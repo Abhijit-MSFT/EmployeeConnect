@@ -1,0 +1,167 @@
+{
+
+  "Month": "July",
+  "EventsAndTraining": [
+
+    {
+      "E&TDate": "6/30/2019",
+      "E&TFlag": "E", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Microsoft envision",
+      "E&TStartDate": "7/5/2019",
+      "E&TEndDate": "7/5/2019",
+      "E&TStartTime": "9:00 AM",
+      "E&TEndTime": "5:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Hyderabad",
+      "E&TDetails": "The annual Envision conference, which promoted changes in how enterprise executives should see technological innovations, will be held at Hyderabad on July 7.",
+      "E&TAgenda": "Interact with the future and knowing their ideas",
+      "E&TAddRemoveFlag": "Removed",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/1/2019",
+      "E&TFlag": "E", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Microsoft Connect",
+      "E&TStartDate": "7/8/2019",
+      "E&TEndDate": "7/8/2019",
+      "E&TStartTime": "10:00 AM",
+      "E&TEndTime": "3:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Online Stream",
+      "E&TDetails": "Microsoft Connect is a platform for thousands of people to know more about Microsft and the products that it offers. It's an online conference for all to attend.",
+      "E&TAgenda": "Public interaction",
+      "E&TAddRemoveFlag": "Added",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/5/2019",
+      "E&TFlag": "E", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Microsoft E3 Briefing",
+      "E&TStartDate": "7/11/2019",
+      "E&TEndDate": "7/12/2019",
+      "E&TStartTime": "10:00 AM",
+      "E&TEndTime": "12:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Seattle",
+      "E&TDetails": "We're hosting Microsoft E3 brieifing from 11 July to 12 July in Seattle, welcoming thousands to exerience the its newest inventions and great technologies.",
+      "E&TAgenda": "Take a peek at the next Xbox.",
+      "E&TAddRemoveFlag": "Added",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/5/2019",
+      "E&TFlag": "T", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Microsoft Azure Discovery Day",
+      "E&TStartDate": "7/11/2019",
+      "E&TEndDate": "7/12/2019",
+      "E&TStartTime": "10:00 AM",
+      "E&TEndTime": "5:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Bangalore",
+      "E&TDetails": "Build your skills with the latest in Azure. Whether you’re developing innovative apps or building new solutions, Microsoft Azure Discovery Day can help you evolve your skills, deepen your expertise, and discover new possibilities.",
+      "E&TAgenda": "Build and discover Azure",
+      "E&TAddRemoveFlag": "Added",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/5/2019",
+      "E&TFlag": "T", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Data and Aritificial Intelligence Day",
+      "E&TStartDate": "7/13/2019",
+      "E&TEndDate": "7/13/2019",
+      "E&TStartTime": "10:00 AM",
+      "E&TEndTime": "5:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Mandalyong City",
+      "E&TDetails": "Get insights into Microsoft's data strategy and AI solutions and learn more about our comprehensive suite of Azure data and AI services, including Azure SQL Database Managed Instance, Azure Cosmos DB, Azure Cognitive Services, Azure Machine Learning and Deep Learning services.",
+      "E&TAgenda": "Learn and grow",
+      "E&TAddRemoveFlag": "Added",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/6/2019",
+      "E&TFlag": "T", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Microsoft Business training program",
+      "E&TStartDate": "7/15/2019",
+      "E&TEndDate": "5/16/2019",
+      "E&TStartTime": "3:00 PM",
+      "E&TEndTime": "5:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Bangalore",
+      "E&TDetails": "we're hosting Microsoft Business Training Program at Banagalore for the new joinees in the business teams",
+      "E&TAgenda": "Business training Program at",
+      "E&TAddRemoveFlag": "Added",
+      "register": "true"
+    },
+    {
+      "E&TDate": "7/7/2019",
+      "E&TFlag": "E", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Microsoft Inspire",
+      "E&TStartDate": "7/20/2019",
+      "E&TEndDate": "5/21/2019",
+      "E&TStartTime": "10:00 AM",
+      "E&TEndTime": "5:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Las Vegas",
+      "E&TDetails": "We're hosting Microsoft Inspire at Las Vegas. Microsoft Inspire is where partners meet to connect, collaborate and celebrate as one community. Joining together with thousands of partners from over 130 countries, you’ll find inspiration from shared experiences and insights.",
+      "E&TAgenda": "Networking events, sessions, speakers, Corenote presentations, daily social hours—no matter your experience of expertise, Microsoft Inspire has the information and insights to help you succeed. ",
+      "E&TAddRemoveFlag": "Removed",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/9/2019",
+      "E&TFlag": "E", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "SharpPoint Conference",
+      "E&TStartDate": "7/23/2019",
+      "E&TEndDate": "7/23/2019",
+      "E&TStartTime": "11:00 AM",
+      "E&TEndTime": "3:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Seattle",
+      "E&TDetails": "SharePoint Conference is going to be held at Seattle. SPC is where business leaders, IT pros, developers, consultants come together to learn how technology can power teamwork, employee engagement and communications, and organizational effectiveness.",
+      "E&TAgenda": "Connect, Collaborate, Create, Celebrate",
+      "E&TAddRemoveFlag": "Added",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/14/2019",
+      "E&TFlag": "E", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Technology fair",
+      "E&TStartDate": "7/27/2019",
+      "E&TEndDate": "7/27/2019",
+      "E&TStartTime": "10:00 AM",
+      "E&TEndTime": "5:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "Ankara",
+      "E&TDetails": "Technology fair at Ankara will be held at Ankara University supported Ministry of Industry and the Ankara Chamber of Commerce. ",
+      "E&TAgenda": "World leaders, Investors, Experts - Together",
+      "E&TAddRemoveFlag": "Added",
+      "register": "false"
+    },
+    {
+      "E&TDate": "7/15/2019",
+      "E&TFlag": "E", //whether it is event or training 
+      "E&TID": "", //keep it empty as of now 
+      "E&TTitle": "Satya's Talk",
+      "E&TStartDate": "7/29/2019",
+      "E&TEndDate": "7/29/2019",
+      "E&TStartTime": "9:00 AM",
+      "E&TEndTime": "12:00 PM",
+      "E&TThumbnailUrl": "",
+      "E&TType": "New York",
+      "E&TDetails": "Satya Nadella will be addressing students and faculty at New York University’s Tandon School of Engineering and the Stern School of Business",
+      "E&TAgenda": "Interact with the future and knowibg their ideas",
+      "E&TAddRemoveFlag": "Removed",
+      "register": "false"
+    }
+  ]
+}

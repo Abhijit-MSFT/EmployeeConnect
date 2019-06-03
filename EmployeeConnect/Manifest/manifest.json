@@ -1,0 +1,64 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.0.0",
+  "id": "a771b5f9-4b2e-4208-843a-f3d1dca903a6",
+  "packageName": "com.microsoft.teams.devapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://00750ad6.ngrok.io",
+    "termsOfUseUrl": "https://00750ad6.ngrok.io"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "EmployeeConnect",
+    "full": "This is Employee_Connect app"
+  },
+  "description": {
+    "short": "Employee Connect intranet app for Microsoft Teams",
+    "full": "This app helps connects employees"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://00750ad6.ngrok.io/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "CurrNews",
+      "name": "News",
+      "contentUrl": "https://00750ad6.ngrok.io/index",
+      "websiteUrl": "https://00750ad6.ngrok.io/index",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "a151b5b0-dc01-4352-8ebb-193fc24475a5",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "00750ad6.ngrok.io"
+  ]
+}
