@@ -1,7 +1,4 @@
-﻿using EmployeeConnect.Helper;
-using EmployeeConnect.Models;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace EmployeeConnect.Controllers
 {
@@ -34,15 +31,6 @@ namespace EmployeeConnect.Controllers
         [Route("configure")]
         public ActionResult Configure()
         {
-            return View();
-        }
-        [Route("Tasks")]
-        public ActionResult Tasks()
-        {
-            List<PurchaseOrders> taskList = new List<PurchaseOrders>();
-            taskList = GetDataHelper.GetPOs();
-
-           //needs to be written to return purchase order data
             return View();
         }
     }
