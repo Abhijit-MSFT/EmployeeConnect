@@ -1,0 +1,158 @@
+﻿@model EmployeeConnect.Models.PO
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./Tasks.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Tasks Tab</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="heading">Pending submissons</header>
+        <div class="card-deck custom-card-deck">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <img src="./imgs/1.JPG" alt="time-sheet" class="time-sheet" />
+                    <h5 class="card-title">12</h5>
+                    <h6 class="title-head">Days of pending timesheet</h6>
+                    <div class="full-timesheet">
+                        Fill timesheet
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card custom-card">
+                <div class="card-body">
+                    <img src="./imgs/2.JPG"
+                         alt="expenses-sheet"
+                         class="expenses-sheet" />
+                    <h5 class="card-title">
+                        <span class="currency">&#x20b9;</span> 25,000
+                    </h5>
+                    <h6 class="title-head">Amount of unreconciled expenses</h6>
+                    <div class="Submit-expenses">
+                        Submit expenses
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pending-approval">
+            <header class="heading">Pending approvals</header>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h6 class="panel-title accordion-toggle"
+                            data-toggle="collapse"
+                            data-parent="#accordion"
+                            href="#Porder">
+                            <span class="title"> Purchase order <span>(3)</span> </span>
+                        </h6>
+                    </div>
+                </div>
+                <div id="Porder" class="panel-collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr class="head-title-color">
+                                    <th>PO no.</th>
+                                    <th></th>
+                                    <th>Description</th>
+                                    <th>Vendor name</th>
+                                    <th>Vendor no.</th>
+                                    <th>Amount</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               @foreach (var item in Model.purchaseOrder)
+                                {
+                                    <tr class="row-highlight">
+                                       <td class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                        <td></td>
+                                        <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>                                        
+                                        <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                        <td class="amount">
+                                            <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
+                                        </td>
+                                        <td class="review">Review</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h6 class="panel-title accordion-toggle"
+                                data-toggle="collapse"
+                                data-parent="#accordion"
+                                href="#Invoice">
+                                <span class="title"> Invoice <span>(3)</span> </span>
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="Invoice" class="panel-collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr class="head-title-color">
+                                        <th>Invoice no.</th>
+                                        <th>PO no.</th>
+                                       <th>Description</th>
+                                        <th>Vendor name</th>
+                                        <th>Vendor no.</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.purchaseOrder)
+                                    {
+                                        <tr class="row-highlight">
+                                            <td class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                            <td class="po-no1">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                            <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                            <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                            <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                            <td class="amount">
+                                                <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
+                                            </td>
+                                            <td class="review">Review</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h6 class="panel-title accordion-toggle collapsed"
+                                data-toggle="collapse"
+                                data-parent="#accordion"
+                                href="#Inventory">
+                                <span class="title"> Inventory <span>(2)</span> </span>
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="Inventory" class="panel-collapse">
+
+                        <div class="panel-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
