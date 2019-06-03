@@ -41,6 +41,15 @@
       "scopes": [
         "personal"
       ]
+    },
+    {
+      "entityId": "uniqueTaskID",
+      "name": "Tasks",
+      "contentUrl": "https://00750ad6.ngrok.io/Tasks",
+      "websiteUrl": "https://00750ad6.ngrok.io/Tasks",
+      "scopes": [
+        "personal"
+      ]
     }
   ],
   "bots": [
