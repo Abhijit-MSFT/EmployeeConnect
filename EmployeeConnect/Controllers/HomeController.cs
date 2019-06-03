@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using EmployeeConnect.Helper;
+using EmployeeConnect.Models;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace EmployeeConnect.Controllers
 {
@@ -32,6 +35,13 @@ namespace EmployeeConnect.Controllers
         public ActionResult Configure()
         {
             return View();
+        }
+        [Route("Tasks")]
+        public ActionResult Tasks()
+        {
+            PO taskList = new PO();
+            taskList = GetDataHelper.GetPOs();
+            return View(taskList);
         }
     }
 }

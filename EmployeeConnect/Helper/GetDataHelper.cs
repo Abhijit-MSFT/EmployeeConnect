@@ -34,18 +34,12 @@ namespace EmployeeConnect.Helper
             return eventsTrainings;
         }
 
-        public List<PurchaseOrders> GetPOs()
+        public static PO GetPOs()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/PurchaseOrders.json";
-
-            List<PurchaseOrders> POs = new List<PurchaseOrders>();
-
-            /*var set*/
-            var purchaseCount = 0;
-
+            PO POs = new PO();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            POs = (new JavaScriptSerializer().Deserialize<List<PurchaseOrders>>(json));
-
+            POs = (new JavaScriptSerializer().Deserialize<PO>(json));
             return POs;
         }
 
