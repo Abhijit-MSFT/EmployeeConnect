@@ -6,11 +6,11 @@ using System.Web;
 
 namespace EmployeeConnect.Models
 {
-    public class EandT
+    public class EandTModel
     {
-        public EventsAndTrainings[] Eventandtraining { get; set; }
+        public EventsAndTraining[] EventsAndtraining { get; set; }
     }
-    public class EventsAndTrainings
+    public class EventsAndTraining
     {
         [JsonProperty(PropertyName = "ETDate")]
         public string ETDate { get; set; }

@@ -13,21 +13,18 @@ namespace EmployeeConnect.Helper
         public static NewsModel GetNews()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
-
             NewsModel news = new NewsModel();
-
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
             news = (new JavaScriptSerializer().Deserialize<NewsModel>(json));
-
             return news;
         }
 
-        public static EandT GetEandT()
+        public static EandTModel GetEandT()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-            EandT eventsTrainings = new EandT();
+            EandTModel eventsTrainings = new EandTModel();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            eventsTrainings = (new JavaScriptSerializer().Deserialize<EandT>(json));
+            eventsTrainings = (new JavaScriptSerializer().Deserialize<EandTModel>(json));
             return eventsTrainings;
         }
 

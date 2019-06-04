@@ -252,7 +252,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\EmployeeConnect\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
     <None Include="packages.config">

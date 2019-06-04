@@ -67,7 +67,7 @@ namespace EmployeeConnect.Controllers
         [Route("EventandTrainingTab")]
         public ActionResult EventandTrainingTab()
         {
-            EandT eventsListData = new EandT();
+            EandTModel eventsListData = new EandTModel();
             eventsListData = GetDataHelper.GetEandT();
             return View(eventsListData);
         }
