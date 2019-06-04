@@ -4,6 +4,7 @@ using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,24 +44,70 @@ namespace EmployeeConnect.Dialogs
             {
                 message = Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity).ToLowerInvariant();
                 Attachment card = null;
+                var reply = context.MakeMessage();
+                List<Attachment> res;
                 switch (message.Trim())
                 {
-                    //case Constants.NextMonthRoster:
-                    //    card = CardHelper.GetMonthlyRosterCard();
-                    //    break;
-                    //case Constants.NextWeekRoster:
-                    //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                    //    break;
-                    //case Constants.UpdateCard:
-                    //    card = CardHelper.GetUpdateScreen();
-                    //    break;
-                    //default:
-                    //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
-                    //    break;
+                    case Common.Constants.Welcome:
+                        res = Helper.CardHelper.WelcomeCard();
+                        for (int i = 0; i < res.Count(); i++)
+                            reply.Attachments.Add(res.ElementAt(i));
+                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                        break;
+                    case Common.Constants.SetPrefrences:
+                        card = Helper.CardHelper.SetTimePrefrences();
+                        reply.Text = "Set a preferred time to receive notifications for latest news, events and trainings and reminders.";
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.SetNewsPrefrences:
+                        card = Helper.CardHelper.SetNewsPreferences();
+                        reply.Text = "You can pick a few categories from the folowing";
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.UpcomingEventsTraining:
+                        res = Helper.CardHelper.UpcomingEventsTraining();
+                        for (int i = 0; i < res.Count(); i++)
+                            reply.Attachments.Add(res.ElementAt(i));
+                        break;
+                    case Common.Constants.ReviewTasks:
+                        card = Helper.CardHelper.ReviewTasks();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.PendingApprovals:
+                        card = Helper.CardHelper.PendingApprovals();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.PendingTasks:
+                        card = Helper.CardHelper.PendingTasks();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.TrendingNews:
+                        card = Helper.CardHelper.getNewsCard();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.Policies:
+                        card = Helper.CardHelper.GetPoliciesCard();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.MyTools:
+                        //card = Helper.CardHelper.GetMyToolsCard();
+                        break;
+                        //case Constants.NextMonthRoster:
+                        //    card = CardHelper.GetMonthlyRosterCard();
+                        //    break;
+                        //case Constants.NextWeekRoster:
+                        //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
+                        //    break;
+                        //case Constants.UpdateCard:
+                        //    card = CardHelper.GetUpdateScreen();
+                        //    break;
+                        //default:
+                        //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
+                        //    break;
                 }
 
-                var reply = context.MakeMessage();
-                reply.Attachments.Add(card);
+
+
                 await context.PostAsync(reply);
 
             }
