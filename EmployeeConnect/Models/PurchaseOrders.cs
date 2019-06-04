@@ -8,7 +8,7 @@ namespace EmployeeConnect.Models
 {
     public class PO
     {
-        public List<PurchaseOrders> purchaseOrder { get; set; }
+        public PurchaseOrders[] PurchaseOrder { get; set; }
     }
 
     public class PurchaseOrders

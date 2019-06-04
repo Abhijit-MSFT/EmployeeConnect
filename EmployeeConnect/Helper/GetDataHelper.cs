@@ -10,27 +10,24 @@ namespace EmployeeConnect.Helper
 {
     public class GetDataHelper
     {
-        public List<News> GetNews()
+        public static NewsModel GetNews()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
 
-            List<News> news = new List<News>();
+            NewsModel news = new NewsModel();
 
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            news = (new JavaScriptSerializer().Deserialize<List<News>>(json));
+            news = (new JavaScriptSerializer().Deserialize<NewsModel>(json));
 
             return news;
         }
 
-        public List<EventsAndTrainings> GetEandT()
+        public static EandT GetEandT()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-
-            List<EventsAndTrainings> eventsTrainings = new List<EventsAndTrainings>();
-
+            EandT eventsTrainings = new EandT();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            eventsTrainings = (new JavaScriptSerializer().Deserialize<List<EventsAndTrainings>>(json));
-
+            eventsTrainings = (new JavaScriptSerializer().Deserialize<EandT>(json));
             return eventsTrainings;
         }
 

@@ -72,8 +72,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               @foreach (var item in Model.purchaseOrder)
-                                {
+                               @foreach (var item in Model.PurchaseOrder)
+                               {
                                     <tr class="row-highlight">
                                        <td class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                         <td></td>
@@ -116,7 +116,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.purchaseOrder)
+                                    @foreach (var item in Model.PurchaseOrder)
                                     {
                                         <tr class="row-highlight">
                                             <td class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>

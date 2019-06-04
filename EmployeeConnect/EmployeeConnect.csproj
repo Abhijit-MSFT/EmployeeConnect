@@ -231,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\msteams-16.css" />
+    <Content Include="Content\Tasks.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -265,6 +266,8 @@
     <Content Include="TestData\NewsData.json" />
     <Content Include="TestData\PurchaseOrders.json" />
     <Content Include="Views\EmployeeConnect\Tasks.cshtml" />
+    <Content Include="Views\EmployeeConnect\News.cshtml" />
+    <Content Include="Views\EmployeeConnect\EventandTrainingTab.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
