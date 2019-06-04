@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-
+using System.Web.WebPages;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
+using EmployeeConnect.Models;
+using EmployeeConnect.Helper;
+using EmployeeConnect.Controllers;
+using System.Windows.Forms;
 
 namespace EmployeeConnect
 {
@@ -11,39 +16,75 @@ namespace EmployeeConnect
     {
         public static ComposeExtensionResponse HandleMessageExtensionQuery(ConnectorClient connector, Activity activity)
         {
+            GetDataHelper helper = new GetDataHelper();
             var query = activity.GetComposeExtensionQueryData();
-            if (query == null || query.CommandId != "getRandomText")
+            if (query == null)
             {
                 // We only process the 'getRandomText' queries with this message extension
                 return null;
             }
-
-            var title = "";
-            var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "cardTitle");
-            if (titleParam != null)
+            if (query.CommandId == "News")
             {
-                title = titleParam.Value.ToString();
+                List<News> news = helper.GetNews();
+                var title = "";
+                var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "newstitle");
+                var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", "result"));
+                ComposeExtensionAttachment[] attachments = null;
+                if (titleParam != null)
+                {
+                    title = titleParam.Value.ToString();
+                    List<string> searchtitle = news.Select(a => a.NewsTitle).Where(c => c.ToLower().Contains(title.ToLower())).Select(d => d).ToList();
+                    List<string> searchImages = news.Where(a => a.NewsTitle.ToLower().Contains(title.ToLower())).Select(c => c.NewsThumbnailUrl).ToList();
+                    List<string> searchDateTime = news.Where(a => a.NewsTitle.ToLower().Contains(title.ToLower())).Select(c => c.NewsDateTIme).ToList();
+                    List<string> searchviews = news.Where(a => a.NewsTitle.ToLower().Contains(title.ToLower())).Select(c => c.NoOfViews).ToList();
+                    List<string> searchby = news.Where(a => a.NewsTitle.ToLower().Contains(title.ToLower())).Select(c => c.NewsBy).ToList();
+                    int attacCount = searchtitle.Count();
+                    attachments = new ComposeExtensionAttachment[attacCount];
+                    for (int i = 0; i < attacCount; i++)
+                    {
+                        attachments[i] = GetAttachment(searchImages[i], searchtitle[i], searchDateTime[i], searchviews[i],searchby[i]);
+                    }
+
+
+                    response.ComposeExtension.Attachments = attachments.ToList();
+                }
+                else
+                {
+                    
+                    List<string> searchtitle = news.Select(c => c.NewsTitle).ToList();
+                    List<string> searchImages = news.Select(c => c.NewsThumbnailUrl).ToList();
+                    List<string> searchDateTime = news.Select(c => c.NewsDateTIme).ToList();
+                    List<string> searchviews = news.Select(c => c.NoOfViews).ToList();
+                    List<string> searchby=news.Select(c => c.NewsBy).ToList();
+                    attachments = new ComposeExtensionAttachment[searchtitle.Count()];
+                    for (int i = 0; i < searchtitle.Count(); i++)
+                    {
+                        attachments[i] = GetAttachment(searchImages[i], searchtitle[i], searchDateTime[i], searchviews[i],searchby[i]);
+                    }
+                    response.ComposeExtension.Attachments = attachments.ToList();
+                }
+                return response;
+            }
+            else
+            {
+                return null;
             }
 
-            var attachments = new ComposeExtensionAttachment[5];
-            for (int i = 0; i < 5; i++)
-            {
-                attachments[i] = GetAttachment(title);
-            }
-
-            var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", "result"));
-            response.ComposeExtension.Attachments = attachments.ToList();
-
-            return response;
+            
         }
 
-        private static ComposeExtensionAttachment GetAttachment(string title = null)
+        private static ComposeExtensionAttachment GetAttachment(string image,string title,string datetime,string views,string by )
         {
             var card = new ThumbnailCard
             {
-                Title = !string.IsNullOrWhiteSpace(title) ? title : Faker.Lorem.Sentence(),
-                Text = Faker.Lorem.Paragraph(),
-               Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
+                Title = title,
+                Subtitle=datetime,
+                Text=views,
+                ///Text = by,
+                Images = new List<CardImage>
+                {
+                    new CardImage(image)
+                }
             };
             
             return card

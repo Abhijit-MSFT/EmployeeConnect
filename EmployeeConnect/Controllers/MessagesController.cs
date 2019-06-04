@@ -45,7 +45,10 @@ namespace EmployeeConnect.Controllers
                     await Conversation.SendAsync(activity, () => new RootDialog());
                     break;
                 case "composeExtension/query":
-                // Handle fetching task module content
+                    // Handle fetching task module content
+                    var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                    var response = MessageExtension.HandleMessageExtensionQuery(connector, activity);
+                    return response != null ? Request.CreateResponse<ComposeExtensionResponse>(response) : new HttpResponseMessage(HttpStatusCode.OK);
                 case "task/fetch":
                 // Handle fetching task module content
                 case "task/submit":
