@@ -37,31 +37,30 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-        [Route("Tasks")]
-        public ActionResult Tasks()
+        [Route("Task")]
+        public ActionResult Task()
         {
             PO taskList = new PO();
             taskList = GetDataHelper.GetPOs();
-            var count = 0;
-            foreach(var item in taskList.PurchaseOrder)
-            {
-                if(taskList.PurchaseOrder[count].PoStatus != "Declined")
-                {
-                    PO filterPOStatus = new PO();
-                    count++;
-
-                }
-                count = 0;
-            }
             return View(taskList);
         }
-
+        [Route("Tools")]
+        public ActionResult Tools()
+        {
+          return View();
+        }
         [Route("news")]
         public ActionResult News()
         {
             NewsModel newsListData = new NewsModel();
             newsListData = GetDataHelper.GetNews();
             return View(newsListData);
+        }
+
+        [Route("purchaseorder")]
+        public ActionResult PurchaseOrder()
+        {
+            return View();
         }
 
         [Route("EventandTrainingTab")]

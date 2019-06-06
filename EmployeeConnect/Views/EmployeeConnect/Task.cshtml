@@ -1,4 +1,6 @@
 ﻿@model EmployeeConnect.Models.PO
+@using EmployeeConnect.Common;
+@using EmployeeConnect.Helper;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +13,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/teamsapp.js"></script>
+   
     <title>Tasks Tab</title>
 </head>
 <body>
@@ -72,18 +76,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               @foreach (var item in Model.PurchaseOrder)
-                               {
+                                @foreach (var item in Model.PurchaseOrder)
+                                {
                                     <tr class="row-highlight">
-                                       <td class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                        <td class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                         <td></td>
                                         <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
-                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>                                        
+                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
                                         <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
                                         <td class="amount">
                                             <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
                                         </td>
-                                        <td class="review">Review</td>
+                                        <td class="button-primary" onclick="submit('purchaseorder');">Review</td>
                                     </tr>
                                 }
                             </tbody>
@@ -108,7 +112,7 @@
                                     <tr class="head-title-color">
                                         <th>Invoice no.</th>
                                         <th>PO no.</th>
-                                       <th>Description</th>
+                                        <th>Description</th>
                                         <th>Vendor name</th>
                                         <th>Vendor no.</th>
                                         <th>Amount</th>
@@ -127,7 +131,7 @@
                                             <td class="amount">
                                                 <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
                                             </td>
-                                            <td class="review">Review</td>
+                                            <td class="button-primary" onclick="submit('purchaseorder');">Review</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -154,5 +158,41 @@
             </div>
         </div>
     </div>
+
+    <script>
+    microsoftTeams.initialize();
+
+        submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+
+        function submit(type) {
+            debugger;
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+
+            taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/purchaseorder";
+                taskInfo.title = "@(TaskModelUIConstant.PurchaseOrder.Title)";
+                taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+    </script>
 </body>
+
 </html>

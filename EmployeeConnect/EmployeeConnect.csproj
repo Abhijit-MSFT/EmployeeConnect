@@ -216,6 +216,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\TaskModelUIConstant.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
@@ -225,22 +226,33 @@
     </Compile>
     <Compile Include="Helper\ApplicationSettings.cs" />
     <Compile Include="Helper\CardHelper.cs" />
+    <Compile Include="Helper\DeeplinkHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
     <Compile Include="MessageExtension.cs" />
+    <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\PurchaseOrders.cs" />
+    <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Custom.css" />
     <Content Include="Content\msteams-16.css" />
     <Content Include="Content\Tasks.css" />
+    <Content Include="Content\Tools.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\1.JPG" />
+    <Content Include="Images\2.JPG" />
+    <Content Include="Images\3.JPG" />
+    <Content Include="Images\4.JPG" />
+    <Content Include="Images\download.JPG" />
     <Content Include="Images\expense_icon.PNG" />
+    <Content Include="Images\submit.JPG" />
     <Content Include="Images\timesheet_icon.PNG" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
@@ -262,6 +274,8 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
+    <Content Include="Content\fonts\TeamsAssets-Light.woff" />
+    <Content Include="Content\fonts\TeamsAssets-Light.woff2" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -272,9 +286,12 @@
     <Content Include="TestData\EventsAndTraining_June.json" />
     <Content Include="TestData\NewsData.json" />
     <Content Include="TestData\PurchaseOrders.json" />
-    <Content Include="Views\EmployeeConnect\Tasks.cshtml" />
+    <Content Include="Views\EmployeeConnect\Task.cshtml" />
     <Content Include="Views\EmployeeConnect\News.cshtml" />
     <Content Include="Views\EmployeeConnect\EventandTrainingTab.cshtml" />
+    <Content Include="Views\EmployeeConnect\PurchaseOrder.cshtml" />
+    <Content Include="Views\Shared\_EmbedPage.cshtml" />
+    <Content Include="Views\EmployeeConnect\Tools.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

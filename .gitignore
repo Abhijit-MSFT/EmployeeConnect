@@ -286,3 +286,8 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/EmployeeConnect/ngrok.exe
+/EmployeeConnect/Manifest/manifest.zip
+/EmployeeConnect/Models
+/EmployeeConnect/Helper/DeeplinkHelper.cs
+/EmployeeConnect/Common/TaskModelUIConstant.cs

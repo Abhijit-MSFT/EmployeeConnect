@@ -1,0 +1,661 @@
+﻿@font-face {
+    font-family: "Teams Assets";
+    src: url("./fonts/TeamsAssets-Light.woff") format("woff"), url("./fonts/TeamsAssets-Light.woff2") format("woff2");
+    font-style: normal;
+}
+
+.create-icon,
+.ticket-creation,
+.leave-request,
+.policies,
+.download-payslip,
+.create-finance-tkt,
+.submit-benefits,
+.support,
+.wife-request,
+.event-support,
+.cafe-service,
+.Inventory,
+.RO-timesheet,
+.Ro-SI {
+    font-family: "Teams Assets";
+    font-size: 22px;
+}
+
+    .create-icon::before {
+        content: "\E328";
+    }
+
+    .ticket-creation::before {
+        content: "\E13F";
+    }
+
+    .leave-request::before {
+        content: "\E503";
+    }
+
+    .policies::before {
+        content: "\E451";
+    }
+
+    .download-payslip::before {
+        content: "\E459";
+    }
+
+    .create-finance-tkt::before {
+        content: "\E13F";
+    }
+
+    .submit-benefits::before {
+        content: "\E971";
+    }
+
+.view-benefits::before {
+    content: "\E451";
+    font-family: "Teams Assets";
+    font-size: 22px;
+}
+
+.support::before {
+    content: "\E21A";
+}
+
+.wife-request::before {
+    content: "\E123";
+}
+
+.event-support::before {
+    content: "\E917";
+}
+
+.cafe-service::before {
+    content: "\E984";
+}
+
+.Inventory::before {
+    content: "\E459";
+}
+
+.RO-timesheet::before {
+    content: "\E501";
+}
+
+.Ro-SI::before {
+    content: "\E137";
+}
+
+.CBL,
+.CT,
+.RL,
+.VP,
+.DP,
+.CFT,
+.SBC,
+.VBP,
+.RIST,
+.GWR,
+.EISR,
+.CSA,
+.IR,
+.timesheet,
+.SI {
+    font-weight: 600;
+    padding-top: 6px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.CBL-des,
+.CT-des,
+.RL-des,
+.VP-des,
+.DP-des,
+.CFT-des,
+.SBC-des,
+.VBP-des,
+.RIST-des,
+.GWR-des,
+.EISR-des,
+.CSA-des,
+.IR-des,
+.timesheet-des,
+.SI-des {
+    padding-top: 6px;
+    color: #adacac;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+.content-radius {
+    border-radius: 0 !important;
+    background-clip: border-box !important;
+    border: 0 !important;
+}
+
+.custom-header {
+    border-bottom: 0 !important;
+}
+
+.category,
+.modal-category {
+    font-size: 14px;
+    color: #807f7f;
+}
+
+.date-control {
+    width: 200px;
+    height: 35px;
+    padding-left: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    background-color: #f3f2f1 !important;
+    color: #252424;
+    border-radius: 3px;
+    position: relative;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+.location-drps,
+.alias-id,
+.Org,
+.Contact,
+.Purpose,
+.Visiting-date,
+.Visiting-time {
+    width: 100%;
+    height: 35px;
+    padding-left: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    background-color: #f3f2f1 !important;
+    color: #252424;
+    border-radius: 3px;
+    position: relative;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+    .date-control,
+    .location-drps,
+    .alias-id:focus {
+        outline: none !important;
+    }
+
+.down-chevron {
+    position: relative;
+    right: 8%;
+}
+
+    .down-chevron::before {
+        content: "\E41E";
+        font-family: "Teams Assets";
+    }
+
+.modal-category {
+    padding-top: 20px;
+}
+
+.card.custom-card {
+    width: auto;
+    height: 90px;
+    background-color: #f4f4f4;
+    border: 0 !important;
+    margin-top: 6px;
+}
+
+.card-body.custom-card-body {
+    padding-top: 6px;
+    padding-left: 15px;
+    font-size: 14px;
+}
+
+.modal-priority {
+    padding-top: 30px;
+    font-size: 14px;
+    color: #807f7f;
+}
+
+.all-radio {
+    position: relative;
+    top: 15px;
+}
+
+.radio-label input:checked ~ .check-mark {
+    background-color: #6264a7;
+}
+
+.radio-label {
+    display: inline-block;
+    position: relative;
+    padding-left: 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .radio-label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        border: 1px solid;
+    }
+
+.check-mark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 12px;
+    width: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+.radio-label .check-mark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+span.range {
+    position: relative;
+    bottom: 7px;
+    left: 10px;
+    font-size: 12px;
+}
+
+.modal-dialog {
+    max-width: 400px;
+}
+
+.cancel,
+.Close {
+    height: 35px;
+    width: 100px;
+    color: black;
+    background-color: white;
+    font-family: "Segoe UI";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid rgba(37, 36, 36, 0.15);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 30px;
+}
+
+.BCT,
+.Edit,
+.send-rq {
+    height: 35px;
+    width: 100px;
+    color: #ffffff;
+    font-family: "Segoe UI";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    background-color: #6264a7;
+    border: 1px solid rgba(37, 36, 36, 0.15);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 30px;
+}
+
+.two-btn {
+    padding-bottom: 50px;
+    float: right;
+}
+
+.tick::before {
+    content: "\E44F";
+    font-family: "Teams Assets";
+    font-size: 22px;
+    color: #a7d050;
+    float: left;
+}
+
+.from-next,
+.from-send-request {
+    left: 15px;
+    top: 5px;
+    position: relative;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.from-send-request {
+    font-size: 16px !important;
+    display: flex;
+}
+
+.from-next-body {
+    padding-top: 0px;
+}
+
+.ES,
+.VD {
+    font-weight: 500;
+}
+
+.ES-msg {
+    padding-top: 6px;
+}
+
+.High-priority {
+    color: #c795b4;
+    padding-bottom: 20px;
+}
+
+.ES,
+.ES-msg,
+.High-priority,
+.ticket-no,
+.Date-created,
+.VD,
+.VD-form-tkname,
+.VD-org,
+.VD-contact,
+.VD-purpose,
+.VD-date,
+.VD-time {
+    padding-left: 36px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+.exclamation {
+    position: relative;
+    top: 3px;
+}
+
+    .exclamation::before {
+        content: "\E62B";
+        font-family: "Teams Assets";
+        color: #943670;
+    }
+
+.ticket-no,
+.ticket-no-no,
+.Date-created,
+.Date-created-date,
+.VD-form-tkname,
+.VD-form-tkno-name,
+.VD-org,
+.VD-org-org,
+.VD-contact,
+.VD-contact-no,
+.VD-purpose,
+.VD-purpose-reason,
+.VD-date,
+.VD-time,
+.VD-date-date,
+.VD-time-time {
+    display: inline;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ticket-data {
+    padding-bottom: 8px;
+}
+
+.VD-form {
+    padding-top: 10px;
+}
+
+.ticket-no,
+.Date-created,
+.VD-form-tkname,
+.VD-org,
+.VD-contact,
+.VD-purpose,
+.VD-date,
+.VD-time {
+    font-size: 12px;
+    color: #c795b4;
+}
+
+.ticket-no-no {
+    padding-left: 60px;
+}
+
+.VD-form-tkno-name {
+    padding-left: 82px;
+}
+
+.Date-created-date, .VD-org-org, .VD-date-date, .VD-time-time {
+    padding-left: 45px;
+}
+
+.VD-contact-no {
+    padding-left: 70px;
+}
+
+.VD-purpose-reason {
+    padding-left: 70px;
+}
+
+.cancel-ticket {
+    padding-left: 36px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+
+.cancel-icon::before {
+    content: "\E413";
+    font-family: "Teams Assets";
+    color: #c4314b;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 2px;
+    background-color: #f3f2f1;
+}
+
+.cancel-btn,
+.cancel-req-btn {
+    position: relative;
+    left: 10px;
+    bottom: 4px;
+}
+
+.vr-res {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.host,
+.Visitor-head {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: #949494;
+}
+
+.Alias,
+.location {
+    color: #949494;
+    font-size: 12px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 10px;
+}
+
+.id-card::before {
+    content: "\E201";
+    font-family: "Teams Assets";
+    float: right;
+    bottom: 30px;
+    right: 5px;
+    position: relative;
+}
+
+.custom-card-for-visitor {
+    max-width: 500px;
+}
+
+.id-card {
+    position: relative;
+    right: 25px;
+    vertical-align: middle;
+}
+
+.for-visitor::before {
+    content: "\E41E";
+    font-family: "Teams Assets";
+    position: relative;
+    float: right;
+    bottom: 30px;
+    right: 5px;
+}
+
+.custom-row {
+    padding-bottom: 10px;
+}
+
+.custom-row1 {
+    padding-bottom: 20px;
+}
+
+.custom-card-for-send-request {
+    max-width: 450px;
+}
+
+.row-hgt {
+    padding-top: 10px;
+}
+
+.date-pick::before {
+    content: "\E503";
+    font-family: "Teams Assets";
+    position: relative;
+    float: right;
+    bottom: 30px;
+    right: 5px;
+}
+
+.time-pick::before {
+    content: "\F301";
+    font-family: "Teams Assets";
+    position: relative;
+    float: right;
+    bottom: 30px;
+    right: 5px;
+}
+
+body {
+    background-color: #f3f2f1;
+    padding: 20px;
+    overflow: auto;
+}
+
+.custom-card-first-row,
+.custom-card-first-row-one,
+.custom-card-first-row-two,
+.custom-card-first-row-three,
+.custom-card-PB-second-row,
+.custom-card-PB-second-row-one,
+.custom-card-PB-second-row-two,
+.custom-card-PB-second-row-three,
+.custom-card-IF-third-row,
+.custom-card-IF-third-row-one,
+.custom-card-IF-third-row-two,
+.custom-card-IF-third-row-three,
+.custom-card-RO-fourth-row,
+.custom-card-RO-fourth-row-one,
+.custom-card-RO-fourth-row-two {
+    width: 16%;
+    height: 20%;
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+    font-family: "Segoe UI";
+    font-size: 16px;
+}
+
+.P-10 {
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.HR,
+.PB,
+.RO,
+.IF {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Segoe UI";
+}
+
+@media screen and (min-width: 721px) and (max-width: 1280px) {
+    .custom-card-first-row,
+    .custom-card-first-row-one,
+    .custom-card-first-row-two,
+    .custom-card-first-row-three,
+    .custom-card-PB-second-row,
+    .custom-card-PB-second-row-one,
+    .custom-card-PB-second-row-two,
+    .custom-card-PB-second-row-three,
+    .custom-card-IF-third-row,
+    .custom-card-IF-third-row-one,
+    .custom-card-IF-third-row-two,
+    .custom-card-IF-third-row-three,
+    .custom-card-RO-fourth-row,
+    .custom-card-RO-fourth-row-one,
+    .custom-card-RO-fourth-row-two {
+        width: 20%;
+        height: auto;
+        font-size: 14px;
+    }
+
+    .CBL-des,
+    .CT-des,
+    .RL-des,
+    .VP-des,
+    .DP-des,
+    .CFT-des,
+    .SBC-des,
+    .VBP-des,
+    .RIST-des,
+    .GWR-des,
+    .EISR-des,
+    .CSA-des,
+    .IR-des,
+    .timesheet-des,
+    .SI-des {
+        font-size: 12px;
+    }
+
+    .create-icon,
+    .ticket-creation,
+    .leave-request,
+    .policies,
+    .download-payslip,
+    .create-finance-tkt,
+    .submit-benefits,
+    .support,
+    .wife-request,
+    .event-support,
+    .cafe-service,
+    .Inventory,
+    .RO-timesheet,
+    .Ro-SI {
+        font-size: 18px;
+    }
+
+    .modal-dialog {
+        max-width: 353px;
+    }
+}
