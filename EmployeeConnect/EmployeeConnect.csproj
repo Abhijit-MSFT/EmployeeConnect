@@ -305,7 +305,7 @@
     <Content Include="Views\EmployeeConnect\Tasks.cshtml" />
     <Content Include="Views\EmployeeConnect\News.cshtml" />
     <Content Include="Views\EmployeeConnect\EventandTrainingTab.cshtml" />
-    <Content Include="TestData\tickets.json" />
+    <Content Include="TestData\Tickets.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
