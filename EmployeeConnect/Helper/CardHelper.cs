@@ -7,37 +7,55 @@ using EmployeeConnect.Models;
 using System.Security.Principal;
 using Microsoft.Bot.Connector.Teams.Models;
 using AdaptiveCards;
+using Microsoft.Ajax.Utilities;
 
 namespace EmployeeConnect.Helper
 {
     public class CardHelper
     {
-        // [Obsolete]
+        //returns a news ListCard containing specific number of messages
         public static Attachment getNewsCard()
         {
+            
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Top stories for you";
+            NewsModel newsL = Helper.GetDataHelper.GetNews();
+            var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
+            var LatestNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
+            //int ReqDescriptionLength = 85;
 
-            for (int i = 0; i < 5; i++)
+            //MaxNewsCount has total number of news to display
+            int MaxNewsCount = 3;
+           // if (MaxNewsCount > SuggestedNews.Count())
+                MaxNewsCount = SuggestedNews.Count();
+
+            for (int i=0;i<MaxNewsCount;i++)
             {
-
+                var news = SuggestedNews.ElementAt(i);
+                string subtitle = news.DetailedNews;
                 var item = new Item();
-                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
-                item.id = i.ToString();
-                item.subtitle = "subtitle";
+                item.title = news.NewsTitle;
+                item.icon = news.NewsThumbnailUrl;
+                item.id = news.NewsID;
 
-                item.type = "resultItem";
-                item.title = "News" + i;
+                //if (subtitle.Length > ReqDescriptionLength)
+                //    item.subtitle = subtitle.Substring(0, ReqDescriptionLength);
+                //else
+                    item.subtitle = subtitle;
+                
+                item.type ="resultItem";
+
+                //item.NewBy = "Vedant";      //doesn't display in frontend
 
                 item.tap = new Tap()
                 {
-                    type = "imBack",
-                    title = "titleitem",
-                    value = "News" + i
+                    type = "messageBack",
+                    title = "title",
+                    text = news.NewsID
                 };
-
+                
                 list.Add(item);
             }
             card.content.items = list.ToArray();
@@ -51,6 +69,8 @@ namespace EmployeeConnect.Helper
             return attachment;
 
         }
+
+        //Returns the policies ListCard having Policies for every department.
         public static Attachment GetPoliciesCard()
         {
 
@@ -69,13 +89,13 @@ namespace EmployeeConnect.Helper
 
 
                 item.type = "resultItem";
-                item.title = "Policy" + i;
+                item.title = "Department " + i;
 
                 item.tap = new Tap()
                 {
-                    type = "imBack",
-                    title = "titleitem",
-                    value = "policy" + i
+                    type = "messageBack",
+                    title = "title",
+                    text = "department" + i
                 };
 
                 list.Add(item);
@@ -91,7 +111,114 @@ namespace EmployeeConnect.Helper
             return attachment;
 
         }
-        public static List<Attachment> WelcomeCard()
+
+        //Returns the Tools ListCard having Tools for every department.
+        public static Attachment GetMyToolsCard()
+        {
+
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Here are the tools under HR department";
+
+            for (int i = 0; i < 5; i++)
+            {
+
+                var item = new Item();
+                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.id = i.ToString();
+
+
+                item.type = "resultItem";
+                item.title = "create Ticket " + i;
+
+                item.tap = new Tap()
+                {
+                    type = "messageBack",
+                    title = "title",
+                    text = "department" + i
+                };
+
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }
+
+        //gets the specific news card on tap
+        public static Attachment GetNewsCardbyId(string id)
+        {
+            NewsModel newsL = Helper.GetDataHelper.GetNews();
+            var SelectedNews = getNewsById(newsL, id);      
+
+            if (SelectedNews == null)   //could not find the news
+                return null;
+            var card = new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage
+                            {
+                                        Url = new Uri(SelectedNews.NewsThumbnailUrl)
+                            },
+                            new AdaptiveTextBlock() //Title of News
+                            {
+                                Text = SelectedNews.NewsTitle,
+                                Weight = AdaptiveTextWeight.Bolder,     // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            },
+                                new AdaptiveTextBlock()     //NewsBy on Date and Time
+                            {
+                                Text = "By " + SelectedNews.NewsBy + " on " + SelectedNews.NewsDateTIme,
+                                Weight = AdaptiveTextWeight.Lighter,    // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Small,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            },
+                            new AdaptiveTextBlock()     //Detailed News
+                            {
+                                Text = SelectedNews.DetailedNews,
+                                Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Default,       // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            }
+                        }
+                    }
+                }
+            };
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = AdaptiveCard.ContentType;
+
+            attachment.Content = card;
+
+            return attachment;
+        }
+
+        //Returns the News with specific NewsID
+        public static News getNewsById(NewsModel newsL,string id)
+        {
+            foreach(var news in newsL.news)
+            {
+                if (news.NewsID.Equals(id))
+                    return news;
+            }
+            return null;    // id doesn't exist
+        }
+            public static List<Attachment> WelcomeCard()
         {
             //Welcome Card
 
@@ -119,7 +246,7 @@ namespace EmployeeConnect.Helper
                                 Wrap = true ,// True if text is allowed to wrap
                             },
                             new AdaptiveImage
-                             {
+                            {
                                         Url = new Uri("https://cdncontribute.geeksforgeeks.org/wp-content/uploads/apple.jpeg") //url to image
                             }
                         }

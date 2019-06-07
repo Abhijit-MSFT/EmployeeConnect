@@ -90,20 +90,35 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.MyTools:
-                        //card = Helper.CardHelper.GetMyToolsCard();
+                        card = Helper.CardHelper.GetMyToolsCard();
+                        reply.Attachments.Add(card);
                         break;
-                        //case Constants.NextMonthRoster:
-                        //    card = CardHelper.GetMonthlyRosterCard();
-                        //    break;
-                        //case Constants.NextWeekRoster:
-                        //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                        //    break;
-                        //case Constants.UpdateCard:
-                        //    card = CardHelper.GetUpdateScreen();
-                        //    break;
-                        //default:
-                        //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
-                        //    break;
+                    //case Constants.NextMonthRoster:
+                    //    card = CardHelper.GetMonthlyRosterCard();
+                    //    break;
+                    //case Constants.NextWeekRoster:
+                    //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
+                    //    break;
+                    //case Constants.UpdateCard:
+                    //    card = CardHelper.GetUpdateScreen();
+                    //    break;
+                    //default:
+                    //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
+                    //    break;
+                    
+                    default:
+                        if (message.Trim().All(char.IsDigit)) {         //if message was a number
+                            card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
+                            if (card == null)
+                                reply.Text = "I dont have that info";
+                            else
+                                reply.Attachments.Add(card);
+                        }
+                        else
+                        {
+                            reply.Text = "I dont have that info";
+                        }
+                        break;
                 }
 
 

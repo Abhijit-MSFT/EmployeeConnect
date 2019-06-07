@@ -240,8 +240,38 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Anthem at EA%27s E3 show.jpg" />
+    <Content Include="Images\Driverless car navigation.jpg" />
+    <Content Include="Images\Reading Improves mental health.jpg" />
+    <Content Include="Images\China violates Montreal Protocol.jpg" />
+    <Content Include="Images\Recycle Ocean Floor Diamongs.jpg" />
     <Content Include="Images\expense_icon.PNG" />
+    <Content Include="Images\Fiat CEO sells stock.jpg" />
+    <Content Include="Images\French Open 2019.jpg" />
+    <Content Include="Images\Havells Net Profit.jpg" />
+    <Content Include="Images\Collaboration in Web Design.jpeg" />
+    <Content Include="Images\IDBI Bank.JPG" />
+    <Content Include="Images\Jet Airways Financial.PNG" />
+    <Content Include="Images\Learn to build Websites.jpeg" />
+    <Content Include="Images\Leonardo da Vinci May Have Had ADHD.jpg" />
+    <Content Include="Images\Meditation Research.jpg" />
+    <Content Include="Images\Meghalaya Rainfall.jpg" />
+    <Content Include="Images\NBA Finals.jpg" />
+    <Content Include="Images\Life Satisfaction.jpeg" />
+    <Content Include="Images\PlayStation Plus June.jpg" />
+    <Content Include="Images\Q4 Vacations ONGC Profit.jpg" />
+    <Content Include="Images\Storms in Kentucky.jpg" />
+    <Content Include="Images\Social Media Advertising.JPG" />
+    <Content Include="Images\Language models.jpg" />
+    <Content Include="Images\The Elder Scrolls 6.jpg" />
+    <Content Include="Images\The world%27s most beautiful house.jpg" />
+    <Content Include="Images\Xiaomi%27s number 1 tag.PNG" />
     <Content Include="Images\timesheet_icon.PNG" />
+    <Content Include="Images\Toonz Media Group.JPG" />
+    <Content Include="Images\Twitter new study.jpg" />
+    <Content Include="Images\British Film Institute digitises archive.jpg" />
+    <Content Include="Images\High-flying robot.jpg" />
+    <Content Include="Images\XBOX Game Pass Subscription.JPG" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
     <Content Include="Scripts\teamsapp.js" />
@@ -275,6 +305,7 @@
     <Content Include="Views\EmployeeConnect\Tasks.cshtml" />
     <Content Include="Views\EmployeeConnect\News.cshtml" />
     <Content Include="Views\EmployeeConnect\EventandTrainingTab.cshtml" />
+    <Content Include="TestData\tickets.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
