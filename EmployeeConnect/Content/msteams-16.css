@@ -18,7 +18,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    overflow: hidden
+    overflow:auto !important;
 }
 
 .theme-light .panel-header {
@@ -32,7 +32,7 @@
     flex: 1 1 auto;
     margin-left: 2rem;
     margin-right: 2rem;
-    overflow: auto
+    overflow: hidden !important;
 }
 
 .theme-light .panel-footer {

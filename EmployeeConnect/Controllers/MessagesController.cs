@@ -9,6 +9,10 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
+using EmployeeConnect.Models;
+using EmployeeConnect.Helper;
+using Newtonsoft.Json;
+using EmployeeConnect.Common;
 
 namespace EmployeeConnect.Controllers
 {
@@ -33,6 +37,42 @@ namespace EmployeeConnect.Controllers
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
 
+        private HttpResponseMessage HandleInvokeMessages(Activity activity)
+        {
+            var activityValue = activity.Value.ToString();
+            if (activity.Name == "task/fetch")
+            {
+                CardActionValue.BotFrameworkCardValue<string> action;
+                try
+                {
+                    action = JsonConvert.DeserializeObject<CardActionValue.TaskModuleActionData<string>>(activityValue).Data;
+                }
+                catch (Exception)
+                {
+                    action = JsonConvert.DeserializeObject<CardActionValue.BotFrameworkCardValue<string>>(activityValue);
+                }
+
+                Models.TaskInfo taskInfo = GetTaskInfo(action.Data);
+                Models.TaskEnvelope taskEnvelope = new Models.TaskEnvelope
+                {
+                    Task = new Models.Task()
+                    {
+                        Type = Models.TaskType.Continue,
+                        TaskInfo = taskInfo
+                    }
+                };
+                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+
+            }
+            else if (activity.Name == "task/submit")
+            {
+                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
+                connector.Conversations.ReplyToActivity(reply);
+            }
+            return new HttpResponseMessage(HttpStatusCode.Accepted);
+        }
+
         /// <summary>
         /// Handle an invoke activity.
         /// </summary>
@@ -50,19 +90,47 @@ namespace EmployeeConnect.Controllers
                     var response = MessageExtension.HandleMessageExtensionQuery(connector, activity);
                     return response != null ? Request.CreateResponse<ComposeExtensionResponse>(response) : new HttpResponseMessage(HttpStatusCode.OK);
                 case "task/fetch":
-                // Handle fetching task module content
+                    // Handle fetching task module content
+                      
+                    
                 case "task/submit":
                     // Handle submission of task module info
                     // Run this on a task so that 
-                    break;
+                    ConnectorClient connectorclient = new ConnectorClient(new Uri(activity.ServiceUrl));
+                    Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
+                    connectorclient.Conversations.ReplyToActivity(reply);
+                    return new HttpResponseMessage(HttpStatusCode.Accepted);
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
+        }
+
+        private static TaskInfo GetTaskInfo(string actionInfo)
+        {
+            TaskInfo taskInfo = new TaskInfo();
+            switch (actionInfo)
+            {
+                case TaskModuleIds.PurchaseOrder:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.PurchaseOrder;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.PurchaseOrder);
+                    break;
+
+                default:
+                    break;
+            }
+            return taskInfo;
+        }
+
+        private static void SetTaskInfo(Models.TaskInfo taskInfo, UIConstants uIConstants)
+        {
+            taskInfo.Height = uIConstants.Height;
+            taskInfo.Width = uIConstants.Width;
+            taskInfo.Title = uIConstants.Title.ToString();
         }
 
         /// <summary>
         /// Handle request to fetch task module content.
         /// </summary>
-        private static async Task HandleConversationUpdate(Activity message)
+        private static async System.Threading.Tasks.Task HandleConversationUpdate(Activity message)
         {
             ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
             var channelData = message.GetChannelData<TeamsChannelData>();
