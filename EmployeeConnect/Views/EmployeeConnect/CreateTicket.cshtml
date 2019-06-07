@@ -1,0 +1,101 @@
+﻿@model EmployeeConnect.Models.PO
+@using EmployeeConnect.Common;
+@using EmployeeConnect.Helper;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./Tools.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>CT</title>
+
+</head>
+<body>
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content content-radius">
+            <div class="modal-header custom-header">
+                <h5 class="modal-title">
+                    Create ticket for HR related queries
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="category">Select category</div>
+                <select class="date-control">
+                    <option selected>Employee support</option>
+                    <option>Option 2</option>
+                </select>
+                <span class="down-chevron"></span>
+                <div class="modal-category">Description</div>
+                <div class="card custom-card">
+                    <div class="card-body custom-card-body">
+                        Need to understand PTO assignment
+                    </div>
+                </div>
+                <div class="modal-priority">Set a priority</div>
+                <form class="all-radio">
+                    <label class="radio-label col-3 ">
+                        <input type="radio" name="radio" />
+                        <span class="range">Low</span>
+                        <span class="check-mark"></span>
+                    </label>
+                    <label class="radio-label col-3">
+                        <input type="radio" name="radio" />
+                        <span class="range">Medium</span>
+                        <span class="check-mark"></span>
+                    </label>
+                    <label class="radio-label col-3">
+                        <input type="radio" name="radio" checked />
+                        <span class="range">High</span>
+                        <span class="check-mark"></span>
+                    </label>
+                </form>
+                <div class="two-btn">
+                    <button type="button" class="cancel">Cancel</button>
+                    <button type="button" class="BCT" data-toggle="modal"
+                            data-target="#Next" onclick="submit('ticketcomplete');">
+                        Create ticket
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    microsoftTeams.initialize();
+
+        submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+
+        function submit(type) {
+
+            debugger;
+            let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete";
+                taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+    </script>
+</body>
+

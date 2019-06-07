@@ -9,6 +9,10 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
+using EmployeeConnect.Models;
+using EmployeeConnect.Helper;
+using Newtonsoft.Json;
+using EmployeeConnect.Common;
 
 namespace EmployeeConnect.Controllers
 {
@@ -24,17 +28,15 @@ namespace EmployeeConnect.Controllers
                 case ActivityTypes.Message:
                     await Conversation.SendAsync(activity, () => new RootDialog());
                     break;
-                    /*
                 case ActivityTypes.Invoke:
                     return await HandleInvokeActivity(activity);
                 case ActivityTypes.ConversationUpdate:
                     await HandleConversationUpdate(activity);
                     break;
-                    */
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
-        /*
+
         private HttpResponseMessage HandleInvokeMessages(Activity activity)
         {
             var activityValue = activity.Value.ToString();
@@ -50,12 +52,12 @@ namespace EmployeeConnect.Controllers
                     action = JsonConvert.DeserializeObject<CardActionValue.BotFrameworkCardValue<string>>(activityValue);
                 }
 
-                Models.TaskInfo taskInfo = GetTaskInfo(action.Data);
-                Models.TaskEnvelope taskEnvelope = new Models.TaskEnvelope
+                TaskInfo taskInfo = GetTaskInfo(action.Data);
+                TaskEnvelope taskEnvelope = new TaskEnvelope
                 {
                     Task = new Models.Task()
                     {
-                        Type = Models.TaskType.Continue,
+                        Type = TaskType.Continue,
                         TaskInfo = taskInfo
                     }
                 };
@@ -122,7 +124,7 @@ namespace EmployeeConnect.Controllers
         {
             taskInfo.Height = uIConstants.Height;
             taskInfo.Width = uIConstants.Width;
-            taskInfo.Title = uIConstants.Title.ToString();
+           // taskInfo.Title = uIConstants.Title.ToString();
         }
 
         /// <summary>
@@ -175,6 +177,6 @@ namespace EmployeeConnect.Controllers
                 default:
                     break;
             }
-            */
         }
     }
+}

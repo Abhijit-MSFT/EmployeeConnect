@@ -1,4 +1,5 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using EmployeeConnect.Common;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static EmployeeConnect.Models.CardActionValue;
 
 namespace EmployeeConnect.Dialogs
 {
@@ -24,7 +26,7 @@ namespace EmployeeConnect.Dialogs
         /// <summary>
         /// Called when a message is received by the dialog
         /// </summary>
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var activity = await result as Activity;
 
@@ -32,6 +34,15 @@ namespace EmployeeConnect.Dialogs
             typingReply.Text = null;
             typingReply.Type = ActivityTypes.Typing;
             await context.PostAsync(typingReply);
+
+            /*Task Module Added*/
+            var tMessage = (Activity)await result;
+            var treply = tMessage.CreateReply();
+            ThumbnailCard Tcard = GetTaskModuleOptions();
+            treply.Attachments.Add(Tcard.ToAttachment());
+            await context.PostAsync(treply);
+            //context.Wait(MessageReceivedAsync);
+            /*Ends here*/
 
             string message = string.Empty;
             var userDetails = await GetCurrentUserDetails(activity);
@@ -65,14 +76,14 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
-                        card = Helper.CardHelper.UpcomingEventsTraining();
-                        //reply.Text = "Upcoming events and training";
+                        res = Helper.CardHelper.UpcomingEventsTraining();
+                        for (int i = 0; i < res.Count(); i++)
+                            reply.Attachments.Add(res.ElementAt(i));
+                        break;
+                    case Common.Constants.ReviewTasks:
+                        card = Helper.CardHelper.ReviewTasks();
                         reply.Attachments.Add(card);
                         break;
-                    //case Common.Constants.ReviewTasks:
-                    //    card = Helper.CardHelper.ReviewTasks();
-                    ///    reply.Attachments.Add(card);
-                    //    break;
                     case Common.Constants.PendingApprovals:
                         card = Helper.CardHelper.PendingApprovals();
                         reply.Attachments.Add(card);
@@ -90,35 +101,20 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.MyTools:
-                        card = Helper.CardHelper.GetMyToolsCard();
-                        reply.Attachments.Add(card);
+                        //card = Helper.CardHelper.GetMyToolsCard();
                         break;
-                    //case Constants.NextMonthRoster:
-                    //    card = CardHelper.GetMonthlyRosterCard();
-                    //    break;
-                    //case Constants.NextWeekRoster:
-                    //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                    //    break;
-                    //case Constants.UpdateCard:
-                    //    card = CardHelper.GetUpdateScreen();
-                    //    break;
-                    //default:
-                    //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
-                    //    break;
-                    
-                    default:
-                        if (message.Trim().All(char.IsDigit)) {         //if message was a number
-                            card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
-                            if (card == null)
-                                reply.Text = "I dont have that info";
-                            else
-                                reply.Attachments.Add(card);
-                        }
-                        else
-                        {
-                            reply.Text = "I dont have that info";
-                        }
-                        break;
+                        //case Constants.NextMonthRoster:
+                        //    card = CardHelper.GetMonthlyRosterCard();
+                        //    break;
+                        //case Constants.NextWeekRoster:
+                        //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
+                        //    break;
+                        //case Constants.UpdateCard:
+                        //    card = CardHelper.GetUpdateScreen();
+                        //    break;
+                        //default:
+                        //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
+                        //    break;
                 }
 
 
@@ -131,6 +127,21 @@ namespace EmployeeConnect.Dialogs
                 await HandleActions(context, activity);
                 return;
             }
+        }
+
+        private static ThumbnailCard GetTaskModuleOptions()
+        {
+            ThumbnailCard card = new ThumbnailCard();
+            card.Title = "Task Module Invocation from Thumbnail Card";
+            card.Buttons = new List<CardAction>();
+           
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PurchaseOrder.ButtonTitle, null,
+                new BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.PurchaseOrder.Id
+                }));
+           
+            return card;
         }
 
         private async Task HandleActions(IDialogContext context, Activity activity)

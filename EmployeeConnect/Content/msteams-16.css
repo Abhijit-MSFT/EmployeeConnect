@@ -408,10 +408,10 @@
     resize: none
 }
 
-    .theme-light .input-field:hover:inactive:enabled, .theme-light .textarea-field:hover:inactive:enabled {
+  /* .theme-light .input-field:hover:inactive:enabled, .theme-light .textarea-field:hover:inactive:enabled {
         background: #F0F2F4;
         border-bottom-color: transparent
-    }
+    }*/
 
     .theme-light .input-field:disabled, .theme-light .textarea-field:disabled {
         background: #F3F4F5;

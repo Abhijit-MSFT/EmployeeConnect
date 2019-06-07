@@ -24,8 +24,6 @@ namespace EmployeeConnect.Models
         public string subtitle { get; set; }
         public Tap tap { get; set; }
         public string icon { get; set; }
-       
-        //public string NewBy { get; set; }   //doesn't display in frontend
     }
 
     public class Tap
@@ -33,8 +31,6 @@ namespace EmployeeConnect.Models
         public string type { get; set; }
         public string title { get; set; }
         public string value { get; set; }
-        public string text { get; set; }
-        public string displayText { get; set; }
     }
 
 }
