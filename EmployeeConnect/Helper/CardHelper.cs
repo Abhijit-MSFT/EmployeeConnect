@@ -8,6 +8,7 @@ using System.Security.Principal;
 using Microsoft.Bot.Connector.Teams.Models;
 using AdaptiveCards;
 using Microsoft.Ajax.Utilities;
+using Antlr.Runtime.Tree;
 
 namespace EmployeeConnect.Helper
 {
@@ -263,7 +264,6 @@ namespace EmployeeConnect.Helper
                     }
                }
             };
-
             var card2 = new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>()
@@ -374,6 +374,10 @@ namespace EmployeeConnect.Helper
             {
                 Body = new List<AdaptiveElement>()
                 {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
 
                     new AdaptiveTextBlock()
                     {
@@ -532,6 +536,8 @@ namespace EmployeeConnect.Helper
                            },
                     }
                 }
+                        }
+                    }
                 },
                 Actions = new List<AdaptiveAction>()
                 {
@@ -560,6 +566,10 @@ namespace EmployeeConnect.Helper
             {
                 Body = new List<AdaptiveElement>()
                 {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
 
                     new AdaptiveTextBlock()
                     {
@@ -606,11 +616,12 @@ namespace EmployeeConnect.Helper
                             {
                                 Title = "Media",
                                 Value = "6"
-                            },
+                            }
 
                         }
-                    },
-
+                    }
+                        }
+                    }
                 },
                 Actions = new List<AdaptiveAction>()
                 {
@@ -636,43 +647,161 @@ namespace EmployeeConnect.Helper
         }
 
         //[Obsolete]
-        public static List<Attachment> UpcomingEventsTraining()
+        public static Attachment UpcomingEventsTraining()
         {
             EandTModel ETlist = new EandTModel();
             ETlist = Helper.GetDataHelper.GetEandT();
-            List<Attachment> res = new List<Attachment>();
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Upcoming events and training for you";
+
+
+            DateTime CurrDate = new DateTime(2019, 6, 1);
+
 
             for (int i = 0; i < ETlist.EventsAndtraining.Count(); i++)
             {
-                var card = new AdaptiveCard("1.0")
-                {
-                    Body = new List<AdaptiveElement>()
-                {
 
-                    new AdaptiveTextBlock()
+                if (!ETlist.EventsAndtraining[i].UserAdded)
+                    continue;
+                else
+                {
+                    DateTime D = DateTime.ParseExact(ETlist.EventsAndtraining[i].ETStartDate, "MM-dd-yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+                    if (D <= CurrDate.AddDays(7))
                     {
-                        Text = "Upcoming events and training will be displayed here",
-                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+
+                        var item = new Item();
+                        item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                        item.id = i.ToString();
+                        item.subtitle = ETlist.EventsAndtraining[i].ETStartDate + " to " + ETlist.EventsAndtraining[i].ETEndDate;
+
+                        item.type = "resultItem";
+                        item.title = ETlist.EventsAndtraining[i].ETTitle;
+
+                        item.tap = new Tap()
+                        {
+                            type = "imBack",
+                            title = "titleitem",
+                            value = "Event and training item" + i
+                        };
+
+                        list.Add(item);
                     }
                 }
-                };
-                res.Add(new Attachment()
-                {
-                    ContentType = AdaptiveCard.ContentType,
-                    Content = card
-                });
             }
-            return res;
+            card.content.items = list.ToArray();
+            Attachment attachment = new Attachment();
+            attachment.ContentType = card.contentType;
+            attachment.Content = card.content;
+            return attachment;
         }
 
         //[Obsolete]
+        [Obsolete]
         public static Attachment PendingTasks()
         {
+            PO POlist = new PO();
+            POlist = Helper.GetDataHelper.GetPOs();
+            PurchaseOrders POOrder = POlist.purchaseOrder.FirstOrDefault<PurchaseOrders>();
+
             var card = new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>()
                 {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Reminder: You have a pending task to review",
+                                Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Default // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Purchase Order",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            new AdaptiveFactSet
+                            {
+                                Separator = true,
+                                Facts =
+                                {
+                                    // Describes a fact in a Adaptive FactSet as a key/value pair
+                                    new AdaptiveFact
+                                    {
+                                        Title = "P.O. No.",
+                                        Value = POOrder.PoNumber
+                                    },
+                                    new AdaptiveFact
+                                    {
+                                        Title = "Description",
+                                        Value = POOrder.Description
+                                    },
+                                    new AdaptiveFact
+                                    {
+                                        Title = "Vendor Name",
+                                        Value =  POOrder.VendorName
+                                    },
+                                    new AdaptiveFact
+                                    {
+                                        Title = "Vendor No.",
+                                        Value = POOrder.vendorNo
+                                    },
+                                    new AdaptiveFact
+                                    {
+                                        Title = "Amount",
+                                        Value = POOrder.TotalAmount
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                },
+                Actions = new List<AdaptiveAction>()
+                {
+                    // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
+                    new AdaptiveSubmitAction()
+                    {
+                        Title = "Remind me later",
+                       // DataJson = "get the data"
+                    },
+                     new AdaptiveShowCardAction
+                     {
+                        Title ="Review",
+                        Card = CardHelper.ReviewTasks()
+
+                     }
+                }
+            };
+            Attachment attachment = new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card
+            };
+            return attachment;
+        }
+
+        //[Obsolete]
+        public static AdaptiveCard ReviewTasks()
+        {
+            //how the po info is sent here
+            AdaptiveCard card = new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
                     new AdaptiveTextBlock()
                     {
                         Text = "Reminder: You have a pending task to review",
@@ -681,9 +810,107 @@ namespace EmployeeConnect.Helper
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "Purchase Order",
+                        Text = "You have timesheet waiting for" + "X" + "days",
                         Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                    }
+                        }
+                    }
+                },
+                Actions = new List<AdaptiveAction>()
+                {
+                    // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
+                    new AdaptiveSubmitAction()
+                    {
+                        Title = "Fill timesheet",
+                       // DataJson = "get the data"
+                    },
+                     new AdaptiveSubmitAction()
+                    {
+                        Title = "Remind me later",
+                       // DataJson = "get the data"
+                    }
+                 }
+
+            };
+            return card;
+        }
+
+        // [Obsolete]
+        public static Attachment PendingApprovals()
+        {
+            //how to get data from json
+            PO POList = Helper.GetDataHelper.GetPOs();
+            int count1 = POList.purchaseOrder.Count();
+            int count = count1;
+            var card = new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+
+                        new AdaptiveTextBlock()
+                        {
+                            Text = "You have " + count + "items pending for approval",
+                            Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                            Size = AdaptiveTextSize.Medium, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                        },
+                        new AdaptiveTextBlock()
+                        {
+                            Text = count1+ "purchase orders",
+                            Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
+                            Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                        }
+                        }
+                    }
+                }
+            };
+            Attachment attachment = new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card
+            };
+            return attachment;
+        }
+
+        public static Attachment Ticket()
+        {
+            var card = new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "Your ticket for employee support category has been created.",
+                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                        Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "Employee Support",
+                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                        Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "Need to understand PTO Assignment",
+                        Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+                        Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "High Priority!",
+                        Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+                        Size = AdaptiveTextSize.Default,
+                        Color= AdaptiveTextColor.Warning// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     },
                     new AdaptiveFactSet
                     {
@@ -718,6 +945,8 @@ namespace EmployeeConnect.Helper
                             },
 
                         }
+                    }
+                        }
                     },
                 },
                 Actions = new List<AdaptiveAction>()
@@ -728,7 +957,7 @@ namespace EmployeeConnect.Helper
                         Title = "Remind me later",
                        // DataJson = "get the data"
                     },
-                     new AdaptiveShowCardAction()
+                     new  AdaptiveSubmitAction()
                     {
                         Title = "Review",
                        // Card= ReviewTasks
@@ -743,85 +972,5 @@ namespace EmployeeConnect.Helper
             };
             return attachment;
         }
-
-        //[Obsolete]
-        public static Attachment ReviewTasks()
-        {
-            //how the po info is sent here
-            var card = new AdaptiveCard("1.0")
-            {
-                Body = new List<AdaptiveElement>()
-                {
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "Reminder: You have a pending task to review",
-                        Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    },
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "You have timesheet waiting for" + "X" + "days",
-                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    }
-                },
-                Actions = new List<AdaptiveAction>()
-                {
-                    // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Fill timesheet",
-                       // DataJson = "get the data"
-                    },
-                     new AdaptiveSubmitAction()
-                    {
-                        Title = "Remind me later",
-                       // DataJson = "get the data"
-                    }
-                 }
-
-            };
-            Attachment attachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card
-            };
-            return attachment;
-        }
-
-        // [Obsolete]
-        public static Attachment PendingApprovals()
-        {
-            //how to get data from json
-            PO POList = Helper.GetDataHelper.GetPOs();
-            int count1 = POList.PurchaseOrder.Count();
-            int count = count1;
-            var card = new AdaptiveCard("1.0")
-            {
-                Body = new List<AdaptiveElement>()
-                {
-
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "You have " + count + "items pending for approval",
-                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Medium, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    },
-                    new AdaptiveTextBlock()
-                    {
-                        Text = count1+ "purchase orders",
-                        Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    }
-                }
-            };
-            Attachment attachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card
-            };
-            return attachment;
-        }
-
     }
 }
