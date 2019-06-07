@@ -9,10 +9,6 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
-using EmployeeConnect.Models;
-using EmployeeConnect.Helper;
-using Newtonsoft.Json;
-using EmployeeConnect.Common;
 
 namespace EmployeeConnect.Controllers
 {
@@ -28,15 +24,17 @@ namespace EmployeeConnect.Controllers
                 case ActivityTypes.Message:
                     await Conversation.SendAsync(activity, () => new RootDialog());
                     break;
+                    /*
                 case ActivityTypes.Invoke:
                     return await HandleInvokeActivity(activity);
                 case ActivityTypes.ConversationUpdate:
                     await HandleConversationUpdate(activity);
                     break;
+                    */
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
-
+        /*
         private HttpResponseMessage HandleInvokeMessages(Activity activity)
         {
             var activityValue = activity.Value.ToString();
@@ -177,6 +175,6 @@ namespace EmployeeConnect.Controllers
                 default:
                     break;
             }
+            */
         }
     }
-}
