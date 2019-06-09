@@ -61,7 +61,7 @@ namespace EmployeeConnect.Dialogs
 
                 var reply = context.MakeMessage();
                 reply.Attachments.Add(card);
-                await context.PostAsync(reply);
+                await context.PostAsync("Hello! how are you today?");
 
             }
             else if (activity.Value != null)

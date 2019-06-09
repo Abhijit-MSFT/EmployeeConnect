@@ -1,111 +1,115 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
+using EmployeeConnect;
 using EmployeeConnect.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 
-namespace EmployeeConnect.Controllers
+namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
 {
+
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+        public static Dictionary<int, string> result = new Dictionary<int, string>();
+        private static int i = 0;
+
+        //public static List<string> speakers;
+
         [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-
-            switch (activity.Type)
+            using (var connector = new ConnectorClient(new Uri(activity.ServiceUrl)))
             {
-                case ActivityTypes.Message:
-                    await Conversation.SendAsync(activity, () => new RootDialog());
-                    break;
-                case ActivityTypes.Invoke:
-                    return await HandleInvokeActivity(activity);
-                case ActivityTypes.ConversationUpdate:
-                    await HandleConversationUpdate(activity);
-                    break;
-            }
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
-        }
-
-        /// <summary>
-        /// Handle an invoke activity.
-        /// </summary>
-        private async Task<HttpResponseMessage> HandleInvokeActivity(Activity activity)
-        {
-            var activityValue = activity.Value.ToString();
-            switch (activity.Name)
-            {
-                case "signin/verifyState":
-                    await Conversation.SendAsync(activity, () => new RootDialog());
-                    break;
-                case "composeExtension/query":
-                // Handle fetching task module content
-                case "task/fetch":
-                // Handle fetching task module content
-                case "task/submit":
-                    // Handle submission of task module info
-                    // Run this on a task so that 
-                    break;
-            }
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
-        }
-
-        /// <summary>
-        /// Handle request to fetch task module content.
-        /// </summary>
-        private static async Task HandleConversationUpdate(Activity message)
-        {
-            ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
-            var channelData = message.GetChannelData<TeamsChannelData>();
-            // Treat 1:1 add/remove events as if they were add/remove of a team member
-            if (channelData.EventType == null)
-            {
-                if (message.MembersAdded != null)
-                    channelData.EventType = "teamMemberAdded";
-                if (message.MembersRemoved != null)
-                    channelData.EventType = "teamMemberRemoved";
-            }
-            switch (channelData.EventType)
-            {
-                case "teamMemberAdded":
-                    // Team member was added (user or bot)
-                    if (message.MembersAdded.Any(m => m.Id.Contains(message.Recipient.Id)))
+                var val = activity.Value;
+                if (activity.IsComposeExtensionQuery())
+                {
+                    var response = MessageExtension.HandleMessageExtensionQuery(connector, activity, result);
+                    return response != null
+                    ? Request.CreateResponse<ComposeExtensionResponse>(response)
+                    : new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    if (activity.Value != null)
                     {
-                        // Bot was added to a team: send welcome message
-                        message.Text = "hi";
-                        await Conversation.SendAsync(message, () => new RootDialog());
-                    }
-                    break;
-                case "teamMemberRemoved":
-                    // Add team & channel details 
-                    if (message.MembersRemoved.Any(m => m.Id.Contains(message.Recipient.Id)))
-                    {
-                        // Bot was removed from a team: remove entry for the team in the database
+                        result = await GetActivity(activity);
                     }
                     else
                     {
-                        // Member was removed from a team: update the team member  count
+                        await EchoBot.EchoMessage(connector, activity);
                     }
-                    break;
-                // Update the team and channel info in the database when the team is rename or when channel are added/removed/renamed
-                case "teamRenamed":
-                    // Rename team & channel details 
-                    break;
-                case "channelCreated":
-                    break;
-                case "channelRenamed":
-                    break;
-                case "channelDeleted":
-                    break;
-                default:
-                    break;
+                }
+                if (activity.Type == ActivityTypes.ConversationUpdate)
+                {
+                    for (int i = 0; i < activity.MembersAdded.Count; i++)
+                    {
+                        if (activity.MembersAdded[i].Id == activity.Recipient.Id)
+                        {
+                            var reply = activity.CreateReply();
+                            reply.Text = "Hi! I am the Event Management bot for Dev Days 2019 happening in Taiwan. Ask me questions about the event and I can help you find answers Ask me questions like \n\n" +
+                                  "   *\r What is the venue? \r\n\n" +
+                                  "   *\r What tracks are available? \r\n\n" +
+                                  "   *\r Do we have workshops planned? \n\n".Replace("\n", Environment.NewLine);
+
+                            await connector.Conversations.ReplyToActivityAsync(reply);
+
+                            var channelData = activity.GetChannelData<TeamsChannelData>();
+                            if (channelData.Team != null)
+                            {
+                                ConversationParameters param = new ConversationParameters()
+                                {
+                                    Members = new List<ChannelAccount>() { new ChannelAccount() { Id = activity.From.Id } },
+                                    ChannelData = new TeamsChannelData()
+                                    {
+                                        Tenant = channelData.Tenant,
+                                        Notification = new NotificationInfo() { Alert = true }
+                                    }
+
+                                };
+
+                                var resource = await connector.Conversations.CreateConversationAsync(param);
+                                await connector.Conversations.SendToConversationAsync(resource.Id, reply);
+
+
+                            }
+                            break;
+                        }
+                    }
+                }
+                return new HttpResponseMessage(HttpStatusCode.Accepted);
             }
+
+        }
+
+
+
+
+
+        public async static Task<Dictionary<int, string>> GetActivity(Activity a)
+        {
+            var jSonObj = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(a.Value.ToString());
+
+            //StudentValues item = new StudentValues
+            //{
+            //    Name = jSonObj["myName"],
+            //    Email = jSonObj["myEmail"],
+            //    Phone = jSonObj["myTel"]
+            //};
+
+            result.Add(i++, null);
+
+            return result;
         }
     }
 }
+
+

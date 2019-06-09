@@ -10,14 +10,14 @@ namespace EmployeeConnect.Helper
 {
     public class GetDataHelper
     {
-        public List<News> GetNews()
+        public static NewsModel GetNews()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
 
-            List<News> news = new List<News>();
+            NewsModel news = new NewsModel();
 
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            news = (new JavaScriptSerializer().Deserialize<List<News>>(json));
+            news = (new JavaScriptSerializer().Deserialize<NewsModel>(json));
 
             return news;
         }
