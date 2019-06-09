@@ -1,0 +1,226 @@
+﻿@model EmployeeConnect.Models.PO
+@using EmployeeConnect.Common;
+@using EmployeeConnect.Helper;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Tools.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Tools Tab</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="HR">Human Resources</div>
+                <div class="P-10">
+                    <div class="card shadow-sm custom-card-first-row">
+                        <div class="card-body">
+                            <span alt-name="create letter"
+                                  class="HR-tabs create-icon"></span>
+                            <div class="CBL">Create business letter</div>
+                            <p class="CBL-des">
+                                Create a business letter within a predesigned color and
+                                template.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-first-row-one" data-toggle="modal"
+                         data-target="#create-ticket">
+                        <div class="card-body">
+                            <span alt-name="ticket-creation"
+                                  class="HR-tabs ticket-creation">
+                            </span>
+                            <div class="CT" onclick="submit('cricketticket');">Create ticket</div>
+                            <p class="CT-des">
+                                For all HR tickets, the ticket type is being set as Employee
+                                Support.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-first-row-two">
+                        <div class="card-body">
+                            <span alt-name="leave-request"
+                                  class="HR-tabs leave-request"></span>
+                            <div class="RL">Request leave</div>
+                            <p class="RL-des">
+                                Request leave and check your status in the Leave application.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-first-row-three">
+                        <div class="card-body">
+                            <span alt-name="policies" class="HR-tabs policies"></span>
+                            <div class="VP">View policies</div>
+                            <p class="VP-des">
+                                Identify the purpose and objectives of Humana Resources
+                                department.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="PB">Pay and benefits</div>
+                <div class="P-10">
+                    <div class="card shadow-sm custom-card-PB-second-row">
+                        <div class="card-body">
+                            <span alt-name="download-payslip"
+                                  class="PB-tabs download-payslip"></span>
+                            <div class="DP">Download payslip</div>
+                            <p class="DP-des">
+                                Create a business letter within a predesigned color and
+                                template.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-PB-second-row-one">
+                        <div class="card-body">
+                            <span alt-name="create-finance-tkt"
+                                  class="PB-tabs create-finance-tkt">
+                            </span>
+                            <div class="CFT">Create finance ticket</div>
+                            <p class="CFT-des">
+                                For all HR tickets, the ticket type is being set as Employee
+                                Support.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-PB-second-row-two">
+                        <div class="card-body">
+                            <span alt-name="submit-benefits"
+                                  class="PB-tabs submit-benefits">
+                            </span>
+                            <div class="SBC">Submit benefits claim</div>
+                            <p class="SBC-des">
+                                Request leave and check your status in the Leave application.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-PB-second-row-three">
+                        <div class="card-body">
+                            <span alt-name="view-benefits"
+                                  class="PB-tabs view-benefits"></span>
+                            <div class="VBP">View benefits policies</div>
+                            <p class="VBP-des">
+                                Identify the purpose and objectives of Humana Resources
+                                department.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="IF">IT and facilities</div>
+                <div class="P-10">
+                    <div class="card shadow-sm custom-card-IF-third-row">
+                        <div class="card-body">
+                            <span class="IF-tabs support"></span>
+                            <div class="RIST">Raise IT Support Ticket</div>
+                            <p class="RIST-des">
+                                Create a business letter within a predesigned color and
+                                template.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-IF-third-row-one">
+                        <div class="card-body">
+                            <span class="IF-tabs wife-request"> </span>
+                            <div class="GWR">Visitor wi-fi request</div>
+                            <p class="GWR-des">
+                                For all HR tickets, the ticket type is being set as Employee
+                                Support.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-IF-third-row-two">
+                        <div class="card-body">
+                            <span class="IF-tabs event-support "></span>
+                            <div class="EISR">Event IT Support request</div>
+                            <p class="EISR-des">
+                                Request leave and check your status in the Leave application.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-IF-third-row-three">
+                        <div class="card-body">
+                            <span class="IF-tabs cafe-service"></span>
+                            <div class="CSA">Cafeteria service app</div>
+                            <p class="CSA-des">
+                                Identify the purpose and objectives of Humana Resources
+                                department.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="RO">Retail operations</div>
+                <div class="P-10">
+                    <div class="card shadow-sm custom-card-RO-fourth-row">
+                        <div class="card-body">
+                            <span class="RO-tabs Inventory"> </span>
+                            <div class="IR">Inventory request</div>
+                            <p class="IR-des">
+                                Create a business letter within a predesigned color and
+                                template.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-RO-fourth-row-one">
+                        <div class="card-body">
+                            <span class="RO-tabs RO-timesheet"></span>
+                            <div class="timesheet">Timesheet</div>
+                            <p class="timesheet-des">
+                                For all HR tickets, the ticket type is being set as Employee
+                                Support.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm custom-card-RO-fourth-row-two">
+                        <div class="card-body">
+                            <span class="RO-tabs Ro-SI"></span>
+                            <div class="SI">Store info</div>
+                            <p class="SI-des">
+                                Request leave and check your status in the Leave application.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    microsoftTeams.initialize();
+
+        submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+
+        function submit(type) {
+
+            debugger;
+            let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
+                taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+    </script>
+</body>

@@ -2,21 +2,21 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
   "manifestVersion": "1.5",
   "version": "1.0.0",
-  "id": "a771b5f9-4b2e-4208-843a-f3d1dca903a6",
+  "id": "dcbed7b8-e0b1-488b-ac89-cdc4c2678fd9",
   "packageName": "com.microsoft.teams.devapp",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://00750ad6.ngrok.io",
-    "termsOfUseUrl": "https://00750ad6.ngrok.io"
+    "privacyUrl": "https://b279550c.ngrok.io",
+    "termsOfUseUrl": "https://b279550c.ngrok.io"
   },
   "icons": {
-    "color": "color.png",
-    "outline": "outline.png"
+    "color": "contoso20x20.png",
+    "outline": "contoso96x96.png"
   },
   "name": {
-    "short": "EmployeeConnect",
-    "full": "This is Employee_Connect app"
+    "short": "EmployeeConnectVedant",
+    "full": "This is Employee_Connect app for vedant"
   },
   "description": {
     "short": "Employee Connect intranet app for Microsoft Teams",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://00750ad6.ngrok.io/configure",
+      "configurationUrl": "https://b279550c.ngrok.io/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -36,8 +36,8 @@
     {
       "entityId": "CurrNews",
       "name": "News",
-      "contentUrl": "https://00750ad6.ngrok.io/index",
-      "websiteUrl": "https://00750ad6.ngrok.io/index",
+      "contentUrl": "https://b279550c.ngrok.io/index",
+      "websiteUrl": "https://b279550c.ngrok.io/index",
       "scopes": [
         "personal"
       ]
@@ -45,7 +45,7 @@
   ],
   "bots": [
     {
-      "botId": "a151b5b0-dc01-4352-8ebb-193fc24475a5",
+      "botId": "3ad3f7e1-7a14-42d6-9bb1-5e2e6a33ff8c",
       "scopes": [
         "personal",
         "team"
@@ -59,6 +59,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "00750ad6.ngrok.io"
+    "b279550c.ngrok.io"
   ]
 }
