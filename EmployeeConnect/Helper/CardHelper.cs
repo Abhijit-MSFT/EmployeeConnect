@@ -708,7 +708,7 @@ namespace EmployeeConnect.Helper
         {
             PO POlist = new PO();
             POlist = Helper.GetDataHelper.GetPOs();
-            PurchaseOrders POOrder = POlist.purchaseOrder.FirstOrDefault<PurchaseOrders>();
+            PurchaseOrders POOrder = POlist.PurchaseOrder.FirstOrDefault<PurchaseOrders>();
 
             var card = new AdaptiveCard("1.0")
             {
@@ -843,7 +843,7 @@ namespace EmployeeConnect.Helper
         {
             //how to get data from json
             PO POList = Helper.GetDataHelper.GetPOs();
-            int count1 = POList.purchaseOrder.Count();
+            int count1 = POList.PurchaseOrder.Count();
             int count = count1;
             var card = new AdaptiveCard("1.0")
             {
