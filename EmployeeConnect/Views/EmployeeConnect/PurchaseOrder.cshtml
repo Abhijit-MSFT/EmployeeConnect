@@ -39,42 +39,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="row-highlight">
-                        <td class="itemCode">6748924245</td>
-                        <td class="Description">White Board, Dry Erase Marker Board for office (1.5x2) (Pack of 1)</td>
-                        <td class="Unit-price"><span>&#x20b9;</span> 720</td>
-                        <td class="Quantity">14</td>
-                        <td class="Total">
-                            <span>&#x20b9;</span> 10,080
-                        </td>
-                    </tr>
-                    <tr class="row-highlight">
-                        <td class="itemCode">6778426526</td>
-                        <td class="Description">Magnetic White Board Planner Sheet Dry Erase. Includes 4 Markers & 1 Duster.</td>
-                        <td class="Unit-price"><span>&#x20b9;</span> 280</td>
-                        <td class="Quantity">22</td>
-                        <td class="Total">
-                            <span>&#x20b9;</span> 3,360
-                        </td>
-                    </tr>
-                    <tr class="row-highlight">
-                        <td class="itemCode">2455318377</td>
-                        <td class="Description">Non-Magnetic chalkboard, Lightweright Aluminium Frame, 1x2 feet (30x60 cm)</td>
-                        <td class="Unit-price"><span>&#x20b9;</span> 660</td>
-                        <td class="Quantity">18</td>
-                        <td class="Total">
-                            <span>&#x20b9;</span> 11,880
-                        </td>
-                    </tr>
-                    <tr class="row-highlight">
-                        <td class="itemCode">3624292842</td>
-                        <td class="Description">Metal Mesh Desk Organizer, Black LD 708-05</td>
-                        <td class="Unit-price"><span>&#x20b9;</span> 459</td>
-                        <td class="Quantity">12</td>
-                        <td class="Total">
-                            <span>&#x20b9;</span> 5,508
-                        </td>
-                    </tr>
+                    @foreach (var item in Model.PODetails)
+                    {
+                        <tr class="row-highlight">
+                            <td class="itemCode">@Html.DisplayFor(modelItem => item.ItemCode)</td>
+                            <td class="Description">@Html.DisplayFor(modelItem => item.ItemDescription)</td>
+                            <td class="Unit-price"><span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                            <td class="Quantity">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td class="Total">
+                                <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+
+                      
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

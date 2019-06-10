@@ -659,3 +659,64 @@ body {
         max-width: 353px;
     }
 }
+/*CreateTicket PopUp Css*/
+body {
+    padding: 20px;
+    overflow: auto;
+    background-color: #f3f2f1;
+}
+
+.panel-heading .accordion-toggle::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    color: darkgray;
+    content: "\f0dd";
+    float: left;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+h6.panel-title.accordion-toggle.collapsed::after {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    /* content: "\f0da"; */
+}
+
+.panel-title {
+    cursor: pointer;
+}
+
+span.title {
+    position: relative;
+    left: 16px;
+    font-weight: 800;
+    font-family: "Segoe UI";
+}
+
+.rules,
+.Claim {
+    color: #969595;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Segoe UI";
+}
+
+.row {
+    border-bottom: 4px solid #f3f2f1;
+    padding: 20px;
+    background-color: white;
+}
+
+.panel-body {
+    font-family: "Segoe UI";
+    font-size: 14px;
+    color: #7a7cb4;
+}
+
+.HR-tabs,
+.PB-tabs {
+    padding: 10px;
+}

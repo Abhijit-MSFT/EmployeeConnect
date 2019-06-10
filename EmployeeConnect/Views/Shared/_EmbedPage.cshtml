@@ -33,7 +33,8 @@
         document.onkeyup = function (event) {
             debugger;
             if ((event.key === 27) || (event.key === "Escape")) {
-                microsoftTeams.tasks.submitTask(); //- this will return an err object to the completionHandler()
+                microsoftTeams.tasks.submitTask(null
+                ); //- this will return an err object to the completionHandler()
             }
         }</script>
     <div id="embed-container">@RenderBody()</div>

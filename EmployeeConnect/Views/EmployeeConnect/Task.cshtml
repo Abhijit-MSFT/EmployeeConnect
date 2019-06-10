@@ -1,9 +1,7 @@
 ﻿@model EmployeeConnect.Models.PO
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -12,13 +10,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/teamsapp.js"></script>
-   
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
     <title>Tasks Tab</title>
-</head>
+
 <body>
+
     <div class="container-fluid">
+        
         <header class="heading">Pending submissons</header>
         <div class="card-deck custom-card-deck">
             <div class="card custom-card">
@@ -87,6 +85,7 @@
                                         <td class="amount">
                                             <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
                                         </td>
+
                                         <td class="button-primary" onclick="submit('purchaseorder');">Review</td>
                                     </tr>
                                 }
@@ -158,7 +157,6 @@
             </div>
         </div>
     </div>
-
     <script>
     microsoftTeams.initialize();
 
@@ -169,22 +167,21 @@
         };
 
         function submit(type) {
+
             debugger;
             let taskInfo = {
-                title: null,
+             //   title: null,
                 height: null,
                 width: null,
                 url: null,
                 fallbackUrl: null,
-                completionBotId: null,
             };
 
-            taskInfo.title = "Purchase Order";
+            //taskInfo.title = "Purchase Order";
             taskInfo.height = "medium";
             taskInfo.width = "medium";
 
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/purchaseorder";
-                taskInfo.title = "@(TaskModelUIConstant.PurchaseOrder.Title)";
                 taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
 
@@ -193,6 +190,6 @@
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         }
     </script>
+
 </body>
 
-</html>

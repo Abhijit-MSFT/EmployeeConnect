@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@model EmployeeConnect.Models.PO
+@using EmployeeConnect.Common;
+@using EmployeeConnect.Helper;
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,7 +36,7 @@
                             <span alt-name="ticket-creation"
                                   class="HR-tabs ticket-creation">
                             </span>
-                            <div class="CT">Create ticket</div>
+                            <div class="CT" onclick="submit('cricketticket');">Create ticket</div>
                             <p class="CT-des">
                                 For all HR tickets, the ticket type is being set as Employee
                                 Support.
@@ -187,11 +188,39 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal create tickets -->
-            <!-- Modal create ticket end -->
-            <!-- Modal2 to Next button  -->
-            <!-- Modal2 to Next button End -->
         </div>
     </div>
+    <script>
+    microsoftTeams.initialize();
+
+        submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+
+        function submit(type) {
+
+            debugger;
+            let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
+                taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+    </script>
 </body>
-</html>

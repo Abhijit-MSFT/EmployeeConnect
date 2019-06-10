@@ -49,6 +49,18 @@ namespace EmployeeConnect.Controllers
         {
           return View();
         }
+        [Route("createticket")]
+        public ActionResult CreateTicket()
+        {
+            return View();
+        }
+
+        [Route("ticketcomplete")]
+        public ActionResult TicketComplete()
+        {
+            return View();
+        }
+
         [Route("news")]
         public ActionResult News()
         {
@@ -60,7 +72,9 @@ namespace EmployeeConnect.Controllers
         [Route("purchaseorder")]
         public ActionResult PurchaseOrder()
         {
-            return View();
+            PO poList = new PO();
+            poList = GetDataHelper.GetPOs();
+            return View(poList.PurchaseOrder);
         }
 
         [Route("EventandTrainingTab")]
