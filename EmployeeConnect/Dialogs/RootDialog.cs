@@ -59,11 +59,6 @@ namespace EmployeeConnect.Dialogs
                         reply.Text = "Set a preferred time to receive notifications for latest news, events and trainings and reminders.";
                         reply.Attachments.Add(card);
                         break;
-                    case Common.Constants.SetNewsPrefrences:
-                        card = Helper.CardHelper.SetNewsPreferences();
-                        reply.Text = "You can pick a few categories from the folowing";
-                        reply.Attachments.Add(card);
-                        break;
                     case Common.Constants.UpcomingEventsTraining:
                         card = Helper.CardHelper.UpcomingEventsTraining();
                         //reply.Text = "Upcoming events and training";

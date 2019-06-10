@@ -379,173 +379,173 @@ namespace EmployeeConnect.Helper
                         Items = new List<AdaptiveElement>()
                         {
 
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "News",
-                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    },
-                    new AdaptiveChoiceSetInput()
-                    {
-                        Id = "NewsTime",
-                        Value = "1", // please set default value here
-                        Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
-                        Choices =
-                        {
-                                  // describes a choice input. the value should be a simple string without a ","
-                             new AdaptiveChoice
-                             {
-                                 Title = "Beginning of the day",
-                                 Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
-                             },
-                             new AdaptiveChoice
-                             {
-                                 Title = "End of the day",
-                                 Value = "2"
-                             },
-                             new AdaptiveChoice
-                             {
-                                 Title = "Set preferred time",
-                                 Value = "3"
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "News",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            new AdaptiveChoiceSetInput()
+                            {
+                                Id = "NewsTime",
+                                Value = "1", // please set default value here
+                                Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
+                                Choices =
+                                {
+                                    // describes a choice input. the value should be a simple string without a ","
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "Beginning of the day",
+                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "End of the day",
+                                        Value = "2"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "Set preferred time",
+                                        Value = "3"
 
-                             }
+                                    }
 
-                        }
-                    },
-                    new AdaptiveChoiceSetInput()
-                    {
-                          Id="SetPreferredTime",
-                          Value="2",
-                          Style=AdaptiveChoiceInputStyle.Compact,
-                           Choices=
-                           {
-                           new AdaptiveChoice
-                           {
-                                 Title = "11:00 AM",
-                                 Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
-                           },
-                           new AdaptiveChoice
-                           {
-                                 Title = "12:00 PM",
-                                 Value = "2"
-                           }
-                           }
-                    },
+                                }
+                            },
+                            new AdaptiveChoiceSetInput()
+                            {
+                                Id = "SetPreferredTime",
+                                Value = "2",
+                                Style = AdaptiveChoiceInputStyle.Compact,
+                                Choices =
+                                {
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "11:00 AM",
+                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "12:00 PM",
+                                        Value = "2"
+                                    }
+                                }
+                            },
 
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "Event and training",
-                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    },
-                    new AdaptiveChoiceSetInput()
-                    {
-                        Id = "NewsTime",
-                        Value = "3", // please set default value here
-                        Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
-                        Choices =
-                        {
-                                  // describes a choice input. the value should be a simple string without a ","
-                             new AdaptiveChoice
-                             {
-                                 Title = "Beginning of the day",
-                                 Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
-                             },
-                             new AdaptiveChoice
-                             {
-                                 Title = "End of the day",
-                                 Value = "2"
-                             },
-                             new AdaptiveChoice
-                             {
-                                 Title = "Set preferred time",
-                                 Value = "3"
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Event and training",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            new AdaptiveChoiceSetInput()
+                            {
+                                Id = "NewsTime",
+                                Value = "3", // please set default value here
+                                Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
+                                Choices =
+                                {
+                                    // describes a choice input. the value should be a simple string without a ","
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "Beginning of the day",
+                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "End of the day",
+                                        Value = "2"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "Set preferred time",
+                                        Value = "3"
 
-                             }
+                                    }
 
-                        }
-                    },
-                    new AdaptiveChoiceSetInput()
-                    {
-                          Id="SetPreferredTime",
-                          Value="4",
-                          Style=AdaptiveChoiceInputStyle.Compact,
-                           Choices=
-                           {
-                           new AdaptiveChoice
-                           {
-                                 Title = "11:00 AM",
-                                 Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
-                           },
-                           new AdaptiveChoice
-                           {
-                                 Title = "12:00 PM",
-                                 Value = "2"
-                           }
-                        }
-                    },
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "Task Reminders",
-                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    },
-                    new AdaptiveChoiceSetInput()
-                    {
-                        Id = "NewsTime",
-                        Value = "5", // please set default value here
-                        Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
-                        Choices =
-                        {
-                                  // describes a choice input. the value should be a simple string without a ","
-                             new AdaptiveChoice
-                             {
-                                 Title = "Beginning of the day",
-                                 Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
-                             },
-                             new AdaptiveChoice
-                             {
-                                 Title = "End of the day",
-                                 Value = "2"
-                             },
-                             new AdaptiveChoice
-                             {
-                                 Title = "Set preferred time",
-                                 Value = "3"
+                                }
+                            },
+                            new AdaptiveChoiceSetInput()
+                            {
+                                Id = "SetPreferredTime",
+                                Value = "4",
+                                Style = AdaptiveChoiceInputStyle.Compact,
+                                Choices =
+                                {
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "11:00 AM",
+                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "12:00 PM",
+                                        Value = "2"
+                                    }
+                                }
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Task Reminders",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            new AdaptiveChoiceSetInput()
+                            {
+                                Id = "NewsTime",
+                                Value = "5", // please set default value here
+                                Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
+                                Choices =
+                                {
+                                    // describes a choice input. the value should be a simple string without a ","
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "Beginning of the day",
+                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "End of the day",
+                                        Value = "2"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "Set preferred time",
+                                        Value = "3"
 
-                             }
+                                    }
 
-                        }
-                    },
-                    new AdaptiveChoiceSetInput()
-                    {
-                          Id="SetPreferredTime",
-                          Value="6",
-                          Style=AdaptiveChoiceInputStyle.Compact,
-                           Choices=
-                           {
-                           new AdaptiveChoice
-                           {
-                                 Title = "11:00 AM",
-                                 Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
-                           },
-                           new AdaptiveChoice
-                           {
-                                 Title = "12:00 PM",
-                                 Value = "2"
-                           },
-                    }
-                }
+                                }
+                            },
+                            new AdaptiveChoiceSetInput()
+                            {
+                                Id = "SetPreferredTime",
+                                Value = "6",
+                                Style = AdaptiveChoiceInputStyle.Compact,
+                                Choices =
+                                {
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "11:00 AM",
+                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "12:00 PM",
+                                        Value = "2"
+                                    },
+                                }
+                            }
                         }
                     }
                 },
                 Actions = new List<AdaptiveAction>()
                 {
                     // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                    new AdaptiveSubmitAction()
+                    new AdaptiveShowCardAction()
                     {
                         Title = "Done",
-                       // DataJson = "get the data"
+                       Card=CardHelper.SetNewsPreferences()
                     }
                }
             };
@@ -560,7 +560,7 @@ namespace EmployeeConnect.Helper
         }
 
         //[Obsolete]
-        public static Attachment SetNewsPreferences()
+        public static AdaptiveCard SetNewsPreferences()
         {
             var card = new AdaptiveCard("1.0")
             {
@@ -638,12 +638,14 @@ namespace EmployeeConnect.Helper
                     }
                }
             };
-            Attachment attachment = new Attachment()
+            
+           /* Attachment attachment = new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = card
-            };
-            return attachment;
+            };*/
+           
+            return card;
         }
 
         //[Obsolete]
@@ -701,7 +703,7 @@ namespace EmployeeConnect.Helper
         }
 
         //[Obsolete]
-        [Obsolete]
+       
         public static Attachment PendingTasks()
         {
             PO POlist = new PO();
@@ -810,7 +812,7 @@ namespace EmployeeConnect.Helper
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "You have timesheet waiting for" + "X" + "days",
+                        Text = "You have timesheet waiting for " + 12 + " day's",
                         Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     }
@@ -854,13 +856,13 @@ namespace EmployeeConnect.Helper
 
                         new AdaptiveTextBlock()
                         {
-                            Text = "You have " + count + "items pending for approval",
+                            Text = "You have " + count + " items pending for approval",
                             Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                             Size = AdaptiveTextSize.Medium, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                         },
                         new AdaptiveTextBlock()
                         {
-                            Text = count1+ "purchase orders",
+                            Text = count1+ " purchase orders",
                             Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
                             Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                         }
