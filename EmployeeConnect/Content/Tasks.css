@@ -1,0 +1,156 @@
+﻿body {
+    padding: 20px;
+    background-color: #f3f2f1;
+}
+
+.heading {
+    font-size: 22px;
+}
+
+.custom-card-deck {
+    position: relative;
+    top: 12px;
+}
+
+.custom-card {
+    max-width: 350px;
+    height: 170px;
+    border-radius: 0;
+}
+
+span.currency {
+    font-size: medium;
+    position: relative;
+    bottom: 3px;
+}
+
+.time-sheet,
+.expenses-sheet {
+    width: 60px;
+    height: 55px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.card-title {
+    display: inline;
+}
+
+.title-head {
+    position: relative;
+    left: 65px;
+    bottom: 10px;
+    color: #5c5b5b;
+    height: 20px;
+    width: 68%;
+}
+
+.full-timesheet,
+.Submit-expenses {
+    position: relative;
+    top: 15px;
+    left: 65px;
+    color: #8586bb;
+    cursor: pointer;
+}
+
+i.fas.fa-chevron-right {
+    font-size: 12px;
+    position: relative;
+    left: 5px;
+}
+
+.panel-heading {
+    color: #747372;
+}
+
+.pending-approval {
+    position: relative;
+    float: left;
+    top: 40px;
+    width: 100%;
+}
+
+.panel-heading .accordion-toggle::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    color: darkgray;
+    content: "\f0dd";
+    float: left;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+h6.panel-title.accordion-toggle.collapsed::after {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    /* content: "\f0da"; */
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+span.title {
+    position: relative;
+    font-family: "Segoe UI";
+    padding: 5px;
+    left: 10px;
+}
+
+h6.panel-title.accordion-toggle {
+    position: relative;
+    padding: 5px;
+    top: 10px;
+}
+
+h6 {
+    cursor: pointer;
+}
+
+.row-highlight {
+    background-color: white;
+}
+
+.table td,
+.table th,
+.table thead th {
+    border: none;
+}
+
+.row-highlight:nth-child(n + 1) {
+    border-bottom: 4px solid #f3f2f1;
+}
+
+.row-highlight:last-child {
+    border: none;
+}
+
+.head-title-color {
+    color: #747372;
+    font-size: 14px;
+}
+
+.review {
+    color: #6668a9;
+    cursor: pointer;
+}
+
+th {
+    font-weight: 400;
+    position: relative;
+    left: 18px;
+}
+
+td.po-no,
+td.vendor-name,
+td.vendor-no,
+td.amount,
+td.po-no1,
+td.Invoice-no {
+    padding-left: 30px;
+}

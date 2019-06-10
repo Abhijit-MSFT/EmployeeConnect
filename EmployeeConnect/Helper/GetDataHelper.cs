@@ -13,38 +13,32 @@ namespace EmployeeConnect.Helper
         public static NewsModel GetNews()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
-
             NewsModel news = new NewsModel();
-
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
             news = (new JavaScriptSerializer().Deserialize<NewsModel>(json));
-
             return news;
         }
 
-        public List<EventsAndTrainings> GetEandT()
+        public static EandTModel GetEandT()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-
-            List<EventsAndTrainings> eventsTrainings = new List<EventsAndTrainings>();
-
+            EandTModel eventsTrainings = new EandTModel();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            eventsTrainings = (new JavaScriptSerializer().Deserialize<List<EventsAndTrainings>>(json));
-
+            eventsTrainings = (new JavaScriptSerializer().Deserialize<EandTModel>(json));
             return eventsTrainings;
         }
 
-        public List<PurchaseOrders> GetPOs()
+        public static PO GetPOs()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/PurchaseOrders.json";
-
-            List<PurchaseOrders> POs = new List<PurchaseOrders>();
-
+            PO POs = new PO();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            POs = (new JavaScriptSerializer().Deserialize<List<PurchaseOrders>>(json));
-
+            POs = (new JavaScriptSerializer().Deserialize<PO>(json));
             return POs;
+
         }
+
+
 
     }
 }
