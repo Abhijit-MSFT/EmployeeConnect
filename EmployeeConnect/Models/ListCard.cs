@@ -31,6 +31,8 @@ namespace EmployeeConnect.Models
         public string type { get; set; }
         public string title { get; set; }
         public string value { get; set; }
+        public string text { get; set; }
+        public string displayText { get; set; }
     }
 
 }

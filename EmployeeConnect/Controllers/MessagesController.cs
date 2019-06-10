@@ -7,7 +7,7 @@ using System.Web.Http;
 using EmployeeConnect.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams;
+
 using Microsoft.Bot.Connector.Teams.Models;
 using EmployeeConnect.Models;
 using EmployeeConnect.Helper;
@@ -42,14 +42,14 @@ namespace EmployeeConnect.Controllers
             var activityValue = activity.Value.ToString();
             if (activity.Name == "task/fetch")
             {
-                CardActionValue.BotFrameworkCardValue<string> action;
+                BotFrameworkCardValue<string> action;
                 try
                 {
-                    action = JsonConvert.DeserializeObject<CardActionValue.TaskModuleActionData<string>>(activityValue).Data;
+                    action = JsonConvert.DeserializeObject<TaskModuleActionData<string>>(activityValue).Data;
                 }
                 catch (Exception)
                 {
-                    action = JsonConvert.DeserializeObject<CardActionValue.BotFrameworkCardValue<string>>(activityValue);
+                    action = JsonConvert.DeserializeObject<BotFrameworkCardValue<string>>(activityValue);
                 }
 
                 TaskInfo taskInfo = GetTaskInfo(action.Data);

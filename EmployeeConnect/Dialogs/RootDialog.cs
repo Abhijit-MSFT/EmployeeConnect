@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static EmployeeConnect.Models.CardActionValue;
+
 
 namespace EmployeeConnect.Dialogs
 {
@@ -71,14 +71,14 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
-                        res = Helper.CardHelper.UpcomingEventsTraining();
-                        for (int i = 0; i < res.Count(); i++)
-                            reply.Attachments.Add(res.ElementAt(i));
-                        break;
-                    case Common.Constants.ReviewTasks:
-                        card = Helper.CardHelper.ReviewTasks();
+                        card = Helper.CardHelper.UpcomingEventsTraining();
+                        //reply.Text = "Upcoming events and training";
                         reply.Attachments.Add(card);
                         break;
+                    //case Common.Constants.ReviewTasks:
+                    //    card = Helper.CardHelper.ReviewTasks();
+                    ///    reply.Attachments.Add(card);
+                    //    break;
                     case Common.Constants.PendingApprovals:
                         card = Helper.CardHelper.PendingApprovals();
                         reply.Attachments.Add(card);
@@ -96,20 +96,36 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.MyTools:
-                        //card = Helper.CardHelper.GetMyToolsCard();
+                        card = Helper.CardHelper.GetMyToolsCard();
+                        reply.Attachments.Add(card);
                         break;
-                        //case Constants.NextMonthRoster:
-                        //    card = CardHelper.GetMonthlyRosterCard();
-                        //    break;
-                        //case Constants.NextWeekRoster:
-                        //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                        //    break;
-                        //case Constants.UpdateCard:
-                        //    card = CardHelper.GetUpdateScreen();
-                        //    break;
-                        //default:
-                        //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
-                        //    break;
+                    //case Constants.NextMonthRoster:
+                    //    card = CardHelper.GetMonthlyRosterCard();
+                    //    break;
+                    //case Constants.NextWeekRoster:
+                    //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
+                    //    break;
+                    //case Constants.UpdateCard:
+                    //    card = CardHelper.GetUpdateScreen();
+                    //    break;
+                    //default:
+                    //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
+                    //    break;
+
+                    default:
+                        if (message.Trim().All(char.IsDigit))
+                        {         //if message was a number
+                            card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
+                            if (card == null)
+                                reply.Text = "I dont have that info";
+                            else
+                                reply.Attachments.Add(card);
+                        }
+                        else
+                        {
+                            reply.Text = "I dont have that info";
+                        }
+                        break;
                 }
 
 
@@ -131,7 +147,7 @@ namespace EmployeeConnect.Dialogs
             card.Buttons = new List<CardAction>();
            
             card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PurchaseOrder.ButtonTitle, null,
-                new BotFrameworkCardValue<string>()
+                new Models.BotFrameworkCardValue<string>()
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
