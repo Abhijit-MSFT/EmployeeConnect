@@ -226,7 +226,6 @@
     </Compile>
     <Compile Include="Helper\ApplicationSettings.cs" />
     <Compile Include="Helper\CardHelper.cs" />
-    <Compile Include="Helper\DeeplinkHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
     <Compile Include="MessageExtension.cs" />
     <Compile Include="Models\CardActionValue.cs" />
