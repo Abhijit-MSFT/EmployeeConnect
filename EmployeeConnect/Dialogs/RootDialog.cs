@@ -36,11 +36,11 @@ namespace EmployeeConnect.Dialogs
             await context.PostAsync(typingReply);
 
             /*Task Module Added*/
-            var tMessage = (Activity)await result;
-            var treply = tMessage.CreateReply();
-            ThumbnailCard Tcard = GetTaskModuleOptions();
-            treply.Attachments.Add(Tcard.ToAttachment());
-            await context.PostAsync(treply);
+            //var tMessage = (Activity)await result;
+            //var treply = tMessage.CreateReply();
+            //ThumbnailCard Tcard = GetTaskModuleOptions();
+            //treply.Attachments.Add(Tcard.ToAttachment());
+            //await context.PostAsync(treply);
             //context.Wait(MessageReceivedAsync);
             /*Ends here*/
 
@@ -111,10 +111,33 @@ namespace EmployeeConnect.Dialogs
                     //default:
                     //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
                     //    break;
-
+                    case Common.Constants.HumanResourceTools:
+                        card = Helper.CardHelper.HumanResourceCard();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.ITFacilitiesTools:
+                        card = Helper.CardHelper.ITFacilitiesCard();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.PaymentsAndBenefitsTools:
+                        card = Helper.CardHelper.PaymentsAndBenefitsCard();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.StoreOperationsTools:
+                        card = Helper.CardHelper.StoreOperationsCard();
+                        reply.Attachments.Add(card);
+                        break;
+                    case Common.Constants.CreateTicket:
+                        reply.Text = "This functionality is under construction";
+                        //deeplink to createTicket
+                        break;
+                    case Common.Constants.WifiRequest:
+                        //deeplink to createTicket
+                        reply.Text = "This functionality is under construction";
+                        break;
                     default:
                         if (message.Trim().All(char.IsDigit))
-                        {         //if message was a number
+                        {         //if message was a number,it is a newsId 
                             card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
                             if (card == null)
                                 reply.Text = "I dont have that info";

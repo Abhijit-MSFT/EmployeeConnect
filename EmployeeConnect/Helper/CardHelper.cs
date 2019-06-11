@@ -23,44 +23,46 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             card.content.title = "Top stories for you";
             NewsModel newsL = Helper.GetDataHelper.GetNews();
-            var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
-            var LatestNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
-            //int ReqDescriptionLength = 85;
-
-            //MaxNewsCount has total number of news to display
-            int MaxNewsCount = 3;
-           // if (MaxNewsCount > SuggestedNews.Count())
-                MaxNewsCount = SuggestedNews.Count();
-
-            for (int i=0;i<MaxNewsCount;i++)
+            if (newsL != null)  //if it got the news
             {
-                var news = SuggestedNews.ElementAt(i);
-                string subtitle = news.DetailedNews;
-                var item = new Item();
-                item.title = news.NewsTitle;
-                item.icon = news.NewsThumbnailUrl;
-                item.id = news.NewsID;
+                var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
+                var LatestNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
+                //int ReqDescriptionLength = 85;
 
-                //if (subtitle.Length > ReqDescriptionLength)
-                //    item.subtitle = subtitle.Substring(0, ReqDescriptionLength);
-                //else
-                    item.subtitle = subtitle;
-                
-                item.type ="resultItem";
+                //MaxNewsCount has total number of news to display
+                //int MaxNewsCount = 3;
+                // if (MaxNewsCount > SuggestedNews.Count())
+                int MaxNewsCount = TrendingNews.Count();
 
-                //item.NewBy = "Vedant";      //doesn't display in frontend
-
-                item.tap = new Tap()
+                for (int i = 0; i < MaxNewsCount; i++)
                 {
-                    type = "messageBack",
-                    title = "title",
-                    text = news.NewsID
-                };
-                
-                list.Add(item);
-            }
-            card.content.items = list.ToArray();
+                    var news = TrendingNews.ElementAt(i);
+                    string subtitle = news.DetailedNews;
+                    var item = new Item();
+                    item.title = news.NewsTitle;
+                    item.icon = news.NewsThumbnailUrl;
+                    item.id = news.NewsID;
 
+                    //if (subtitle.Length > ReqDescriptionLength)
+                    //    item.subtitle = subtitle.Substring(0, ReqDescriptionLength);
+                    //else
+                    item.subtitle = subtitle;
+
+                    item.type = "resultItem";
+
+                    //item.NewBy = "Vedant";      //doesn't display in frontend
+
+                    item.tap = new Tap()
+                    {
+                        type = "messageBack",
+                        text = news.NewsID
+                    };
+
+                    list.Add(item);
+                }
+                card.content.items = list.ToArray();
+
+            }   
             Attachment attachment = new Attachment();
 
             attachment.ContentType = card.contentType;
@@ -81,7 +83,7 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             card.content.title = "Please select a department to view policies";
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
 
                 var item = new Item();
@@ -90,13 +92,20 @@ namespace EmployeeConnect.Helper
 
 
                 item.type = "resultItem";
-                item.title = "Department " + i;
+                if (i == 0)
+                    item.title = "Human Resources";
+                else if (i == 1)
+                    item.title = "Payment and benefits";
+                else if (i == 2)
+                    item.title = "IT & facilities";
+                else
+                    item.title = "Store operations";
 
                 item.tap = new Tap()
                 {
                     type = "messageBack",
-                    title = "title",
-                    text = "department" + i
+                    //title = "title",
+                    text = item.title + " policy"
                 };
 
                 list.Add(item);
@@ -112,16 +121,17 @@ namespace EmployeeConnect.Helper
             return attachment;
 
         }
-
-        //Returns the Tools ListCard having Tools for every department.
-        public static Attachment GetMyToolsCard()
+        /*
+        public static Attachment GetNewsCardTwoTitles() // two titles
         {
 
 
             var card = new ListCard();
-            card.content = new Content();
+            //card.content = new Content();
             var list = new List<Item>();
-            card.content.title = "Here are the tools under HR department";
+            var contents = new List<Content>();
+            var content1 = new Content();
+            var content2 = new Content();
 
             for (int i = 0; i < 5; i++)
             {
@@ -132,13 +142,89 @@ namespace EmployeeConnect.Helper
 
 
                 item.type = "resultItem";
-                item.title = "create Ticket " + i;
+                item.title = "News " + i;
 
                 item.tap = new Tap()
                 {
                     type = "messageBack",
                     title = "title",
-                    text = "department" + i
+                    text = "News" + i
+                };
+
+                list.Add(item);
+            }
+            //contents.ElementAt(0).items = list.ToArray();
+            var list2 = new List<Item>();
+            for (int i = 0; i < 5; i++)
+            {
+
+                var item = new Item();
+                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.id = i.ToString();
+
+
+                item.type = "resultItem";
+                item.title = "News " + i;
+
+                item.tap = new Tap()
+                {
+                    type = "messageBack",
+                    title = "title",
+                    text = "News" + i
+                };
+
+                list2.Add(item);
+            }
+            content1.title = "Please select a news";
+            content2.title = "Please select a news";
+            content1.items = list.ToArray();
+            content2.items = list2.ToArray();
+            contents.Add(content1);
+            contents.Add(content2);
+            card.content = contents.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }*/
+        //Returns the Tools ListCard having Tools for every department.
+        public static Attachment GetMyToolsCard()
+        {
+
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Please select a department to view it's tools";
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                var item = new Item();
+                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.id = i.ToString();
+
+
+                item.type = "resultItem";
+                if(i==0)
+                    item.title = "Human Resources";
+                else if (i == 1)
+                    item.title = "Payment and benefits";
+                else if (i == 2)
+                    item.title = "IT & facilities";
+                else
+                    item.title = "Store operations";
+
+                item.tap = new Tap()
+                {
+                    type = "messageBack",
+                    //title = "title",
+                    text = item.title+" tools"
                 };
 
                 list.Add(item);
@@ -212,6 +298,8 @@ namespace EmployeeConnect.Helper
         //Returns the News with specific NewsID
         public static News getNewsById(NewsModel newsL,string id)
         {
+            if (newsL == null)
+                return null;
             foreach(var news in newsL.news)
             {
                 if (news.NewsID.Equals(id))
@@ -973,6 +1061,233 @@ namespace EmployeeConnect.Helper
                 Content = card
             };
             return attachment;
+        }
+        public static Attachment HumanResourceCard()
+        {
+
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Here are the tools under your HR department";
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                var item = new Item();
+                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.id = i.ToString();
+
+
+                item.type = "resultItem";
+                if (i == 0)
+                {
+                    item.title = "Create business letter";
+                    item.subtitle = "Create a business letter within a predesigned color and template.";
+                }
+                else if (i == 1)
+                {
+                    item.title = "Create ticket";
+                    item.subtitle = "For all HR tickets, the ticket type is being set as Employee Support.";
+                }
+                else if (i == 2)
+                {
+                    item.title = "Request leave";
+                    item.subtitle = "Request leave and check your status in the Leave application.";
+                }
+                else
+                {
+                    item.title = "Store operations";
+                    item.subtitle = "View human resource policies to stay updated.";
+                }
+
+                    item.tap = new Tap()
+                    {
+                        type = "messageBack",
+                        text = item.title
+                    };
+
+                    list.Add(item);
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }
+        public static Attachment ITFacilitiesCard()
+        {
+
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Here are the tools under your IT department";
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                var item = new Item();
+                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.id = i.ToString();
+
+
+                item.type = "resultItem";
+                if (i == 0)
+                {
+                    item.title = "Raise IT Support Ticket";
+                    item.subtitle = "Create a business letter within a predesigned color and template.";
+                }
+                else if (i == 1)
+                {
+                    item.title = "Visitor's wi-fi request";
+                    item.subtitle = "For all HR tickets, the ticket type is being set as Employee Support.";
+                }
+                else if (i == 2)
+                {
+                    item.title = "Event IT Support request";
+                    item.subtitle = "Request leave and check your status in the Leave application.";
+                }
+                else
+                {
+                    item.title = "Cafeteria services app";
+                    item.subtitle = "View human resource policies to stay updated.";
+                }
+
+                item.tap = new Tap()
+                {
+                    type = "messageBack",
+                    text = item.title
+                };
+
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }
+        public static Attachment PaymentsAndBenefitsCard()
+        {
+
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Here are the tools under your PaymentAndBenefits department";
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                var item = new Item();
+                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.id = i.ToString();
+
+
+                item.type = "resultItem";
+                if (i == 0)
+                {
+                    item.title = "Download payslip";
+                    item.subtitle = "Create a business letter within a predesigned color and template.";
+                }
+                else if (i == 1)
+                {
+                    item.title = "Create finance ticket";
+                    item.subtitle = "For all HR tickets, the ticket type is being set as Employee Support.";
+                }
+                else if (i == 2)
+                {
+                    item.title = "Submit benefit claim";
+                    item.subtitle = "Request leave and check your status in the Leave application.";
+                }
+                else
+                {
+                    item.title = "View benefit policies";
+                    item.subtitle = "View human resource policies to stay updated.";
+                }
+
+                item.tap = new Tap()
+                {
+                    type = "messageBack",
+                    text = item.title
+                };
+
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }
+        public static Attachment StoreOperationsCard()
+        {
+
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Here are the tools under your Store Operations department.";
+
+            for (int i = 0; i < 3; i++)
+            {
+
+                var item = new Item();
+                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.id = i.ToString();
+
+
+                item.type = "resultItem";
+                if (i == 0)
+                {
+                    item.title = "Inventory request";
+                    item.subtitle = "Create a business letter within a predesigned color and template.";
+                }
+                else if (i == 1)
+                {
+                    item.title = "Timesheet";
+                    item.subtitle = "For all HR tickets, the ticket type is being set as Employee Support.";
+                }
+                else 
+                {
+                    item.title = "Store info";
+                    item.subtitle = "Request leave and check your status in the Leave application.";
+                }
+
+                item.tap = new Tap()
+                {
+                    type = "messageBack",
+                    text = item.title
+                };
+
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
         }
     }
 }
