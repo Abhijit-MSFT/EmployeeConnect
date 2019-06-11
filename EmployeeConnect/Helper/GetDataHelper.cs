@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Web.UI;
 using EmployeeConnect.Models;
 
 namespace EmployeeConnect.Helper
@@ -38,7 +39,16 @@ namespace EmployeeConnect.Helper
 
         }
 
-
-
+        public static TicketDetails GetTicketData()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Ticket.json";
+            TicketDetails ticketsdata = new TicketDetails();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            ticketsdata = (new JavaScriptSerializer().Deserialize<TicketDetails>(json));
+            return ticketsdata;
+        }		
     }
 }
+
+
+

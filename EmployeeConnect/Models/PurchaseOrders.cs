@@ -16,7 +16,11 @@ namespace EmployeeConnect.Models
 
         [JsonProperty(PropertyName = "poNumber")]
         public string PoNumber { get; set; }
+        [JsonProperty(PropertyName = "POCreationDate")]
+        public DateTime POCreationDate { get; set; }
 
+        [JsonProperty(PropertyName = "PODueDate")]
+        public DateTime PODueDate { get; set; }
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 

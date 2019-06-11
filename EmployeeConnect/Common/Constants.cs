@@ -15,5 +15,6 @@
         public const string SetNewsPrefrences = "set news preferences";
         public const string UpcomingEventsTraining = "upcoming events and training";
         public const string ReviewTasks = "review tasks";
+        public const string Ticket = "ticket";
     }
 }

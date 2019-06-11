@@ -9,6 +9,9 @@ using Microsoft.Bot.Connector.Teams.Models;
 using AdaptiveCards;
 using Microsoft.Ajax.Utilities;
 using Antlr.Runtime.Tree;
+using System.Net.NetworkInformation;
+using System.Windows.Forms;
+using Chronic;
 
 namespace EmployeeConnect.Helper
 {
@@ -378,6 +381,7 @@ namespace EmployeeConnect.Helper
                     {
                         Items = new List<AdaptiveElement>()
                         {
+                            
 
                             new AdaptiveTextBlock()
                             {
@@ -414,7 +418,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoiceSetInput()
                             {
-                                Id = "SetPreferredTime",
+                                Id = "SetNewsPreferredTime",
                                 Value = "2",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
@@ -440,7 +444,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoiceSetInput()
                             {
-                                Id = "NewsTime",
+                                Id = "EventandTrainingtime",
                                 Value = "3", // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
@@ -492,7 +496,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoiceSetInput()
                             {
-                                Id = "NewsTime",
+                                Id = "TaskRemindersTime",
                                 Value = "5", // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
@@ -519,7 +523,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoiceSetInput()
                             {
-                                Id = "SetPreferredTime",
+                                Id = "SetTaskRemidersPreferredTime",
                                 Value = "6",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
@@ -545,7 +549,7 @@ namespace EmployeeConnect.Helper
                     new AdaptiveShowCardAction()
                     {
                         Title = "Done",
-                       Card=CardHelper.SetNewsPreferences()
+                       Card=CardHelper.SetNewsPreferences(),
                     }
                }
             };
@@ -632,18 +636,14 @@ namespace EmployeeConnect.Helper
                        // DataJson = "get the data"
                     },
                      new AdaptiveSubmitAction()
-                    {
+                     {
                         Title = "Done",
-                       // DataJson = "get the data"
-                    }
+                     //  DataJson= @"{'ActionType':'" + "NEWS TIME ["+"'] }"
+                     }
                }
             };
             
-           /* Attachment attachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card
-            };*/
+          
            
             return card;
         }
@@ -660,7 +660,7 @@ namespace EmployeeConnect.Helper
             card.content.title = "Upcoming events and training for you";
 
 
-            DateTime CurrDate = new DateTime(2019, 6, 1);
+            DateTime CurrDate = DateTime.Today;
 
 
             for (int i = 0; i < ETlist.EventsAndtraining.Count(); i++)
@@ -672,14 +672,16 @@ namespace EmployeeConnect.Helper
                 {
                     DateTime D = DateTime.ParseExact(ETlist.EventsAndtraining[i].ETStartDate, "MM-dd-yyyy",
                                        System.Globalization.CultureInfo.InvariantCulture);
+                    DateTime E = DateTime.ParseExact(ETlist.EventsAndtraining[i].ETEndDate, "MM-dd-yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
 
-                    if (D <= CurrDate.AddDays(7))
+                    if (D <= CurrDate.AddDays(7) && E>CurrDate)
                     {
 
                         var item = new Item();
                         item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
                         item.id = i.ToString();
-                        item.subtitle = ETlist.EventsAndtraining[i].ETStartDate + " to " + ETlist.EventsAndtraining[i].ETEndDate;
+                        item.subtitle = ETlist.EventsAndtraining[i].ETStartTime+" - "+ETlist.EventsAndtraining[i].ETEndTime+", "+ ETlist.EventsAndtraining[i].ETStartDate + " to " + ETlist.EventsAndtraining[i].ETEndDate;
 
                         item.type = "resultItem";
                         item.title = ETlist.EventsAndtraining[i].ETTitle;
@@ -706,96 +708,70 @@ namespace EmployeeConnect.Helper
        
         public static Attachment PendingTasks()
         {
-            PO POlist = new PO();
-            POlist = Helper.GetDataHelper.GetPOs();
-            PurchaseOrders POOrder = POlist.PurchaseOrder.FirstOrDefault<PurchaseOrders>();
+            
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Pending tasks";
+            PO pO = new PO();
+            pO = Helper.GetDataHelper.GetPOs();  
+           
+            int MaxPOCount = pO.PurchaseOrder.Count();
 
-            var card = new AdaptiveCard("1.0")
+            for (int i = 0; i < MaxPOCount; i++)
             {
-                Body = new List<AdaptiveElement>()
+                
+                
+                var po_ = pO.PurchaseOrder[i];
+                if (po_.POCreationDate > DateTime.Today)
+                    continue;
+                if (po_.PoStatus == "pending")
                 {
-                    new AdaptiveContainer()
+                    string subtitle = po_.POCreationDate.ToString("MMMM dd, yyyy")+" - "+po_.PODueDate.ToString("MMMM dd, yyyy");
+                    var item = new Item();
+                    item.title = po_.PoNumber+" " +po_.Description;
+                    item.id = po_.PoNumber;
+
+                    item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                    item.subtitle = subtitle;
+
+                    item.type = "resultItem";
+
+                   
+                    item.tap = new Tap()
                     {
-                        Items = new List<AdaptiveElement>()
-                        {
+                        type = "messageBack",
+                       // title = "title",
+                        text = "po:"+po_.PoNumber
+                    };
 
-                            new AdaptiveTextBlock()
-                            {
-                                Text = "Reminder: You have a pending task to review",
-                                Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Default // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            new AdaptiveTextBlock()
-                            {
-                                Text = "Purchase Order",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            new AdaptiveFactSet
-                            {
-                                Separator = true,
-                                Facts =
-                                {
-                                    // Describes a fact in a Adaptive FactSet as a key/value pair
-                                    new AdaptiveFact
-                                    {
-                                        Title = "P.O. No.",
-                                        Value = POOrder.PoNumber
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Description",
-                                        Value = POOrder.Description
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Vendor Name",
-                                        Value =  POOrder.VendorName
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Vendor No.",
-                                        Value = POOrder.vendorNo
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Amount",
-                                        Value = POOrder.TotalAmount
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                },
-                Actions = new List<AdaptiveAction>()
-                {
-                    // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Remind me later",
-                       // DataJson = "get the data"
-                    },
-                     new AdaptiveShowCardAction
-                     {
-                        Title ="Review",
-                        Card = CardHelper.ReviewTasks()
-
-                     }
+                    list.Add(item);
                 }
-            };
-            Attachment attachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card
-            };
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
             return attachment;
+
         }
 
         //[Obsolete]
-        public static AdaptiveCard ReviewTasks()
+        public static AdaptiveCard ReviewTasks(PurchaseOrders po_card)
         {
             //how the po info is sent here
+            DateTime today = DateTime.Today;
+            string duetext;
+            if ((po_card.PODueDate - today).Days > 0)
+            {
+                duetext = "You have timesheet waiting for " + (today-po_card.POCreationDate).Days + " days";
+            }
+            else
+                duetext = (today-po_card.PODueDate).Days + " have passed since due date";
             AdaptiveCard card = new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>()
@@ -812,7 +788,7 @@ namespace EmployeeConnect.Helper
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "You have timesheet waiting for " + 12 + " day's",
+                        Text = duetext,
                         Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     }
@@ -878,8 +854,162 @@ namespace EmployeeConnect.Helper
             return attachment;
         }
 
-        public static Attachment Ticket()
+        public static Attachment GetPOCard(string id)
         {
+            //NewsModel newsL = Helper.GetDataHelper.GetNews();
+            PO po_ = Helper.GetDataHelper.GetPOs();
+            var po_card = GetPObyID(po_, id);
+
+            if (po_card == null)   //could not find the news
+                return null;
+            var card = new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                 {
+                     new AdaptiveContainer()
+                     {
+                         Items = new List<AdaptiveElement>()
+                         {
+
+                             new AdaptiveTextBlock()
+                             {
+                                 Text = "Reminder: You have a pending task to review",
+                                 Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+                                 Size = AdaptiveTextSize.Default // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                             },
+                             new AdaptiveTextBlock()
+                             {
+                                 Text = "Purchase Order",
+                                 Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                 Size = AdaptiveTextSize.Large // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                             },
+                             new AdaptiveFactSet
+                             {
+                                 Separator = true,
+                                 Facts =
+                                 {
+                                     // Describes a fact in a Adaptive FactSet as a key/value pair
+                                     new AdaptiveFact
+                                     {
+                                         Title = "P.O. No.",
+                                         Value = po_card.PoNumber
+                                     },
+                                     new AdaptiveFact
+                                     {
+                                         Title = "Description",
+                                         Value = po_card.Description
+                                     },
+                                     new AdaptiveFact
+                                     {
+                                         Title = "Vendor Name",
+                                         Value =  po_card.VendorName
+                                     },
+                                     new AdaptiveFact
+                                     {
+                                         Title = "Vendor No.",
+                                         Value = po_card.vendorNo
+                                     },
+                                     new AdaptiveFact
+                                     {
+                                         Title = "Amount",
+                                         Value = po_card.TotalAmount
+                                     }
+                                 }
+                             }
+
+                         }
+                     }
+                 },
+                Actions = new List<AdaptiveAction>()
+                 {
+                     // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
+                     new AdaptiveSubmitAction()
+                     {
+                         Title = "Remind me later",
+                        // DataJson = "get the data"
+                     },
+                      new AdaptiveShowCardAction
+                      {
+                         Title ="Review",
+                         Card = CardHelper.ReviewTasks(po_card)
+
+                      }
+                 }
+            };
+            Attachment attachment = new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card
+            };
+            return attachment; 
+        }
+        public static PurchaseOrders GetPObyID(PO p,string index)
+        {
+            foreach (var po in p.PurchaseOrder)
+            {
+                if (po.PoNumber.Equals(index))
+                    return po;
+            }
+            return null;
+        }
+
+        public static Attachment GetTicket()
+        {
+           
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Ticket Status";
+            TicketDetails ticketdetail = Helper.GetDataHelper.GetTicketData();
+
+            int MaxTicketCount = ticketdetail.Tickets.Count();
+
+            for (int i = 0; i < MaxTicketCount; i++)
+            {
+
+                
+                    string subtitle = ticketdetail.Tickets[i].description;
+                    var item = new Item();
+                    item.title = ticketdetail.Tickets[i].ticketNo +" " + ticketdetail.Tickets[i].ticketDept;
+                    item.id = ticketdetail.Tickets[i].ticketNo;
+
+                    item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                    item.subtitle = subtitle;
+
+                    item.type = "resultItem";
+
+
+                    item.tap = new Tap()
+                    {
+                        type = "messageBack",
+                        // title = "title",
+                        text = "td:" + ticketdetail.Tickets[i].ticketNo
+                    };
+
+                    list.Add(item);
+                
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+        }
+
+        public static Attachment GetTicketCard(string id)
+        {
+            //NewsModel newsL = Helper.GetDataHelper.GetNews();
+            //PO po_ = Helper.GetDataHelper.GetPOs();
+            TicketDetails td_ = Helper.GetDataHelper.GetTicketData();
+
+            var td_card = GetTDbyID(td_.Tickets, id);
+
+            if (td_card == null)   //could not find the news
+                return null;
             var card = new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>()
@@ -891,25 +1021,25 @@ namespace EmployeeConnect.Helper
 
                     new AdaptiveTextBlock()
                     {
-                        Text = "Your ticket for employee support category has been created.",
+                        Text = "Your ticket for "+  td_card.ticketDept +" employee support category has been created.",
                         Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "Employee Support",
+                        Text = td_card.ticketDept,
                         Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "Need to understand PTO Assignment",
+                        Text = td_card.description,
                         Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "High Priority!",
+                        Text = td_card.ticketPriority,
                         Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Default,
                         Color= AdaptiveTextColor.Warning// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
@@ -922,28 +1052,28 @@ namespace EmployeeConnect.Helper
                             // Describes a fact in a Adaptive FactSet as a key/value pair
                             new AdaptiveFact
                             {
-                                Title = "P.O. No.",
-                                Value = "PO NUMBER"
+                                Title = "Ticket No.",
+                                Value = td_card.ticketNo
                             },
                             new AdaptiveFact
                             {
-                                Title = "Description",
-                                Value = "Backlog"
+                                Title = "Date Created",
+                                Value = td_card.ticketCreateDate
                             },
                             new AdaptiveFact
                             {
-                                Title = "Vendor Name",
-                                Value = "Matt Hidinger"
+                                Title = "Assigned to",
+                                Value = td_card.ticketAssignedTo
                             },
                             new AdaptiveFact
                             {
-                                Title = "Vendor No.",
-                                Value = "Not set"
+                                Title = "ETA date",
+                                Value = td_card.ticketETADate
                             },
                             new AdaptiveFact
                             {
-                                Title = "Amount",
-                                Value = "Not set"
+                                Title = "Status",
+                                Value = td_card.ticketStatus
                             },
 
                         }
@@ -956,12 +1086,12 @@ namespace EmployeeConnect.Helper
                     // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
                     new AdaptiveSubmitAction()
                     {
-                        Title = "Remind me later",
+                        Title = "Cancel Ticket",
                        // DataJson = "get the data"
                     },
                      new  AdaptiveSubmitAction()
                     {
-                        Title = "Review",
+                        Title = "Edit",
                        // Card= ReviewTasks
                     }
                  }
@@ -973,6 +1103,16 @@ namespace EmployeeConnect.Helper
                 Content = card
             };
             return attachment;
+            
+        }
+        public static Ticket GetTDbyID(Ticket[] td, string index)
+        {
+            foreach (var td_ in td)
+            {
+                if (td_.ticketNo.Equals(index))
+                    return td_;
+            }
+            return null;
         }
     }
 }

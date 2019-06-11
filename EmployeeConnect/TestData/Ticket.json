@@ -1,5 +1,5 @@
 {
-  "ticket": [
+  "Ticket": [
     {
       "ticketCategory": "Employee Support",
 
@@ -21,7 +21,6 @@
 
       "ticketStatus": "In progress"
     },
-
     {
 
       "ticketCategory": "Hardware Issue",
@@ -45,7 +44,6 @@
       "ticketStatus": "Completed"
 
     },
-
     {
 
       "ticketCategory": "ID Access Issue",

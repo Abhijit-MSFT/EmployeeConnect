@@ -1,218 +1,234 @@
 {
    "purchaseOrder":[
-      {
-         "poNumber":"739248",
-         "InvoiceNo":"346829",
-         "description":"Gym Equipments",
-         "vendorName":"Store C",
-         "vendorNo":"68292",
-         "totalAmount":"115000",
-         "poStatus":"pending",
-         "poDetails":[
-            {
-               "itemCode":"9865321456",
-               "itemDescription":"Fitness Machine",
-               "unitPrice":"5000",
-               "quantity":"12"
-            },
-            {
-               "itemCode":"8563214568",
-               "itemDescription":"Exercise Cycle",
-               "unitPrice":"5000",
-               "quantity":"7"
-            },
-            {
-               "itemCode":"4563215698",
-               "itemDescription":"Spinning Bike",
-               "unitPrice":"10000",
-               "quantity":"2"
-            }
-         ]
-      },
-      {
-         "poNumber":"739249",
-         "InvoiceNo":"473528",
-         "description":"Gym Equipments",
-         "vendorName":"Store C",
-         "vendorNo":"68292",
-         "totalAmount":"15000",
-         "poStatus":"approved",
-         "poDetails":[
-            {
-               "itemCode":"7897897899",
-               "itemDescription":"Dumbles set of 2",
-               "unitPrice":"1000",
-               "quantity":"10"
-            },
-            {
-               "itemCode":"9856985698",
-               "itemDescription":"Exercise Kit",
-               "unitPrice":"500",
-               "quantity":"10"
-            }
-         ]
-      },
-      {
-         "poNumber":"654654",
-         "InvoiceNo":"482561",
-         "description":"Gaming items",
-         "vendorName":"Store D",
-         "vendorNo":"25836",
-         "totalAmount":"8500",
-         "poStatus":"declined",
-         "poDetails":[
-            {
-               "itemCode":"5236987412",
-               "itemDescription":"Tennis Racquets 12, Tennis balls 8",
-               "unitPrice":"350",
-               "quantity":"10"
-            },
-            {
-               "itemCode":"5236787412",
-               "itemDescription":"Fussballs Table 10",
-               "unitPrice":"500",
-               "quantity":"10"
-            }
-         ]
-      },
-      {
-         "poNumber":"659954",
-         "InvoiceNo":"912321",
-         "description":"Gaming items",
-         "vendorName":"Store D",
-         "vendorNo":"25836",
-         "totalAmount":"210000",
-         "poStatus":"declined",
-         "poDetails":[
-            {
-               "itemCode":"5236987412",
-               "itemDescription":"Air Hockey Table",
-               "unitPrice":"70000",
-               "quantity":"3"
-            }
-         ]
-      },
-      {
-         "poNumber":"908657",
-         "InvoiceNo":"637251",
-         "description":"Stationery Items",
-         "vendorName":"Store A",
-         "vendorNo":"97546",
-         "totalAmount":"26,524",
-         "poStatus":"pending",
-         "poDetails":[
-            {
-               "itemCode":"9823564412",
-               "itemDescription":"White Board,Dry Eraser marker board for office",
-               "unitPrice":"789",
-               "quantity":"14"
-            },
-            {
-               "itemCode":"5635478211",
-               "itemDescription":"Magnetic White board Planner sheet dry erase.Includes 4 markers and 1 duster",
-               "unitPrice":"234",
-               "quantity":"7"
-            },
-            {
-               "itemCode":"2355618412",
-               "itemDescription":"Non-Magentic clipboard,lightweight Aluminium frame",
-               "unitPrice":"560",
-               "quantity":"8"
-            },
-            {
-               "itemCode":"3256278825",
-               "itemDescription":"Metal mesh Desk organiser,Black LD",
-               "unitPrice":"780",
-               "quantity":"12"
-            }
-         ]
-      },
-      {
-         "poNumber":"678453",
-         "InvoiceNo":"537282",
-         "description":"Office essentials",
-         "vendorName":"Store A",
-         "vendorNo":"97546",
-         "totalAmount":"2,47,800",
-         "poStatus":"approved",
-         "poDetails":[
-            {
-               "itemCode":"2367645661",
-               "itemDescription":"Ebee Solid Wood Portable Desk supplies",
-               "unitPrice":"2300",
-               "quantity":"6"
-            },
-            {
-               "itemCode":"9987565632",
-               "itemDescription":"Twain File Cabinet with melamine finish",
-               "unitPrice":"12,000",
-               "quantity":"7"
-            },
-            {
-               "itemCode":"7896672342",
-               "itemDescription":"Strip cut Paper Shredder Cd/DVD/credit card",
-               "unitPrice":"15,000",
-               "quantity":"10"
-            }
-         ]
-      },
-      {
-         "poNumber":"678455",
-         "InvoiceNo":"328815",
-         "description":"Pantry Etables",
-         "vendorName":"Store P",
-         "vendorNo":"97547",
-         "totalAmount":"1,70,000",
-         "poStatus":"pending",
-         "poDetails":[
-            {
-               "itemCode":"2367645663",
-               "itemDescription":"Fruits",
-               "quantity":"1000",
-               "unitPrice":"50"
-            },
-            {
-               "itemCode":"9987565633",
-               "itemDescription":"Cakes and Namkins",
-               "unitPrice":"1000",
-               "quantity":"50"
-            },
-            {
-               "itemCode":"7896672344",
-               "itemDescription":"Juices, Milk, Softdrinks and other MRP items",
-               "unitPrice":"70",
-               "quantity":"1000"
-            }
-         ]
-      },
-      {
-         "poNumber":"678454",
-         "InvoiceNo":"532881",
-         "description":"Pantry Essentials",
-         "vendorName":"Store P",
-         "vendorNo":"97547",
-         "totalAmount":"1,10,000",
-         "poStatus":"pending",
-         "poDetails":[
-            {
-               "itemCode":"2367645662",
-               "itemDescription":"Medium size ceramic plates",
-               "quantity":"100",
-               "unitPrice":"300"
-            },
-          {
-            "itemCode": "9987565633",
-            "itemDescription": "Coffee Mugs",
-            "unitPrice": "300",
-            "quantity": "200"
-          },
-            {
-               "itemCode":"7896672344",
-               "itemDescription":"Glasses for derinking water",
-               "unitPrice":"100",
-               "quantity":"200"
-            }
-         ]
-      }
+    {
+      "poNumber": "739248",
+      "POCreationDate": "6/1/2019",
+      "PODueDate": "6/20/2019",
+      "InvoiceNo": "346829",
+      "description": "Gym Equipments",
+      "vendorName": "Store C",
+      "vendorNo": "68292",
+      "totalAmount": "115000",
+      "poStatus": "pending",
+      "poDetails": [
+        {
+          "itemCode": "9865321456",
+          "itemDescription": "Fitness Machine",
+          "unitPrice": "5000",
+          "quantity": "12"
+        },
+        {
+          "itemCode": "8563214568",
+          "itemDescription": "Exercise Cycle",
+          "unitPrice": "5000",
+          "quantity": "7"
+        },
+        {
+          "itemCode": "4563215698",
+          "itemDescription": "Spinning Bike",
+          "unitPrice": "10000",
+          "quantity": "2"
+        }
+      ]
+    },
+    {
+      "poNumber": "739249",
+      "POCreationDate": "6/15/2019",
+      "PODueDate": "6/23/2019",
+      "InvoiceNo": "473528",
+      "description": "Gym Equipments",
+      "vendorName": "Store C",
+      "vendorNo": "68292",
+      "totalAmount": "15000",
+      "poStatus": "approved",
+      "poDetails": [
+        {
+          "itemCode": "7897897899",
+          "itemDescription": "Dumbles set of 2",
+          "unitPrice": "1000",
+          "quantity": "10"
+        },
+        {
+          "itemCode": "9856985698",
+          "itemDescription": "Exercise Kit",
+          "unitPrice": "500",
+          "quantity": "10"
+        }
+      ]
+    },
+    {
+      "poNumber": "654654",
+      "POCreationDate": "6/10/2019",
+      "PODueDate": "6/26/2019",
+      "InvoiceNo": "482561",
+      "description": "Gaming items",
+      "vendorName": "Store D",
+      "vendorNo": "25836",
+      "totalAmount": "8500",
+      "poStatus": "declined",
+      "poDetails": [
+        {
+          "itemCode": "5236987412",
+          "itemDescription": "Tennis Racquets 12, Tennis balls 8",
+          "unitPrice": "350",
+          "quantity": "10"
+        },
+        {
+          "itemCode": "5236787412",
+          "itemDescription": "Fussballs Table 10",
+          "unitPrice": "500",
+          "quantity": "10"
+        }
+      ]
+    },
+    {
+      "poNumber": "659954",
+      "POCreationDate": "6/11/2019",
+      "PODueDate": "6/19/2019",
+      "InvoiceNo": "912321",
+      "description": "Gaming items",
+      "vendorName": "Store D",
+      "vendorNo": "25836",
+      "totalAmount": "210000",
+      "poStatus": "declined",
+      "poDetails": [
+        {
+          "itemCode": "5236987412",
+          "itemDescription": "Air Hockey Table",
+          "unitPrice": "70000",
+          "quantity": "3"
+        }
+      ]
+    },
+    {
+      "poNumber": "908657",
+      "POCreationDate": "6/14/2019",
+      "PODueDate": "6/20/2019",
+      "InvoiceNo": "637251",
+      "description": "Stationery Items",
+      "vendorName": "Store A",
+      "vendorNo": "97546",
+      "totalAmount": "26,524",
+      "poStatus": "pending",
+      "poDetails": [
+        {
+          "itemCode": "9823564412",
+          "itemDescription": "White Board,Dry Eraser marker board for office",
+          "unitPrice": "789",
+          "quantity": "14"
+        },
+        {
+          "itemCode": "5635478211",
+          "itemDescription": "Magnetic White board Planner sheet dry erase.Includes 4 markers and 1 duster",
+          "unitPrice": "234",
+          "quantity": "7"
+        },
+        {
+          "itemCode": "2355618412",
+          "itemDescription": "Non-Magentic clipboard,lightweight Aluminium frame",
+          "unitPrice": "560",
+          "quantity": "8"
+        },
+        {
+          "itemCode": "3256278825",
+          "itemDescription": "Metal mesh Desk organiser,Black LD",
+          "unitPrice": "780",
+          "quantity": "12"
+        }
+      ]
+    },
+    {
+      "poNumber": "678453",
+      "POCreationDate": "6/16/2019",
+      "PODueDate": "6/26/2019",
+      "InvoiceNo": "537282",
+      "description": "Office essentials",
+      "vendorName": "Store A",
+      "vendorNo": "97546",
+      "totalAmount": "2,47,800",
+      "poStatus": "approved",
+      "poDetails": [
+        {
+          "itemCode": "2367645661",
+          "itemDescription": "Ebee Solid Wood Portable Desk supplies",
+          "unitPrice": "2300",
+          "quantity": "6"
+        },
+        {
+          "itemCode": "9987565632",
+          "itemDescription": "Twain File Cabinet with melamine finish",
+          "unitPrice": "12,000",
+          "quantity": "7"
+        },
+        {
+          "itemCode": "7896672342",
+          "itemDescription": "Strip cut Paper Shredder Cd/DVD/credit card",
+          "unitPrice": "15,000",
+          "quantity": "10"
+        }
+      ]
+    },
+    {
+      "poNumber": "678455",
+      "InvoiceNo": "328815",
+      "POCreationDate": "6/18/2019",
+      "PODueDate": "6/28/2019",
+      "description": "Pantry Eatables",
+      "vendorName": "Store P",
+      "vendorNo": "97547",
+      "totalAmount": "1,70,000",
+      "poStatus": "pending",
+      "poDetails": [
+        {
+          "itemCode": "2367645663",
+          "itemDescription": "Fruits",
+          "quantity": "1000",
+          "unitPrice": "50"
+        },
+        {
+          "itemCode": "9987565633",
+          "itemDescription": "Cakes and Namkins",
+          "unitPrice": "1000",
+          "quantity": "50"
+        },
+        {
+          "itemCode": "7896672344",
+          "itemDescription": "Juices, Milk, Softdrinks and other MRP items",
+          "unitPrice": "70",
+          "quantity": "1000"
+        }
+      ]
+    },
+    {
+      "poNumber": "678454",
+      "InvoiceNo": "532881",
+      "POCreationDate": "6/22/2019",
+      "PODueDate": "6/30/2019",
+      "description": "Pantry Essentials",
+      "vendorName": "Store P",
+      "vendorNo": "97547",
+      "totalAmount": "1,10,000",
+      "poStatus": "pending",
+      "poDetails": [
+        {
+          "itemCode": "2367645662",
+          "itemDescription": "Medium size ceramic plates",
+          "quantity": "100",
+          "unitPrice": "300"
+        },
+        {
+          "itemCode": "9987565633",
+          "itemDescription": "Coffee Mugs",
+          "unitPrice": "300",
+          "quantity": "200"
+        },
+        {
+          "itemCode": "7896672344",
+          "itemDescription": "Glasses for derinking water",
+          "unitPrice": "100",
+          "quantity": "200"
+        }
+      ]
+    }
    ]
 }

@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 
 namespace EmployeeConnect.Dialogs
 {
@@ -43,15 +43,21 @@ namespace EmployeeConnect.Dialogs
             await context.PostAsync(treply);
             //context.Wait(MessageReceivedAsync);
             /*Ends here*/
-
+            
             string message = string.Empty;
             var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
             {
                 await context.PostAsync("Failed to read user profile. Please try again.");
             }
-
-            if (!string.IsNullOrEmpty(activity.Text))
+            else if(string.IsNullOrEmpty(activity.Text))
+            {
+                var reply = context.MakeMessage();
+              //  reply.Text = activity.Value.ToString();
+                await context.PostAsync(reply);
+            }
+            
+            else if (!string.IsNullOrEmpty(activity.Text))
             {
                 message = Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity).ToLowerInvariant();
                 Attachment card = null;
@@ -87,6 +93,10 @@ namespace EmployeeConnect.Dialogs
                         card = Helper.CardHelper.PendingTasks();
                         reply.Attachments.Add(card);
                         break;
+                    case Common.Constants.Ticket:
+                        card = Helper.CardHelper.GetTicket();
+                        reply.Attachments.Add(card);
+                        break;
                     case Common.Constants.TrendingNews:
                         card = Helper.CardHelper.getNewsCard();
                         reply.Attachments.Add(card);
@@ -120,6 +130,21 @@ namespace EmployeeConnect.Dialogs
                                 reply.Text = "I dont have that info";
                             else
                                 reply.Attachments.Add(card);
+                        }
+                        else if(message.Trim().Substring(0,3)=="po:")
+                        {
+                            card = Helper.CardHelper.GetPOCard(message.Trim().Substring(3));
+                            if (card == null)
+                                reply.Text = "I dont have that info";
+                            else
+                                reply.Attachments.Add(card);
+                        }
+                        else if (activity.Value != null )//&& !string.IsNullOrEmpty(activity.Text))
+                        {
+                            //Attachment card = null;
+                            //reply.Text = activity.Value.ToString();
+                            await context.PostAsync(reply);
+
                         }
                         else
                         {
