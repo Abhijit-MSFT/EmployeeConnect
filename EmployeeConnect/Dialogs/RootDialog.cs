@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static EmployeeConnect.Models.CardActionValue;
 
 
 namespace EmployeeConnect.Dialogs
@@ -60,72 +61,84 @@ namespace EmployeeConnect.Dialogs
                 switch (message.Trim())
                 {
                     case Common.Constants.Welcome:
+
                         res = Helper.CardHelper.WelcomeCard();
+
+                        for (int i = 0; i < res.Count(); i++)
+
+                            reply.Attachments.Add(res.ElementAt(i));
+
+                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+
+                        break;
+
+                    case Common.Constants.SetPrefrences:
+
+                        card = Helper.CardHelper.SetTimePrefrences();
+
+                        reply.Text = "Set a preferred time to receive notifications for latest news, events and trainings and reminders.";
+
+                        reply.Attachments.Add(card);
+
+                        break;
+
+                    case Common.Constants.UpcomingEventsTraining:
+                        res = Helper.CardHelper.UpcomingEventsTraining();
                         for (int i = 0; i < res.Count(); i++)
                             reply.Attachments.Add(res.ElementAt(i));
-                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                         break;
-                    case Common.Constants.SetPrefrences:
-                        card = Helper.CardHelper.SetTimePrefrences();
-                        reply.Text = "Set a preferred time to receive notifications for latest news, events and trainings and reminders.";
+                    case Common.Constants.ReviewTasks:
+                        card = Helper.CardHelper.ReviewTasks();
                         reply.Attachments.Add(card);
-                        break;
-                    case Common.Constants.UpcomingEventsTraining:
-                        card = Helper.CardHelper.UpcomingEventsTraining();
-                        //reply.Text = "Upcoming events and training";
-                        reply.Attachments.Add(card);
-                        break;
-                    //case Common.Constants.ReviewTasks:
-                    //    card = Helper.CardHelper.ReviewTasks();
-                    ///    reply.Attachments.Add(card);
-                    //    break;
-                    case Common.Constants.PendingApprovals:
-                        card = Helper.CardHelper.PendingApprovals();
-                        reply.Attachments.Add(card);
-                        break;
-                    case Common.Constants.PendingTasks:
-                        card = Helper.CardHelper.PendingTasks();
-                        reply.Attachments.Add(card);
-                        break;
-                    case Common.Constants.TrendingNews:
-                        card = Helper.CardHelper.getNewsCard();
-                        reply.Attachments.Add(card);
-                        break;
-                    case Common.Constants.Policies:
-                        card = Helper.CardHelper.GetPoliciesCard();
-                        reply.Attachments.Add(card);
-                        break;
-                    case Common.Constants.MyTools:
-                        card = Helper.CardHelper.GetMyToolsCard();
-                        reply.Attachments.Add(card);
-                        break;
-                    //case Constants.NextMonthRoster:
-                    //    card = CardHelper.GetMonthlyRosterCard();
-                    //    break;
-                    //case Constants.NextWeekRoster:
-                    //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                    //    break;
-                    //case Constants.UpdateCard:
-                    //    card = CardHelper.GetUpdateScreen();
-                    //    break;
-                    //default:
-                    //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
-                    //    break;
 
-                    default:
-                        if (message.Trim().All(char.IsDigit))
-                        {         //if message was a number
-                            card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
-                            if (card == null)
-                                reply.Text = "I dont have that info";
-                            else
-                                reply.Attachments.Add(card);
-                        }
-                        else
-                        {
-                            reply.Text = "I dont have that info";
-                        }
                         break;
+                    case Common.Constants.PendingApprovals:
+
+                        card = Helper.CardHelper.PendingApprovals();
+
+                        reply.Attachments.Add(card);
+
+                        break;
+
+                    case Common.Constants.PendingTasks:
+
+                        card = Helper.CardHelper.PendingTasks();
+
+                        reply.Attachments.Add(card);
+
+                        break;
+
+                    case Common.Constants.TrendingNews:
+
+                        card = Helper.CardHelper.getNewsCard();
+
+                        reply.Attachments.Add(card);
+
+                        break;
+
+                    case Common.Constants.Policies:
+
+                        card = Helper.CardHelper.GetPoliciesCard();
+
+                        reply.Attachments.Add(card);
+
+                        break;
+
+                    case Common.Constants.MyTools:
+                        //card = Helper.CardHelper.GetMyToolsCard();
+                        break;
+                        //case Constants.NextMonthRoster:
+                        //    card = CardHelper.GetMonthlyRosterCard();
+                        //    break;
+                        //case Constants.NextWeekRoster:
+                        //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
+                        //    break;
+                        //case Constants.UpdateCard:
+                        //    card = CardHelper.GetUpdateScreen();
+                        //    break;
+                        //default:
+                        //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
+                        //    break;
                 }
 
 

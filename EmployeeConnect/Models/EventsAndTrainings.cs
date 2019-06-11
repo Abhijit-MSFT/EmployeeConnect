@@ -55,8 +55,5 @@ namespace EmployeeConnect.Models
         public string Register { get; set; }
         public bool UserAdded { get; set; }
 
-        [JsonProperty(PropertyName = "UserAdded")]
-        public bool UserAdded { get; set; }
-
     }
 }
