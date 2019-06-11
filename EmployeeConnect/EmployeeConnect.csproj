@@ -291,6 +291,7 @@
     <Content Include="Views\EmployeeConnect\PurchaseOrder.cshtml" />
     <Content Include="Views\Shared\_EmbedPage.cshtml" />
     <Content Include="Views\EmployeeConnect\Tools.cshtml" />
+    <Content Include="TestData\Ticket.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

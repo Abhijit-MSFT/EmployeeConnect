@@ -7,7 +7,7 @@ using System.Web.Http;
 using EmployeeConnect.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams;
+
 using Microsoft.Bot.Connector.Teams.Models;
 using EmployeeConnect.Helper;
 using Newtonsoft.Json;
