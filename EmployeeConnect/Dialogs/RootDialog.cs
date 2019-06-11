@@ -168,13 +168,13 @@ namespace EmployeeConnect.Dialogs
             ThumbnailCard card = new ThumbnailCard();
             card.Title = "Task Module Invocation from Thumbnail Card";
             card.Buttons = new List<CardAction>();
-           
+
             card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PurchaseOrder.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
-           
+
             return card;
         }
 
