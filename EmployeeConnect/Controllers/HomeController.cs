@@ -74,7 +74,11 @@ namespace EmployeeConnect.Controllers
         {
             PO poList = new PO();
             poList = GetDataHelper.GetPOs();
-            return View(poList.PurchaseOrder);
+           /* foreach (var item in poList.PurchaseOrder)
+            {
+                poList = null;
+            }*/
+            return View(poList);
         }
 
         [Route("EventandTrainingTab")]

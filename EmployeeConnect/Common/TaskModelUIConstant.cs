@@ -9,7 +9,12 @@ namespace EmployeeConnect.Common
     {
       public static UIConstants PurchaseOrder { get; set; } =
             new UIConstants(510, 450, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
-  }
+        public static UIConstants CreateTicket { get; set; } =
+      new UIConstants(310, 250, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
+
+        public static UIConstants TicketComplete { get; set; } =
+            new UIConstants(120, 60, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
+    }
 
     public class UIConstants
     {
@@ -32,6 +37,8 @@ namespace EmployeeConnect.Common
     public class TaskModuleIds
     {
         public const string PurchaseOrder = "purchaseorder";
+        public const string CreateTicket = "createticket";
+        public const string TicketComplete = "ticketcomplete";
 
     }
 }

@@ -4,55 +4,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./Tools.css" />
+    <link rel="stylesheet" href="~/Content/Tools.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>BCT</title>
 </head>
 <body>
-    <!-- <div
-       id="Next"
-       class="modal fade"
-       tabindex="-1"
-       role="dialog"
-       style="display: none;"
-       aria-hidden="true"
-     > -->
-    <div class="modal-dialog modal-dialog-centered custom-card2"
-         role="document">
-        <div class="modal-content content-radius">
-            <div class="modal-header custom-header">
-                <span class="modal-title tick">
-                    <span class="from-next"> Your ticket has been created </span>
-                </span>
+    <script>
+    microsoftTeams.initialize();
+    </script>
+        < !-- < div
+        id = "Next"
+        class="modal fade"
+        tabindex = "-1"
+        role = "dialog"
+        style = "display: none;"
+        aria - hidden="true"
+            > -->
+            <div class="modal-dialog modal-dialog-centered custom-card2"
+                role="document">
+                <div class="modal-content content-radius">
+                    <div class="modal-header custom-header">
+                        <span class="modal-title tick">
+                            <span class="from-next"> Your ticket has been created </span>
+                        </span>
+                    </div>
+                    <div class="modal-body from-next-body">
+                        <div class="ES">Employee support</div>
+                        <div class="ES-msg">
+                            Need to understand PTO assignment
+                    </div>
+                        <div class="High-priority">
+                            High-priority
+                        <span class="exclamation"></span>
+                        </div>
+                        <div class="ticket-data">
+                            <div class="ticket-no">Ticket No.</div>
+                            <div class="ticket-no-no">INC000000324567</div>
+                        </div>
+                        <div>
+                            <div class="Date-created">Date created</div>
+                            <div class="Date-created-date">Fri 05 Oct, 2018</div>
+                        </div>
+                        <div class="cancel-ticket">
+                            <span class="cancel-icon"></span>
+                            <span class="cancel-btn">Cancel ticket</span>
+                        </div>
+                        <div class="two-btn">
+                            <button type="button" class="Close">Close</button>
+                            <button type="button" class="Edit">Edit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body from-next-body">
-                <div class="ES">Employee support</div>
-                <div class="ES-msg">
-                    Need to understand PTO assignment
-                </div>
-                <div class="High-priority">
-                    High-priority
-                    <span class="exclamation"></span>
-                </div>
-                <div class="ticket-data">
-                    <div class="ticket-no">Ticket No.</div>
-                    <div class="ticket-no-no">INC000000324567</div>
-                </div>
-                <div>
-                    <div class="Date-created">Date created</div>
-                    <div class="Date-created-date">Fri 05 Oct, 2018</div>
-                </div>
-                <div class="cancel-ticket">
-                    <span class="cancel-icon"></span>
-                    <span class="cancel-btn">Cancel ticket</span>
-                </div>
-                <div class="two-btn">
-                    <button type="button" class="Close">Close</button>
-                    <button type="button" class="Edit">Edit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+</body >

@@ -238,7 +238,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\EmployeeConnect.dll" />
+    <Content Include="bin\EmployeeConnect.pdb" />
     <Content Include="Content\Custom.css" />
+    <Content Include="Content\Event.css" />
     <Content Include="Content\msteams-16.css" />
     <Content Include="Content\Tasks.css" />
     <Content Include="Content\Tools.css" />
@@ -255,6 +258,7 @@
     <Content Include="Images\timesheet_icon.PNG" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
+    <Content Include="obj\Debug\EmployeeConnect.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\teamsapp.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -270,7 +274,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\EmployeeConnect\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff" />
@@ -292,6 +298,8 @@
     <Content Include="Views\Shared\_EmbedPage.cshtml" />
     <Content Include="Views\EmployeeConnect\Tools.cshtml" />
     <Content Include="TestData\Ticket.json" />
+    <Content Include="Views\EmployeeConnect\CreateTicket.cshtml" />
+    <Content Include="Views\EmployeeConnect\TicketComplete.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
