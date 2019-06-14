@@ -245,6 +245,7 @@
     <Content Include="Content\msteams-16.css" />
     <Content Include="Content\Tasks.css" />
     <Content Include="Content\Tools.css" />
+    <Content Include="Content\Visitor.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -300,6 +301,8 @@
     <Content Include="TestData\Ticket.json" />
     <Content Include="Views\EmployeeConnect\CreateTicket.cshtml" />
     <Content Include="Views\EmployeeConnect\TicketComplete.cshtml" />
+    <Content Include="Views\EmployeeConnect\VisitorRegistration.cshtml" />
+    <Content Include="Views\EmployeeConnect\SendRequest.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

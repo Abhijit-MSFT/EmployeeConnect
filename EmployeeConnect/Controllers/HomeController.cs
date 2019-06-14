@@ -61,6 +61,17 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
+        [Route("visitorregistration")]
+        public ActionResult VisitorRegistration()
+        {
+            return View();
+        }
+
+        [Route("sendrequest")]
+        public ActionResult SendRequest()
+        {
+            return View();
+        }
         [Route("news")]
         public ActionResult News()
         {
