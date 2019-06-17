@@ -61,6 +61,17 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
+        [Route("visitorregistration")]
+        public ActionResult VisitorRegistration()
+        {
+            return View();
+        }
+
+        [Route("sendrequest")]
+        public ActionResult SendRequest()
+        {
+            return View();
+        }
         [Route("news")]
         public ActionResult News()
         {
@@ -74,7 +85,11 @@ namespace EmployeeConnect.Controllers
         {
             PO poList = new PO();
             poList = GetDataHelper.GetPOs();
-            return View(poList.PurchaseOrder);
+           /* foreach (var item in poList.PurchaseOrder)
+            {
+                poList = null;
+            }*/
+            return View(poList);
         }
 
         [Route("EventandTrainingTab")]
