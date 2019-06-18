@@ -106,6 +106,7 @@ namespace EmployeeConnect.Controllers
                 poTotal += Convert.ToInt32(poList.PoDetails[poCount].Total);
             }
             string TotalPOSum = poTotal.ToString();
+            
             return View(poList);
         }
         [Route("podecline")]
