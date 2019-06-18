@@ -36,7 +36,7 @@ namespace EmployeeConnect.Controllers
         {
             return View();
         }
-
+        
         [Route("Task")]
         public ActionResult Task()
         {
@@ -60,14 +60,26 @@ namespace EmployeeConnect.Controllers
         {
             return View();
         }
-
         [Route("news")]
         public ActionResult News()
         {
-            NewsModel newsListData = new NewsModel();
-            newsListData = GetDataHelper.GetNews();
-            return View(newsListData);
+            NewsModel news = new NewsModel();
+            news = GetDataHelper.GetNews();
+            return View(news);
         }
+
+        [Route("preferences")]
+        public ActionResult Preferences()
+        {
+            return View("Preferences");
+        }
+
+        [Route("policies")]
+        public ActionResult Policies()
+        {
+            return View("Policies");
+        }
+
 
         [Route("purchaseorder")]
         public ActionResult PurchaseOrder()
@@ -77,12 +89,10 @@ namespace EmployeeConnect.Controllers
             return View(poList.PurchaseOrder);
         }
 
-        [Route("EventandTrainingTab")]
+        [Route("eventandTrainingTab")]
         public ActionResult EventandTrainingTab()
         {
-            EandTModel eventsListData = new EandTModel();
-            eventsListData = GetDataHelper.GetEandT();
-            return View(eventsListData);
+           return View("EventandTrainingTab");
         }
 
     }
