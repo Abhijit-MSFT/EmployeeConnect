@@ -36,7 +36,7 @@
                             <span alt-name="ticket-creation"
                                   class="HR-tabs ticket-creation">
                             </span>
-                            <div class="CT" onclick="submit('cricketticket');">Create ticket</div>
+                            <div class="CT" onclick="submit('createticket');">Create ticket</div>
                             <p class="CT-des">
                                 For all HR tickets, the ticket type is being set as Employee
                                 Support.
@@ -128,7 +128,7 @@
                     <div class="card shadow-sm custom-card-IF-third-row-one">
                         <div class="card-body">
                             <span class="IF-tabs wife-request"> </span>
-                            <div class="GWR" onclick="submit('visitorrequest');">Visitor wi-fi request</div>
+                            <div class="GWR" onclick="submit('visitorregistration');">Visitor wi-fi request</div>
                             <p class="GWR-des">
                                 For all HR tickets, the ticket type is being set as Employee
                                 Support.
@@ -190,6 +190,7 @@
             </div>
         </div>
     </div>
+    <script src="~/Scripts/teamsapp.js"></script>
     <script>
     microsoftTeams.initialize();
 
@@ -215,14 +216,19 @@
                 taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
             }
+            else if (type.includes('visitorregistration')) {
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
+                taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
+            }
             else {
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/VisitorRegistration";
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/tools";
                 taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
             }
 
 
-              
+
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;

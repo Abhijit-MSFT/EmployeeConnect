@@ -2,21 +2,21 @@
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./Content/Tasks.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
-    <title>Tasks Tab</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="./Content/Tasks.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<title>Tasks Tab</title>
 
 <body>
 
     <div class="container-fluid">
-        
+
         <header class="heading">Pending submissons</header>
         <div class="card-deck custom-card-deck">
             <div class="card custom-card">
@@ -77,7 +77,7 @@
                                 @foreach (var item in Model.PurchaseOrder)
                                 {
                                     <tr class="row-highlight">
-                                        <td class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                        <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                         <td></td>
                                         <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
                                         <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
@@ -122,7 +122,7 @@
                                     @foreach (var item in Model.PurchaseOrder)
                                     {
                                         <tr class="row-highlight">
-                                            <td class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                            <td id="invoiceNoId" class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                             <td class="po-no1">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                             <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
                                             <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
@@ -167,10 +167,13 @@
         };
 
         function submit(type) {
-
+            var PONumber = document.getElementById('poNoid');
+            var invoiceNumber = document.getElementById('invoiceNoId');
             debugger;
             let taskInfo = {
              //   title: null,
+                PONo: null,
+                InvoiceNo: null,
                 height: null,
                 width: null,
                 url: null,
@@ -181,9 +184,10 @@
             taskInfo.height = "medium";
             taskInfo.width = "medium";
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/purchaseorder";
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/purchaseorder?poNumber="+PONumber.innerText;
                 taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
+
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;

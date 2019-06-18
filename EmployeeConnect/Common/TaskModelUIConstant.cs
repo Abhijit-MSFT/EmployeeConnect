@@ -8,7 +8,7 @@ namespace EmployeeConnect.Common
     public static class TaskModelUIConstant
     {
       public static UIConstants PurchaseOrder { get; set; } =
-            new UIConstants(510, 450, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
+            new UIConstants(750, 650, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
         public static UIConstants CreateTicket { get; set; } =
       new UIConstants(610, 510, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
@@ -16,10 +16,13 @@ namespace EmployeeConnect.Common
             new UIConstants(510, 320, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
 
         public static UIConstants VisitorRegistration { get; set; } =
-    new UIConstants(630, 550, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");
-   
+    new UIConstants(630, 550, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");  
     public static UIConstants SendRequest { get; set; } =
-    new UIConstants(630, 550, "Send Request", TaskModuleIds.SendRequest, "Send Request");
+    new UIConstants(530, 420, "Send Request", TaskModuleIds.PODecline, "Send Request");
+        public static UIConstants PoDecline { get; set; } =
+new UIConstants(330, 250, "PO Decline", TaskModuleIds.PODecline, "PO Decline");
+    public static UIConstants Declined { get; set; } =
+new UIConstants(230, 100, "Declined", TaskModuleIds.PODecline, "Declined");
 }
 public class UIConstants
     {
@@ -44,8 +47,9 @@ public class UIConstants
         public const string PurchaseOrder = "purchaseorder";
         public const string CreateTicket = "createticket";
         public const string TicketComplete = "ticketcomplete";
-        public const string VisitorRegistration = "visitorregisration";
-        public const string SendRequest = "sendrequest";
+        public const string VisitorRegistration = "visitorregistration";
+        public const string PODecline = "podecline";
+        public const string Declined = "declined";
 
 }
 }

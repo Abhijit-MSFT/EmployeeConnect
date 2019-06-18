@@ -16,73 +16,102 @@
     <title>VR</title>
 </head>
 <body>
-    <div class="modal-dialog modal-dialog-centered custom-card-for-visitor"
-         role="document">
-        <div class="modal-content content-radius">
-            <div class="modal-header custom-header">
-                <div class="modal-title">
-                    <div class="vr-res">Visitor registration</div>
+    <script>
+        microsoftTeams.initialize();
+
+        function validateForm() {
+            debugger;
+             let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/sendrequest";
+                taskInfo.height = "@(TaskModelUIConstant.SendRequest.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.SendRequest.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
+            return true;
+        }
+    </script>
+    <form method="POST" id="sendrequest" action="/sendrequest" onSubmit="return validateForm()">
+        <div class="modal-dialog modal-dialog-centered custom-card-for-visitor"
+             role="document">
+            <div class="modal-content content-radius">
+                <div class="modal-header custom-header">
+                    <div class="modal-title">
+                        <div class="vr-res">Visitor registration</div>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-body">
-                <div class="host">Host</div>
-                <form>
-                    <div class="row custom-row">
-                        <div class="col-6">
-                            <div class="Alias">Alias</div>
-                            <input type="text" class="alias-id" placeholder="Marie Beaudouin">
-                            <span class="id-card"></span>
+                <div class="modal-body">
+                    <div class="host">Host</div>
+                    <form>
+                        <div class="row custom-row">
+                            <div class="col-6">
+                                <div class="Alias">Alias</div>
+                                <input type="text" class="alias-id" placeholder="Marie Beaudouin">
+                                <span class="id-card"></span>
+                            </div>
+                            <div class="col-6">
+                                <div class="location">Location</div>
+                                <select class="location-drps">
+                                    <option selected>IDC ferns Bangalore</option>
+                                    <option>IDC Hyderabad</option>
+                                </select>
+                                <span class="for-visitor"></span>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <div class="location">Location</div>
-                            <select class="location-drps">
-                                <option selected>IDC ferns Bangalore</option>
-                                <option>IDC Hyderabad</option>
-                            </select>
-                            <span class="for-visitor"></span>
+                        <div class="Visitor-head">Visitor</div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="Alias">Name</div>
+                                <input type="text" class="alias-id" placeholder="Marie Douin">
+                            </div>
+                            <div class="col-6">
+                                <div class="location">Organisation</div>
+                                <input type="text" class="Org" placeholder="Design studio">
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="Alias">Contact</div>
+                                <input type="text" class="Contact" placeholder="+91 xxxx xx358">
+                            </div>
+                            <div class="col-6">
+                                <div class="location">Purpose</div>
+                                <input type="text" class="Purpose" placeholder="Meeting">
+                            </div>
+                        </div>
+                        <div class="row custom-row1">
+                            <div class="col-6">
+                                <div class="Alias">Visiting date</div>
+                                <input type="date" class="Visiting-date">
+                                <span class="date-pick"></span>
+                            </div>
+                            <div class="col-6">
+                                <div class="location">Visiting time</div>
+                                <input type="time" class="Visiting-time">
+                                <span class="time-pick"></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="two-btn">
+                        <button type="button" class="cancel">Cancel</button>
+                        <button type="button" class="send-rq" onclick="submit('sendrequest');">Send request</button>
                     </div>
-                    <div class="Visitor-head">Visitor</div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="Alias">Name</div>
-                            <input type="text" class="alias-id" placeholder="Marie Douin">
-                        </div>
-                        <div class="col-6">
-                            <div class="location">Organisation</div>
-                            <input type="text" class="Org" placeholder="Design studio">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="Alias">Contact</div>
-                            <input type="text" class="Contact" placeholder="+91 xxxx xx358">
-                        </div>
-                        <div class="col-6">
-                            <div class="location">Purpose</div>
-                            <input type="text" class="Purpose" placeholder="Meeting">
-                        </div>
-                    </div>
-                    <div class="row custom-row1">
-                        <div class="col-6">
-                            <div class="Alias">Visiting date</div>
-                            <input type="date" class="Visiting-date">
-                            <span class="date-pick"></span>
-                        </div>
-                        <div class="col-6">
-                            <div class="location">Visiting time</div>
-                            <input type="time" class="Visiting-time">
-                            <span class="time-pick"></span>
-                        </div>
-                    </div>
-                </form>
-                <div class="two-btn">
-                    <button type="button" class="cancel">Cancel</button>
-                    <button type="button" class="send-rq" onclick="submit('sendrequest');">Send request</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <script>
     microsoftTeams.initialize();
 
@@ -113,7 +142,7 @@
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+             microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
         }
     </script>
 </body>

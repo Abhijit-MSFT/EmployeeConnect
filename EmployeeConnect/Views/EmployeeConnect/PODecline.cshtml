@@ -7,12 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Tools.css" />
+    <link rel="stylesheet" href="~/Content/PODecline.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>CT</title>
-
 </head>
 <body>
     <script>
@@ -32,9 +31,9 @@
             taskInfo.height = "medium";
             taskInfo.width = "medium";
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete";
-                taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
+                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
@@ -42,57 +41,38 @@
             return true;
         }
     </script>
-    <form method="POST" id="ticketcomplete" action="/ticketComplete" onSubmit="return validateForm()">
+    <form method="POST" id="ticketcomplete" action="/declined" onSubmit="return validateForm()">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content content-radius">
                 <div class="modal-header custom-header">
                     <h5 class="modal-title">
-                        Create ticket for HR related queries
+                        Please provide a reason for decline
                     </h5>
                 </div>
                 <div class="modal-body">
-                    <div class="category">Select category</div>
+                    <div class="category">Select a reason</div>
                     <select class="date-control">
-                        <option selected id="category">Employee support</option>
+                        <option selected>out of stock</option>
                         <option>Option 2</option>
                     </select>
                     <span class="down-chevron"></span>
-                    <div class="modal-category">Description</div>
+                    <div class="modal-category">Comments(optional)</div>
                     <div class="card custom-card">
-                        <div class="card-body custom-card-body" id="description">
-                            Need to understand PTO assignment
+                        <div class="card-body custom-card-body">
+                            We are currently out of stock, please wait until next month
                         </div>
                     </div>
-                    <div class="modal-priority">Set a priority</div>
-                    <form class="all-radio">
-                        <label class="radio-label col-3 ">
-                            <input type="radio" name="radio" />
-                            <span class="range">Low</span>
-                            <span class="check-mark"></span>
-                        </label>
-                        <label class="radio-label col-3">
-                            <input type="radio" name="radio" />
-                            <span class="range">Medium</span>
-                            <span class="check-mark"></span>
-                        </label>
-                        <label class="radio-label col-3">
-                            <input type="radio" name="radio" checked />
-                            <span class="range">High</span>
-                            <span class="check-mark"></span>
-                        </label>
-                    </form>
                     <div class="two-btn">
                         <button type="button" class="cancel">Cancel</button>
-                        <button type="button" class="BCT"
-                                onclick="submit('ticketcomplete');">
-                            Create ticket
+                        <button type="button" class="BCT" onclick="submit('declined');" data-toggle="modal"
+                                data-target="#Next">
+                            Decline
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    <script src="~/Scripts/teamsapp.js"></script>
     <script>
     microsoftTeams.initialize();
 
@@ -103,10 +83,11 @@
         };
 
         function submit(type) {
-
             debugger;
             let taskInfo = {
              //   title: null,
+                PONo: null,
+                InvoiceNo: null,
                 height: null,
                 width: null,
                 url: null,
@@ -117,16 +98,15 @@
             taskInfo.height = "medium";
             taskInfo.width = "medium";
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete";
-                taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
+                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
+
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
-
-           // microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         }
     </script>
-</body>
 
+</body>
