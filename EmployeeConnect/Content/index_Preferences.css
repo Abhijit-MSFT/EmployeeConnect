@@ -56,7 +56,7 @@ span.title {
   font-family: "Segoe UI";
 }
 
-.show-more {
+/*.show-more {
     height: 35px;
     width: 100px;
     color: white;
@@ -79,12 +79,12 @@ span.title {
 
 .for-task {
     margin-top: 5px;
-}
+}*/
 
 .row-display {
   display: inline;
-  /*height: 90px;
-  width: 90px;*/
+  height: 90px;
+  width: 90px;
   border-radius: 8px;
   cursor: pointer;
   opacity: 0.9;

@@ -24,9 +24,10 @@ namespace EmployeeConnect
             }
             if (query.CommandId == "News")
             {
+                
                 NewsModel news = GetDataHelper.GetNews();
                 var title = "";
-                var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "newstitle");
+                var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "newsTitle");
                 var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", "result"));
                 ComposeExtensionAttachment[] attachments = null;
                 if (titleParam != null)
@@ -100,12 +101,12 @@ namespace EmployeeConnect
                 }
                 return response;
             }
-            else if (query.CommandId == "EventesAndTraining")
+            else if (query.CommandId == "EventsAndTrainings")
 
             {
                 EandTModel eventsTrainings = GetDataHelper.GetEandT();
                 var title = "";
-                var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "EventsAndTrainingtitle");
+                var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "EventsAndTrainingstitle");
                 var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", "result"));
                 ComposeExtensionAttachment[] attachments = null;
 
@@ -173,6 +174,7 @@ namespace EmployeeConnect
                 Text = views,
                 Images = new List<CardImage>
                 {
+                    new CardImage(image),
                     new CardImage(image)
                 }
             };
