@@ -5,7 +5,7 @@
         public const string NextWeekRoster = "my next week roster";
         public const string TrendingNews = "trending news";
         public const string MyEventTraining = "my events and training";
-        public const string PendingTasks = "pending tasks";
+        public const string PendingTasks = "pending submissions";
         public const string PendingApprovals = "pending approvals";
         public const string MyTools = "my tools";
         public const string Policies = "policies";

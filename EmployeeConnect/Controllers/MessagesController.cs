@@ -19,10 +19,10 @@ namespace EmployeeConnect.Controllers
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        [HttpPost]
+        [HttpPost]  
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-
+            
             switch (activity.Type)
             {
                 case ActivityTypes.Message:
@@ -91,15 +91,15 @@ namespace EmployeeConnect.Controllers
                     return response != null ? Request.CreateResponse<ComposeExtensionResponse>(response) : new HttpResponseMessage(HttpStatusCode.OK);
                 case "task/fetch":
                     // Handle fetching task module content
-                      
-                    
+
+                    break;
                 case "task/submit":
                     // Handle submission of task module info
                     // Run this on a task so that 
                     ConnectorClient connectorclient = new ConnectorClient(new Uri(activity.ServiceUrl));
                     Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
                     connectorclient.Conversations.ReplyToActivity(reply);
-                    return new HttpResponseMessage(HttpStatusCode.Accepted);
+                    break;
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
@@ -132,9 +132,11 @@ namespace EmployeeConnect.Controllers
         /// </summary>
         private static async System.Threading.Tasks.Task HandleConversationUpdate(Activity message)
         {
+            //if(message.)
             ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
             var channelData = message.GetChannelData<TeamsChannelData>();
             // Treat 1:1 add/remove events as if they were add/remove of a team member
+            
             if (channelData.EventType == null)
             {
                 if (message.MembersAdded != null)
@@ -146,11 +148,19 @@ namespace EmployeeConnect.Controllers
             {
                 case "teamMemberAdded":
                     // Team member was added (user or bot)
-                    if (message.MembersAdded.Any(m => m.Id.Contains(message.Recipient.Id)))
+                    if (channelData.Team == null)   //if bot added in personal scope,send a welcome message to user
                     {
-                        // Bot was added to a team: send welcome message
-                        message.Text = "hi";
-                        await Conversation.SendAsync(message, () => new RootDialog());
+                        if (message.MembersAdded.Any(m => m.Id.Contains(message.Recipient.Id)))
+                        {
+                            // Bot was added to a team: send welcome message
+                            var connectorClient = new ConnectorClient(new Uri(message.ServiceUrl));
+                            Activity welcomeMessage = message.CreateReply();
+
+                            welcomeMessage.Text = "Welcome.Let's get your Preferences set.";
+                            Attachment card = Helper.CardHelper.SetTimePrefrences();
+                            welcomeMessage.Attachments.Add(card);
+                            await connectorClient.Conversations.ReplyToActivityWithRetriesAsync(welcomeMessage);
+                        }
                     }
                     break;
                 case "teamMemberRemoved":
