@@ -230,15 +230,21 @@
     <Compile Include="MessageExtension.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
+    <Compile Include="Models\GNews.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
+    <Compile Include="Models\UPreferences.cs" />
     <Compile Include="Models\PurchaseOrders.cs" />
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Custom.css" />
+    <Content Include="Content\eventandtrainingnew.css" />
+    <Content Include="Content\index.css" />
+    <Content Include="Content\index_Policies.css" />
+    <Content Include="Content\index_Preferences.css" />
     <Content Include="Content\msteams-16.css" />
     <Content Include="Content\Tasks.css" />
     <Content Include="Content\Tools.css" />
@@ -253,6 +259,33 @@
     <Content Include="Images\expense_icon.PNG" />
     <Content Include="Images\submit.JPG" />
     <Content Include="Images\timesheet_icon.PNG" />
+    <Content Include="imgs\1.png" />
+    <Content Include="imgs\2.png" />
+    <Content Include="imgs\3.jpg" />
+    <Content Include="imgs\4.jpg" />
+    <Content Include="imgs\5.jpg" />
+    <Content Include="imgs\6.jpg" />
+    <Content Include="imgs\7.jpg" />
+    <Content Include="imgs\8.png" />
+    <Content Include="imgs\Animation.gif" />
+    <Content Include="imgs\Art.jpg" />
+    <Content Include="imgs\Business.jpg" />
+    <Content Include="imgs\Creative.png" />
+    <Content Include="imgs\CS.jpg" />
+    <Content Include="imgs\Culture.jpg" />
+    <Content Include="imgs\Data.jpg" />
+    <Content Include="imgs\Design.jpg" />
+    <Content Include="imgs\Economy.jpg" />
+    <Content Include="imgs\Enterprise.jpg" />
+    <Content Include="imgs\Finance.jpg" />
+    <Content Include="imgs\Health.jpg" />
+    <Content Include="imgs\IT.jpg" />
+    <Content Include="imgs\Market.jpg" />
+    <Content Include="imgs\Media.jpg" />
+    <Content Include="imgs\Software.jpg" />
+    <Content Include="imgs\Technology.jpg" />
+    <Content Include="imgs\Travel.jpg" />
+    <Content Include="js\index.js" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
     <Content Include="Scripts\teamsapp.js" />
@@ -292,6 +325,12 @@
     <Content Include="Views\Shared\_EmbedPage.cshtml" />
     <Content Include="Views\EmployeeConnect\Tools.cshtml" />
     <Content Include="TestData\Ticket.json" />
+    <Content Include="TestData\Test.json" />
+    <Content Include="Views\EmployeeConnect\Preferences.cshtml" />
+    <Content Include="Views\EmployeeConnect\CreateTicket.cshtml" />
+    <Content Include="Views\EmployeeConnect\TicketComplete.cshtml" />
+    <Content Include="Views\EmployeeConnect\Policies.cshtml" />
+    <Content Include="TestData\Preferences\Userpreferences.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
