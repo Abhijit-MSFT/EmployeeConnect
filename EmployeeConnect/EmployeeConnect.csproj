@@ -238,10 +238,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\EmployeeConnect.dll" />
+    <Content Include="bin\EmployeeConnect.pdb" />
     <Content Include="Content\Custom.css" />
+    <Content Include="Content\Event.css" />
     <Content Include="Content\msteams-16.css" />
     <Content Include="Content\Tasks.css" />
     <Content Include="Content\Tools.css" />
+    <Content Include="Content\Visitor.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -261,6 +265,7 @@
     <Content Include="Images\whiteImage.png" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
+    <Content Include="obj\Debug\EmployeeConnect.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\teamsapp.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -278,6 +283,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestData\Preferences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
@@ -300,6 +308,10 @@
     <Content Include="Views\Shared\_EmbedPage.cshtml" />
     <Content Include="Views\EmployeeConnect\Tools.cshtml" />
     <Content Include="TestData\Ticket.json" />
+    <Content Include="Views\EmployeeConnect\CreateTicket.cshtml" />
+    <Content Include="Views\EmployeeConnect\TicketComplete.cshtml" />
+    <Content Include="Views\EmployeeConnect\VisitorRegistration.cshtml" />
+    <Content Include="Views\EmployeeConnect\SendRequest.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
