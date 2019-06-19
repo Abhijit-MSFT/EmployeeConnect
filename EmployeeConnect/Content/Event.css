@@ -1,0 +1,351 @@
+﻿@font-face {
+    font-family: "Teams Assets";
+    src: url("./fonts/TeamsAssets-Light.woff") format("woff"), url("./fonts/TeamsAssets-Light.woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Teams Assets-Regular";
+    src: url("./fonts/TeamsAssets-Regular.woff2") format("woff2"), url("./fonts/TeamsAssets-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+}
+
+html {
+    height: 100%;
+}
+
+.header,
+.header2,
+.heading,
+.today,
+.month-date,
+.msg-for-header {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header,
+.header2 {
+    background-color: #f6f6f7;
+    vertical-align: middle;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.header2 {
+    margin-top: 30px;
+}
+
+.heading {
+    font-size: 22px;
+    display: inline;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.today {
+    display: inline;
+    background-color: #ebebec;
+    color: #656465;
+    padding: 5px 20px 5px 20px;
+    margin-left: 80px;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.left-chev,
+.right-chev,
+.month-date,
+.down-chev,
+.date,
+.day {
+    display: inline;
+}
+
+    .left-chev::before {
+        content: "\E420";
+        font-family: "Teams Assets";
+        font-size: 18px;
+        vertical-align: middle;
+        margin-left: 20px;
+        cursor: pointer;
+    }
+
+    .right-chev::before {
+        content: "\E421";
+        font-family: "Teams Assets";
+        font-size: 18px;
+        vertical-align: middle;
+        margin-left: 14px;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    .right-chev:hover::before {
+        opacity: 1;
+    }
+
+.month-date {
+    vertical-align: middle;
+    font-weight: 600;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.down-chev::before {
+    content: "\E447";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.msg-for-header {
+    color: #9c9b9b;
+    font-size: 16px;
+}
+
+.date-row {
+    padding-top: 20px;
+}
+
+.date {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.day {
+    padding-left: 5px;
+}
+
+.flag::before {
+    content: "\E917";
+    font-family: "Teams Assets";
+    font-size: 20px;
+    color: #4286bc;
+    vertical-align: middle;
+}
+
+.header-flag,
+.header-badge {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    background-color: #efeff6;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-bottom-width: 0px;
+}
+
+.badge-icon::before {
+    content: "\E954";
+    font-family: "Teams Assets";
+    font-size: 20px;
+    color: #4286bc;
+    vertical-align: middle;
+}
+
+.check::before {
+    content: "\F109";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #92c353;
+    vertical-align: text-bottom;
+    position: relative;
+    left: 40%;
+}
+
+.star::before {
+    content: "\E40A";
+    font-family: "Teams Assets-Regular";
+    font-size: 14px;
+    color: #f5a623;
+    vertical-align: text-bottom;
+    position: relative;
+    left: 40%;
+}
+
+.event {
+    font-size: 14px;
+    color: #4286bc;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+.time-icon::before {
+    content: "\F301";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #9999a4;
+}
+
+.time-icon2::before {
+    content: "\F301";
+    font-family: "Teams Assets";
+    font-size: 12px;
+    color: #9999a4;
+}
+
+.time-icon,
+.time-icon2,
+.location-icon,
+.web-icon {
+    padding-top: 5px;
+}
+
+.event-time,
+.location,
+.web {
+    color: #9999a4;
+    display: inline;
+    font-size: 12px;
+    padding-left: 10px;
+    position: relative;
+    bottom: 2px;
+}
+
+.location-icon::before {
+    content: "\E610";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #9999a4;
+}
+
+.web-icon::before {
+    content: "\E505";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #9999a4;
+}
+
+.web-icon2::before {
+    content: "\E505";
+    font-family: "Teams Assets";
+    font-size: 12px;
+    color: #9999a4;
+}
+
+.cal-icon::before {
+    content: "\E50A";
+    font-family: "Teams Assets";
+    font-size: 18px;
+    color: #6365a8;
+    vertical-align: middle;
+}
+
+.cal-icon {
+    position: relative;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.check-icon-added::before {
+    content: "\E44F";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #bada76;
+    vertical-align: middle;
+}
+
+.check-icon-added {
+    display: none;
+    margin-top: 10px;
+}
+
+.main-title-msg,
+.main-title {
+    position: relative;
+    font-weight: 700;
+    font-size: 18px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.4;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.main-title {
+    height: 54px;
+}
+
+.custom-card-deck {
+    position: relative;
+    top: 12px;
+}
+
+.custom-card-deck2 {
+    position: relative;
+    top: 30px;
+}
+
+.custom-card {
+    height: auto;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+    border-color: #d0d1e5 !important;
+}
+
+.custom-card2 {
+    height: 220px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+    border-color: #d0d1e5 !important;
+}
+
+.mandatory,
+.featured {
+    position: relative;
+    left: 40%;
+    font-size: 14px;
+    /* vertical-align: middle; */
+    color: #767a7e;
+}
+
+.for-header2-dateandtime,
+.for-header2-stream {
+    font-size: 12px;
+}
+
+.for-header2-cal {
+    font-size: 14px;
+}
+
+.cal,
+.check-added {
+    padding-left: 5px;
+    display: inline;
+    vertical-align: middle;
+    color: #6365a8;
+}
+
+.check-added {
+    color: #9999a4;
+    padding-left: 6px;
+}
+
+.register {
+    height: 30px;
+    width: 100px;
+    color: black;
+    font-family: "Segoe UI";
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    background-color: white;
+    border: 1px solid rgba(37, 36, 36, 0.15);
+    border-radius: none;
+    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 10px;
+}

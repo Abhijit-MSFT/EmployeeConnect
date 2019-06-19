@@ -1,0 +1,112 @@
+﻿@model EmployeeConnect.Models.PO
+@using EmployeeConnect.Common;
+@using EmployeeConnect.Helper;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/PODecline.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>CT</title>
+</head>
+<body>
+    <script>
+        microsoftTeams.initialize();
+
+        function validateForm() {
+            debugger;
+             let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
+                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
+            return true;
+        }
+    </script>
+    <form method="POST" id="ticketcomplete" action="/declined" onSubmit="return validateForm()">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content content-radius">
+                <div class="modal-header custom-header">
+                    <h5 class="modal-title">
+                        Please provide a reason for decline
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="category">Select a reason</div>
+                    <select class="date-control">
+                        <option selected>out of stock</option>
+                        <option>Option 2</option>
+                    </select>
+                    <span class="down-chevron"></span>
+                    <div class="modal-category">Comments(optional)</div>
+                    <div class="card custom-card">
+                        <div class="card-body custom-card-body">
+                            We are currently out of stock, please wait until next month
+                        </div>
+                    </div>
+                    <div class="two-btn">
+                        <button type="button" class="cancel">Cancel</button>
+                        <button type="button" class="BCT" onclick="submit('declined');" data-toggle="modal"
+                                data-target="#Next">
+                            Decline
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+    microsoftTeams.initialize();
+
+        submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+
+        function submit(type) {
+            debugger;
+            let taskInfo = {
+             //   title: null,
+                PONo: null,
+                InvoiceNo: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
+                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
+
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+    </script>
+
+</body>
