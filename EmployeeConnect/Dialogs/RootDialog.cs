@@ -71,7 +71,7 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
-                        card = Helper.CardHelper.UpcomingEventsTraining();
+                        card = Helper.CardHelper.getETCard();
                         //reply.Text = "Upcoming events and training";
                         reply.Attachments.Add(card);
                         break;
@@ -125,6 +125,16 @@ namespace EmployeeConnect.Dialogs
                         reply.Text = "This functionality is under construction";
                         break;
                     default:
+                        if (message.Trim().StartsWith("e"))
+                        {         //if message was a number,it is a newsId [.StartsWith("E")]
+
+                            card = Helper.CardHelper.GetETbyID(message.Trim());
+                            if (card == null)
+                                reply.Text = "I dont have that info";
+                            else
+                                reply.Attachments.Add(card);
+                            break;
+                        }
                         if (message.Trim().All(char.IsDigit))
                         {         //if message was a number,it is a newsId 
                             card = Helper.CardHelper.GetNewsCardbyId(message.Trim());

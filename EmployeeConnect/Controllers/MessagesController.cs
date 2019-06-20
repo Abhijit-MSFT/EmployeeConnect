@@ -13,6 +13,7 @@ using EmployeeConnect.Models;
 using EmployeeConnect.Helper;
 using Newtonsoft.Json;
 using EmployeeConnect.Common;
+using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Controllers
 {
@@ -91,8 +92,28 @@ namespace EmployeeConnect.Controllers
                     return response != null ? Request.CreateResponse<ComposeExtensionResponse>(response) : new HttpResponseMessage(HttpStatusCode.OK);
                 case "task/fetch":
                     // Handle fetching task module content
+                    Models.BotFrameworkCardValue<string> action;
 
-                    break;
+                    try
+                    {
+                        action = JsonConvert.DeserializeObject<Models.TaskModuleActionData<string>>(activityValue).Data;
+                    }
+                    catch (Exception)
+                    {
+                        action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
+                    }
+
+                    Models.TaskInfo taskInfo = GetTaskInfo(action.Data);
+                    //Models.TaskInfo taskInfo = GetTaskInfo("createticket");
+                    Models.TaskEnvelope taskEnvelope = new Models.TaskEnvelope
+                    {
+                        Task = new Models.Task()
+                        {
+                            Type = Models.TaskType.Continue,
+                            TaskInfo = taskInfo
+                        }
+                    };
+                    return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "task/submit":
                     // Handle submission of task module info
                     // Run this on a task so that 
@@ -107,13 +128,32 @@ namespace EmployeeConnect.Controllers
         private static TaskInfo GetTaskInfo(string actionInfo)
         {
             TaskInfo taskInfo = new TaskInfo();
+            if (actionInfo.StartsWith("news:"))
+            {
+                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetNewsCardbyId(actionInfo.Substring(5)));
+                SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
+                return taskInfo;
+            }
+            if (actionInfo.StartsWith("events:"))
+            {
+                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetETbyID(actionInfo.Substring(7)));
+                SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
+                return taskInfo;
+            }
             switch (actionInfo)
             {
                 case TaskModuleIds.PurchaseOrder:
                     taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.PurchaseOrder;
                     SetTaskInfo(taskInfo, TaskModelUIConstant.PurchaseOrder);
                     break;
-
+                case TaskModuleIds.CreateTicket:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.CreateTicket;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.CreateTicket);
+                    break;
+                case TaskModuleIds.VisitorRegistration:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.VisitorRegistration;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.VisitorRegistration);
+                    break;
                 default:
                     break;
             }
