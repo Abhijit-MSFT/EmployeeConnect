@@ -9,6 +9,7 @@ using Microsoft.Bot.Connector.Teams.Models;
 using AdaptiveCards;
 using Microsoft.Ajax.Utilities;
 using Antlr.Runtime.Tree;
+using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Helper
 {
@@ -736,6 +737,68 @@ namespace EmployeeConnect.Helper
             return card;
         }
 
+        public static Attachment getETCard()
+        {
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Upcoming events and Trainings";
+            EandTModel EandTL = Helper.GetDataHelper.GetEandT();
+            if (EandTL != null)  //if it got the news
+            {
+                var Events = EandTL.EventsAndtraining.Where(w => w.ETID.StartsWith("e"));
+                //var Trainings = EandTL.EventsAndtraining.Where(w => w.ETFlag.Equals("T"));
+                //int ReqDescriptionLength = 85;
+
+                //MaxNewsCount has total number of news to display
+                //int MaxNewsCount = 3;
+                // if (MaxNewsCount > SuggestedNews.Count())
+                int MaxEventsCount = Events.Count();
+                //int MaxTrainingsCount = Trainings.Count();
+
+                for (int i = 0; i < MaxEventsCount; i++)
+                {
+                    var EandT = Events.ElementAt(i);
+                    string subtitle = EandT.ETDetails;
+                    string title = EandT.ETTitle + ' ' + EandT.ETStartDate + ' ' + '-' + ' ' + EandT.ETEndDate;
+                    var item = new Item();
+                    //item.title = EandT.ETTitle;
+                    item.title = title;
+                    item.icon = EandT.ETThumbnailUrl;
+                    item.id = EandT.ETID;
+
+                    //if (subtitle.Length > ReqDescriptionLength)
+                    //    item.subtitle = subtitle.Substring(0, ReqDescriptionLength);
+                    //else
+                    item.subtitle = subtitle;
+
+                    item.type = "resultItem";
+
+                    //item.NewBy = "Vedant";      //doesn't display in frontend
+
+                    item.tap = new Tap()
+                    {
+                        type = "messageBack",
+                        text = EandT.ETID
+                    };
+
+                    list.Add(item);
+                }
+                card.content.items = list.ToArray();
+
+            }
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }
+
+
         //[Obsolete]
         public static Attachment UpcomingEventsTraining()
         {
@@ -878,7 +941,77 @@ namespace EmployeeConnect.Helper
                 Content = card
             };
             return attachment;
+       }
+        public static Attachment GetETbyID(string id)
+        {
+            EandTModel EandTL = Helper.GetDataHelper.GetEandT();
+            var SelectedEventsTrainings = getETById(EandTL, id);
+
+            if (SelectedEventsTrainings == null)   //could not find the news
+                return null;
+            var card = new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage
+                            {
+                                        Url = new Uri(SelectedEventsTrainings.ETThumbnailUrl)
+                            },
+                            new AdaptiveTextBlock() //Title of News
+                            {
+                                Text = SelectedEventsTrainings.ETTitle,
+                                Weight = AdaptiveTextWeight.Bolder,     // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            },
+                                new AdaptiveTextBlock()     //NewsBy on Date and Time
+                            {
+                                Text = "By " + SelectedEventsTrainings.ETType + " on " + SelectedEventsTrainings.ETStartDate,
+                                Weight = AdaptiveTextWeight.Lighter,    // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Small,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            },
+                            new AdaptiveTextBlock()     //Detailed News
+                            {
+                                Text = SelectedEventsTrainings.ETDetails,
+                                Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Default,       // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            }
+                        }
+                    }
+                }
+            };
+
+        
+            var attachment = new Attachment() {
+
+                ContentType = AdaptiveCard.ContentType,
+                Content = card
+        };
+            // return JObject.FromObject(attachment);
+
+            return attachment;
         }
+
+        //Returns the News with specific NewsID
+        public static EventsAndTraining getETById(EandTModel EandTL, string id)
+        {
+            if (EandTL == null)
+                return null;
+            foreach (var ET in EandTL.EventsAndtraining)
+            {
+                if (ET.ETID.Equals(id))
+                    return ET;
+            }
+            return null;    // id doesn't exist
+        }
+
+
 
         //[Obsolete]
         public static AdaptiveCard ReviewTasks()

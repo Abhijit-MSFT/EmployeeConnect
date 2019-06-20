@@ -9,6 +9,7 @@ namespace EmployeeConnect.Models
     public class EandTModel
     {
         public EventsAndTraining[] EventsAndtraining { get; set; }
+        public EventsAndTraining[] EventGrid { get; set; }
     }
     public class EventsAndTraining
     {

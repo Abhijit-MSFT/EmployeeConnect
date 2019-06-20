@@ -13,6 +13,7 @@ using EmployeeConnect.Models;
 using EmployeeConnect.Helper;
 using Newtonsoft.Json;
 using EmployeeConnect.Common;
+using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Controllers
 {
@@ -113,6 +114,32 @@ namespace EmployeeConnect.Controllers
                     taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.PurchaseOrder;
                     SetTaskInfo(taskInfo, TaskModelUIConstant.PurchaseOrder);
                     break;
+                case TaskModuleIds.PODecline:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.PODecline;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.PoDecline);
+                    break;
+                case TaskModuleIds.Declined:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.Declined;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.Declined);
+                    break;
+                case TaskModuleIds.CreateTicket:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.CreateTicket;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.CreateTicket);
+                    break;
+                case TaskModuleIds.TicketComplete:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.TicketComplete;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.TicketComplete);
+                    break;
+                case TaskModuleIds.SendRequest:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.SendRequest;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.SendRequest);
+                    break;
+                case TaskModuleIds.EventCard:
+                    //taskInfo.Card = CardHelper.GetETbyID("7");
+                    // taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.EventCard;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.EventCard);
+                    break;
+
 
                 default:
                     break;

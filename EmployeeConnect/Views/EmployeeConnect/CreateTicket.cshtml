@@ -38,7 +38,7 @@
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, submitHandler, "@ApplicationSettings.AppId");
+            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
             return true;
         }
     </script>
@@ -82,7 +82,8 @@
                         </label>
                     </form>
                     <div class="two-btn">
-                        <button type="submit" class="cancel">Cancel</button>
+                        <button type="submit" class="Close">Close</button>
+                        @*<button type="submit" class="cancel">Cancel</button>*@
                         <button type="button" class="BCT"
                                 onclick="submit('ticketcomplete');">
                             Create ticket
@@ -99,11 +100,10 @@
        submitHandler = (err, result) => {
             debugger;
             console.log(`Submit handler - err: ${err}`);
-          //  alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+           // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
         function submit(type) {
-            alert(type);
             debugger;
             let taskInfo = {
              //   title: null,
@@ -112,16 +112,18 @@
                 url: null,
                 fallbackUrl: null,
             };
-
-
+            
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+            if (type.includes('ticketcomplete')) {
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete";
                 taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";
 
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-         //   microsoftTeams.tasks.submitTask(taskInfo, submitHandler, "@ApplicationSettings.AppId");
-
+                // Set fallback URL
+                taskInfo.fallbackUrl = taskInfo.url;
+                //   microsoftTeams.tasks.submitTask(taskInfo, submitHandler, "@ApplicationSettings.AppId");
+            }
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         }
     </script>

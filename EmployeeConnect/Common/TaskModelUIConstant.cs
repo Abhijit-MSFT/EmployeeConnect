@@ -18,12 +18,14 @@ namespace EmployeeConnect.Common
         public static UIConstants VisitorRegistration { get; set; } =
     new UIConstants(500, 570, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");  
     public static UIConstants SendRequest { get; set; } =
-    new UIConstants(400, 459, "Send Request", TaskModuleIds.PODecline, "Send Request");
+    new UIConstants(400, 459, "Send Request", TaskModuleIds.SendRequest, "Send Request");
         public static UIConstants PoDecline { get; set; } =
 new UIConstants(400, 367, "PO Decline", TaskModuleIds.PODecline, "PO Decline");
     public static UIConstants Declined { get; set; } =
 new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");
-}
+        public static UIConstants EventCard { get; set; }=
+            new UIConstants(380, 350, "EventCard", TaskModuleIds.EventCard, "EventCard");
+    }
 public class UIConstants
     {
         public UIConstants(int width, int height, string title, string id, string buttonTitle)
@@ -34,7 +36,6 @@ public class UIConstants
             Id = id;
             ButtonTitle = buttonTitle;
         }
-
         public int Height { get; set; }
         public int Width { get; set; }
         public string Title { get; set; }
@@ -50,6 +51,8 @@ public class UIConstants
         public const string VisitorRegistration = "visitorregistration";
         public const string PODecline = "podecline";
         public const string Declined = "declined";
+        public const string SendRequest = "sendrequest";
+        public const string EventCard = "eventcard";
 
-}
+    }
 }

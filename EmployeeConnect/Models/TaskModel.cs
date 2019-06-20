@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Azure.Documents;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,9 @@ namespace EmployeeConnect.Models
         [JsonProperty("title")]
         public string Title { get; set; }
 
+        [JsonProperty("card")]
+        public Attachment Card { get; set; }
+
         [JsonProperty("height")]
         public object Height { get; set; }
 
@@ -23,6 +27,9 @@ namespace EmployeeConnect.Models
 
         [JsonProperty("fallbackUrl")]
         public string FallbackUrl { get; set; }
+        
+        [JsonProperty("completionBotId")]
+        public string CompletionBotId { get; set; }
 
         public string ToJson()
         {

@@ -21,7 +21,34 @@
     <script src="~/Scripts/teamsapp.js"></script>
     <script>
         microsoftTeams.initialize();
+           submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+           // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+         function submit(type) {
+            debugger;
+            let taskInfo = {
+             //   title: null
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
 
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline";
+                taskInfo.height = "@(TaskModelUIConstant.PoDecline.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PoDecline.Width)";
+
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
         function validateForm() {
             debugger;
              let taskInfo = {
@@ -48,7 +75,7 @@
     </script>
     <form method="POST" id="podecline" action="/podecline" onSubmit="return validateForm()">
         <div class="container-fluid">
-            <header>Purchase order no. poNo</header>
+            <header>Purchase order no. @TempData["data"]</header>
             <div>Vendor no. 72383</div>
             <div style="float:right">
                 Total amount<br />

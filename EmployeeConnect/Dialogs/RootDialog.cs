@@ -71,7 +71,7 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
-                        card = Helper.CardHelper.UpcomingEventsTraining();
+                        card = Helper.CardHelper.getETCard();
                         //reply.Text = "Upcoming events and training";
                         reply.Attachments.Add(card);
                         break;
@@ -136,6 +136,7 @@ namespace EmployeeConnect.Dialogs
                         reply.Text = "This functionality is under construction";
                         break;
                     default:
+                        
                         if (message.Trim().All(char.IsDigit))
                         {         //if message was a number,it is a newsId 
                             card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
@@ -174,7 +175,42 @@ namespace EmployeeConnect.Dialogs
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
-           
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PoDecline.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.PoDecline.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.Declined.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.Declined.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.CreateTicket.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.CreateTicket.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.TicketComplete.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.TicketComplete.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.VisitorRegistration.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.VisitorRegistration.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.SendRequest.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.SendRequest.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.EventCard.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.EventCard.Id
+                }));
+
             return card;
         }
 

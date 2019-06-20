@@ -3,6 +3,9 @@ using EmployeeConnect.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Controllers
 {
@@ -43,6 +46,18 @@ namespace EmployeeConnect.Controllers
         {
             PO taskList = new PO();
             taskList = GetDataHelper.GetPOs();
+            PurchaseOrders[] filterList = new PurchaseOrders[taskList.PurchaseOrder.Length];
+          
+            filterList = taskList.PurchaseOrder.Where(e => e.PoStatus != "declined").ToArray();
+            PurchaseOrders[] approvedList = new PurchaseOrders[filterList.Length];
+            PurchaseOrders[] pendingList = new PurchaseOrders[filterList.Length];
+
+            approvedList = filterList.Where(i => i.PoStatus == "approved").ToArray();
+            pendingList =  filterList.Where(i => i.PoStatus == "pending").ToArray();
+
+            taskList.ApprovedPO = approvedList;
+            taskList.PendingPO = pendingList;
+            taskList.PurchaseOrder = filterList;
             return View(taskList);
         }
         [Route("Tools")]
@@ -86,7 +101,7 @@ namespace EmployeeConnect.Controllers
         public ActionResult PurchaseOrder(string poNumber)
         {
 
-
+            TempData["data"] = poNumber;
             PO poList = new PO();
             poList = GetDataHelper.GetPOs();
             var podetaillist = poList.PurchaseOrder[0].PoDetails;
@@ -126,7 +141,17 @@ namespace EmployeeConnect.Controllers
         {
             EandTModel eventsListData = new EandTModel();
             eventsListData = GetDataHelper.GetEandT();
+            EventsAndTraining[] EventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
+             EventGrid = eventsListData.EventsAndtraining.Where(i => i.ETFlag == "E").ToArray();
+            eventsListData.EventGrid = EventGrid;
             return View(eventsListData);
+        }
+
+
+        [Route("getEventInfo")]
+        public JObject GetEventInfo(string eventId)
+        {
+            return JObject.FromObject(CardHelper.GetETbyID(eventId));
         }
 
     }
