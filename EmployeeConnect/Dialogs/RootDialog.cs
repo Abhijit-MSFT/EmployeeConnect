@@ -35,15 +35,6 @@ namespace EmployeeConnect.Dialogs
             typingReply.Type = ActivityTypes.Typing;
             await context.PostAsync(typingReply);
 
-            /*Task Module Added*/
-            //var tMessage = (Activity)await result;
-            //var treply = tMessage.CreateReply();
-            //ThumbnailCard Tcard = GetTaskModuleOptions();
-            //treply.Attachments.Add(Tcard.ToAttachment());
-            //await context.PostAsync(treply);
-            //context.Wait(MessageReceivedAsync);
-            /*Ends here*/
-
             string message = string.Empty;
             var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
@@ -71,7 +62,7 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
-                        card = Helper.CardHelper.UpcomingEventsTraining();
+                        card = Helper.CardHelper.getETCard();
                         //reply.Text = "Upcoming events and training";
                         reply.Attachments.Add(card);
                         break;
@@ -124,17 +115,31 @@ namespace EmployeeConnect.Dialogs
                         reply.Text = "This functionality is under construction";
                         break;
                     default:
+                        if (message.Trim().StartsWith("e"))
+                        {         //if message was a number,it is a newsId [.StartsWith("E")]
+
+                            card = Helper.CardHelper.GetETbyID(message.Trim());
+                            if (card == null)
+                                reply.Text = "I dont have that info";
+                            else
+                                reply.Attachments.Add(card);
+                            break;
+                        }
                         if (message.Trim().All(char.IsDigit))
                         {         //if message was a number,it is a newsId 
+                            reply.Text = message.Trim();
                             card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
                             if (card == null)
                                 reply.Text = "I dont have that info";
                             else
                                 reply.Attachments.Add(card);
+                            break;
                         }
                         else
                         {
-                            reply.Text = "I dont have that info";
+                            //reply.Text = message;
+                            reply.Text = "I dont have that info111";
+
                         }
                         break;
                 }
@@ -159,6 +164,11 @@ namespace EmployeeConnect.Dialogs
                 new Models.BotFrameworkCardValue<string>()
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.NewsCard.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.NewsCard.Id
                 }));
 
             return card;

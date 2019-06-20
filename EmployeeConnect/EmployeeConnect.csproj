@@ -224,10 +224,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AdaptiveCardHelper.cs" />
     <Compile Include="Helper\ApplicationSettings.cs" />
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
     <Compile Include="MessageExtension.cs" />
+    <Compile Include="Models\GNews.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
     <Compile Include="Models\GNews.cs" />

@@ -9,6 +9,8 @@ namespace EmployeeConnect.Common
     {
       public static UIConstants PurchaseOrder { get; set; } =
             new UIConstants(750, 650, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
+        public static UIConstants  NewsCard { get; set; } =
+            new UIConstants(750, 650, "News Card", TaskModuleIds.PurchaseOrder, "News Card");
         public static UIConstants CreateTicket { get; set; } =
       new UIConstants(610, 510, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
@@ -50,6 +52,7 @@ public class UIConstants
         public const string VisitorRegistration = "visitorregistration";
         public const string PODecline = "podecline";
         public const string Declined = "declined";
+        public const string Newscard = "newscard";
 
-}
+    }
 }

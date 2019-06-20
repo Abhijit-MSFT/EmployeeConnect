@@ -17,12 +17,17 @@ namespace EmployeeConnect.Models
 
         [JsonProperty("height")]
         public object Height { get; set; }
+        //YG
+        [JsonProperty("card")]
+        public object Card { get; set; }
 
         [JsonProperty("width")]
         public object Width { get; set; }
 
         [JsonProperty("fallbackUrl")]
         public string FallbackUrl { get; set; }
+        [JsonProperty("botcompletionid")]
+        public string completionBotId { get; set; }
 
         public string ToJson()
         {
