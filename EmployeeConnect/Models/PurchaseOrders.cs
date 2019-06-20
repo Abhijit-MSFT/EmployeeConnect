@@ -9,8 +9,9 @@ namespace EmployeeConnect.Models
     public class PO
     {
         public PurchaseOrders[] PurchaseOrder { get; set; }
-    }
 
+        public Podetail[] PoDetails { get; set; }
+    }
     public class PurchaseOrders
     {
 
@@ -37,6 +38,7 @@ namespace EmployeeConnect.Models
 
         [JsonProperty(PropertyName = "poDetails")]
         public Podetail[] PoDetails { get; set; }
+
 
     }
     public class Podetail

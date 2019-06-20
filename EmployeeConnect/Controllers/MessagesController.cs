@@ -7,11 +7,13 @@ using System.Web.Http;
 using EmployeeConnect.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams;
+
 using Microsoft.Bot.Connector.Teams.Models;
 using EmployeeConnect.Helper;
 using Newtonsoft.Json;
 using EmployeeConnect.Common;
+using AdaptiveCards;
+using Newtonsoft.Json.Linq;
 using EmployeeConnect.Models;
 
 namespace EmployeeConnect.Controllers
@@ -19,7 +21,7 @@ namespace EmployeeConnect.Controllers
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        [HttpPost]
+        [HttpPost]  
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
 
@@ -29,53 +31,13 @@ namespace EmployeeConnect.Controllers
                     await Conversation.SendAsync(activity, () => new RootDialog());
                     break;
                 case ActivityTypes.Invoke:
-                    return await HandleInvokeActivity(activity);
+                     return await HandleInvokeActivity(activity);
                 case ActivityTypes.ConversationUpdate:
                     await HandleConversationUpdate(activity);
                     break;
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
-
-        private HttpResponseMessage HandleInvokeMessages(Activity activity)
-        {
-            var activityValue = activity.Value.ToString();
-            if (activity.Name == "task/fetch")
-            {
-                BotFrameworkCardValue<string> action;
-                try
-                {
-                    action = JsonConvert.DeserializeObject<TaskModuleActionData<string>>(activityValue).Data;
-                }
-                catch (Exception)
-                {
-                    action = JsonConvert.DeserializeObject<BotFrameworkCardValue<string>>(activityValue);
-                }
-
-                TaskInfo taskInfo = GetTaskInfo(action.Data);
-                TaskEnvelope taskEnvelope = new TaskEnvelope
-                {
-                    Task = new Models.Task()
-                    {
-                        Type = TaskType.Continue,
-                        TaskInfo = taskInfo
-                    }
-                };
-                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
-
-            }
-            else if (activity.Name == "task/submit")
-            {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
-                connector.Conversations.ReplyToActivity(reply);
-            }
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
-        }
-
-        /// <summary>
-        /// Handle an invoke activity.
-        /// </summary>
         private async Task<HttpResponseMessage> HandleInvokeActivity(Activity activity)
         {
             var activityValue = activity.Value.ToString();
@@ -91,29 +53,68 @@ namespace EmployeeConnect.Controllers
                     return response != null ? Request.CreateResponse<ComposeExtensionResponse>(response) : new HttpResponseMessage(HttpStatusCode.OK);
                 case "task/fetch":
                     // Handle fetching task module content
-                      
-                    
+                    Models.BotFrameworkCardValue<string> action;
+
+                    try
+                    {
+                        action = JsonConvert.DeserializeObject<Models.TaskModuleActionData<string>>(activityValue).Data;
+                    }
+                    catch (Exception)
+                    {
+                        action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
+                    }
+
+
+                    Models.TaskInfo taskInfo = GetTaskInfo(action.Data);
+                    Models.TaskEnvelope taskEnvelope = new Models.TaskEnvelope
+                    {
+                        Task = new Models.Task()
+                        {
+                            Type = Models.TaskType.Continue,
+                            TaskInfo = taskInfo
+                        }
+                    };
+                    return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "task/submit":
                     // Handle submission of task module info
                     // Run this on a task so that 
                     ConnectorClient connectorclient = new ConnectorClient(new Uri(activity.ServiceUrl));
                     Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
                     connectorclient.Conversations.ReplyToActivity(reply);
-                    return new HttpResponseMessage(HttpStatusCode.Accepted);
+                    break;
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
 
-        private static TaskInfo GetTaskInfo(string actionInfo)
+        private static TaskInfo GetTaskInfo(string id, string actionInfo)
         {
             TaskInfo taskInfo = new TaskInfo();
+            if (actionInfo.StartsWith("news:"))
+            {
+                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetNewsCardbyId(actionInfo.Substring(5)));
+                SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
+                return taskInfo;
+            }
+            if (actionInfo.StartsWith("events:"))
+            {
+                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetETbyID(actionInfo.Substring(7)));
+                SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
+                return taskInfo;
+            }
             switch (actionInfo)
             {
                 case TaskModuleIds.PurchaseOrder:
                     taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.PurchaseOrder;
                     SetTaskInfo(taskInfo, TaskModelUIConstant.PurchaseOrder);
                     break;
-
+                case TaskModuleIds.CreateTicket:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.CreateTicket;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.CreateTicket);
+                    break;
+                case TaskModuleIds.VisitorRegistration:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.VisitorRegistration;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.VisitorRegistration);
+                    break;
                 default:
                     break;
             }
@@ -124,7 +125,6 @@ namespace EmployeeConnect.Controllers
         {
             taskInfo.Height = uIConstants.Height;
             taskInfo.Width = uIConstants.Width;
-           // taskInfo.Title = uIConstants.Title.ToString();
         }
 
         /// <summary>
@@ -132,9 +132,11 @@ namespace EmployeeConnect.Controllers
         /// </summary>
         private static async System.Threading.Tasks.Task HandleConversationUpdate(Activity message)
         {
+            //if(message.)
             ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
             var channelData = message.GetChannelData<TeamsChannelData>();
             // Treat 1:1 add/remove events as if they were add/remove of a team member
+            
             if (channelData.EventType == null)
             {
                 if (message.MembersAdded != null)
@@ -146,11 +148,19 @@ namespace EmployeeConnect.Controllers
             {
                 case "teamMemberAdded":
                     // Team member was added (user or bot)
-                    if (message.MembersAdded.Any(m => m.Id.Contains(message.Recipient.Id)))
+                    if (channelData.Team == null)   //if bot added in personal scope,send a welcome message to user
                     {
-                        // Bot was added to a team: send welcome message
-                        message.Text = "hi";
-                        await Conversation.SendAsync(message, () => new RootDialog());
+                        if (message.MembersAdded.Any(m => m.Id.Contains(message.Recipient.Id)))
+                        {
+                            // Bot was added to a team: send welcome message
+                            var connectorClient = new ConnectorClient(new Uri(message.ServiceUrl));
+                            Activity welcomeMessage = message.CreateReply();
+
+                            welcomeMessage.Text = "Welcome.Let's get your Preferences set.";
+                            Attachment card = Helper.CardHelper.SetTimePrefrences();
+                            welcomeMessage.Attachments.Add(card);
+                            await connectorClient.Conversations.ReplyToActivityWithRetriesAsync(welcomeMessage);
+                        }
                     }
                     break;
                 case "teamMemberRemoved":

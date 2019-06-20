@@ -36,7 +36,7 @@
                             <span alt-name="ticket-creation"
                                   class="HR-tabs ticket-creation">
                             </span>
-                            <div class="CT" onclick="submit('cricketticket');">Create ticket</div>
+                            <div class="CT" onclick="submit('createticket');">Create ticket</div>
                             <p class="CT-des">
                                 For all HR tickets, the ticket type is being set as Employee
                                 Support.
@@ -128,7 +128,7 @@
                     <div class="card shadow-sm custom-card-IF-third-row-one">
                         <div class="card-body">
                             <span class="IF-tabs wife-request"> </span>
-                            <div class="GWR">Visitor wi-fi request</div>
+                            <div class="GWR" onclick="submit('visitorregistration');">Visitor wi-fi request</div>
                             <p class="GWR-des">
                                 For all HR tickets, the ticket type is being set as Employee
                                 Support.
@@ -190,13 +190,14 @@
             </div>
         </div>
     </div>
+    <script src="~/Scripts/teamsapp.js"></script>
     <script>
     microsoftTeams.initialize();
 
         submitHandler = (err, result) => {
             debugger;
             console.log(`Submit handler - err: ${err}`);
-            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+            //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
         function submit(type) {
@@ -210,13 +211,24 @@
                 fallbackUrl: null,
             };
 
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
+            if (type.includes('createticket')) {
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
-                taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
+                taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
+            }
+            else if (type.includes('visitorregistration')) {
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
+                taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
+            }
+            else {
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/tools";
+                taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
+            }
+
+
+
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
