@@ -89,7 +89,8 @@ namespace EmployeeConnect.Dialogs
                     case Common.Constants.MyTools:
                         card = Helper.CardHelper.GetMyToolsCard();
                         reply.Attachments.Add(card);
-                        break;                   
+                        break;
+                    
                     case Common.Constants.HumanResourceTools:
                         card = Helper.CardHelper.HumanResourceCard();
                         reply.Attachments.Add(card);

@@ -263,6 +263,11 @@
     <Content Include="Images\4.JPG" />
     <Content Include="Images\download.JPG" />
     <Content Include="Images\expense_icon.PNG" />
+    <Content Include="Images\Human Resources.jpeg" />
+    <Content Include="Images\ITFacilities.jpg" />
+    <Content Include="Images\Payment and benefits.jpg" />
+    <Content Include="Images\purpleImage.JPG" />
+    <Content Include="Images\Store Operations.jpg" />
     <Content Include="Images\submit.JPG" />
     <Content Include="Images\timesheet_icon.PNG" />
     <Content Include="imgs\1.png" />
@@ -309,6 +314,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\EmployeeConnect\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestData\Preferences\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
