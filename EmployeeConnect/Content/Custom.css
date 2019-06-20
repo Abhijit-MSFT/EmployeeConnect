@@ -6,3 +6,37 @@
 div.panel {
     padding: 15px;
 }
+.approve,.decline {
+    height: 35px;
+    width: 100px;
+    color: #ffffff;
+    font-family: "Segoe UI";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    background-color: #6264a7;
+    border: 1px solid rgba(37, 36, 36, 0.15);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: -5px;
+    float: right !important;
+}
+
+tr, td, th {
+    border: none !important;
+    font-weight: normal;
+    position:relative;
+    left:0px;
+}
+
+.purchaseHeader, .purchaseBody {
+    background: #f5f5f5 !important;
+    border: none;
+}
+.totalSum{
+    font-size:24px;
+    color:black;
+    font-weight:bold;
+}
