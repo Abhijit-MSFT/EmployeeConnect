@@ -39,35 +39,22 @@ namespace EmployeeConnect.Helper
             return POs;
 
         }
-        public static GNews GetNewsData()
-        {
-            string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
-            using (WebClient client = new WebClient())
-            {
-                GNews news = null;
-                string json = null;
+        //public static GNews GetNewsData()
+        //{
+        //    string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
+        //    using (WebClient client = new WebClient())
+        //    {
+        //        GNews news = null;
+        //        string json = null;
 
-                json = client.DownloadString(url);
-                news = (new JavaScriptSerializer().Deserialize<GNews>(json));
-                //return news;
-                return news.status == "ok" ? news : null;
-            }
-        }
+        //        json = client.DownloadString(url);
+        //        news = (new JavaScriptSerializer().Deserialize<GNews>(json));
+        //        //return news;
+        //        return news.status == "ok" ? news : null;
+        //    }
+        //}
 
-        public static GNews GetNewsData()
-        {
-            string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
-            using (WebClient client = new WebClient())
-            {
-                GNews news = null;
-                string json = null;
-
-                json = client.DownloadString(url);
-                news = (new JavaScriptSerializer().Deserialize<GNews>(json));
-                
-                return news.status == "ok" ? news : null;
-            }
-        }
+      
     }
 }
 
