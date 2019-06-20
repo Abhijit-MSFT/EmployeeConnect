@@ -13,6 +13,9 @@ namespace EmployeeConnect.Models
 
         [JsonProperty("data")]
         public T Data { get; set; }
+
+        [JsonProperty("dat")]
+        public T Dataa { get; set; }
     }
 
     public class AdaptiveCardValue<T>
