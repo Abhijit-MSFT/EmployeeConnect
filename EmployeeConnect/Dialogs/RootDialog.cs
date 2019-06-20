@@ -90,18 +90,7 @@ namespace EmployeeConnect.Dialogs
                         card = Helper.CardHelper.GetMyToolsCard();
                         reply.Attachments.Add(card);
                         break;
-                    //case Constants.NextMonthRoster:
-                    //    card = CardHelper.GetMonthlyRosterCard();
-                    //    break;
-                    //case Constants.NextWeekRoster:
-                    //    card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                    //    break;
-                    //case Constants.UpdateCard:
-                    //    card = CardHelper.GetUpdateScreen();
-                    //    break;
-                    //default:
-                    //    card = CardHelper.GetWelcomeScreen(userDetails.GivenName ?? userDetails.Name);
-                    //    break;
+                    
                     case Common.Constants.HumanResourceTools:
                         card = Helper.CardHelper.HumanResourceCard();
                         reply.Attachments.Add(card);
