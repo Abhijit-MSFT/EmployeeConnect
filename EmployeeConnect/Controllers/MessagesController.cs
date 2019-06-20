@@ -13,6 +13,7 @@ using EmployeeConnect.Models;
 using EmployeeConnect.Helper;
 using Newtonsoft.Json;
 using EmployeeConnect.Common;
+using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Controllers
@@ -30,53 +31,13 @@ namespace EmployeeConnect.Controllers
                     await Conversation.SendAsync(activity, () => new RootDialog());
                     break;
                 case ActivityTypes.Invoke:
-                    return await HandleInvokeActivity(activity);
+                     return await HandleInvokeActivity(activity);
                 case ActivityTypes.ConversationUpdate:
                     await HandleConversationUpdate(activity);
                     break;
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
-
-        private HttpResponseMessage HandleInvokeMessages(Activity activity)
-        {
-            var activityValue = activity.Value.ToString();
-            if (activity.Name == "task/fetch")
-            {
-                BotFrameworkCardValue<string> action;
-                try
-                {
-                    action = JsonConvert.DeserializeObject<TaskModuleActionData<string>>(activityValue).Data;
-                }
-                catch (Exception)
-                {
-                    action = JsonConvert.DeserializeObject<BotFrameworkCardValue<string>>(activityValue);
-                }
-
-                TaskInfo taskInfo = GetTaskInfo(action.Data);
-                TaskEnvelope taskEnvelope = new TaskEnvelope
-                {
-                    Task = new Models.Task()
-                    {
-                        Type = TaskType.Continue,
-                        TaskInfo = taskInfo
-                    }
-                };
-                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
-
-            }
-            else if (activity.Name == "task/submit")
-            {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
-                connector.Conversations.ReplyToActivity(reply);
-            }
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
-        }
-
-        /// <summary>
-        /// Handle an invoke activity.
-        /// </summary>
         private async Task<HttpResponseMessage> HandleInvokeActivity(Activity activity)
         {
             var activityValue = activity.Value.ToString();
@@ -103,8 +64,8 @@ namespace EmployeeConnect.Controllers
                         action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
                     }
 
+
                     Models.TaskInfo taskInfo = GetTaskInfo(action.Data);
-                    //Models.TaskInfo taskInfo = GetTaskInfo("createticket");
                     Models.TaskEnvelope taskEnvelope = new Models.TaskEnvelope
                     {
                         Task = new Models.Task()
@@ -125,7 +86,7 @@ namespace EmployeeConnect.Controllers
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
 
-        private static TaskInfo GetTaskInfo(string actionInfo)
+        private static TaskInfo GetTaskInfo(string id, string actionInfo)
         {
             TaskInfo taskInfo = new TaskInfo();
             if (actionInfo.StartsWith("news:"))
@@ -164,7 +125,6 @@ namespace EmployeeConnect.Controllers
         {
             taskInfo.Height = uIConstants.Height;
             taskInfo.Width = uIConstants.Width;
-           // taskInfo.Title = uIConstants.Title.ToString();
         }
 
         /// <summary>

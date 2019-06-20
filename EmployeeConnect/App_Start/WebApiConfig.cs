@@ -7,6 +7,7 @@ namespace EmployeeConnect
 {
     public static class WebApiConfig
     {
+        [System.Obsolete]
         public static void Register(HttpConfiguration config)
         {
             // Json settings
