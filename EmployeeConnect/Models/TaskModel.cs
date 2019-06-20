@@ -9,7 +9,7 @@ using System.Web;
 namespace EmployeeConnect.Models
 {
     public class TaskInfo
-    {
+    {                                               //Cards not there
         [JsonProperty("url")]
         public string Url { get; set; }
 
@@ -21,16 +21,20 @@ namespace EmployeeConnect.Models
 
         [JsonProperty("height")]
         public object Height { get; set; }
+        //YG
+        [JsonProperty("card")]
+        public object Card { get; set; }
 
         [JsonProperty("width")]
         public object Width { get; set; }
 
         [JsonProperty("fallbackUrl")]
         public string FallbackUrl { get; set; }
-        
-        [JsonProperty("completionBotId")]
-        public string CompletionBotId { get; set; }
+        [JsonProperty("botcompletionid")]
+        public string completionBotId { get; set; }
 
+        [JsonProperty("card")]
+        public object Card { get; set; }
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);
