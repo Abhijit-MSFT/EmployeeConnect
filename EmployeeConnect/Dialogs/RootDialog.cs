@@ -35,15 +35,6 @@ namespace EmployeeConnect.Dialogs
             typingReply.Type = ActivityTypes.Typing;
             await context.PostAsync(typingReply);
 
-            /*Task Module Added*/
-            //var tMessage = (Activity)await result;
-            //var treply = tMessage.CreateReply();
-            //ThumbnailCard Tcard = GetTaskModuleOptions();
-            //treply.Attachments.Add(Tcard.ToAttachment());
-            //await context.PostAsync(treply);
-            //context.Wait(MessageReceivedAsync);
-            /*Ends here*/
-
             string message = string.Empty;
             var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
