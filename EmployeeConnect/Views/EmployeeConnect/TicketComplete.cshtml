@@ -71,7 +71,7 @@
                         <span class="cancel-btn">Cancel ticket</span>
                     </div>
                     <div class="two-btn">
-                        <button type="button" class="Close" onclick="closeModel()">Close</button>
+                        <button type="submit" class="Close">Close</button>
                         <button type="button" class="Edit" onclick="submit('createticket')">Edit</button>
                     </div>
                 </div>
@@ -83,13 +83,9 @@
         submitHandler = (err, result) => {
             debugger;
             console.log(`Submit handler - err: ${err}`);
-           // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+           
         };
-
-    function closeModel() {
-        debugger;
-        window.location.href = "@(ApplicationSettings.BaseUrl)" + "/tools";
-    }
+    
         function submit(type) {
 
             debugger;

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace EmployeeConnect.Models
 {
-    public class GNews
-    {
-    }
+	public class GNews
+	{
+	}
 }

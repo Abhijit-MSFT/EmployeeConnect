@@ -24,7 +24,6 @@ namespace EmployeeConnect.Controllers
         [HttpPost]  
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-            
             switch (activity.Type)
             {
                 case ActivityTypes.Message:
@@ -86,7 +85,7 @@ namespace EmployeeConnect.Controllers
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
 
-        private static TaskInfo GetTaskInfo(string id, string actionInfo)
+        private static TaskInfo GetTaskInfo(string actionInfo)
         {
             TaskInfo taskInfo = new TaskInfo();
             if (actionInfo.StartsWith("news:"))

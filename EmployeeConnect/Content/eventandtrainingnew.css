@@ -116,7 +116,7 @@ html {
   color: #4286bc;
   vertical-align: middle;
 }
-.header-flag,
+/*.header-flag,
 .header-badge {
   padding-left: 5px !important;
   padding-right: 5px !important;
@@ -124,7 +124,7 @@ html {
   padding-top: 2px;
   padding-bottom: 2px;
   border-bottom-width: 0px;
-}
+}*/
 .badge-icon::before {
   content: "\E954";
   font-family: "Teams Assets";
@@ -268,7 +268,7 @@ html {
 .mandatory,
 .featured {
   position: relative;
-  left: 40%;
+  left: 10%;
   font-size: 14px;
   /* vertical-align: middle; */
   color: #767a7e;
@@ -305,4 +305,63 @@ html {
   box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
   position: relative;
   top: 10px;
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+    .heading {
+        font-size: 18px;
+    }
+
+    .small-dev {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .check::before {
+        left: 38%;
+    }
+
+    .mandatory, .featured {
+        left: 38%;
+    }
+
+    .star::before {
+        left: 38%;
+    }
+
+    .dates {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .main-title {
+        height: 20px;
+        font-size: 14px;
+    }
+
+    .main-title-msg {
+        font-size: 14px;
+    }
+
+    .body-top {
+        padding-top: 10px;
+    }
+
+    .location-icon {
+        padding-top: 0px;
+    }
+
+    .custom-card2 {
+        height: 180px;
+    }
+
+    .day {
+        padding-left: 0px;
+        font-size: 16px;
+    }
+
+    .date {
+        font-size: 16px;
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using EmployeeConnect.Helper;
 using EmployeeConnect.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -80,6 +81,13 @@ namespace EmployeeConnect.Controllers
             news = GetDataHelper.GetNews();
             return View(news);
         }
+
+        [Route("getNewsInfo")]
+        public JObject GetNewsInfo(string NewsId)
+        {
+            return JObject.FromObject(CardHelper.GetNewsCardbyId(NewsId));
+        }
+
 
         [Route("preferences")]
         public ActionResult Preferences()

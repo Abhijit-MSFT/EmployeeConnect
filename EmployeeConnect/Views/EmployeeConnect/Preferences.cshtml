@@ -8,13 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
-    @Scripts.Render("https://unpkg.com/@microsoft/teams-js@1.3.4/dist/MicrosoftTeams.min.js")
+    @Scripts.Render("https://unpkg.com/@microsoft/teams-js@1.4.2/dist/MicrosoftTeams.min.js")
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="~/Content/index_Preferences.css" rel="stylesheet" />
 
     <title>Preferences Tab</title>
+    <script>
+        microsoftTeams.initialize();
+    </script>
 </head>
 
 <body>
@@ -38,7 +41,7 @@
                 <div class="rules">Pick 5 or more topics for news updates</div>
                 <div id="News" class="panel-collapse">
                     @*<a href="#" style="float:right;" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/5004f5ec-ecbf-4fcc-9848-cc8943dc0077/currNews');">Show Newsss</a>*@
-                    <button type="button" style="float:right; height: 35px; width: 100px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/5004f5ec-ecbf-4fcc-9848-cc8943dc0077/currNews')">Show News</button>
+                    <button type="button" style="float:right; height: 35px; width: 100px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/currNews')">Show News</button>
                     <div class="panel-body body-height">
                         <div class="image-text image_grid">
                             <label for="Business">
@@ -265,7 +268,7 @@
             </div>
             <div class="col-10">
                 <div id="Events" class="panel-collapse">
-                    <button type="button" style="float:right; height: 35px; width: 180px; margin-top:5px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/5004f5ec-ecbf-4fcc-9848-cc8943dc0077/currNews')">Show Event and Training</button>
+                    <button type="button" style="float:right; height: 35px; width: 180px; margin-top:5px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/EandT')">Show Event and Training</button>                    
                     <div class="panel-body">
                         <div class="switch-title">
                             <label class="switch">
@@ -323,8 +326,8 @@
                 </div>
             </div>
             <div class="col-10">
-                <div id="Taskreminders" class="panel-collapse">
-                    <button type="button" style="float:right; height: 35px; width: 180px; color: white; background-color: #6264a7; font-family: Segoe UI; margin-top:5px; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/5004f5ec-ecbf-4fcc-9848-cc8943dc0077/currNews')">Show Task Reminder</button>
+                <div id="Taskreminders" class="panel-collapse">                    
+                    <button type="button" style="float:right; height: 35px; width: 180px; color: white; background-color: #6264a7; font-family: Segoe UI; margin-top:5px; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/tasks')">Show Task Reminder</button>
                     <div class="panel-body">
                         <div class="notify notify-task">Notify me at</div>
                         <form class="all-radio">
@@ -354,7 +357,7 @@
                                 <option>4:00 pm</option>
                                 <option>5:00 pm</option>
                             </select>
-                            <i class="fas fa-chevron-down"></i> <br><br><br> 
+                            <i class="fas fa-chevron-down"></i> <br><br><br>
                         </form>
                     </div>
                 </div>

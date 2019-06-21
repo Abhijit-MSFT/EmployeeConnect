@@ -54,7 +54,20 @@ namespace EmployeeConnect.Helper
         //    }
         //}
 
-      
+        public static News UpdateNewsMockData()
+        {
+            NewsModel news = GetNews();
+            int NewsCount = news.news.Count();
+            string dt = DateTime.Now.Date.Date.ToString("M/dd/yyyy, h:mm tt");
+            
+            for (int i = 0; i < NewsCount; i++)
+            {
+                news.news[0].NewsDateTIme = dt;
+                
+            }
+            return null;
+        }
+
     }
 }
 
