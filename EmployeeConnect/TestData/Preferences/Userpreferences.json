@@ -1,0 +1,58 @@
+{
+  "preferences": [
+    {
+      "UserName": "Abhijit Jodbhavi",
+      "News": [
+        {
+          "SelectedCategories": [],
+          "NewsNotificationFlag": true,
+          "NewsNotifyMe": "",
+          "NewsNotificationTime": ""
+        }
+
+      ],
+      "EandT": [
+        {
+          "EandTNotificationFlag": true,
+          "EandTNotifyMe": "",
+          "EandTNotificationTime": ""
+        }
+      ],
+      "Task": [
+        {
+          "TaskNotificationFlag": true,
+          "TaskNotifyMe": "",
+          "TaskNotificationTime": ""
+        }
+      ]
+    },
+    {
+      "UserName": "Wajeed Shaikh",
+      "News": [
+        {
+          "SelectedCategories": [],
+          "NewsNotificationFlag": true,
+          "NewsNotifyMe": "",
+          "NewsNotificationTime": ""
+        }
+
+      ],
+      "EandT": [
+        {
+          "EandTNotificationFlag": true,
+          "EandTNotifyMe": "",
+          "EandTNotificationTime": ""
+        }
+      ],
+      "Task": [
+        {
+          "TaskNotificationFlag": true,
+          "TaskNotifyMe": "",
+          "TaskNotificationTime": ""
+        }
+      ]
+    }
+  ]
+}
+
+

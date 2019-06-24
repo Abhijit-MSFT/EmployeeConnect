@@ -149,7 +149,7 @@
     -moz-appearance: none;
     -o-appearance: none;
     appearance: none;
-    background-color: #f3f2f1 !important;
+    /*background-color: #f3f2f1 !important;*/
     color: #252424;
     border-radius: 3px;
     position: relative;

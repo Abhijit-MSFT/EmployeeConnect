@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
@@ -38,22 +39,40 @@ namespace EmployeeConnect.Helper
             return POs;
 
         }
-        public static GNews GetNewsData()
+        //public static GNews GetNewsData()
+        //{
+        //    string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
+        //    using (WebClient client = new WebClient())
+        //    {
+        //        GNews news = null;
+        //        string json = null;
+
+        //        json = client.DownloadString(url);
+        //        news = (new JavaScriptSerializer().Deserialize<GNews>(json));
+        //        //return news;
+        //        return news.status == "ok" ? news : null;
+        //    }
+        //}
+
+        public static News UpdateNewsMockData()
         {
-            string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
-            using (WebClient client = new WebClient())
+            NewsModel news = GetNews();
+            int NewsCount = news.news.Count();
+            string dt = DateTime.Now.Date.Date.ToString("M/dd/yyyy, h:mm tt");
+            
+            for (int i = 0; i < NewsCount; i++)
             {
-                GNews news = null;
-                string json = null;
-
-                json = client.DownloadString(url);
-                news = (new JavaScriptSerializer().Deserialize<GNews>(json));
-                //return news;
-                return news.status == "ok" ? news : null;
+                news.news[0].NewsDateTIme = dt;
+                
             }
+            return null;
         }
-
-
 
     }
 }
+
+
+
+
+
+

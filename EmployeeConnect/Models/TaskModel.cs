@@ -28,9 +28,6 @@ namespace EmployeeConnect.Models
         public string FallbackUrl { get; set; }
         [JsonProperty("botcompletionid")]
         public string completionBotId { get; set; }
-
-        [JsonProperty("card")]
-        public object Card { get; set; }
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);

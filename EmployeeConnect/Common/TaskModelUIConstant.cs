@@ -24,10 +24,7 @@ namespace EmployeeConnect.Common
         public static UIConstants PoDecline { get; set; } =
         new UIConstants(400, 367, "PO Decline", TaskModuleIds.PODecline, "PO Decline");
         public static UIConstants Declined { get; set; } =
-        new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");
-
-        public static UIConstants NewsCard { get; set; } =
-        new UIConstants(500, 570, "News Card: Inputs", TaskModuleIds.Newscard, "News Card");
+        new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");    
 
         public static UIConstants ETCard { get; set; } =
         new UIConstants(500, 350, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");

@@ -145,8 +145,6 @@ namespace EmployeeConnect.Dialogs
                         break;
                 }
 
-
-
                 await context.PostAsync(reply);
 
             }

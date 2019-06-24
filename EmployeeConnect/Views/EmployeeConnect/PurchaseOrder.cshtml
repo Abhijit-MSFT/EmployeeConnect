@@ -23,7 +23,6 @@
         microsoftTeams.initialize();
 
         function validateForm() {
-            debugger;
              let taskInfo = {
              //   title: null,
                 height: null,
@@ -97,5 +96,35 @@
             </div>
         </div>
     </form>
+    <script>
+    microsoftTeams.initialize();
+
+        submitHandler = (err, result) => {
+            console.log(`Submit handler - err: ${err}`);
+        };
+
+        function submit(type) {
+            let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline";
+                taskInfo.height = "@(TaskModelUIConstant.PoDecline.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PoDecline.Width)";
+
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+    </script>
 </body>
 
