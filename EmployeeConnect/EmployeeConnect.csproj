@@ -215,6 +215,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="attachment\ContentType.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\TaskModelUIConstant.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -232,7 +233,6 @@
     <Compile Include="Models\GNews.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
-    <Compile Include="Models\GNews.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
@@ -246,6 +246,11 @@
     <Content Include="bin\EmployeeConnect.pdb" />
     <Content Include="Content\Custom.css" />
     <Content Include="Content\eventandtrainingnew.css" />
+    <Content Include="Content\fonts\Location.PNG" />
+    <Content Include="Content\fonts\Shape.png" />
+    <Content Include="Content\fonts\Flag.png" />
+    <Content Include="Content\fonts\Time.PNG" />
+    <Content Include="Content\fonts\Website.PNG" />
     <Content Include="Content\index.css" />
     <Content Include="Content\index_Policies.css" />
     <Content Include="Content\index_Preferences.css" />
@@ -261,10 +266,12 @@
     <Content Include="Images\2.JPG" />
     <Content Include="Images\3.JPG" />
     <Content Include="Images\4.JPG" />
+    <Content Include="Images\Bootcamp Training Session.jfif" />
     <Content Include="Images\download.JPG" />
     <Content Include="Images\expense_icon.PNG" />
     <Content Include="Images\Human Resources.jpeg" />
     <Content Include="Images\ITFacilities.jpg" />
+    <Content Include="Images\MicrosoftBuild.jfif" />
     <Content Include="Images\Payment and benefits.jpg" />
     <Content Include="Images\purpleImage.JPG" />
     <Content Include="Images\Store Operations.jpg" />
@@ -316,15 +323,14 @@
     <Content Include="Views\EmployeeConnect\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TestData\Preferences\" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff2" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -17,6 +17,8 @@ namespace EmployeeConnect.Models
 
         [JsonProperty(PropertyName = "ETFlag")]
         public string ETFlag { get; set; }
+        [JsonProperty(PropertyName = "ETFlagImage")]
+        public string ETFlagImage { get; set; }
 
         [JsonProperty(PropertyName = "ETID")]
         public string ETID { get; set; }
@@ -54,6 +56,7 @@ namespace EmployeeConnect.Models
         [JsonProperty(PropertyName = "register")]
         public string Register { get; set; }
         public bool UserAdded { get; set; }
+        public bool ETMandatory { get; set; }
 
     }
 }
