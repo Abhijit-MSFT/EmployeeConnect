@@ -32,4 +32,17 @@ namespace EmployeeConnect.Models
         [JsonProperty("data")]
         public BotFrameworkCardValue<T> Data { get; set; }
     }
+    public class TaskModuleSubmitData<T>
+    {
+        [JsonProperty("commandId")]
+        public T commandId { get; set; }
+
+
+
+        [JsonProperty("data")]
+        public T Data { get; set; }
+
+        public T DataJson { get; set; }
+
+    }
 }

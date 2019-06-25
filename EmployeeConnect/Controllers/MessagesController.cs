@@ -15,6 +15,16 @@ using EmployeeConnect.Common;
 using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using EmployeeConnect.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Script.Serialization;
+using EmployeeConnect.Models;
+using System.Net;
+using System.Drawing;
+using System.Web.Caching;
 
 namespace EmployeeConnect.Controllers
 {
@@ -75,12 +85,44 @@ namespace EmployeeConnect.Controllers
                     };
                     return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "task/submit":
-                    // Handle submission of task module info
-                    // Run this on a task so that 
-                    ConnectorClient connectorclient = new ConnectorClient(new Uri(activity.ServiceUrl));
-                    Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
-                    connectorclient.Conversations.ReplyToActivity(reply);
+                    string data = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
+                    //string datajson = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).DataJson;
+                    switch (data)
+                    {
+                        case "close_button":
+                            break;
+                        default:
+                            int n = data.Length;
+                            string t = data.Substring(n - 4, 4);
+
+                            int x = Int32.Parse(t);
+                            x = x - 1231;
+                            string s;
+                            string r;
+                            bool b;
+                            b = data[0] == 'R' ? false : true;
+                            s = data[0] == 'R' ? "Removed" : "Added";
+                            r = data[0] == 'R' ? "false" : "true";
+                            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsandTraining_June.json";
+                            string json = File.ReadAllText(file);
+                            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                            if(jsonObj["EventsAndTraining"][x]["ETFlag"]=="E")
+                            {
+                                jsonObj["EventsAndTraining"][x]["ETAddRemoveFlag"] = s;
+                                jsonObj["EventsAndTraining"][x]["register"] = null;
+                            }
+                            else
+                            {
+                                jsonObj["EventsAndTraining"][x]["ETAddRemoveFlag"] = null;
+                                jsonObj["EventsAndTraining"][x]["register"] =r;
+                            }
+                            jsonObj["EventsAndTraining"][x]["UserAdded"] = b;
+                            string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+                            File.WriteAllText(file, output);
+                            break;
+                    }
                     break;
+                    
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
