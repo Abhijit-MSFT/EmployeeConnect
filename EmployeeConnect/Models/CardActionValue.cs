@@ -13,9 +13,6 @@ namespace EmployeeConnect.Models
 
         [JsonProperty("data")]
         public T Data { get; set; }
-
-        [JsonProperty("dat")]
-        public T Dataa { get; set; }
     }
 
     public class AdaptiveCardValue<T>
@@ -31,5 +28,20 @@ namespace EmployeeConnect.Models
     {
         [JsonProperty("data")]
         public BotFrameworkCardValue<T> Data { get; set; }
+    }
+
+    public class ActionDetails<T>
+    {
+        [JsonProperty("action")]
+        public object Action { get; set; }
+    }
+
+    public class TaskModuleSubmitData<T>
+    {
+        [JsonProperty("commandId")]
+        public T commandId { get; set; }
+
+        [JsonProperty("data")]
+        public T Data { get; set; }
     }
 }

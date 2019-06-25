@@ -81,6 +81,18 @@ namespace EmployeeConnect.Controllers
                     Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
                     connectorclient.Conversations.ReplyToActivity(reply);
                     break;
+                case "composeExtension/submitAction":
+                    string commandid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).commandId;
+                    taskInfo = GetTaskInfo(commandid);
+                    taskEnvelope = new Models.TaskEnvelope
+                    {
+                        Task = new Models.Task()
+                        {
+                            Type = Models.TaskType.Continue,
+                            TaskInfo = taskInfo
+                        }
+                    };
+                    return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }

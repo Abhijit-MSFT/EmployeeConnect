@@ -21,5 +21,9 @@
         public const string StoreOperationsTools = "store operations tools";
         public const string CreateTicket = "create ticket";
         public const string WifiRequest = "visitor's wi-fi request";
+        public const string ViewTicket = "view tickets";
+        public const string SetPrefrencesDone = "set preferences done";
+        public const string SetPrefrencesSkip = "set preferences skip";
+
     }
 }

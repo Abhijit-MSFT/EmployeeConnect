@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using System.Net;
 using System.Windows.Forms;
-
+using EmployeeConnect.Common;
 
 namespace EmployeeConnect.Helper
 {
@@ -26,16 +26,24 @@ namespace EmployeeConnect.Helper
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
-            card.content.title = "Top stories for you";
+            var buttonsList = new List<ListButton>();
+            card.content.title = "";
             NewsModel newsL = Helper.GetDataHelper.GetNews();
             Item item;
+            item = new Item();
+            item.title = "Top stories for you";
+            item.type = "section";
+            list.Add(item);
+            
             if (newsL != null)  //if it got the news
             {
                 var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
-                var LatestNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
+                var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
+
                 int MaxNewsCount = TrendingNews.Count();
-                if (MaxNewsCount > 3)
-                    MaxNewsCount = 3;
+                if (MaxNewsCount > 2)   //show 2 trending news
+                    MaxNewsCount = 2;
+
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
                     var news = TrendingNews.ElementAt(i);
@@ -56,22 +64,56 @@ namespace EmployeeConnect.Helper
 
                     list.Add(item);
                 }
+                item = new Item();
+                item.title = "Suggested stories";
+                item.type = "section";
+                list.Add(item);
+
+                MaxNewsCount = 0;
+                if (SuggestedNews.Count() > 0) //show 1 suggested news
+                    MaxNewsCount = 1; 
+                
+                for (int i = 0; i < MaxNewsCount; i++)
+                {
+                    var news = SuggestedNews.ElementAt(i);
+                    string subtitle = news.DetailedNews;
+                    item = new Item();
+                    item.title = news.NewsTitle;
+                    item.icon = news.NewsThumbnailUrl;
+                    item.id = news.NewsID;
+                    item.subtitle = subtitle;
+                    item.type = "resultItem";
+                    item.tap = new Tap()
+                    {
+                        type = "invoke",
+                        title = item.id,
+                        value = "{ \"type\": \"task/fetch\", \"data\": \"news:" + item.id.ToString() + "\"}"
+                    };
+
+                    list.Add(item);
+                }
 
                 //for View More
-                item = new Item();
+                /*item = new Item();
                 item.title = "View more";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
-                item.type = "resultItem";
-
+                item.icon = ApplicationSettings.BaseUrl + "/Images/whiteImage.png";
+                item.type = "content";
+                item.id = deepLinkTab("currNews", "news");
                 item.tap = new Tap()
                 {
                     type = "openUrl",
                     value = deepLinkTab("currNews", "news")
 
                 };
+                list.Add(item);*/
 
-                list.Add(item);
+                ListButton viewButton = new ListButton();
+                viewButton.type = "openUrl";
+                viewButton.title = "View more";
+                viewButton.value = deepLinkTab("currNews", "news");
+                buttonsList.Add(viewButton);
 
+                card.content.buttons = buttonsList.ToArray();
                 card.content.items = list.ToArray();
 
             }
@@ -112,9 +154,9 @@ namespace EmployeeConnect.Helper
 
                 item.tap = new Tap()
                 {
-                    /*type = "messageBack",
+                    type = "messageBack",
                     //title = "title",
-                    text = item.title + " policy"*/
+                    text = item.title + " policy"
 
 
                 };
@@ -317,31 +359,51 @@ namespace EmployeeConnect.Helper
 
             var card1 = new AdaptiveCard("1.0")
             {
+                            BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
                 Body = new List<AdaptiveElement>()
                 {
+                    //BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
                     new AdaptiveContainer()
                     {
+                     //   BackgroundImage = ApplicationSettings.BaseUrl + "/Images/signin_1.png",
                         Items = new List<AdaptiveElement>()
                         {
                             // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
                             new AdaptiveTextBlock()
                             {
+                                
                                 Text = "Welcome to Employee Connect",
                                 Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                
                             },
                             // Adaptive FactSet item makes it simple to display a series of facts (e.g. name/value pairs) in a tabular form
                            
                             // ImageSet allows for the inclusion of a collection images like a photogallery
                             new AdaptiveTextBlock()
                             {
-                                Text = "Please sign in",
+                                Text = "Please sign in to get started",
                                 Wrap = true ,// True if text is allowed to wrap
+                                
                             },
-                            new AdaptiveImage
+                            new AdaptiveTextBlock()
                             {
-                                        Url = new Uri("https://cdncontribute.geeksforgeeks.org/wp-content/uploads/apple.jpeg") //url to image
+                                Text = "Keep yourself posted \r\rabout the latest news",
+                                Wrap = true ,// True if text is allowed to wrap
+                                 Weight = AdaptiveTextWeight.Bolder,
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation.",
+                                Wrap = true ,// True if text is allowed to wrap
+                                
                             }
+                            //new AdaptiveImage
+                            //{
+                            //           // Url = new Uri("https://cdncontribute.geeksforgeeks.org/wp-content/uploads/apple.jpeg") //url to image
+                            //            Url = new Uri(ApplicationSettings.BaseUrl + "/Images/signin_1.png")
+
+                            //}
                         }
                     }
                 },
@@ -358,32 +420,47 @@ namespace EmployeeConnect.Helper
             };
             var card2 = new AdaptiveCard("1.0")
             {
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_2.png"),
                 Body = new List<AdaptiveElement>()
                 {
                     new AdaptiveContainer()
                     {
+                       
                         Items = new List<AdaptiveElement>()
                         {
-                            // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
-                            new AdaptiveTextBlock()
-                            {
-                                Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            // Adaptive FactSet item makes it simple to display a series of facts (e.g. name/value pairs) in a tabular form
+                            
+                        new AdaptiveTextBlock()
+                        {
+                            Text = "Welcome to Employee Connect",
+                            Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                            Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                        },
+                        // Adaptive FactSet item makes it simple to display a series of facts (e.g. name/value pairs) in a tabular form
                            
-                            // ImageSet allows for the inclusion of a collection images like a photogallery
+                        // ImageSet allows for the inclusion of a collection images like a photogallery
+                        new AdaptiveTextBlock()
+                        {
+                            Text = "Please sign in to get started",
+                            Wrap = true ,// True if text is allowed to wrap
+                        },
                             new AdaptiveTextBlock()
-                            {
-                                Text = "Please sign in",
-                                Wrap = true ,// True if text is allowed to wrap
-                            },
-                            new AdaptiveImage
-                             {
-                                        Url = new Uri("https://cdncontribute.geeksforgeeks.org/wp-content/uploads/apple.jpeg") //url to image
-                            }
+                        {
+                            Text = "Add events to your calender",
+                            Wrap = true ,// True if text is allowed to wrap
+                                Weight = AdaptiveTextWeight.Bolder
+
+                        },
+                        new AdaptiveTextBlock()
+                        {
+                            Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings.",
+                            Wrap = true ,// True if text is allowed to wrap
+                            MaxWidth = 2
                         }
+                                    
+                                   
+                                }
+                            // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
+                            
                     }
                 },
 
@@ -399,6 +476,7 @@ namespace EmployeeConnect.Helper
             };
             var card3 = new AdaptiveCard("1.0")
             {
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_3.png"),
                 Body = new List<AdaptiveElement>()
                 {
                     new AdaptiveContainer()
@@ -420,10 +498,24 @@ namespace EmployeeConnect.Helper
                                 Text = "Please sign in",
                                 Wrap = true ,// True if text is allowed to wrap
                             },
-                            new AdaptiveImage
-                             {
-                                        Url = new Uri("https://cdncontribute.geeksforgeeks.org/wp-content/uploads/apple.jpeg") //url to image
+                             new AdaptiveTextBlock()
+                            {
+                                Text = "Create and manage your tasks",
+                                Wrap = true ,// True if text is allowed to wrap
+                                Weight = AdaptiveTextWeight.Bolder
+
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "The apps identifies all your \r\r pending tasks and help \r\r you manage everything at \r\rone place.",
+                                Wrap = true ,// True if text is allowed to wrap
+                                
                             }
+                            //new AdaptiveImage
+                            // {
+                            //            //Url = new Uri("https://cdncontribute.geeksforgeeks.org/wp-content/uploads/apple.jpeg") //url to image
+                            //            Url = new Uri(ApplicationSettings.BaseUrl + "/Images/signin_3.png")
+                            //}
                         }
                     }
                 },
@@ -479,7 +571,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoiceSetInput()
                             {
-                                Id = "SetNewsTime",
+                                Id = "SetNewsChoice",
                                 Value = "1", // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
@@ -507,7 +599,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetNewsPreferredTime",
-                                Value = "2",
+                                //Value = "1",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
@@ -532,8 +624,8 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoiceSetInput()
                             {
-                                Id = "SetENTTime",
-                                Value = "3", // please set default value here
+                                Id = "SetENTChoice",
+                                Value = "1", // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
                                 {
@@ -560,7 +652,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetENTPreferredTime",
-                                Value = "4",
+                                //Value = "1",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
@@ -584,8 +676,8 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoiceSetInput()
                             {
-                                Id = "SetTaskRemindersTime",
-                                Value = "5", // please set default value here
+                                Id = "SetTaskRemindersChoice",
+                                Value = "1", // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
                                 {
@@ -612,7 +704,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetTaskReminderPreferredTime",
-                                Value = "6",
+                                //Value = "1",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
@@ -661,8 +753,8 @@ namespace EmployeeConnect.Helper
                 {
                      new AdaptiveChoiceSetInput()
                     {
-                        Id = "NewsCategory1",
-                        Value = "1", // please set default value here
+                        Id = "NewsCategory",
+                        //Value = "1", // please set default value here
                         Style = AdaptiveChoiceInputStyle.Expanded,
                         IsMultiSelect=true,// set the style of Choice set to compact
                         Wrap=true,
@@ -699,7 +791,7 @@ namespace EmployeeConnect.Helper
                      new AdaptiveChoiceSetInput()
                     {
                         Id = "NewsCategory2",
-                        Value = "2", // please set default value here
+                        //Value = "2", // please set default value here
                         Style = AdaptiveChoiceInputStyle.Expanded,
                         IsMultiSelect=true,// set the style of Choice set to compact
                         Wrap=true,
@@ -810,15 +902,13 @@ namespace EmployeeConnect.Helper
                     new AdaptiveSubmitAction()
                     {
                         Title = "Skip",
-                       // DataJson = "get the data"
+                        DataJson=@"{'Action':'" + Constants.SetPrefrencesSkip+"' }"
                     },
                      new AdaptiveSubmitAction()
                     {
                         Title = "Done",
-                       // DataJson="{ActionType: }",
-                       // Data=new PO()
-                       
-                    }
+                        DataJson=@"{'Action':'" + Constants.SetPrefrencesDone+"' }"
+                     }
                }
             };
 
@@ -898,6 +988,7 @@ namespace EmployeeConnect.Helper
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
+            var buttonsList = new List<ListButton>();
             card.content.title = "Upcoming events and Trainings";
             EandTModel EandTL = Helper.GetDataHelper.GetEandT();
             Item item;
@@ -932,17 +1023,22 @@ namespace EmployeeConnect.Helper
                         list.Add(item);
                     }
                 }
-                item = new Item();
-                item.type = "resultItem";
-                item.title = "View more";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
-                item.tap = new Tap()
-                {
-                    type = "openUrl",
-                    value = deepLinkTab("EandT", "Events and Trainings")
-                };
+                //item = new Item();
+                //item.type = "resultItem";
+                //item.title = "View more";
+                //item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                //item.tap = new Tap()
+                //{
+                //    type = "openUrl",
+                //    value = deepLinkTab("EandT", "Events and Trainings")
+                //};
+                ListButton viewButton = new ListButton();
+                viewButton.type = "openUrl";
+                viewButton.title = "View all events";
+                viewButton.value = deepLinkTab("EandT", "Events and Trainings");
+                buttonsList.Add(viewButton);
 
-                list.Add(item);
+                card.content.buttons = buttonsList.ToArray();
                 card.content.items = list.ToArray();
             }
             Attachment attachment = new Attachment();
@@ -959,6 +1055,7 @@ namespace EmployeeConnect.Helper
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
+            var buttonsList = new List<ListButton>();
             card.content.title = "Upcoming events and training for you";
 
 
@@ -1004,16 +1101,23 @@ namespace EmployeeConnect.Helper
             item = new Item();
             //item.icon = "##BaseURL##/Images/whiteimage.JPG";
 
-            item.type = "resultItem";
-            item.title = "View more";
-            //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
-            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
-            item.tap = new Tap()
-            {
-                type = "openUrl",
-                value = deepLinkTab("EandT", "Events and Trainings")
-            };
+            //item.type = "resultItem";
+            //item.title = "View more";
+            ////item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+            //item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            //item.tap = new Tap()
+            //{
+            //    type = "openUrl",
+            //    value = deepLinkTab("EandT", "Events and Trainings")
+            //};
+            
+            ListButton viewButton = new ListButton();
+            viewButton.type = "openUrl";
+            viewButton.title = "View all events";
+            viewButton.value = deepLinkTab("EandT", "Events and Trainings");
+            buttonsList.Add(viewButton);
 
+            card.content.buttons = buttonsList.ToArray();
             list.Add(item);
 
             card.content.items = list.ToArray();
@@ -1122,13 +1226,14 @@ namespace EmployeeConnect.Helper
                             new AdaptiveFactSet
                             {
                                 Separator = true,
+                                Spacing = AdaptiveSpacing.ExtraLarge,
                                 Facts =
                                 {
                                     // Describes a fact in a Adaptive FactSet as a key/value pair
                                     new AdaptiveFact
                                     {
                                         Title = "P.O. No.",
-                                        Value = POOrder.PoNumber
+                                        Value = "\t"+POOrder.PoNumber,
                                     },
                                     new AdaptiveFact
                                     {
@@ -1226,7 +1331,9 @@ namespace EmployeeConnect.Helper
         {
             //how to get data from json
             PO POList = Helper.GetDataHelper.GetPOs();
-            int POcount = 0, Icount = 0;
+            InventoryModel InvList = Helper.GetDataHelper.getInventoryData();
+
+            int POcount = 0, Icount = 0, Invcount = InvList.Inventory.Count();
             for (int i = 0; i < POList.PurchaseOrder.Count(); i++)
             {
                 if (POList.PurchaseOrder[i].PoStatus == "pending")
@@ -1247,7 +1354,7 @@ namespace EmployeeConnect.Helper
 
                         new AdaptiveTextBlock()
                         {
-                            Text = "You have " + (POcount+Icount) + " items pending for approval",
+                            Text = "You have " + (POcount+Icount+Invcount) + " items pending for approval",
                             Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                             Size = AdaptiveTextSize.Medium, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                         },
@@ -1260,6 +1367,12 @@ namespace EmployeeConnect.Helper
                          new AdaptiveTextBlock()
                         {
                             Text = Icount+ " invoices",
+                            Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
+                            Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                        },
+                          new AdaptiveTextBlock()
+                        {
+                            Text = Invcount+ " inventory",
                             Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
                             Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                         }
@@ -1287,6 +1400,8 @@ namespace EmployeeConnect.Helper
 
         public static Attachment Ticket()
         {
+            TicketModel tickets = GetDataHelper.getTicket();
+            Ticket firstTicket = tickets.ticket.FirstOrDefault();
             var card = new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>()
@@ -1304,19 +1419,19 @@ namespace EmployeeConnect.Helper
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "Employee Support",
+                        Text = firstTicket.ticketDept,
                         Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "Need to understand PTO Assignment",
+                        Text =firstTicket.description,
                         Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                     },
                     new AdaptiveTextBlock()
                     {
-                        Text = "High Priority!",
+                        Text = firstTicket.ticketPriority,
                         Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
                         Size = AdaptiveTextSize.Default,
                         Color= AdaptiveTextColor.Warning// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
@@ -1329,28 +1444,28 @@ namespace EmployeeConnect.Helper
                             // Describes a fact in a Adaptive FactSet as a key/value pair
                             new AdaptiveFact
                             {
-                                Title = "P.O. No.",
-                                Value = "PO NUMBER"
+                                Title = "Ticket No.",
+                                Value = firstTicket.ticketNo
                             },
                             new AdaptiveFact
                             {
-                                Title = "Description",
-                                Value = "Backlog"
+                                Title = "Date Created",
+                                Value = firstTicket.ticketCreateDate
                             },
                             new AdaptiveFact
                             {
-                                Title = "Vendor Name",
-                                Value = "Matt Hidinger"
+                                Title = "Assigned To",
+                                Value = firstTicket.ticketAssignedTo
                             },
                             new AdaptiveFact
                             {
-                                Title = "Vendor No.",
-                                Value = "Not set"
+                                Title = "ETA date",
+                                Value = firstTicket.ticketETADate
                             },
                             new AdaptiveFact
                             {
-                                Title = "Amount",
-                                Value = "Not set"
+                                Title = "Status",
+                                Value = firstTicket.ticketStatus
                             },
 
                         }
@@ -1361,11 +1476,7 @@ namespace EmployeeConnect.Helper
                 Actions = new List<AdaptiveAction>()
                 {
                     // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Remind me later",
-                       // DataJson = "get the data"
-                    },
+                   
                      new  AdaptiveSubmitAction()
                     {
                         Title = "Review",
@@ -1383,17 +1494,24 @@ namespace EmployeeConnect.Helper
         }
         public static Attachment HumanResourceCard()
         {
+
+
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Here are the tools under your HR department";
-            string[] HRtools = { "Create business letter", "Create ticket", "Request leave", "Store Operations" };
-            string[] HRtoolsSub = { "Create a business letter within a predesigned color and template.", "For all HR tickets, the ticket type is being set as Employee Support.", "Request leave and check your status in the Leave application.", "View human resource policies to stay updated." };
+            string[] HRtools = { "Create business letter", "Create ticket", "Request leave", "View policies" };
+            string[] HRtoolsSub = { "Create a business letter within a predesigned color and template.", "For all HR tickets, the ticket type is being set as Employee Support.", "Request leave and check your status in the Leave application.", "Identify the purpose and objectives of Human Resources department." };
+            string[] HRicons = {"/Images/createbusinessletter.JPG","/Images/createticket.JPG","/Images/requestleave.JPG","/Images/viewpolicies.JPG" };
             for (int i = 0; i < HRtools.Count(); i++)
             {
+
                 var item = new Item();
-                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.icon = ApplicationSettings.BaseUrl + HRicons[i];
                 item.id = i.ToString();
+
+
                 item.type = "resultItem";
                 item.title = HRtools[i];
                 item.subtitle = HRtoolsSub[i];
@@ -1414,7 +1532,6 @@ namespace EmployeeConnect.Helper
                         text = item.title
                     };
                 }
-
                 list.Add(item);
             }
             card.content.items = list.ToArray();
@@ -1430,24 +1547,27 @@ namespace EmployeeConnect.Helper
         }
         public static Attachment ITFacilitiesCard()
         {
+
+
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Here are the tools under your IT department";
             string[] ITtools = { "Raise IT Support Ticket", "Make visitor request", "Event IT Support request", "Cafeteria services app" };
-            string[] ITtoolsSub = { "Create a business letter within a predesigned color and template.", "Fill the request form for short term visitors.", "Request leave and check your status in the Leave application.", "View human resource policies to stay updated." };
-
+            string[] ITtoolsSub = { "Submit your support case to review and respond.", "Fill a request form for short-term visitors.", "Fill out this form to request any equipment for events.", "Employees can order and pay here without waiting in long queues." };
+            string[] ITicons = {"/Images/itsupportticket.JPG","/Images/makewifirequest.JPG", "/Images/eventitsupport.JPG","/Images/cafeteriaservices.JPG"};
             for (int i = 0; i < ITtools.Count(); i++)
             {
 
                 var item = new Item();
-                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.icon = ApplicationSettings.BaseUrl + ITicons[i];
                 item.id = i.ToString();
                 item.title = ITtools[i];
                 item.subtitle = ITtoolsSub[i];
 
                 item.type = "resultItem";
-                if (ITtools[i].Equals("Visitor's wi-fi request"))
+                if (ITtools[i].Equals("Make visitor request"))
                 {
                     item.tap = new Tap()
                     {
@@ -1486,37 +1606,20 @@ namespace EmployeeConnect.Helper
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Here are the tools under your PaymentAndBenefits department";
-
-            for (int i = 0; i < 4; i++)
+            string[] PBTools = { "Download payslip", "Create finance ticket", "Submit benefit claim", "View benefit policies" };
+            string[] PBToolsSub = { "View online payslips and full payment histories.", "Open a support ticket with the Finance ", "Submit a claim from your account to start the process.", "Read common queries about servicing your policy." };
+            string[] PBicons = {"/Images/downloadpayslip.JPG","/Images/financeticket.JPG","/Images/benefitclaim.JPG","/Images/viewpolicies.JPG" };
+            for (int i = 0; i < PBTools.Count(); i++)
             {
 
                 var item = new Item();
-                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.icon = ApplicationSettings.BaseUrl + PBicons[i];
                 item.id = i.ToString();
 
-
+                item.title = PBTools[i];
+                item.subtitle = PBToolsSub[i];
                 item.type = "resultItem";
-                if (i == 0)
-                {
-                    item.title = "Download payslip";
-                    item.subtitle = "Create a business letter within a predesigned color and template.";
-                }
-                else if (i == 1)
-                {
-                    item.title = "Create finance ticket";
-                    item.subtitle = "For all HR tickets, the ticket type is being set as Employee Support.";
-                }
-                else if (i == 2)
-                {
-                    item.title = "Submit benefit claim";
-                    item.subtitle = "Request leave and check your status in the Leave application.";
-                }
-                else
-                {
-                    item.title = "View benefit policies";
-                    item.subtitle = "View human resource policies to stay updated.";
-                }
-
                 item.tap = new Tap()
                 {
                     type = "messageBack",
@@ -1545,30 +1648,23 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             card.content.title = "Here are the tools under your Store Operations department.";
 
-            for (int i = 0; i < 3; i++)
+            string[] STools = { "Inventory request", "Timesheet", "Store info" };
+            string[] SToolsSub = { "Inventory form to request supplies.", "Weekly timesheet setup in order ", "Your store information." };
+            string[] Sicons = {"/Images/inventoryrequest.JPG","/Images/timesheet.JPG","/Images/storeinfo.JPG" };
+
+            for (int i = 0; i < STools.Count(); i++)
             {
 
                 var item = new Item();
-                item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                item.icon = ApplicationSettings.BaseUrl + Sicons[i];
                 item.id = i.ToString();
 
 
                 item.type = "resultItem";
-                if (i == 0)
-                {
-                    item.title = "Inventory request";
-                    item.subtitle = "Create a business letter within a predesigned color and template.";
-                }
-                else if (i == 1)
-                {
-                    item.title = "Timesheet";
-                    item.subtitle = "For all HR tickets, the ticket type is being set as Employee Support.";
-                }
-                else
-                {
-                    item.title = "Store info";
-                    item.subtitle = "Request leave and check your status in the Leave application.";
-                }
+
+                item.title = STools[i];
+                item.subtitle = SToolsSub[i];
 
                 item.tap = new Tap()
                 {

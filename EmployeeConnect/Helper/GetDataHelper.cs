@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
 using System.Net;
+using Chronic;
 
 namespace EmployeeConnect.Helper
 {
@@ -67,7 +68,33 @@ namespace EmployeeConnect.Helper
             }
             return null;
         }
+        public static TicketModel getTicket()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Ticket.json";
+            TicketModel ticket = new TicketModel();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            ticket = (new JavaScriptSerializer().Deserialize<TicketModel>(json));
+            return ticket;
+        }
 
+        public static InventoryModel getInventoryData()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Inventory.json";
+            InventoryModel inventory = new InventoryModel();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            inventory = (new JavaScriptSerializer().Deserialize<InventoryModel>(json));
+            return inventory;
+        }
+
+        /*public static UserPreferences setPreferencesData(string json)
+        {
+            //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Inventory.json";
+            //InventoryModel inventory = new InventoryModel();
+            //string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            UserPreferences pref = new UserPreferences();
+            pref = (new JavaScriptSerializer().Deserialize<UserPreferences>(json));
+            return pref;
+        }*/
     }
 }
 

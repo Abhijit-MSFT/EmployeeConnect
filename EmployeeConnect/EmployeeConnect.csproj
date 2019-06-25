@@ -229,13 +229,14 @@
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
     <Compile Include="MessageExtension.cs" />
-    <Compile Include="Models\GNews.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
     <Compile Include="Models\GNews.cs" />
+    <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\UPreferences.cs" />
     <Compile Include="Models\PurchaseOrders.cs" />
     <Compile Include="Models\TaskModel.cs" />
@@ -261,15 +262,33 @@
     <Content Include="Images\2.JPG" />
     <Content Include="Images\3.JPG" />
     <Content Include="Images\4.JPG" />
+    <Content Include="Images\benefitclaim.JPG" />
+    <Content Include="Images\cafeteriaservices.JPG" />
+    <Content Include="Images\createbusinessletter.JPG" />
+    <Content Include="Images\createticket.JPG" />
     <Content Include="Images\download.JPG" />
+    <Content Include="Images\downloadpayslip.JPG" />
+    <Content Include="Images\eventitsupport.JPG" />
     <Content Include="Images\expense_icon.PNG" />
+    <Content Include="Images\financeticket.JPG" />
     <Content Include="Images\Human Resources.jpeg" />
+    <Content Include="Images\inventoryrequest.JPG" />
     <Content Include="Images\ITFacilities.jpg" />
+    <Content Include="Images\itsupportticket.JPG" />
+    <Content Include="Images\makewifirequest.JPG" />
     <Content Include="Images\Payment and benefits.jpg" />
     <Content Include="Images\purpleImage.JPG" />
+    <Content Include="Images\requestleave.JPG" />
+    <Content Include="Images\signIn_1.png" />
+    <Content Include="Images\signIn_2.png" />
+    <Content Include="Images\signIn_3.png" />
     <Content Include="Images\Store Operations.jpg" />
+    <Content Include="Images\storeinfo.JPG" />
     <Content Include="Images\submit.JPG" />
+    <Content Include="Images\timesheet.JPG" />
     <Content Include="Images\timesheet_icon.PNG" />
+    <Content Include="Images\viewpolicies.JPG" />
+    <Content Include="Images\whiteImage.png" />
     <Content Include="imgs\1.png" />
     <Content Include="imgs\2.png" />
     <Content Include="imgs\3.jpg" />
@@ -297,8 +316,10 @@
     <Content Include="imgs\Technology.jpg" />
     <Content Include="imgs\Travel.jpg" />
     <Content Include="js\index.js" />
+    <Content Include="Manifest\color.png" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
+    <Content Include="Manifest\outline.png" />
     <Content Include="obj\Debug\EmployeeConnect.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\teamsapp.js" />
     <Content Include="Web.config">
@@ -316,15 +337,13 @@
     <Content Include="Views\EmployeeConnect\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TestData\Preferences\" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Manifest\manifest.json" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff2" />
+    <Content Include="Manifest\manifest.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -352,6 +371,7 @@
     <Content Include="Views\EmployeeConnect\TicketComplete.cshtml" />
     <Content Include="Views\EmployeeConnect\Policies.cshtml" />
     <Content Include="TestData\Preferences\Userpreferences.json" />
+    <Content Include="TestData\Inventory.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

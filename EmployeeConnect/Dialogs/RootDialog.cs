@@ -107,16 +107,20 @@ namespace EmployeeConnect.Dialogs
                         card = Helper.CardHelper.StoreOperationsCard();
                         reply.Attachments.Add(card);
                         break;
-                    case Common.Constants.CreateTicket:
-                        reply.Text = "This functionality is under construction";
-                        //deeplink to createTicket
-                        break;
-                    case Common.Constants.WifiRequest:
-                        //deeplink to createTicket
-                        reply.Text = "This functionality is under construction";
+                    //case Common.Constants.CreateTicket:
+                    //    reply.Text = "This functionality is under construction";
+                    //    //deeplink to createTicket
+                    //    break;
+                    //case Common.Constants.WifiRequest:
+                    //    //deeplink to createTicket
+                    //    reply.Text = "This functionality is under construction";
+                    //    break;
+                    case Common.Constants.ViewTicket:
+                        card = Helper.CardHelper.Ticket();
+                        reply.Attachments.Add(card);
                         break;
                     default:
-                        if (message.Trim().StartsWith("e"))
+                        /*if (message.Trim().StartsWith("e"))
                         {         //if message was a number,it is a newsId [.StartsWith("E")]
 
                             card = Helper.CardHelper.GetETbyID(message.Trim());
@@ -137,11 +141,13 @@ namespace EmployeeConnect.Dialogs
                             break;
                         }
                         else
-                        {
-                            //reply.Text = message;
-                            reply.Text = "I dont have that info111";
+                        {*/
+                        //reply.Text = message;
+                        
+                            reply.Text = "I dont have that info";
 
-                        }
+                        //}
+
                         break;
                 }
 
@@ -150,6 +156,8 @@ namespace EmployeeConnect.Dialogs
             }
             else if (activity.Value != null)
             {
+                //just to test
+                //EmployeeConnect.Models.UserPreferences pref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
                 await HandleActions(context, activity);
                 return;
             }
@@ -177,33 +185,31 @@ namespace EmployeeConnect.Dialogs
 
         private async Task HandleActions(IDialogContext context, Activity activity)
         {
-            //var actionDetails = JsonConvert.DeserializeObject<ActionDetails>(activity.Value.ToString());
-            //var userDetails = await GetCurrentUserDetails(activity);
-            //var type = actionDetails.ActionType;
-
-            //Attachment card = null;
-
-            //switch (type)
-            //{
-            //    case Constants.ShowDetailedRoster:
-            //        card = await GetDetailedRoasterCard(activity, userDetails);
-            //        break;
-            //    case Constants.NextWeekRoster:
-            //        card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-            //        break;
-            //    case Constants.NextMonthRoster:
-            //        card = CardHelper.GetMonthlyRosterCard();
-            //        break;
-            //    case Constants.WeatherCard:
-            //        card = await GetWeatherCard(activity);
-            //        break;
-            //    case Constants.CurrencyCard:
-            //        card = await GetCurrencyCard(activity);
-            //        break;
-            //}
-
+            var actionDetails = JsonConvert.DeserializeObject<Models.ActionDetails<string>>(activity.Value.ToString());
+            var userDetails = await GetCurrentUserDetails(activity);
+            switch (actionDetails.Action)
+            {
+                case Constants.SetPrefrencesDone:   //Press Done button on set preferences
+                    //EmployeeConnect.Models.UserPreferences pref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
+                    //pref.UserName = userDetails.Name;
+                    break;
+                case Constants.SetPrefrencesSkip:   //Press Skip button on set preferences
+                    break;
+                    //break;
+                    //    case Constants.NextWeekRoster:
+                    //        card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
+                    //        break;
+                    //    case Constants.NextMonthRoster:
+                    //        card = CardHelper.GetMonthlyRosterCard();
+                    //        break;
+                    //    case Constants.WeatherCard:
+                    //        card = await GetWeatherCard(activity);
+                    //        break;
+                    //    case Constants.CurrencyCard:
+                    //        card = await GetCurrencyCard(activity);
+                    //        break;
+            }
             var reply = context.MakeMessage();
-            // reply.Attachments.Add(card);
             await context.PostAsync(reply);
             return;
         }
