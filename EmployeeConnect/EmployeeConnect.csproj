@@ -229,10 +229,8 @@
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
     <Compile Include="MessageExtension.cs" />
-    <Compile Include="Models\GNews.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
-    <Compile Include="Models\GNews.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
@@ -297,8 +295,8 @@
     <Content Include="imgs\Technology.jpg" />
     <Content Include="imgs\Travel.jpg" />
     <Content Include="js\index.js" />
-    <Content Include="Manifest\contoso20x20.png" />
-    <Content Include="Manifest\contoso96x96.png" />
+    <Content Include="Manifest\color.png" />
+    <Content Include="Manifest\outline.png" />
     <Content Include="obj\Debug\EmployeeConnect.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\teamsapp.js" />
     <Content Include="Web.config">
@@ -316,11 +314,9 @@
     <Content Include="Views\EmployeeConnect\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TestData\Preferences\" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff" />
