@@ -24,6 +24,7 @@
         public const string ViewTicket = "view tickets";
         public const string SetPrefrencesDone = "set preferences done";
         public const string SetPrefrencesSkip = "set preferences skip";
+        public const string TicketCancel = "Cancel ticket";
 
     }
 }

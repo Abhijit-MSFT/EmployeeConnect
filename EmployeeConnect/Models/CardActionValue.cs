@@ -34,6 +34,10 @@ namespace EmployeeConnect.Models
     {
         [JsonProperty("action")]
         public object Action { get; set; }
+
+        [JsonProperty("TicketNo")]
+        public string TicketNo { get; set; }
+
     }
 
     public class TaskModuleSubmitData<T>

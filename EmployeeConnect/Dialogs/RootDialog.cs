@@ -6,6 +6,7 @@ using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -63,20 +64,21 @@ namespace EmployeeConnect.Dialogs
                         break;
                     case Common.Constants.UpcomingEventsTraining:
                         card = Helper.CardHelper.getETCard();
-                        //reply.Text = "Upcoming events and training";
                         reply.Attachments.Add(card);
                         break;
-                    //case Common.Constants.ReviewTasks:
-                    //    card = Helper.CardHelper.ReviewTasks();
-                    ///    reply.Attachments.Add(card);
-                    //    break;
                     case Common.Constants.PendingApprovals:
                         card = Helper.CardHelper.PendingApprovals();
-                        reply.Attachments.Add(card);
+                        if (card != null)
+                            reply.Attachments.Add(card);
+                        else
+                            reply.Text = "No pending approvals to show.";
                         break;
                     case Common.Constants.PendingTasks:
                         card = Helper.CardHelper.PendingTasks();
-                        reply.Attachments.Add(card);
+                        if (card != null)
+                            reply.Attachments.Add(card);
+                        else
+                            reply.Text = "No pending submissions to show.";
                         break;
                     case Common.Constants.TrendingNews:
                         card = Helper.CardHelper.getNewsCard();
@@ -107,48 +109,16 @@ namespace EmployeeConnect.Dialogs
                         card = Helper.CardHelper.StoreOperationsCard();
                         reply.Attachments.Add(card);
                         break;
-                    //case Common.Constants.CreateTicket:
-                    //    reply.Text = "This functionality is under construction";
-                    //    //deeplink to createTicket
-                    //    break;
-                    //case Common.Constants.WifiRequest:
-                    //    //deeplink to createTicket
-                    //    reply.Text = "This functionality is under construction";
-                    //    break;
                     case Common.Constants.ViewTicket:
                         card = Helper.CardHelper.Ticket();
-                        reply.Attachments.Add(card);
+                        if (card != null)
+                            reply.Attachments.Add(card);
+                        else
+                            reply.Text = "No tickets to show.";
                         break;
                     default:
-                        /*if (message.Trim().StartsWith("e"))
-                        {         //if message was a number,it is a newsId [.StartsWith("E")]
-
-                            card = Helper.CardHelper.GetETbyID(message.Trim());
-                            if (card == null)
-                                reply.Text = "I dont have that info";
-                            else
-                                reply.Attachments.Add(card);
-                            break;
-                        }
-                        if (message.Trim().All(char.IsDigit))
-                        {         //if message was a number,it is a newsId 
-                            reply.Text = message.Trim();
-                            card = Helper.CardHelper.GetNewsCardbyId(message.Trim());
-                            if (card == null)
-                                reply.Text = "I dont have that info";
-                            else
-                                reply.Attachments.Add(card);
-                            break;
-                        }
-                        else
-                        {*/
-                        //reply.Text = message;
-                        
-                            reply.Text = "I dont have that info";
-
-                        //}
-
-                        break;
+                        //dont reply anything
+                        return;
                 }
 
                 await context.PostAsync(reply);
@@ -156,8 +126,6 @@ namespace EmployeeConnect.Dialogs
             }
             else if (activity.Value != null)
             {
-                //just to test
-                //EmployeeConnect.Models.UserPreferences pref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
                 await HandleActions(context, activity);
                 return;
             }
@@ -187,29 +155,24 @@ namespace EmployeeConnect.Dialogs
         {
             var actionDetails = JsonConvert.DeserializeObject<Models.ActionDetails<string>>(activity.Value.ToString());
             var userDetails = await GetCurrentUserDetails(activity);
+            var reply = context.MakeMessage();
             switch (actionDetails.Action)
             {
                 case Constants.SetPrefrencesDone:   //Press Done button on set preferences
                     //EmployeeConnect.Models.UserPreferences pref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
                     //pref.UserName = userDetails.Name;
-                    break;
+                    return;
                 case Constants.SetPrefrencesSkip:   //Press Skip button on set preferences
+                    reply.Text = "";
+                    return;
+                case Constants.TicketCancel:        //cancels the ticket with a ticket number:removes it from Ticket.json
+                    string ticketno = actionDetails.TicketNo;
+                    if(cancelTicket(ticketno)==true)
+                        reply.Text = "Ticket deleted successfully";
+                    else
+                        reply.Text = "Ticket not available";
                     break;
-                    //break;
-                    //    case Constants.NextWeekRoster:
-                    //        card = await CardHelper.GetWeeklyRosterCard(userDetails.UserPrincipalName);
-                    //        break;
-                    //    case Constants.NextMonthRoster:
-                    //        card = CardHelper.GetMonthlyRosterCard();
-                    //        break;
-                    //    case Constants.WeatherCard:
-                    //        card = await GetWeatherCard(activity);
-                    //        break;
-                    //    case Constants.CurrencyCard:
-                    //        card = await GetCurrencyCard(activity);
-                    //        break;
             }
-            var reply = context.MakeMessage();
             await context.PostAsync(reply);
             return;
         }
@@ -233,5 +196,25 @@ namespace EmployeeConnect.Dialogs
 
         }
 
+        //Cancels the ticket with ticketNo,returns true if ticket removed
+        public bool cancelTicket(string ticketNo)
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Ticket.json";
+            string json = File.ReadAllText(file);
+
+            Newtonsoft.Json.Linq.JObject ticketObj = Newtonsoft.Json.Linq.JObject.Parse(json);
+            for (int i = 0; i < ticketObj["ticket"].Count(); i++)
+            {
+                string str = ticketObj["ticket"][i]["ticketNo"].ToString();
+                if (ticketObj["ticket"][i]["ticketNo"].ToString().Equals(ticketNo))
+                {
+                    ticketObj["ticket"][i].Remove();
+                    string output = Newtonsoft.Json.JsonConvert.SerializeObject(ticketObj, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(file, output);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

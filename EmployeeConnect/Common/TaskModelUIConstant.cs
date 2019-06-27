@@ -27,7 +27,7 @@ namespace EmployeeConnect.Common
         new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");    
 
         public static UIConstants ETCard { get; set; } =
-        new UIConstants(500, 350, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");
+        new UIConstants(750, 600, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");
     }
 public class UIConstants
     {
