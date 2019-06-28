@@ -17,13 +17,10 @@ namespace EmployeeConnect.Models
         public string Title { get; set; }
 
         [JsonProperty("card")]
-        public Attachment Card { get; set; }
+        public object Card { get; set; }
 
         [JsonProperty("height")]
         public object Height { get; set; }
-        //YG
-        [JsonProperty("card")]
-        public object Card { get; set; }
 
         [JsonProperty("width")]
         public object Width { get; set; }
@@ -32,9 +29,6 @@ namespace EmployeeConnect.Models
         public string FallbackUrl { get; set; }
         [JsonProperty("botcompletionid")]
         public string completionBotId { get; set; }
-
-        [JsonProperty("card")]
-        public object Card { get; set; }
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this);

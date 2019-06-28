@@ -38,22 +38,37 @@ namespace EmployeeConnect.Helper
             return POs;
 
         }
-        public static GNews GetNewsData()
+        public  static EandTModel UpdateEandT(string eventID)
         {
-            string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
-            using (WebClient client = new WebClient())
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
+            EandTModel eventsTrainings = new EandTModel();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            eventsTrainings = (new JavaScriptSerializer().Deserialize<EandTModel>(json));
+            foreach(var item in eventsTrainings.EventsAndtraining)
             {
-                GNews news = null;
-                string json = null;
-
-                json = client.DownloadString(url);
-                news = (new JavaScriptSerializer().Deserialize<GNews>(json));
-                //return news;
-                return news.status == "ok" ? news : null;
+                if(item.ETID == eventID)
+                {
+                    item.UserAdded = true;
+                }
             }
+            File.WriteAllText(file,json);
+            return eventsTrainings;
+
         }
+        //public static GNews GetNewsData()
+        //   {
+        //       string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
+        //       using (WebClient client = new WebClient())
+        //       {
+        //           GNews news = null;
+        //           string json = null;
 
-
+        //           json = client.DownloadString(url);
+        //           news = (new JavaScriptSerializer().Deserialize<GNews>(json));
+        //           //return news;
+        //           return news.status == "ok" ? news : null;
+        //       }
+        // }
 
     }
 }

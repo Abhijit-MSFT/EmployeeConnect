@@ -73,7 +73,7 @@
                     <div class="two-btn">
                         <button type="submit" class="Close">Close</button>
                         @*<button type="button" class="Close" onclick="closeModel()">Close</button>*@
-                        <button type="button" class="Edit" onclick="submit('createticket')">Edit</button>
+                        <button type="button" class="Edit" onclick="submitTicketComplete('createticket')">Edit</button>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
            // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
-        function submit(type) {
+        function submitTicketComplete(type) {
 
             debugger;
             let taskInfo = {

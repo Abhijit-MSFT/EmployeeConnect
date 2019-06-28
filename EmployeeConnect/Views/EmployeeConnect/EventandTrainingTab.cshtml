@@ -72,7 +72,17 @@
                                     <div class="card custom-card">
                                         <div class="card-header header-flag">
                                             <span class="flag"></span>
-                                            <span class="event">Event</span>
+                                            <span class="event">
+                                                @if (item.ETFlag == "E")
+                                                {
+                                                <span>Event</span>
+                                                }
+                                                else
+                                                {
+                                                   <span>Training</span>
+                                                }
+
+                                            </span>
                                         </div>
 
                                         <div class="card-body" onclick="submit('@item.ETID');">
@@ -95,7 +105,7 @@
 
                 </div>
 
-                <div class="row">
+                @*<div class="row">
                     <div class="col-12">
                         <div class="card-deck custom-card-deck">
                             <div class="col-2">
@@ -137,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
         <div class="row header2">
@@ -151,186 +161,51 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-deck custom-card-deck2">
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="flag"></span>
-                                <span class="event">Event</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    Microsoft E3 briefing
+                    @foreach (var item in Model.UpcomingEventGrid)
+                    {
+                        <div class="col-2">
+                            <div class="card custom-card2">
+                                <div class="card-header header-flag">
+                                    <span class="flag"></span>
+                                    <span class="event">
+                                        @if (item.ETFlag == "E")
+                                        {
+                                            <span>Event</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Training</span>
+                                        }
+                                    </span>
                                 </div>
-                                <div class="time-icon2">
-                                    <div class="event-time for-header2-dateandtime">
-                                        Wed, 15 May 2019, 10:30 AM - 05:00 PM
+                                <div class="card-body">
+                                    <div class="card-title main-title">
+                                        @Html.DisplayFor(modelItem => item.ETTitle)
                                     </div>
-                                </div>
-                                <div class="web-icon2">
-                                    <div class="web for-header2-stream">Online stream</div>
-                                </div>
-                                <div class="cal-icon">
-                                    <div class="cal for-header2-cal">Add to calendar</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="flag"></span>
-                                <span class="event">Event</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    Microsoft E3 briefing
-                                </div>
-                                <div class="time-icon2">
-                                    <div class="event-time for-header2-dateandtime">
-                                        Wed, 15 May 2019, 10:30 AM - 05:00 PM
+                                    <div class="time-icon2">
+                                        <div class="event-time for-header2-dateandtime">
+                                            @Html.DisplayFor(modelItem => item.ETStartDate)
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="location-icon">
-                                    <div class="location for-header2-loc">Las Vegas</div>
-                                </div>
-                                <div class="cal-icon">
-                                    <div class="cal for-header2-cal">Add to calendar</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="badge-icon"></span>
-                                <span class="event">Training</span>
-                                <span class="star">
-                                    <span class="featured">Featured</span>
-                                </span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    Microsoft Business training program
-                                </div>
-                                <div class="time-icon2">
-                                    <div class="event-time for-header2-dateandtime">
-                                        Fri, 17 May 2019, 10:00 AM - 12:00 PM
+                                    <div class="web-icon2">
+                                        <div class="web for-header2-stream"> @Html.DisplayFor(modelItem => item.ETType)</div>
                                     </div>
-                                </div>
-                                <div class="location-icon">
-                                    <div class="location for-header2-loc">
-                                        Online stream and Seattle
-                                    </div>
-                                </div>
-                                <div>
-                                    <button type="button" class="register">Register</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="flag"></span>
-                                <span class="event">Event</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    Inside Xbox: Live E3
-                                </div>
-                                <div class="time-icon2">
-                                    <div class="event-time for-header2-dateandtime">
-                                        Wed, 22 May 2019, 04:30 - 05:00 PM
-                                    </div>
-                                </div>
-                                <div class="location-icon">
-                                    <div class="location">Online stream and Las Vegas</div>
-                                </div>
-                                <div class="cal-icon icon-cal">
-                                    <div class="cal for-header2-cal">Add to calendar</div>
-                                </div>
-                                <div class="check-icon-added added-icon">
-                                    <div class="check-added for-header2-cal">
-                                        Added to calendar
+                                    <div class="cal-icon">
+                                        <div class="cal for-header2-cal" onclick="AddToMyEventsGrid('@item.ETID')">Add to calendar</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    }
                     </div>
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="flag"></span>
-                                <span class="event">Event</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    Microsoft Inspire
-                                </div>
-                                <div class="time-icon2">
-                                    <div class="event-time for-header2-dateandtime">
-                                        Thu, 23 May 2019, 10:30 - 11:00 AM
-                                    </div>
-                                </div>
-                                <div class="location-icon">
-                                    <div class="location for-header2-loc">BLR campus</div>
-                                </div>
-                                <div class="cal-icon">
-                                    <div class="cal for-header2-cal">Add to calendar</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <!-- add data here -->
-                    </div>
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="flag"></span>
-                                <span class="event">Event</span>
-                                <span class="star">
-                                    <span class="featured">Featured</span>
-                                </span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    SharePoint Conference
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="flag"></span>
-                                <span class="event">Event</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    Satya's Corenote at Microsoft Ready
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="card custom-card2">
-                            <div class="card-header header-flag">
-                                <span class="flag"></span>
-                                <span class="event">Event</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title main-title">
-                                    Technology fair
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <script>
+    function AddToMyEventsGrid(value) {
+        debugger;
+                    location.href = '@Url.Action("EventAndTrainingTab","Home")?id='+value;
+}
     microsoftTeams.initialize();
 
         submitHandler = (err, result) => {

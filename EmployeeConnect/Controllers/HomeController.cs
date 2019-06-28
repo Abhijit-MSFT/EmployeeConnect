@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
+using Microsoft.Ajax.Utilities;
+using System.Web.Script.Serialization;
+using EO.Internal;
 
 namespace EmployeeConnect.Controllers
 {
@@ -71,9 +75,35 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-        [Route("ticketcomplete")]
-        public ActionResult TicketComplete()
+        JObject globalTicketData = new JObject();
+        [Route("createticketindb")]
+        public string CreateTicketindb(string category, string description, string prioritySelected)
         {
+            int ticketNumber = 000000324567;
+            DateTime currentDate = DateTime.Now;
+            CultureInfo invC = CultureInfo.InvariantCulture;
+            currentDate.ToString("f", invC);
+            JObject data = new JObject(
+                new JProperty("Category", category),
+                new JProperty("Description", description),
+                new JProperty("Priority", prioritySelected),
+                new JProperty("TicketNo", ticketNumber),
+                new JProperty("Date", currentDate));
+            globalTicketData = data;
+            var objectData = data.ToString();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var parsedData = js.Serialize(objectData);
+            return parsedData;
+        }
+
+
+        [Route("ticketcomplete")]
+        public ActionResult TicketComplete(int ticketNoId)
+        {
+            var currentTicketData = globalTicketData.ToString();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+           // var parsedData = js.Serialize(currentTicketData);
+
             return View();
         }
 
@@ -137,13 +167,31 @@ namespace EmployeeConnect.Controllers
         }
 
         [Route("EventandTrainingTab")]
-        public ActionResult EventandTrainingTab()
+        public ActionResult EventandTrainingTab(string id)
         {
             EandTModel eventsListData = new EandTModel();
             eventsListData = GetDataHelper.GetEandT();
+            foreach(var item in eventsListData.EventsAndtraining)
+            {
+                if(item.ETID == id)
+                {
+                    eventsListData = GetDataHelper.UpdateEandT(item.ETID);
+                    //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
+                }
+            }
             EventsAndTraining[] EventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
-             EventGrid = eventsListData.EventsAndtraining.Where(i => i.ETFlag == "E").ToArray();
+            EventsAndTraining[] UpcomingEventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
+            EventsAndTraining[] TrainingGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
+            EventsAndTraining[] UpcomingTrainingGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
+            TrainingGrid = eventsListData.EventsAndtraining.Where(i => i.UserAdded == true).ToArray();
+            UpcomingTrainingGrid = eventsListData.EventsAndtraining.Where(i => i.UserAdded == false).ToArray();
+            EventGrid = eventsListData.EventsAndtraining.Where(i => i.ETAddRemoveFlag == "Added").ToArray();
+            UpcomingEventGrid = eventsListData.EventsAndtraining.Where(i => i.ETAddRemoveFlag == "Removed").
+                                                                Where(i => i.UserAdded == false).ToArray();
+            EventGrid = TrainingGrid;
+            UpcomingEventGrid = UpcomingTrainingGrid;
             eventsListData.EventGrid = EventGrid;
+            eventsListData.UpcomingEventGrid = UpcomingEventGrid;
             return View(eventsListData);
         }
 

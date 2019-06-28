@@ -7,14 +7,12 @@ using System.Web.Http;
 using EmployeeConnect.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-
 using Microsoft.Bot.Connector.Teams.Models;
-using EmployeeConnect.Models;
 using EmployeeConnect.Helper;
 using Newtonsoft.Json;
 using EmployeeConnect.Common;
-using AdaptiveCards;
 using Newtonsoft.Json.Linq;
+using EmployeeConnect.Models;
 
 namespace EmployeeConnect.Controllers
 {
@@ -86,7 +84,7 @@ namespace EmployeeConnect.Controllers
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
 
-        private static TaskInfo GetTaskInfo(string id, string actionInfo)
+        private static TaskInfo GetTaskInfo(string actionInfo)
         {
             TaskInfo taskInfo = new TaskInfo();
             if (actionInfo.StartsWith("news:"))

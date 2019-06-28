@@ -8,9 +8,9 @@ namespace EmployeeConnect.Common
     public static class TaskModelUIConstant
     {
       public static UIConstants PurchaseOrder { get; set; } =
-            new UIConstants(750, 650, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
+            new UIConstants(950, 650, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
         public static UIConstants  NewsCard { get; set; } =
-            new UIConstants(750, 650, "News Card", TaskModuleIds.PurchaseOrder, "News Card");
+            new UIConstants(750, 650, "News Card", TaskModuleIds.Newscard, "News Card");
         public static UIConstants CreateTicket { get; set; } =
         new UIConstants(610, 510, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
@@ -26,15 +26,8 @@ namespace EmployeeConnect.Common
         public static UIConstants Declined { get; set; } =
         new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");
 
-        public static UIConstants NewsCard { get; set; } =
-        new UIConstants(500, 570, "News Card: Inputs", TaskModuleIds.Newscard, "News Card");
-
         public static UIConstants ETCard { get; set; } =
         new UIConstants(500, 350, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");
-    }
-new UIConstants(400, 367, "PO Decline", TaskModuleIds.PODecline, "PO Decline");
-    public static UIConstants Declined { get; set; } =
-new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");
         public static UIConstants EventCard { get; set; }=
             new UIConstants(380, 350, "EventCard", TaskModuleIds.EventCard, "EventCard");
     }
