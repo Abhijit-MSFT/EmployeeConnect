@@ -119,7 +119,7 @@ namespace EmployeeConnect
                     List<string> searchimage = eventsTrainings.EventsAndtraining.Where(a => a.ETTitle.ToLower().Contains(title.ToLower())).Select(d => d.ETThumbnailUrl).ToList();
                     List<string> searchETType = eventsTrainings.EventsAndtraining.Where(a => a.ETTitle.ToLower().Contains(title.ToLower())).Select(d => d.ETType).ToList();
                     List<string> searchETid = eventsTrainings.EventsAndtraining.Where(a => a.ETTitle.ToLower().Contains(title.ToLower())).Select(d => d.ETID).ToList();
-                    List<string> searchETar = eventsTrainings.EventsAndtraining.Where(a => a.ETTitle.ToLower().Contains(title.ToLower())).Select(d => d.ETAddRemoveFlag).ToList();
+                    List<bool> searchETar = eventsTrainings.EventsAndtraining.Where(a => a.ETTitle.ToLower().Contains(title.ToLower())).Select(d => d.UserAdded).ToList();
 
                     int attacCount = searchTitle.Count();
 
@@ -140,7 +140,7 @@ namespace EmployeeConnect
                     List<string> searchimage = eventsTrainings.EventsAndtraining.Select(c => c.ETThumbnailUrl).Take(6).ToList();
                     List<string> searchETType = eventsTrainings.EventsAndtraining.Select(c => c.ETType).Take(6).ToList();
                     List<string> searchETid = eventsTrainings.EventsAndtraining.Select(c => c.ETID).Take(6).ToList();
-                    List<string> searchETar = eventsTrainings.EventsAndtraining.Select(c => c.ETAddRemoveFlag).Take(6).ToList();
+                    List<bool> searchETar = eventsTrainings.EventsAndtraining.Select(c => c.UserAdded).Take(6).ToList();
                     attachments = new ComposeExtensionAttachment[searchTitle.Count];
                     for (int i = 0; i < searchTitle.Count; i++)
                     {
@@ -170,7 +170,7 @@ namespace EmployeeConnect
                 .ToAttachment()
                 .ToComposeExtensionAttachment();
         }
-        private static ComposeExtensionAttachment GetAttachment1(string image, string title, string date, string views, string id, string searchetar)
+        private static ComposeExtensionAttachment GetAttachment1(string image, string title, string date, string views, string id, bool userAdded)
         {
             var card = new ThumbnailCard
             {
@@ -180,9 +180,9 @@ namespace EmployeeConnect
                 Buttons = new List<CardAction>
                 {
                     new CardAction(){
-                             Title = searchetar=="Added"?"Remove from calendar":"Add To calendar",
+                             Title = userAdded?"Remove from calendar":"Add To calendar",
                              Type = "invoke",
-                             Value = "{\"data\": \"" + id + searchetar+"\"}",
+                             Value = "{\"data\": \"" + id +"\"}",
                     }
 
                 },

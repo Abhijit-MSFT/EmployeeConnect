@@ -15,3 +15,4 @@ namespace EmployeeConnect.Models
         public string CatThumbnailURL { get; set; }
     }
 }
+

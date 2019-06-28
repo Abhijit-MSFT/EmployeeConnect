@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
 using System.Net;
 using Chronic;
+using Newtonsoft.Json;
 
 namespace EmployeeConnect.Helper
 {
@@ -82,19 +83,127 @@ namespace EmployeeConnect.Helper
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Inventory.json";
             InventoryModel inventory = new InventoryModel();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            inventory = (new JavaScriptSerializer().Deserialize<InventoryModel>(json));
+            inventory = new JavaScriptSerializer().Deserialize<InventoryModel>(json);
             return inventory;
         }
 
-        /*public static UserPreferences setPreferencesData(string json)
+        //to get the preferences from the card json 
+        public static SetPreferences setPreferencesData(string json)
         {
-            //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Inventory.json";
-            //InventoryModel inventory = new InventoryModel();
-            //string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
-            UserPreferences pref = new UserPreferences();
-            pref = (new JavaScriptSerializer().Deserialize<UserPreferences>(json));
+            SetPreferences pref = new SetPreferences();
+            pref = (new JavaScriptSerializer().Deserialize<SetPreferences>(json));
             return pref;
-        }*/
+        }
+
+        //Makes a UPrefObject from SetPreferences object
+        public static Preference makeUPrefObject(SetPreferences pref)
+        {
+            Preference uPref = new Preference();
+            uPref.UserName = pref.UserName;
+            NewsPreference newsPref = new NewsPreference();
+            EandtPreference entPref = new EandtPreference();
+            TaskPreference taskPref = new TaskPreference();
+            newsPref.NewsNotificationFlag = true;
+            newsPref.NewsNotifyMe = "true";
+            entPref.EandTNotificationFlag = true;
+            entPref.EandTNotifyMe = "true";
+            taskPref.TaskNotificationFlag = true;
+            taskPref.TaskNotifyMe = "true";
+            string[] time = {"11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM" };
+            string[] category = {"Finance","Media","Art","Business","Culture","Technology"};
+            switch (pref.SetNewsChoice)
+            {
+                case "1":
+                    newsPref.NewsNotificationTime = "9:00 AM";
+                    break;
+                case "2":
+                    newsPref.NewsNotificationTime = "5:00 PM";
+                    break;
+                case "3":
+                    newsPref.NewsNotificationTime = time[Int32.Parse(pref.SetNewsPreferredTime)-1];
+                    break;
+                default:
+                    break;
+            }
+            switch (pref.SetENTChoice)
+            {
+                case "1":
+                    entPref.EandTNotificationTime = "9:00 AM";
+                    break;
+                case "2":
+                    entPref.EandTNotificationTime = "5:00 PM";
+                    break;
+                case "3":
+                    entPref.EandTNotificationTime = time[Int32.Parse(pref.SetENTPreferredTime) - 1];
+                    break;
+                default:
+                    break;
+            }
+            switch (pref.SetTaskRemindersChoice)
+            {
+                case "1":
+                    taskPref.TaskNotificationTime = "9:00 AM";
+                    break;
+                case "2":
+                    taskPref.TaskNotificationTime = "5:00 PM";
+                    break;
+                case "3":
+                    taskPref.TaskNotificationTime = time[Int32.Parse(pref.SetTaskReminderPreferredTime) - 1];
+                    break;
+                default:
+                    break;
+            }
+            string newsCategory;
+            if (pref.NewsCategory1 == null && pref.NewsCategory2 == null)
+                newsPref.SelectedCategories = new string[0];
+            else
+            {
+                if (pref.NewsCategory1 != null && pref.NewsCategory2 == null)
+                    newsCategory = pref.NewsCategory1;
+                else if (pref.NewsCategory1 == null && pref.NewsCategory2 != null)
+                    newsCategory = pref.NewsCategory2;
+                else
+                    newsCategory = pref.NewsCategory1 + "," + pref.NewsCategory2;
+
+                var arr = newsCategory.Split(',');
+                newsPref.SelectedCategories = new string[arr.Count()];
+                for (int i = 0; i < arr.Count(); i++)
+                    newsPref.SelectedCategories[i] = category[Int32.Parse(arr[i])-1];
+            }
+            uPref.News = new NewsPreference[1];
+            uPref.EandT = new EandtPreference[1];
+            uPref.Task = new TaskPreference[1];
+            uPref.News[0] = newsPref;
+            uPref.EandT[0] = entPref;
+            uPref.Task[0] = taskPref;
+            
+            return uPref;
+        }
+
+        //Updates the UPreferences json with the preference
+        public static void WritePreferences(Preference pref)
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
+            string json = File.ReadAllText(file);
+            int i;
+            EmployeeConnect.Models.UPreferences uPref = new JavaScriptSerializer().Deserialize<EmployeeConnect.Models.UPreferences>(json);
+            List<EmployeeConnect.Models.Preference> list = uPref.preferences.ToList();
+            for (i = 0; i < list.Count(); i++)
+            {
+                if (list[i].UserName.Equals(pref.UserName))
+                {
+                    //rewrite
+                    list[i] = pref;
+                    break;
+                }
+            }
+            if (i == list.Count())
+                list.Add(pref);
+            uPref.preferences = list.ToArray();
+            var convertedJson = JsonConvert.SerializeObject(uPref, Formatting.Indented);
+            File.WriteAllText(file, convertedJson);
+            return;
+        }
     }
 }
 

@@ -4,12 +4,13 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Web.Script.Serialization;
 
 namespace EmployeeConnect.Dialogs
 {
@@ -159,8 +160,10 @@ namespace EmployeeConnect.Dialogs
             switch (actionDetails.Action)
             {
                 case Constants.SetPrefrencesDone:   //Press Done button on set preferences
-                    //EmployeeConnect.Models.UserPreferences pref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
-                    //pref.UserName = userDetails.Name;
+                    EmployeeConnect.Models.SetPreferences setPref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
+                    setPref.UserName = userDetails.Name;
+                    EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.makeUPrefObject(setPref);
+                    Helper.GetDataHelper.WritePreferences(pref);
                     return;
                 case Constants.SetPrefrencesSkip:   //Press Skip button on set preferences
                     reply.Text = "";
@@ -216,5 +219,7 @@ namespace EmployeeConnect.Dialogs
             }
             return false;
         }
+
+       
     }
 }

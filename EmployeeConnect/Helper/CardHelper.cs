@@ -461,7 +461,6 @@ namespace EmployeeConnect.Helper
             return res;
         }
 
-        //[Obsolete]
         public static Attachment SetTimePrefrences()
         {
             var card = new AdaptiveCard("1.0")
@@ -509,7 +508,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetNewsPreferredTime",
-                                //Value = "1",
+                                Value = "1",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
@@ -522,6 +521,26 @@ namespace EmployeeConnect.Helper
                                     {
                                         Title = "12:00 PM",
                                         Value = "2"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "1:00 PM",
+                                        Value = "3"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "2:00 PM",
+                                        Value = "4"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "3:00 PM",
+                                        Value = "5"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "4:00 PM",
+                                        Value = "6"
                                     }
                                 }
                             },
@@ -562,7 +581,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetENTPreferredTime",
-                                //Value = "1",
+                                Value = "1",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
@@ -575,6 +594,26 @@ namespace EmployeeConnect.Helper
                                     {
                                         Title = "12:00 PM",
                                         Value = "2"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "1:00 PM",
+                                        Value = "3"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "2:00 PM",
+                                        Value = "4"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "3:00 PM",
+                                        Value = "5"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "4:00 PM",
+                                        Value = "6"
                                     }
                                 }
                             },
@@ -614,7 +653,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetTaskReminderPreferredTime",
-                                //Value = "1",
+                                Value = "1",
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
@@ -628,6 +667,26 @@ namespace EmployeeConnect.Helper
                                         Title = "12:00 PM",
                                         Value = "2"
                                     },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "1:00 PM",
+                                        Value = "3"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "2:00 PM",
+                                        Value = "4"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "3:00 PM",
+                                        Value = "5"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "4:00 PM",
+                                        Value = "6"
+                                    }
                                 }
                             }
                         }
@@ -653,7 +712,6 @@ namespace EmployeeConnect.Helper
 
         }
 
-        //[Obsolete]
         public static AdaptiveCard SetNewsPreferences()
         {
             List<AdaptiveColumn> list = new List<AdaptiveColumn>();
@@ -661,9 +719,10 @@ namespace EmployeeConnect.Helper
             {
                 Items =
                 {
+
                      new AdaptiveChoiceSetInput()
                     {
-                        Id = "NewsCategory",
+                        Id = "NewsCategory1",
                         //Value = "1", // please set default value here
                         Style = AdaptiveChoiceInputStyle.Expanded,
                         IsMultiSelect=true,// set the style of Choice set to compact
@@ -714,7 +773,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoice
                             {
-                                Title = "Media",
+                                Title = "Technology",
                                 Value = "6",
                             }
 
@@ -1586,7 +1645,7 @@ namespace EmployeeConnect.Helper
                 card.Actions.Add(new AdaptiveSubmitAction()
                 {
                     Title = status,
-                    Data = (!SelectedEventsTrainings.UserAdded) ? "ETAdd" + id : "ETRemove" + id,
+                    Data = "ET" + id
                     //DataJson = "Remove_Add"
                 });
             }

@@ -32,7 +32,7 @@
       "ETDetails": " Xbox video showcase event of the year on livestream,featuring new released games like Metro Exodus, Mortal Kombat 11, Crackdown 3, Sea of Thieves, and The Division 2.",
       "ETAgenda": "Xbox Showcase Event featuring new releases",
       "ETAddRemoveFlag": "Removed",
-      "register": null,
+      "register": "true",
       "UserAdded": false,
       "ETMandatory": false
     },
@@ -50,8 +50,8 @@
       "ETDetails": "Join us in Seattle at 8 a.m. PT on Thursday, June 13, to watch the World Championship of Imagine Cup, our global student technology competition.",
       "ETAgenda": "Microsoft Imagine Championship Event",
       "ETAddRemoveFlag": "Added",
-      "register": "null",
-      "UserAdded": false,
+      "register": "true",
+      "UserAdded": true,
       "ETMandatory": false
     },
     {
@@ -86,8 +86,8 @@
       "ETDetails": "we're hosting Microsoft Business application summit from June 16 to 17 in Seattle, welcoming thousands in person and millions more via live stream. This annual event presents unique opporunities.",
       "ETAgenda": "Take a peek at out expert-led sessions and wokshops",
       "ETAddRemoveFlag": "Added",
-      "register": null,
-      "UserAdded": true,
+      "register": "true",
+      "UserAdded": false,
       "ETMandatory": false
     },
     {
