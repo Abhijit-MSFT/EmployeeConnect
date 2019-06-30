@@ -105,7 +105,7 @@
                         </div>
                     </form>
                     <div class="two-btn">
-                        <button type="button" class="cancel">Cancel</button>
+                        <button type="submit" class="cancel">Cancel</button>
                         <button type="button" class="send-rq" onclick="submit('sendrequest');">Send request</button>
                     </div>
                 </div>
@@ -118,7 +118,6 @@
         submitHandler = (err, result) => {
             debugger;
             console.log(`Submit handler - err: ${err}`);
-            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
         function submit(type) {

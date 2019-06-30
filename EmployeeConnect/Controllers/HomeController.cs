@@ -1,5 +1,6 @@
 ﻿using EmployeeConnect.Helper;
 using EmployeeConnect.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -37,7 +38,7 @@ namespace EmployeeConnect.Controllers
         {
             return View();
         }
-
+        
         [Route("Task")]
         public ActionResult Task()
         {
@@ -76,10 +77,30 @@ namespace EmployeeConnect.Controllers
         [Route("news")]
         public ActionResult News()
         {
-            NewsModel newsListData = new NewsModel();
-            newsListData = GetDataHelper.GetNews();
-            return View(newsListData);
+            NewsModel news = new NewsModel();
+            news = GetDataHelper.GetNews();
+            return View(news);
         }
+
+        [Route("getNewsInfo")]
+        public JObject GetNewsInfo(string NewsId)
+        {
+            return JObject.FromObject(CardHelper.GetNewsCardbyId(NewsId));
+        }
+
+
+        [Route("preferences")]
+        public ActionResult Preferences()
+        {
+            return View("Preferences");
+        }
+
+        [Route("policies")]
+        public ActionResult Policies()
+        {
+            return View("Policies");
+        }
+
 
         [Route("purchaseorder")]
         [HttpGet]
@@ -121,12 +142,10 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-        [Route("EventandTrainingTab")]
+        [Route("eventandTrainingTab")]
         public ActionResult EventandTrainingTab()
         {
-            EandTModel eventsListData = new EandTModel();
-            eventsListData = GetDataHelper.GetEandT();
-            return View(eventsListData);
+           return View("EventandTrainingTab");
         }
 
     }

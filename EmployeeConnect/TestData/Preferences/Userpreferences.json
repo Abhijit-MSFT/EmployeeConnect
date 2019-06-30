@@ -1,0 +1,83 @@
+{
+  "preferences": [
+    {
+      "userName": "Abhijit Jodbhavi",
+      "news": [
+        {
+          "selectedCategories": [],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "",
+          "newsNotificationTime": ""
+        }
+      ],
+      "eandT": [
+        {
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "",
+          "eandTNotificationTime": ""
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "",
+          "taskNotificationTime": ""
+        }
+      ]
+    },
+    {
+      "userName": "Wajeed Shaikh",
+      "news": [
+        {
+          "selectedCategories": [],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "",
+          "newsNotificationTime": ""
+        }
+      ],
+      "eandT": [
+        {
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "",
+          "eandTNotificationTime": ""
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "",
+          "taskNotificationTime": ""
+        }
+      ]
+    },
+    {
+      "userName": "Vedant Patwary",
+      "news": [
+        {
+          "selectedCategories": [
+            "Finance",
+            "Art",
+            "Technology"
+          ],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "true",
+          "newsNotificationTime": "9:00 AM"
+        }
+      ],
+      "eandT": [
+        {
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "true",
+          "eandTNotificationTime": "9:00 AM"
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "true",
+          "taskNotificationTime": "9:00 AM"
+        }
+      ]
+    }
+  ]
+}
