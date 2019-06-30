@@ -15,6 +15,7 @@ using EmployeeConnect.Common;
 using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using EmployeeConnect.Models;
+using System.IO;
 
 namespace EmployeeConnect.Controllers
 {
@@ -40,6 +41,7 @@ namespace EmployeeConnect.Controllers
         private async Task<HttpResponseMessage> HandleInvokeActivity(Activity activity)
         {
             var activityValue = activity.Value.ToString();
+            string ETid;
             switch (activity.Name)
             {
                 case "signin/verifyState":
@@ -75,11 +77,40 @@ namespace EmployeeConnect.Controllers
                     };
                     return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "task/submit":
-                    // Handle submission of task module info
-                    // Run this on a task so that 
-                    ConnectorClient connectorclient = new ConnectorClient(new Uri(activity.ServiceUrl));
-                    Activity reply = activity.CreateReply("Received = " + activity.Value.ToString());
-                    connectorclient.Conversations.ReplyToActivity(reply);
+                    string data = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
+                    //string datajson = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).DataJson;
+                    if (data.Length > 2 && data.Substring(0, 2) == "ET")
+                    {
+                        ETid = data.Substring(2);
+                        //will update the button action Added<->Removed
+                        ETStatusUpdate(ETid);
+                        return new HttpResponseMessage(HttpStatusCode.Accepted);
+                    }
+                    switch (data)
+                    {
+                        //When close is pressed on task module card
+                        case "close_button":
+                            break;
+                        default:    //need to build
+                            break;
+                    }
+                    break;
+                case "composeExtension/submitAction":
+                    string commandid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).commandId;
+                    taskInfo = GetTaskInfo(commandid);
+                    taskEnvelope = new Models.TaskEnvelope
+                    {
+                        Task = new Models.Task()
+                        {
+                            Type = Models.TaskType.Continue,
+                            TaskInfo = taskInfo
+                        }
+                    };
+
+                    return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                case "composeExtension/onCardButtonClicked":
+                    ETid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
+                    ETStatusUpdate(ETid);
                     break;
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
@@ -185,6 +216,35 @@ namespace EmployeeConnect.Controllers
                     break;
                 default:
                     break;
+            }
+        }
+
+        //changes the status of eT Registered<->Unregistered, Added<->Remove
+        public void ETStatusUpdate(string ETid)
+        {
+            if (ETid == null)
+                return;
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
+            string json = File.ReadAllText(file);
+
+            Newtonsoft.Json.Linq.JObject ETObj = Newtonsoft.Json.Linq.JObject.Parse(json);
+            for (int i = 0; i < ETObj["EventsAndTraining"].Count(); i++)
+            {
+                if (ETObj["EventsAndTraining"][i]["ETID"].ToString().Equals(ETid))
+                {
+                    ETObj["EventsAndTraining"][i]["UserAdded"] = !(bool)ETObj["EventsAndTraining"][i]["UserAdded"];
+
+                    //Event
+                    if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
+                        ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
+
+                    //Training
+                    else
+                        ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
+                    string FileOutput = Newtonsoft.Json.JsonConvert.SerializeObject(ETObj, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(file, FileOutput);
+                    break;
+                }
             }
         }
     }

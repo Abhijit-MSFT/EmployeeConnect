@@ -14,6 +14,8 @@ namespace EmployeeConnect.Models
     {
         public string title { get; set; }
         public Item[] items { get; set; }
+
+        public ListButton[] buttons { get; set; }
     }
 
     public class Item
@@ -24,6 +26,7 @@ namespace EmployeeConnect.Models
         public string subtitle { get; set; }
         public Tap tap { get; set; }
         public string icon { get; set; }
+
     }
 
     public class Tap
@@ -35,6 +38,12 @@ namespace EmployeeConnect.Models
         public string displayText { get; set; }
     }
 
+    public class ListButton
+    {
+        public string type { get; set; }
+        public string title { get; set; }
+        public string value { get; set; }
+    }
 }
 
 
