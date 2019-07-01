@@ -150,15 +150,15 @@
                  dataType: "json",
                  success: function (data) {
                      debugger;
-                        var parsedData = JSON.parse(data);
+                        var parsedData = JSON.parse(data,textStatus, jQxhr);
                         var TicketNoId = parsedData.TicketNo;
                         taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete?ticketNoId=" + TicketNoId;
                         taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
                         taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";      
                         // Set fallback URL
                         taskInfo.fallbackUrl = taskInfo.url;
-                        microsoftTeams.tasks.submitTask(taskInfo, submitHandler, "@ApplicationSettings.AppId");
-                 },
+                        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+               },
                   error: function() { console.log('A error'); }
                 });
 

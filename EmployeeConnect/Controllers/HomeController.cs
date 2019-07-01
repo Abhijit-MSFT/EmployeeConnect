@@ -1,5 +1,6 @@
 ﻿using EmployeeConnect.Helper;
 using EmployeeConnect.Models;
+using EmployeeConnect.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -175,7 +176,8 @@ namespace EmployeeConnect.Controllers
             {
                 if(item.ETID == id)
                 {
-                    eventsListData = GetDataHelper.UpdateEandT(item.ETID);
+                    
+                    GetDataHelper.ETStatusUpdate(item.ETID);
                     //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
                 }
             }

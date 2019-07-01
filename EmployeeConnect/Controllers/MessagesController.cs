@@ -144,6 +144,7 @@ namespace EmployeeConnect.Controllers
             taskInfo.Width = uIConstants.Width;
         }
 
+
         /// <summary>
         /// Handle request to fetch task module content.
         /// </summary>
