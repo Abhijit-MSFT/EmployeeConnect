@@ -1,4 +1,5 @@
 ﻿using EmployeeConnect.Common;
+using EmployeeConnect.Helper;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
@@ -18,6 +19,9 @@ namespace EmployeeConnect.Dialogs
     [Serializable]
     public class RootDialog : IDialog<object>
     {
+        private const string ProfileKey = "profile";
+
+        private const string EmailKey = "emailId";
         /// <summary>
         /// Called when the dialog is started.
         /// </summary>
@@ -32,22 +36,33 @@ namespace EmployeeConnect.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var activity = await result as Activity;
-
             var typingReply = activity.CreateReply();
             typingReply.Text = null;
             typingReply.Type = ActivityTypes.Typing;
             await context.PostAsync(typingReply);
-
             string message = string.Empty;
+            string userEmailId = string.Empty;
+            string emailKey = GetEmailKey(activity);
+            //string user = null;
+            if (!context.ConversationData.ContainsKey(emailKey))
+            {
+                await SendOAuthCardAsync(context, (Activity)context.Activity);
+                return;
+            }
             var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
             {
                 await context.PostAsync("Failed to read user profile. Please try again.");
             }
-
             if (!string.IsNullOrEmpty(activity.Text))
             {
                 message = Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity).ToLowerInvariant();
+                if (message.ToLowerInvariant().Contains("reset"))
+                {
+                    userEmailId = await GetUserEmailId(activity);
+                    await Signout(userEmailId, context);
+                    return;
+                }
                 Attachment card = null;
                 var reply = context.MakeMessage();
                 List<Attachment> res;
@@ -123,6 +138,9 @@ namespace EmployeeConnect.Dialogs
                         return;
                 }
 
+                        }
+                        break;
+                }
                 await context.PostAsync(reply);
 
             }
@@ -132,7 +150,6 @@ namespace EmployeeConnect.Dialogs
                 return;
             }
         }
-
         private static ThumbnailCard GetTaskModuleOptions()
         {
             ThumbnailCard card = new ThumbnailCard();
@@ -144,15 +161,44 @@ namespace EmployeeConnect.Dialogs
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.NewsCard.ButtonTitle, null,
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PoDecline.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()
                 {
-                    Data = TaskModelUIConstant.NewsCard.Id
+                    Data = TaskModelUIConstant.PoDecline.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.Declined.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.Declined.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.CreateTicket.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.CreateTicket.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.TicketComplete.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.TicketComplete.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.VisitorRegistration.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.VisitorRegistration.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.SendRequest.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.SendRequest.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.EventCard.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.EventCard.Id
                 }));
 
             return card;
         }
-
         private async Task HandleActions(IDialogContext context, Activity activity)
         {
             var actionDetails = JsonConvert.DeserializeObject<Models.ActionDetails<string>>(activity.Value.ToString());
@@ -221,6 +267,74 @@ namespace EmployeeConnect.Dialogs
             return false;
         }
 
-       
+        private async Task SendOAuthCardAsync(IDialogContext context, Activity activity)
+        {
+            var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "In order to use Employee connect, we need your basic details please sign in", "Sign In", true).ConfigureAwait(false);
+            await context.PostAsync(reply);
+            context.Wait(WaitForToken);
+        }
+        private async Task WaitForToken(IDialogContext context, IAwaitable<object> result)
+        {
+            var activity = await result as Activity;
+            var tokenResponse = activity.ReadTokenResponseContent();
+            if (tokenResponse != null)
+            {
+                // Use the token to do exciting things!
+            }
+            else
+            {
+                // Get the Activity Message as well as activity.value in case of Auto closing of pop-up
+                string input = activity.Type == ActivityTypes.Message ? Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity)
+                                                                : ((dynamic)(activity.Value)).state.ToString();
+                if (!string.IsNullOrEmpty(input))
+                {
+                    tokenResponse = await context.GetUserTokenAsync(ApplicationSettings.ConnectionName, input.Trim());
+                    if (tokenResponse != null)
+                    {
+                        context.ConversationData.SetValue<string>(GetEmailKey(context.Activity), tokenResponse.ToString());
+                        await context.PostAsync($"Your sign in was successful.Please check the commands to see what i can do!!");
+                        context.Wait(MessageReceivedAsync);
+                        return;
+                    }
+                }
+                await context.PostAsync($"Hmm. Something went wrong. Please initiate the SignIn again. Try sending help.");
+                context.Wait(MessageReceivedAsync);
+            }
+        }
+        private static string GetEmailKey(IActivity activity)
+
+        {
+
+            return activity.From.Id + EmailKey;
+
+        }
+        private static string GetProfileKey(IActivity activity)
+
+        {
+
+            return activity.From.Id + ProfileKey;
+
+        }
+        private async Task<string> GetUserEmailId(Activity activity)
+
+        {
+
+            // Fetch the members in the current conversation
+
+            ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+
+            var members = await connector.Conversations.GetConversationMembersAsync(activity.Conversation.Id);
+
+            return members.Where(m => m.Id == activity.From.Id).First().AsTeamsChannelAccount().UserPrincipalName.ToLower();
+
+        }
+        public static async Task Signout(string emailId, IDialogContext context)
+        {
+            context.ConversationData.RemoveValue(GetEmailKey(context.Activity));
+            await context.SignOutUserAsync(ApplicationSettings.ConnectionName);
+            await context.PostAsync($"We have cleared everything related to you.");
+
+        }
+
     }
 }

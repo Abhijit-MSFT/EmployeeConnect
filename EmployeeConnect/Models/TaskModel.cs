@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Azure.Documents;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace EmployeeConnect.Models
         [JsonProperty("title")]
         public string Title { get; set; }
 
-        [JsonProperty("height")]
-        public object Height { get; set; }
-        //YG
         [JsonProperty("card")]
         public object Card { get; set; }
+
+        [JsonProperty("height")]
+        public object Height { get; set; }
 
         [JsonProperty("width")]
         public object Width { get; set; }

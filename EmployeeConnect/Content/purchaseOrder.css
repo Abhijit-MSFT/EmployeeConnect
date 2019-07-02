@@ -1,0 +1,127 @@
+﻿body {
+    background-color: #6e7a75 !important;
+}
+
+.modal-content {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border: 0 !important;
+}
+@media (min-width: 576px) {
+    .modal-dialog-centered {
+        min-height: initial !important;
+    }
+
+    .modal-dialog {
+        max-width: none !important;
+        margin: 1.75rem auto;
+    }
+}
+h5 {
+    margin-bottom: 0px !important;
+}
+
+.mh {
+    display: block !important;
+    padding: 60px 30px 20px 30px !important;
+    border-bottom: 0px !important;
+}
+
+.mb {
+    padding-top: 0px !important;
+}
+
+.vendor {
+    color: #7e7e7e !important;
+    font-size: 14px !important;
+}
+
+.store {
+    font-size: 14px !important;
+}
+
+span.currency {
+    font-size: 12px;
+    position: relative;
+    bottom: 14px;
+    font-weight: bold;
+}
+
+.currency1 {
+    font-size: 12px !important;
+    position: relative !important;
+    bottom: 2px !important;
+}
+
+.T-amount,
+.total-h {
+    float: right !important;
+}
+
+.total-h {
+    font-size: 12px !important;
+    color: #7e7e7e !important;
+}
+
+table {
+    background-color: #f5f5f5 !important;
+}
+
+.t-amount {
+    font-size: 24px;
+    font-weight: 500;
+    position: relative;
+}
+
+.th-head {
+    font-size: 12px;
+    padding: 20px 30px 0px 30px !important;
+    border-top: 0px !important;
+    color: #7e7e7e;
+}
+
+.th-total {
+    text-align: right;
+}
+
+.cnt {
+    padding: 30px 30px 20px 30px !important;
+    border-top: 0px !important;
+    font-size: 14px;
+    color: #7e7e7e;
+}
+
+.desc {
+    width: 310px;
+    color: black;
+}
+
+tr:nth-child(n + 3) {
+    border-top: 1px solid #eaeaea !important;
+}
+
+.foo {
+    border: 0 !important;
+    margin-top: 30px;
+}
+
+.decline,
+.approve {
+    height: 30px !important;
+    width: 100px !important;
+    color: white !important;
+    background-color: #6264a7 !important;
+    font-family: "Segoe UI" !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    text-align: center !important;
+    border: 1px solid rgba(37, 36, 36, 0.15) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1) !important;
+}
+
+.decline {
+    color: black !important;
+    background-color: white !important;
+}

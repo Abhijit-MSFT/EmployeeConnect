@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 using System.Net;
 using System.Windows.Forms;
 using EmployeeConnect.Common;
+using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Helper
 {
@@ -839,49 +840,109 @@ namespace EmployeeConnect.Helper
                 for (int i = 0; i < MaxEventsCount; i++)
                 {
                     var EandT = Events.ElementAt(i);
-                    string date = "";
-                    if (EandT.ETStartDate == EandT.ETEndDate)
-                        date = EandT.ETStartDate;
-                    else
-                        date = EandT.ETStartDate + " to " + EandT.ETEndDate;
-                    DateTime Dstart = DateTime.ParseExact(EandT.ETStartDate, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    DateTime Dend = DateTime.ParseExact(EandT.ETEndDate, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    if (count == 5)
-                        break;
-                    if (Dstart <= CurrDate.AddDays(7) && EandT.UserAdded && Dend <= CurrDate.AddDays(7))
+                    string subtitle = EandT.ETDetails;
+                    string title = EandT.ETTitle + ' ' + EandT.ETStartDate + ' ' + '-' + ' ' + EandT.ETEndDate;
+                    var item = new Item();
+                    //item.title = EandT.ETTitle;
+                    item.title = title;
+                    item.icon = EandT.ETThumbnailUrl;
+                    item.id = EandT.ETID;
+
+                    //if (subtitle.Length > ReqDescriptionLength)
+                    //    item.subtitle = subtitle.Substring(0, ReqDescriptionLength);
+                    //else
+                    item.subtitle = subtitle;
+
+                    item.type = "resultItem";
+
+                    //item.NewBy = "Vedant";      //doesn't display in frontend
+
+                    item.tap = new Tap()
                     {
-                        string subtitle = date + ' ' + "from" + ' ' + EandT.ETStartTime + '-' + EandT.ETEndTime;
-                        string title = EandT.ETTitle;
+                        type = "messageBack",
+                        text = EandT.ETID
+                    };
+
+                    list.Add(item);
+                }
+                card.content.items = list.ToArray();
+
+            }
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }
+    
+
+
+        //[Obsolete]
+        public static Attachment UpcomingEventsTraining()
+        {
+            EandTModel ETlist = new EandTModel();
+            ETlist = Helper.GetDataHelper.GetEandT();
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Upcoming events and training for you";
+
+
+            DateTime CurrDate = new DateTime(2019, 6, 1);
+            Item item;
+            int count = 0;
+            for (int i = 0; i < ETlist.EventsAndtraining.Count(); i++)
+            {
+                if (count == 3)
+                    break;
+                if (!ETlist.EventsAndtraining[i].UserAdded)
+                    continue;
+                else
+                {
+                    DateTime D = DateTime.ParseExact(ETlist.EventsAndtraining[i].ETStartDate, "MM-dd-yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+                    if (D <= CurrDate.AddDays(7))
+                    {
+
                         item = new Item();
-                        item.title = title;
-                        //item.icon = EandT.ETThumbnailUrl;
-                        if (EandT.ETFlag == "E")
-                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/flagEvents.JPG";
-                        else
-                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/shapeEvent.JPG";
-                        item.id = EandT.ETID;
-                        item.subtitle = subtitle;
-                        //item.flagImage = EandT.ETFlagImage;
+                        item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                        item.id = i.ToString();
+                        item.subtitle = ETlist.EventsAndtraining[i].ETStartDate + " to " + ETlist.EventsAndtraining[i].ETEndDate;
+
                         item.type = "resultItem";
+                        item.title = ETlist.EventsAndtraining[i].ETTitle;
+
                         item.tap = new Tap()
                         {
-                            type = "invoke",
-                            title = item.id,
-                            value = "{ \"type\": \"task/fetch\", \"data\": \"events:" + item.id.ToString() + "\"}"
+                            type = "imBack",
+                            title = "titleitem",
+                            value = "Event and training item" + i
                         };
-                        count++;
+
                         list.Add(item);
+                        count++;
                     }
                 }
-                /*item = new Item();
-                item.type = "resultItem";
-                item.title = "View more";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
-                item.tap = new Tap()
-                {
-                    type = "openUrl",
-                    value = deepLinkTab("EandT", "Events and Trainings")
-                };
+            }
+            //adding all events tab
+
+            item = new Item();
+            //item.icon = "##BaseURL##/Images/whiteimage.JPG";
+
+            item.type = "resultItem";
+            item.title = "View more";
+            //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            item.tap = new Tap()
+            {
+                type = "openUrl",
+                value = deepLinkTab("EandT", "Events and Trainings")
+            };
 
                 list.Add(item);*/
                 ListButton viewButton = new ListButton();
@@ -898,9 +959,77 @@ namespace EmployeeConnect.Helper
             Attachment attachment = new Attachment();
             attachment.ContentType = card.contentType;
             attachment.Content = card.content;
+            return attachment;
+        }
+        //Y.G
+        public static Attachment GetETbyID(string id)
+        {
+            EandTModel EandTL = Helper.GetDataHelper.GetEandT();
+            var SelectedEventsTrainings = getETById(EandTL, id);
+
+            if (SelectedEventsTrainings == null)   //could not find the news
+                return null;
+            var card = new AdaptiveCard("1.0")
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage
+                            {
+                                        Url = new Uri(SelectedEventsTrainings.ETThumbnailUrl)
+                            },
+                            new AdaptiveTextBlock() //Title of News
+                            {
+                                Text = SelectedEventsTrainings.ETTitle,
+                                Weight = AdaptiveTextWeight.Bolder,     // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            },
+                                new AdaptiveTextBlock()     //NewsBy on Date and Time
+                            {
+                                Text = "By " + SelectedEventsTrainings.ETType + " on " + SelectedEventsTrainings.ETStartDate,
+                                Weight = AdaptiveTextWeight.Lighter,    // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Small,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            },
+                            new AdaptiveTextBlock()     //Detailed News
+                            {
+                                Text = SelectedEventsTrainings.ETDetails,
+                                Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Default,       // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+                            }
+                        }
+                    }
+                }
+            };
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = AdaptiveCard.ContentType;
+
+            attachment.Content = card;
 
             return attachment;
         }
+
+        //Returns the News with specific NewsID
+        public static EventsAndTraining getETById(EandTModel EandTL, string id)
+        {
+            if (EandTL == null)
+                return null;
+            foreach (var ET in EandTL.EventsAndtraining)
+            {
+                if (ET.ETID.Equals(id))
+                    return ET;
+            }
+            return null;    // id doesn't exist
+        }
+
+
+        //[Obsolete]
 
         public static Attachment PendingTasks()
         {
