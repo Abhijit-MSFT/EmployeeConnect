@@ -44,11 +44,11 @@ namespace EmployeeConnect.Dialogs
             string userEmailId = string.Empty;
             string emailKey = GetEmailKey(activity);
             //string user = null;
-            if (!context.ConversationData.ContainsKey(emailKey))
+            /*if (!context.ConversationData.ContainsKey(emailKey))
             {
                 await SendOAuthCardAsync(context, (Activity)context.Activity);
                 return;
-            }
+            }*/
             var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
             {
@@ -57,12 +57,12 @@ namespace EmployeeConnect.Dialogs
             if (!string.IsNullOrEmpty(activity.Text))
             {
                 message = Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity).ToLowerInvariant();
-                if (message.ToLowerInvariant().Contains("reset"))
+                /*if (message.ToLowerInvariant().Contains("reset"))
                 {
                     userEmailId = await GetUserEmailId(activity);
                     await Signout(userEmailId, context);
                     return;
-                }
+                }*/
                 Attachment card = null;
                 var reply = context.MakeMessage();
                 List<Attachment> res;
@@ -138,9 +138,6 @@ namespace EmployeeConnect.Dialogs
                         return;
                 }
 
-                        }
-                        break;
-                }
                 await context.PostAsync(reply);
 
             }
