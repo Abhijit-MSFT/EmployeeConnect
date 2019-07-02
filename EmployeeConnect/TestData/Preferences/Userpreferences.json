@@ -1,58 +1,83 @@
 {
   "preferences": [
     {
-      "UserName": "Abhijit Jodbhavi",
-      "News": [
+      "userName": "Abhijit Jodbhavi",
+      "news": [
         {
-          "SelectedCategories": [],
-          "NewsNotificationFlag": true,
-          "NewsNotifyMe": "",
-          "NewsNotificationTime": ""
-        }
-
-      ],
-      "EandT": [
-        {
-          "EandTNotificationFlag": true,
-          "EandTNotifyMe": "",
-          "EandTNotificationTime": ""
+          "selectedCategories": [],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "",
+          "newsNotificationTime": ""
         }
       ],
-      "Task": [
+      "eandT": [
         {
-          "TaskNotificationFlag": true,
-          "TaskNotifyMe": "",
-          "TaskNotificationTime": ""
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "",
+          "eandTNotificationTime": ""
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "",
+          "taskNotificationTime": ""
         }
       ]
     },
     {
-      "UserName": "Wajeed Shaikh",
-      "News": [
+      "userName": "Wajeed Shaikh",
+      "news": [
         {
-          "SelectedCategories": [],
-          "NewsNotificationFlag": true,
-          "NewsNotifyMe": "",
-          "NewsNotificationTime": ""
-        }
-
-      ],
-      "EandT": [
-        {
-          "EandTNotificationFlag": true,
-          "EandTNotifyMe": "",
-          "EandTNotificationTime": ""
+          "selectedCategories": [],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "",
+          "newsNotificationTime": ""
         }
       ],
-      "Task": [
+      "eandT": [
         {
-          "TaskNotificationFlag": true,
-          "TaskNotifyMe": "",
-          "TaskNotificationTime": ""
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "",
+          "eandTNotificationTime": ""
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "",
+          "taskNotificationTime": ""
+        }
+      ]
+    },
+    {
+      "userName": "Vedant Patwary",
+      "news": [
+        {
+          "selectedCategories": [
+            "Finance",
+            "Art",
+            "Technology"
+          ],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "true",
+          "newsNotificationTime": "9:00 AM"
+        }
+      ],
+      "eandT": [
+        {
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "true",
+          "eandTNotificationTime": "9:00 AM"
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "true",
+          "taskNotificationTime": "9:00 AM"
         }
       ]
     }
   ]
 }
-
-

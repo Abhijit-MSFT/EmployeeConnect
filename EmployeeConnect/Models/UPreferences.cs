@@ -20,7 +20,7 @@ namespace EmployeeConnect.Models
 
     public class NewsPreference
     {
-        public object[] SelectedCategories { get; set; }
+        public string[] SelectedCategories { get; set; }
         public bool NewsNotificationFlag { get; set; }
         public string NewsNotifyMe { get; set; }
         public string NewsNotificationTime { get; set; }
