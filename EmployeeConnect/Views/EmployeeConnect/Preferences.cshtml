@@ -1,0 +1,369 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+    @Scripts.Render("https://unpkg.com/@microsoft/teams-js@1.4.2/dist/MicrosoftTeams.min.js")
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="~/Content/index_Preferences.css" rel="stylesheet" />
+
+    <title>Preferences Tab</title>
+    <script>
+        microsoftTeams.initialize();
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row first-row">
+            <div class="col-2 h-100">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h6 class="panel-title title1 accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                                href="#News">
+                                <span class="title">
+                                    News
+                                </span>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="rules">Pick 5 or more topics for news updates</div>
+                <div id="News" class="panel-collapse">
+                    @*<a href="#" style="float:right;" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/5004f5ec-ecbf-4fcc-9848-cc8943dc0077/currNews');">Show Newsss</a>*@
+                    <button type="button" style="float:right; height: 35px; width: 100px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/currNews')">Show News</button>
+                    <div class="panel-body body-height">
+                        <div class="image-text image_grid">
+                            <label for="Business">
+                                <img src="./imgs/Business.jpg" alt-name="Business" class="row-display" />
+                            </label>
+                            <input type="checkbox" checked name="Business" id="Business" />
+                            <div class="tick">
+                                <div class="title-name">Business</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Travel">
+                                <img src="./imgs/Travel.jpg" alt-name="Travel" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Travel" id="Travel" />
+                            <div class="tick">
+                                <div class="title-name">Travel</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Design">
+                                <img src="./imgs/Design.jpg" alt-name="Design" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Design" id="Design" />
+                            <div class="tick">
+                                <div class="title-name">Design</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Technology">
+                                <img src="./imgs/Technology.jpg" alt-name="Technology" class="row-display" />
+                            </label>
+                            <input type="checkbox" checked name="Technology" id="Technology" />
+                            <div class="tick">
+                                <div class="title-name">Technology</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Media">
+                                <img src="./imgs/Media.jpg" alt-name="Media" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Media" id="Media" />
+                            <div class="tick">
+                                <div class="title-name">Media</div>
+                            </div>
+                        </div>
+
+                        <div class="image-text image_grid">
+                            <label for="Economy">
+                                <img src="./imgs/Economy.jpg" alt-name="Economy" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Economy" id="Economy" />
+                            <div class="tick">
+                                <div class="title-name">Economy</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="CS">
+                                <img src="./imgs/CS.jpg" alt-name="CS" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="CS" id="CS" />
+                            <div class="tick">
+                                <div class="title-name">CS</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Market">
+                                <img src="./imgs/Market.jpg" alt-name="Market" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Market" id="Market" />
+                            <div class="tick">
+                                <div class="title-name">Market</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Finance">
+                                <img src="./imgs/Finance.jpg" alt-name="Finance" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Finance" id="Finance" />
+                            <div class="tick">
+                                <div class="title-name">Finance</div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="image-text image_grid">
+                            <label for="Enterprise">
+                                <img src="./imgs/Enterprise.jpg" alt-name="Enterprise" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Enterprise" id="Enterprise" />
+                            <div class="tick">
+                                <div class="title-name">Enterprise</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Software">
+                                <img src="./imgs/Software.jpg" alt-name="Software" class="row-display" />
+                            </label>
+                            <input type="checkbox" checked name="Software" id="Software" />
+                            <div class="tick">
+                                <div class="title-name">Software</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Art">
+                                <img src="./imgs/Art.jpg" alt-name="Art" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Art" id="Art" />
+                            <div class="tick">
+                                <div class="title-name">Art</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Animation">
+                                <img src="./imgs/Animation.gif" alt-name="Animation" class="row-display" />
+                            </label>
+                            <input type="checkbox" checked name="Animation" id="Animation" />
+                            <div class="tick">
+                                <div class="title-name">Animation</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Culture">
+                                <img src="./imgs/Culture.jpg" alt-name="Culture" class="row-display" />
+                            </label>
+                            <input type="checkbox" checked name="Culture" id="Culture" />
+                            <div class="tick">
+                                <div class="title-name">Culture</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Health">
+                                <img src="./imgs/Health.jpg" alt-name="Health" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Health" id="Health" />
+                            <div class="tick">
+                                <div class="title-name">Health</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Creative">
+                                <img src="./imgs/Creative.png" alt-name="Creative" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Creative" id="Creative" />
+                            <div class="tick">
+                                <div class="title-name">Creative</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="IT">
+                                <img src="./imgs/IT.jpg" alt-name="IT" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="IT" id="IT" />
+                            <div class="tick">
+                                <div class="title-name">IT</div>
+                            </div>
+                        </div>
+                        <div class="image-text image_grid">
+                            <label for="Data">
+                                <img src="./imgs/Data.jpg" alt-name="Data" class="row-display" />
+                            </label>
+                            <input type="checkbox" name="Data" id="Data" />
+                            <div class="tick">
+                                <div class="title-name">Data</div>
+                            </div>
+                        </div>
+
+                        <div class="explore-more">
+                            Explore more categories
+                        </div>
+                        <div class="switch-title1">
+                            <label class="switch">
+                                <input type="checkbox" checked />
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="news-updates">Send notifications about news updates</span>
+                        </div>
+                        <div class="notify">Notify me at</div>
+                        <form class="all-radio">
+                            <label class="radio-label">
+                                <input type="radio" name="radio" />
+                                <span class="text-align">Beginning of the day</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="radio" />
+                                <span class="text-align">End of the day</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" checked name="radio" />
+                                <span class="text-align">Set a preffered time </span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <select class="date-control" id="newsTime">
+                                <option selected>10:00 am</option>
+                                <option>11:00 am</option>
+                                <option>12:00 am</option>
+                                <option>1:00 pm</option>
+                                <option>2:00 pm</option>
+                                <option>3:00 pm</option>
+                                <option>4:00 pm</option>
+                                <option>5:00 pm</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </form>
+                    </div> <br><br><br>
+                </div>
+            </div>
+        </div>
+        <div class="row second-row">
+            <div class="col-2 h-100">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h6 class="panel-title title2 accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                                href="#Events">
+                                <span class="title">
+                                    Events & trainings
+                                </span>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <div id="Events" class="panel-collapse">
+                    <button type="button" style="float:right; height: 35px; width: 180px; margin-top:5px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/EandT')">Show Event and Training</button>                    
+                    <div class="panel-body">
+                        <div class="switch-title">
+                            <label class="switch">
+                                <input type="checkbox" checked />
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="events-training">Send notifications about new events & training</span>
+                        </div>
+                        <div class="notify">Notify me at</div>
+                        <form class="all-radio">
+                            <label class="radio-label">
+                                <input type="radio" name="radio" />
+                                <span class="text-align">Beginning of the day</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="radio" />
+                                <span class="text-align">End of the day</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="radio" checked />
+                                <span class="text-align">Set a preffered time </span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <select class="date-control" id="EandTTime">
+                                <option selected>10:00 am</option>
+                                <option>11:00 am</option>
+                                <option>12:00 am</option>
+                                <option>1:00 pm</option>
+                                <option>2:00 pm</option>
+                                <option>3:00 pm</option>
+                                <option>4:00 pm</option>
+                                <option>5:00 pm</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i> <br><br><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 h-100">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h6 class="panel-title title2 accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                                href="#Taskreminders">
+                                <span class="title">
+                                    Task reminders
+                                </span>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <div id="Taskreminders" class="panel-collapse">                    
+                    <button type="button" style="float:right; height: 35px; width: 180px; color: white; background-color: #6264a7; font-family: Segoe UI; margin-top:5px; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/tasks')">Show Task Reminder</button>
+                    <div class="panel-body">
+                        <div class="notify notify-task">Notify me at</div>
+                        <form class="all-radio">
+                            <label class="radio-label">
+                                <input type="radio" name="radio" checked />
+                                <span class="text-align">Beginning of the day</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="radio" />
+                                <span class="text-align">End of the day</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="radio" />
+                                <span class="text-align">Set a preffered time </span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <br>
+                            <select class="date-control">
+                                <option selected>10:00 am</option>
+                                <option>11:00 am</option>
+                                <option>12:00 am</option>
+                                <option>1:00 pm</option>
+                                <option>2:00 pm</option>
+                                <option>3:00 pm</option>
+                                <option>4:00 pm</option>
+                                <option>5:00 pm</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i> <br><br><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

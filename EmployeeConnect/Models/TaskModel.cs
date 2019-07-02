@@ -34,7 +34,6 @@ namespace EmployeeConnect.Models
             return JsonConvert.SerializeObject(this);
         }
     }
-
     public class TaskEnvelope
     {
         [JsonProperty("task")]

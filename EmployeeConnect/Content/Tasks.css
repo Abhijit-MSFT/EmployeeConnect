@@ -151,6 +151,7 @@ h6 {
 .review {
     color: #6668a9;
     cursor: pointer;
+    text-align: center;
 }
 
 th {

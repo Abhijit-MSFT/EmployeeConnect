@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 70,
+  "articles": [
+    {
+      "source": {
+        "id": "fox-news",
+        "name": "Fox News"
+      },
+      "author": "Gary Gastelu",
+      "title": "Elon Musk says Tesla's pickup will be able to tow as much as a Ford F-150 - Fox News",
+      "description": "How does it measure up?",
+      "url": "https://www.foxnews.com/auto/elon-musk-says-teslas-truck-will-be-able-to-tow-as-much-as-a-ford-f-150",
+      "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2019/06/8455358a-tesla-teaser.jpg",
+      "publishedAt": "2019-06-12T16:25:01Z",
+      "content": "Tesla is planning a horse race with Ford in the pickup segment.\r\nDays after proclaiming that Tesla’s upcoming electric pickup would be better than a Ford F-150, Elon Musk revealed on Tuesday what his target is for the truck’s all-important tow rating.\r\nTesla … [+1436 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Cnet.com"
+      },
+      "author": "Chris Paukert",
+      "title": "Ford recalls 1.2 million Explorer SUVs over suspension failure fears - CNET",
+      "description": "The Blue Oval is also issuing three other separate recall actions, including its popular F-150 pickup.",
+      "url": "https://www.cnet.com/roadshow/news/ford-recall-explorer-suv-suspension-failure-f-150-pickup/",
+      "urlToImage": "https://cnet3.cbsistatic.com/img/8YfPSoYkh19HMab1pJrWlM-c0To=/2019/06/12/927c708e-7a12-43b0-9dd6-b8d9b03f5038/2017-ford-explorer-xlt-ogi.jpg",
+      "publishedAt": "2019-06-12T16:05:00Z",
+      "content": "Ford's Explorer is being recalled over potential fractured rear toe links in the vehicle's suspension.\r\nFord\r\nFord has just released a quartet of safety recalls, with three of them impacting US customers. \r\nThe biggest one covers Ford's very popular 2011-2017… [+3649 chars]"
+    }    
+  ]
+}

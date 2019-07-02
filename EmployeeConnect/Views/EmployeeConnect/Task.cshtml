@@ -161,18 +161,14 @@
     microsoftTeams.initialize();
 
         submitHandler = (err, result) => {
-            debugger;
             console.log(`Submit handler - err: ${err}`);
             //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
         function submit(type) {
-            var PONumber = document.getElementById('poNoid');
-            var invoiceNumber = document.getElementById('invoiceNoId');
             debugger;
+            var PONumber = document.getElementById('poNoid');
             let taskInfo = {
-             //   title: null,
-                PONo: null,
                 InvoiceNo: null,
                 height: null,
                 width: null,

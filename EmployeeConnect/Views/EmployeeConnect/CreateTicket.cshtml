@@ -19,6 +19,12 @@
     <script>
         microsoftTeams.initialize();
 
+        submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+            //  alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+
         function validateForm() {
             var ticketInfo = {
                 category: document.forms["ticketcomplete"]["category"].value,
@@ -46,7 +52,6 @@
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
-
             microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
             return true;
         }
@@ -126,7 +131,6 @@
     microsoftTeams.initialize();
 
        submitHandler = (err, result) => {
-            debugger;
             console.log(`Submit handler - err: ${err}`);
            // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };

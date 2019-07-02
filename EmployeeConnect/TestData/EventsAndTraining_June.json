@@ -1,6 +1,5 @@
 {
   "EventsAndTraining": [
-
     {
       "ETDate": "06-05-2019",
       "ETFlag": "T",
@@ -25,8 +24,8 @@
       "ETFlag": "E",
       "ETID": "e1232",
       "ETTitle": "Inside XBOX Live @ E3",
-      "ETStartDate": "06-10-2019",
-      "ETEndDate": "06-10-2019",
+      "ETStartDate": "06-04-2019",
+      "ETEndDate": "06-05-2019",
       "ETStartTime": "1:00 PM",
       "ETEndTime": "4:00 PM",
       "ETThumbnailUrl": "##BaseURL##/Images/Inside XBOX Live @ E3.jpg",
@@ -44,8 +43,8 @@
       "ETFlag": "E",
       "ETID": "e1233",
       "ETTitle": "Microsoft Imagine Championship",
-      "ETStartDate": "06-13-2019",
-      "ETEndDate": "06-14-2019",
+      "ETStartDate": "06-05-2019",
+      "ETEndDate": "06-05-2019",
       "ETStartTime": "8:00 AM",
       "ETEndTime": "2:00 PM",
       "ETThumbnailUrl": "##BaseURL##/Images/Microsoft Imagine Championship.jpg",
@@ -63,13 +62,13 @@
       "ETFlag": "E",
       "ETID": "e1234",
       "ETTitle": "Microsoft Build",
-      "ETStartDate": "06-17-2019",
-      "ETEndDate": "06-17-2019",
+      "ETStartDate": "06-05-2019",
+      "ETEndDate": "06-06-2019",
       "ETStartTime": "8:00 AM",
       "ETEndTime": "12:00 PM",
-      "ETThumbnailUrl": "##BaseURL##/Images/Microsoft Build.jfif",
+      "ETThumbnailUrl": "##BaseURL##/Images/MicrosoftBuild.jfif",
       "ETType": "Online stream",
-      "ETDetails": "More than 6,000 people from around the world are joining us on June 13 in Seattle for Microsoft Build, our premier developer conference. This year’s event is focused on empowering developers of all kinds, from experienced computer scientists to tech beginners with big ideas.",
+      "ETDetails": "More than 6,000 people from around the world are joining us on June 13 in Seattle for Microsoft Build, our premier developer conference. This yearï¿½s event is focused on empowering developers of all kinds, from experienced computer scientists to tech beginners with big ideas.",
       "ETAgenda": "Microsoft Build Developer Conference",
       "ETAddRemoveFlag": "Added",
       "register": null,
@@ -82,8 +81,8 @@
       "ETFlag": "E",
       "ETID": "e1235",
       "ETTitle": "Business Application Summit",
-      "ETStartDate": "06-17-2019",
-      "ETEndDate": "06-18-2019",
+      "ETStartDate": "06-02-2019",
+      "ETEndDate": "06-03-2019",
       "ETStartTime": "10:00 AM",
       "ETEndTime": "5:00 PM",
       "ETThumbnailUrl": "##BaseURL##/Images/Business Application Summit.jfif",
@@ -101,8 +100,8 @@
       "ETFlag": "T",
       "ETID": "e1236",
       "ETTitle": "Teams Platform Overview Training",
-      "ETStartDate": "06-20-2019",
-      "ETEndDate": "06-20-2019",
+      "ETStartDate": "06-02-2019",
+      "ETEndDate": "06-02-2019",
       "ETStartTime": "3:00 PM",
       "ETEndTime": "5:00 PM",
       "ETThumbnailUrl": "##BaseURL##/Images/Teams Platform Overview Training.jpg",
@@ -155,4 +154,3 @@
     }
   ]
 }
-
