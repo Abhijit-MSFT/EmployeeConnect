@@ -231,8 +231,6 @@
     <Compile Include="MessageExtension.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
-    <Compile Include="Models\GNews.cs" />
-    <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
@@ -454,8 +452,6 @@
     <Content Include="imgs\Xiaomi%27s number 1 tag.PNG" />
     <Content Include="js\index.js" />
     <Content Include="Manifest\color.png" />
-    <Content Include="Manifest\contoso20x20.png" />
-    <Content Include="Manifest\contoso96x96.png" />
     <Content Include="Manifest\outline.png" />
     <Content Include="obj\Debug\EmployeeConnect.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\teamsapp.js" />

@@ -64,8 +64,6 @@ namespace EmployeeConnect.Controllers
                     {
                         action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
                     }
-
-
                     Models.TaskInfo taskInfo = GetTaskInfo(action.Data);
                     Models.TaskEnvelope taskEnvelope = new Models.TaskEnvelope
                     {
