@@ -197,7 +197,7 @@ namespace EmployeeConnect.Controllers
                 if(item.ETID == id)
                 {
                     
-                    GetDataHelper.ETStatusUpdate(item.ETID);
+                    ETStatusUpdate(item.ETID);
                     //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
                 }
             }
