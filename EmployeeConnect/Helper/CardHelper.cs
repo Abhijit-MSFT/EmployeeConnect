@@ -14,7 +14,6 @@ using System.Web.Script.Serialization;
 using System.Net;
 using System.Windows.Forms;
 using EmployeeConnect.Common;
-using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Helper
 {
@@ -35,7 +34,7 @@ namespace EmployeeConnect.Helper
             item.title = "Top stories for you";
             item.type = "section";
             list.Add(item);
-            
+
             if (newsL != null)  //if it got the news
             {
                 var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
@@ -72,8 +71,8 @@ namespace EmployeeConnect.Helper
 
                 MaxNewsCount = 0;
                 if (SuggestedNews.Count() > 0) //show 1 suggested news
-                    MaxNewsCount = 1; 
-                
+                    MaxNewsCount = 1;
+
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
                     var news = SuggestedNews.ElementAt(i);
@@ -175,7 +174,7 @@ namespace EmployeeConnect.Helper
             return attachment;
 
         }
-        
+
         //Returns the Tools ListCard having Tools for every department.
         public static Attachment GetMyToolsCard()
         {
@@ -290,7 +289,7 @@ namespace EmployeeConnect.Helper
 
             var card1 = new AdaptiveCard("1.0")
             {
-                            BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
                 Body = new List<AdaptiveElement>()
                 {
                     //BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
@@ -302,7 +301,7 @@ namespace EmployeeConnect.Helper
                             // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
                             new AdaptiveTextBlock()
                             {
-                                
+
                                 Text = "Welcome to Employee Connect",
                                 Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
@@ -350,10 +349,10 @@ namespace EmployeeConnect.Helper
                 {
                     new AdaptiveContainer()
                     {
-                       
+
                         Items = new List<AdaptiveElement>()
                         {
-                            
+
                             new AdaptiveTextBlock()
                             {
                                 Text = "Welcome to Employee Connect",
@@ -840,109 +839,49 @@ namespace EmployeeConnect.Helper
                 for (int i = 0; i < MaxEventsCount; i++)
                 {
                     var EandT = Events.ElementAt(i);
-                    string subtitle = EandT.ETDetails;
-                    string title = EandT.ETTitle + ' ' + EandT.ETStartDate + ' ' + '-' + ' ' + EandT.ETEndDate;
-                    var item = new Item();
-                    //item.title = EandT.ETTitle;
-                    item.title = title;
-                    item.icon = EandT.ETThumbnailUrl;
-                    item.id = EandT.ETID;
-
-                    //if (subtitle.Length > ReqDescriptionLength)
-                    //    item.subtitle = subtitle.Substring(0, ReqDescriptionLength);
-                    //else
-                    item.subtitle = subtitle;
-
-                    item.type = "resultItem";
-
-                    //item.NewBy = "Vedant";      //doesn't display in frontend
-
-                    item.tap = new Tap()
+                    string date = "";
+                    if (EandT.ETStartDate == EandT.ETEndDate)
+                        date = EandT.ETStartDate;
+                    else
+                        date = EandT.ETStartDate + " to " + EandT.ETEndDate;
+                    DateTime Dstart = DateTime.ParseExact(EandT.ETStartDate, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    DateTime Dend = DateTime.ParseExact(EandT.ETEndDate, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    if (count == 5)
+                        break;
+                    if (Dstart <= CurrDate.AddDays(7) && EandT.UserAdded && Dend <= CurrDate.AddDays(7))
                     {
-                        type = "messageBack",
-                        text = EandT.ETID
-                    };
-
-                    list.Add(item);
-                }
-                card.content.items = list.ToArray();
-
-            }
-            Attachment attachment = new Attachment();
-
-            attachment.ContentType = card.contentType;
-
-            attachment.Content = card.content;
-
-            return attachment;
-
-        }
-    
-
-
-        //[Obsolete]
-        public static Attachment UpcomingEventsTraining()
-        {
-            EandTModel ETlist = new EandTModel();
-            ETlist = Helper.GetDataHelper.GetEandT();
-
-            var card = new ListCard();
-            card.content = new Content();
-            var list = new List<Item>();
-            card.content.title = "Upcoming events and training for you";
-
-
-            DateTime CurrDate = new DateTime(2019, 6, 1);
-            Item item;
-            int count = 0;
-            for (int i = 0; i < ETlist.EventsAndtraining.Count(); i++)
-            {
-                if (count == 3)
-                    break;
-                if (!ETlist.EventsAndtraining[i].UserAdded)
-                    continue;
-                else
-                {
-                    DateTime D = DateTime.ParseExact(ETlist.EventsAndtraining[i].ETStartDate, "MM-dd-yyyy",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-
-                    if (D <= CurrDate.AddDays(7))
-                    {
-
+                        string subtitle = date + ' ' + "from" + ' ' + EandT.ETStartTime + '-' + EandT.ETEndTime;
+                        string title = EandT.ETTitle;
                         item = new Item();
-                        item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
-                        item.id = i.ToString();
-                        item.subtitle = ETlist.EventsAndtraining[i].ETStartDate + " to " + ETlist.EventsAndtraining[i].ETEndDate;
-
+                        item.title = title;
+                        //item.icon = EandT.ETThumbnailUrl;
+                        if (EandT.ETFlag == "E")
+                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/flagEvents.JPG";
+                        else
+                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/shapeEvent.JPG";
+                        item.id = EandT.ETID;
+                        item.subtitle = subtitle;
+                        //item.flagImage = EandT.ETFlagImage;
                         item.type = "resultItem";
-                        item.title = ETlist.EventsAndtraining[i].ETTitle;
-
                         item.tap = new Tap()
                         {
-                            type = "imBack",
-                            title = "titleitem",
-                            value = "Event and training item" + i
+                            type = "invoke",
+                            title = item.id,
+                            value = "{ \"type\": \"task/fetch\", \"data\": \"events:" + item.id.ToString() + "\"}"
                         };
-
-                        list.Add(item);
                         count++;
+                        list.Add(item);
                     }
                 }
-            }
-            //adding all events tab
-
-            item = new Item();
-            //item.icon = "##BaseURL##/Images/whiteimage.JPG";
-
-            item.type = "resultItem";
-            item.title = "View more";
-            //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
-            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
-            item.tap = new Tap()
-            {
-                type = "openUrl",
-                value = deepLinkTab("EandT", "Events and Trainings")
-            };
+                /*item = new Item();
+                item.type = "resultItem";
+                item.title = "View more";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                item.tap = new Tap()
+                {
+                    type = "openUrl",
+                    value = deepLinkTab("EandT", "Events and Trainings")
+                };
 
                 list.Add(item);*/
                 ListButton viewButton = new ListButton();
@@ -959,77 +898,9 @@ namespace EmployeeConnect.Helper
             Attachment attachment = new Attachment();
             attachment.ContentType = card.contentType;
             attachment.Content = card.content;
-            return attachment;
-        }
-        //Y.G
-        public static Attachment GetETbyID(string id)
-        {
-            EandTModel EandTL = Helper.GetDataHelper.GetEandT();
-            var SelectedEventsTrainings = getETById(EandTL, id);
-
-            if (SelectedEventsTrainings == null)   //could not find the news
-                return null;
-            var card = new AdaptiveCard("1.0")
-            {
-                Body = new List<AdaptiveElement>()
-                {
-                    new AdaptiveContainer()
-                    {
-                        Items = new List<AdaptiveElement>()
-                        {
-                            new AdaptiveImage
-                            {
-                                        Url = new Uri(SelectedEventsTrainings.ETThumbnailUrl)
-                            },
-                            new AdaptiveTextBlock() //Title of News
-                            {
-                                Text = SelectedEventsTrainings.ETTitle,
-                                Weight = AdaptiveTextWeight.Bolder,     // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
-                            },
-                                new AdaptiveTextBlock()     //NewsBy on Date and Time
-                            {
-                                Text = "By " + SelectedEventsTrainings.ETType + " on " + SelectedEventsTrainings.ETStartDate,
-                                Weight = AdaptiveTextWeight.Lighter,    // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Small,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
-                            },
-                            new AdaptiveTextBlock()     //Detailed News
-                            {
-                                Text = SelectedEventsTrainings.ETDetails,
-                                Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Default,       // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
-                            }
-                        }
-                    }
-                }
-            };
-            Attachment attachment = new Attachment();
-
-            attachment.ContentType = AdaptiveCard.ContentType;
-
-            attachment.Content = card;
 
             return attachment;
         }
-
-        //Returns the News with specific NewsID
-        public static EventsAndTraining getETById(EandTModel EandTL, string id)
-        {
-            if (EandTL == null)
-                return null;
-            foreach (var ET in EandTL.EventsAndtraining)
-            {
-                if (ET.ETID.Equals(id))
-                    return ET;
-            }
-            return null;    // id doesn't exist
-        }
-
-
-        //[Obsolete]
 
         public static Attachment PendingTasks()
         {
@@ -1146,7 +1017,7 @@ namespace EmployeeConnect.Helper
                         Title = "Fill timesheet",
                        // DataJson = "get the data"
                     }
-                     
+
                  }
 
             };
@@ -1329,7 +1200,7 @@ namespace EmployeeConnect.Helper
             card.content.title = "Here are the tools under your HR department";
             string[] HRtools = { "Create business letter", "Create ticket", "Request leave", "View policies" };
             string[] HRtoolsSub = { "Create a business letter within a predesigned color and template.", "For all HR tickets, the ticket type is being set as Employee Support.", "Request leave and check your status in the Leave application.", "Identify the purpose and objectives of Human Resources department." };
-            string[] HRicons = {"/Images/createbusinessletter.JPG","/Images/createticket.JPG","/Images/requestleave.JPG","/Images/viewpolicies.JPG" };
+            string[] HRicons = { "/Images/createbusinessletter.JPG", "/Images/createticket.JPG", "/Images/requestleave.JPG", "/Images/viewpolicies.JPG" };
             for (int i = 0; i < HRtools.Count(); i++)
             {
 
@@ -1382,7 +1253,7 @@ namespace EmployeeConnect.Helper
             card.content.title = "Here are the tools under your IT department";
             string[] ITtools = { "Raise IT Support Ticket", "Make visitor request", "Event IT Support request", "Cafeteria services app" };
             string[] ITtoolsSub = { "Submit your support case to review and respond.", "Fill a request form for short-term visitors.", "Fill out this form to request any equipment for events.", "Employees can order and pay here without waiting in long queues." };
-            string[] ITicons = {"/Images/itsupportticket.JPG","/Images/makewifirequest.JPG", "/Images/eventitsupport.JPG","/Images/cafeteriaservices.JPG"};
+            string[] ITicons = { "/Images/itsupportticket.JPG", "/Images/makewifirequest.JPG", "/Images/eventitsupport.JPG", "/Images/cafeteriaservices.JPG" };
             for (int i = 0; i < ITtools.Count(); i++)
             {
 
@@ -1434,7 +1305,7 @@ namespace EmployeeConnect.Helper
             card.content.title = "Here are the tools under your PaymentAndBenefits department";
             string[] PBTools = { "Download payslip", "Create finance ticket", "Submit benefit claim", "View benefit policies" };
             string[] PBToolsSub = { "View online payslips and full payment histories.", "Open a support ticket with the Finance ", "Submit a claim from your account to start the process.", "Read common queries about servicing your policy." };
-            string[] PBicons = {"/Images/downloadpayslip.JPG","/Images/financeticket.JPG","/Images/benefitclaim.JPG","/Images/viewpolicies.JPG" };
+            string[] PBicons = { "/Images/downloadpayslip.JPG", "/Images/financeticket.JPG", "/Images/benefitclaim.JPG", "/Images/viewpolicies.JPG" };
             for (int i = 0; i < PBTools.Count(); i++)
             {
 
@@ -1476,7 +1347,7 @@ namespace EmployeeConnect.Helper
 
             string[] STools = { "Inventory request", "Timesheet", "Store info" };
             string[] SToolsSub = { "Inventory form to request supplies.", "Weekly timesheet setup in order ", "Your store information." };
-            string[] Sicons = {"/Images/inventoryrequest.JPG","/Images/timesheet.JPG","/Images/storeinfo.JPG" };
+            string[] Sicons = { "/Images/inventoryrequest.JPG", "/Images/timesheet.JPG", "/Images/storeinfo.JPG" };
 
             for (int i = 0; i < STools.Count(); i++)
             {

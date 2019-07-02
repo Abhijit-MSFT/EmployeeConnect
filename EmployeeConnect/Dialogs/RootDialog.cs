@@ -5,14 +5,11 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using EmployeeConnect.Helper;
 
 namespace EmployeeConnect.Dialogs
 {
@@ -109,7 +106,7 @@ namespace EmployeeConnect.Dialogs
                         card = Helper.CardHelper.GetMyToolsCard();
                         reply.Attachments.Add(card);
                         break;
-                    
+
                     case Common.Constants.HumanResourceTools:
                         card = Helper.CardHelper.HumanResourceCard();
                         reply.Attachments.Add(card);
@@ -138,9 +135,6 @@ namespace EmployeeConnect.Dialogs
                         return;
                 }
 
-                        }
-                        break;
-                }
                 await context.PostAsync(reply);
 
             }
@@ -161,40 +155,10 @@ namespace EmployeeConnect.Dialogs
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PoDecline.ButtonTitle, null,
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.NewsCard.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()
                 {
-                    Data = TaskModelUIConstant.PoDecline.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.Declined.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.Declined.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.CreateTicket.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.CreateTicket.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.TicketComplete.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.TicketComplete.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.VisitorRegistration.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.VisitorRegistration.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.SendRequest.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.SendRequest.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.EventCard.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.EventCard.Id
+                    Data = TaskModelUIConstant.NewsCard.Id
                 }));
 
             return card;
@@ -217,7 +181,7 @@ namespace EmployeeConnect.Dialogs
                     return;
                 case Constants.TicketCancel:        //cancels the ticket with a ticket number:removes it from Ticket.json
                     string ticketno = actionDetails.TicketNo;
-                    if(cancelTicket(ticketno)==true)
+                    if (cancelTicket(ticketno) == true)
                         reply.Text = "Ticket deleted successfully";
                     else
                         reply.Text = "Ticket not available";

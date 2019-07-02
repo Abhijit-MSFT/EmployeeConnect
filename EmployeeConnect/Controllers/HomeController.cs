@@ -2,15 +2,10 @@
 using EmployeeConnect.Models;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Globalization;
-using Microsoft.Ajax.Utilities;
 using System.Web.Script.Serialization;
-using EO.Internal;
 
 namespace EmployeeConnect.Controllers
 {
@@ -197,7 +192,7 @@ namespace EmployeeConnect.Controllers
                 if(item.ETID == id)
                 {
                     
-                    GetDataHelper.ETStatusUpdate(item.ETID);
+                    ETStatusUpdate(item.ETID);
                     //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
                 }
             }
@@ -216,6 +211,7 @@ namespace EmployeeConnect.Controllers
             eventsListData.UpcomingEventGrid = UpcomingEventGrid;
             return View(eventsListData);
         }
+
 
 
         [Route("getEventInfo")]
