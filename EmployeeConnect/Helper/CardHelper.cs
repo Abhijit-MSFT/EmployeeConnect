@@ -289,13 +289,13 @@ namespace EmployeeConnect.Helper
 
             var card1 = new AdaptiveCard("1.0")
             {
-                            BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
+                            BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.JPG"),
                 Body = new List<AdaptiveElement>()
                 {
-                    //BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
+                    //BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.JPG"),
                     new AdaptiveContainer()
                     {
-                     //   BackgroundImage = ApplicationSettings.BaseUrl + "/Images/signin_1.png",
+                     //   BackgroundImage = ApplicationSettings.BaseUrl + "/Images/signin_1.JPG",
                         Items = new List<AdaptiveElement>()
                         {
                             // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
@@ -344,7 +344,7 @@ namespace EmployeeConnect.Helper
             };
             var card2 = new AdaptiveCard("1.0")
             {
-                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_2.png"),
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_2.JPG"),
                 Body = new List<AdaptiveElement>()
                 {
                     new AdaptiveContainer()
@@ -1205,7 +1205,7 @@ namespace EmployeeConnect.Helper
             {
 
                 var item = new Item();
-                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.JPG";
                 item.icon = ApplicationSettings.BaseUrl + HRicons[i];
                 item.id = i.ToString();
 
@@ -1310,7 +1310,7 @@ namespace EmployeeConnect.Helper
             {
 
                 var item = new Item();
-                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.JPG";
                 item.icon = ApplicationSettings.BaseUrl + PBicons[i];
                 item.id = i.ToString();
 
@@ -1353,7 +1353,7 @@ namespace EmployeeConnect.Helper
             {
 
                 var item = new Item();
-                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.png";
+                //item.icon = "https://fleetinfobot.azurewebsites.net/resources/Airline-Fleet-Bot-02.JPG";
                 item.icon = ApplicationSettings.BaseUrl + Sicons[i];
                 item.id = i.ToString();
 
