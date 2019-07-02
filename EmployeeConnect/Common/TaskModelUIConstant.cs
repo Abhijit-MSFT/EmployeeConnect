@@ -8,9 +8,9 @@ namespace EmployeeConnect.Common
     public static class TaskModelUIConstant
     {
       public static UIConstants PurchaseOrder { get; set; } =
-            new UIConstants(750, 650, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
+            new UIConstants(950, 650, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
         public static UIConstants  NewsCard { get; set; } =
-            new UIConstants(750, 650, "News Card", TaskModuleIds.PurchaseOrder, "News Card");
+            new UIConstants(750, 650, "News Card", TaskModuleIds.Newscard, "News Card");
         public static UIConstants CreateTicket { get; set; } =
         new UIConstants(610, 510, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
@@ -18,9 +18,9 @@ namespace EmployeeConnect.Common
         new UIConstants(400, 396, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
 
         public static UIConstants VisitorRegistration { get; set; } =
-        new UIConstants(500, 570, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");  
-        public static UIConstants SendRequest { get; set; } =
-        new UIConstants(400, 459, "Send Request", TaskModuleIds.PODecline, "Send Request");
+    new UIConstants(500, 570, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");  
+    public static UIConstants SendRequest { get; set; } =
+    new UIConstants(400, 459, "Send Request", TaskModuleIds.SendRequest, "Send Request");
         public static UIConstants PoDecline { get; set; } =
         new UIConstants(400, 367, "PO Decline", TaskModuleIds.PODecline, "PO Decline");
         public static UIConstants Declined { get; set; } =
@@ -39,7 +39,6 @@ public class UIConstants
             Id = id;
             ButtonTitle = buttonTitle;
         }
-
         public int Height { get; set; }
         public int Width { get; set; }
         public string Title { get; set; }
@@ -57,6 +56,8 @@ public class UIConstants
         public const string Declined = "declined";
         public const string Newscard = "newscard";
         public const string ETcard = "ETcard";
+        public const string SendRequest = "sendrequest";
+        public const string EventCard = "eventcard";
 
     }
 }

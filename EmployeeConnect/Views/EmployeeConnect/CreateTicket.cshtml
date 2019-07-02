@@ -1,19 +1,20 @@
 ﻿@model EmployeeConnect.Models.PO
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Tools.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>CT</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/Content/Tools.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>CT</title>
 
-</head>
+    </head>
 <body>
     <script>
         microsoftTeams.initialize();
@@ -25,18 +26,25 @@
         };
 
         function validateForm() {
-            debugger;
-             let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
+            var ticketInfo = {
+                category: document.forms["ticketcomplete"]["category"].value,
+                description: document.forms["ticketcomplete"]["description"].value,
+                priority: document.forms["ticketcomplete"]["low"].value
+            }
 
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
+            /* $.ajax({
+                  type: "POST",
+                  url: "/Home/ticketComplete",
+                 contentType: "application/json; charset=utf-8",
+                 data: { data: ticketInfo },
+
+                //  data: '{"catrgory":"' + document.forms["ticketcomplete"]["category"].value + '","description":"' + document.forms["ticketcomplete"]["description"].value + '"}', 
+                  dataType: "json",
+                  success: function () {
+                     alert('Success');
+                 },
+                  error: function() { console.log('A error'); }
+                });*/
 
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete";
                 taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
@@ -48,7 +56,7 @@
             return true;
         }
     </script>
-    <form method="POST" id="ticketcomplete" action="/ticketComplete" onSubmit="return validateForm()">
+    <form id="ticketcomplete">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content content-radius">
                 <div class="modal-header custom-header">
@@ -58,38 +66,40 @@
                 </div>
                 <div class="modal-body">
                     <div class="category">Select category</div>
-                    <select class="date-control">
-                        <option selected id="category">Employee support</option>
-                        <option>Option 2</option>
+                    <select class="date-control" id="allCategories">
+                        <option id="category">Employee support</option>
+                        <option id="category">Option 2</option>
+                        <option selected id="category">Employee Connect</option>
+                        <option id="category">Option 3</option>
                     </select>
                     <span class="down-chevron"></span>
                     <div class="modal-category">Description</div>
                     <div class="card custom-card">
-                        <div class="card-body custom-card-body" id="description">
-                            Need to understand PTO assignment
-                        </div>
+                    <textarea class="card-body custom-card-body" id="description">Need to understand PTO assignment</textarea>
                     </div>
                     <div class="modal-priority">Set a priority</div>
-                    <form class="all-radio">
+                    <div class="all-radio" id="priorityCheck">
                         <label class="radio-label col-3 ">
-                            <input type="radio" name="radio" />
+                            <input id="low" type="radio" name="low" />
                             <span class="range">Low</span>
                             <span class="check-mark"></span>
                         </label>
                         <label class="radio-label col-3">
-                            <input type="radio" name="radio" />
+                            <input id="medium" type="radio" name="medium" />
                             <span class="range">Medium</span>
                             <span class="check-mark"></span>
                         </label>
                         <label class="radio-label col-3">
-                            <input type="radio" name="radio" checked />
+                            <input id="high" type="radio" name="high" checked />
                             <span class="range">High</span>
                             <span class="check-mark"></span>
                         </label>
-                    </form>
+                    </div>
                     <div class="two-btn">
-                        <button type="submit" class="cancel">Cancel</button>
-                        <button type="button" class="BCT" onclick="submit('ticketcomplete');">
+                        <button type="submit" class="Close">Close</button>
+                        @*<button type="submit" class="cancel">Cancel</button>*@
+                        <button type="button" class="BCT"
+                               onclick="submitCreateTicket('ticketcomplete');" >
                             Create ticket
                         </button>
                     </div>
@@ -99,14 +109,33 @@
     </form>
     <script src="~/Scripts/teamsapp.js"></script>
     <script>
+    debugger;
+    var categorySelected, prioritySelected, ticketDescription;
+    categorySelected = document.getElementById("category").value;
+    ticketDescription = document.getElementById("description").value;
+    prioritySelected = "low";
+    $("select").change(function ()
+       {    
+        categorySelected = document.getElementBysId("allCategories").value;  
+    }); 
+    $("input[type='radio']").click(function(){
+            var radioValue = $("input[name='low']:checked").val();
+        if (radioValue) {
+            prioritySelected = radioValue;
+                //alert("Your are a - " + radioValue);
+            }
+        });
+
+
+   
     microsoftTeams.initialize();
 
        submitHandler = (err, result) => {
             console.log(`Submit handler - err: ${err}`);
-          //  alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+           // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
-        function submit(type) {
+    function submitCreateTicket(type) {
             let taskInfo = {
              //   title: null,
                 height: null,
@@ -115,17 +144,37 @@
                 fallbackUrl: null,
             };
 
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+             $.ajax({
+                  type: "POST",
+                  url: "/createticketindb",
+                 contentType: "application/json; charset=utf-8",
+                 data: '{"category":"' + categorySelected + '","description":"' + ticketDescription + '","priority":"' + prioritySelected + '"}', 
+                 dataType: "json",
+                 success: function (data) {
+                     debugger;
+                        var parsedData = JSON.parse(data,textStatus, jQxhr);
+                        var TicketNoId = parsedData.TicketNo;
+                        taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete?ticketNoId=" + TicketNoId;
+                        taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
+                        taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";      
+                        // Set fallback URL
+                        taskInfo.fallbackUrl = taskInfo.url;
+                        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+               },
+                  error: function() { console.log('A error'); }
+                });
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete";
-                taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";
+           
+            
+               
+                //   microsoftTeams.tasks.submitTask(taskInfo, submitHandler, "@ApplicationSettings.AppId");
+        
 
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-         //   microsoftTeams.tasks.submitTask(taskInfo, submitHandler, "@ApplicationSettings.AppId");
-
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            
         }
     </script>
 </body>
 
+//

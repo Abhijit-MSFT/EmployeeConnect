@@ -161,10 +161,40 @@ namespace EmployeeConnect.Dialogs
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.NewsCard.ButtonTitle, null,
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PoDecline.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()
                 {
-                    Data = TaskModelUIConstant.NewsCard.Id
+                    Data = TaskModelUIConstant.PoDecline.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.Declined.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.Declined.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.CreateTicket.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.CreateTicket.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.TicketComplete.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.TicketComplete.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.VisitorRegistration.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.VisitorRegistration.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.SendRequest.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.SendRequest.Id
+                }));
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.EventCard.ButtonTitle, null,
+                new Models.BotFrameworkCardValue<string>()
+                {
+                    Data = TaskModelUIConstant.EventCard.Id
                 }));
 
             return card;

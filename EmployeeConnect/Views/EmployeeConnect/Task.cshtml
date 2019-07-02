@@ -55,7 +55,7 @@
                             data-toggle="collapse"
                             data-parent="#accordion"
                             href="#Porder">
-                            <span class="title"> Purchase order <span>(3)</span> </span>
+                            <span class="title"> Purchase order <span>(@Model.PendingPO.Length)</span> </span>
                         </h6>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.PurchaseOrder)
+                                @foreach (var item in Model.PendingPO)
                                 {
                                     <tr class="row-highlight">
                                         <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
@@ -100,7 +100,7 @@
                                 data-toggle="collapse"
                                 data-parent="#accordion"
                                 href="#Invoice">
-                                <span class="title"> Invoice <span>(3)</span> </span>
+                                <span class="title"> Invoice <span>(@Model.ApprovedPO.Length)</span> </span>
                             </h6>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.PurchaseOrder)
+                                    @foreach (var item in Model.ApprovedPO)
                                     {
                                         <tr class="row-highlight">
                                             <td id="invoiceNoId" class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
@@ -162,7 +162,7 @@
 
         submitHandler = (err, result) => {
             console.log(`Submit handler - err: ${err}`);
-       
+            //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
         function submit(type) {

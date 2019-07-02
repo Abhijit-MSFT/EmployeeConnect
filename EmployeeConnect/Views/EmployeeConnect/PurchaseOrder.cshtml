@@ -1,27 +1,54 @@
 ﻿@model EmployeeConnect.Models.PO
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
-<!DOCTYPE html>
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Custom.css" />
+          type="text/css"
+          media="screen"
+          href="~/Content/purchaseOrder.css" />
     <link rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Merchant Popup card</title>
 </head>
 
 <body>
     <script src="~/Scripts/teamsapp.js"></script>
     <script>
         microsoftTeams.initialize();
+           submitHandler = (err, result) => {
+            debugger;
+            console.log(`Submit handler - err: ${err}`);
+           // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        };
+         function submit(type) {
+            debugger;
+            let taskInfo = {
+             //   title: null
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
 
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline";
+                taskInfo.height = "@(TaskModelUIConstant.PoDecline.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PoDecline.Width)";
+
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
         function validateForm() {
              let taskInfo = {
              //   title: null,
@@ -46,53 +73,55 @@
         }
     </script>
     <form method="POST" id="podecline" action="/podecline" onSubmit="return validateForm()">
-        <div class="container-fluid">
-            <header>Purchase order no. poNo</header>
-            <div>Vendor no. 72383</div>
-            <div style="float:right">
-                Total amount<br />
-                <span class="totalSum">30080</span>
-            </div>
-            <span class="title"> Store A</span>
-
-        </div>
-        <div id="Porder" class="panel-collapse">
-            <div class="panel-body">
-                <table class="table">
-                    <thead class="purchaseHeader">
-                        <tr class="head-title-color purchaseHeader">
-                            <th>Item code</th>
-                            <th>Description</th>
-                            <th>Unit price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody class="purchaseBody">
-                        @foreach (var item in Model.PoDetails)
-                        {
-                            <tr class="row-highlight purchaseBody">
-                                <td class="itemCode">@Html.DisplayFor(modelItem => item.ItemCode)</td>
-                                <td class="Description">@Html.DisplayFor(modelItem => item.ItemDescription)</td>
-                                <td class="Unit-price"><span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.UnitPrice)</td>
-                                <td class="Quantity">@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                <td class="Total">
-                                    <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.Total)
-                                </td>
-
-
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                <button type="button" style="margin-left:15px;" class="approve"
-                        onclick="submit('Aprroved');">
-                    Decline
-                </button>
-                <button type="button" style="float:left" class="decline"
-                        onclick="submit('podecline');">
-                    Approve
-                </button>
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header mh">
+                    <h5>
+                        Purchase order no. @TempData["data"]
+                    </h5>
+                    <div class="total-h">Total Amount</div>
+                    <span class="vendor">Vendor no. 72383</span><br />
+                    <span class="store">Store A</span>
+                    <div class="T-amount">
+                        <span class="currency">&#x20b9;</span>
+                        <span class="t-amount">30,828</span>
+                    </div>
+                </div>
+                <div class="modal-body mb">
+                    <div class="row">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="th-head">Item code</td>
+                                    <td class="th-head">Description</td>
+                                    <td class="th-head">Unit price</td>
+                                    <td class="th-head">Quantity</td>
+                                    <td class="th-head th-total">Total</td>
+                                </tr>
+                                @foreach (var item in Model.PoDetails)
+                                {
+                                    <tr>
+                                        <td class="cnt">@Html.DisplayFor(modelItem => item.ItemCode)</td>
+                                        <td class="cnt desc">
+                                            @Html.DisplayFor(modelItem => item.ItemDescription)
+                                        </td>
+                                        <td class="cnt">
+                                            <span class="currency1">&#x20b9;</span>  @Html.DisplayFor(modelItem => item.UnitPrice)
+                                        </td>
+                                        <td class="cnt">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td class="cnt th-total">
+                                            <span class="currency1">&#x20b9;</span> @Html.DisplayFor(modelItem => item.Total)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer foo">
+                        <button type="submit" class="decline">Decline</button>
+                        <button type="button" class="approve" onclick="submit('podecline');">Approve</button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
@@ -127,4 +156,3 @@
         }
     </script>
 </body>
-

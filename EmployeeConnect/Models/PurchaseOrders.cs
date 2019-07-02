@@ -9,7 +9,8 @@ namespace EmployeeConnect.Models
     public class PO
     {
         public PurchaseOrders[] PurchaseOrder { get; set; }
-
+        public PurchaseOrders[] ApprovedPO { get; set; }
+        public PurchaseOrders[] PendingPO { get; set; }
         public Podetail[] PoDetails { get; set; }
     }
     public class PurchaseOrders
