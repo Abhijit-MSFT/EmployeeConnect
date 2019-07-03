@@ -79,7 +79,7 @@ namespace EmployeeConnect.Controllers
                     {
                         ETid = data.Substring(2);
                         //will update the button action Added<->Removed
-                        ETStatusUpdate(ETid);
+                        GetDataHelper.ETStatusUpdate(ETid);
                         return new HttpResponseMessage(HttpStatusCode.Accepted);
                     }
                     switch (data)
@@ -106,7 +106,7 @@ namespace EmployeeConnect.Controllers
                     return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "composeExtension/onCardButtonClicked":
                     ETid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
-                    ETStatusUpdate(ETid);
+                    GetDataHelper.ETStatusUpdate(ETid);
                     break;
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
@@ -156,7 +156,7 @@ namespace EmployeeConnect.Controllers
                 case TaskModuleIds.EventCard:
                     //taskInfo.Card = CardHelper.GetETbyID("7");
                     // taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.EventCard;
-                    SetTaskInfo(taskInfo, TaskModelUIConstant.EventCard);
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
                     break;
 
 
@@ -235,33 +235,6 @@ namespace EmployeeConnect.Controllers
             }
         }
 
-        //changes the status of eT Registered<->Unregistered, Added<->Remove
-        public void ETStatusUpdate(string ETid)
-        {
-            if (ETid == null)
-                return;
-            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-            string json = File.ReadAllText(file);
 
-            Newtonsoft.Json.Linq.JObject ETObj = Newtonsoft.Json.Linq.JObject.Parse(json);
-            for (int i = 0; i < ETObj["EventsAndTraining"].Count(); i++)
-            {
-                if (ETObj["EventsAndTraining"][i]["ETID"].ToString().Equals(ETid))
-                {
-                    ETObj["EventsAndTraining"][i]["UserAdded"] = !(bool)ETObj["EventsAndTraining"][i]["UserAdded"];
-
-                    //Event
-                    if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
-                        ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
-
-                    //Training
-                    else
-                        ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
-                    string FileOutput = Newtonsoft.Json.JsonConvert.SerializeObject(ETObj, Newtonsoft.Json.Formatting.Indented);
-                    File.WriteAllText(file, FileOutput);
-                    break;
-                }
-            }
-        }
     }
 }
