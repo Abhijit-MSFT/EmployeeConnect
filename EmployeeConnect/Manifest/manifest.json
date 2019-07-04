@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
   "manifestVersion": "1.5",
   "version": "1.0.0",
-  "id": "bf0fb57b-4fe9-42b2-8c9f-b996159d2963",
+  "id": "3b28c87b-83d7-47ca-8e8c-5870f08595a5",
   "packageName": "com.microsoft.teams.devapp",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://employeeconnect-9566.azurewebsites.net",
-    "termsOfUseUrl": "https://employeeconnect-9566.azurewebsites.net"
+    "privacyUrl": "https://f2ec49a2.ngrok.io",
+    "termsOfUseUrl": "https://f2ec49a2.ngrok.io"
   },
   "icons": {
     "color": "color.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "currNews",
       "name": "News",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/News",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/News",
+      "contentUrl": "https://f2ec49a2.ngrok.io/News",
+      "websiteUrl": "https://f2ec49a2.ngrok.io/News",
       "scopes": [
         "personal"
       ]
@@ -36,8 +36,8 @@
     {
       "entityId": "EandT",
       "name": "Events and Trainings",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/EventandTrainingTab",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/EventandTrainingTab",
+      "contentUrl": "https://f2ec49a2.ngrok.io/EventandTrainingTab",
+      "websiteUrl": "https://f2ec49a2.ngrok.io/EventandTrainingTab",
       "scopes": [
         "personal"
       ]
@@ -45,8 +45,8 @@
     {
       "entityId": "tools",
       "name": "Tools",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Tools",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Tools",
+      "contentUrl": "https://f2ec49a2.ngrok.io/Tools",
+      "websiteUrl": "https://f2ec49a2.ngrok.io/Tools",
       "scopes": [
         "personal"
       ]
@@ -54,8 +54,8 @@
     {
       "entityId": "tasks",
       "name": "Tasks",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Task",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Task",
+      "contentUrl": "https://f2ec49a2.ngrok.io/Task",
+      "websiteUrl": "https://f2ec49a2.ngrok.io/Task",
       "scopes": [
         "personal"
       ]
@@ -63,8 +63,8 @@
     {
       "entityId": "policies",
       "name": "Policies",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Policies",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Policies",
+      "contentUrl": "https://f2ec49a2.ngrok.io/Policies",
+      "websiteUrl": "https://f2ec49a2.ngrok.io/Policies",
       "scopes": [
         "personal"
       ]
@@ -72,119 +72,119 @@
     {
       "entityId": "preferences",
       "name": "Preferences",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Preferences",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Preferences",
+      "contentUrl": "https://f2ec49a2.ngrok.io/Preferences",
+      "websiteUrl": "https://f2ec49a2.ngrok.io/Preferences",
       "scopes": [
         "personal"
       ]
     }
   ],
   "bots": [
+    {
+      "botId": "3b28c87b-83d7-47ca-8e8c-5870f08595a5",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "commandLists": [
         {
-            "botId": "bf0fb57b-4fe9-42b2-8c9f-b996159d2963",
-            "scopes": [
-                "personal",
-                "team"
-            ],
-          "commandLists": [
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
             {
-              "scopes": [
-                "personal"
-              ],
-              "commands": [
-                {
-                  "title": "welcome",
-                  "description": "Displays the welcome card"
-                },
-                {
-                  "title": "set preferences",
-                  "description": "set notification timings"
-                },
-                {
-                  "title": "trending news",
-                  "description": "View trending news"
-                },
-                {
-                  "title": "upcoming events and training",
-                  "description": "View your events and training"
-                },
-                {
-                  "title": "pending submissions",
-                  "description": "Complete pending tasks"
-                },
-                {
-                  "title": "pending approvals",
-                  "description": "Review pending approvals"
-                },
-                {
-                  "title": "my tools",
-                  "description": "View your tools"
-                },
-                {
-                  "title": "policies",
-                  "description": "View policies"
-                },
-                {
-                  "title": "help",
-                  "description": "Walkthrough"
-                }
-              ]
+              "title": "welcome",
+              "description": "Displays the welcome card"
             },
             {
-              "scopes": [
-                "team"
-              ],
-              "commands": [
-                {
-                  "title": "welcome",
-                  "description": "Displays the welcome card"
-                },
-                {
-                  "title": "set preferences",
-                  "description": "set notification timings"
-                },
-                {
-                  "title": "trending news",
-                  "description": "View trending news"
-                },
-                {
-                  "title": "upcoming events and training",
-                  "description": "View your events and training"
-                },
-                {
-                  "title": "pending tasks",
-                  "description": "Complete pending tasks"
-                },
-                {
-                  "title": "pending approvals",
-                  "description": "Review pending approvals"
-                },
-                {
-                  "title": "my tools",
-                  "description": "View your tools"
-                },
-                {
-                  "title": "policies",
-                  "description": "View policies"
-                },
-                {
-                  "title": "help",
-                  "description": "Walkthrough"
-                },
-                {
-                  "title": "pending submissions",
-                  "description": "Complete pending tasks"
-                }
-              ]
+              "title": "set preferences",
+              "description": "set notification timings"
+            },
+            {
+              "title": "trending news",
+              "description": "View trending news"
+            },
+            {
+              "title": "upcoming events and training",
+              "description": "View your events and training"
+            },
+            {
+              "title": "pending submissions",
+              "description": "Complete pending tasks"
+            },
+            {
+              "title": "pending approvals",
+              "description": "Review pending approvals"
+            },
+            {
+              "title": "my tools",
+              "description": "View your tools"
+            },
+            {
+              "title": "policies",
+              "description": "View policies"
+            },
+            {
+              "title": "help",
+              "description": "Walkthrough"
             }
+          ]
+        },
+        {
+          "scopes": [
+            "team"
           ],
-            "supportsFiles": false,
-            "isNotificationOnly": false
+          "commands": [
+            {
+              "title": "welcome",
+              "description": "Displays the welcome card"
+            },
+            {
+              "title": "set preferences",
+              "description": "set notification timings"
+            },
+            {
+              "title": "trending news",
+              "description": "View trending news"
+            },
+            {
+              "title": "upcoming events and training",
+              "description": "View your events and training"
+            },
+            {
+              "title": "pending tasks",
+              "description": "Complete pending tasks"
+            },
+            {
+              "title": "pending approvals",
+              "description": "Review pending approvals"
+            },
+            {
+              "title": "my tools",
+              "description": "View your tools"
+            },
+            {
+              "title": "policies",
+              "description": "View policies"
+            },
+            {
+              "title": "help",
+              "description": "Walkthrough"
+            },
+            {
+              "title": "pending submissions",
+              "description": "Complete pending tasks"
+            }
+          ]
         }
-    ],
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
   "composeExtensions": [
     {
-      "botId": "bf0fb57b-4fe9-42b2-8c9f-b996159d2963",
+      "botId": "3b28c87b-83d7-47ca-8e8c-5870f08595a5",
       "canUpdateConfiguration": false,
       "commands": [
         {
