@@ -109,18 +109,18 @@ namespace EmployeeConnect.Helper
             entPref.EandTNotifyMe = "true";
             taskPref.TaskNotificationFlag = true;
             taskPref.TaskNotifyMe = "true";
-            string[] time = {"11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM" };
-            string[] category = {"Finance","Media","Art","Business","Culture","Technology"};
+            string[] time = { "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM" };
+            string[] category = { "Finance", "Media", "Design", "Technology", "Data", "Business", "CS", "Technology", "Animation", "IT" };
             switch (pref.SetNewsChoice)
             {
                 case "1":
-                    newsPref.NewsNotificationTime = "9:00 AM";
+                    newsPref.NewsNotificationTime = "8:00 AM";
                     break;
                 case "2":
                     newsPref.NewsNotificationTime = "5:00 PM";
                     break;
                 case "3":
-                    newsPref.NewsNotificationTime = time[Int32.Parse(pref.SetNewsPreferredTime)-1];
+                    newsPref.NewsNotificationTime = time[Int32.Parse(pref.SetNewsPreferredTime) - 1];
                     break;
                 default:
                     break;
@@ -128,7 +128,7 @@ namespace EmployeeConnect.Helper
             switch (pref.SetENTChoice)
             {
                 case "1":
-                    entPref.EandTNotificationTime = "9:00 AM";
+                    entPref.EandTNotificationTime = "8:00 AM";
                     break;
                 case "2":
                     entPref.EandTNotificationTime = "5:00 PM";
@@ -142,7 +142,7 @@ namespace EmployeeConnect.Helper
             switch (pref.SetTaskRemindersChoice)
             {
                 case "1":
-                    taskPref.TaskNotificationTime = "9:00 AM";
+                    taskPref.TaskNotificationTime = "8:00 AM";
                     break;
                 case "2":
                     taskPref.TaskNotificationTime = "5:00 PM";
@@ -168,7 +168,7 @@ namespace EmployeeConnect.Helper
                 var arr = newsCategory.Split(',');
                 newsPref.SelectedCategories = new string[arr.Count()];
                 for (int i = 0; i < arr.Count(); i++)
-                    newsPref.SelectedCategories[i] = category[Int32.Parse(arr[i])-1];
+                    newsPref.SelectedCategories[i] = category[Int32.Parse(arr[i]) - 1];
             }
             uPref.News = new NewsPreference[1];
             uPref.EandT = new EandtPreference[1];
@@ -176,7 +176,7 @@ namespace EmployeeConnect.Helper
             uPref.News[0] = newsPref;
             uPref.EandT[0] = entPref;
             uPref.Task[0] = taskPref;
-            
+
             return uPref;
         }
 
@@ -220,13 +220,13 @@ namespace EmployeeConnect.Helper
                 {
                     ETObj["EventsAndTraining"][i]["UserAdded"] = !(bool)ETObj["EventsAndTraining"][i]["UserAdded"];
 
-                    //Event
-                    if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
-                        ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
+                    ////Event
+                    //if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
+                    //    ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
 
-                    //Training
-                    else
-                        ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
+                    ////Training
+                    //else
+                    //    ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
                     string FileOutput = Newtonsoft.Json.JsonConvert.SerializeObject(ETObj, Newtonsoft.Json.Formatting.Indented);
                     File.WriteAllText(file, FileOutput);
                     break;
@@ -234,7 +234,42 @@ namespace EmployeeConnect.Helper
             }
         }
 
+        public static UPreferences getPreferences()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
+            UPreferences pref = new UPreferences();
+            string json = File.ReadAllText(file);
+            pref = new JavaScriptSerializer().Deserialize<UPreferences>(json);
+            return pref;
+        }
 
+        public static NewsModel getPreferredNews(string username)
+        {
+            UPreferences uPref = getPreferences();
+            List<EmployeeConnect.Models.Preference> list = uPref.preferences.ToList();
+            int i;
+            for (i = 0; i < list.Count(); i++)
+            {
+                if (list[i].UserName.Equals(username))
+                {
+                    break;
+                }
+            }
+            NewsModel newsM = GetNews();
+            if (i == list.Count())
+            {
+                return newsM;
+            }
+            string[] categories = list[i].News[0].SelectedCategories;
+            var prefNews = new List<News>();
+            for (int j = 0; j < categories.Count(); j++)
+            {
+                var news = newsM.news.Where(w => w.Category.Equals(categories[j]));
+                prefNews = prefNews.Concat(news).ToList();
+            }
+            newsM.news = prefNews.ToArray();
+            return newsM;
+        }
     }
 }
 
