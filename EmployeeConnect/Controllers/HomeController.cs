@@ -248,8 +248,8 @@ namespace EmployeeConnect.Controllers
             EventsAndTraining[] UpcomingTrainingGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
             TrainingGrid = eventsListData.EventsAndtraining.Where(i => i.UserAdded == true).ToArray();
             UpcomingTrainingGrid = eventsListData.EventsAndtraining.Where(i => i.UserAdded == false).ToArray();
-            EventGrid = eventsListData.EventsAndtraining.Where(i => i.ETAddRemoveFlag == "Added").ToArray();
-            UpcomingEventGrid = eventsListData.EventsAndtraining.Where(i => i.ETAddRemoveFlag == "Removed").
+            EventGrid = eventsListData.EventsAndtraining.Where(i => i.UserAdded == true).ToArray();
+            UpcomingEventGrid = eventsListData.EventsAndtraining.Where(i => i.UserAdded == false).
                                                                 Where(i => i.UserAdded == false).ToArray();
             EventGrid = TrainingGrid;
             UpcomingEventGrid = UpcomingTrainingGrid;

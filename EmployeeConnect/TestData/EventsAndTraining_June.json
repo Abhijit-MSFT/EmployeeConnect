@@ -13,13 +13,10 @@
       "ETType": "BLR Campus",
       "ETDetails": "We are having a bootcamp session on June 7 in Bangalore for newly joined interns.",
       "ETAgenda": "Hands-on session on Web Development Tools",
-      "ETAddRemoveFlag": null,
-      "ETregister": true,
-      "UserAdded": false,
+      "UserAdded": true,
       "ETMandatory": true
     },
     {
-      "ETAddRemoveFlag": "Removed",
       "ETAgenda": "Xbox Showcase Event featuring new releases",
       "ETDate": "06-06-2019",
       "ETDetails": " Xbox video showcase event of the year on livestream,featuring new released games like Metro Exodus, Mortal Kombat 11, Crackdown 3, Sea of Thieves, and The Division 2.",
@@ -33,7 +30,6 @@
       "ETThumbnailUrl": "##BaseURL##/Images/Inside XBOX Live @ E3",
       "ETTitle": "Inside XBOX Live @ E3",
       "ETType": "Online stream and Las Vegas",
-      "register": "true",
       "UserAdded": false
     },
     {
@@ -49,8 +45,6 @@
       "ETType": "Seattle",
       "ETDetails": "Join us in Seattle at 8 a.m. PT on Thursday, June 13, to watch the World Championship of Imagine Cup, our global student technology competition.",
       "ETAgenda": "Microsoft Imagine Championship Event",
-      "ETAddRemoveFlag": "Added",
-      "register": "true",
       "UserAdded": true,
       "ETMandatory": false
     },
@@ -67,8 +61,6 @@
       "ETType": "Online stream",
       "ETDetails": "More than 6,000 people from around the world are joining us on June 13 in Seattle for Microsoft Build, our premier developer conference. This year�s event is focused on empowering developers of all kinds, from experienced computer scientists to tech beginners with big ideas.",
       "ETAgenda": "Microsoft Build Developer Conference",
-      "ETAddRemoveFlag": "Added",
-      "register": "true",
       "UserAdded": true,
       "ETMandatory": false
     },
@@ -85,8 +77,6 @@
       "ETType": "Seattle",
       "ETDetails": "we're hosting Microsoft Business application summit from June 16 to 17 in Seattle, welcoming thousands in person and millions more via live stream. This annual event presents unique opporunities.",
       "ETAgenda": "Take a peek at out expert-led sessions and wokshops",
-      "ETAddRemoveFlag": "Added",
-      "register": "true",
       "UserAdded": false,
       "ETMandatory": false
     },
@@ -103,8 +93,6 @@
       "ETType": "Online training",
       "ETDetails": "An online training event on June 20 has been scheduled for Platform Overview of Microsoft Teams covering major features like Bots and building new apps through AppStudio.",
       "ETAgenda": "Platform Overview of Microsoft Teams",
-      "ETAddRemoveFlag": null,
-      "register": "true",
       "UserAdded": true,
       "ETMandatory": false
     },
@@ -121,8 +109,6 @@
       "ETType": "Online stream",
       "ETDetails": "Microsoft Ignite:The place where developers and tech professionals continue learning alongside experts. Explore the latest developer tools and cloud technologies and learn how to put your skills to work in new areas.",
       "ETAgenda": "Microsoft Ignite:Learn and Grow alongside Experts",
-      "ETAddRemoveFlag": "Added",
-      "register": null,
       "UserAdded": true,
       "ETMandatory": true
     },
@@ -139,8 +125,6 @@
       "ETType": "BLR Campus",
       "ETDetails": "Explore the latest developer tools and technologies along with hands on session with experts and learn how to put your skills to work  in new areas-like IoT ,Machine Learning,microservices and more.",
       "ETAgenda": "Development camp for Azure Services",
-      "ETAddRemoveFlag": null,
-      "register": true,
       "UserAdded": true,
       "ETMandatory": false
     }

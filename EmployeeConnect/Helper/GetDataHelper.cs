@@ -240,12 +240,12 @@ namespace EmployeeConnect.Helper
                     ETObj["EventsAndTraining"][i]["UserAdded"] = !(bool)ETObj["EventsAndTraining"][i]["UserAdded"];
 
                     //Event
-                    if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
-                        ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
+                    //if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
+                    //    ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
 
-                    //Training
-                    else
-                        ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
+                    ////Training
+                    //else
+                    //    ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
                     string FileOutput = Newtonsoft.Json.JsonConvert.SerializeObject(ETObj, Newtonsoft.Json.Formatting.Indented);
                     File.WriteAllText(file, FileOutput);
                     break;

@@ -51,13 +51,7 @@ namespace EmployeeConnect.Models
 
         [JsonProperty(PropertyName = "ETAgenda")]
         public string ETAgenda { get; set; }
-
-        [JsonProperty(PropertyName = "ETAddRemoveFlag")]
-        public string ETAddRemoveFlag { get; set; }
-
-        [JsonProperty(PropertyName = "ETregister")]
-        public string Register { get; set; }
-
+                        
         [JsonProperty(PropertyName = "ETUserAdded")]
         public bool UserAdded { get; set; }
 
