@@ -175,33 +175,6 @@ namespace EmployeeConnect.Helper
             
             return uPref;
         }
-        public static void ETStatusUpdate(string ETid)
-        {
-            if (ETid == null)
-                return;
-            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-            string json = File.ReadAllText(file);
-
-            Newtonsoft.Json.Linq.JObject ETObj = Newtonsoft.Json.Linq.JObject.Parse(json);
-            for (int i = 0; i < ETObj["EventsAndTraining"].Count(); i++)
-            {
-                if (ETObj["EventsAndTraining"][i]["ETID"].ToString().Equals(ETid))
-                {
-                    ETObj["EventsAndTraining"][i]["UserAdded"] = !(bool)ETObj["EventsAndTraining"][i]["UserAdded"];
-
-                    //Event
-                    if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
-                        ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
-
-                    //Training
-                    else
-                        ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
-                    string FileOutput = Newtonsoft.Json.JsonConvert.SerializeObject(ETObj, Newtonsoft.Json.Formatting.Indented);
-                    File.WriteAllText(file, FileOutput);
-                    break;
-                }
-            }
-        }
 
         //Updates the UPreferences json with the preference
         public static void WritePreferences(Preference pref)
