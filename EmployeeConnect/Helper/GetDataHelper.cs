@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Helper
 {
@@ -36,6 +37,28 @@ namespace EmployeeConnect.Helper
             POs = (new JavaScriptSerializer().Deserialize<PO>(json));
             return POs;
 
+        }
+
+        public static void updatePOStatus(string poNo)
+        {
+            if (poNo == null)
+                return;
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/PurchaseOrders.json";
+            string json = File.ReadAllText(file);
+
+            Newtonsoft.Json.Linq.JObject poObj = Newtonsoft.Json.Linq.JObject.Parse(json);
+            for(int poCount =0; poCount<poObj["purchaseOrder"].Count();poCount++)
+            {
+                if (poObj["purchaseOrder"][poCount]["poNumber"].ToString().Equals(poNo))
+                {
+                    poObj["purchaseOrder"][poCount]["poStatus"] = poObj["purchaseOrder"][poCount]["poStatus"].Equals("pending") ? "approved" : "declined";
+                    string FileOutput = JsonConvert.SerializeObject(poObj, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(file, FileOutput);
+                    break;
+                }
+            }
+
+            return;
         }
         //public static GNews GetNewsData()
         //{
@@ -229,6 +252,26 @@ namespace EmployeeConnect.Helper
                 }
             }
         }
+
+       /* public static void saveVisitorInfo(JObject visitorData)
+        {
+           
+            VisitorDataModel currentVisitor = new VisitorDataModel()
+            {
+          
+                VhostName = hostName,
+                VhostLocation = hostLocation,
+                Vdate = date,
+                Vtime = time,
+                Vpurpose = purpose,
+                Vorg = org,
+                Vcontact = contact
+            
+            };
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string visitorJson = js.Serialize(currentVisitor);
+            File.WriteAllText(@"C:\visitorsData.json", visitorJson);
+        }*/
 
 
     }

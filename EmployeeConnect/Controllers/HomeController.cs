@@ -114,19 +114,8 @@ namespace EmployeeConnect.Controllers
                new JProperty("Date", date),
                new JProperty("Time",time));
             var objectData = data.ToString();
-            VisitorDataModel currentVisitor = new VisitorDataModel()
-            {
-                VhostName = hostName,
-                VhostLocation = hostLocation,
-                Vdate = date,
-                Vtime = time,
-                Vpurpose = purpose,
-                Vorg = org,
-                Vcontact=contact
-            };
+            //GetDataHelper.saveVisitorInfo(data);      
             JavaScriptSerializer js = new JavaScriptSerializer();
-            string visitorJson = js.Serialize(currentVisitor);
-          //  System.IO.File.WriteAllText(@"C:\visitorsData.json", visitorJson);
             var parsedData = js.Serialize(objectData);
             return parsedData;
         }
@@ -167,6 +156,7 @@ namespace EmployeeConnect.Controllers
             ViewBag.visitorList = visitorData;
             return View();
         }
+
         [Route("news")]
         public ActionResult News()
         {
@@ -226,8 +216,9 @@ namespace EmployeeConnect.Controllers
 
             return View(poList);
         }
+
         [Route("podecline")]
-        public ActionResult PODecline(string poNo)
+        public ActionResult PODecline(string poNo, string reason, string comment)
         {
             PO poList = new PO();
             poList = GetDataHelper.GetPOs();
@@ -236,7 +227,7 @@ namespace EmployeeConnect.Controllers
             {
                 if(item.PoNumber == poNo)
                 {
-                    item.PoStatus = "Removed";
+                    GetDataHelper.updatePOStatus(poNo);
                 }
             }
             return View();
@@ -257,11 +248,9 @@ namespace EmployeeConnect.Controllers
             foreach(var item in eventsListData.EventsAndtraining)
             {
                 if(item.ETID == id)
-                {
-                    
+                {                    
                     GetDataHelper.ETStatusUpdate(item.ETID);
-                    //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-                }
+               }
             }
             EventsAndTraining[] EventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
             EventsAndTraining[] UpcomingEventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
@@ -278,8 +267,6 @@ namespace EmployeeConnect.Controllers
             eventsListData.UpcomingEventGrid = UpcomingEventGrid;
             return View(eventsListData);
         }
-
-
 
         [Route("getEventInfo")]
         public JObject GetEventInfo(string eventId)

@@ -26,7 +26,7 @@
                         <div class="today">Today</div>
                         <div class="left-chev"></div>
                         <div class="right-chev"></div>
-                        <div class="month-date">May, 2019</div>
+                        <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
                         <div class="down-chev"></div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
             <div class="col-12">
                 <div class="heading">Other upcoming events and trainings</div>
                 <div class="today">Today</div>
-                <div class="month-date">May, 2019</div>
+                <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
                 <div class="down-chev"></div>
             </div>
         </div>
@@ -210,6 +210,7 @@
 
         submitHandler = (err, result) => {
             debugger;
+            result = result.substring(2, result.length);
             location.href='@Url.Action("EventAndTrainingTab","Home")?id='+result;
             console.log(`Submit handler - err: ${err}`);
             //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));

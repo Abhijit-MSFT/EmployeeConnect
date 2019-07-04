@@ -27,14 +27,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="category">Select a reason</div>
-                    <select class="date-control">
-                        <option selected>out of stock</option>
-                        <option>Option 2</option>
+                    <select class="date-control" id="reasonfordecline">
+                        <option selected id="defaultSelected">out of stock</option>
+                        <option>Not Available</option>
+                        <option>Option 3</option>
+                        <option>Option 4</option>
                     </select>
                     <span class="down-chevron"></span>
                     <div class="modal-category">Comments(optional)</div>
                     <div class="card custom-card">
-                        <textarea class="card-body custom-card-body">
+                        <textarea class="card-body custom-card-body" id="userComment">
                             We are currently out of stock, please wait until next month
                         </textarea>
                     </div>
@@ -50,7 +52,12 @@
     </form>
     <script>
     microsoftTeams.initialize();
-
+  var selectedReason = document.getElementById("defaultSelected").value;
+  $("select").change(function ()
+       {    
+        categorySelectedChange = document.getElementById("reasonfordecline").value;  
+    });
+    var userAddedComment = document.getElementById("userComment").value;
         submitHandler = (err, result) => {
             debugger;
             console.log(`Submit handler - err: ${err}`);
@@ -62,9 +69,10 @@
             let declineInfo = {
              //   title: null,
                 PONo: poNo,
+                reason: selectedReason,
+                comment: userAddedComment,
                 action:"decline"
             };
-
             microsoftTeams.tasks.submitTask(declineInfo);
         }
     </script>

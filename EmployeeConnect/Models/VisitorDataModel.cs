@@ -13,7 +13,6 @@ namespace EmployeeConnect.Models
         public  string Vtime { get; set; }
         public  string Vpurpose { get; set; }
         public  string Vorg { get; set; }
-        public  string Vcontact { get; set; }
-
+        public string Vcontact { get; set; }
     }
 }

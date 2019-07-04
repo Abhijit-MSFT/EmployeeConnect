@@ -175,7 +175,7 @@
                 };
 
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline?poNo=" + result.poNumber;
+                    taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline?poNo=" + result.poNumber +"&POreason="+result.reason+ "&POComment="+result.comment;
                     taskInfo.height = "@(TaskModelUIConstant.PoDecline.Height)";
                     taskInfo.width = "@(TaskModelUIConstant.PoDecline.Width)";
 
@@ -194,7 +194,7 @@
                 url: null
             };
 
-            taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined?poNo=" + result.PONo;
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined?poNo=" + result.PONo;
                 taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
 

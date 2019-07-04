@@ -12,7 +12,5 @@ namespace EmployeeConnect.Models
         public  string date { get; set; }
         public  string category { get; set; }
         public  string priority { get; set; }
-
-
     }
 }
