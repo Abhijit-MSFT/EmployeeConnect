@@ -235,7 +235,6 @@ namespace EmployeeConnect.Controllers
             }
         }
 
-        //changes the status of eT Registered<->Unregistered, Added<->Remove
-      
+
     }
 }
