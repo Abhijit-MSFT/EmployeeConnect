@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
-using System.Net;
-using Chronic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace EmployeeConnect.Helper
 {
@@ -40,6 +37,28 @@ namespace EmployeeConnect.Helper
             POs = (new JavaScriptSerializer().Deserialize<PO>(json));
             return POs;
 
+        }
+
+        public static void updatePOStatus(string poNo)
+        {
+            if (poNo == null)
+                return;
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/PurchaseOrders.json";
+            string json = File.ReadAllText(file);
+
+            Newtonsoft.Json.Linq.JObject poObj = Newtonsoft.Json.Linq.JObject.Parse(json);
+            for(int poCount =0; poCount<poObj["purchaseOrder"].Count();poCount++)
+            {
+                if (poObj["purchaseOrder"][poCount]["poNumber"].ToString().Equals(poNo))
+                {
+                    poObj["purchaseOrder"][poCount]["poStatus"] = poObj["purchaseOrder"][poCount]["poStatus"].Equals("pending") ? "approved" : "declined";
+                    string FileOutput = JsonConvert.SerializeObject(poObj, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(file, FileOutput);
+                    break;
+                }
+            }
+
+            return;
         }
         //public static GNews GetNewsData()
         //{
@@ -232,6 +251,51 @@ namespace EmployeeConnect.Helper
                     break;
                 }
             }
+        }
+
+        public static void saveVisitorInfo(JObject visitorData)
+        {
+
+           VisitorDataModel currentVisitor = new VisitorDataModel()
+            {               
+
+                VhostName = visitorData.GetValue("hostName").ToString(),
+                VhostLocation = visitorData.GetValue("hostLocation").ToString(),
+                Vdate = visitorData.GetValue("date").ToString(),
+                Vtime = visitorData.GetValue("time").ToString(),
+                Vpurpose = visitorData.GetValue("purpose").ToString(),
+                Vorg = visitorData.GetValue("org").ToString(),
+                Vcontact = visitorData.GetValue("contact").ToString()
+
+           };
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string visitorJson = js.Serialize(currentVisitor);
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/VisitorReg") + @"/Visitors.json";
+            if (File.Exists(filePath))
+            {
+                File.AppendAllText(filePath, visitorJson);
+            }
+        }
+
+        public static void saveTicketsInfo(JObject ticketData)
+        {
+
+            TicketsDataModel currentTicket = new TicketsDataModel()
+            {
+                ticketNo = Convert.ToInt32(ticketData.GetValue("TicketNo")),
+                ticketDescription = ticketData.GetValue("Description").ToString(),
+                date = ticketData.GetValue("Date").ToString(),
+                priority = ticketData.GetValue("Priority").ToString(),
+                category = ticketData.GetValue("Category").ToString()
+            };
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string TicketJson = js.Serialize(currentTicket);
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets") + @"/Tickets.json";
+            if (File.Exists(filePath))
+            {
+                File.AppendAllText(filePath, TicketJson);
+            }
+
         }
 
 

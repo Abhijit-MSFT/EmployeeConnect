@@ -16,32 +16,8 @@
 <body>
     <script>
         microsoftTeams.initialize();
-
-        function validateForm() {
-            debugger;
-             let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
-                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
-            return true;
-        }
     </script>
-    <form method="POST" id="ticketcomplete" action="/declined" onSubmit="return validateForm()">
+    <form id="ticketcomplete">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content content-radius">
                 <div class="modal-header custom-header">
@@ -51,21 +27,22 @@
                 </div>
                 <div class="modal-body">
                     <div class="category">Select a reason</div>
-                    <select class="date-control">
-                        <option selected>out of stock</option>
-                        <option>Option 2</option>
+                    <select class="date-control" id="reasonfordecline">
+                        <option selected id="defaultSelected">out of stock</option>
+                        <option>Not Available</option>
+                        <option>Option 3</option>
+                        <option>Option 4</option>
                     </select>
                     <span class="down-chevron"></span>
                     <div class="modal-category">Comments(optional)</div>
                     <div class="card custom-card">
-                        <div class="card-body custom-card-body">
+                        <textarea class="card-body custom-card-body" id="userComment">
                             We are currently out of stock, please wait until next month
-                        </div>
+                        </textarea>
                     </div>
                     <div class="two-btn">
                         <button type="submit" class="cancel">Cancel</button>
-                        <button type="button" class="BCT" onclick="submit('declined');" data-toggle="modal"
-                                data-target="#Next">
+                        <button type="button" class="BCT" onclick="submitDecline(@TempData["data"]);">
                             Decline
                         </button>
                     </div>
@@ -75,37 +52,27 @@
     </form>
     <script>
     microsoftTeams.initialize();
-
+    var selectedReason = document.getElementById("defaultSelected").value;
+  $("select").change(function ()
+       {    
+        categorySelectedChange = document.getElementById("reasonfordecline").value;  
+    });
+    var userAddedComment = document.getElementById("userComment").value;
         submitHandler = (err, result) => {
             debugger;
             console.log(`Submit handler - err: ${err}`);
             alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
-        function submit(type) {
+        function submitDecline(poNo) {
             debugger;
-            let taskInfo = {
-             //   title: null,
-                PONo: null,
-                InvoiceNo: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
+            let declineInfo = {
+                PONo: poNo,
+                reason: selectedReason,
+                comment: userAddedComment,
+                action:"decline"
             };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
-                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
-
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            microsoftTeams.tasks.submitTask(declineInfo);
         }
     </script>
 
