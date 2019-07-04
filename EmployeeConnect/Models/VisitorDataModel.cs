@@ -5,6 +5,7 @@ using System.Web;
 
 namespace EmployeeConnect.Models
 {
+
     public class VisitorDataModel
     {
         public  string VhostName { get; set; }

@@ -52,7 +52,7 @@
     </form>
     <script>
     microsoftTeams.initialize();
-  var selectedReason = document.getElementById("defaultSelected").value;
+    var selectedReason = document.getElementById("defaultSelected").value;
   $("select").change(function ()
        {    
         categorySelectedChange = document.getElementById("reasonfordecline").value;  
@@ -67,7 +67,6 @@
         function submitDecline(poNo) {
             debugger;
             let declineInfo = {
-             //   title: null,
                 PONo: poNo,
                 reason: selectedReason,
                 comment: userAddedComment,

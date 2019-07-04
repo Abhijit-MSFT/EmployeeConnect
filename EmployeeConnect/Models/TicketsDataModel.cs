@@ -5,6 +5,7 @@ using System.Web;
 
 namespace EmployeeConnect.Models
 {
+
     public class TicketsDataModel
     {
         public  int  ticketNo { get; set; }

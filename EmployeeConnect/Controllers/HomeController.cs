@@ -87,18 +87,8 @@ namespace EmployeeConnect.Controllers
                 new JProperty("TicketNo", ticketNumber),
                 new JProperty("Date", currentDate));
             var objectData = data.ToString();
-            TicketsDataModel currentTicket = new TicketsDataModel()
-            {
-                ticketNo = ticketNumber,
-                ticketDescription = description,
-                date = currentDate.ToString(),
-                priority = prioritySelected,
-                category= category
-            };
+            GetDataHelper.saveTicketsInfo(data);
             JavaScriptSerializer js = new JavaScriptSerializer();
-            string ticketJson = js.Serialize(currentTicket);
-            //System.IO.File.WriteAllText(@"C:\ticketsData.json",ticketJson);
-
             var parsedData = js.Serialize(objectData);
             return parsedData;
         }
@@ -114,7 +104,7 @@ namespace EmployeeConnect.Controllers
                new JProperty("Date", date),
                new JProperty("Time",time));
             var objectData = data.ToString();
-            //GetDataHelper.saveVisitorInfo(data);      
+            GetDataHelper.saveVisitorInfo(data);      
             JavaScriptSerializer js = new JavaScriptSerializer();
             var parsedData = js.Serialize(objectData);
             return parsedData;

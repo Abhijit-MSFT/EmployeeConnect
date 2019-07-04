@@ -253,25 +253,50 @@ namespace EmployeeConnect.Helper
             }
         }
 
-       /* public static void saveVisitorInfo(JObject visitorData)
+        public static void saveVisitorInfo(JObject visitorData)
         {
-           
-            VisitorDataModel currentVisitor = new VisitorDataModel()
-            {
-          
-                VhostName = hostName,
-                VhostLocation = hostLocation,
-                Vdate = date,
-                Vtime = time,
-                Vpurpose = purpose,
-                Vorg = org,
-                Vcontact = contact
-            
-            };
+
+           VisitorDataModel currentVisitor = new VisitorDataModel()
+            {               
+
+                VhostName = visitorData.GetValue("hostName").ToString(),
+                VhostLocation = visitorData.GetValue("hostLocation").ToString(),
+                Vdate = visitorData.GetValue("date").ToString(),
+                Vtime = visitorData.GetValue("time").ToString(),
+                Vpurpose = visitorData.GetValue("purpose").ToString(),
+                Vorg = visitorData.GetValue("org").ToString(),
+                Vcontact = visitorData.GetValue("contact").ToString()
+
+           };
             JavaScriptSerializer js = new JavaScriptSerializer();
             string visitorJson = js.Serialize(currentVisitor);
-            File.WriteAllText(@"C:\visitorsData.json", visitorJson);
-        }*/
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/VisitorReg") + @"/Visitors.json";
+            if (File.Exists(filePath))
+            {
+                File.AppendAllText(filePath, visitorJson);
+            }
+        }
+
+        public static void saveTicketsInfo(JObject ticketData)
+        {
+
+            TicketsDataModel currentTicket = new TicketsDataModel()
+            {
+                ticketNo = Convert.ToInt32(ticketData.GetValue("TicketNo")),
+                ticketDescription = ticketData.GetValue("Description").ToString(),
+                date = ticketData.GetValue("Date").ToString(),
+                priority = ticketData.GetValue("Priority").ToString(),
+                category = ticketData.GetValue("Category").ToString()
+            };
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string TicketJson = js.Serialize(currentTicket);
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets") + @"/Tickets.json";
+            if (File.Exists(filePath))
+            {
+                File.AppendAllText(filePath, TicketJson);
+            }
+
+        }
 
 
     }
