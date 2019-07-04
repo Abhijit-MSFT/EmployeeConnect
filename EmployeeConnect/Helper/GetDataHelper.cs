@@ -261,11 +261,11 @@ namespace EmployeeConnect.Helper
 
                 VhostName = visitorData.GetValue("hostName").ToString(),
                 VhostLocation = visitorData.GetValue("hostLocation").ToString(),
-                Vdate = visitorData.GetValue("date").ToString(),
-                Vtime = visitorData.GetValue("time").ToString(),
+                Vdate = visitorData.GetValue("Date").ToString(),
+                Vtime = visitorData.GetValue("Time").ToString(),
                 Vpurpose = visitorData.GetValue("purpose").ToString(),
                 Vorg = visitorData.GetValue("org").ToString(),
-                Vcontact = visitorData.GetValue("contact").ToString()
+                Vcontact = visitorData.GetValue("contactNo").ToString()
 
            };
             JavaScriptSerializer js = new JavaScriptSerializer();
