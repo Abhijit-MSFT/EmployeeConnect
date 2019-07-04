@@ -86,7 +86,7 @@
                                             <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
                                         </td>
 
-                                        <td class="reviewButton" onclick="submit('purchaseorder');">Review</td>
+                                        <td class="reviewButton" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
                                     </tr>
                                 }
                             </tbody>
@@ -130,7 +130,7 @@
                                             <td class="amount">
                                                 <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
                                             </td>
-                                            <td class="reviewButton" onclick="submit('purchaseorder');">Review</td>
+                                            <td class="reviewButton" onclick="submitPurchaseOrder('@item.InvoiceNo','@item.vendorNo');">Review</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -160,14 +160,59 @@
     <script>
     microsoftTeams.initialize();
 
-        submitHandler = (err, result) => {
-            console.log(`Submit handler - err: ${err}`);
-            //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+    submitHandler = (err, result) => {
+
+          //  console.log(`Submit handler - err: ${err}`);
+        //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        debugger;
+            if (result.action == "podecline") {
+                  let taskInfo = {
+                    InvoiceNo: null,
+                    height: null,
+                    width: null,
+                    url: null,
+                    fallbackUrl: null,
+                };
+
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline?poNo=" + result.poNumber;
+                    taskInfo.height = "@(TaskModelUIConstant.PoDecline.Height)";
+                    taskInfo.width = "@(TaskModelUIConstant.PoDecline.Width)";
+
+
+                // Set fallback URL
+                taskInfo.fallbackUrl = taskInfo.url;
+                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+
+        }
+        if (result.action == "decline") {
+            debugger;
+             let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null
+            };
+
+            taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined?poNo=" + result.PONo;
+                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+        if (result.action == "decline") {
+            microsoftTeams.tasks.submitTask();
+        }
+
+
         };
 
-        function submit(type) {
+        function submitPurchaseOrder(poNo, vendorNumber) {
             debugger;
-            var PONumber = document.getElementById('poNoid');
+            var PONumber = poNo;
+            var vendorNo = vendorNumber;
             let taskInfo = {
                 InvoiceNo: null,
                 height: null,
@@ -180,7 +225,7 @@
             taskInfo.height = "medium";
             taskInfo.width = "medium";
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/purchaseorder?poNumber="+PONumber.innerText;
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/purchaseorder?poNumber="+PONumber+"&vendorno="+vendorNo;
                 taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
 
@@ -188,6 +233,9 @@
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+
+
+
         }
     </script>
 

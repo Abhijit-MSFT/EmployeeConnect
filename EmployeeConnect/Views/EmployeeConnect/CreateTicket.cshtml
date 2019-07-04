@@ -18,43 +18,15 @@
 <body>
     <script>
         microsoftTeams.initialize();
-
-        submitHandler = (err, result) => {
-            debugger;
-            console.log(`Submit handler - err: ${err}`);
-            //  alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
-        };
-
-        function validateForm() {
-            var ticketInfo = {
-                category: document.forms["ticketcomplete"]["category"].value,
-                description: document.forms["ticketcomplete"]["description"].value,
-                priority: document.forms["ticketcomplete"]["low"].value
-            }
-
-            /* $.ajax({
-                  type: "POST",
-                  url: "/Home/ticketComplete",
-                 contentType: "application/json; charset=utf-8",
-                 data: { data: ticketInfo },
-
-                //  data: '{"catrgory":"' + document.forms["ticketcomplete"]["category"].value + '","description":"' + document.forms["ticketcomplete"]["description"].value + '"}', 
-                  dataType: "json",
-                  success: function () {
-                     alert('Success');
-                 },
-                  error: function() { console.log('A error'); }
-                });*/
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete";
-                taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
+ function closeTicket() {
+             let ticketInfo = {
+                 action: "submitTicket",
+            };
+            microsoftTeams.tasks.submitTask(ticketInfo);
             return true;
         }
+       
+        
     </script>
     <form id="ticketcomplete">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -96,7 +68,7 @@
                         </label>
                     </div>
                     <div class="two-btn">
-                        <button type="submit" class="Close">Close</button>
+                        <button type="submit" class="Close" onclick="closeTicket('submitTicket')">Close</button>
                         @*<button type="submit" class="cancel">Cancel</button>*@
                         <button type="button" class="BCT"
                                onclick="submitCreateTicket('ticketcomplete');" >
@@ -109,72 +81,53 @@
     </form>
     <script src="~/Scripts/teamsapp.js"></script>
     <script>
-    debugger;
-    var categorySelected, prioritySelected, ticketDescription;
-    categorySelected = document.getElementById("category").value;
-    ticketDescription = document.getElementById("description").value;
-    prioritySelected = "low";
-    $("select").change(function ()
-       {    
-        categorySelected = document.getElementBysId("allCategories").value;  
-    }); 
     $("input[type='radio']").click(function(){
             var radioValue = $("input[name='low']:checked").val();
         if (radioValue) {
             prioritySelected = radioValue;
-                //alert("Your are a - " + radioValue);
             }
-        });
-
-
+    });
+    var categorySelectedChange = document.getElementById("category").value;
+  $("select").change(function ()
+       {    
+        categorySelectedChange = document.getElementById("allCategories").value;  
+    });
    
     microsoftTeams.initialize();
 
-       submitHandler = (err, result) => {
-            console.log(`Submit handler - err: ${err}`);
-           // alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
-        };
-
     function submitCreateTicket(type) {
-            let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
-
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-             $.ajax({
+        debugger;
+    var categorySelected, prioritySelected, ticketDescription;
+    categorySelected = categorySelectedChange;
+    ticketDescription = document.getElementById("description").value;
+    prioritySelected = "low";
+  
+         $.ajax({
                   type: "POST",
                   url: "/createticketindb",
                  contentType: "application/json; charset=utf-8",
                  data: '{"category":"' + categorySelected + '","description":"' + ticketDescription + '","priority":"' + prioritySelected + '"}', 
                  dataType: "json",
-                 success: function (data) {
-                     debugger;
-                        var parsedData = JSON.parse(data,textStatus, jQxhr);
-                        var TicketNoId = parsedData.TicketNo;
-                        taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete?ticketNoId=" + TicketNoId;
-                        taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
-                        taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";      
-                        // Set fallback URL
-                        taskInfo.fallbackUrl = taskInfo.url;
-                        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+             success: function (data) {   
+                 
+                   var parsedData = JSON.parse(data);
+                     var TicketNoId = parsedData.TicketNo;
+                     var Description = parsedData.Description;
+                     var ticketCategory = parsedData.Category;
+                     var ticketpriority = parsedData.Priority;
+                   let ticketInfo = {
+                       ticketNo: TicketNoId,
+                       TDescription: Description,
+                       TCategory: ticketCategory,
+                       TPriority:ticketpriority,
+                       action:"ticketcomplete"
+                   };    
+                   microsoftTeams.tasks.submitTask(ticketInfo);
                },
                   error: function() { console.log('A error'); }
                 });
-
-           
-            
-               
-                //   microsoftTeams.tasks.submitTask(taskInfo, submitHandler, "@ApplicationSettings.AppId");
-        
-
-            
-        }
+ 
+    }
+   
     </script>
 </body>
-
-//

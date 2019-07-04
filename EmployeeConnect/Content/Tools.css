@@ -429,14 +429,16 @@ span.range {
 }
 
 .ticket-no-no {
-    padding-left: 60px;
+    padding-left: 0px !important;
 }
 
 .VD-form-tkno-name {
     padding-left: 82px;
 }
-
-.Date-created-date, .VD-org-org, .VD-date-date, .VD-time-time {
+.Date-created-date{
+    padding-left:0px !important;
+}
+.VD-org-org, .VD-date-date, .VD-time-time {
     padding-left: 45px;
 }
 
@@ -661,9 +663,12 @@ body {
 }
 /*CreateTicket PopUp Css*/
 body {
-    padding: 20px;
+    padding: 0px;
     overflow: auto;
     background-color: #ffffff;
+}
+.theme-light .panel{
+    overflow:hidden !important;
 }
 
 .panel-heading .accordion-toggle::after {

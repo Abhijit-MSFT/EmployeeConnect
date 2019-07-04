@@ -3,7 +3,7 @@
     {
       "ETDate": "06-05-2019",
       "ETFlag": "T",
-      "ETID": "e1231",
+      "ETID": "ETe1231",
       "ETTitle": "Bootcamp Training Session",
       "ETStartDate": "06-07-2019",
       "ETEndDate": "06-07-2019",
@@ -15,14 +15,13 @@
       "ETAgenda": "Hands-on session on Web Development Tools",
       "ETAddRemoveFlag": null,
       "ETregister": true,
-      "ETUserAdded": true,
-      "ETMandatory": "",
-      "ETFeatured" : ""
+      "UserAdded": false,
+      "ETMandatory": true
     },
     {
       "ETDate": "06-06-2019",
       "ETFlag": "E",
-      "ETID": "e1232",
+      "ETID": "ETe1232",
       "ETTitle": "Inside XBOX Live @ E3",
       "ETStartDate": "06-04-2019",
       "ETEndDate": "06-05-2019",
@@ -33,15 +32,14 @@
       "ETDetails": " Xbox video showcase event of the year on livestream,featuring new released games like Metro Exodus, Mortal Kombat 11, Crackdown 3, Sea of Thieves, and The Division 2.",
       "ETAgenda": "Xbox Showcase Event featuring new releases",
       "ETAddRemoveFlag": "Removed",
-      "register": null,
+      "register": "true",
       "UserAdded": false,
-      "ETMandatory": "",
-      "ETFeatured": ""
+      "ETMandatory": false
     },
     {
       "ETDate": "06-07-2019",
       "ETFlag": "E",
-      "ETID": "e1233",
+      "ETID": "ETe1233",
       "ETTitle": "Microsoft Imagine Championship",
       "ETStartDate": "06-05-2019",
       "ETEndDate": "06-05-2019",
@@ -52,15 +50,14 @@
       "ETDetails": "Join us in Seattle at 8 a.m. PT on Thursday, June 13, to watch the World Championship of Imagine Cup, our global student technology competition.",
       "ETAgenda": "Microsoft Imagine Championship Event",
       "ETAddRemoveFlag": "Added",
-      "register": null,
+      "register": "true",
       "UserAdded": true,
-      "ETMandatory": "",
-      "ETFeatured": ""
+      "ETMandatory": false
     },
     {
       "ETDate": "06-10-2019",
       "ETFlag": "E",
-      "ETID": "e1234",
+      "ETID": "ETe1234",
       "ETTitle": "Microsoft Build",
       "ETStartDate": "06-05-2019",
       "ETEndDate": "06-06-2019",
@@ -71,15 +68,14 @@
       "ETDetails": "More than 6,000 people from around the world are joining us on June 13 in Seattle for Microsoft Build, our premier developer conference. This year�s event is focused on empowering developers of all kinds, from experienced computer scientists to tech beginners with big ideas.",
       "ETAgenda": "Microsoft Build Developer Conference",
       "ETAddRemoveFlag": "Added",
-      "register": null,
+      "register": "true",
       "UserAdded": true,
-      "ETMandatory": "",
-      "ETFeatured": ""
+      "ETMandatory": false
     },
     {
       "ETDate": "06-05-2019",
       "ETFlag": "E",
-      "ETID": "e1235",
+      "ETID": "ETe1235",
       "ETTitle": "Business Application Summit",
       "ETStartDate": "06-02-2019",
       "ETEndDate": "06-03-2019",
@@ -90,15 +86,14 @@
       "ETDetails": "we're hosting Microsoft Business application summit from June 16 to 17 in Seattle, welcoming thousands in person and millions more via live stream. This annual event presents unique opporunities.",
       "ETAgenda": "Take a peek at out expert-led sessions and wokshops",
       "ETAddRemoveFlag": "Added",
-      "register": null,
+      "register": "true",
       "UserAdded": true,
-      "ETMandatory": "",
-      "ETFeatured": ""
+      "ETMandatory": false
     },
     {
       "ETDate": "06-14-2019",
       "ETFlag": "T",
-      "ETID": "e1236",
+      "ETID": "ETe1236",
       "ETTitle": "Teams Platform Overview Training",
       "ETStartDate": "06-02-2019",
       "ETEndDate": "06-02-2019",
@@ -109,15 +104,14 @@
       "ETDetails": "An online training event on June 20 has been scheduled for Platform Overview of Microsoft Teams covering major features like Bots and building new apps through AppStudio.",
       "ETAgenda": "Platform Overview of Microsoft Teams",
       "ETAddRemoveFlag": null,
-      "register": "false",
-      "UserAdded": false,
-      "ETMandatory": "",
-      "ETFeatured": ""
+      "register": "true",
+      "UserAdded": true,
+      "ETMandatory": false
     },
     {
       "ETDate": "06-18-2019",
       "ETFlag": "E",
-      "ETID": "e1237",
+      "ETID": "ETe1237",
       "ETTitle": "Microsoft Ignite",
       "ETStartDate": "06-24-2019",
       "ETEndDate": "06-25-2019",
@@ -130,13 +124,12 @@
       "ETAddRemoveFlag": "Added",
       "register": null,
       "UserAdded": true,
-      "ETMandatory": "",
-      "ETFeatured": ""
+      "ETMandatory": true
     },
     {
       "ETDate": "06-20-2019",
       "ETFlag": "T",
-      "ETID": "e1238",
+      "ETID": "ETe1238",
       "ETTitle": "Microsoft Azure Development Camp",
       "ETStartDate": "06-27-2019",
       "ETEndDate": "06-28-2019",
@@ -149,8 +142,7 @@
       "ETAddRemoveFlag": null,
       "register": true,
       "UserAdded": true,
-      "ETMandatory": "",
-      "ETFeatured": ""
+      "ETMandatory": false
     }
   ]
 }

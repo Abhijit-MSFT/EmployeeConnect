@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Linq;
 using System.Globalization;
 using System.Web.Script.Serialization;
+using System.Collections.Generic;
 
 namespace EmployeeConnect.Controllers
 {
@@ -71,11 +72,11 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-        JObject globalTicketData = new JObject();
         [Route("createticketindb")]
         public string CreateTicketindb(string category, string description, string prioritySelected)
         {
-            int ticketNumber = 000000324567;
+            Random no = new Random();
+            int ticketNumber = no.Next();
             DateTime currentDate = DateTime.Now;
             CultureInfo invC = CultureInfo.InvariantCulture;
             currentDate.ToString("f", invC);
@@ -85,21 +86,64 @@ namespace EmployeeConnect.Controllers
                 new JProperty("Priority", prioritySelected),
                 new JProperty("TicketNo", ticketNumber),
                 new JProperty("Date", currentDate));
-            globalTicketData = data;
             var objectData = data.ToString();
+            TicketsDataModel currentTicket = new TicketsDataModel()
+            {
+                ticketNo = ticketNumber,
+                ticketDescription = description,
+                date = currentDate.ToString(),
+                priority = prioritySelected,
+                category= category
+            };
             JavaScriptSerializer js = new JavaScriptSerializer();
+            string ticketJson = js.Serialize(currentTicket);
+            //System.IO.File.WriteAllText(@"C:\ticketsData.json",ticketJson);
+
+            var parsedData = js.Serialize(objectData);
+            return parsedData;
+        }
+        [Route("sendRequestindb")]
+        public string SendRequestIndb(string hostName, string hostLocation, string org, string contact, string purpose, string date, string time)
+        {
+            JObject data = new JObject(
+               new JProperty("hostName", hostName),
+               new JProperty("hostLocation", hostLocation),
+               new JProperty("contactNo", contact),
+               new JProperty("org", org),
+               new JProperty("purpose", purpose),
+               new JProperty("Date", date),
+               new JProperty("Time",time));
+            var objectData = data.ToString();
+            VisitorDataModel currentVisitor = new VisitorDataModel()
+            {
+                VhostName = hostName,
+                VhostLocation = hostLocation,
+                Vdate = date,
+                Vtime = time,
+                Vpurpose = purpose,
+                Vorg = org,
+                Vcontact=contact
+            };
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string visitorJson = js.Serialize(currentVisitor);
+          //  System.IO.File.WriteAllText(@"C:\visitorsData.json", visitorJson);
             var parsedData = js.Serialize(objectData);
             return parsedData;
         }
 
-
         [Route("ticketcomplete")]
-        public ActionResult TicketComplete(int ticketNoId)
+        public ActionResult TicketComplete(int ticketNoId,string description, string category, string priority)
         {
-            var currentTicketData = globalTicketData.ToString();
-            JavaScriptSerializer js = new JavaScriptSerializer();
-           // var parsedData = js.Serialize(currentTicketData);
-
+            List<string> ticketData = new List<string>();
+            DateTime currentDate = DateTime.Now;
+            CultureInfo invC = CultureInfo.InvariantCulture;
+            currentDate.ToString("f", invC);
+            ticketData.Add(description);
+            ticketData.Add(category);
+            ticketData.Add(priority);
+            ticketData.Add(ticketNoId.ToString());
+            ticketData.Add(currentDate.ToString());
+            ViewBag.ticketList = ticketData;
             return View();
         }
 
@@ -110,8 +154,17 @@ namespace EmployeeConnect.Controllers
         }
 
         [Route("sendrequest")]
-        public ActionResult SendRequest()
+        public ActionResult SendRequest(string Date, string Time, string Contact, string location, string purpose, string hostName, string org)
         {
+            List<string> visitorData = new List<string>();
+            visitorData.Add(Date);
+            visitorData.Add(Time);
+            visitorData.Add(Contact);
+            visitorData.Add(location);
+            visitorData.Add(purpose);
+            visitorData.Add(hostName);
+            visitorData.Add(org);
+            ViewBag.visitorList = visitorData;
             return View();
         }
         [Route("news")]
@@ -144,10 +197,11 @@ namespace EmployeeConnect.Controllers
 
         [Route("purchaseorder")]
         [HttpGet]
-        public ActionResult PurchaseOrder(string poNumber)
+        public ActionResult PurchaseOrder(string poNumber,string vendorno)
         {
 
             TempData["data"] = poNumber;
+            ViewBag.vendorNo = vendorno;
             PO poList = new PO();
             poList = GetDataHelper.GetPOs();
             var podetaillist = poList.PurchaseOrder[0].PoDetails;
@@ -167,18 +221,31 @@ namespace EmployeeConnect.Controllers
                 poTotal += Convert.ToInt32(poList.PoDetails[poCount].Total);
             }
             string TotalPOSum = poTotal.ToString();
-            
+            ViewData["Sum"] = TotalPOSum;
+
+
             return View(poList);
         }
         [Route("podecline")]
-        public ActionResult PODecline()
+        public ActionResult PODecline(string poNo)
         {
+            PO poList = new PO();
+            poList = GetDataHelper.GetPOs();
+            TempData["data"] = poNo;
+            foreach(var item in poList.PurchaseOrder)
+            {
+                if(item.PoNumber == poNo)
+                {
+                    item.PoStatus = "Removed";
+                }
+            }
             return View();
         }
 
         [Route("declined")]
-        public ActionResult Declined()
+        public ActionResult Declined(string poNo)
         {
+            TempData["data"] = poNo;
             return View();
         }
 
@@ -192,7 +259,7 @@ namespace EmployeeConnect.Controllers
                 if(item.ETID == id)
                 {
                     
-                    ETStatusUpdate(item.ETID);
+                    GetDataHelper.ETStatusUpdate(item.ETID);
                     //string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
                 }
             }

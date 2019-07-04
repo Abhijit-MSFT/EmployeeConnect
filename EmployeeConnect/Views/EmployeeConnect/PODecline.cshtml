@@ -16,32 +16,8 @@
 <body>
     <script>
         microsoftTeams.initialize();
-
-        function validateForm() {
-            debugger;
-             let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
-                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
-            return true;
-        }
     </script>
-    <form method="POST" id="ticketcomplete" action="/declined" onSubmit="return validateForm()">
+    <form id="ticketcomplete">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content content-radius">
                 <div class="modal-header custom-header">
@@ -58,14 +34,13 @@
                     <span class="down-chevron"></span>
                     <div class="modal-category">Comments(optional)</div>
                     <div class="card custom-card">
-                        <div class="card-body custom-card-body">
+                        <textarea class="card-body custom-card-body">
                             We are currently out of stock, please wait until next month
-                        </div>
+                        </textarea>
                     </div>
                     <div class="two-btn">
                         <button type="submit" class="cancel">Cancel</button>
-                        <button type="button" class="BCT" onclick="submit('declined');" data-toggle="modal"
-                                data-target="#Next">
+                        <button type="button" class="BCT" onclick="submitDecline(@TempData["data"]);">
                             Decline
                         </button>
                     </div>
@@ -82,30 +57,15 @@
             alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
-        function submit(type) {
+        function submitDecline(poNo) {
             debugger;
-            let taskInfo = {
+            let declineInfo = {
              //   title: null,
-                PONo: null,
-                InvoiceNo: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
+                PONo: poNo,
+                action:"decline"
             };
 
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined";
-                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
-
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            microsoftTeams.tasks.submitTask(declineInfo);
         }
     </script>
 
