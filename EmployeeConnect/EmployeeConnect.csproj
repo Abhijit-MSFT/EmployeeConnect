@@ -224,12 +224,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AdaptiveCardHelper.cs" />
     <Compile Include="Helper\ApplicationSettings.cs" />
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
     <Compile Include="MessageExtension.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
+    <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
@@ -359,15 +361,9 @@
     <Content Include="Images\Xiaomi%27s number 1 tag.PNG" />
     <Content Include="Images\xray.jpg" />
     <Content Include="imgs\1.JPG" />
-    <Content Include="imgs\1.png" />
     <Content Include="imgs\2.JPG" />
-    <Content Include="imgs\2.png" />
     <Content Include="imgs\3.jpg" />
     <Content Include="imgs\4.jpg" />
-    <Content Include="imgs\5.jpg" />
-    <Content Include="imgs\6.jpg" />
-    <Content Include="imgs\7.jpg" />
-    <Content Include="imgs\8.png" />
     <Content Include="imgs\Animation.gif" />
     <Content Include="imgs\Anthem at EA%27s E3 show.jpg" />
     <Content Include="imgs\Art.jpg" />
@@ -430,7 +426,7 @@
     <Content Include="imgs\signIn_1.png" />
     <Content Include="imgs\signIn_2.png" />
     <Content Include="imgs\signIn_3.png" />
-    <Content Include="imgs\Social Media Advertising.JPG" />
+    <Content Include="imgs\Social Media Advertising.jpg" />
     <Content Include="imgs\Software.jpg" />
     <Content Include="imgs\Store Operations.jpg" />
     <Content Include="imgs\Storms in Kentucky.jpg" />

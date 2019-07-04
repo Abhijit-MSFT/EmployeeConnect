@@ -5,14 +5,12 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using EmployeeConnect.Helper;
+
 
 namespace EmployeeConnect.Dialogs
 {
@@ -44,11 +42,11 @@ namespace EmployeeConnect.Dialogs
             string userEmailId = string.Empty;
             string emailKey = GetEmailKey(activity);
             //string user = null;
-            if (!context.ConversationData.ContainsKey(emailKey))
+            /*if (!context.ConversationData.ContainsKey(emailKey))
             {
                 await SendOAuthCardAsync(context, (Activity)context.Activity);
                 return;
-            }
+            }*/
             var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
             {
@@ -57,12 +55,12 @@ namespace EmployeeConnect.Dialogs
             if (!string.IsNullOrEmpty(activity.Text))
             {
                 message = Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity).ToLowerInvariant();
-                if (message.ToLowerInvariant().Contains("reset"))
+                /*if (message.ToLowerInvariant().Contains("reset"))
                 {
                     userEmailId = await GetUserEmailId(activity);
                     await Signout(userEmailId, context);
                     return;
-                }
+                }*/
                 Attachment card = null;
                 var reply = context.MakeMessage();
                 List<Attachment> res;
@@ -138,9 +136,6 @@ namespace EmployeeConnect.Dialogs
                         return;
                 }
 
-                        }
-                        break;
-                }
                 await context.PostAsync(reply);
 
             }
@@ -191,11 +186,11 @@ namespace EmployeeConnect.Dialogs
                 {
                     Data = TaskModelUIConstant.SendRequest.Id
                 }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.EventCard.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.EventCard.Id
-                }));
+            //card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.EventCard.ButtonTitle, null,
+            //    new Models.BotFrameworkCardValue<string>()
+            //    {
+            //        Data = TaskModelUIConstant.EventCard.Id
+            //    }));
 
             return card;
         }
