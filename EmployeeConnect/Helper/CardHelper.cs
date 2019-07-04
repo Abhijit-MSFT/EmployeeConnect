@@ -14,14 +14,13 @@ using System.Web.Script.Serialization;
 using System.Net;
 using System.Windows.Forms;
 using EmployeeConnect.Common;
-using System.IO;
 
 namespace EmployeeConnect.Helper
 {
     public class CardHelper
     {
         //returns a news ListCard containing specific number of messages
-        public static Attachment getNewsCard()
+        public static Attachment getNewsCard(string username)
         {
 
             var card = new ListCard();
@@ -29,7 +28,7 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             var buttonsList = new List<ListButton>();
             card.content.title = "";
-            NewsModel newsL = Helper.GetDataHelper.GetNews();
+            NewsModel newsL = Helper.GetDataHelper.getPreferredNews(username);
             Item item;
             item = new Item();
             item.title = "Top stories for you";
@@ -39,11 +38,11 @@ namespace EmployeeConnect.Helper
             if (newsL != null)  //if it got the news
             {
                 var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
-                var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Suggested"));
+                var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
 
                 int MaxNewsCount = TrendingNews.Count();
-                if (MaxNewsCount > 2)   //show 2 trending news
-                    MaxNewsCount = 2;
+                if (MaxNewsCount > 4)   //show 2 trending news
+                    MaxNewsCount = 4;
 
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
@@ -70,9 +69,9 @@ namespace EmployeeConnect.Helper
                 item.type = "section";
                 list.Add(item);
 
-                MaxNewsCount = 0;
-                if (SuggestedNews.Count() > 0) //show 1 suggested news
-                    MaxNewsCount = 1;
+                MaxNewsCount = SuggestedNews.Count();
+                if (SuggestedNews.Count() > 4)   //show 2 trending news
+                    MaxNewsCount = 4;
 
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
@@ -236,7 +235,8 @@ namespace EmployeeConnect.Helper
                         {
                             new AdaptiveImage
                             {
-                                        Url = new Uri(SelectedNews.NewsThumbnailUrl)
+                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                                Url = new Uri(SelectedNews.NewsThumbnailUrl)
                             },
                             new AdaptiveTextBlock() //Title of News
                             {
@@ -287,7 +287,15 @@ namespace EmployeeConnect.Helper
         public static List<Attachment> WelcomeCard()
         {
             //Welcome Card
-
+            var action = new List<AdaptiveAction>()
+            {
+                // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
+                new AdaptiveShowCardAction()
+                {
+                    Title = "Let's get Started",
+                    Card=(AdaptiveCard)CardHelper.SetTimePrefrences().Content
+                }
+            };
             var card1 = new AdaptiveCard("1.0")
             {
                 BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
@@ -311,12 +319,12 @@ namespace EmployeeConnect.Helper
                             // Adaptive FactSet item makes it simple to display a series of facts (e.g. name/value pairs) in a tabular form
                            
                             // ImageSet allows for the inclusion of a collection images like a photogallery
-                            new AdaptiveTextBlock()
+                            /*new AdaptiveTextBlock()
                             {
                                 Text = "Please sign in to get started",
                                 Wrap = true ,// True if text is allowed to wrap
                                 
-                            },
+                            },*/
                             new AdaptiveTextBlock()
                             {
                                 Text = "Keep yourself posted \r\rabout the latest news",
@@ -333,15 +341,7 @@ namespace EmployeeConnect.Helper
                     }
                 },
 
-                Actions = new List<AdaptiveAction>()
-                {
-                    // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Sign in",
-                       // DataJson = "get the data"
-                    }
-               }
+                Actions = action
             };
             var card2 = new AdaptiveCard("1.0")
             {
@@ -360,11 +360,11 @@ namespace EmployeeConnect.Helper
                                 Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                             },
-                            new AdaptiveTextBlock()
+                            /*new AdaptiveTextBlock()
                             {
                                 Text = "Please sign in to get started",
                                 Wrap = true ,// True if text is allowed to wrap
-                            },
+                            },*/
                                 new AdaptiveTextBlock()
                             {
                                 Text = "Add events to your calender",
@@ -384,16 +384,7 @@ namespace EmployeeConnect.Helper
                     }
                 },
 
-                Actions = new List<AdaptiveAction>()
-                {
-                    // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Sign in",
-                        Data = "Sign in"
-                       // DataJson = "get the data"
-                    }
-               }
+                Actions = action
             };
             var card3 = new AdaptiveCard("1.0")
             {
@@ -410,36 +401,29 @@ namespace EmployeeConnect.Helper
                                 Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                             },
-                            new AdaptiveTextBlock()
+                            /*new AdaptiveTextBlock()
                             {
                                 Text = "Please sign in",
-                                Wrap = true ,// True if text is allowed to wrap
-                            },
-                             new AdaptiveTextBlock()
+                                Wrap = true,// True if text is allowed to wrap
+                            },*/
+                            new AdaptiveTextBlock()
                             {
                                 Text = "Create and manage your tasks",
-                                Wrap = true ,// True if text is allowed to wrap
+                                Wrap = true,// True if text is allowed to wrap
                                 Weight = AdaptiveTextWeight.Bolder
 
                             },
                             new AdaptiveTextBlock()
                             {
                                 Text = "The apps identifies all your \r\r pending tasks and help \r\r you manage everything at \r\rone place.",
-                                Wrap = true ,// True if text is allowed to wrap
-                                
+                                Wrap = true,// True if text is allowed to wrap
+
                             }
                         }
                     }
                 },
 
-                Actions = new List<AdaptiveAction>()
-                {
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Sign in",
-                       // DataJson = "get the data"
-                    }
-               }
+                Actions = action
             };
             List<Attachment> res = new List<Attachment>();
             res.Add(new Attachment()
@@ -464,6 +448,94 @@ namespace EmployeeConnect.Helper
 
         public static Attachment SetTimePrefrences()
         {
+            List<AdaptiveColumn> list = new List<AdaptiveColumn>();
+            list.Add(new AdaptiveColumn()
+            {
+                Items =
+                {
+
+                     new AdaptiveChoiceSetInput()
+                    {
+                        Id = "NewsCategory1",
+                        Value = "1", // please set default value here
+                        Style = AdaptiveChoiceInputStyle.Expanded,
+                        IsMultiSelect=true,// set the style of Choice set to compact
+                        Wrap=true,
+                        Choices =
+                         {
+                            new AdaptiveChoice
+                            {
+                                Title ="Finance",
+                                Value = "1",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "Media",
+                                Value = "2",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "Design",
+                                Value = "3",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "Technology",
+                                Value = "4",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "Data",
+                                Value = "5",
+                            },
+                        }
+                }
+               },
+                Width = "500"
+            });
+            list.Add(new AdaptiveColumn()
+            {
+                Items =
+                {
+                     new AdaptiveChoiceSetInput()
+                    {
+                        Id = "NewsCategory2",
+                        Style = AdaptiveChoiceInputStyle.Expanded,
+                        IsMultiSelect=true,// set the style of Choice set to compact
+                        Wrap=true,
+                        Choices =
+                        {
+                            new AdaptiveChoice
+                            {
+                                Title = "Business",
+                                Value = "6",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "CS",
+                                Value = "7",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "Technology",
+                                Value = "8",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "Animation",
+                                Value = "9",
+                            },
+                            new AdaptiveChoice
+                            {
+                                Title = "IT",
+                                Value = "10",
+                            },
+
+                        }
+                }
+               },
+                Width = "500"
+            });
             var card = new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>()
@@ -515,37 +587,57 @@ namespace EmployeeConnect.Helper
                                 {
                                     new AdaptiveChoice
                                     {
-                                        Title = "11:00 AM",
+                                        Title = "9:00 AM",
                                         Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
+                                        Title = "10:00 AM",
+                                        Value = "2" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "11:00 AM",
+                                        Value = "3" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
                                         Title = "12:00 PM",
-                                        Value = "2"
-                                    },
-                                    new AdaptiveChoice
-                                    {
-                                        Title = "1:00 PM",
-                                        Value = "3"
-                                    },
-                                    new AdaptiveChoice
-                                    {
-                                        Title = "2:00 PM",
                                         Value = "4"
                                     },
                                     new AdaptiveChoice
                                     {
-                                        Title = "3:00 PM",
+                                        Title = "1:00 PM",
                                         Value = "5"
                                     },
                                     new AdaptiveChoice
                                     {
-                                        Title = "4:00 PM",
+                                        Title = "2:00 PM",
                                         Value = "6"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "3:00 PM",
+                                        Value = "7"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "4:00 PM",
+                                        Value = "8"
                                     }
                                 }
                             },
-
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Select 5 or more categories for your news preferences.",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Medium, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns=list
+                            },
                             new AdaptiveTextBlock()
                             {
                                 Text = "Event and training",
@@ -588,33 +680,44 @@ namespace EmployeeConnect.Helper
                                 {
                                     new AdaptiveChoice
                                     {
-                                        Title = "11:00 AM",
+                                        Title = "9:00 AM",
                                         Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
+                                        Title = "10:00 AM",
+                                        Value = "2" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "11:00 AM",
+                                        Value = "3" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
                                         Title = "12:00 PM",
-                                        Value = "2"
-                                    },
-                                    new AdaptiveChoice
-                                    {
-                                        Title = "1:00 PM",
-                                        Value = "3"
-                                    },
-                                    new AdaptiveChoice
-                                    {
-                                        Title = "2:00 PM",
                                         Value = "4"
                                     },
                                     new AdaptiveChoice
                                     {
-                                        Title = "3:00 PM",
+                                        Title = "1:00 PM",
                                         Value = "5"
                                     },
                                     new AdaptiveChoice
                                     {
-                                        Title = "4:00 PM",
+                                        Title = "2:00 PM",
                                         Value = "6"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "3:00 PM",
+                                        Value = "7"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "4:00 PM",
+                                        Value = "8"
                                     }
                                 }
                             },
@@ -660,33 +763,44 @@ namespace EmployeeConnect.Helper
                                 {
                                     new AdaptiveChoice
                                     {
-                                        Title = "11:00 AM",
+                                        Title = "9:00 AM",
                                         Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
+                                        Title = "10:00 AM",
+                                        Value = "2" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "11:00 AM",
+                                        Value = "3" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                    },
+                                    new AdaptiveChoice
+                                    {
                                         Title = "12:00 PM",
-                                        Value = "2"
-                                    },
-                                    new AdaptiveChoice
-                                    {
-                                        Title = "1:00 PM",
-                                        Value = "3"
-                                    },
-                                    new AdaptiveChoice
-                                    {
-                                        Title = "2:00 PM",
                                         Value = "4"
                                     },
                                     new AdaptiveChoice
                                     {
-                                        Title = "3:00 PM",
+                                        Title = "1:00 PM",
                                         Value = "5"
                                     },
                                     new AdaptiveChoice
                                     {
-                                        Title = "4:00 PM",
+                                        Title = "2:00 PM",
                                         Value = "6"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "3:00 PM",
+                                        Value = "7"
+                                    },
+                                    new AdaptiveChoice
+                                    {
+                                        Title = "4:00 PM",
+                                        Value = "8"
                                     }
                                 }
                             }
@@ -696,11 +810,11 @@ namespace EmployeeConnect.Helper
                 Actions = new List<AdaptiveAction>()
                 {
                     // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                    new AdaptiveShowCardAction()
+                    new AdaptiveSubmitAction()
                     {
                         Title = "Done",
-                       Card=CardHelper.SetNewsPreferences()
-                    }
+                        DataJson=@"{'Action':'" + Constants.SetPrefrencesDone+"' }"
+                     }
                }
             };
 
@@ -907,9 +1021,41 @@ namespace EmployeeConnect.Helper
         {
             PO POlist = new PO();
             POlist = Helper.GetDataHelper.GetPOs();
-            PurchaseOrders POOrder = POlist.PurchaseOrder.FirstOrDefault<PurchaseOrders>();
-            if (POOrder == null)
-                return null;
+
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            var buttonsList = new List<ListButton>();
+            card.content.title = "Your pending submissions";
+            Item item = new Item();
+
+            for (int i = 0; i < POlist.PurchaseOrder.Count(); i++)
+            {
+                item = new Item();
+                item.title = POlist.PurchaseOrder[i].Description;
+                item.subtitle = POlist.PurchaseOrder[i].PoNumber;
+                item.id = POlist.PurchaseOrder[i].PoNumber;
+                item.type = "resultItem";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                item.tap = new Tap()
+                {
+                    type = "invoke",
+                    title = item.id,
+                    value = "{ \"type\": \"task/fetch\", \"data\": \"po:" + POlist.PurchaseOrder[i].PoNumber.ToString() + "\"}"
+                };
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
+            Attachment attachment = new Attachment();
+            attachment.ContentType = card.contentType;
+            attachment.Content = card.content;
+
+            return attachment;
+        }
+
+        public static Attachment PendingTasksCard(string id)
+        {
+            EmployeeConnect.Models.PurchaseOrders POOrder = Helper.CardHelper.PendingTaskbyID(id);
             var card = new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>()
@@ -971,11 +1117,15 @@ namespace EmployeeConnect.Helper
                 },
                 Actions = new List<AdaptiveAction>()
                 {
-                     new AdaptiveShowCardAction
+                     new AdaptiveSubmitAction
                      {
-                        Title ="Review",
-                        Card = CardHelper.ReviewTasks()
-
+                        Title ="Approve",
+                       Data="podecline"
+                     },
+                     new AdaptiveSubmitAction
+                     {
+                        Title ="Decline",
+                        Data="close_button"
                      }
                 }
             };
@@ -985,6 +1135,18 @@ namespace EmployeeConnect.Helper
                 Content = card
             };
             return attachment;
+        }
+
+        public static EmployeeConnect.Models.PurchaseOrders PendingTaskbyID(string id)
+        {
+            PO POlist = new PO();
+            POlist = Helper.GetDataHelper.GetPOs();
+            for (int i = 0; i < POlist.PurchaseOrder.Count(); i++)
+            {
+                if (id.Equals(POlist.PurchaseOrder[i].PoNumber))
+                    return POlist.PurchaseOrder[i];
+            }
+            return new EmployeeConnect.Models.PurchaseOrders();
         }
         public static AdaptiveCard ReviewTasks()
         {
@@ -1594,7 +1756,8 @@ namespace EmployeeConnect.Helper
                         {
                             new AdaptiveImage
                             {
-                                Url = new Uri(SelectedEventsTrainings.ETThumbnailUrl),
+                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                                Url = new Uri(SelectedEventsTrainings.ETThumbnailUrl)
                             },
                             new AdaptiveColumnSet()
                             {
@@ -1673,6 +1836,134 @@ namespace EmployeeConnect.Helper
             return null;    // id doesn't exist
         }
 
-       
+        public static List<Attachment> DefaultCard()
+        {
+            //Welcome Card
+            var card1 = new AdaptiveCard("1.0")
+            {
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
+                Body = new List<AdaptiveElement>()
+                {
+                    //BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
+                    new AdaptiveContainer()
+                    {
+                     //   BackgroundImage = ApplicationSettings.BaseUrl + "/Images/signin_1.png",
+                        Items = new List<AdaptiveElement>()
+                        {
+                            // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
+                            new AdaptiveTextBlock()
+                            {
+
+                                Text = "Welcome to Employee Connect",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                
+                            },
+                            // Adaptive FactSet item makes it simple to display a series of facts (e.g. name/value pairs) in a tabular form
+                           
+                            // ImageSet allows for the inclusion of a collection images like a photogallery
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Keep yourself posted \r\rabout the latest news",
+                                Wrap = true ,// True if text is allowed to wrap
+                                 Weight = AdaptiveTextWeight.Bolder,
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation.",
+                                Wrap = true ,// True if text is allowed to wrap
+                                
+                            }
+                        }
+                    }
+                }
+            };
+            var card2 = new AdaptiveCard("1.0")
+            {
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_2.png"),
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+
+                        Items = new List<AdaptiveElement>()
+                        {
+
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Welcome to Employee Connect",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Add events to your calender",
+                                Wrap = true ,// True if text is allowed to wrap
+                                    Weight = AdaptiveTextWeight.Bolder
+
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings.",
+                                Wrap = true ,// True if text is allowed to wrap
+                                MaxWidth = 2
+                            }
+                        }
+                            // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
+                            
+                    }
+                }
+            };
+            var card3 = new AdaptiveCard("1.0")
+            {
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_3.png"),
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Welcome to Employee Connect",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Create and manage your tasks",
+                                Wrap = true,// True if text is allowed to wrap
+                                Weight = AdaptiveTextWeight.Bolder
+
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "The apps identifies all your \r\r pending tasks and help \r\r you manage everything at \r\rone place.",
+                                Wrap = true,// True if text is allowed to wrap
+
+                            }
+                        }
+                    }
+                },
+            };
+            List<Attachment> res = new List<Attachment>();
+            res.Add(new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card1
+            });
+            res.Add(new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card2
+            });
+            res.Add(new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card3
+            });
+            return res;
+        }
     }
 }

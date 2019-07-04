@@ -14,6 +14,7 @@ using EmployeeConnect.Common;
 using Newtonsoft.Json.Linq;
 using EmployeeConnect.Models;
 using System.IO;
+using Microsoft.Bot.Connector.Teams;
 
 namespace EmployeeConnect.Controllers
 {
@@ -40,6 +41,8 @@ namespace EmployeeConnect.Controllers
         {
             var activityValue = activity.Value.ToString();
             string ETid;
+            Models.TaskInfo taskInfo;
+            Models.TaskEnvelope taskEnvelope;
             switch (activity.Name)
             {
                 case "signin/verifyState":
@@ -62,8 +65,8 @@ namespace EmployeeConnect.Controllers
                     {
                         action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
                     }
-                    Models.TaskInfo taskInfo = GetTaskInfo(action.Data);
-                    Models.TaskEnvelope taskEnvelope = new Models.TaskEnvelope
+                    taskInfo = GetTaskInfo(action.Data);
+                    taskEnvelope = new Models.TaskEnvelope
                     {
                         Task = new Models.Task()
                         {
@@ -75,6 +78,7 @@ namespace EmployeeConnect.Controllers
                 case "task/submit":
                     string data = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
                     //string datajson = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).DataJson;
+
                     if (data.Length > 2 && data.Substring(0, 2) == "ET")
                     {
                         ETid = data.Substring(2);
@@ -87,6 +91,17 @@ namespace EmployeeConnect.Controllers
                         //When close is pressed on task module card
                         case "close_button":
                             break;
+                        case "podecline":
+                            taskInfo = GetTaskInfo(data);
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue,
+                                    TaskInfo = taskInfo
+                                }
+                            };
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                         default:    //need to build
                             break;
                     }
@@ -127,6 +142,12 @@ namespace EmployeeConnect.Controllers
                 SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
                 return taskInfo;
             }
+            if (actionInfo.StartsWith("po:"))
+            {
+                taskInfo.Card = JObject.FromObject(Helper.CardHelper.PendingTasksCard(actionInfo.Substring(3)));
+                SetTaskInfo(taskInfo, TaskModelUIConstant.POCard);
+                return taskInfo;
+            }
             switch (actionInfo)
             {
                 case TaskModuleIds.PurchaseOrder:
@@ -157,6 +178,10 @@ namespace EmployeeConnect.Controllers
                     //taskInfo.Card = CardHelper.GetETbyID("7");
                     // taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.EventCard;
                     SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
+                    break;
+                case TaskModuleIds.VisitorRegistration:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.VisitorRegistration;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.VisitorRegistration);
                     break;
 
 
@@ -194,18 +219,35 @@ namespace EmployeeConnect.Controllers
             {
                 case "teamMemberAdded":
                     // Team member was added (user or bot)
+                    var members = await connector.Conversations.GetConversationMembersAsync(message.Conversation.Id);
+
+                    var userDetails = members.FirstOrDefault(m => m.Id == message.From.Id)?.AsTeamsChannelAccount();
                     if (channelData.Team == null)   //if bot added in personal scope,send a welcome message to user
                     {
                         if (message.MembersAdded.Any(m => m.Id.Contains(message.Recipient.Id)))
                         {
                             // Bot was added to a team: send welcome message
                             var connectorClient = new ConnectorClient(new Uri(message.ServiceUrl));
-                            Activity welcomeMessage = message.CreateReply();
+                            //Activity welcomeMessage = message.CreateReply();
 
-                            welcomeMessage.Text = "Welcome.Let's get your Preferences set.";
+                            await Conversation.SendAsync(message, () => new RootDialog());
+                            //For get Prefrences card
+                            /*
+                            welcomeMessage.Text = string.Format("Hi {0}.Let's get your Preferences set.",userDetails.Name);
                             Attachment card = Helper.CardHelper.SetTimePrefrences();
                             welcomeMessage.Attachments.Add(card);
-                            await connectorClient.Conversations.ReplyToActivityWithRetriesAsync(welcomeMessage);
+                            await connectorClient.Conversations.ReplyToActivityWithRetriesAsync(welcomeMessage);*/
+
+                            //For Welcome Card
+
+                            /*string url = await RootDialog.getSigninUrl(message);
+                            await RootDialog.SendOAuthCardAsync(context, (Activity)context.Activity);
+                            List<Attachment> res;
+                            res = Helper.CardHelper.WelcomeCard(url);
+                            for (int i = 0; i < res.Count(); i++)
+                                welcomeMessage.Attachments.Add(res.ElementAt(i));
+                            welcomeMessage.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                            await connectorClient.Conversations.ReplyToActivityWithRetriesAsync(welcomeMessage);*/
                         }
                     }
                     break;

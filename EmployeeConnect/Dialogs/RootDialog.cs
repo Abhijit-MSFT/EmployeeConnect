@@ -5,6 +5,7 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,11 +43,21 @@ namespace EmployeeConnect.Dialogs
             string userEmailId = string.Empty;
             string emailKey = GetEmailKey(activity);
             //string user = null;
-            /*if (!context.ConversationData.ContainsKey(emailKey))
+            if (!context.ConversationData.ContainsKey(emailKey))
             {
                 await SendOAuthCardAsync(context, (Activity)context.Activity);
                 return;
-            }*/
+
+                /*Welcome Card
+                var reply = context.MakeMessage();
+                List<Attachment> res;
+                string url = await getSigninUrl(activity);
+                res = Helper.CardHelper.WelcomeCard(url);
+                for (int i = 0; i < res.Count(); i++)
+                    reply.Attachments.Add(res.ElementAt(i));
+                reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                await context.PostAsync(reply);*/
+            }
             var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
             {
@@ -67,6 +78,7 @@ namespace EmployeeConnect.Dialogs
                 switch (message.Trim())
                 {
                     case Common.Constants.Welcome:
+                        //string url = await getSigninUrl(activity);
                         res = Helper.CardHelper.WelcomeCard();
                         for (int i = 0; i < res.Count(); i++)
                             reply.Attachments.Add(res.ElementAt(i));
@@ -74,7 +86,7 @@ namespace EmployeeConnect.Dialogs
                         break;
                     case Common.Constants.SetPrefrences:
                         card = Helper.CardHelper.SetTimePrefrences();
-                        reply.Text = "Set a preferred time to receive notifications for latest news, events and trainings and reminders.";
+                        reply.Text = string.Format("Hi {0}. Let's get your Preferences set.", userDetails.Name);
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
@@ -96,7 +108,7 @@ namespace EmployeeConnect.Dialogs
                             reply.Text = "No pending submissions to show.";
                         break;
                     case Common.Constants.TrendingNews:
-                        card = Helper.CardHelper.getNewsCard();
+                        card = Helper.CardHelper.getNewsCard(userDetails.Name);
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.Policies:
@@ -133,7 +145,13 @@ namespace EmployeeConnect.Dialogs
                         break;
                     default:
                         //dont reply anything
-                        return;
+                        res = Helper.CardHelper.DefaultCard();
+                        for (int i = 0; i < res.Count(); i++)
+                            reply.Attachments.Add(res.ElementAt(i));
+                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                        break;
+                        //return;
+
                 }
 
                 await context.PostAsync(reply);
@@ -196,7 +214,8 @@ namespace EmployeeConnect.Dialogs
                     setPref.UserName = userDetails.Name;
                     EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.makeUPrefObject(setPref);
                     Helper.GetDataHelper.WritePreferences(pref);
-                    return;
+                    reply.Text = "Your preferences are set.";
+                    break;
                 case Constants.SetPrefrencesSkip:   //Press Skip button on set preferences
                     reply.Text = "";
                     return;
@@ -278,6 +297,13 @@ namespace EmployeeConnect.Dialogs
                     {
                         context.ConversationData.SetValue<string>(GetEmailKey(context.Activity), tokenResponse.ToString());
                         await context.PostAsync($"Your sign in was successful.Please check the commands to see what i can do!!");
+                        //string url = await getSigninUrl(activity);
+                        var reply = context.MakeMessage();
+                        List<Attachment> res = Helper.CardHelper.WelcomeCard();
+                        for (int i = 0; i < res.Count(); i++)
+                            reply.Attachments.Add(res.ElementAt(i));
+                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                        await context.PostAsync(reply);
                         context.Wait(MessageReceivedAsync);
                         return;
                     }
@@ -319,6 +345,33 @@ namespace EmployeeConnect.Dialogs
             await context.SignOutUserAsync(ApplicationSettings.ConnectionName);
             await context.PostAsync($"We have cleared everything related to you.");
 
+        }
+        public static async Task<string> getSigninUrl(Activity activity)
+        {
+            var connectionName = "TestOAuthCard";
+            // var authClient = activity.GetOAuthClient(new MicrosoftAppCredentials("57af17b5-0742-4dc8-b16f-c72cb30134cc", "jsYEJGD427;$ukmvgHQ85{#"));
+            OAuthClient authClient = activity.GetOAuthClient();// new OAuthClient(new MicrosoftAppCredentials("57af17b5-0742-4dc8-b16f-c72cb30134cc", "jsYEJGD427;$ukmvgHQ85{#"));
+            // var url = await authClient.OAuthApi.GetSignInLinkAsync(activity, );
+            //var query = activity.GetComposeExtensionQueryData();
+            JObject data = activity.Value as JObject;
+            string link = "";
+            // Check if the request comes with login state
+            if (data != null && data["state"] != null)
+            {
+                // Verify Token.
+                var token1 = await authClient.OAuthApi.GetUserTokenAsync(activity.From.Id, connectionName, data["state"].ToString());
+                // Do stuff with the token here.
+            }
+            else
+            {
+                var token = await authClient.OAuthApi.GetUserTokenAsync(activity.From.Id, connectionName).ConfigureAwait(false);
+                if (token == null)
+                {
+                    // Send the login response with the auth link.
+                    link = await authClient.OAuthApi.GetSignInLinkAsync(activity, connectionName);
+                }
+            }
+            return link;
         }
 
     }
