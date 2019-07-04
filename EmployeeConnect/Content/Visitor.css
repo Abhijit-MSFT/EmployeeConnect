@@ -558,7 +558,7 @@ span.range {
 body {
     background-color: #ffffff;
     padding: 20px;
-    overflow: auto;
+    overflow: hidden !important;
 }
 
 .custom-card-first-row,

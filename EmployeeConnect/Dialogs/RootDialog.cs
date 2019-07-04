@@ -107,7 +107,7 @@ namespace EmployeeConnect.Dialogs
                         card = Helper.CardHelper.GetMyToolsCard();
                         reply.Attachments.Add(card);
                         break;
-                    
+
                     case Common.Constants.HumanResourceTools:
                         card = Helper.CardHelper.HumanResourceCard();
                         reply.Attachments.Add(card);
@@ -156,20 +156,10 @@ namespace EmployeeConnect.Dialogs
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PoDecline.ButtonTitle, null,
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.NewsCard.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()
                 {
-                    Data = TaskModelUIConstant.PoDecline.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.Declined.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.Declined.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.CreateTicket.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.CreateTicket.Id
+                    Data = TaskModelUIConstant.NewsCard.Id
                 }));
             card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.TicketComplete.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()
@@ -212,7 +202,7 @@ namespace EmployeeConnect.Dialogs
                     return;
                 case Constants.TicketCancel:        //cancels the ticket with a ticket number:removes it from Ticket.json
                     string ticketno = actionDetails.TicketNo;
-                    if(cancelTicket(ticketno)==true)
+                    if (cancelTicket(ticketno) == true)
                         reply.Text = "Ticket deleted successfully";
                     else
                         reply.Text = "Ticket not available";
