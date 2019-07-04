@@ -174,20 +174,10 @@ namespace EmployeeConnect.Dialogs
                 {
                     Data = TaskModelUIConstant.PurchaseOrder.Id
                 }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PoDecline.ButtonTitle, null,
+            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.NewsCard.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()
                 {
-                    Data = TaskModelUIConstant.PoDecline.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.Declined.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.Declined.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.CreateTicket.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.CreateTicket.Id
+                    Data = TaskModelUIConstant.NewsCard.Id
                 }));
             card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.TicketComplete.ButtonTitle, null,
                 new Models.BotFrameworkCardValue<string>()

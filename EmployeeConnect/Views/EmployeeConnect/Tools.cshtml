@@ -32,11 +32,11 @@
                     </div>
                     <div class="card shadow-sm custom-card-first-row-one" data-toggle="modal"
                          data-target="#create-ticket">
-                        <div class="card-body">
+                        <div class="card-body" onclick="submitTools('createticket');">
                             <span alt-name="ticket-creation"
                                   class="HR-tabs ticket-creation">
                             </span>
-                            <div class="CT" onclick="submit('createticket');">Create ticket</div>
+                            <div class="CT">Create ticket</div>
                             <p class="CT-des">
                                 For all HR tickets, the ticket type is being set as Employee
                                 Support.
@@ -126,9 +126,9 @@
                         </div>
                     </div>
                     <div class="card shadow-sm custom-card-IF-third-row-one">
-                        <div class="card-body">
+                        <div class="card-body" onclick="submitTools('visitorregistration');">
                             <span class="IF-tabs wife-request"> </span>
-                            <div class="GWR" onclick="submit('visitorregistration');">Visitor wi-fi request</div>
+                            <div class="GWR">Visitor wi-fi request</div>
                             <p class="GWR-des">
                                 For all HR tickets, the ticket type is being set as Employee
                                 Support.
@@ -195,11 +195,87 @@
     microsoftTeams.initialize();
 
         submitHandler = (err, result) => {
+            debugger;
+            if (result.action == "ticketcomplete") {
+                let taskInfo = {
+                    height: null,
+                    width: null,
+                    url: null,
+                    fallbackUrl: null,
+                };
+
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/ticketcomplete?ticketNoId=" + result.ticketNo +"&description="+result.TDescription +"&category="+result.TCategory +"&priority="+result.TPriority;
+                taskInfo.height = "@(TaskModelUIConstant.TicketComplete.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.TicketComplete.Width)";
+                // Set fallback URL
+                taskInfo.fallbackUrl = taskInfo.url;
+                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            }
+            if (result.action == "createticket") {
+                let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
+                taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
+                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+           
+            }
+            if (result.action == "sendrequest") {
+                  let taskInfo = {
+             //   title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+                };
+                
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/sendrequest?Date=" + result.VDate +"&Time="+result.VTime +"&Contact="+result.VContact +"&location="+result.VLocation+"&purpose=" + result.VPurpose + "&hostName="+result.VHostName+ "&org="+result.VOrg;
+                taskInfo.height = "@(TaskModelUIConstant.SendRequest.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.SendRequest.Width)";
+
+            // Set fallback URL
+                taskInfo.fallbackUrl = taskInfo.url;
+                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            }
+            if (result.action == "visitorregistration") {
+                   let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
+                taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            }
+            if (result.action == "submit") {
+                microsoftTeams.tasks.submitTask(taskInfo);
+            }
+            if (result.action == "submitTicket") {
+                 microsoftTeams.tasks.submitTask(taskInfo);
+            }
+             if (result.action == "submitVisitor") {
+                 microsoftTeams.tasks.submitTask(taskInfo);
+            }
             // console.log(`Submit handler - err: ${err}`);
             //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
-        function submit(type) {
+        function submitTools(type) {
 
             debugger;
             let taskInfo = {

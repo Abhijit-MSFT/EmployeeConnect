@@ -12,13 +12,13 @@ namespace EmployeeConnect.Common
         public static UIConstants  NewsCard { get; set; } =
             new UIConstants(750, 650, "News Card", TaskModuleIds.Newscard, "News Card");
         public static UIConstants CreateTicket { get; set; } =
-        new UIConstants(610, 510, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
+        new UIConstants(610, 500, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
         public static UIConstants TicketComplete { get; set; } =
-        new UIConstants(400, 396, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
+        new UIConstants(350, 420, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
 
         public static UIConstants VisitorRegistration { get; set; } =
-    new UIConstants(500, 570, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");  
+    new UIConstants(500, 550, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");  
     public static UIConstants SendRequest { get; set; } =
     new UIConstants(400, 459, "Send Request", TaskModuleIds.SendRequest, "Send Request");
         public static UIConstants PoDecline { get; set; } =

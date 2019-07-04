@@ -16,31 +16,22 @@
 <body>
     <script>
         microsoftTeams.initialize();
-         function validateForm() {
-            debugger;
-             let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
+         function submitTicketComplete() {
+             let ticketInfo = {
+                 action: "createticket",
             };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
-                taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
+            microsoftTeams.tasks.submitTask(ticketInfo);
+            return true;
+        }
+         function closeTicketComplete() {
+             let ticketInfo = {
+                 action: "submit",
+            };
+            microsoftTeams.tasks.submitTask(ticketInfo);
             return true;
         }
     </script>
-    <form method="POST" id="createticket" action="/createticket" onSubmit="return validateForm()">
+    <form id="createticket">
         <div class="modal-dialog modal-dialog-centered custom-card2"
              role="document">
             <div class="modal-content content-radius">
@@ -49,10 +40,11 @@
                         <span class="from-next"> Your ticket has been created </span>
                     </span>
                 </div>
+               
                 <div class="modal-body from-next-body">
-                    <div class="ES">Employee support</div>
+                    <div class="ES">@ViewBag.ticketList[1]</div>
                     <div class="ES-msg">
-                        Need to understand PTO assignment
+                        @ViewBag.ticketList[0]
                     </div>
                     <div class="High-priority">
                         High-priority
@@ -60,18 +52,19 @@
                     </div>
                     <div class="ticket-data">
                         <div class="ticket-no">Ticket No.</div>
-                        <div class="ticket-no-no">INC000000324567</div>
+                        <div class="ticket-no-no">INC000000 @ViewBag.ticketList[3]</div>
                     </div>
                     <div>
                         <div class="Date-created">Date created</div>
-                        <div class="Date-created-date">Fri 05 Oct, 2018</div>
+                        <div class="Date-created-date">@ViewBag.ticketList[4]</div>
                     </div>
                     <div class="cancel-ticket">
                         <span class="cancel-icon"></span>
                         <span class="cancel-btn">Cancel ticket</span>
                     </div>
+                    
                     <div class="two-btn">
-                        <button type="submit" class="Close">Close</button>
+                        <button type="submit" class="Close" onclick="closeTicketComplete('submit')">Close</button>
                         @*<button type="button" class="Close" onclick="closeModel()">Close</button>*@
                         <button type="button" class="Edit" onclick="submitTicketComplete('createticket')">Edit</button>
                     </div>
@@ -80,35 +73,4 @@
         </div>
         </form>
         <script src="~/Scripts/teamsapp.js"></script>
-        <script>
-        submitHandler = (err, result) => {
-            debugger;
-            console.log(`Submit handler - err: ${err}`);
-           
-        };
-
-        function submitTicketComplete(type) {
-
-            debugger;
-            let taskInfo = {
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
-                taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
-           // microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
-        }
-        </script>
 </body>

@@ -10,40 +10,27 @@
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/Visitor.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>VR</title>
 </head>
 <body>
     <script>
+        
+  
         microsoftTeams.initialize();
-
-        function validateForm() {
-            debugger;
-             let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
+          function closeVisitor() {
+             let ticketInfo = {
+                 action: "submitVisitor",
             };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/sendrequest";
-                taskInfo.height = "@(TaskModelUIConstant.SendRequest.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.SendRequest.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
+            microsoftTeams.tasks.submitTask(ticketInfo);
             return true;
         }
+     
     </script>
-    <form method="POST" id="sendrequest" action="/sendrequest" onSubmit="return validateForm()">
+    <form id="sendrequest">
         <div class="modal-dialog modal-dialog-centered custom-card-for-visitor"
              role="document">
             <div class="modal-content content-radius">
@@ -54,18 +41,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="host">Host</div>
-                    <form>
+                    
                         <div class="row custom-row">
                             <div class="col-6">
                                 <div class="Alias">Alias</div>
-                                <input type="text" class="alias-id" placeholder="Marie Beaudouin">
+                                <input type="text" id="aliasHostId"class="alias-id" placeholder="Marie Beaudouin">
                                 <span class="id-card"></span>
                             </div>
                             <div class="col-6">
                                 <div class="location">Location</div>
-                                <select class="location-drps">
+                                <select class="location-drps" id="hostLocation">
                                     <option selected>IDC ferns Bangalore</option>
                                     <option>IDC Hyderabad</option>
+                                   
                                 </select>
                                 <span class="for-visitor"></span>
                             </div>
@@ -74,39 +62,39 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="Alias">Name</div>
-                                <input type="text" class="alias-id" placeholder="Marie Douin">
+                                <input type="text" class="alias-id" id="aliasId" placeholder="Marie Douin">
                             </div>
                             <div class="col-6">
                                 <div class="location">Organisation</div>
-                                <input type="text" class="Org" placeholder="Design studio">
+                                <input type="text" class="Org" id="orgId" placeholder="Design studio">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="Alias">Contact</div>
-                                <input type="text" class="Contact" placeholder="+91 xxxx xx358">
+                                <input type="text" class="Contact" id="contactId" placeholder="+91 xxxx xx358">
                             </div>
                             <div class="col-6">
                                 <div class="location">Purpose</div>
-                                <input type="text" class="Purpose" placeholder="Meeting">
+                                <input type="text" class="Purpose" id="purposeId" placeholder="Meeting">
                             </div>
                         </div>
                         <div class="row custom-row1">
                             <div class="col-6">
                                 <div class="Alias">Visiting date</div>
-                                <input type="date" class="Visiting-date">
+                                <input type="date" id="dateId" class="Visiting-date">
                                 <span class="date-pick"></span>
                             </div>
                             <div class="col-6">
                                 <div class="location">Visiting time</div>
-                                <input type="time" class="Visiting-time">
+                                <input type="time" id="timeId" class="Visiting-time">
                                 <span class="time-pick"></span>
                             </div>
                         </div>
-                    </form>
+                    
                     <div class="two-btn">
-                        <button type="submit" class="cancel">Cancel</button>
-                        <button type="button" class="send-rq" onclick="submit('sendrequest');">Send request</button>
+                        <button type="submit" class="cancel" onclick="closeVisitor('submitVisitor')">Cancel</button>
+                        <button type="button" class="send-rq" onclick="submitVisitorInfo('sendrequest');">Send request</button>
                     </div>
                 </div>
             </div>
@@ -119,29 +107,61 @@
             debugger;
             console.log(`Submit handler - err: ${err}`);
         };
-
-        function submit(type) {
-
-            debugger;
-            let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/sendrequest";
-                taskInfo.height = "@(TaskModelUIConstant.SendRequest.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.SendRequest.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-             microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
+    var locationSelectedChange;
+  $("select").change(function ()
+       {    
+        locationSelectedChange = document.getElementById("hostLocation").value;  
+    });
+    function submitVisitorInfo(type) {
+        debugger;
+        var hostName, hostLocation, Alias, org,contact, purpose,date,time;
+        hostName = document.getElementById("aliasHostId").value;
+        hostLocation = locationSelectedChange;
+        Alias = document.getElementById("aliasId").value;
+        org = document.getElementById("orgId").value;
+        contact = document.getElementById("contactId").value;
+        purpose = document.getElementById("purposeId").value;
+        date = document.getElementById("dateId").value;
+        time = document.getElementById("timeId").value;
+             $.ajax({
+                  type: "POST",
+                  url: "/sendRequestindb",
+                 contentType: "application/json; charset=utf-8",
+                 data: '{"hostName":"' + hostName +
+                     '","hostLocation":"' + hostLocation +
+                     '","Alias":"' + Alias +
+                     '","org":"' + org +
+                     '","contact":"' + contact +
+                     '","purpose":"' + purpose +
+                     '","date":"' + date +
+                     '","time":"' + time + '"}', 
+                 dataType: "json",
+                 success: function (data) {
+                     debugger;
+                     var parsedData = JSON.parse(data);
+                     var date = parsedData.Date;
+                     var time = parsedData.Time;
+                     var org = parsedData.org;
+                     var contactNo = parsedData.contactNo;
+                     var hostLocation = parsedData.hostLocation;
+                     var hostName = parsedData.hostName;
+                     var purpose = parsedData.purpose;
+                     let visitorInfo = {
+                         VDate: date,
+                         VTime: time,
+                         VContact: contactNo,
+                         VLocation: hostLocation,
+                         VHostName: hostName,
+                         VPurpose: purpose,
+                         VOrg:org,
+                         action:"sendrequest"
+                          };
+ 
+                     microsoftTeams.tasks.submitTask(visitorInfo);
+               },
+                  error: function() { console.log('A error'); }
+                });
+        
         }
     </script>
 </body>

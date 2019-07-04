@@ -19,32 +19,22 @@
 <body>
     <script>
         microsoftTeams.initialize();
-
-        function validateForm() {
-            debugger;
-             let taskInfo = {
-             //   title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
+         function closeSendRequest() {
+             let ticketInfo = {
+                 action: "submitRequest",
             };
-
-            //taskInfo.title = "Purchase Order";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
-
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
-                taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.submitTask(taskInfo, "@ApplicationSettings.AppId");
+            microsoftTeams.tasks.submitTask(ticketInfo);
+            return true;
+        }
+          function editVisitor() {
+             let ticketInfo = {
+                 action: "visitorregistration",
+            };
+            microsoftTeams.tasks.submitTask(ticketInfo);
             return true;
         }
     </script>
-    <form method="POST" id="visitorregestration" action="/visitorregistration" onSubmit="return validateForm()">
+    <form id="visitorregestration">
         <div class="modal-dialog modal-dialog-centered custom-card-for-send-request"
              role="document">
             <div class="modal-content content-radius">
@@ -57,35 +47,35 @@
                     <div class="VD">Visitor details</div>
                     <div class="VD-form">
                         <div class="VD-form-tkname">Name</div>
-                        <div class="VD-form-tkno-name">Marie Beaudouin</div>
+                        <div class="VD-form-tkno-name">@ViewBag.visitorList[5]</div>
                     </div>
                     <div class="row-hgt">
                         <div class="VD-org">Organisation</div>
-                        <div class="VD-org-org">Design studio</div>
+                        <div class="VD-org-org">@ViewBag.visitorList[6]</div>
                     </div>
                     <div class="row-hgt">
                         <div class="VD-contact">Contact</div>
-                        <div class="VD-contact-no">+91 xxxx xx358</div>
+                        <div class="VD-contact-no">@ViewBag.visitorList[2]</div>
                     </div>
                     <div class="row-hgt">
                         <div class="VD-purpose">Purpose</div>
-                        <div class="VD-purpose-reason">Meeting</div>
+                        <div class="VD-purpose-reason">@ViewBag.visitorList[4]</div>
                     </div>
                     <div class="row-hgt">
                         <div class="VD-date">Visiting date</div>
-                        <div class="VD-date-date">14 May,2019</div>
+                        <div class="VD-date-date">@ViewBag.visitorList[0]</div>
                     </div>
                     <div class="row-hgt">
                         <div class="VD-time">Visiting time</div>
-                        <div class="VD-time-time">13:00</div>
+                        <div class="VD-time-time">@ViewBag.visitorList[1]</div>
                     </div>
                     <div class="cancel-ticket">
                         <span class="cancel-icon"></span>
                         <span class="cancel-req-btn">Cancel request</span>
                     </div>
                     <div class="two-btn">
-                        <button type="submit" class="Close">Close</button>
-                        <button type="button" class="Edit" onclick="submit('visitorregistration');">Edit</button>
+                        <button type="submit" class="Close" onclick="closeSendRequest('submitRequest')">Close</button>
+                        <button type="button" class="Edit" onclick="editVisitor('visitorregistration');">Edit</button>
                     </div>
                 </div>
             </div>

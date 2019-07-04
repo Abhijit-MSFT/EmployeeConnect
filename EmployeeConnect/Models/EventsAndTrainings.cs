@@ -53,6 +53,8 @@ namespace EmployeeConnect.Models
         public string ETAgenda { get; set; }
 
         public bool UserAdded { get; set; }
+
+        [JsonProperty(PropertyName = "ETMandatory")]
         public bool ETMandatory { get; set; }
 
     }
