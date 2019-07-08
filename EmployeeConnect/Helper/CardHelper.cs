@@ -480,7 +480,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveChoice
                             {
-                                Title = "Technology",
+                                Title = "AI",
                                 Value = "4",
                             },
                             new AdaptiveChoice

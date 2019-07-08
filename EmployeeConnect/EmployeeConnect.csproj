@@ -237,15 +237,18 @@
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\SetPreferences.cs" />
     <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketsDataModel.cs" />
     <Compile Include="Models\UPreferences.cs" />
     <Compile Include="Models\PurchaseOrders.cs" />
     <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\VisitorDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\EmployeeConnect.dll" />
     <Content Include="bin\EmployeeConnect.pdb" />
     <Content Include="Content\Custom.css" />
+    <Content Include="Content\declined.css" />
     <Content Include="Content\eventandtrainingnew.css" />
     <Content Include="Content\fonts\Flag.png" />
     <Content Include="Content\fonts\flagEvents.JPG" />
@@ -261,6 +264,8 @@
     <Content Include="Content\index_Preferences.css" />
     <Content Include="Content\Event.css" />
     <Content Include="Content\msteams-16.css" />
+    <Content Include="Content\PODecline.css" />
+    <Content Include="Content\purchaseOrder.css" />
     <Content Include="Content\Tasks.css" />
     <Content Include="Content\Tools.css" />
     <Content Include="Content\Visitor.css" />
@@ -271,6 +276,7 @@
     <Content Include="Images\2.JPG" />
     <Content Include="Images\3.JPG" />
     <Content Include="Images\4.JPG" />
+    <Content Include="Images\A lost boy.jpg" />
     <Content Include="Images\Anthem at EA%27s E3 show.jpg" />
     <Content Include="Images\australia.jpg" />
     <Content Include="Images\benefitclaim.JPG" />
@@ -291,14 +297,18 @@
     <Content Include="Images\Electric bike.jfif" />
     <Content Include="Images\eventitsupport.JPG" />
     <Content Include="Images\expense_icon.PNG" />
+    <Content Include="Images\Feeling the pride.jpg" />
     <Content Include="Images\Fiat CEO sells stock.jpg" />
     <Content Include="Images\financeticket.JPG" />
+    <Content Include="Images\Flagship microsoft.jpg" />
     <Content Include="Images\French Open 2019.jpg" />
+    <Content Include="Images\Gamers with disabilities.jpg" />
     <Content Include="Images\gaming.jpg" />
     <Content Include="Images\gaudi.jpg" />
     <Content Include="Images\Havells Net Profit.jpg" />
     <Content Include="Images\High-flying robot.jpg" />
     <Content Include="Images\hololens.jpg" />
+    <Content Include="Images\How building robots.jpg" />
     <Content Include="Images\Huawei folding phone.jpg" />
     <Content Include="Images\Human Resources.jpeg" />
     <Content Include="Images\IDBI Bank.JPG" />
@@ -319,23 +329,31 @@
     <Content Include="Images\Microsoft Azure Devevlopment Camp.jfif" />
     <Content Include="Images\Microsoft Azure Discovery Day.jpg" />
     <Content Include="Images\Microsoft Build.jfif" />
+    <Content Include="Images\Microsoft Garage.jpg" />
+    <Content Include="Images\Microsoft hackathon.jpg" />
     <Content Include="Images\Microsoft Ignite.jpg" />
     <Content Include="Images\Microsoft Imagine Championship.jpg" />
+    <Content Include="Images\Microsoft Pix.jpg" />
+    <Content Include="Images\Microsoft%27s AI for Accessibility.jpg" />
     <Content Include="Images\MicrosoftBuild.jfif" />
     <Content Include="Images\NBA Finals.jpg" />
     <Content Include="Images\NVIDIA ARM.jpg" />
     <Content Include="Images\NVIDIA steal AI.png" />
+    <Content Include="Images\Partnership microsoft nfl.jpg" />
+    <Content Include="Images\Passwords.JPG" />
     <Content Include="Images\Payment and benefits.jpg" />
     <Content Include="Images\phone.jpg" />
     <Content Include="Images\PlayStation Plus June.jpg" />
     <Content Include="Images\purpleImage.JPG" />
     <Content Include="Images\Q4 Vacations ONGC Profit.jpg" />
+    <Content Include="Images\Quantum Computing.jpg" />
     <Content Include="Images\Reading Improves mental health.jpg" />
     <Content Include="Images\Recycle Ocean Floor Diamongs.jpg" />
     <Content Include="Images\requestleave.JPG" />
     <Content Include="Images\rob.jpg" />
     <Content Include="Images\robot.jpg" />
     <Content Include="Images\salesforce.png" />
+    <Content Include="Images\Satya Nadella rise of Microsoft.jpg" />
     <Content Include="Images\SharpPoint Conference.jpg" />
     <Content Include="Images\signIn_1.png" />
     <Content Include="Images\signIn_2.png" />
@@ -354,6 +372,7 @@
     <Content Include="Images\timesheet_icon.PNG" />
     <Content Include="Images\Toonz Media Group.JPG" />
     <Content Include="Images\Twitter new study.jpg" />
+    <Content Include="Images\Unmoored Times Square.jpg" />
     <Content Include="Images\USB ports.png" />
     <Content Include="Images\viewpolicies.JPG" />
     <Content Include="Images\whiteImage.png" />
@@ -500,6 +519,11 @@
     <Content Include="Views\EmployeeConnect\Policies.cshtml" />
     <Content Include="TestData\Preferences\Userpreferences.json" />
     <Content Include="TestData\Inventory.json" />
+    <Content Include="Views\EmployeeConnect\PODecline.cshtml" />
+    <Content Include="Views\EmployeeConnect\Declined.cshtml" />
+    <Content Include="TestData\VisitorReg\Tickets.json" />
+    <Content Include="TestData\VisitorReg\Visitors.json" />
+    <Content Include="TestData\SupportTickets\Tickets.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

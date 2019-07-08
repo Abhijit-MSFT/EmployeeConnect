@@ -27,7 +27,7 @@
       "ETMandatory": false,
       "ETStartDate": "06-04-2019",
       "ETStartTime": "1:00 PM",
-      "ETThumbnailUrl": "##BaseURL##/Images/Inside XBOX Live @ E3",
+      "ETThumbnailUrl": "##BaseURL##/Images/Inside XBOX Live @ E3.jpg",
       "ETTitle": "Inside XBOX Live @ E3",
       "ETType": "Online stream and Las Vegas",
       "UserAdded": false
@@ -121,7 +121,7 @@
       "ETEndDate": "06-28-2019",
       "ETStartTime": "12:00 PM",
       "ETEndTime": "1:00 PM",
-      "ETThumbnailUrl": "##BaseURL##/Images/Microsoft Azure Development Camp.jfif",
+      "ETThumbnailUrl": "##BaseURL##/Images/Microsoft Azure Devevlopment Camp.jfif",
       "ETType": "BLR Campus",
       "ETDetails": "Explore the latest developer tools and technologies along with hands on session with experts and learn how to put your skills to work  in new areas-like IoT ,Machine Learning,microservices and more.",
       "ETAgenda": "Development camp for Azure Services",

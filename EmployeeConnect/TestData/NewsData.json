@@ -3,7 +3,7 @@
   "news": [
     {
       "newsID": "12348",
-      "category": "Technology",
+      "category": "AI",
       "newsTitle": "Microsoft’s AI for Accessibility grant winners: ‘You want to be seen as the person you are",
       "latestOrTrendingFlag": "Trending",
       "newsThumbnailUrl": "##BaseURL##/Images/Microsoft's AI for Accessibility.JPG",
@@ -531,7 +531,7 @@
     },
     {
       "newsID": "12367",
-      "category": "Technology",
+      "category": "AI",
       "newsTitle": "Habana Labs launches its Gaudi AI training processor",
       "latestOrTrendingFlag": "Latest",
       "newsThumbnailUrl": "##BaseURL##/Images/gaudi.jpg",
@@ -542,7 +542,7 @@
     },
     {
       "newsID": "12368",
-      "category": "Gaming",
+      "category": "AI",
       "newsTitle": "Gaming sites hit with billions of cyberattacks",
       "latestOrTrendingFlag": "Trending",
       "newsThumbnailUrl": "##BaseURL##/imgs/gaming.jpg",

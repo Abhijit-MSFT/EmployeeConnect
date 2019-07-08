@@ -106,7 +106,7 @@ namespace EmployeeConnect
             {
                 EandTModel eventsTrainings = GetDataHelper.GetEandT();
                 var title = "";
-                var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "EventesAndTrainingstitle");
+                var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "EventsAndTrainingstitle");
                 var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", "result"));
                 ComposeExtensionAttachment[] attachments = null;
 

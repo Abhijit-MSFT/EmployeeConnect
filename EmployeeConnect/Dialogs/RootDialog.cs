@@ -145,12 +145,12 @@ namespace EmployeeConnect.Dialogs
                         break;
                     default:
                         //dont reply anything
-                        res = Helper.CardHelper.DefaultCard();
-                        for (int i = 0; i < res.Count(); i++)
-                            reply.Attachments.Add(res.ElementAt(i));
-                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-                        break;
-                        //return;
+                        //res = Helper.CardHelper.DefaultCard();
+                        //for (int i = 0; i < res.Count(); i++)
+                        //    reply.Attachments.Add(res.ElementAt(i));
+                        //reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                        //break;
+                        return;
 
                 }
 

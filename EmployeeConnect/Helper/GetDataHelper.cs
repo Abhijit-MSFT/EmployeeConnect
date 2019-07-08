@@ -129,7 +129,7 @@ namespace EmployeeConnect.Helper
             taskPref.TaskNotificationFlag = true;
             taskPref.TaskNotifyMe = "true";
             string[] time = { "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM" };
-            string[] category = { "Finance", "Media", "Design", "Technology", "Data", "Business", "CS", "Technology", "Animation", "IT" };
+            string[] category = { "Finance", "Media", "Design", "AI", "Data", "Business", "CS", "Technology", "Animation", "IT" };
             switch (pref.SetNewsChoice)
             {
                 case "1":
