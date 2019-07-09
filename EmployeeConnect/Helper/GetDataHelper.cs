@@ -174,7 +174,7 @@ namespace EmployeeConnect.Helper
             }
             string newsCategory;
             if (pref.NewsCategory1 == null && pref.NewsCategory2 == null)
-                newsPref.SelectedCategories = new string[0];
+                newsPref.SelectedCategories = category;
             else
             {
                 if (pref.NewsCategory1 != null && pref.NewsCategory2 == null)
@@ -334,6 +334,16 @@ namespace EmployeeConnect.Helper
             newsM.news = prefNews.ToArray();
             return newsM;
         }
+
+        //Update MockData
+        public static void UpdateETMockData()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
+            string json = File.ReadAllText(file);
+
+            EventsAndTraining et = new EventsAndTraining();
+        }
+      
     }
 }
 

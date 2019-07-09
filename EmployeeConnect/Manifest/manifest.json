@@ -225,30 +225,35 @@
         {
           "id": "createticket",
           "description": "Create a To Do item",
+          "fetchTask": true,
           "title": "Create ticket",
           "type": "action"
         },
         {
           "id": "business",
           "description": "Create a To Do item",
+          "fetchTask": true,
           "title": "Create business letter",
           "type": "action"
         },
         {
           "id": "leave",
           "description": "Create a To Do item",
+          "fetchTask": true,
           "title": "Create leave",
           "type": "action"
         },
         {
           "id": "benefit",
           "description": "Create a To Do item",
+          "fetchTask": true,
           "title": "Submit benefit claim",
           "type": "action"
         },
         {
           "id": "visitorregistration",
           "description": "Create a To Do item",
+          "fetchTask": true,
           "title": "Make visitor request",
           "type": "action"
         }

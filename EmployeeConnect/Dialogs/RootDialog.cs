@@ -86,7 +86,7 @@ namespace EmployeeConnect.Dialogs
                         break;
                     case Common.Constants.SetPrefrences:
                         card = Helper.CardHelper.SetTimePrefrences();
-                        reply.Text = string.Format("Hi {0}. Let's get your Preferences set.", userDetails.Name);
+                        reply.Text = string.Format("Set a preferred time to receive notifications, for latest news, events, trainings and reminders.");
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
@@ -273,7 +273,7 @@ namespace EmployeeConnect.Dialogs
 
         private async Task SendOAuthCardAsync(IDialogContext context, Activity activity)
         {
-            var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "In order to use Employee connect, we need your basic details please sign in", "Sign In", true).ConfigureAwait(false);
+            var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "Please sign in", "Sign In", true).ConfigureAwait(false);
             await context.PostAsync(reply);
             context.Wait(WaitForToken);
         }
