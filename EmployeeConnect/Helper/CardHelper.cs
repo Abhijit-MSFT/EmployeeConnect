@@ -457,7 +457,7 @@ namespace EmployeeConnect.Helper
                      new AdaptiveChoiceSetInput()
                     {
                         Id = "NewsCategory1",
-                        Value = "1", // please set default value here
+                        //Value = "1", // please set default value here
                         Style = AdaptiveChoiceInputStyle.Expanded,
                         IsMultiSelect=true,// set the style of Choice set to compact
                         Wrap=true,
@@ -945,7 +945,7 @@ namespace EmployeeConnect.Helper
             card.content.title = "Upcoming Events and Trainings";
             EandTModel EandTL = Helper.GetDataHelper.GetEandT();
             Item item;
-            if (EandTL != null)  //if it got the news
+            if (EandTL != null)  
             {
                 var Events = EandTL.EventsAndtraining;
                 int MaxEventsCount = Events.Count();
@@ -971,9 +971,9 @@ namespace EmployeeConnect.Helper
                         item.title = title;
                         //item.icon = EandT.ETThumbnailUrl;
                         if (EandT.ETFlag == "E")
-                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/flagEvents.JPG";
+                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/flagImg.JPG";
                         else
-                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/shapeEvent.JPG";
+                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/shapeEve.JPG";
                         item.id = EandT.ETID;
                         item.subtitle = subtitle;
                         //item.flagImage = EandT.ETFlagImage;
@@ -1022,6 +1022,8 @@ namespace EmployeeConnect.Helper
             PO POlist = new PO();
             POlist = Helper.GetDataHelper.GetPOs();
 
+
+
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
@@ -1029,26 +1031,39 @@ namespace EmployeeConnect.Helper
             card.content.title = "Your pending submissions";
             Item item = new Item();
 
-            for (int i = 0; i < POlist.PurchaseOrder.Count(); i++)
+            item = new Item();
+            item.title = "12";
+            item.subtitle = "Days of pending timesheet";
+            //item.id = POlist.PurchaseOrder[i].PoNumber;
+            item.type = "resultItem";
+            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            var url = "pendingdates";
+            item.tap = new Tap()
             {
-                item = new Item();
-                item.title = POlist.PurchaseOrder[i].Description;
-                item.subtitle = POlist.PurchaseOrder[i].PoNumber;
-                item.id = POlist.PurchaseOrder[i].PoNumber;
-                item.type = "resultItem";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
-                item.tap = new Tap()
-                {
-                    type = "invoke",
-                    title = item.id,
-                    value = "{ \"type\": \"task/fetch\", \"data\": \"po:" + POlist.PurchaseOrder[i].PoNumber.ToString() + "\"}"
-                };
-                list.Add(item);
-            }
+                type = "invoke",
+                title = item.id,
+                value = "{ \"type\": \"task/fetch\", \"data\": \"" + url + "\"}"
+            };
+            list.Add(item);
+            item = new Item();
+            item.title = "Rs. 25,000";
+            item.subtitle = "Amount of unreconciled expenses";
+            //item.id = POlist.PurchaseOrder[i].PoNumber;
+            item.type = "resultItem";
+            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            item.tap = new Tap()
+            {
+                type = "invoke",
+                title = item.id,
+                value = "{ \"type\": \"task/fetch\", \"data\": \"" + url + "\"}"
+            };
+            list.Add(item);
             card.content.items = list.ToArray();
             Attachment attachment = new Attachment();
             attachment.ContentType = card.contentType;
             attachment.Content = card.content;
+
+
 
             return attachment;
         }
@@ -1188,69 +1203,95 @@ namespace EmployeeConnect.Helper
         }
         public static Attachment PendingApprovals()
         {
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "";
+
+            Item item;
+            item = new Item();
+            item.title = "Purchase orders";
+            item.type = "section";
+            list.Add(item);
+
             PO POList = Helper.GetDataHelper.GetPOs();
             InventoryModel InvList = Helper.GetDataHelper.getInventoryData();
 
-            int POcount = 0, Icount = 0, Invcount = InvList.Inventory.Count();
-            for (int i = 0; i < POList.PurchaseOrder.Count(); i++)
+            var pending = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("pending"));
+
+            var invoice = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("approved"));
+
+            var inventory = InvList.Inventory;
+
+            for (int i = 0; i < pending.Count(); i++)
             {
-                if (POList.PurchaseOrder[i].PoStatus == "pending")
-                    POcount++;
-                else if (POList.PurchaseOrder[i].PoStatus == "approved")
-                    Icount++;
+                item = new Item();
+                var task = pending.ElementAt(i);
+                item.title = task.Description;
+                item.subtitle = "PoNumber: "+ task.PoNumber;
+                item.id = task.PoNumber;
+                item.type = "resultItem";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                var url = "purchaseorder?poNumber=" + task.PoNumber.ToString()+"&vendorno="+task.vendorNo.ToString();
+                item.tap = new Tap()
+                {
+                    // /purchaseorder?poNumber="+PONumber+"&vendorno="+vendorNo;
+                    type = "invoke",
+                    title = item.id,
+                    value = "{ \"type\": \"task/fetch\", \"data\": \"" + url +  "\"}"
+                };
+                list.Add(item);
             }
+            item = new Item();
+            item.title = "Invoices";
+            item.type = "section";
+            list.Add(item);
 
-
-            var card = new AdaptiveCard("1.0")
+            for (int i = 0; i < invoice.Count(); i++)
             {
-                Body = new List<AdaptiveElement>()
+                item = new Item();
+                var task = invoice.ElementAt(i);
+                item.title = task.Description;
+                item.subtitle = "InvoiceNumber: " + task.PoNumber;
+                item.id =task.PoNumber;
+                item.type = "resultItem";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                var url = "purchaseorder?poNumber=" + task.PoNumber.ToString() + "&vendorno=" + task.vendorNo.ToString();
+                item.tap = new Tap()
                 {
-                    new AdaptiveContainer()
-                    {
-                        Items = new List<AdaptiveElement>()
-                        {
-
-                        new AdaptiveTextBlock()
-                        {
-                            Text = "You have " + (POcount+Icount+Invcount) + " items pending for approval",
-                            Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                            Size = AdaptiveTextSize.Medium, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                        },
-                        new AdaptiveTextBlock()
-                        {
-                            Text = POcount+ " purchase orders",
-                            Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
-                            Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                        },
-                         new AdaptiveTextBlock()
-                        {
-                            Text = Icount+ " invoices",
-                            Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
-                            Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                        },
-                          new AdaptiveTextBlock()
-                        {
-                            Text = Invcount+ " inventory",
-                            Weight = AdaptiveTextWeight.Lighter, // set the weight of text e.g. Bolder, Light, Normal
-                            Size = AdaptiveTextSize.Small, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                        }
-                        }
-                    }
-                },
-                Actions = new List<AdaptiveAction>()
+                    type = "invoke",
+                    title = item.id,
+                    value = "{ \"type\": \"task/fetch\", \"data\": \"" + url + "\"}"
+                };
+                list.Add(item);
+            }
+            item = new Item();
+            item.title = "Inventory";
+            item.type = "section";
+            list.Add(item);
+            
+            for (int i = 0; i < inventory.Count(); i++)
+            {
+                item = new Item();
+                var task = inventory.ElementAt(i);
+                item.title = task.description;
+                item.subtitle = "InventoryNumber: " + task.inventoryNo;
+                item.id =  task.inventoryNo;
+                item.type = "resultItem";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                item.tap = new Tap()
                 {
-                    new AdaptiveOpenUrlAction()
-                    {
-                        Title="Review",
-                        Url= new Uri(deepLinkTab("tasks","Tasks"))
-                    }
-
-                 }
-            };
+                    type = "invoke",
+                    title = item.id,
+                    //value = "{ \"type\": \"task/fetch\", \"data\": \"po:" + task.inventoryNo.ToString() + "\"}"
+                };
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
             Attachment attachment = new Attachment()
             {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card
+                ContentType = card.contentType,
+                Content = card.content
             };
             return attachment;
         }
