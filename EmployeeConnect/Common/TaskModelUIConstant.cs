@@ -30,7 +30,11 @@ namespace EmployeeConnect.Common
         new UIConstants(750, 600, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");
 
         public static UIConstants POCard { get; set; } =
-        new UIConstants(350,300, "PO Card", TaskModuleIds.ETcard, "PO Card");
+        new UIConstants(750,600, "PO Card", TaskModuleIds.ETcard, "PO Card");
+
+        public static UIConstants PendingDates { get; set; } =
+       new UIConstants(2000,2000, "Pending Dates", TaskModuleIds.ETcard, "Pending Dates");
+
     }
 public class UIConstants
     {
@@ -62,5 +66,6 @@ public class UIConstants
         public const string SendRequest = "sendrequest";
         public const string EventCard = "eventcard";
         public const string POCard = "pocard";
+        public const string pendingDates = "pendingdates";
     }
 }

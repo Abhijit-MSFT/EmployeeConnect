@@ -94,6 +94,7 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.PendingApprovals:
+
                         card = Helper.CardHelper.PendingApprovals();
                         if (card != null)
                             reply.Attachments.Add(card);

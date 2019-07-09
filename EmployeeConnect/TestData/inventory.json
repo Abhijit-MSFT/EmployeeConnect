@@ -1,56 +1,56 @@
 {
   "Inventory": [
     {
-      "inventoryNo.": "55545",
+      "inventoryNo": "55545",
       "description": "Fitness Machine",
       "vendorName": "Store C",
       "vendorNo": "68292",
       "amount": "5000"
     },
     {
-      "inventoryNo.": "55632",
+      "inventoryNo": "55632",
       "description": "Spinning Bike",
       "vendorName": "Store C",
       "vendorNo": "68292",
       "amount": "10000"
     },
     {
-      "inventoryNo.": "12564",
+      "inventoryNo": "12564",
       "description": "Tennis Racquet",
       "vendorName": "Store D",
       "vendorNo": "25836",
       "amount": "350"
     },
     {
-      "inventoryNo.": "12564",
+      "inventoryNo": "12564",
       "description": "Fussball Table",
       "vendorName": "Store D",
       "vendorNo": "25836",
       "amount": "500"
     },
     {
-      "inventoryNo.": "12565",
+      "inventoryNo": "12565",
       "description": "Air Hockey Table",
       "vendorName": "Store D",
       "vendorNo": "25836",
       "amount": "20000"
     },
     {
-      "inventoryNo.": "12785",
+      "inventoryNo": "12785",
       "description": "White Board",
       "vendorName": "Store A",
       "vendorNo": "97546",
       "amount": "400"
     },
     {
-      "inventoryNo.": "12785",
+      "inventoryNo": "12785",
       "description": "Twain File Cabinet",
       "vendorName": "Store A",
       "vendorNo": "97546",
       "amount": "2300"
     },
     {
-      "inventoryNo.": "12785",
+      "inventoryNo": "12785",
       "description": "Juices",
       "vendorName": "Store P",
       "vendorNo": "97547",

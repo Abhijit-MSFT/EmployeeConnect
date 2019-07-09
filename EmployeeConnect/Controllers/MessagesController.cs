@@ -129,6 +129,7 @@ namespace EmployeeConnect.Controllers
 
         private static TaskInfo GetTaskInfo(string actionInfo)
         {
+
             TaskInfo taskInfo = new TaskInfo();
             if (actionInfo.StartsWith("news:"))
             {
@@ -142,10 +143,11 @@ namespace EmployeeConnect.Controllers
                 SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
                 return taskInfo;
             }
-            if (actionInfo.StartsWith("po:"))
+            if (actionInfo.StartsWith("purchaseorder?poNumber="))
             {
-                taskInfo.Card = JObject.FromObject(Helper.CardHelper.PendingTasksCard(actionInfo.Substring(3)));
-                SetTaskInfo(taskInfo, TaskModelUIConstant.POCard);
+                taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + actionInfo;
+                //taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + "/purchaseorder?poNumber=" + "739248" + "&vendorno=" + "68282";
+                SetTaskInfo(taskInfo, TaskModelUIConstant.PurchaseOrder);
                 return taskInfo;
             }
             switch (actionInfo)
@@ -183,7 +185,10 @@ namespace EmployeeConnect.Controllers
                     taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.VisitorRegistration;
                     SetTaskInfo(taskInfo, TaskModelUIConstant.VisitorRegistration);
                     break;
-
+                case TaskModuleIds.pendingDates:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.pendingDates;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.PendingDates);
+                    break;
 
                 default:
                     break;
