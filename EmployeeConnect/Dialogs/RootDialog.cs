@@ -86,7 +86,7 @@ namespace EmployeeConnect.Dialogs
                         break;
                     case Common.Constants.SetPrefrences:
                         card = Helper.CardHelper.SetTimePrefrences();
-                        reply.Text = string.Format("Hi {0}. Let's get your Preferences set.", userDetails.Name);
+                        //reply.Text = string.Format("Hi {0}. Let's get your Preferences set.", userDetails.Name);
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
@@ -94,6 +94,7 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.PendingApprovals:
+
                         card = Helper.CardHelper.PendingApprovals();
                         if (card != null)
                             reply.Attachments.Add(card);

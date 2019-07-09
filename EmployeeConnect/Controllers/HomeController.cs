@@ -230,6 +230,14 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
+
+        [Route("pendingdates")]
+        public ActionResult PendingDates()
+        {
+            //TempData["data"] = poNo;
+            return View();
+        }
+
         [Route("EventandTrainingTab")]
         public ActionResult EventandTrainingTab(string id)
         {
