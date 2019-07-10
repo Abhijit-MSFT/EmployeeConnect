@@ -52,17 +52,17 @@
                     <div class="modal-priority">Set a priority</div>
                     <form class="all-radio">
                         <label class="radio-label col-3 ">
-                            <input type="radio" name="radio">
+                            <input type="radio" name="radio" value="Low" onclick="getPriority(this.value)">
                             <span class="range">Low</span>
                             <span class="check-mark"></span>
                         </label>
                         <label class="radio-label col-3">
-                            <input type="radio" name="radio">
+                            <input type="radio" name="radio" value="Medium" onclick="getPriority(this.value)">
                             <span class="range">Medium</span>
                             <span class="check-mark"></span>
                         </label>
                         <label class="radio-label col-3">
-                            <input type="radio" name="radio" checked="">
+                            <input type="radio" name="radio" checked="" value="HIgh" onclick="getPriority(this.value)">
                             <span class="range">High</span>
                             <span class="check-mark"></span>
                         </label>
@@ -85,22 +85,26 @@
   $("select").change(function ()
        {    
         categorySelectedChange = document.getElementById("allCategories").value;  
-    });
-   
+  });
+    var prioritySelected = "High";
+    function getPriority(value) {
+        debugger;
+          prioritySelected = value;
+        }
     microsoftTeams.initialize();
 
     function submitCreateTicket(type) {
         debugger;
-    var categorySelected, prioritySelected, ticketDescription;
+    var categorySelected, ticketDescription;
     categorySelected = categorySelectedChange;
     ticketDescription = document.getElementById("description").value;
-    prioritySelected = "low";
+  
   
          $.ajax({
                   type: "POST",
                   url: "/createticketindb",
                  contentType: "application/json; charset=utf-8",
-                 data: '{"category":"' + categorySelected + '","description":"' + ticketDescription + '","priority":"' + prioritySelected + '"}', 
+                 data: '{"category":"' + categorySelected + '","description":"' + ticketDescription + '","prioritySelected":"' + prioritySelected + '"}', 
                  dataType: "json",
              success: function (data) {   
                  

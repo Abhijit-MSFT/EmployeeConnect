@@ -11,6 +11,7 @@ namespace EmployeeConnect.Helper
 {
     public class GetDataHelper
     {
+        public static string userName = "";
         public static NewsModel GetNews()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
@@ -111,6 +112,7 @@ namespace EmployeeConnect.Helper
         {
             SetPreferences pref = new SetPreferences();
             pref = (new JavaScriptSerializer().Deserialize<SetPreferences>(json));
+            userName = pref.UserName;
             return pref;
         }
 
@@ -207,6 +209,10 @@ namespace EmployeeConnect.Helper
             int i;
             EmployeeConnect.Models.UPreferences uPref = new JavaScriptSerializer().Deserialize<EmployeeConnect.Models.UPreferences>(json);
             List<EmployeeConnect.Models.Preference> list = uPref.preferences.ToList();
+            if(pref.UserName == null)
+            {
+                pref.UserName = "Abhijit Jodbhavi";
+            }
             for (i = 0; i < list.Count(); i++)
             {
                 if (list[i].UserName.Equals(pref.UserName))
