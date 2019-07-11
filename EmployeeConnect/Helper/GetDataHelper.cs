@@ -209,16 +209,17 @@ namespace EmployeeConnect.Helper
             int i;
             EmployeeConnect.Models.UPreferences uPref = new JavaScriptSerializer().Deserialize<EmployeeConnect.Models.UPreferences>(json);
             List<EmployeeConnect.Models.Preference> list = uPref.preferences.ToList();
-            if(pref.UserName == null)
-            {
-                pref.UserName = "Abhijit Jodbhavi";
-            }
             for (i = 0; i < list.Count(); i++)
             {
                 if (list[i].UserName.Equals(pref.UserName))
                 {
                     //rewrite
                     list[i] = pref;
+                    break;
+                }
+                else
+                {
+                    list[i].UserName = pref.UserName;
                     break;
                 }
             }

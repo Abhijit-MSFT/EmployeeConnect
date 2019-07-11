@@ -171,10 +171,11 @@ namespace EmployeeConnect.Controllers
         }
 
         [Route("PreferenceInDb")]
-        public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag)
+        public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName)
         {
             
             Preference pref = new Preference();
+            pref.UserName = UserName;
             pref.News = new NewsPreference[1];
             pref.EandT = new EandtPreference[1];
             pref.Task = new TaskPreference[1];
