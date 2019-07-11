@@ -26,7 +26,8 @@
         var taskNotificationTime = "10:00 AM";
         var taskNotifyme = "true";
         var taskNotifyFlag = true;
-
+        var userName = "";
+        microsoftTeams.getContext(function (context) { userName = context.userPrincipalName})
         function getTime(value) {
             newsSelectedTime = value;
         }
@@ -59,18 +60,15 @@
             }
         }
         function getCategory() {
-            debugger;
             if (event.target.checked == true) {
                 newsCategory.push(event.currentTarget.value);
           $.ajax({
             type: "POST",
             url: "/PreferenceInDb",
-            contentType: "application/json; charset=utf-8",
-            data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '"}',
+              contentType: "application/json; charset=utf-8",
+              data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '",,"UserName":"' + userName + '"}',
             dataType: "json",
             success: function (data) {
-                debugger;
-                alert(data);
             },
             error: function () {
                 console.log('A error');

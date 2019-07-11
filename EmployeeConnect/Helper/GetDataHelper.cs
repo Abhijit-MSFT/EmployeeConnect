@@ -221,6 +221,11 @@ namespace EmployeeConnect.Helper
                     list[i] = pref;
                     break;
                 }
+                else
+                {
+                    list[i].UserName = pref.UserName;
+                    break;
+                }
             }
             if (i == list.Count())
                 list.Add(pref);
