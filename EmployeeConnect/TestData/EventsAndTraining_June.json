@@ -17,20 +17,21 @@
       "ETMandatory": true
     },
     {
-      "ETAgenda": "Xbox Showcase Event featuring new releases",
+
       "ETDate": "06-06-2019",
-      "ETDetails": " Xbox video showcase event of the year on livestream,featuring new released games like Metro Exodus, Mortal Kombat 11, Crackdown 3, Sea of Thieves, and The Division 2.",
-      "ETEndDate": "06-05-2019",
-      "ETEndTime": "4:00 PM",
       "ETFlag": "E",
       "ETID": "e1232",
-      "ETMandatory": false,
-      "ETStartDate": "06-04-2019",
-      "ETStartTime": "1:00 PM",
-      "ETThumbnailUrl": "##BaseURL##/Images/Inside XBOX Live @ E3.jpg",
       "ETTitle": "Inside XBOX Live @ E3",
+      "ETStartDate": "06-04-2019",
+      "ETEndDate": "06-05-2019",
+      "ETStartTime": "1:00 PM",
+      "ETEndTime": "4:00 PM",
+      "ETThumbnailUrl": "##BaseURL##/Images/Inside XBOX Live @ E3.jpg",
       "ETType": "Online stream and Las Vegas",
-      "UserAdded": false
+      "ETDetails": " Xbox video showcase event of the year on livestream,featuring new released games like Metro Exodus, Mortal Kombat 11, Crackdown 3, Sea of Thieves, and The Division 2.",
+      "ETAgenda": "Xbox Showcase Event featuring new releases",
+      "UserAdded": false,
+      "ETMandatory": false
     },
     {
       "ETDate": "06-07-2019",

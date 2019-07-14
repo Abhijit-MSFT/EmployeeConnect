@@ -453,7 +453,6 @@ namespace EmployeeConnect.Helper
             {
                 Items =
                 {
-
                      new AdaptiveChoiceSetInput()
                     {
                         Id = "NewsCategory1",

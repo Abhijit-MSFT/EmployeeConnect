@@ -1,32 +1,14 @@
 {
   "preferences": [
     {
-      "userName": "Abhijit Jodbhavi",
-      "news": [
-        {
-          "selectedCategories": [],
-          "newsNotificationFlag": true,
-          "newsNotifyMe": "",
-          "newsNotificationTime": ""
-        }
-      ],
-      "eandT": [
-        {
-          "eandTNotificationFlag": true,
-          "eandTNotifyMe": "",
-          "eandTNotificationTime": ""
-        }
-      ],
-      "task": [
-        {
-          "taskNotificationFlag": true,
-          "taskNotifyMe": "",
-          "taskNotificationTime": ""
-        }
-      ]
-    },
-    {
       "userName": "Wajeed Shaikh",
+      "userInfo": [
+        {
+          "uniqueID": "",
+          "tenantID": "",
+          "serviceURl": ""
+        }
+      ],
       "news": [
         {
           "selectedCategories": [],
@@ -51,31 +33,74 @@
       ]
     },
     {
-      "userName": "Vedant Patwary",
+      "userName": "Trinetra Kumar",
+      "userInfo": [
+        {
+          "uniqueID": "",
+          "tenantID": "",
+          "serviceURl": ""
+        }
+      ],
+      "news": [
+        {
+          "selectedCategories": [],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "",
+          "newsNotificationTime": ""
+        }
+      ],
+      "eandT": [
+        {
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "",
+          "eandTNotificationTime": ""
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "",
+          "taskNotificationTime": ""
+        }
+      ]
+    },
+    {
+      "userName": "Abhijit Jodhbhavi",
+      "userInfo": [
+        {
+          "uniqueID": "29:18ls6y6123LSOgQyRZfJ3VaRbfXZq54SlGxdq570f3rPCp6Y2sd4a0tChMug7qRNUsv-Gs0OxxYQlL1R6GUQg-Q",
+          "tenantID": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "serviceURl": "https://smba.trafficmanager.net/amer/"
+        }
+      ],
       "news": [
         {
           "selectedCategories": [
-            "Finance",
-            "Art",
-            "Technology"
+            "Design",
+            "AI",
+            "Data",
+            "CS",
+            "Technology",
+            "Animation",
+            "IT"
           ],
           "newsNotificationFlag": true,
           "newsNotifyMe": "true",
-          "newsNotificationTime": "9:00 AM"
+          "newsNotificationTime": "8:00 AM"
         }
       ],
       "eandT": [
         {
           "eandTNotificationFlag": true,
           "eandTNotifyMe": "true",
-          "eandTNotificationTime": "9:00 AM"
+          "eandTNotificationTime": "5:00 PM"
         }
       ],
       "task": [
         {
           "taskNotificationFlag": true,
           "taskNotifyMe": "true",
-          "taskNotificationTime": "9:00 AM"
+          "taskNotificationTime": "2:00 PM"
         }
       ]
     }

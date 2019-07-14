@@ -34,6 +34,7 @@ namespace EmployeeConnect.Dialogs
         /// </summary>
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
+           
             var activity = await result as Activity;
             var typingReply = activity.CreateReply();
             typingReply.Text = null;
@@ -42,11 +43,54 @@ namespace EmployeeConnect.Dialogs
             string message = string.Empty;
             string userEmailId = string.Empty;
             string emailKey = GetEmailKey(activity);
-            //string user = null;
+            var userDetails = await GetCurrentUserDetails(activity);
+            string userName = userDetails.Name;
+            int index = userName.IndexOf(' ');
+            index = userName.IndexOf(' ', index + 1);
+            userName = userName.Substring(0, index);
+
+            // TODO:
+            // Get preferences and check if user info is present for Abhijit
+            // If Exists -> All good 
+            // Else - 
+            // 
+
+
+            //Models.UPreferences uPref = GetDataHelper.readPreferences();
+            //List<Models.Preference> Preflist = uPref.preferences.ToList();
+            ////Models.Preference currUser = Preflist.Where(c => c.UserName == userName).Select(d=>d).FirstOrDefault();
+            //if (Preflist.Select(c => c.UserName).Contains(userName))
+            //{
+            //    string UniqueId = activity.From.Id;
+            //    string ServiceURL = activity.ServiceUrl;
+            //    string TenantId = activity.GetChannelData<TeamsChannelData>().Tenant.Id;
+            //    string PrefFileName = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
+
+            //    int uPrefCount = uPref.preferences.Count();
+            //    for (int i = 0; i < uPrefCount; i++)
+            //    {
+            //        if (Preflist[i].UserName.Equals(userName))
+            //        {
+            //            Preflist[i].UserInfo.FirstOrDefault().UniqueID = UniqueId;
+            //            Preflist[i].UserInfo.FirstOrDefault().TenantID = TenantId;
+            //            Preflist[i].UserInfo.FirstOrDefault().ServiceURl = ServiceURL;
+            //        }
+
+            //    }
+
+            //    string json = JsonConvert.SerializeObject(uPref); //create json object
+
+            //    File.WriteAllText(PrefFileName, json);
+            //}
+
+
+
+
+
             if (!context.ConversationData.ContainsKey(emailKey))
             {
-                await SendOAuthCardAsync(context, (Activity)context.Activity);
-                return;
+                //await SendOAuthCardAsync(context, (Activity)context.Activity);
+                //return;
 
                 /*Welcome Card
                 var reply = context.MakeMessage();
@@ -58,7 +102,7 @@ namespace EmployeeConnect.Dialogs
                 reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                 await context.PostAsync(reply);*/
             }
-            var userDetails = await GetCurrentUserDetails(activity);
+            //var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
             {
                 await context.PostAsync("Failed to read user profile. Please try again.");
@@ -72,6 +116,7 @@ namespace EmployeeConnect.Dialogs
                     await Signout(userEmailId, context);
                     return;
                 }*/
+
                 Attachment card = null;
                 var reply = context.MakeMessage();
                 List<Attachment> res;
@@ -109,7 +154,7 @@ namespace EmployeeConnect.Dialogs
                             reply.Text = "No pending submissions to show.";
                         break;
                     case Common.Constants.TrendingNews:
-                        card = Helper.CardHelper.getNewsCard(userDetails.Name);
+                        card = Helper.CardHelper.getNewsCard(userName);
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.Policies:
@@ -208,12 +253,47 @@ namespace EmployeeConnect.Dialogs
             var actionDetails = JsonConvert.DeserializeObject<Models.ActionDetails<string>>(activity.Value.ToString());
             var userDetails = await GetCurrentUserDetails(activity);
             var reply = context.MakeMessage();
+
+            string userName = userDetails.Name;
+            int index = userName.IndexOf(' ');
+            index = userName.IndexOf(' ', index + 1);
+            userName = userName.Substring(0, index);
+            string UniqueId = activity.From.Id;
+            string ServiceURL = activity.ServiceUrl;
+            string TenantId = activity.GetChannelData<TeamsChannelData>().Tenant.Id;
+
+
+            Models.UPreferences uPref = GetDataHelper.readPreferences();
+            List<Models.Preference> Preflist = uPref.preferences.ToList();
+            if (Preflist.Select(c => c.UserName).Contains(userName))
+            {
+               
+                string PrefFileName = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
+
+                //int uPrefCount = uPref.preferences.Count();
+                //for (int i = 0; i < uPrefCount; i++)
+                //{
+                //    if (Preflist[i].UserName.Equals(userName))
+                //    {
+                //        Preflist[i].UserInfo.FirstOrDefault().UniqueID = UniqueId;
+                //        Preflist[i].UserInfo.FirstOrDefault().TenantID = TenantId;
+                //        Preflist[i].UserInfo.FirstOrDefault().ServiceURl = ServiceURL;
+                //    }
+
+                //}
+
+                //string json = JsonConvert.SerializeObject(uPref); //create json object
+
+                //File.WriteAllText(PrefFileName, json);
+            }
+            //------------
             switch (actionDetails.Action)
             {
                 case Constants.SetPrefrencesDone:   //Press Done button on set preferences
                     EmployeeConnect.Models.SetPreferences setPref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
-                    setPref.UserName = userDetails.Name;
-                    EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.makeUPrefObject(setPref);
+                    setPref.UserName = userName;
+                    //setPref.UserName = userDetails.Name;
+                    EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.makeUPrefObject(setPref, UniqueId, ServiceURL, TenantId);
                     Helper.GetDataHelper.WritePreferences(pref);
                     reply.Text = "Your preferences are set.";
                     break;
@@ -275,8 +355,8 @@ namespace EmployeeConnect.Dialogs
         private async Task SendOAuthCardAsync(IDialogContext context, Activity activity)
         {
             var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "Please sign in", "Sign In", true).ConfigureAwait(false);
-            await context.PostAsync(reply);
-            context.Wait(WaitForToken);
+            //await context.PostAsync(reply);
+            //context.Wait(WaitForToken);
         }
         private async Task WaitForToken(IDialogContext context, IAwaitable<object> result)
         {
@@ -328,9 +408,7 @@ namespace EmployeeConnect.Dialogs
 
         }
         private async Task<string> GetUserEmailId(Activity activity)
-
         {
-
             // Fetch the members in the current conversation
 
             ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));

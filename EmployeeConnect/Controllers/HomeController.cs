@@ -7,6 +7,9 @@ using System.Linq;
 using System.Globalization;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.IO;
+
 
 namespace EmployeeConnect.Controllers
 {
@@ -72,6 +75,24 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
+        [Route("showNews")]
+        public async Task<ActionResult> ShowNews(string userName)
+        {
+            // Fetch preferences and get the userInfo
+            // var user = usersList.WHere(u => u.nmae == usersNm, e);
+            //var userInfo = user.userINfo; // Fetch from JSON for userName
+            // Based on preferences - create news card
+
+            UPreferences uPref = GetDataHelper.readPreferences();
+            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+            
+            //need to send one more parameter Attachement
+            //await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID);
+            
+            return View();
+        }
+
         [Route("createticketindb")]
         public string CreateTicketindb(string category, string description, string prioritySelected)
         {
@@ -92,6 +113,7 @@ namespace EmployeeConnect.Controllers
             var parsedData = js.Serialize(objectData);
             return parsedData;
         }
+
         [Route("sendRequestindb")]
         public string SendRequestIndb(string hostName, string hostLocation, string org, string contact, string purpose, string date, string time)
         {
@@ -150,7 +172,12 @@ namespace EmployeeConnect.Controllers
         [Route("news")]
         public ActionResult News()
         {
-            NewsModel news = new NewsModel();
+            NewsModel news = new NewsModel();            
+            int day = DateTime.Now.Day;
+            if (day == 15 || day == 30)
+            {
+                GetDataHelper.UpdateNewsMockData();
+            }
             news = GetDataHelper.GetNews();
             return View(news);
         }
@@ -179,7 +206,6 @@ namespace EmployeeConnect.Controllers
         [HttpGet]
         public ActionResult PurchaseOrder(string poNumber,string vendorno)
         {
-
             TempData["data"] = poNumber;
             ViewBag.vendorNo = vendorno;
             PO poList = new PO();
