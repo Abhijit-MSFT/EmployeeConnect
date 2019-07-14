@@ -15,6 +15,7 @@ namespace EmployeeConnect.Controllers
 {
     public class EmployeeConnectController : Controller
     {
+        public static int count = 1;
         [Route("")]
         public ActionResult Index()
         {
@@ -188,11 +189,44 @@ namespace EmployeeConnect.Controllers
             return JObject.FromObject(CardHelper.GetNewsCardbyId(NewsId));
         }
 
-
         [Route("preferences")]
         public ActionResult Preferences()
         {
             return View("Preferences");
+        }
+
+        [Route("PreferenceInDb")]
+        public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName)
+        {
+            
+            Preference pref = new Preference();
+            pref.UserName = UserName;
+            pref.News = new NewsPreference[1];
+            pref.EandT = new EandtPreference[1];
+            pref.Task = new TaskPreference[1];
+            NewsPreference newsPref = new NewsPreference()
+                {
+                    SelectedCategories = newsPrefCat,
+                    NewsNotificationTime = newsTime,
+                    NewsNotifyMe = newsNotifyMe,
+                    NewsNotificationFlag = newsNotificationFlag
+            };
+            EandtPreference entPref = new EandtPreference()
+            {
+                EandTNotificationTime = eandtTime,
+                EandTNotifyMe = eandtNotify,
+                EandTNotificationFlag = eandtflag
+            };
+            TaskPreference taskPref = new TaskPreference()
+            {
+                TaskNotificationTime = taskTime,
+                TaskNotifyMe = taskNotifyMe,
+                TaskNotificationFlag = taskNotificationFlag
+            };
+            pref.News[0] = newsPref;
+            pref.EandT[0] = entPref;
+            pref.Task[0] = taskPref;
+            GetDataHelper.WritePreferences(pref);
         }
 
         [Route("policies")]
