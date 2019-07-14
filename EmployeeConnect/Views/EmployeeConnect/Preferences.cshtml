@@ -8,8 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
-    @Scripts.Render("https://unpkg.com/@microsoft/teams-js@1.4.2/dist/MicrosoftTeams.min.js")
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="~/Content/index_Preferences.css" rel="stylesheet" />
@@ -17,7 +16,73 @@
     <title>Preferences Tab</title>
     <script>
         microsoftTeams.initialize();
-    </script>
+
+        var newsCategory = ["Business"];
+        var newsSelectedTime = "10:00 AM";
+        var newsNotificationFlag = true;
+        var newNotifyMe = true;
+        var entNotifyMe = "true";
+        var entNotificationFlag = true;
+        var entNotificationTime = "10:00 AM";
+        var taskNotificationTime = "10:00 AM";
+        var taskNotifyme = "true";
+        var taskNotifyFlag = true;
+        var userName = "";
+        microsoftTeams.getContext(function (context) { userName = context.userPrincipalName})
+        function getTime(value) {
+            newsSelectedTime = value;
+        }
+        function getEnTTime(value) {
+            entNotificationTime = value;
+        }
+        function getTaskTime(value) {
+            taskNotificationTime = value;
+        }
+       
+        function toggleSliderEnT() {
+            if (event.currentTarget.checked == true) {
+                entNotificationFlag = true;
+                entNotifyMe = "true";
+            }
+            else {
+                entNotificationFlag = false;
+                entNotifyMe = "false";
+            }
+        }
+        function toggleSliderNews() {
+            if (event.currentTarget.checked == true) {
+                newsNotificationFlag = true;
+                newNotifyMe = "true";
+
+            }
+            else {
+                newsNotificationFlag = false;
+                newNotifyMe = "false";
+            }
+        }
+        function getCategory() {
+            if (event.target.checked == true) {
+                newsCategory.push(event.currentTarget.value);
+          $.ajax({
+            type: "POST",
+            url: "/PreferenceInDb",
+              contentType: "application/json; charset=utf-8",
+              data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '",,"UserName":"' + userName + '"}',
+            dataType: "json",
+            success: function (data) {
+            },
+            error: function () {
+                console.log('A error');
+            }
+        });
+            }
+           
+        }
+       
+      
+
+
+/**/</script>
 </head>
 
 <body>
@@ -47,7 +112,7 @@
                             <label for="Business">
                                 <img src="./imgs/Business.jpg" alt-name="Business" class="row-display" />
                             </label>
-                            <input type="checkbox" checked name="Business" id="Business" />
+                            <input type="checkbox" name="Business" checked id="Business" value="Business" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Business</div>
                             </div>
@@ -56,7 +121,7 @@
                             <label for="Travel">
                                 <img src="./imgs/Travel.jpg" alt-name="Travel" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Travel" id="Travel" />
+                            <input type="checkbox" name="Travel" id="Travel" value="Travel" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Travel</div>
                             </div>
@@ -65,7 +130,7 @@
                             <label for="Design">
                                 <img src="./imgs/Design.jpg" alt-name="Design" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Design" id="Design" />
+                            <input type="checkbox" name="Design" id="Design" value="Design" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Design</div>
                             </div>
@@ -74,7 +139,7 @@
                             <label for="Technology">
                                 <img src="./imgs/Technology.jpg" alt-name="Technology" class="row-display" />
                             </label>
-                            <input type="checkbox" checked name="Technology" id="Technology" />
+                            <input type="checkbox" name="Technology" id="Technology" value="Technology" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Technology</div>
                             </div>
@@ -83,7 +148,7 @@
                             <label for="Media">
                                 <img src="./imgs/Media.jpg" alt-name="Media" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Media" id="Media" />
+                            <input type="checkbox" name="Media" id="Media" value="Media" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Media</div>
                             </div>
@@ -93,7 +158,7 @@
                             <label for="Economy">
                                 <img src="./imgs/Economy.jpg" alt-name="Economy" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Economy" id="Economy" />
+                            <input type="checkbox" name="Economy" id="Economy" value="Economy" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Economy</div>
                             </div>
@@ -102,7 +167,7 @@
                             <label for="CS">
                                 <img src="./imgs/CS.jpg" alt-name="CS" class="row-display" />
                             </label>
-                            <input type="checkbox" name="CS" id="CS" />
+                            <input type="checkbox" name="CS" id="CS" value="CS" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">CS</div>
                             </div>
@@ -111,7 +176,7 @@
                             <label for="Market">
                                 <img src="./imgs/Market.jpg" alt-name="Market" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Market" id="Market" />
+                            <input type="checkbox" name="Market" id="Market" value="Market" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Market</div>
                             </div>
@@ -120,7 +185,7 @@
                             <label for="Finance">
                                 <img src="./imgs/Finance.jpg" alt-name="Finance" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Finance" id="Finance" />
+                            <input type="checkbox" name="Finance" id="Finance" value="Finance" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Finance</div>
                             </div>
@@ -130,7 +195,7 @@
                             <label for="Enterprise">
                                 <img src="./imgs/Enterprise.jpg" alt-name="Enterprise" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Enterprise" id="Enterprise" />
+                            <input type="checkbox" name="Enterprise" id="Enterprise" value="Enterprise" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Enterprise</div>
                             </div>
@@ -139,7 +204,7 @@
                             <label for="Software">
                                 <img src="./imgs/Software.jpg" alt-name="Software" class="row-display" />
                             </label>
-                            <input type="checkbox" checked name="Software" id="Software" />
+                            <input type="checkbox" name="Software" id="Software" value="Software" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Software</div>
                             </div>
@@ -148,7 +213,7 @@
                             <label for="Art">
                                 <img src="./imgs/Art.jpg" alt-name="Art" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Art" id="Art" />
+                            <input type="checkbox" name="Art" id="Art" value="Art" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Art</div>
                             </div>
@@ -157,7 +222,7 @@
                             <label for="Animation">
                                 <img src="./imgs/Animation.gif" alt-name="Animation" class="row-display" />
                             </label>
-                            <input type="checkbox" checked name="Animation" id="Animation" />
+                            <input type="checkbox" name="Animation" id="Animation" value="Animation" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Animation</div>
                             </div>
@@ -166,7 +231,7 @@
                             <label for="Culture">
                                 <img src="./imgs/Culture.jpg" alt-name="Culture" class="row-display" />
                             </label>
-                            <input type="checkbox" checked name="Culture" id="Culture" />
+                            <input type="checkbox" name="Culture" id="Culture" value="Culture" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Culture</div>
                             </div>
@@ -175,7 +240,7 @@
                             <label for="Health">
                                 <img src="./imgs/Health.jpg" alt-name="Health" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Health" id="Health" />
+                            <input type="checkbox" name="Health" id="Health" value="Health" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Health</div>
                             </div>
@@ -184,7 +249,7 @@
                             <label for="Creative">
                                 <img src="./imgs/Creative.png" alt-name="Creative" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Creative" id="Creative" />
+                            <input type="checkbox" name="Creative" id="Creative" value="Creative" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Creative</div>
                             </div>
@@ -193,7 +258,7 @@
                             <label for="IT">
                                 <img src="./imgs/IT.jpg" alt-name="IT" class="row-display" />
                             </label>
-                            <input type="checkbox" name="IT" id="IT" />
+                            <input type="checkbox" name="IT" id="IT" value="IT" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">IT</div>
                             </div>
@@ -202,7 +267,7 @@
                             <label for="Data">
                                 <img src="./imgs/Data.jpg" alt-name="Data" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Data" id="Data" />
+                            <input type="checkbox" name="Data" id="Data" value="Data" onclick="getCategory()"/>
                             <div class="tick">
                                 <div class="title-name">Data</div>
                             </div>
@@ -213,7 +278,7 @@
                         </div>
                         <div class="switch-title1">
                             <label class="switch">
-                                <input type="checkbox" checked />
+                                <input type="checkbox" checked onclick="toggleSliderNews()"/>
                                 <span class="slider round"></span>
                             </label>
                             <span class="news-updates">Send notifications about news updates</span>
@@ -221,13 +286,13 @@
                         <div class="notify">Notify me at</div>
                         <form class="all-radio">
                             <label class="radio-label">
-                                <input type="radio" name="radio" />
+                                <input type="radio" name="radio" value ="10:00 AM" onclick="getTime(this.value)"/>
                                 <span class="text-align">Beginning of the day</span>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="radio-label">
-                                <input type="radio" name="radio" />
-                                <span class="text-align">End of the day</span>
+                                <input type="radio" name="radio" value="5:00 PM" onclick="getTime(this.value)"/>
+                                <span class="text-align" onclick="getTime(this.value)">End of the day</span>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="radio-label">
@@ -235,15 +300,15 @@
                                 <span class="text-align">Set a preffered time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" id="newsTime">
-                                <option selected>10:00 am</option>
-                                <option>11:00 am</option>
-                                <option>12:00 am</option>
-                                <option>1:00 pm</option>
-                                <option>2:00 pm</option>
-                                <option>3:00 pm</option>
-                                <option>4:00 pm</option>
-                                <option>5:00 pm</option>
+                            <select class="date-control" id="newsTime" onchange="getTime(this.value)">
+                                <option selected value="10:00 am">10:00 am</option>
+                                <option value="11:00 am">11:00 am</option>
+                                <option value="12:00 am">12:00 am</option>
+                                <option value="1:00 pm">1:00 pm</option>
+                                <option value="2:00 pm">2:00 pm</option>
+                                <option value="3:00 pm">3:00 pm</option>
+                                <option value="4:00 pm">4:00 pm</option>
+                                <option value="5:00 pm">5:00 pm</option>
                             </select>
                             <i class="fas fa-chevron-down"></i>
                         </form>
@@ -272,7 +337,7 @@
                     <div class="panel-body">
                         <div class="switch-title">
                             <label class="switch">
-                                <input type="checkbox" checked />
+                                <input type="checkbox" checked onclick="toggleSliderEnT()"/>
                                 <span class="slider round"></span>
                             </label>
                             <span class="events-training">Send notifications about new events & training</span>
@@ -280,12 +345,12 @@
                         <div class="notify">Notify me at</div>
                         <form class="all-radio">
                             <label class="radio-label">
-                                <input type="radio" name="radio" />
+                                <input type="radio" name="radio" onclick="getEnTTime(this.value)"/>
                                 <span class="text-align">Beginning of the day</span>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="radio-label">
-                                <input type="radio" name="radio" />
+                                <input type="radio" name="radio" onclick="getEnTTime(this.value)"/>
                                 <span class="text-align">End of the day</span>
                                 <span class="checkmark"></span>
                             </label>
@@ -294,15 +359,15 @@
                                 <span class="text-align">Set a preffered time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" id="EandTTime">
-                                <option selected>10:00 am</option>
-                                <option>11:00 am</option>
-                                <option>12:00 am</option>
-                                <option>1:00 pm</option>
-                                <option>2:00 pm</option>
-                                <option>3:00 pm</option>
-                                <option>4:00 pm</option>
-                                <option>5:00 pm</option>
+                            <select class="date-control" id="EandTTime" onchange="getEnTTime(this.value)">
+                                <option selected value="10:00 am">10:00 am</option>
+                                <option value="11:00 am">11:00 am</option>
+                                <option value="12:00 am">12:00 am</option>
+                                <option value="1:00 pm">1:00 pm</option>
+                                <option value="2:00 pm">2:00 pm</option>
+                                <option value="3:00 pm">3:00 pm</option>
+                                <option value="4:00 pm">4:00 pm</option>
+                                <option value="5:00 pm">5:00 pm</option>
                             </select>
                             <i class="fas fa-chevron-down"></i> <br><br><br>
                         </form>
@@ -332,12 +397,12 @@
                         <div class="notify notify-task">Notify me at</div>
                         <form class="all-radio">
                             <label class="radio-label">
-                                <input type="radio" name="radio" checked />
+                                <input type="radio" name="radio" checked onclick="getTaskTime(this.value)"/>
                                 <span class="text-align">Beginning of the day</span>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="radio-label">
-                                <input type="radio" name="radio" />
+                                <input type="radio" name="radio" onclick="getTaskTime(this.value)"/>
                                 <span class="text-align">End of the day</span>
                                 <span class="checkmark"></span>
                             </label>
@@ -347,15 +412,15 @@
                                 <span class="checkmark"></span>
                             </label>
                             <br>
-                            <select class="date-control">
-                                <option selected>10:00 am</option>
-                                <option>11:00 am</option>
-                                <option>12:00 am</option>
-                                <option>1:00 pm</option>
-                                <option>2:00 pm</option>
-                                <option>3:00 pm</option>
-                                <option>4:00 pm</option>
-                                <option>5:00 pm</option>
+                            <select class="date-control" id="taskTime" onchange="getTaskTime(this.value)">
+                                <option selected value="10:00 am">10:00 am</option>
+                                <option value="11:00 am">11:00 am</option>
+                                <option value="12:00 am">12:00 am</option>
+                                <option value="1:00 pm">1:00 pm</option>
+                                <option value="2:00 pm">2:00 pm</option>
+                                <option value="3:00 pm">3:00 pm</option>
+                                <option value="4:00 pm">4:00 pm</option>
+                                <option value="5:00 pm">5:00 pm</option>
                             </select>
                             <i class="fas fa-chevron-down"></i> <br><br><br>
                         </form>

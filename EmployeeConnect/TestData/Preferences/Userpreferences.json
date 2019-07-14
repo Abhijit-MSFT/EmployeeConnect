@@ -4,24 +4,26 @@
       "userName": "Abhijit Jodbhavi",
       "news": [
         {
-          "selectedCategories": [],
+          "selectedCategories": [
+            "Business,Animation,Culture"
+          ],
           "newsNotificationFlag": true,
-          "newsNotifyMe": "",
-          "newsNotificationTime": ""
+          "newsNotifyMe": "true",
+          "newsNotificationTime": "10:00 AM"
         }
       ],
       "eandT": [
         {
           "eandTNotificationFlag": true,
-          "eandTNotifyMe": "",
-          "eandTNotificationTime": ""
+          "eandTNotifyMe": "true",
+          "eandTNotificationTime": "1:00 pm"
         }
       ],
       "task": [
         {
           "taskNotificationFlag": true,
-          "taskNotifyMe": "",
-          "taskNotificationTime": ""
+          "taskNotifyMe": "true",
+          "taskNotificationTime": "4:00 pm"
         }
       ]
     },
@@ -78,6 +80,7 @@
           "taskNotificationTime": "9:00 AM"
         }
       ]
-    }
+    },
+    {}
   ]
 }
