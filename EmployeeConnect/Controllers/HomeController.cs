@@ -175,6 +175,7 @@ namespace EmployeeConnect.Controllers
             
             Preference pref = new Preference();
             pref.UserName = UserName;
+            
             pref.News = new NewsPreference[1];
             pref.EandT = new EandtPreference[1];
             pref.Task = new TaskPreference[1];

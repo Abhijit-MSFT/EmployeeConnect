@@ -1036,7 +1036,7 @@ namespace EmployeeConnect.Helper
             item.subtitle = "Days of pending timesheet";
             //item.id = POlist.PurchaseOrder[i].PoNumber;
             item.type = "resultItem";
-            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            item.icon = ApplicationSettings.BaseUrl + "/Images/timesheet_icon.PNG";
             var url = "pendingdates";
             item.tap = new Tap()
             {
@@ -1050,7 +1050,7 @@ namespace EmployeeConnect.Helper
             item.subtitle = "Amount of unreconciled expenses";
             //item.id = POlist.PurchaseOrder[i].PoNumber;
             item.type = "resultItem";
-            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            item.icon = ApplicationSettings.BaseUrl + "/Images/expense_icon.PNG";
             item.tap = new Tap()
             {
                 type = "invoke",

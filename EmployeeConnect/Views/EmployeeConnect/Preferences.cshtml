@@ -17,7 +17,7 @@
     <script>
         microsoftTeams.initialize();
 
-        var newsCategory = ["Business"];
+        var newsCategory = ["Technology", "CS", "Software", "Animation", "IT", "AI"];
         var newsSelectedTime = "10:00 AM";
         var newsNotificationFlag = true;
         var newNotifyMe = true;
@@ -28,7 +28,10 @@
         var taskNotifyme = "true";
         var taskNotifyFlag = true;
         var userName = "";
-        microsoftTeams.getContext(function (context) { userName = context.userPrincipalName})
+        microsoftTeams.getContext(function (context) {
+            debugger;
+            userName = context.userPrincipalName;
+        })
         function getTime(value) {
             newsSelectedTime = value;
         }
@@ -66,13 +69,16 @@
           $.ajax({
             type: "POST",
             url: "/PreferenceInDb",
-              contentType: "application/json; charset=utf-8",
-              data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '",,"UserName":"' + userName + '"}',
+            contentType: "application/json; charset=utf-8",
+            data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '","UserName":"' + userName + '"}',
             dataType: "json",
-            success: function (data) {
+              success: function (data) {
+                  debugger;
+                  alert(data);
             },
-            error: function () {
-                console.log('A error');
+              error: function () {
+                  debugger;
+               console.log(JSON.stringify(error));
             }
         });
             }
@@ -300,7 +306,7 @@
                                 <span class="text-align">Set a preffered time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" id="newsTime" onchange="getTime(this.value)">
+                            <select class="date-control" style="height:55px; width:120px; padding-bottom:20px;"id="newsTime" onchange="getTime(this.value)">
                                 <option selected value="10:00 am">10:00 am</option>
                                 <option value="11:00 am">11:00 am</option>
                                 <option value="12:00 am">12:00 am</option>

@@ -6,6 +6,11 @@ body {
 .row {
   background-color: white;
 }
+select#newsTime {
+    width: 155px;
+    height: 55px;
+    padding-bottom: 20px;
+}
 
 .first-row:first-child,.second-row {
   border-bottom: 5px solid #F3F2F1;
