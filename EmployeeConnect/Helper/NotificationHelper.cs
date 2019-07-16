@@ -12,6 +12,7 @@ namespace EmployeeConnect.Helper
     {
         public static async Task<bool> SendNotification(string userId, string serviceUrl, string tenantId, Attachment attachment)
         {
+            MicrosoftAppCredentials.TrustServiceUrl(serviceUrl);
             using (var connectorClient = new ConnectorClient(new Uri(serviceUrl)))
             {
                 var parameters = new ConversationParameters
@@ -19,7 +20,8 @@ namespace EmployeeConnect.Helper
                     Members = new ChannelAccount[] { new ChannelAccount(userId) },
                     ChannelData = new TeamsChannelData
                     {
-                        Tenant = new TenantInfo() { Id = tenantId }
+                        Tenant = new TenantInfo() { Id = tenantId },
+                        Notification = new NotificationInfo() {  Alert = true}
                     }
                 };
 

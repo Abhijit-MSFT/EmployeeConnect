@@ -22,7 +22,6 @@ namespace EmployeeConnect.Helper
         //returns a news ListCard containing specific number of messages
         public static Attachment getNewsCard(string username)
         {
-
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
@@ -47,7 +46,7 @@ namespace EmployeeConnect.Helper
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
                     var news = TrendingNews.ElementAt(i);
-                    string subtitle = news.DetailedNews;
+                    string subtitle = news.DetailedNews.Substring(0, 100) + "...";
                     item = new Item();
                     item.title = news.NewsTitle;
                     item.icon = news.NewsThumbnailUrl;
@@ -152,16 +151,22 @@ namespace EmployeeConnect.Helper
                 item.title = dept[i];
                 item.type = "resultItem";
 
+                //item.tap = new Tap()
+                //{
+                //    type = "messageBack",
+                //    //title = "title",
+                //    text = item.title + " policy"
+
+
+                //};
                 item.tap = new Tap()
                 {
-                    type = "messageBack",
-                    //title = "title",
-                    text = item.title + " policy"
-
-
+                    type = "",
+                    title = item.id,
+                    value = deepLinkTab("policies", "Policies")
                 };
 
-                list.Add(item);
+            list.Add(item);
             }
             card.content.items = list.ToArray();
 
@@ -970,9 +975,9 @@ namespace EmployeeConnect.Helper
                         item.title = title;
                         //item.icon = EandT.ETThumbnailUrl;
                         if (EandT.ETFlag == "E")
-                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/flagImg.JPG";
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/flagImg.JPG";
                         else
-                            item.icon = ApplicationSettings.BaseUrl + "/Content/fonts/shapeEve.JPG";
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/shapeEve.JPG";
                         item.id = EandT.ETID;
                         item.subtitle = subtitle;
                         //item.flagImage = EandT.ETFlagImage;
@@ -1598,9 +1603,9 @@ namespace EmployeeConnect.Helper
             string date = "";
             string imagepath = "";
             if (SelectedEventsTrainings.ETFlag == "E")
-                imagepath = "/Content/fonts/Flag.png";
+                imagepath = "/fonts/Flag.png";
             else
-                imagepath = "/Content/fonts/Shape.png";
+                imagepath = "/fonts/Shape.png";
             if (SelectedEventsTrainings.ETStartDate == SelectedEventsTrainings.ETEndDate)
                 date = SelectedEventsTrainings.ETStartDate;
             else
@@ -1621,7 +1626,7 @@ namespace EmployeeConnect.Helper
                 {
                     new AdaptiveImage()
                     {
-                        Url = new Uri(ApplicationSettings.BaseUrl + "/Content/fonts/Time.png"),
+                        Url = new Uri(ApplicationSettings.BaseUrl + "/fonts/Time.png"),
                         Size = AdaptiveImageSize.Small
                     }
                 },
@@ -1651,7 +1656,7 @@ namespace EmployeeConnect.Helper
                 {
                     new AdaptiveImage()
                     {
-                        Url = new Uri(ApplicationSettings.BaseUrl + "/Content/fonts/Location.png"),
+                        Url = new Uri(ApplicationSettings.BaseUrl + "/fonts/Location.png"),
                         Size = AdaptiveImageSize.Small
                     }
                 },
@@ -1680,7 +1685,7 @@ namespace EmployeeConnect.Helper
                 {
                     new AdaptiveImage()
                     {
-                        Url = new Uri(ApplicationSettings.BaseUrl + "/Content/fonts/Website.png"),
+                        Url = new Uri(ApplicationSettings.BaseUrl + "/fonts/Website.png"),
                         Size = AdaptiveImageSize.Small,
                     }
                 },
@@ -1775,8 +1780,8 @@ namespace EmployeeConnect.Helper
             if (SelectedEventsTrainings.ETFlag == "E")
             {
                 if (SelectedEventsTrainings.UserAdded)
-                    status = "Remove";
-                else status = "Add";
+                    status = "Remove from Calendar";
+                else status = "Add to Calendar";
             }
             else
             {

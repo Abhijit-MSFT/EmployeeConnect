@@ -233,6 +233,7 @@
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
     <Compile Include="Helper\NotificationHelper.cs" />
+    <Compile Include="Helper\Scheduler.cs" />
     <Compile Include="MessageExtension.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
@@ -256,17 +257,17 @@
     <Content Include="Content\Custom.css" />
     <Content Include="Content\declined.css" />
     <Content Include="Content\eventandtrainingnew.css" />
-    <Content Include="Content\fonts\Flag.png" />
-    <Content Include="Content\fonts\flagEvents.JPG" />
-    <Content Include="Content\fonts\flagImg.JPG" />
-    <Content Include="Content\fonts\FlagSnip.PNG" />
-    <Content Include="Content\fonts\Location.PNG" />
-    <Content Include="Content\fonts\Shape.png" />
-    <Content Include="Content\fonts\ShapeEve.JPG" />
-    <Content Include="Content\fonts\shapeEvent.JPG" />
-    <Content Include="Content\fonts\ShapeSnip.PNG" />
-    <Content Include="Content\fonts\Time.PNG" />
-    <Content Include="Content\fonts\Website.PNG" />
+    <Content Include="fonts\Flag.png" />
+    <Content Include="fonts\flagEvents.JPG" />
+    <Content Include="fonts\flagImg.JPG" />
+    <Content Include="fonts\FlagSnip.PNG" />
+    <Content Include="fonts\Location.PNG" />
+    <Content Include="fonts\Shape.png" />
+    <Content Include="fonts\ShapeEve.JPG" />
+    <Content Include="fonts\shapeEvent.JPG" />
+    <Content Include="fonts\ShapeSnip.PNG" />
+    <Content Include="fonts\Time.PNG" />
+    <Content Include="fonts\Website.PNG" />
     <Content Include="Content\index.css" />
     <Content Include="Content\index_Policies.css" />
     <Content Include="Content\index_Preferences.css" />
@@ -497,9 +498,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="fonts\TeamsAssets-Light.woff" />
+    <Content Include="fonts\TeamsAssets-Light.woff2" />
+    <Content Include="Manifest\manifest.json" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff2" />
-    <Content Include="Manifest\manifest.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

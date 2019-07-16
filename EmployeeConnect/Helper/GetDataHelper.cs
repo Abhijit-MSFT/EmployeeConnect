@@ -222,12 +222,7 @@ namespace EmployeeConnect.Helper
                     //rewrite
                     list[i] = pref;
                     break;
-                }
-                else
-                {
-                    list[i].UserName = pref.UserName;
-                    break;
-                }
+                }                
             }
             if (i == list.Count())
                 list.Add(pref);
@@ -345,44 +340,84 @@ namespace EmployeeConnect.Helper
             newsM.news = prefNews.ToArray();
             return newsM;
         }
+               
+        //news notification as per preferences
+        public static async System.Threading.Tasks.Task CheckPrefAndSendNewsCard()
+        {
+            UPreferences UserPref = GetDataHelper.readPreferences();
+            int UPrefCount = UserPref.preferences.Count();
+            Attachment card = null;
 
-        //public async Task CheckPrefAndSendNewsCard(IDialogContext context, Activity activity)
+            for (int i = 0; i < UPrefCount; i++)
+            {
+                string userName = UserPref.preferences[i].UserName;
+
+                string NewsNotificationTime1 = UserPref.preferences[i].News.Select(c => c.NewsNotificationTime).FirstOrDefault();
+                DateTime NewsNotificationTime = DateTime.ParseExact(UserPref.preferences[i].News.Select(c => c.NewsNotificationTime).FirstOrDefault(), "H:mm tt", CultureInfo.InvariantCulture);
+                //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
+
+                DateTime currTime = DateTime.Now;
+                if (NewsNotificationTime >= currTime.AddMinutes(-10) || NewsNotificationTime <= currTime.AddMinutes(10))
+                {
+                    card = Helper.CardHelper.getNewsCard(userName);
+                    string uIn = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    string tenID =  UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    string serURL =  UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);                     
+                }
+            }            
+        }
+
+        //eAndt notification as per preferences
+        public static async System.Threading.Tasks.Task CheckPrefAndSendEandTCard()
+        {
+            UPreferences UserPref = GetDataHelper.readPreferences();
+            int UPrefCount = UserPref.preferences.Count();
+            Attachment card = null;
+
+            for (int i = 0; i < UPrefCount; i++)
+            {
+                string userName = UserPref.preferences[i].UserName;
+                DateTime ETNotificationTime = DateTime.ParseExact(UserPref.preferences[i].EandT.Select(c => c.EandTNotificationTime).ToString(), "H:mm tt", CultureInfo.InvariantCulture);
+
+                //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
+
+                DateTime currTime = DateTime.Now;
+                if (ETNotificationTime >= currTime.AddMinutes(-10) || ETNotificationTime <= currTime.AddMinutes(10))
+                {
+                    card = Helper.CardHelper.getETCard();
+                    string uIn = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    string tenID = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    string serURL = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
+                }
+            }
+        }
+
+        ////Task notification as per preferences
+        //public static async System.Threading.Tasks.Task CheckPrefAndSendTaskCard()
         //{
         //    UPreferences UserPref = GetDataHelper.readPreferences();
         //    int UPrefCount = UserPref.preferences.Count();
-        //    await context.PostAsync(activity.CreateReply());
         //    Attachment card = null;
-        //    var reply = context.MakeMessage();
+
         //    for (int i = 0; i < UPrefCount; i++)
         //    {
         //        string userName = UserPref.preferences[i].UserName;
-        //        DateTime NewsNotificationTime = DateTime.ParseExact(UserPref.preferences[i].News.Select(c => c.NewsNotificationTime).ToString(), "H:mm tt", CultureInfo.InvariantCulture);
-        //        DateTime EnTNotificationTime = DateTime.ParseExact(UserPref.preferences[i].EandT.Select(c => c.EandTNotificationTime).ToString(), "H:mm tt", CultureInfo.InvariantCulture);
         //        DateTime TaskNotificationTime = DateTime.ParseExact(UserPref.preferences[i].Task.Select(c => c.TaskNotificationTime).ToString(), "H:mm tt", CultureInfo.InvariantCulture);
 
-        //        List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
+        //        //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
 
-                
         //        DateTime currTime = DateTime.Now;
-                
-
-        //        if (NewsNotificationTime >= currTime.AddMinutes(-10) || NewsNotificationTime <= currTime.AddMinutes(10))
+        //        if (TaskNotificationTime >= currTime.AddMinutes(-10) || TaskNotificationTime <= currTime.AddMinutes(10))
         //        {
-        //            card = Helper.CardHelper.getNewsCard(userName);
-        //            reply.Attachments.Add(card);
-        //            await context.PostAsync(reply);
+        //            card = Helper.CardHelper.PendingTasksCard();
+        //            string uIn = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+        //            string tenID = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+        //            string serURL = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+        //            await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
         //        }
-
-        //        //if (EnTNotificationTime >= currTime.AddMinutes(-10) || EnTNotificationTime <= currTime.AddMinutes(10))
-        //        //{
-        //        //    card = Helper.CardHelper.getETCard();
-        //        //    reply.Attachments.Add(card);
-        //        //    await context.PostAsync(reply);
-        //        //}
-        //        return null;
         //    }
-        //    return null;
-            
         //}
 
 

@@ -15,7 +15,7 @@ namespace EmployeeConnect.Common
         new UIConstants(610, 500, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
         public static UIConstants TicketComplete { get; set; } =
-        new UIConstants(350, 420, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
+        new UIConstants(350, 450, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
 
         public static UIConstants VisitorRegistration { get; set; } =
     new UIConstants(500, 550, "Visitor Registration", TaskModuleIds.VisitorRegistration, "Visitor Registration");  
@@ -33,7 +33,7 @@ namespace EmployeeConnect.Common
         new UIConstants(750,600, "PO Card", TaskModuleIds.ETcard, "PO Card");
 
         public static UIConstants PendingDates { get; set; } =
-       new UIConstants(2000,2000, "Pending Dates", TaskModuleIds.ETcard, "Pending Dates");
+       new UIConstants(1800,1800, "Pending Dates", TaskModuleIds.ETcard, "Pending Dates");
 
     }
 public class UIConstants

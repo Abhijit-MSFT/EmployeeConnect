@@ -7,15 +7,15 @@
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://3f4e31c7.ngrok.io",
-    "termsOfUseUrl": "https://3f4e31c7.ngrok.io"
+    "privacyUrl": "https://11c83184.ngrok.io",
+    "termsOfUseUrl": "https://11c83184.ngrok.io"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Employee Connect Test",
+    "short": "Test Employee Connect",
     "full": "This is Employee_Connect app"
   },
   "description": {
@@ -27,8 +27,8 @@
     {
       "entityId": "currNews",
       "name": "News",
-      "contentUrl": "https://3f4e31c7.ngrok.io/News",
-      "websiteUrl": "https://3f4e31c7.ngrok.io/News",
+      "contentUrl": "https://11c83184.ngrok.io/News",
+      "websiteUrl": "https://11c83184.ngrok.io/News",
       "scopes": [
         "personal"
       ]
@@ -36,8 +36,8 @@
     {
       "entityId": "EandT",
       "name": "Events and Trainings",
-      "contentUrl": "https://3f4e31c7.ngrok.io/EventandTrainingTab",
-      "websiteUrl": "https://3f4e31c7.ngrok.io/EventandTrainingTab",
+      "contentUrl": "https://11c83184.ngrok.io/EventandTrainingTab",
+      "websiteUrl": "https://11c83184.ngrok.io/EventandTrainingTab",
       "scopes": [
         "personal"
       ]
@@ -45,8 +45,8 @@
     {
       "entityId": "tools",
       "name": "Tools",
-      "contentUrl": "https://3f4e31c7.ngrok.io/Tools",
-      "websiteUrl": "https://3f4e31c7.ngrok.io/Tools",
+      "contentUrl": "https://11c83184.ngrok.io/Tools",
+      "websiteUrl": "https://11c83184.ngrok.io/Tools",
       "scopes": [
         "personal"
       ]
@@ -54,8 +54,8 @@
     {
       "entityId": "tasks",
       "name": "Tasks",
-      "contentUrl": "https://3f4e31c7.ngrok.io/Task",
-      "websiteUrl": "https://3f4e31c7.ngrok.io/Task",
+      "contentUrl": "https://11c83184.ngrok.io/Task",
+      "websiteUrl": "https://11c83184.ngrok.io/Task",
       "scopes": [
         "personal"
       ]
@@ -63,8 +63,8 @@
     {
       "entityId": "policies",
       "name": "Policies",
-      "contentUrl": "https://3f4e31c7.ngrok.io/Policies",
-      "websiteUrl": "https://3f4e31c7.ngrok.io/Policies",
+      "contentUrl": "https://11c83184.ngrok.io/Policies",
+      "websiteUrl": "https://11c83184.ngrok.io/Policies",
       "scopes": [
         "personal"
       ]
@@ -72,8 +72,8 @@
     {
       "entityId": "preferences",
       "name": "Preferences",
-      "contentUrl": "https://3f4e31c7.ngrok.io/Preferences",
-      "websiteUrl": "https://3f4e31c7.ngrok.io/Preferences",
+      "contentUrl": "https://11c83184.ngrok.io/Preferences",
+      "websiteUrl": "https://11c83184.ngrok.io/Preferences",
       "scopes": [
         "personal"
       ]

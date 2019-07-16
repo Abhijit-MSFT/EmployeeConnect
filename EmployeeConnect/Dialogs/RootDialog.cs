@@ -44,10 +44,10 @@ namespace EmployeeConnect.Dialogs
             string userEmailId = string.Empty;
             string emailKey = GetEmailKey(activity);
             var userDetails = await GetCurrentUserDetails(activity);
-            string userName = userDetails.Name;
-            int index = userName.IndexOf(' ');
-            index = userName.IndexOf(' ', index + 1);
-            userName = userName.Substring(0, index);
+            string userName = userDetails.UserPrincipalName;
+            //int index = userName.IndexOf(' ');
+            //index = userName.IndexOf(' ', index + 1);
+            //userName = userName.Substring(0, index);
 
             // TODO:
             // Get preferences and check if user info is present for Abhijit
@@ -254,10 +254,10 @@ namespace EmployeeConnect.Dialogs
             var userDetails = await GetCurrentUserDetails(activity);
             var reply = context.MakeMessage();
 
-            string userName = userDetails.Name;
-            int index = userName.IndexOf(' ');
-            index = userName.IndexOf(' ', index + 1);
-            userName = userName.Substring(0, index);
+            string userName = userDetails.UserPrincipalName;
+            //int index = userName.IndexOf(' ');
+            //index = userName.IndexOf(' ', index + 1);
+            //userName = userName.Substring(0, index);
             string UniqueId = activity.From.Id;
             string ServiceURL = activity.ServiceUrl;
             string TenantId = activity.GetChannelData<TeamsChannelData>().Tenant.Id;

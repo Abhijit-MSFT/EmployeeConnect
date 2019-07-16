@@ -76,21 +76,43 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-        [Route("showNews")]
+        [Route("ShowNews")]
         public async Task<ActionResult> ShowNews(string userName)
         {
-            // Fetch preferences and get the userInfo
-            // var user = usersList.WHere(u => u.nmae == usersNm, e);
-            //var userInfo = user.userINfo; // Fetch from JSON for userName
-            // Based on preferences - create news card
-
             UPreferences uPref = GetDataHelper.readPreferences();
             Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
             UserInfo userInfo = user.UserInfo.FirstOrDefault();
-            
-            //need to send one more parameter Attachement
-            //await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID);
-            
+
+            var card = Helper.CardHelper.getNewsCard(userName);
+            await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
+
+            return View();
+        }
+
+        [Route("ShowEnT")]
+        public async Task<ActionResult> ShowEnT(string userName)
+        {
+            UPreferences uPref = GetDataHelper.readPreferences();
+            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+
+            var card = Helper.CardHelper.getETCard();
+            await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
+
+            return View();
+        }
+
+
+        [Route("ShowTask")]
+        public async Task<ActionResult> ShowTask(string userName)
+        {
+            UPreferences uPref = GetDataHelper.readPreferences();
+            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+
+            var card = Helper.CardHelper.PendingTasks();
+            await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
+
             return View();
         }
 
