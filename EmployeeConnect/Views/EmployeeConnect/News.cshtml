@@ -2,8 +2,6 @@
 @using System;
 @using EmployeeConnect.Common;
 
-@{Layout=null;}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,9 +59,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 5; i < 9; i++)
                                 {
-                                    <div class="card col-3 col-md-3 @(i ==0 ? "custom-main-card" : "custom-sub-cards")">
+                                    <div class="card col-3 col-md-3 @(i ==5 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==0 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==5 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
@@ -87,9 +85,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 10; i < 14; i++)
                                 {
-                                    <div class="card col-3  @(i ==0 ? "custom-main-card" : "custom-sub-cards")">
+                                    <div class="card col-3  @(i ==10 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==0 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==10 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
@@ -129,9 +127,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 15; i < 19; i++)
                                 {
-                                    <div class="card col-3 @(i ==0 ? "custom-main-card" : "custom-sub-cards sub-card2")">
+                                    <div class="card col-3 @(i ==15 ? "custom-main-card" : "custom-sub-cards sub-card2")">
                                             <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                            <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==0 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                            <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==15 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                                                               
                                             <div class="card-body">
                                                 <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
@@ -156,9 +154,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 20; i < 24; i++)
                                 {
-                                    <div class="card col-3 col-md-3  @(i ==0 ? "custom-main-card" : "custom-sub-cards sub-card2")">
+                                    <div class="card col-3 col-md-3  @(i ==20 ? "custom-main-card" : "custom-sub-cards sub-card2")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==0 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==20 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text desc" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
@@ -182,9 +180,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 25; i < 29; i++)
                                 {
-                                    <div class="card col-3 col-md-3 @(i ==0 ? "custom-main-card" : "custom-sub-cards sub-card2")">
+                                    <div class="card col-3 col-md-3 @(i ==25 ? "custom-main-card" : "custom-sub-cards sub-card2")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==0 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==25 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text desc" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
