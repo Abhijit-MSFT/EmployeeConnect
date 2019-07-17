@@ -2,10 +2,17 @@
   "preferences": [
     {
       "userName": "v-abjodh@microsoft.com",
+      "userInfo": [
+        {
+          "uniqueID": "29:18ls6y6123LSOgQyRZfJ3VaRbfXZq54SlGxdq570f3rPCp6Y2sd4a0tChMug7qRNUsv-Gs0OxxYQlL1R6GUQg-Q",
+          "tenantID": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "serviceURl": "https://smba.trafficmanager.net/amer/"
+        }
+      ],
       "news": [
         {
           "selectedCategories": [
-            "Technology,CS,Software,Animation,IT,AI,Design,Technology"
+            "Technology,CS,Software,Animation,IT,AI,Software"
           ],
           "newsNotificationFlag": true,
           "newsNotifyMe": "true",

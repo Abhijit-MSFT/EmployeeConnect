@@ -323,7 +323,9 @@
     <Content Include="Images\Human Resources.jpeg" />
     <Content Include="Images\IDBI Bank.JPG" />
     <Content Include="Images\Inside XBOX Live %40 E3.jpg" />
+    <Content Include="Images\inventory.PNG" />
     <Content Include="Images\inventoryrequest.JPG" />
+    <Content Include="Images\invoice.PNG" />
     <Content Include="Images\iphone.png" />
     <Content Include="Images\ITFacilities.jpg" />
     <Content Include="Images\itsupportticket.JPG" />
@@ -354,6 +356,7 @@
     <Content Include="Images\Payment and benefits.jpg" />
     <Content Include="Images\phone.jpg" />
     <Content Include="Images\PlayStation Plus June.jpg" />
+    <Content Include="Images\purchase_order.png" />
     <Content Include="Images\purpleImage.JPG" />
     <Content Include="Images\Q4 Vacations ONGC Profit.jpg" />
     <Content Include="Images\Quantum Computing.jpg" />

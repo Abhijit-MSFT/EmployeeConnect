@@ -30,7 +30,7 @@ div#car-root {
 }
 
 .carousel2 {
-    bottom: 110px !important;
+    bottom: -100px !important;
 }
 
 .carousel-indicators li {
@@ -104,7 +104,7 @@ div#car-root {
 
 .sub-card-img {
     width: 100%;
-    height: 220px;
+    height: 280px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 20px;
@@ -141,6 +141,7 @@ div#car-root {
 
 .desc {
     font-size: 12px;
+    display: none;
 }
 
 .card-deck {
@@ -182,27 +183,24 @@ div#car-root {
 .car2-title {
     padding-top: 10px;
 }
-
-.author-date {
-    padding-top: 45px;
-}
-
-.author-month {
-    padding-top: 22px;
-}
-
+/* .author-date {
+  padding-top: 45px;
+} */
+/* .author-month {
+  padding-top: 22px;
+} */
 h6.card-title.text {
     cursor: pointer;
+    height: 50px;
 }
 /* for mobile */
 @media (max-width: 425px) {
-    .col-2,
-    .desc,
-    .carousel2 {
+    .col-3,
+    .desc {
         display: none;
     }
 
-    .car2-custom-sub-cards {
+    .car2-custom-sub-cards, .custom-main-card {
         display: block;
         flex: 0 0 100%;
         max-width: 100%;
@@ -222,11 +220,11 @@ h6.card-title.text {
         padding-right: 0;
         padding-top: 10px;
         border-radius: 5px;
-        height: 220px;
+        height: 220px !important;
     }
 
     .author-month {
-        padding: 0;
+        padding: 0 !important;
     }
 
     .carousel-item {
@@ -252,7 +250,7 @@ h6.card-title.text {
     }
 
     .exp-for-mobile2 {
-        top: 620px;
+        top: 460px;
         left: 2%;
     }
 
@@ -276,7 +274,7 @@ h6.card-title.text {
 
     .custom-row {
         border-top: 8px solid #f3f2f1;
-        margin-top: 160px;
+        margin-top: 160px !important;
     }
 
     .ls {
@@ -371,39 +369,57 @@ h6.card-title.text {
         margin: 0 !important;
     }
 
-    .main-card-img {
-        height: 220px;
-    }
-
-    .sub-card-img {
+    .main-card-img, .sub-card-img {
         height: 180px;
     }
 
     .custom-main-card,
     .custom-sub-cards {
-        height: 420px !important;
+        height: 360px !important;
     }
 
-    .carousel-indicators {
-        bottom: -68px !important;
-    }
-
-    .carousel2 {
-        bottom: 110px !important;
+    .carousel-indicators, .carousel2 {
+        bottom: -8px !important;
     }
 
     .custom-row {
-        margin-top: 80px !important;
+        margin-top: 0px !important;
     }
-
-    .author-month {
-        padding-top: 20px !important;
-    }
-
+    /* .author-month {
+    padding-top: 20px !important;
+  } */
     .author-date {
         padding-top: 22px !important;
     }
+
+    h6.card-title.text {
+        height: auto;
+    }
 }
 
-@media (max-width: 767px) and (min-width: 425px) {
+@media (max-width: 768px) and (min-width: 426px) {
+    .main-card-img, .sub-card-img {
+        height: 150px;
+    }
+
+    .custom-main-card,
+    .custom-sub-cards {
+        height: 340px !important;
+    }
+
+    .carousel-indicators, .carousel2 {
+        bottom: 12px !important;
+    }
+
+    .custom-row {
+        margin-top: 10px !important;
+    }
+
+    h6.card-title.text {
+        height: auto;
+    }
+
+    .author-date {
+        padding-top: 0px !important;
+    }
 }

@@ -29,7 +29,7 @@
                         <div class="today">Today</div>
                         <div class="left-chev"></div>
                         <div class="right-chev"></div>
-                        <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
+                        <div class="month-date">@DateTime.Now.ToString("MMM"), @DateTime.Now.Year</div>
                         <div class="down-chev"></div>
                     </div>
                 </div>
@@ -105,59 +105,14 @@
                             }
                         </div>
                     </div>
-
                 </div>
-
-                @*<div class="row">
-                        <div class="col-12">
-                            <div class="card-deck custom-card-deck">
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <div class="card custom-card">
-                                        <div class="card-header header-badge">
-                                            <span class="badge-icon"></span>
-                                            <span class="event">Training</span>
-                                            <span class="check">
-                                                <span class="mandatory">Mandatory</span>
-                                            </span>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-title main-title-msg">
-                                                Platform overviews training
-                                            </div>
-                                            <div class="time-icon">
-                                                <div class="event-time">02:00 - 04:00 PM</div>
-                                            </div>
-                                            <div class="web-icon">
-                                                <div class="web">Online stream</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
             </div>
         </div>
         <div class="row header2">
             <div class="col-12">
                 <div class="heading">Other upcoming events and trainings</div>
                 <div class="today">Today</div>
-                <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
+                <div class="month-date">@DateTime.Now.ToString("MMM"), @DateTime.Now.Year</div>
                 <div class="down-chev"></div>
             </div>
         </div>

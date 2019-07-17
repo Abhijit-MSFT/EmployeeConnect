@@ -48,4 +48,38 @@ namespace EmployeeConnect.Models
         [JsonProperty("data")]
         public T Data { get; set; }
     }
+    public class TicketTaskData
+    {
+        public string ticketNo { get; set; }
+        public string TDescription { get; set; }
+        public string TCategory { get; set; }
+        public string TPriority { get; set; }
+        public string action { get; set; }
+    }
+
+    public class VisitorData
+    {
+        public string VhostName { get; set; }
+        public string VhostLocation { get; set; }
+        public string Vdate { get; set; }
+        public string Vtime { get; set; }
+        public string Vpurpose { get; set; }
+        public string Vorg { get; set; }
+        public string Vcontact { get; set; }
+        public string action { get; set; }
+    }
+
+    public class SubmitActionData
+    {
+        public string commandId { get; set; }
+    }
+
+
+
+    public class SubmitActionData<T>
+    {
+        public string commandId { get; set; }
+        public string commandContext { get; set; }
+        public T data { get; set; }
+    }
 }

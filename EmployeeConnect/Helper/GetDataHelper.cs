@@ -65,6 +65,15 @@ namespace EmployeeConnect.Helper
 
             return;
         }
+        public static TicketsDataModel getTickets()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets/") + @"/Tickets.json";
+            TicketsDataModel ticket = new TicketsDataModel();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            ticket = (new JavaScriptSerializer().Deserialize<TicketsDataModel>(json));
+            return ticket;
+        }
+
         //public static GNews GetNewsData()
         //{
         //    string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
@@ -286,21 +295,44 @@ namespace EmployeeConnect.Helper
 
         public static void saveTicketsInfo(JObject ticketData)
         {
-            TicketsDataModel currentTicket = new TicketsDataModel()
-            {
-                ticketNo = Convert.ToInt32(ticketData.GetValue("TicketNo")),
-                ticketDescription = ticketData.GetValue("Description").ToString(),
-                date = ticketData.GetValue("Date").ToString(),
-                priority = ticketData.GetValue("Priority").ToString(),
-                category = ticketData.GetValue("Category").ToString()
-            };
+            TicketsDataModel currentTicket = GetDataHelper.getTickets();
+
+            int TicketCount = currentTicket.Tickets.Count();
+            var tNo = Convert.ToInt32(ticketData.GetValue("TicketNo"));
+            var ticDes = ticketData.GetValue("Description").ToString();
+            var ticDate = ticketData.GetValue("Date").ToString();
+            var ticPriority = ticketData.GetValue("Priority").ToString();
+            var ticCat = ticketData.GetValue("Category").ToString();
+
+            
+            //currentTicket.Tickets[TicketCount].ticketNo = tNo;
+            //currentTicket.Tickets[TicketCount].ticketDescription = ticDes;
+            //currentTicket.Tickets[TicketCount].date = ticDate;
+            //currentTicket.Tickets[TicketCount].priority = ticPriority;
+            //currentTicket.Tickets[TicketCount].category = ticCat;
+
             JavaScriptSerializer js = new JavaScriptSerializer();
             string TicketJson = js.Serialize(currentTicket);
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets") + @"/Tickets.json";
             if (File.Exists(filePath))
             {
-                File.AppendAllText(filePath, TicketJson);
+                File.WriteAllText(filePath, TicketJson);
             }
+            //TicketsDataModel currentTicket = new TicketsDataModel()
+            //{
+            //    ticketNo = Convert.ToInt32(ticketData.GetValue("TicketNo")),
+            //    ticketDescription = ticketData.GetValue("Description").ToString(),
+            //    date = ticketData.GetValue("Date").ToString(),
+            //    priority = ticketData.GetValue("Priority").ToString(),
+            //    category = ticketData.GetValue("Category").ToString()
+            //};
+            //JavaScriptSerializer js = new JavaScriptSerializer();
+            //string TicketJson = js.Serialize(currentTicket);
+            //string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets") + @"/Tickets.json";
+            //if (File.Exists(filePath))
+            //{
+            //    File.AppendAllText(filePath, TicketJson);
+            //}
 
         }
 

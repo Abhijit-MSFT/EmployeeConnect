@@ -16,6 +16,7 @@ namespace EmployeeConnect.Controllers
     public class EmployeeConnectController : Controller
     {
         public static int count = 1;
+
         [Route("")]
         public ActionResult Index()
         {
@@ -214,41 +215,43 @@ namespace EmployeeConnect.Controllers
         [Route("preferences")]
         public ActionResult Preferences()
         {
-            return View("Preferences");
+            //Preference pref = new Preference();
+            //UPreferences userPref = GetDataHelper.readPreferences();
+            //Preference user = userPref.preferences.Where(c => c.UserName == UserName).Select(d => d).FirstOrDefault();
+           // UPreferences PrefViewData = new UPreferences();
+            //PrefViewData.preferences[0] = user;
+
+            return View();
         }
 
         [Route("PreferenceInDb")]
         public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName)
         {
-            
             Preference pref = new Preference();
-            pref.UserName = UserName;
-            pref.News = new NewsPreference[1];
-            pref.EandT = new EandtPreference[1];
-            pref.Task = new TaskPreference[1];
-            NewsPreference newsPref = new NewsPreference()
-                {
-                    SelectedCategories = newsPrefCat,
-                    NewsNotificationTime = newsTime,
-                    NewsNotifyMe = newsNotifyMe,
-                    NewsNotificationFlag = newsNotificationFlag
-            };
-            EandtPreference entPref = new EandtPreference()
+            UPreferences userPref = GetDataHelper.readPreferences();
+            Preference user = userPref.preferences.Where(c => c.UserName == UserName).Select(d => d).FirstOrDefault();
+
+            if (user != null)
             {
-                EandTNotificationTime = eandtTime,
-                EandTNotifyMe = eandtNotify,
-                EandTNotificationFlag = eandtflag
-            };
-            TaskPreference taskPref = new TaskPreference()
+                user.News[0].NewsNotificationFlag = newsNotificationFlag;
+                user.News[0].NewsNotificationTime = newsTime;
+                user.News[0].SelectedCategories = newsPrefCat;
+                user.News[0].NewsNotifyMe = newsNotifyMe;
+
+                user.EandT[0].EandTNotificationFlag = eandtflag;
+                user.EandT[0].EandTNotifyMe = eandtNotify;
+                user.EandT[0].EandTNotificationTime = eandtTime;
+
+                user.Task[0].TaskNotificationFlag = taskNotificationFlag;
+                user.Task[0].TaskNotificationTime = taskTime;
+                user.Task[0].TaskNotifyMe = taskNotifyMe;
+                
+                GetDataHelper.WritePreferences(user);
+            }
+            else
             {
-                TaskNotificationTime = taskTime,
-                TaskNotifyMe = taskNotifyMe,
-                TaskNotificationFlag = taskNotificationFlag
-            };
-            pref.News[0] = newsPref;
-            pref.EandT[0] = entPref;
-            pref.Task[0] = taskPref;
-            GetDataHelper.WritePreferences(pref);
+
+            }
         }
 
         [Route("policies")]

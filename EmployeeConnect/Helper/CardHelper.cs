@@ -75,7 +75,7 @@ namespace EmployeeConnect.Helper
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
                     var news = SuggestedNews.ElementAt(i);
-                    string subtitle = news.DetailedNews;
+                    string subtitle = news.DetailedNews.Substring(0, 100) + "...";
                     item = new Item();
                     item.title = news.NewsTitle;
                     item.icon = news.NewsThumbnailUrl;
@@ -1040,7 +1040,7 @@ namespace EmployeeConnect.Helper
             item.subtitle = "Days of pending timesheet";
             //item.id = POlist.PurchaseOrder[i].PoNumber;
             item.type = "resultItem";
-            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            item.icon = ApplicationSettings.BaseUrl + "/Images/timesheet_icon.PNG";
             var url = "pendingdates";
             item.tap = new Tap()
             {
@@ -1054,7 +1054,7 @@ namespace EmployeeConnect.Helper
             item.subtitle = "Amount of unreconciled expenses";
             //item.id = POlist.PurchaseOrder[i].PoNumber;
             item.type = "resultItem";
-            item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+            item.icon = ApplicationSettings.BaseUrl + "/Images/expense_icon.PNG";
             item.tap = new Tap()
             {
                 type = "invoke",
@@ -1235,7 +1235,7 @@ namespace EmployeeConnect.Helper
                 item.subtitle = "PoNumber: "+ task.PoNumber;
                 item.id = task.PoNumber;
                 item.type = "resultItem";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/purchase_order.PNG";
                 var url = "purchaseorder?poNumber=" + task.PoNumber.ToString()+"&vendorno="+task.vendorNo.ToString();
                 item.tap = new Tap()
                 {
@@ -1259,7 +1259,7 @@ namespace EmployeeConnect.Helper
                 item.subtitle = "InvoiceNumber: " + task.PoNumber;
                 item.id =task.PoNumber;
                 item.type = "resultItem";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/invoice.PNG";
                 var url = "purchaseorder?poNumber=" + task.PoNumber.ToString() + "&vendorno=" + task.vendorNo.ToString();
                 item.tap = new Tap()
                 {
@@ -1282,7 +1282,7 @@ namespace EmployeeConnect.Helper
                 item.subtitle = "InventoryNumber: " + task.inventoryNo;
                 item.id =  task.inventoryNo;
                 item.type = "resultItem";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
+                item.icon = ApplicationSettings.BaseUrl + "/Images/inventory.PNG";
                 item.tap = new Tap()
                 {
                     type = "invoke",
@@ -1303,7 +1303,7 @@ namespace EmployeeConnect.Helper
         public static Attachment Ticket()
         {
             TicketModel tickets = GetDataHelper.getTicket();
-            Ticket firstTicket = tickets.ticket.FirstOrDefault();
+            Tics firstTicket = tickets.ticket.FirstOrDefault();
             if (firstTicket == null)
                 return null;
             var card = new AdaptiveCard("1.0")

@@ -107,18 +107,96 @@ namespace EmployeeConnect.Controllers
                     }
                     break;
                 case "composeExtension/submitAction":
-                    string commandid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).commandId;
-                    taskInfo = GetTaskInfo(commandid);
-                    taskEnvelope = new Models.TaskEnvelope
-                    {
-                        Task = new Models.Task()
-                        {
-                            Type = Models.TaskType.Continue,
-                            TaskInfo = taskInfo
-                        }
-                    };
 
-                    return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                    var details = JsonConvert.DeserializeObject<SubmitActionData>(activityValue);
+                    string commandid = details.commandId;
+                    switch (details.commandId)
+                    {
+                        case "createticket":
+                            var createTicketData = JsonConvert.DeserializeObject<SubmitActionData<TicketTaskData>>(activityValue);
+                            if (createTicketData.data == null)
+                            {
+                                commandid = details.commandId;
+                                taskInfo = GetTaskInfo(commandid);
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue,
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                            else if (createTicketData.data.action == "submit")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
+                            else
+                            {
+                                commandid = createTicketData.data.action;
+                                taskInfo = GetTaskInfo(commandid);
+                                var ticketurl = "?ticketNoId=" + createTicketData.data.ticketNo + "&description=" + createTicketData.data.TDescription + "&category=" + createTicketData.data.TCategory + "&priority=" + createTicketData.data.TPriority;
+                                taskInfo.Url = taskInfo.Url + ticketurl;
+                                taskInfo.FallbackUrl = taskInfo.FallbackUrl + ticketurl;
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue,
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                        case "visitorregistration":
+                            var savevisitordata = JsonConvert.DeserializeObject<SubmitActionData<VisitorData>>(activityValue);
+
+                            if (savevisitordata.data == null)
+                            {
+                                commandid = details.commandId;
+                                taskInfo = GetTaskInfo(commandid);
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue,
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                            else if (savevisitordata.data.action == "submit")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
+
+                            else
+                            {
+                                commandid = savevisitordata.data.action;
+                                taskInfo = GetTaskInfo(commandid);
+                                var ticketurl = "?Date=" + savevisitordata.data.Vdate + "&Time=" + savevisitordata.data.Vtime + "&Contact=" + savevisitordata.data.Vcontact + "&location=" + savevisitordata.data.VhostLocation + "&purpose=" + savevisitordata.data.Vpurpose + "&hostName=" + savevisitordata.data.VhostName + "&org=" + savevisitordata.data.Vorg;
+                                taskInfo.Url = taskInfo.Url + ticketurl;
+                                taskInfo.FallbackUrl = taskInfo.FallbackUrl + ticketurl;
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue,
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                        default:
+                            commandid = details.commandId;
+                            break;
+                    }
+                    break;
                 case "composeExtension/onCardButtonClicked":
                     ETid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
                     GetDataHelper.ETStatusUpdate(ETid);

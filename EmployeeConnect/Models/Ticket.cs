@@ -8,10 +8,10 @@ namespace EmployeeConnect.Models
 
     public class TicketModel
     {
-        public Ticket[] ticket { get; set; }
+        public Tics[] ticket { get; set; }
     }
 
-    public class Ticket
+    public class Tics
     {
         public string ticketCategory { get; set; }
         public string ticketNo { get; set; }
