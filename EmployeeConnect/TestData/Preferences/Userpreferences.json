@@ -12,10 +12,11 @@
       "news": [
         {
           "selectedCategories": [
-            "Technology,CS,Software,Animation,IT,AI,Software"
+            "Creative",
+            "IT"
           ],
           "newsNotificationFlag": true,
-          "newsNotifyMe": "true",
+          "newsNotifyMe": "True",
           "newsNotificationTime": "10:00 AM"
         }
       ],

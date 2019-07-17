@@ -132,8 +132,6 @@ namespace EmployeeConnect.Helper
         //Returns the policies ListCard having Policies for every department.
         public static Attachment GetPoliciesCard()
         {
-
-
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
@@ -161,7 +159,7 @@ namespace EmployeeConnect.Helper
                 //};
                 item.tap = new Tap()
                 {
-                    type = "",
+                    type = "openUrl",
                     title = item.id,
                     value = deepLinkTab("policies", "Policies")
                 };
