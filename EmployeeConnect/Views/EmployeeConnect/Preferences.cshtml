@@ -1,4 +1,6 @@
-﻿@*@{ Layout = null;}*@
+﻿
+
+@model string[]
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +36,7 @@
             userName = context.userPrincipalName;
          $.ajax({
                 type: "POST",
-                url: "/Preferences",
+                url: "/Preferences/userName",
                 contentType: "application/json; charset=utf-8",
                 data: '{"UserName":"' + userName + '"}',
                 dataType: "json",
@@ -76,7 +78,7 @@
             }
         }
 
-           
+
 
         function getCategory() {
             if (event.target.checked == true) {
@@ -162,9 +164,10 @@
                             <label for="Business">
                                 <img src="./imgs/Business.jpg" alt-name="Business" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Business" checked id="Business" value="Business" onclick="getCategory()" />
+                            <input type="checkbox" name="Business" id="Business" value="Business" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Business</div>
+                                @*<div class="title-name @(Model. ==15 ? "main-card-img" : "sub-card-img")">Business</div>*@
                             </div>
                         </div>
                         <div class="image-text image_grid">

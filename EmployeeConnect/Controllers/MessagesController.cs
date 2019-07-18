@@ -101,6 +101,11 @@ namespace EmployeeConnect.Controllers
 
 
                             return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+
+                        case "submitTicket":
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        case "submitVisitor":
+                            return Request.CreateResponse(HttpStatusCode.OK);
                         case "sendrequest":
                             var savevisitordata = JsonConvert.DeserializeObject<SubmitActionData<VisitorData>>(activityValue).data;
                             taskInfo = GetTaskInfo(taskId);
