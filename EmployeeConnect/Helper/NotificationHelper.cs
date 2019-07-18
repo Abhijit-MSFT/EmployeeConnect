@@ -21,7 +21,7 @@ namespace EmployeeConnect.Helper
                     ChannelData = new TeamsChannelData
                     {
                         Tenant = new TenantInfo() { Id = tenantId },
-                        Notification = new NotificationInfo() {  Alert = true}
+                        //Notification = new NotificationInfo() {  Alert = true}
                     }
                 };
 
@@ -31,6 +31,7 @@ namespace EmployeeConnect.Helper
 
                     var message = Activity.CreateMessageActivity();
                     message.Conversation = new ConversationAccount(id: conversationResource.Id.ToString());
+                    message.ChannelData = new TeamsChannelData() { Notification = new NotificationInfo() { Alert = true } };
                     message.Attachments.Add(attachment);
 
                     await connectorClient.Conversations.SendToConversationAsync((Activity)message);

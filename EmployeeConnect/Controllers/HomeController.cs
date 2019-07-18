@@ -213,15 +213,16 @@ namespace EmployeeConnect.Controllers
         }
 
         [Route("preferences")]
-        public ActionResult Preferences()
+        public ActionResult Preferences(string emailID)
         {
-            //Preference pref = new Preference();
-            //UPreferences userPref = GetDataHelper.readPreferences();
-            //Preference user = userPref.preferences.Where(c => c.UserName == UserName).Select(d => d).FirstOrDefault();
-           // UPreferences PrefViewData = new UPreferences();
+            Preference pref = new Preference();
+            UPreferences userPref = GetDataHelper.readPreferences();
+            Preference user = userPref.preferences.Where(c => c.UserName == emailID).Select(d => d).FirstOrDefault();
+            //UPreferences PrefViewData = new UPreferences();
             //PrefViewData.preferences[0] = user;
+            string[] cat = user.News.Select(c => c.SelectedCategories).FirstOrDefault();
 
-            return View();
+            return View(cat);
         }
 
         [Route("PreferenceInDb")]

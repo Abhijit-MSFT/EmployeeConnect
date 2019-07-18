@@ -132,8 +132,6 @@ namespace EmployeeConnect.Helper
         //Returns the policies ListCard having Policies for every department.
         public static Attachment GetPoliciesCard()
         {
-
-
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
@@ -161,7 +159,7 @@ namespace EmployeeConnect.Helper
                 //};
                 item.tap = new Tap()
                 {
-                    type = "",
+                    type = "openUrl",
                     title = item.id,
                     value = deepLinkTab("policies", "Policies")
                 };
@@ -954,7 +952,8 @@ namespace EmployeeConnect.Helper
                 var Events = EandTL.EventsAndtraining;
                 int MaxEventsCount = Events.Count();
                 int count = 0;
-                DateTime CurrDate = new DateTime(2019, 6, 1);
+                //DateTime CurrDate = new DateTime(2019, 6, 1);
+                DateTime CurrDate = DateTime.Now;
                 for (int i = 0; i < MaxEventsCount; i++)
                 {
                     var EandT = Events.ElementAt(i);
@@ -967,7 +966,7 @@ namespace EmployeeConnect.Helper
                     DateTime Dend = DateTime.ParseExact(EandT.ETEndDate, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
                     if (count == 5)
                         break;
-                    if (Dstart <= CurrDate.AddDays(7) && EandT.UserAdded && Dend <= CurrDate.AddDays(7))
+                    if (Dstart <= CurrDate.AddDays(15) && EandT.UserAdded && Dend >= CurrDate.AddDays(-15))
                     {
                         string subtitle = date + ' ' + "from" + ' ' + EandT.ETStartTime + '-' + EandT.ETEndTime;
                         string title = EandT.ETTitle;

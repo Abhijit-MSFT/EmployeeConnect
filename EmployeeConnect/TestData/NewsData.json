@@ -35,7 +35,7 @@
     {
       "newsID": "12352",
       "category": "Software",
-      "newsTitle": "Microsoft Hackathon 2018 winning team: ‘Think bigger – and believe you can change the world’",
+      "newsTitle": "Microsoft Hackathon 2019 winning team: ‘Think bigger – and believe you can change the world’",
       "latestOrTrendingFlag": "Latest",
       "newsThumbnailUrl": "##BaseURL##/Images/Microsoft hackathon.jpg",
       "newsBy": "TIMES OF INDIA",
@@ -161,7 +161,7 @@
       "newsThumbnailUrl": "##BaseURL##/Images/crypto.jpg",
       "newsBy": "Maev Kennedy",
       "newsDateTIme": "7-10-2019, 12:00 AM",
-      "detailedNews": "In a paper presented at the recent IEEE Symposium on Security and Privacy, MIT researchers detail a system that, for the first time, automatically generates optimized cryptography code that’s usually written by hand. Deployed in early 2018, the system is now being widely used by Google and other tech firms.The paper now demonstrates for other researchers in the field how automated methods can be implemented to prevent human-made errors in generating cryptocode, and how key adjustments to components of the system can help achieve higher performance.To secure online communications, cryptographic protocols run complex mathematical algorithms that do some complex arithmetic on large numbers. Behind the scenes, however, a small group of experts write and rewrite those algorithms by hand. For each algorithm, they must weigh various mathematical techniques and chip architectures to optimize for performance. When the underlying math or architecture changes, they essentially start over from scratch. Apart from being or-intensive, this manual process can produce nonoptimal algorithms and often introduces bugs that are later caught and fixed.Researchers from the Computer Science and Artificial Intelligence Laboratory (CSAIL) instead designed “Fiat Cryptography,” a system that automatically generates — and simultaneously verifies — optimized cryptographic algorithms for all hardware platforms. In tests, the researchers found their system can generate algorithms that match performance of the best handwritten code, but much faster.",
+      "detailedNews": "In a paper presented at the recent IEEE Symposium on Security and Privacy, MIT researchers detail a system that, for the first time, automatically generates optimized cryptography code that’s usually written by hand. Deployed in early 2019, the system is now being widely used by Google and other tech firms.The paper now demonstrates for other researchers in the field how automated methods can be implemented to prevent human-made errors in generating cryptocode, and how key adjustments to components of the system can help achieve higher performance.To secure online communications, cryptographic protocols run complex mathematical algorithms that do some complex arithmetic on large numbers. Behind the scenes, however, a small group of experts write and rewrite those algorithms by hand. For each algorithm, they must weigh various mathematical techniques and chip architectures to optimize for performance. When the underlying math or architecture changes, they essentially start over from scratch. Apart from being or-intensive, this manual process can produce nonoptimal algorithms and often introduces bugs that are later caught and fixed.Researchers from the Computer Science and Artificial Intelligence Laboratory (CSAIL) instead designed “Fiat Cryptography,” a system that automatically generates — and simultaneously verifies — optimized cryptographic algorithms for all hardware platforms. In tests, the researchers found their system can generate algorithms that match performance of the best handwritten code, but much faster.",
       "noOfViews": "101"
     },
     {
@@ -181,7 +181,7 @@
       "newsTitle": "MIT researchers taught robots to link senses like sight and touch",
       "latestOrTrendingFlag": "Latest",
       "newsThumbnailUrl": "##BaseURL##/Images/rob.jpg",
-      "newsBy": "Hugh Montgomery",
+      "newsBy": "Montgomery",
       "newsDateTIme": "7-10-2019, 12:00 AM",
       "detailedNews": "MIT researchers at the Computer Science and Artificial Intelligence Lab (CSAIL) have created a predictive AI that allows robots to link multiple senses in much the same way humans do.“While our sense of touch gives us a channel to feel the physical world, our eyes help us immediately understand the full picture of these tactile signals,” writes Rachel Gordon, of MIT CSAIL. In robots, this connection doesn’t exist. In an effort to bridge the gap, researchers developed a predictive AI capable of learning to “see by touching” and “feel by seeing,” a means of linking senses of sight and touch in future robots.Using a KUKA robot arm with a tactile sensor called GelSight (another MIT creation), the team recorded nearly 200 objects with a web cam. These included tools, fabrics, household products and other every day materials humans come into contact with regularly.The team used the robotic arm to touch the items more than 12,000 times, breaking each of these video clips into static frames for further analysis. All told, researchers ended up with more than three million visual/tactile paired imgs in its dataset.“By looking at the scene, our model can imagine the feeling of touching a flat surface or a sharp edge,” said Yunzhu Li, CSAIL PhD student and lead author on a new paper about the system. “By blindly touching around, our model can predict the interaction with the environment purely from tactile feelings.”For humans, this comes naturally. We can touch an item once, even years prior, and have a sense of how it feels when we come into contact with it at a later date. In robots, it could help to reduce human input for mechanical tasks, such as flipping a switch, or deciding where the safest place to pick up a package is.",
       "noOfViews": "256"
@@ -225,7 +225,7 @@
       "newsTitle": "Artificial intelligence could revolutionize medical care. But don’t trust it to read your x-ray just yet",
       "latestOrTrendingFlag": "Latest",
       "newsThumbnailUrl": "##BaseURL##/Images/xray.jpg",
-      "newsBy": "Agence France-Presse",
+      "newsBy": "France-Presse",
       "newsDateTIme": "7-10-2019, 12:00 AM",
       "detailedNews": "Artificial intelligence (AI) is poised to upend the practice of medicine, boosting the efficiency and accuracy of diagnosis in specialties that rely on imgs, such as radiology and pathology. But as the technology gallops ahead, experts are grappling with its potential downsides. “Just working with the technology, I see lots of ways it can fail,” says Albert Hsiao, a radiologist at the University of California, San Diego, who has developed algorithms for reading cardiac imgs and improving their quality. One major concern: Most AI software is designed and tested in one hospital, and it risks faltering when transferred to another.Last month in the Journal of the American College of Radiology, U.S. government scientists, regulators, and doctors published a road map describing how to convert research-based AI into improved medical imaging on patients. Among other things, the authors urged more collaboration across disciplines in building and testing AI algorithms, and intensive validation of algorithms beforey reach patients. For now, Hsiao says, “I would want a human physician no matter what,” even if a machine hums alongside.Most AI in medicine is used in research, but regulators have already approved some algorithms for radiologists. Physicians are also developing their own—which they’re permitted to use without regulatory approval as long as companies aren’t marketing the new technology. Studies are testing algorithms to read x-rays, detect brain bleeds, pinpoint tumors, and more.",
       "noOfViews": "190"
@@ -244,7 +244,7 @@
     {
       "newsID": "12375",
       "category": "Business",
-      "newsTitle": "Satya Nadella to partners at Inspire 2017: ‘We have an unprecedented opportunity’",
+      "newsTitle": "Satya Nadella to partners at Inspire 2019: ‘We have an unprecedented opportunity’",
       "latestOrTrendingFlag": "Trending",
       "newsThumbnailUrl": "##BaseURL##/Images/Satya Nadella rise of Microsoft.jpg",
       "newsBy": "Khari Johnson",
@@ -356,7 +356,7 @@
       "newsTitle": "Xbox Game Pass Subscription Service Headed to PC With Over 100 Titles",
       "latestOrTrendingFlag": "Trending",
       "newsThumbnailUrl": "##BaseURL##/Images/XBOX Game Pass Subscription.JPG",
-      "newsBy": "THE WASHING TON POST",
+      "newsBy": "WASHINGTON POST",
       "newsDateTIme": "7-10-2019, 12:00 AM",
       "detailedNews": "New Delhi: Microsoft is bringing the Xbox Game Pass subscription service over to the PC ecosystem. The chief of Microsoft's Xbox division, Phil Spencer, has announced that Xbox Game Pass is headed to PC, giving PC gamers the benefits enjoyed by their Xbox counterparts such as access to over 100-games on the Windows platform and the ability to play a title from the Xbox Game Studios on the very day of its global release for a monthly fee. Additionally, PC games from the Xbox Game Studios will also be made available on third-party online stores on launch day. Moreover, the company also looks forward to enabling support for native Win32 games to the Microsoft Store. ",
       "noOfViews": "243"
@@ -367,7 +367,7 @@
       "newsTitle": "Twitter Is Not Making You Smarter and Hurting Your Intelligence, New Study Finds",
       "latestOrTrendingFlag": "Latest",
       "newsThumbnailUrl": "##BaseURL##/Images/Twitter new study.jpg",
-      "newsBy": "THE WASHINGTON POST",
+      "newsBy": "WASHINGTON POST",
       "newsDateTIme": "7-10-2019, 12:00 AM",
       "detailedNews": "Washington: Twitter, used by 126 million people daily and now ubiquitous in some industries, has vowed to reform itself after being enlisted as a tool of misinformation and hate.But new evidence shows that the platform may be inflicting harm at an even more basic level. It could be making its users, well, a bit witless.The finding by a team of Italian researchers is not necessarily that the crush of hashtags, likes and retweets destroys brain cells; that's a question for neuroscientists, they said. ",
       "noOfViews": "129"
@@ -380,7 +380,7 @@
       "newsThumbnailUrl": "##BaseURL##/Images/Xiaomi's number 1 tag.PNG",
       "newsBy": "TIMES OF INDIA",
       "newsDateTIme": "7-10-2019, 12:00 AM",
-      "detailedNews": "New Delhi: Holding top slot in the Indian smartphone market no longer enamours Samsung, at least so the company claims. The South Korean smartphone brand, which lost the No. 1 position to Chinese rival Xiaomi in late 2017, claims that it has stepped aside from this rat race on paper and focus more on ‘value’. And for Samsung, ‘value’ means increasing revenues.  ",
+      "detailedNews": "New Delhi: Holding top slot in the Indian smartphone market no longer enamours Samsung, at least so the company claims. The South Korean smartphone brand, which lost the No. 1 position to Chinese rival Xiaomi in late 2019, claims that it has stepped aside from this rat race on paper and focus more on ‘value’. And for Samsung, ‘value’ means increasing revenues.  ",
       "noOfViews": "144"
     },
     {
@@ -446,7 +446,7 @@
       "newsThumbnailUrl": "##BaseURL##/Images/The Elder Scrolls 6.jpg",
       "newsBy": "Gerald Linch",
       "newsDateTIme": "7-10-2019, 12:00 AM",
-      "detailedNews": "Bethesda granted the wishes of Elder Scrolls fans everywhere when studio boss Todd Howard confirmed at E3 2018 that the developer is working on the highly-anticipated The Elder Scrolls 6. We haven't heard much about The Elder Scrolls 6 since it was announced, potentially due to the Redfall trademark dispute, and Todd Howard has stated the game won't be at E3 2019. However, following the announcement trailer at E3 2018, rumors immediately started gathering about where the latest Elder Scrolls title will be set, when it will release and when we will hear more.",
+      "detailedNews": "Bethesda granted the wishes of Elder Scrolls fans everywhere when studio boss Todd Howard confirmed at E3 2019 that the developer is working on the highly-anticipated The Elder Scrolls 6. We haven't heard much about The Elder Scrolls 6 since it was announced, potentially due to the Redfall trademark dispute, and Todd Howard has stated the game won't be at E3 2019. However, following the announcement trailer at E3 2019, rumors immediately started gathering about where the latest Elder Scrolls title will be set, when it will release and when we will hear more.",
       "noOfViews": "765"
     },
     {
@@ -501,7 +501,7 @@
       "newsThumbnailUrl": "##BaseURL##/Images/crypto.jpg",
       "newsBy": "Maev Kennedy",
       "newsDateTIme": "7-10-2019, 12:00 AM",
-      "detailedNews": "In a paper presented at the recent IEEE Symposium on Security and Privacy, MIT researchers detail a system that, for the first time, automatically generates optimized cryptography code that’s usually written by hand. Deployed in early 2018, the system is now being widely used by Google and other tech firms.The paper now demonstrates for other researchers in the field how automated methods can be implemented to prevent human-made errors in generating cryptocode, and how key adjustments to components of the system can help achieve higher performance.To secure online communications, cryptographic protocols run complex mathematical algorithms that do some complex arithmetic on large numbers. Behind the scenes, however, a small group of experts write and rewrite those algorithms by hand. For each algorithm, they must weigh various mathematical techniques and chip architectures to optimize for performance. When the underlying math or architecture changes, they essentially start over from scratch. Apart from being or-intensive, this manual process can produce nonoptimal algorithms and often introduces bugs that are later caught and fixed.Researchers from the Computer Science and Artificial Intelligence Laboratory (CSAIL) instead designed “Fiat Cryptography,” a system that automatically generates — and simultaneously verifies — optimized cryptographic algorithms for all hardware platforms. In tests, the researchers found their system can generate algorithms that match performance of the best handwritten code, but much faster.",
+      "detailedNews": "In a paper presented at the recent IEEE Symposium on Security and Privacy, MIT researchers detail a system that, for the first time, automatically generates optimized cryptography code that’s usually written by hand. Deployed in early 2019, the system is now being widely used by Google and other tech firms.The paper now demonstrates for other researchers in the field how automated methods can be implemented to prevent human-made errors in generating cryptocode, and how key adjustments to components of the system can help achieve higher performance.To secure online communications, cryptographic protocols run complex mathematical algorithms that do some complex arithmetic on large numbers. Behind the scenes, however, a small group of experts write and rewrite those algorithms by hand. For each algorithm, they must weigh various mathematical techniques and chip architectures to optimize for performance. When the underlying math or architecture changes, they essentially start over from scratch. Apart from being or-intensive, this manual process can produce nonoptimal algorithms and often introduces bugs that are later caught and fixed.Researchers from the Computer Science and Artificial Intelligence Laboratory (CSAIL) instead designed “Fiat Cryptography,” a system that automatically generates — and simultaneously verifies — optimized cryptographic algorithms for all hardware platforms. In tests, the researchers found their system can generate algorithms that match performance of the best handwritten code, but much faster.",
       "noOfViews": "101"
     },
     {
@@ -545,7 +545,7 @@
       "newsThumbnailUrl": "##BaseURL##/Images/gaming.jpg",
       "newsBy": "Mariah Corey",
       "newsDateTIme": "7-10-2019, 12:00 AM",
-      "detailedNews": "Habana Labs, a Tel Aviv-based AI processor startup, today announced its Gaudi AI training processor, which promises to easily beat GPU-based systems by a factor of four. While the individual Cybercriminals have set their sights on the gaming industry and a new report has revealed that 12bn credential stuffing attacks were carried out against gaming websites over the course of 17 months leading up to March 2019.Akamai's 2019 State of the Internet / Security Web Attacks and Gaming Abuse Report highlights how the online gaming community is one of the fastest rising targets for credential stuffing attacks as well as one of the most lucrative targets for attackers.During the same time period in which gaming websites saw heightened attacks, Akamai observed a total of 55bn credential stuffing attacks across all industries.The firm's report also revealed that SQL Injection (SQLi) attacks now represent 65.1 percent of all web application attacks with Local File Inclusion (LFI) attacks accounting for 24.7 percent. Akamai's data shows that SQLi attacks have continued to grow in popularity among cybercriminals after experiencing a spike in activity during 2018's holiday shopping season and the attacks have continued at an elevated rate since that time.",
+      "detailedNews": "Habana Labs, a Tel Aviv-based AI processor startup, today announced its Gaudi AI training processor, which promises to easily beat GPU-based systems by a factor of four. While the individual Cybercriminals have set their sights on the gaming industry and a new report has revealed that 12bn credential stuffing attacks were carried out against gaming websites over the course of 17 months leading up to March 2019.Akamai's 2019 State of the Internet / Security Web Attacks and Gaming Abuse Report highlights how the online gaming community is one of the fastest rising targets for credential stuffing attacks as well as one of the most lucrative targets for attackers.During the same time period in which gaming websites saw heightened attacks, Akamai observed a total of 55bn credential stuffing attacks across all industries.The firm's report also revealed that SQL Injection (SQLi) attacks now represent 65.1 percent of all web application attacks with Local File Inclusion (LFI) attacks accounting for 24.7 percent. Akamai's data shows that SQLi attacks have continued to grow in popularity among cybercriminals after experiencing a spike in activity during 2019's holiday shopping season and the attacks have continued at an elevated rate since that time.",
       "noOfViews": "249"
     },
     {

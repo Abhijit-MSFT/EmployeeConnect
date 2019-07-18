@@ -1,4 +1,6 @@
-﻿@*@{ Layout = null;}*@
+﻿
+
+@model string[]
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +20,7 @@
     <script>
         microsoftTeams.initialize();
 
-        var newsCategory = ["Technology", "CS", "Software", "Animation", "IT", "AI"];
+        var newsCategory = new Array();
         var newsSelectedTime = "10:00 AM";
         var newsNotificationFlag = true;
         var newNotifyMe = true;
@@ -34,7 +36,7 @@
             userName = context.userPrincipalName;
          $.ajax({
                 type: "POST",
-                url: "/Preferences",
+                url: "/Preferences/userName",
                 contentType: "application/json; charset=utf-8",
                 data: '{"UserName":"' + userName + '"}',
                 dataType: "json",
@@ -76,16 +78,29 @@
             }
         }
 
-           
+
 
         function getCategory() {
             if (event.target.checked == true) {
                 newsCategory.push(event.currentTarget.value);
+                let obj = {};
+                obj.newsPrefCat = newsCategory;
+                obj.newsTime = newsSelectedTime;
+                obj.newsNotificationFlag = newsNotificationFlag;
+                obj.newsNotifyMe = newNotifyMe;
+                obj.eandtTime = entNotificationTime;
+                obj.eandtNotify = entNotifyMe;
+                obj.eandtflag = entNotificationFlag;
+                obj.taskNotifyMe = taskNotifyme;
+                obj.taskTime = taskNotificationTime;
+                obj.taskNotificationFlag = taskNotifyFlag;
+                obj.UserName = userName;
           $.ajax({
             type: "POST",
             url: "/PreferenceInDb",
-              contentType: "application/json; charset=utf-8",
-              data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '","UserName":"' + userName + '"}',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+           // data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '","UserName":"' + userName + '"}',
             dataType: "json",
             success: function (data) {
             },
@@ -149,9 +164,10 @@
                             <label for="Business">
                                 <img src="./imgs/Business.jpg" alt-name="Business" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Business" checked id="Business" value="Business" onclick="getCategory()" />
+                            <input type="checkbox" name="Business" id="Business" value="Business" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Business</div>
+                                @*<div class="title-name @(Model. ==15 ? "main-card-img" : "sub-card-img")">Business</div>*@
                             </div>
                         </div>
                         <div class="image-text image_grid">

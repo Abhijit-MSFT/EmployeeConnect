@@ -76,6 +76,56 @@ namespace EmployeeConnect.Controllers
                     };
                     return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "task/submit":
+                    string taskId = JsonConvert.DeserializeObject<TaskModuleSubmitData<TicketTaskData>>(activityValue).Data.action;
+                    //string commandid = details.commandId;
+                    switch (taskId)
+                    {
+                        case "ticketcomplete":
+                            var createTicketData = JsonConvert.DeserializeObject<SubmitActionData<TicketTaskData>>(activityValue).data;
+                            taskInfo = GetTaskInfo(taskId);
+                            var ticketurl = "?ticketNoId=" + createTicketData.ticketNo + "&description=" + createTicketData.TDescription + "&category=" + createTicketData.TCategory + "&priority=" + createTicketData.TPriority;
+                            taskInfo.Url = taskInfo.Url + ticketurl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + ticketurl;
+
+
+
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue,
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+
+                        case "submitTicket":
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        case "submitVisitor":
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        case "sendrequest":
+                            var savevisitordata = JsonConvert.DeserializeObject<SubmitActionData<VisitorData>>(activityValue).data;
+                            taskInfo = GetTaskInfo(taskId);
+                            var vurl = "?Date=" + savevisitordata.Vdate + "&Time=" + savevisitordata.Vtime + "&Contact=" + savevisitordata.Vcontact + "&location=" + savevisitordata.VhostLocation + "&purpose=" + savevisitordata.Vpurpose + "&hostName=" + savevisitordata.VhostName + "&org=" + savevisitordata.Vorg;
+                            taskInfo.Url = taskInfo.Url + vurl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + vurl;
+
+
+
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue,
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                    }
                     string data = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
                     //string datajson = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).DataJson;
 

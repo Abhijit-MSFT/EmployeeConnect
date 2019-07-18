@@ -87,21 +87,21 @@ namespace EmployeeConnect.Dialogs
 
 
 
-            if (!context.ConversationData.ContainsKey(emailKey))
-            {
-                //await SendOAuthCardAsync(context, (Activity)context.Activity);
-                //return;
+            //if (!context.ConversationData.ContainsKey(emailKey))
+            //{
+            //    //await SendOAuthCardAsync(context, (Activity)context.Activity);
+            //    return;
 
-                /*Welcome Card
-                var reply = context.MakeMessage();
-                List<Attachment> res;
-                string url = await getSigninUrl(activity);
-                res = Helper.CardHelper.WelcomeCard(url);
-                for (int i = 0; i < res.Count(); i++)
-                    reply.Attachments.Add(res.ElementAt(i));
-                reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-                await context.PostAsync(reply);*/
-            }
+            //    //Welcome Card
+            //    //var reply = context.MakeMessage();
+            //    //List<Attachment> res;
+            //    //string url = await getSigninUrl(activity);
+            //    //res = Helper.CardHelper.WelcomeCard(url);
+            //    //for (int i = 0; i < res.Count(); i++)
+            //    //    reply.Attachments.Add(res.ElementAt(i));
+            //    //reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+            //    //await context.PostAsync(reply);
+            //}
             //var userDetails = await GetCurrentUserDetails(activity);
             if (userDetails == null)
             {
@@ -123,7 +123,7 @@ namespace EmployeeConnect.Dialogs
                 switch (message.Trim())
                 {
                     case Common.Constants.Welcome:
-                        //string url = await getSigninUrl(activity);
+                        string url = await getSigninUrl(activity);
                         res = Helper.CardHelper.WelcomeCard();
                         for (int i = 0; i < res.Count(); i++)
                             reply.Attachments.Add(res.ElementAt(i));
@@ -352,12 +352,12 @@ namespace EmployeeConnect.Dialogs
             return false;
         }
 
-        private async Task SendOAuthCardAsync(IDialogContext context, Activity activity)
-        {
-            var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "Please sign in", "Sign In", true).ConfigureAwait(false);
-            //await context.PostAsync(reply);
-            //context.Wait(WaitForToken);
-        }
+        //private async Task SendOAuthCardAsync(IDialogContext context, Activity activity)
+        //{
+        //    var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "Please sign in", "Sign In", true).ConfigureAwait(false);
+        //    await context.PostAsync(reply);
+        //    context.Wait(WaitForToken);
+        //}
         private async Task WaitForToken(IDialogContext context, IAwaitable<object> result)
         {
             var activity = await result as Activity;
@@ -427,7 +427,7 @@ namespace EmployeeConnect.Dialogs
         }
         public static async Task<string> getSigninUrl(Activity activity)
         {
-            var connectionName = "TestOAuthCard";
+            var connectionName = "ReadProfile";
             // var authClient = activity.GetOAuthClient(new MicrosoftAppCredentials("57af17b5-0742-4dc8-b16f-c72cb30134cc", "jsYEJGD427;$ukmvgHQ85{#"));
             OAuthClient authClient = activity.GetOAuthClient();// new OAuthClient(new MicrosoftAppCredentials("57af17b5-0742-4dc8-b16f-c72cb30134cc", "jsYEJGD427;$ukmvgHQ85{#"));
             // var url = await authClient.OAuthApi.GetSignInLinkAsync(activity, );

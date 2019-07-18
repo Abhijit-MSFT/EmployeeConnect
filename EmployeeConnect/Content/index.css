@@ -191,7 +191,7 @@ div#car-root {
 } */
 h6.card-title.text {
     cursor: pointer;
-    height: 50px;
+    height: 52px;
 }
 /* for mobile */
 @media (max-width: 425px) {

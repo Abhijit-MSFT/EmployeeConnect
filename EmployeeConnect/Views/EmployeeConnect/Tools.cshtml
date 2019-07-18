@@ -1,6 +1,10 @@
-﻿@model EmployeeConnect.Models.PO
+﻿
+
+@model EmployeeConnect.Models.PO
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
+
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,9 +19,9 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div class="HR">Human Resources</div>
-                <div class="P-10">
+            <div class="col-12 panel-group" id="accordion">
+                <div class="HR panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#HRtools">Human Resources</div>
+                <div class="P-10 panel-collapse" id="HRtools">
                     <div class="card shadow-sm custom-card-first-row">
                         <div class="card-body">
                             <span alt-name="create letter"
@@ -64,8 +68,11 @@
                     </div>
                 </div>
 
-                <div class="PB">Pay and benefits</div>
-                <div class="P-10">
+                <div class="PB panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Pay-benefits">
+                    Pay and benefits
+                </div>
+
+                <div class="P-10 panel-collapse" id="Pay-benefits">
                     <div class="card shadow-sm custom-card-PB-second-row">
                         <div class="card-body">
                             <span alt-name="download-payslip"
@@ -83,7 +90,8 @@
                             </span>
                             <div class="CFT">Create finance ticket</div>
                             <p class="CFT-des">
-                               Open a support ticket with the Finance and Operations support.
+                                Open a support ticket with the Finance and Operations
+                                support.
                             </p>
                         </div>
                     </div>
@@ -109,8 +117,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="IF">IT and facilities</div>
-                <div class="P-10">
+                <div class="IF panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#itandfacilities">IT and facilities</div>
+                <div class="P-10 panel-collapse" id="itandfacilities">
                     <div class="card shadow-sm custom-card-IF-third-row">
                         <div class="card-body">
                             <span class="IF-tabs support"></span>
@@ -148,14 +156,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="RO">Retail operations</div>
-                <div class="P-10">
+                <div class="RO panel-title accordion-toggle" data-toggle="collapse"
+                     data-parent="#accordion"
+                     href="#retail-operations">Retail operations</div>
+                <div class="P-10 panel-collapse" id="retail-operations">
                     <div class="card shadow-sm custom-card-RO-fourth-row">
                         <div class="card-body">
                             <span class="RO-tabs Inventory"> </span>
                             <div class="IR">Inventory request</div>
                             <p class="IR-des">
                                 Inventory form to request supplies.
+
                             </p>
                         </div>
                     </div>
@@ -216,7 +227,7 @@
                 taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
-           
+
             }
             if (result.action == "sendrequest") {
                   let taskInfo = {
@@ -226,7 +237,7 @@
                 url: null,
                 fallbackUrl: null,
                 };
-                
+
 
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/sendrequest?Date=" + result.VDate +"&Time="+result.VTime +"&Contact="+result.VContact +"&location="+result.VLocation+"&purpose=" + result.VPurpose + "&hostName="+result.VHostName+ "&org="+result.VOrg;
                 taskInfo.height = "@(TaskModelUIConstant.SendRequest.Height)";

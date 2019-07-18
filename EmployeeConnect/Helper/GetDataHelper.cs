@@ -293,6 +293,7 @@ namespace EmployeeConnect.Helper
             }
         }
 
+        //Abhijit - Changes are pending
         public static void saveTicketsInfo(JObject ticketData)
         {
             TicketsDataModel currentTicket = GetDataHelper.getTickets();
@@ -318,22 +319,6 @@ namespace EmployeeConnect.Helper
             {
                 File.WriteAllText(filePath, TicketJson);
             }
-            //TicketsDataModel currentTicket = new TicketsDataModel()
-            //{
-            //    ticketNo = Convert.ToInt32(ticketData.GetValue("TicketNo")),
-            //    ticketDescription = ticketData.GetValue("Description").ToString(),
-            //    date = ticketData.GetValue("Date").ToString(),
-            //    priority = ticketData.GetValue("Priority").ToString(),
-            //    category = ticketData.GetValue("Category").ToString()
-            //};
-            //JavaScriptSerializer js = new JavaScriptSerializer();
-            //string TicketJson = js.Serialize(currentTicket);
-            //string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets") + @"/Tickets.json";
-            //if (File.Exists(filePath))
-            //{
-            //    File.AppendAllText(filePath, TicketJson);
-            //}
-
         }
 
         public static UPreferences getPreferences()
