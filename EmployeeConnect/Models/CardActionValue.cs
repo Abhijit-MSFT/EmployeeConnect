@@ -15,6 +15,20 @@ namespace EmployeeConnect.Models
         public T Data { get; set; }
     }
 
+
+    public class TaskFetchData
+    {
+        public Data data { get; set; }
+    }
+
+    public class Data
+    {
+        public string type { get; set; }
+        public string data { get; set; }
+    }
+
+    
+
     public class AdaptiveCardValue<T>
     {
         [JsonProperty("msteams")]

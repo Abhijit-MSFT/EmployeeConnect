@@ -227,8 +227,8 @@
                     url: url,
                     type: 'get',
                     contentType: 'application/json',
-                    success: function (data, textStatus, jQxhr) {
-                        taskInfo.card = data;
+                success: function (data, textStatus, jQxhr) {
+                    taskInfo.card = JSON.parse(data);
                         taskInfo.height = "@(TaskModelUIConstant.NewsCard.Height)";
                         taskInfo.width = "@(TaskModelUIConstant.NewsCard.Width)";
                         microsoftTeams.tasks.startTask(taskInfo, submitHandler);

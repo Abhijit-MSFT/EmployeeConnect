@@ -21,7 +21,7 @@ namespace EmployeeConnect.Controllers
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        [HttpPost]  
+        [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
             switch (activity.Type)
@@ -30,7 +30,7 @@ namespace EmployeeConnect.Controllers
                     await Conversation.SendAsync(activity, () => new RootDialog());
                     break;
                 case ActivityTypes.Invoke:
-                     return await HandleInvokeActivity(activity);
+                    return await HandleInvokeActivity(activity);
                 case ActivityTypes.ConversationUpdate:
                     await HandleConversationUpdate(activity);
                     break;
@@ -55,22 +55,25 @@ namespace EmployeeConnect.Controllers
                     return response != null ? Request.CreateResponse<ComposeExtensionResponse>(response) : new HttpResponseMessage(HttpStatusCode.OK);
                 case "task/fetch":
                     // Handle fetching task module content
-                    Models.BotFrameworkCardValue<string> action;
+                    string action = string.Empty;
 
                     try
                     {
-                        action = JsonConvert.DeserializeObject<Models.TaskModuleActionData<string>>(activityValue).Data;
+                        var input = JsonConvert.DeserializeObject<TaskFetchData>(activityValue);
+                        action = input.data.data;
+
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
+                        Console.WriteLine(ex);
+                        // action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
                     }
-                    taskInfo = GetTaskInfo(action.Data);
+                    taskInfo = GetTaskInfo(action);
                     taskEnvelope = new Models.TaskEnvelope
                     {
                         Task = new Models.Task()
                         {
-                            Type = Models.TaskType.Continue,
+                            Type = Models.TaskType.Continue.ToString().ToLower(),
                             TaskInfo = taskInfo
                         }
                     };
@@ -93,7 +96,7 @@ namespace EmployeeConnect.Controllers
                             {
                                 Task = new Models.Task()
                                 {
-                                    Type = Models.TaskType.Continue,
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
                                     TaskInfo = taskInfo
                                 }
                             };
@@ -119,7 +122,7 @@ namespace EmployeeConnect.Controllers
                             {
                                 Task = new Models.Task()
                                 {
-                                    Type = Models.TaskType.Continue,
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
                                     TaskInfo = taskInfo
                                 }
                             };
@@ -147,7 +150,7 @@ namespace EmployeeConnect.Controllers
                             {
                                 Task = new Models.Task()
                                 {
-                                    Type = Models.TaskType.Continue,
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
                                     TaskInfo = taskInfo
                                 }
                             };
@@ -172,7 +175,7 @@ namespace EmployeeConnect.Controllers
                                 {
                                     Task = new Models.Task()
                                     {
-                                        Type = Models.TaskType.Continue,
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
                                         TaskInfo = taskInfo
                                     }
                                 };
@@ -194,7 +197,7 @@ namespace EmployeeConnect.Controllers
                                 {
                                     Task = new Models.Task()
                                     {
-                                        Type = Models.TaskType.Continue,
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
                                         TaskInfo = taskInfo
                                     }
                                 };
@@ -212,7 +215,7 @@ namespace EmployeeConnect.Controllers
                                 {
                                     Task = new Models.Task()
                                     {
-                                        Type = Models.TaskType.Continue,
+                                        Type =  Models.TaskType.Continue.ToString().ToLower(),
                                         TaskInfo = taskInfo
                                     }
                                 };
@@ -235,7 +238,7 @@ namespace EmployeeConnect.Controllers
                                 {
                                     Task = new Models.Task()
                                     {
-                                        Type = Models.TaskType.Continue,
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
                                         TaskInfo = taskInfo
                                     }
                                 };
@@ -261,13 +264,13 @@ namespace EmployeeConnect.Controllers
             TaskInfo taskInfo = new TaskInfo();
             if (actionInfo.StartsWith("news:"))
             {
-                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetNewsCardbyId(actionInfo.Substring(5)));
+                taskInfo.Card = CardHelper.GetNewsCardbyId(actionInfo.Substring(5));
                 SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
                 return taskInfo;
             }
             if (actionInfo.StartsWith("events:"))
             {
-                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetETbyID(actionInfo.Substring(7)));
+                taskInfo.Card = CardHelper.GetETbyID(actionInfo.Substring(7));
                 SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
                 return taskInfo;
             }
@@ -340,7 +343,7 @@ namespace EmployeeConnect.Controllers
             ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
             var channelData = message.GetChannelData<TeamsChannelData>();
             // Treat 1:1 add/remove events as if they were add/remove of a team member
-            
+
             if (channelData.EventType == null)
             {
                 if (message.MembersAdded != null)
