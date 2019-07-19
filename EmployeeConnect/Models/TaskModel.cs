@@ -46,7 +46,7 @@ namespace EmployeeConnect.Models
         public TaskInfo TaskInfo { get; set; }
 
         [JsonProperty("type")]
-        public TaskType Type { get; set; }
+        public string Type { get; set; }
     }
 
     public enum TaskType

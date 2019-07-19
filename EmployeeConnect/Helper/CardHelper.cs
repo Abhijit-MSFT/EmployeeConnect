@@ -239,28 +239,32 @@ namespace EmployeeConnect.Helper
                             new AdaptiveImage
                             {
                                 HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
-                                Url = new Uri(SelectedNews.NewsThumbnailUrl)
+                                Url = new Uri(SelectedNews.NewsThumbnailUrl),
+                                Id="imgId"
                             },
                             new AdaptiveTextBlock() //Title of News
                             {
                                 Text = SelectedNews.NewsTitle,
                                 Weight = AdaptiveTextWeight.Bolder,     // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
+                                Wrap = true,
+                                Id="TextId1"
                             },
                                 new AdaptiveTextBlock()     //NewsBy on Date and Time
                             {
                                 Text = "By " + SelectedNews.NewsBy + " on " + SelectedNews.NewsDateTIme,
                                 Weight = AdaptiveTextWeight.Lighter,    // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Small,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
+                                Wrap = true,
+                                Id="TextId2"
                             },
                             new AdaptiveTextBlock()     //Detailed News
                             {
                                 Text = SelectedNews.DetailedNews,
                                 Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Default,       // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
+                                Wrap = true,
+                                Id="TextId3"
                             }
                         }
                     }
