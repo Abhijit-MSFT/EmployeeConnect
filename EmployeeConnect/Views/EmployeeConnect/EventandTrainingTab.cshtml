@@ -1,20 +1,23 @@
 ﻿@model EmployeeConnect.Models.EandTModel
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/Content/Event.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>*@
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="./index.js"></script>
-        <title>Events and Trainings</title>
-    </head>
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Event.css" />
+    <link href="~/Content/eventandtrainingnew.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    @*<script type="text/javascript" src="./index.js"></script>*@
+    <title>Events and Trainings</title>
+</head>
 
 <body>
     <div class="container-fluid">
@@ -26,7 +29,7 @@
                         <div class="today">Today</div>
                         <div class="left-chev"></div>
                         <div class="right-chev"></div>
-                        <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
+                        <div class="month-date">@DateTime.Now.ToString("MMM"), @DateTime.Now.Year</div>
                         <div class="down-chev"></div>
                     </div>
                 </div>
@@ -75,11 +78,11 @@
                                             <span class="event">
                                                 @if (item.ETFlag == "E")
                                                 {
-                                                <span>Event</span>
+                                                    <span>Event</span>
                                                 }
                                                 else
                                                 {
-                                                   <span>Training</span>
+                                                    <span>Training</span>
                                                 }
 
                                             </span>
@@ -102,59 +105,14 @@
                             }
                         </div>
                     </div>
-
                 </div>
-
-                @*<div class="row">
-                    <div class="col-12">
-                        <div class="card-deck custom-card-deck">
-                            <div class="col-2">
-                                <!-- add data here -->
-                            </div>
-                            <div class="col-2">
-                                <div class="card custom-card">
-                                    <div class="card-header header-badge">
-                                        <span class="badge-icon"></span>
-                                        <span class="event">Training</span>
-                                        <span class="check">
-                                            <span class="mandatory">Mandatory</span>
-                                        </span>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-title main-title-msg">
-                                            Platform overviews training
-                                        </div>
-                                        <div class="time-icon">
-                                            <div class="event-time">02:00 - 04:00 PM</div>
-                                        </div>
-                                        <div class="web-icon">
-                                            <div class="web">Online stream</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <!-- add data here -->
-                            </div>
-                            <div class="col-2">
-                                <!-- add data here -->
-                            </div>
-                            <div class="col-2">
-                                <!-- add data here -->
-                            </div>
-                            <div class="col-2">
-                                <!-- add data here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
             </div>
         </div>
         <div class="row header2">
             <div class="col-12">
                 <div class="heading">Other upcoming events and trainings</div>
                 <div class="today">Today</div>
-                <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
+                <div class="month-date">@DateTime.Now.ToString("MMM"), @DateTime.Now.Year</div>
                 <div class="down-chev"></div>
             </div>
         </div>
@@ -197,15 +155,17 @@
                             </div>
                         </div>
                     }
-                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script>
-    function AddToMyEventsGrid(value) {
+
+    <script type="text/javascript">
+
+        function AddToMyEventsGrid(value) {
         debugger;
         location.href = '@Url.Action("EventAndTrainingTab","Home")?id='+value;
-}
+    }
     microsoftTeams.initialize();
 
         submitHandler = (err, result) => {
@@ -228,7 +188,7 @@
                 fallbackUrl: null,
             };
 
-           
+
 
 
             var url = "/GetEventInfo?eventId=" + eventId;

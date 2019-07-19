@@ -65,7 +65,7 @@
                             <thead>
                                 <tr class="head-title-color">
                                     <th>PO no.</th>
-                                    <th></th>
+
                                     <th>Description</th>
                                     <th>Vendor name</th>
                                     <th>Vendor no.</th>
@@ -76,18 +76,18 @@
                             <tbody>
                                 @foreach (var item in Model.PendingPO)
                                 {
-                                    <tr class="row-highlight">
-                                        <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
-                                        <td></td>
-                                        <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
-                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
-                                        <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
-                                        <td class="amount">
-                                            <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
-                                        </td>
-
-                                        <td class="reviewButton" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
-                                    </tr>
+                                <tr class="row-highlight">
+                                    <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                    <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                    <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                    
+                                    <td class="amount">
+                                        <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
+                                    </td>
+                                    <td></td>
+                                    <td class="reviewButton" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

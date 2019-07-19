@@ -99,7 +99,7 @@
       "vendorName": "Store A",
       "vendorNo": "97546",
       "totalAmount": "26,524",
-      "poStatus": "pending",
+      "poStatus": "declined",
       "poDetails": [
         {
           "itemCode": "9823564412",

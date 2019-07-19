@@ -15,10 +15,40 @@ using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Azure;
 
+
 namespace EmployeeConnect
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        // private static readonly Timer timer = new Timer(new TimerCallback(x =>
+        //{
+
+        //    CheckScheduleAndExecute(x);
+
+        //})
+        // , null, new TimeSpan(0, 0, 10), new TimeSpan(1,0,0));
+        //private static System.Timers.Timer aTimer;
+
+        //static MvcApplication()
+        //{
+        //    aTimer = new System.Timers.Timer( (new TimeSpan(0,0,10)).TotalMilliseconds);
+
+        //    // Hook up the event handler for the Elapsed event.
+        //    aTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);
+
+        //    // Only raise the event the first time Interval elapses.
+        //    aTimer.AutoReset = true;
+        //    aTimer.Enabled = true;
+
+        //}
+
+        //private static void OnTimedEvent(object source, System.Timers.ElapsedEventArgs e)
+        //{
+        //    Helper.GetDataHelper.CheckPrefAndSendNewsCard().GetAwaiter().GetResult();
+        //    Helper.GetDataHelper.CheckPrefAndSendEandTCard().GetAwaiter().GetResult();
+        //}
+
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

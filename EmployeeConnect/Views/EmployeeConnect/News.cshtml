@@ -1,7 +1,6 @@
 ﻿@model EmployeeConnect.Models.NewsModel
-    @using System;
+@using System;
 @using EmployeeConnect.Common;
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +21,7 @@
             <div class="col-12">
                 <div class="lt">Latest News</div>
                 <div class="for-you dis-in">For you</div>
-                <div class="Explore dis-in">Explore more</div>
+                <div class="Explore dis-in exp-for-mobile2"><a target="_blank" href="https://news.microsoft.com/en-in/">Explore more</a></div>
                 <div id="root" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#root" data-slide-to="0" class="active"></li>
@@ -34,9 +33,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 0; i < 4; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3 @(i ==0 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==0 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
@@ -60,9 +59,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 5; i < 9; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3 col-md-3 @(i ==5 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==5 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
@@ -86,9 +85,9 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 10; i < 14; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3  @(i ==10 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');"/>
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==10 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
@@ -116,7 +115,7 @@
         <div class="row custom-row">
             <div class="col-12">
                 <div class="lt dis-in">Trending stories</div>
-                <div class="Explore dis-in">Explore more</div>
+                <div class="Explore dis-in exp-for-mobile2"><a target="_blank" href="https://www.msn.com/en-us/news/bing/">Explore more</a></div>
                 <div id="car-root" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators carousel2 ">
                         <li data-target="#car-root" data-slide-to="0" class="active"></li>
@@ -128,11 +127,12 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 15; i < 19; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
-                                        <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                    <div class="card col-3 @(i ==15 ? "custom-main-card" : "custom-sub-cards sub-card2")">
+                                        <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==15 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+
                                         <div class="card-body">
-                                            <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                            <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
                                             </h6>
                                             <div class="author-month">
@@ -154,11 +154,11 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 20; i < 24; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3 col-md-3  @(i ==20 ? "custom-main-card" : "custom-sub-cards sub-card2")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==20 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
-                                            <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                            <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
                                             </h6>
                                             <div class="author-month">
@@ -180,11 +180,11 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 25; i < 29; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3 col-md-3 @(i ==25 ? "custom-main-card" : "custom-sub-cards sub-card2")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==25 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
-                                            <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                            <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
                                             </h6>
                                             <div class="author-month">
@@ -210,23 +210,18 @@
     <script>
     microsoftTeams.initialize();
         submitHandler = (err, result) => {
-            debugger;
-            console.log(`Submit handler - err: ${err}`);
-            //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
 
         function submit(NewsId) {
-            debugger;
             let taskInfo = {
-             //   title: null,
                 height: null,
                 width: null,
                 card:null,
                 url: null,
                 fallbackUrl: null,
             };
-            
+
             var url = "/GetNewsInfo?NewsId=" + NewsId;
             $.ajax({
                     url: url,

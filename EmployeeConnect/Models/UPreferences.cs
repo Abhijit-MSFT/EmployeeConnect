@@ -13,6 +13,7 @@ namespace EmployeeConnect.Models
     public class Preference
     {
         public string UserName { get; set; }
+        public UserInfo[] UserInfo { get; set; }  
         public NewsPreference[] News { get; set; }
         public EandtPreference[] EandT { get; set; }
         public TaskPreference[] Task { get; set; }

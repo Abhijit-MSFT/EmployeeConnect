@@ -1,6 +1,10 @@
-﻿@model EmployeeConnect.Models.PO
+﻿
+
+@model EmployeeConnect.Models.PO
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
+
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,9 +19,9 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div class="HR">Human Resources</div>
-                <div class="P-10">
+            <div class="col-12 panel-group" id="accordion">
+                <div class="HR panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#HRtools">Human Resources</div>
+                <div class="P-10 panel-collapse" id="HRtools">
                     <div class="card shadow-sm custom-card-first-row">
                         <div class="card-body">
                             <span alt-name="create letter"
@@ -64,16 +68,18 @@
                     </div>
                 </div>
 
-                <div class="PB">Pay and benefits</div>
-                <div class="P-10">
+                <div class="PB panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Pay-benefits">
+                    Pay and benefits
+                </div>
+
+                <div class="P-10 panel-collapse" id="Pay-benefits">
                     <div class="card shadow-sm custom-card-PB-second-row">
                         <div class="card-body">
                             <span alt-name="download-payslip"
                                   class="PB-tabs download-payslip"></span>
                             <div class="DP">Download payslip</div>
                             <p class="DP-des">
-                                Create a business letter within a predesigned color and
-                                template.
+                                View online pay slips and full payment histories.
                             </p>
                         </div>
                     </div>
@@ -84,8 +90,8 @@
                             </span>
                             <div class="CFT">Create finance ticket</div>
                             <p class="CFT-des">
-                                For all HR tickets, the ticket type is being set as Employee
-                                Support.
+                                Open a support ticket with the Finance and Operations
+                                support.
                             </p>
                         </div>
                     </div>
@@ -96,7 +102,7 @@
                             </span>
                             <div class="SBC">Submit benefits claim</div>
                             <p class="SBC-des">
-                                Request leave and check your status in the Leave application.
+                                Submit a claim from your account to start the process.
                             </p>
                         </div>
                     </div>
@@ -106,31 +112,28 @@
                                   class="PB-tabs view-benefits"></span>
                             <div class="VBP">View benefits policies</div>
                             <p class="VBP-des">
-                                Identify the purpose and objectives of Humana Resources
-                                department.
+                                Read common queries about servicing your policy.
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="IF">IT and facilities</div>
-                <div class="P-10">
+                <div class="IF panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#itandfacilities">IT and facilities</div>
+                <div class="P-10 panel-collapse" id="itandfacilities">
                     <div class="card shadow-sm custom-card-IF-third-row">
                         <div class="card-body">
                             <span class="IF-tabs support"></span>
                             <div class="RIST">Raise IT Support Ticket</div>
                             <p class="RIST-des">
-                                Create a business letter within a predesigned color and
-                                template.
+                                Submit your support case to review and respond.
                             </p>
                         </div>
                     </div>
                     <div class="card shadow-sm custom-card-IF-third-row-one">
                         <div class="card-body" onclick="submitTools('visitorregistration');">
                             <span class="IF-tabs wife-request"> </span>
-                            <div class="GWR">Visitor wi-fi request</div>
+                            <div class="GWR">Submit Visitor request</div>
                             <p class="GWR-des">
-                                For all HR tickets, the ticket type is being set as Employee
-                                Support.
+                                Fill a  request form for short-term visitors.
                             </p>
                         </div>
                     </div>
@@ -139,7 +142,7 @@
                             <span class="IF-tabs event-support "></span>
                             <div class="EISR">Event IT Support request</div>
                             <p class="EISR-des">
-                                Request leave and check your status in the Leave application.
+                                Fill out this form to request any equiepment for events.
                             </p>
                         </div>
                     </div>
@@ -148,21 +151,22 @@
                             <span class="IF-tabs cafe-service"></span>
                             <div class="CSA">Cafeteria service app</div>
                             <p class="CSA-des">
-                                Identify the purpose and objectives of Humana Resources
-                                department.
+                                Emloyee can order and pay here without waiting in long queue.
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="RO">Retail operations</div>
-                <div class="P-10">
+                <div class="RO panel-title accordion-toggle" data-toggle="collapse"
+                     data-parent="#accordion"
+                     href="#retail-operations">Retail operations</div>
+                <div class="P-10 panel-collapse" id="retail-operations">
                     <div class="card shadow-sm custom-card-RO-fourth-row">
                         <div class="card-body">
                             <span class="RO-tabs Inventory"> </span>
                             <div class="IR">Inventory request</div>
                             <p class="IR-des">
-                                Create a business letter within a predesigned color and
-                                template.
+                                Inventory form to request supplies.
+
                             </p>
                         </div>
                     </div>
@@ -171,8 +175,7 @@
                             <span class="RO-tabs RO-timesheet"></span>
                             <div class="timesheet">Timesheet</div>
                             <p class="timesheet-des">
-                                For all HR tickets, the ticket type is being set as Employee
-                                Support.
+                                Weekly Timesheet setup.
                             </p>
                         </div>
                     </div>
@@ -181,7 +184,7 @@
                             <span class="RO-tabs Ro-SI"></span>
                             <div class="SI">Store info</div>
                             <p class="SI-des">
-                                Request leave and check your status in the Leave application.
+                                Your store information.
                             </p>
                         </div>
                     </div>
@@ -224,7 +227,7 @@
                 taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
-           
+
             }
             if (result.action == "sendrequest") {
                   let taskInfo = {
@@ -234,7 +237,7 @@
                 url: null,
                 fallbackUrl: null,
                 };
-                
+
 
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/sendrequest?Date=" + result.VDate +"&Time="+result.VTime +"&Contact="+result.VContact +"&location="+result.VLocation+"&purpose=" + result.VPurpose + "&hostName="+result.VHostName+ "&org="+result.VOrg;
                 taskInfo.height = "@(TaskModelUIConstant.SendRequest.Height)";

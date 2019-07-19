@@ -141,6 +141,9 @@
     <Reference Include="Polly, Version=5.9.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
       <HintPath>..\packages\Polly-Signed.5.9.0\lib\net45\Polly.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz, Version=3.0.7.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.3.0.7\lib\net452\Quartz.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -153,6 +156,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Spatial, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.7.0\lib\net40\System.Spatial.dll</HintPath>
@@ -228,6 +232,8 @@
     <Compile Include="Helper\ApplicationSettings.cs" />
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\GetDataHelper.cs" />
+    <Compile Include="Helper\NotificationHelper.cs" />
+    <Compile Include="Helper\Scheduler.cs" />
     <Compile Include="MessageExtension.cs" />
     <Compile Include="Models\CardActionValue.cs" />
     <Compile Include="Models\EventsAndTrainings.cs" />
@@ -241,6 +247,7 @@
     <Compile Include="Models\UPreferences.cs" />
     <Compile Include="Models\PurchaseOrders.cs" />
     <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\VisitorDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -250,20 +257,23 @@
     <Content Include="Content\Custom.css" />
     <Content Include="Content\declined.css" />
     <Content Include="Content\eventandtrainingnew.css" />
-    <Content Include="Content\fonts\Flag.png" />
-    <Content Include="Content\fonts\flagEvents.JPG" />
-    <Content Include="Content\fonts\FlagSnip.PNG" />
-    <Content Include="Content\fonts\Location.PNG" />
-    <Content Include="Content\fonts\Shape.png" />
-    <Content Include="Content\fonts\shapeEvent.JPG" />
-    <Content Include="Content\fonts\ShapeSnip.PNG" />
-    <Content Include="Content\fonts\Time.PNG" />
-    <Content Include="Content\fonts\Website.PNG" />
+    <Content Include="fonts\Flag.png" />
+    <Content Include="fonts\flagEvents.JPG" />
+    <Content Include="fonts\flagImg.JPG" />
+    <Content Include="fonts\FlagSnip.PNG" />
+    <Content Include="fonts\Location.PNG" />
+    <Content Include="fonts\Shape.png" />
+    <Content Include="fonts\ShapeEve.JPG" />
+    <Content Include="fonts\shapeEvent.JPG" />
+    <Content Include="fonts\ShapeSnip.PNG" />
+    <Content Include="fonts\Time.PNG" />
+    <Content Include="fonts\Website.PNG" />
     <Content Include="Content\index.css" />
     <Content Include="Content\index_Policies.css" />
     <Content Include="Content\index_Preferences.css" />
     <Content Include="Content\Event.css" />
     <Content Include="Content\msteams-16.css" />
+    <Content Include="Content\pendingdates.css" />
     <Content Include="Content\PODecline.css" />
     <Content Include="Content\purchaseOrder.css" />
     <Content Include="Content\Tasks.css" />
@@ -313,7 +323,9 @@
     <Content Include="Images\Human Resources.jpeg" />
     <Content Include="Images\IDBI Bank.JPG" />
     <Content Include="Images\Inside XBOX Live %40 E3.jpg" />
+    <Content Include="Images\inventory.PNG" />
     <Content Include="Images\inventoryrequest.JPG" />
+    <Content Include="Images\invoice.PNG" />
     <Content Include="Images\iphone.png" />
     <Content Include="Images\ITFacilities.jpg" />
     <Content Include="Images\itsupportticket.JPG" />
@@ -344,6 +356,7 @@
     <Content Include="Images\Payment and benefits.jpg" />
     <Content Include="Images\phone.jpg" />
     <Content Include="Images\PlayStation Plus June.jpg" />
+    <Content Include="Images\purchase_order.png" />
     <Content Include="Images\purpleImage.JPG" />
     <Content Include="Images\Q4 Vacations ONGC Profit.jpg" />
     <Content Include="Images\Quantum Computing.jpg" />
@@ -488,9 +501,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="fonts\TeamsAssets-Light.woff" />
+    <Content Include="fonts\TeamsAssets-Light.woff2" />
+    <Content Include="Manifest\manifest.json" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff" />
     <Content Include="Content\fonts\TeamsAssets-Light.woff2" />
-    <Content Include="Manifest\manifest.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -524,6 +539,7 @@
     <Content Include="TestData\VisitorReg\Tickets.json" />
     <Content Include="TestData\VisitorReg\Visitors.json" />
     <Content Include="TestData\SupportTickets\Tickets.json" />
+    <Content Include="Views\EmployeeConnect\pendingdates.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,13 +7,16 @@ using System.Linq;
 using System.Globalization;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.IO;
+
 
 namespace EmployeeConnect.Controllers
 {
     public class EmployeeConnectController : Controller
     {
         public static int count = 1;
+
         [Route("")]
         public ActionResult Index()
         {
@@ -74,6 +77,46 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
+        [Route("ShowNews")]
+        public async Task<ActionResult> ShowNews(string userName)
+        {
+            UPreferences uPref = GetDataHelper.readPreferences();
+            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+
+            var card = Helper.CardHelper.getNewsCard(userName);
+            await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
+
+            return View();
+        }
+
+        [Route("ShowEnT")]
+        public async Task<ActionResult> ShowEnT(string userName)
+        {
+            UPreferences uPref = GetDataHelper.readPreferences();
+            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+
+            var card = Helper.CardHelper.getETCard();
+            await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
+
+            return View();
+        }
+
+
+        [Route("ShowTask")]
+        public async Task<ActionResult> ShowTask(string userName)
+        {
+            UPreferences uPref = GetDataHelper.readPreferences();
+            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+
+            var card = Helper.CardHelper.PendingTasks();
+            await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
+
+            return View();
+        }
+
         [Route("createticketindb")]
         public string CreateTicketindb(string category, string description, string prioritySelected)
         {
@@ -94,6 +137,7 @@ namespace EmployeeConnect.Controllers
             var parsedData = js.Serialize(objectData);
             return parsedData;
         }
+
         [Route("sendRequestindb")]
         public string SendRequestIndb(string hostName, string hostLocation, string org, string contact, string purpose, string date, string time)
         {
@@ -152,7 +196,12 @@ namespace EmployeeConnect.Controllers
         [Route("news")]
         public ActionResult News()
         {
-            NewsModel news = new NewsModel();
+            NewsModel news = new NewsModel();            
+            int day = DateTime.Now.Day;
+            if (day == 15 || day == 30)
+            {
+                GetDataHelper.UpdateNewsMockData();
+            }
             news = GetDataHelper.GetNews();
             return View(news);
         }
@@ -164,44 +213,46 @@ namespace EmployeeConnect.Controllers
         }
 
         [Route("preferences")]
-        public ActionResult Preferences()
+        public ActionResult Preferences(string emailID)
         {
-            return View("Preferences");
+            Preference pref = new Preference();
+            UPreferences userPref = GetDataHelper.readPreferences();
+            Preference user = userPref.preferences.Where(c => c.UserName == emailID).Select(d => d).FirstOrDefault();
+            //UPreferences PrefViewData = new UPreferences();
+            //PrefViewData.preferences[0] = user;
+            string[] cat = user.News.Select(c => c.SelectedCategories).FirstOrDefault();
+
+            return View(cat);
         }
 
         [Route("PreferenceInDb")]
         public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName)
         {
-            
             Preference pref = new Preference();
-            pref.UserName = UserName;
-            
-            pref.News = new NewsPreference[1];
-            pref.EandT = new EandtPreference[1];
-            pref.Task = new TaskPreference[1];
-            NewsPreference newsPref = new NewsPreference()
-                {
-                    SelectedCategories = newsPrefCat,
-                    NewsNotificationTime = newsTime,
-                    NewsNotifyMe = newsNotifyMe,
-                    NewsNotificationFlag = newsNotificationFlag
-            };
-            EandtPreference entPref = new EandtPreference()
+            UPreferences userPref = GetDataHelper.readPreferences();
+            Preference user = userPref.preferences.Where(c => c.UserName == UserName).Select(d => d).FirstOrDefault();
+
+            if (user != null)
             {
-                EandTNotificationTime = eandtTime,
-                EandTNotifyMe = eandtNotify,
-                EandTNotificationFlag = eandtflag
-            };
-            TaskPreference taskPref = new TaskPreference()
+                user.News[0].NewsNotificationFlag = newsNotificationFlag;
+                user.News[0].NewsNotificationTime = newsTime;
+                user.News[0].SelectedCategories = newsPrefCat;
+                user.News[0].NewsNotifyMe = newsNotifyMe;
+
+                user.EandT[0].EandTNotificationFlag = eandtflag;
+                user.EandT[0].EandTNotifyMe = eandtNotify;
+                user.EandT[0].EandTNotificationTime = eandtTime;
+
+                user.Task[0].TaskNotificationFlag = taskNotificationFlag;
+                user.Task[0].TaskNotificationTime = taskTime;
+                user.Task[0].TaskNotifyMe = taskNotifyMe;
+                
+                GetDataHelper.WritePreferences(user);
+            }
+            else
             {
-                TaskNotificationTime = taskTime,
-                TaskNotifyMe = taskNotifyMe,
-                TaskNotificationFlag = taskNotificationFlag
-            };
-            pref.News[0] = newsPref;
-            pref.EandT[0] = entPref;
-            pref.Task[0] = taskPref;
-            GetDataHelper.WritePreferences(pref);
+
+            }
         }
 
         [Route("policies")]
@@ -215,7 +266,6 @@ namespace EmployeeConnect.Controllers
         [HttpGet]
         public ActionResult PurchaseOrder(string poNumber,string vendorno)
         {
-
             TempData["data"] = poNumber;
             ViewBag.vendorNo = vendorno;
             PO poList = new PO();
