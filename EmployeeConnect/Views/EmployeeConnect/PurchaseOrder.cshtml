@@ -36,7 +36,6 @@
 
         }
     </script>
-    <form id="podecline">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header mh">
@@ -82,11 +81,10 @@
                         </table>
                     </div>
                     <div class="modal-footer foo">
-                        <button type="submit" class="decline" onclick="submitApprove('@TempData["data"]');">Decline</button>
-                        <button type="submit" class="approve" onclick="submitApprove('@TempData["data"]');">Approve</button>
+                        <button  class="decline" onclick="submitApprove('@TempData["data"]');">Decline</button>
+                        <button class="approve" onclick="submitApprove('@TempData["data"]');">Approve</button>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
 </body>

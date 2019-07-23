@@ -169,9 +169,7 @@
 
         submitHandler = (err, result) => {
             debugger;
-            result = result.substring(2, result.length);
-            location.href='@Url.Action("EventAndTrainingTab","Home")?id='+result;
-            console.log(`Submit handler - err: ${err}`);
+            location.href = '@Url.Action("EventAndTrainingTab","Home")?id=' + result.eventId;
             //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 

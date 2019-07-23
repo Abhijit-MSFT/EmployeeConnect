@@ -70,6 +70,14 @@ namespace EmployeeConnect.Models
         public string TPriority { get; set; }
         public string action { get; set; }
     }
+
+    public class EventTaskData
+    {
+        public string eventId { get; set; }
+
+        public string action { get; set; }
+    }
+
     public class PODeclineData
     {
         public string poNumber { get; set; }

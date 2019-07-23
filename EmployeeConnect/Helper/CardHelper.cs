@@ -1113,12 +1113,12 @@ namespace EmployeeConnect.Helper
                      new AdaptiveSubmitAction
                      {
                         Title ="Approve",
-                       Data="podecline"
+                       Data= new PODeclineData { action = "podecline" }  
                      },
                      new AdaptiveSubmitAction
                      {
                         Title ="Decline",
-                        Data="close_button"
+                        DataJson="{\"action\": \"close\"}"
                      }
                 }
             };
@@ -1818,8 +1818,8 @@ namespace EmployeeConnect.Helper
                         new AdaptiveSubmitAction()
                         {
                             Title = "Close",
-                            Data = "close_button",
-                            //DataJson="close_button"
+                            // Data = ,
+                            DataJson="{\"action\": \"close\"}"
                         }
 
                 }
@@ -1829,8 +1829,7 @@ namespace EmployeeConnect.Helper
                 card.Actions.Add(new AdaptiveSubmitAction()
                 {
                     Title = status,
-                    Data = "ET" + id
-                    //DataJson = "Remove_Add"
+                    Data = new EventTaskData() { action = TaskModuleIds.toggleEventStatus, eventId = id }
                 });
             }
 

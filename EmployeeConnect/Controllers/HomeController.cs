@@ -357,6 +357,7 @@ namespace EmployeeConnect.Controllers
                     GetDataHelper.ETStatusUpdate(item.ETID);
                 }
             }
+            eventsListData = GetDataHelper.GetEandT();
             EventsAndTraining[] EventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
             EventsAndTraining[] UpcomingEventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
             EventsAndTraining[] TrainingGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];

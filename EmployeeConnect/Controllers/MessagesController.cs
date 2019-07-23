@@ -1,20 +1,18 @@
-﻿using System;
+﻿using EmployeeConnect.Common;
+using EmployeeConnect.Dialogs;
+using EmployeeConnect.Helper;
+using EmployeeConnect.Models;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector;
+using Microsoft.Bot.Connector.Teams;
+using Microsoft.Bot.Connector.Teams.Models;
+using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using EmployeeConnect.Dialogs;
-using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams.Models;
-using EmployeeConnect.Helper;
-using Newtonsoft.Json;
-using EmployeeConnect.Common;
-using Newtonsoft.Json.Linq;
-using EmployeeConnect.Models;
-using System.IO;
-using Microsoft.Bot.Connector.Teams;
 
 namespace EmployeeConnect.Controllers
 {
@@ -83,7 +81,7 @@ namespace EmployeeConnect.Controllers
                     //string commandid = details.commandId;
                     switch (taskId)
                     {
-                       
+
                         case "ticketcomplete":
                             var createTicketData = JsonConvert.DeserializeObject<SubmitActionData<TicketTaskData>>(activityValue).data;
                             taskInfo = GetTaskInfo(taskId);
@@ -136,20 +134,6 @@ namespace EmployeeConnect.Controllers
                             };
 
                             return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
-                        case "cancelPo":
-                            return Request.CreateResponse(HttpStatusCode.OK);
-                        case "donedecline":
-                            return Request.CreateResponse(HttpStatusCode.OK);
-                        case "closePending":
-                            return Request.CreateResponse(HttpStatusCode.OK);
-                        case "submitTicket":
-                            return Request.CreateResponse(HttpStatusCode.OK);
-                        case "submit":
-                            return Request.CreateResponse(HttpStatusCode.OK);
-                        case "submitRequest":
-                            return Request.CreateResponse(HttpStatusCode.OK);
-                        case "submitVisitor":
-                            return Request.CreateResponse(HttpStatusCode.OK);
                         case "editVisitorRequest":
                             taskInfo = GetTaskInfo(taskId);
                             taskEnvelope = new Models.TaskEnvelope
@@ -182,8 +166,6 @@ namespace EmployeeConnect.Controllers
                             taskInfo.Url = taskInfo.Url + vurl;
                             taskInfo.FallbackUrl = taskInfo.FallbackUrl + vurl;
 
-
-
                             taskEnvelope = new Models.TaskEnvelope
                             {
                                 Task = new Models.Task()
@@ -194,41 +176,19 @@ namespace EmployeeConnect.Controllers
                             };
 
                             return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
-                    }
-                     if(taskId == null)
-                    {
-                        return Request.CreateResponse(HttpStatusCode.OK);
-                    }
-                    string data = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
-                    //string datajson = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).DataJson;
 
-                    if (data.Length > 2 && data.Substring(0, 2) == "ET")
-                    {
-                        ETid = data.Substring(2);
-                        //will update the button action Added<->Removed
-                        GetDataHelper.ETStatusUpdate(ETid);
-                        return new HttpResponseMessage(HttpStatusCode.Accepted);
+                        case TaskModuleIds.toggleEventStatus:
+                            // TODO Event - EventTaskData
+                            var eventData = JsonConvert.DeserializeObject<SubmitActionData<EventTaskData>>(activityValue).data;
+
+                            //will update the button action Added<->Removed
+                            GetDataHelper.ETStatusUpdate(eventData.eventId);
+                            return new HttpResponseMessage(HttpStatusCode.Accepted);
+
+                        default: // Handled all remaining cases for task module. Ex-  Close, PoDeclinedClosed
+                            return Request.CreateResponse(HttpStatusCode.OK);
+
                     }
-                    switch (data)
-                    {
-                        //When close is pressed on task module card
-                        case "close_button":
-                            break;
-                        case "podecline":
-                            taskInfo = GetTaskInfo(data);
-                            taskEnvelope = new Models.TaskEnvelope
-                            {
-                                Task = new Models.Task()
-                                {
-                                    Type = Models.TaskType.Continue.ToString().ToLower(),
-                                    TaskInfo = taskInfo
-                                }
-                            };
-                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
-                        default:    //need to build
-                            break;
-                    }
-                    break;
                 case "composeExtension/submitAction":
 
                     var details = JsonConvert.DeserializeObject<SubmitActionData>(activityValue);

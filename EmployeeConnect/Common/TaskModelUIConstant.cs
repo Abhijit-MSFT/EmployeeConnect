@@ -8,7 +8,7 @@ namespace EmployeeConnect.Common
     public static class TaskModelUIConstant
     {
       public static UIConstants PurchaseOrder { get; set; } =
-            new UIConstants(950, 650, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
+            new UIConstants(900, 600, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
         public static UIConstants  NewsCard { get; set; } =
             new UIConstants(750, 650, "News Card", TaskModuleIds.Newscard, "News Card");
         public static UIConstants CreateTicket { get; set; } =
@@ -70,5 +70,8 @@ public class UIConstants
         public const string pendingDates = "pendingdates";
         public const string editTicket = "editTicket";
         public const string editVisitorRequest = "editVisitorRequest";
+
+        public const string toggleEventStatus = "toggleEventStatus";
+        
     }
 }
