@@ -70,7 +70,18 @@ namespace EmployeeConnect.Models
         public string TPriority { get; set; }
         public string action { get; set; }
     }
-
+    public class PODeclineData
+    {
+        public string poNumber { get; set; }
+        public string action { get; set; }
+    }
+    public class DeclineData
+    {
+        public string PONo { get; set; }
+        public string reason { get; set; }
+        public string comments { get; set; }
+        public string action { get; set; }
+    }
     public class VisitorData
     {
         public string VhostName { get; set; }

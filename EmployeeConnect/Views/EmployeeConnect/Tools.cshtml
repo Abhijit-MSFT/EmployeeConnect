@@ -4,6 +4,9 @@
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
 
+@{
+    Layout = null;
+}
 
 <head>
     <meta charset="UTF-8" />
@@ -14,14 +17,15 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="@("https://unpkg.com/@microsoft/teams-js@1.4.1/dist/MicrosoftTeams.min.js")"></script>
     <title>Tools Tab</title>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 panel-group" id="accordion">
-                <div class="HR panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#HRtools">Human Resources</div>
-                <div class="P-10 panel-collapse" id="HRtools">
+            <div class="col-12">
+                <div class="HR" data-toggle="collapse" data-target="#HRtools">Human Resources</div>
+                <div class="P-10 collapse" id="HRtools">
                     <div class="card shadow-sm custom-card-first-row">
                         <div class="card-body">
                             <span alt-name="create letter"
@@ -41,8 +45,7 @@
                             </span>
                             <div class="CT">Create ticket</div>
                             <p class="CT-des">
-                                For all HR tickets, the ticket type is being set as Employee
-                                Support.
+                                For all HR tickets, the ticket type is set as Employee Support.
                             </p>
                         </div>
                     </div>
@@ -61,18 +64,17 @@
                             <span alt-name="policies" class="HR-tabs policies"></span>
                             <div class="VP">View policies</div>
                             <p class="VP-des">
-                                Identify the purpose and objectives of Humana Resources
-                                department.
+                                Identify the purpose and objectives of HR department.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="PB panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Pay-benefits">
+                <div class="PB title accordion-toggle" data-toggle="collapse" data-target="#Pay-benefits">
                     Pay and benefits
                 </div>
 
-                <div class="P-10 panel-collapse" id="Pay-benefits">
+                <div class="P-10 collapse" id="Pay-benefits">
                     <div class="card shadow-sm custom-card-PB-second-row">
                         <div class="card-body">
                             <span alt-name="download-payslip"
@@ -117,8 +119,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="IF panel-title accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#itandfacilities">IT and facilities</div>
-                <div class="P-10 panel-collapse" id="itandfacilities">
+                <div class="IF title accordion-toggle" data-toggle="collapse" data-target="#itandfacilities">IT and facilities</div>
+                <div class="P-10 collapse" id="itandfacilities">
                     <div class="card shadow-sm custom-card-IF-third-row">
                         <div class="card-body">
                             <span class="IF-tabs support"></span>
@@ -156,10 +158,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="RO panel-title accordion-toggle" data-toggle="collapse"
-                     data-parent="#accordion"
-                     href="#retail-operations">Retail operations</div>
-                <div class="P-10 panel-collapse" id="retail-operations">
+                <div class="RO title accordion-toggle" data-toggle="collapse"
+                     data-target="#retail-operations"
+                     >Retail operations</div>
+                <div class="P-10 collapse" id="retail-operations">
                     <div class="card shadow-sm custom-card-RO-fourth-row">
                         <div class="card-body">
                             <span class="RO-tabs Inventory"> </span>
@@ -195,10 +197,15 @@
     <script src="~/Scripts/teamsapp.js"></script>
     <script>
     microsoftTeams.initialize();
-
+        $("document").ready(function () {
+            if ($(window).width() > 425) {
+                $(".P-10").addClass("show");
+            } else {
+                $("#HRtools").addClass("show");
+            }
+        });
         submitHandler = (err, result) => {
-            debugger;
-            if (result.action == "ticketcomplete") {
+           if (result.action == "ticketcomplete") {
                 let taskInfo = {
                     height: null,
                     width: null,
@@ -214,7 +221,7 @@
                 taskInfo.fallbackUrl = taskInfo.url;
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
             }
-            if (result.action == "createticket") {
+            if (result.action == "createticket" || result.action == "editTicket" ) {
                 debugger;
                 let taskInfo = {
              //   title: null,
@@ -222,12 +229,12 @@
                 width: null,
                 url: null,
                 fallbackUrl: null,
-            };
-
+                };
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
                 taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                return;
 
             }
             if (result.action == "sendrequest") {
@@ -247,23 +254,27 @@
             // Set fallback URL
                 taskInfo.fallbackUrl = taskInfo.url;
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                return;
             }
-            if (result.action == "visitorregistration") {
-                   let taskInfo = {
-                title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
+            if (result.action == "visitorregistration" || result.action == "editVisitorRequest")
+            {
+                    debugger;
+                       let taskInfo = {
+                    title: null,
+                    height: null,
+                    width: null,
+                    url: null,
+                    fallbackUrl: null,
+                };
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
-                taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
+                    taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
+                    taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
+                    taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
 
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                // Set fallback URL
+                taskInfo.fallbackUrl = taskInfo.url;
+                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                return;
             }
             if (result.action == "submit") {
                 microsoftTeams.tasks.submitTask(taskInfo);

@@ -52,16 +52,16 @@
       "ETDate": "07-23-2019",
       "ETFlag": "E",
       "ETID": "e1234",
-      "ETTitle": "Microsoft Build",
+      "ETTitle": "Microsoft Open Hackethon",
       "ETStartDate": "07-23-2019",
       "ETEndDate": "07-23-2019",
       "ETStartTime": "8:00 AM",
       "ETEndTime": "12:00 PM",
       "ETThumbnailUrl": "##BaseURL##/Images/MicrosoftBuild.jfif",
       "ETType": "Online stream",
-      "ETDetails": "More than 6,000 people from around the world are joining us on June 13 in Seattle for Microsoft Build, our premier developer conference. This year�s event is focused on empowering developers of all kinds, from experienced computer scientists to tech beginners with big ideas.",
-      "ETAgenda": "Microsoft Build Developer Conference",
-      "UserAdded": false,
+      "ETDetails": "More than 6,000 people from around the world are joining us in Seattle for Microsoft Open Hackethon, our premier developer conference. This year�s event is focused on empowering developers of all kinds, from experienced computer scientists to tech beginners with big ideas.",
+      "ETAgenda": "Microsoft Open Hackethon For Developer",
+      "UserAdded": true,
       "ETMandatory": false
     },
     {
@@ -93,14 +93,14 @@
       "ETType": "Online training",
       "ETDetails": "An online training event on June 20 has been scheduled for Platform Overview of Microsoft Teams covering major features like Bots and building new apps through AppStudio.",
       "ETAgenda": "Platform Overview of Microsoft Teams",
-      "UserAdded": true,
+      "UserAdded": false,
       "ETMandatory": false
     },
     {
-      "ETDate": "07-29-2019",
+      "ETDate": "07-27-2019",
       "ETFlag": "E",
       "ETID": "e1237",
-      "ETTitle": "Microsoft Ignite",
+      "ETTitle": "Tech Expo",
       "ETStartDate": "07-27-2019",
       "ETEndDate": "07-28-2019",
       "ETStartTime": "10:00 AM",
@@ -108,12 +108,12 @@
       "ETThumbnailUrl": "##BaseURL##/Images/Microsoft Ignite.jpg",
       "ETType": "Online stream",
       "ETDetails": "Microsoft Ignite:The place where developers and tech professionals continue learning alongside experts. Explore the latest developer tools and cloud technologies and learn how to put your skills to work in new areas.",
-      "ETAgenda": "Microsoft Ignite:Learn and Grow alongside Experts",
+      "ETAgenda": "Tech Expo:Learn and Grow alongside Experts",
       "UserAdded": true,
       "ETMandatory": true
     },
     {
-      "ETDate": "07-20-2019",
+      "ETDate": "07-29-2019",
       "ETFlag": "T",
       "ETID": "e1238",
       "ETTitle": "Microsoft Azure Development Camp",
@@ -125,7 +125,7 @@
       "ETType": "BLR Campus",
       "ETDetails": "Explore the latest developer tools and technologies along with hands on session with experts and learn how to put your skills to work  in new areas-like IoT ,Machine Learning,microservices and more.",
       "ETAgenda": "Development camp for Azure Services",
-      "UserAdded": false,
+      "UserAdded": true,
       "ETMandatory": false
     }
   ]

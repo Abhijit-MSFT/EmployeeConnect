@@ -83,14 +83,13 @@ namespace EmployeeConnect.Controllers
                     //string commandid = details.commandId;
                     switch (taskId)
                     {
+                       
                         case "ticketcomplete":
                             var createTicketData = JsonConvert.DeserializeObject<SubmitActionData<TicketTaskData>>(activityValue).data;
                             taskInfo = GetTaskInfo(taskId);
                             var ticketurl = "?ticketNoId=" + createTicketData.ticketNo + "&description=" + createTicketData.TDescription + "&category=" + createTicketData.TCategory + "&priority=" + createTicketData.TPriority;
                             taskInfo.Url = taskInfo.Url + ticketurl;
                             taskInfo.FallbackUrl = taskInfo.FallbackUrl + ticketurl;
-
-
 
                             taskEnvelope = new Models.TaskEnvelope
                             {
@@ -101,14 +100,81 @@ namespace EmployeeConnect.Controllers
                                 }
                             };
 
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                        case "podecline":
+                            var podeclineData = JsonConvert.DeserializeObject<SubmitActionData<PODeclineData>>(activityValue).data;
+                            taskInfo = GetTaskInfo(taskId);
+                            var declineUrl = "?poNo=" + podeclineData.poNumber;
+                            taskInfo.Url = taskInfo.Url + declineUrl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + declineUrl;
 
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
 
                             return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                        case "decline":
+                            var declineData = JsonConvert.DeserializeObject<SubmitActionData<DeclineData>>(activityValue).data;
+                            taskId = "declined";
+                            taskInfo = GetTaskInfo(taskId);
+                            var decUrl = "?poNo=" + declineData.PONo + "&reason=" + declineData.reason + "&comment=" + declineData.comments;
+                            taskInfo.Url = taskInfo.Url + decUrl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + decUrl;
 
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                        case "cancelPo":
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        case "donedecline":
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        case "closePending":
+                            return Request.CreateResponse(HttpStatusCode.OK);
                         case "submitTicket":
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        case "submit":
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        case "submitRequest":
                             return Request.CreateResponse(HttpStatusCode.OK);
                         case "submitVisitor":
                             return Request.CreateResponse(HttpStatusCode.OK);
+                        case "editVisitorRequest":
+                            taskInfo = GetTaskInfo(taskId);
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                        case "editTicket":
+
+                            taskInfo = GetTaskInfo(taskId);
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+
                         case "sendrequest":
                             var savevisitordata = JsonConvert.DeserializeObject<SubmitActionData<VisitorData>>(activityValue).data;
                             taskInfo = GetTaskInfo(taskId);
@@ -128,6 +194,10 @@ namespace EmployeeConnect.Controllers
                             };
 
                             return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                    }
+                     if(taskId == null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK);
                     }
                     string data = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
                     //string datajson = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).DataJson;
@@ -186,6 +256,10 @@ namespace EmployeeConnect.Controllers
                             {
                                 return Request.CreateResponse(HttpStatusCode.OK);
                             }
+                            else if (createTicketData.data.action == "submitTicket")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
                             else
                             {
                                 commandid = createTicketData.data.action;
@@ -215,18 +289,21 @@ namespace EmployeeConnect.Controllers
                                 {
                                     Task = new Models.Task()
                                     {
-                                        Type =  Models.TaskType.Continue.ToString().ToLower(),
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
                                         TaskInfo = taskInfo
                                     }
                                 };
 
                                 return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                             }
-                            else if (savevisitordata.data.action == "submit")
+                            else if (savevisitordata.data.action == "submitVisitor")
                             {
                                 return Request.CreateResponse(HttpStatusCode.OK);
                             }
-
+                            else if (savevisitordata.data.action == "submitRequest")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
                             else
                             {
                                 commandid = savevisitordata.data.action;
@@ -320,7 +397,14 @@ namespace EmployeeConnect.Controllers
                     taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.pendingDates;
                     SetTaskInfo(taskInfo, TaskModelUIConstant.PendingDates);
                     break;
-
+                case TaskModuleIds.editTicket:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.CreateTicket;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.CreateTicket);
+                    break;
+                case TaskModuleIds.editVisitorRequest:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.VisitorRegistration;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.VisitorRegistration);
+                    break;
                 default:
                     break;
             }

@@ -1,6 +1,13 @@
+
 body {
     overflow: auto;
     background-color: #f3f2f1;
+}
+
+@font-face {
+    font-family: "Teams Assets";
+    src: url("./fonts/TeamsAssets-Light.woff") format("woff"), url("./fonts/TeamsAssets-Light.woff2") format("woff2");
+    font-style: normal;
 }
 
 .row {
@@ -13,10 +20,10 @@ body {
 }
 
 .panel-heading .accordion-toggle::after {
-    font-family: "Font Awesome 5 Free";
+    font-family: "Teams Assets";
     font-weight: 600;
     color: darkgray;
-    content: "\f0dd";
+    content: "\E447";
     float: left;
     -moz-transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
@@ -58,21 +65,6 @@ span.title {
     font-family: "Segoe UI";
 }
 
-.show-more {
-    height: 35px;
-    width: 100px;
-    color: white;
-    background-color: #6264a7;
-    font-family: "Segoe UI";
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid rgba(37, 36, 36, 0.15);
-    border-radius: 2px;
-    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
-    float: right;
-}
 
 .for-events,
 .for-task {
@@ -286,13 +278,29 @@ option {
     padding-right: 21px;
 }
 
-.fa-chevron-down:before {
+.chevron-down::before {
+    content: "\E447";
+    font-family: "Teams Assets";
     font-size: 22px;
+    font-weight: 600;
+    float: right;
+    position: absolute;
+    margin-left: -1%;
     color: #9b9a99;
+    cursor:pointer;
 }
 
+/*.chevron-down::before {
+    content: "\E447";
+    font-family: "Teams Assets";
+    font-size: 16px;
+    font-weight: 600;
+    float: left;
+    color: #6264a7;
+}*/
+
 .date-control {
-    width: 200px;
+    width: 160px;
     height: 35px;
     padding-left: 10px;
     -webkit-appearance: none;
@@ -371,6 +379,10 @@ option {
 /* added new css */
 .col-10 {
     display: block;
+}
+
+.container-fluid {
+    overflow-y: scroll !important;
 }
 
 .rules1 {
@@ -523,6 +535,9 @@ option {
     .check-btn-mobile {
         bottom: 30px;
     }
+    div#News {
+        margin-bottom: 12px;
+    }
 }
 
 @media (max-width: 375px) {
@@ -662,6 +677,7 @@ option {
         font-size: 12px;
     }
 }
+
 /* for Mobile end*/
 
 @media (min-width: 426px) and (max-width: 1280px) {

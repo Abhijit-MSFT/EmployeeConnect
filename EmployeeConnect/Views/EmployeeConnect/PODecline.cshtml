@@ -40,7 +40,7 @@
                         </textarea>
                     </div>
                     <div class="two-btn">
-                        <button type="submit" class="cancel">Cancel</button>
+                        <button type="button" class="cancel" onclick="cancelPo('cancelpo')">Cancel</button>
                         <button type="button" class="BCT" onclick="submitDecline(@TempData["data"]);">
                             Decline
                         </button>
@@ -62,6 +62,13 @@
             console.log(`Submit handler - err: ${err}`);
             alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
+        function cancelPo(type) {
+            debugger;
+            let cancelInfo = {
+                action: "cancelPo"
+            };
+            microsoftTeams.tasks.submitTask(cancelInfo);
+        }
 
         function submitDecline(poNo) {
             debugger;

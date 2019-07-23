@@ -4,7 +4,8 @@
     font-family: 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
     font-size: 0.875rem;
     font-weight: 400;
-    line-height: 1.25rem
+    line-height: 1.0rem;
+    overflow:hidden;
 }
 
 .theme-light .panel {
@@ -18,7 +19,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    overflow:auto !important;
+    overflow:hidden !important;
 }
 
 .theme-light .panel-header {

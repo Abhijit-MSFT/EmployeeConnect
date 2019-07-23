@@ -259,11 +259,11 @@
     <Content Include="Content\eventandtrainingnew.css" />
     <Content Include="fonts\Flag.png" />
     <Content Include="fonts\flagEvents.JPG" />
-    <Content Include="fonts\flagImg.JPG" />
+    <Content Include="fonts\flagImg.png" />
     <Content Include="fonts\FlagSnip.PNG" />
     <Content Include="fonts\Location.PNG" />
     <Content Include="fonts\Shape.png" />
-    <Content Include="fonts\ShapeEve.JPG" />
+    <Content Include="fonts\shapeEve.png" />
     <Content Include="fonts\shapeEvent.JPG" />
     <Content Include="fonts\ShapeSnip.PNG" />
     <Content Include="fonts\Time.PNG" />
@@ -388,6 +388,7 @@
     <Content Include="Images\Unmoored Times Square.jpg" />
     <Content Include="Images\USB ports.png" />
     <Content Include="Images\viewpolicies.JPG" />
+    <Content Include="Images\VisitorRequest.JPG" />
     <Content Include="Images\whiteImage.png" />
     <Content Include="Images\XBOX Game Pass Subscription.JPG" />
     <Content Include="Images\Xiaomi%27s number 1 tag.PNG" />

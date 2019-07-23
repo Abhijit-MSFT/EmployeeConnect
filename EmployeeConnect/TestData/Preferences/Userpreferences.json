@@ -12,32 +12,57 @@
       "news": [
         {
           "selectedCategories": [
-            "Media",
-            "Design",
             "AI",
-            "Data",
-            "CS",
             "Technology",
-            "Animation",
             "IT"
           ],
           "newsNotificationFlag": true,
-          "newsNotifyMe": "true",
-          "newsNotificationTime": "8:00 AM"
+          "newsNotifyMe": "true"
         }
       ],
       "eandT": [
         {
           "eandTNotificationFlag": true,
-          "eandTNotifyMe": "true",
-          "eandTNotificationTime": "8:00 AM"
+          "eandTNotifyMe": "true"
         }
       ],
       "task": [
         {
           "taskNotificationFlag": true,
-          "taskNotifyMe": "true",
-          "taskNotificationTime": "8:00 AM"
+          "taskNotifyMe": "true"
+        }
+      ]
+    },
+    {
+      "userName": "mungo@blrdev.onmicrosoft.com",
+      "userInfo": [
+        {
+          "uniqueID": "29:1HTxqNtcFeAKghVPWbyPAFFOS2b4u2h_c0oUx7Y2pai0nDRBMJkZFgGGNg9tmPLDR5hwGJIW1FBndH91d7uyQnQ",
+          "tenantID": "0d9b645f-597b-41f0-a2a3-ef103fbd91bb",
+          "serviceURl": "https://smba.trafficmanager.net/in/"
+        }
+      ],
+      "news": [
+        {
+          "selectedCategories": [
+            "AI",
+            "Technology",
+            "IT"
+          ],
+          "newsNotificationFlag": true,
+          "newsNotifyMe": "true"
+        }
+      ],
+      "eandT": [
+        {
+          "eandTNotificationFlag": true,
+          "eandTNotifyMe": "true"
+        }
+      ],
+      "task": [
+        {
+          "taskNotificationFlag": true,
+          "taskNotifyMe": "true"
         }
       ]
     }

@@ -7,7 +7,7 @@
       "vendorName": "Store C",
       "vendorNo": "68292",
       "totalAmount": "115000",
-      "poStatus": "declined",
+      "poStatus": "approved",
       "poDetails": [
         {
           "itemCode": "9865321456",
@@ -53,13 +53,13 @@
       ]
     },
     {
-      "poNumber": "654654",
+      "poNumber": "739250",
       "InvoiceNo": "482561",
       "description": "Gaming items",
       "vendorName": "Store D",
       "vendorNo": "25836",
       "totalAmount": "8500",
-      "poStatus": "declined",
+      "poStatus": "approved",
       "poDetails": [
         {
           "itemCode": "5236987412",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "poNumber": "659954",
+      "poNumber": "739251",
       "InvoiceNo": "912321",
       "description": "Gaming items",
       "vendorName": "Store D",
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "poNumber": "908657",
+      "poNumber": "739252",
       "InvoiceNo": "637251",
       "description": "Stationery Items",
       "vendorName": "Store A",
@@ -128,13 +128,13 @@
       ]
     },
     {
-      "poNumber": "678453",
+      "poNumber": "739253",
       "InvoiceNo": "537282",
       "description": "Office essentials",
       "vendorName": "Store A",
       "vendorNo": "97546",
       "totalAmount": "2,47,800",
-      "poStatus": "approved",
+      "poStatus": "pending",
       "poDetails": [
         {
           "itemCode": "2367645661",
@@ -157,7 +157,7 @@
       ]
     },
     {
-      "poNumber": "678455",
+      "poNumber": "739254",
       "InvoiceNo": "328815",
       "description": "Pantry Etables",
       "vendorName": "Store P",
@@ -173,7 +173,7 @@
         },
         {
           "itemCode": "9987565633",
-          "itemDescription": "Cakes and Namkins",
+          "itemDescription": "Cakes and Pastries",
           "unitPrice": "1000",
           "quantity": "50"
         },
@@ -208,7 +208,7 @@
         },
         {
           "itemCode": "7896672344",
-          "itemDescription": "Glasses for derinking water",
+          "itemDescription": "Glasses for drinking water",
           "unitPrice": "100",
           "quantity": "200"
         }

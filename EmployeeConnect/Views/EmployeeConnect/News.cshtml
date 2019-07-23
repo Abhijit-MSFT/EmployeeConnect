@@ -2,6 +2,10 @@
 @using System;
 @using EmployeeConnect.Common;
 
+@{
+    Layout = "";
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +17,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="@("https://unpkg.com/@microsoft/teams-js@1.4.1/dist/MicrosoftTeams.min.js")"></script>
     <title>News</title>
 </head>
 <body>
-    <div class="container-fluid">
+    <div>
         <div class="row">
             <div class="col-12">
                 <div class="lt">Latest News</div>
@@ -238,6 +243,7 @@
                     }
             });
         }
+
     </script>
 </body>
 </html>

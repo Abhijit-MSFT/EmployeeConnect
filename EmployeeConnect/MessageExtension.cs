@@ -42,7 +42,7 @@ namespace EmployeeConnect
                     attachments = new ComposeExtensionAttachment[attacCount];
                     for (int i = 0; i < attacCount; i++)
                     {
-                        attachments[i] = GetAttachment(searchImages[i], searchtitle[i], searchby[i], searchdetail[i]);
+                        attachments[i] = GetNewsAttachment(searchImages[i], searchtitle[i], searchby[i], searchdetail[i]);
                     }
 
                     response.ComposeExtension.Attachments = attachments.ToList();
@@ -58,7 +58,7 @@ namespace EmployeeConnect
                     attachments = new ComposeExtensionAttachment[searchtitle.Count()];
                     for (int i = 0; i < searchtitle.Count(); i++)
                     {
-                        attachments[i] = GetAttachment(searchImages[i], searchtitle[i], searchby[i], searchdetail[i]);
+                        attachments[i] = GetNewsAttachment(searchImages[i], searchtitle[i], searchby[i], searchdetail[i]);
                     }
                     response.ComposeExtension.Attachments = attachments.ToList();
                 }
@@ -76,26 +76,24 @@ namespace EmployeeConnect
                     title = titleParam.Value.ToString();
                     List<string> description = task.PurchaseOrder.Select(a => a.Description).Where(c => c.ToLower().Contains(title.ToLower())).Select(d => d).ToList();
                     List<string> totamount = task.PurchaseOrder.Where(a => a.Description.ToLower().Contains(title.ToLower())).Select(c => c.TotalAmount).ToList();
-                    List<string> postatus = task.PurchaseOrder.Where(a => a.Description.ToLower().Contains(title.ToLower())).Select(c => c.PoStatus).ToList();
+
                     int attacCount = description.Count();
                     attachments = new ComposeExtensionAttachment[attacCount];
                     for (int i = 0; i < attacCount; i++)
                     {
-                        attachments[i] = GetAttachments(description[i], totamount[i], postatus[i]);
+                        attachments[i] = GetTaskAttachments(description[i], totamount[i]);
                     }
 
                     response.ComposeExtension.Attachments = attachments.ToList();
                 }
                 else
                 {
-
-                    List<string> description = task.PurchaseOrder.Select(c => c.Description).Take(20).ToList();
-                    List<string> totamount = task.PurchaseOrder.Select(c => c.TotalAmount).Take(20).ToList();
-                    List<string> postatus = task.PurchaseOrder.Select(c => c.PoStatus).Take(20).ToList();
+                    List<string> description = task.PurchaseOrder.Where(b=>b.PoStatus == "pending").Select(c => c.Description).Take(20).ToList();
+                    List<string> totamount = task.PurchaseOrder.Where(b=>b.PoStatus == "pending").Select(c => c.TotalAmount).Take(20).ToList();
                     attachments = new ComposeExtensionAttachment[description.Count()];
                     for (int i = 0; i < description.Count(); i++)
                     {
-                        attachments[i] = GetAttachments(description[i], totamount[i], postatus[i]);
+                        attachments[i] = GetTaskAttachments(description[i], totamount[i]);
                     }
                     response.ComposeExtension.Attachments = attachments.ToList();
                 }
@@ -127,7 +125,7 @@ namespace EmployeeConnect
 
                     for (int i = 0; i < attacCount; i++)
                     {
-                        attachments[i] = GetAttachment1(searchimage[i], searchTitle[i] + ',' + searchETType[i], searchdate[i], searchdetails[i], searchETid[i], searchETar[i]);
+                        attachments[i] = GetEventsAttachment(searchimage[i], searchTitle[i] + ',' + searchETType[i], searchdate[i], searchdetails[i], searchETid[i], searchETar[i]);
                     }
 
                     response.ComposeExtension.Attachments = attachments.ToList();
@@ -144,7 +142,7 @@ namespace EmployeeConnect
                     attachments = new ComposeExtensionAttachment[searchTitle.Count];
                     for (int i = 0; i < searchTitle.Count; i++)
                     {
-                        attachments[i] = GetAttachment1(searchimage[i], searchTitle[i] + ',' + searchETType[i], searchdate[i], searchdetails[i], searchETid[i], searchETar[i]);
+                        attachments[i] = GetEventsAttachment(searchimage[i], searchTitle[i] + ',' + searchETType[i], searchdate[i], searchdetails[i], searchETid[i], searchETar[i]);
                     }
 
                     response.ComposeExtension.Attachments = attachments.ToList();
@@ -157,20 +155,19 @@ namespace EmployeeConnect
                 return null;
             }
         }
-        private static ComposeExtensionAttachment GetAttachments(string ponumber, string vendorname, string postatus)
+        private static ComposeExtensionAttachment GetTaskAttachments(string ponumber, string vendorname)
         {
             var card = new ThumbnailCard
             {
                 Title = ponumber,
-                Subtitle = vendorname,
-                Text = postatus
+                Subtitle = vendorname               
             };
 
             return card
                 .ToAttachment()
                 .ToComposeExtensionAttachment();
         }
-        private static ComposeExtensionAttachment GetAttachment1(string image, string title, string date, string views, string id, bool userAdded)
+        private static ComposeExtensionAttachment GetEventsAttachment(string image, string title, string date, string views, string id, bool userAdded)
         {
             var card = new ThumbnailCard
             {
@@ -198,7 +195,7 @@ namespace EmployeeConnect
                 .ToAttachment()
                 .ToComposeExtensionAttachment();
         }
-        private static ComposeExtensionAttachment GetAttachment(string image, string title, string date, string views)
+        private static ComposeExtensionAttachment GetNewsAttachment(string image, string title, string date, string views)
         {
             var card = new ThumbnailCard
             {

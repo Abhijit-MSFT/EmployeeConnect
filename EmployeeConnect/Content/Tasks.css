@@ -1,7 +1,13 @@
-﻿
+﻿@font-face {
+    font-family: "Teams Assets";
+    src: url("./fonts/TeamsAssets-Light.woff") format("woff"), url("./fonts/TeamsAssets-Light.woff2") format("woff2");
+    font-style: normal;
+}
+
 body {
     padding: 20px;
     background-color: #f3f2f1;
+    overflow: auto;
 }
 
 .heading {
@@ -24,18 +30,7 @@ span.currency {
     position: relative;
     bottom: 3px;
 }
-.reviewButton {
-    height: 35px;
-    width: 100px;
-    color: blue !important;
-    font-family: "Segoe UI";
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: center;
-    position: relative;
-    cursor: pointer;
-}
+
 .time-sheet,
 .expenses-sheet {
     width: 60px;
@@ -50,7 +45,7 @@ span.currency {
 
 .title-head {
     position: relative;
-    left: 65px;
+    margin-left: 65px;
     bottom: 10px;
     color: #5c5b5b;
     height: 20px;
@@ -61,15 +56,18 @@ span.currency {
 .Submit-expenses {
     position: relative;
     top: 15px;
-    left: 65px;
+    margin-left: 65px;
     color: #8586bb;
     cursor: pointer;
 }
 
-i.fas.fa-chevron-right {
-    font-size: 12px;
-    position: relative;
-    left: 5px;
+.chevron-right::before {
+    font-size: 16px;
+    position: absolute;
+    margin-left: 10px;
+    content: "\E449";
+    font-family: "Teams Assets";
+    font-weight: bold;
 }
 
 .panel-heading {
@@ -150,7 +148,6 @@ h6 {
 .review {
     color: #6668a9;
     cursor: pointer;
-    text-align: center;
 }
 
 th {
@@ -166,4 +163,151 @@ td.amount,
 td.po-no1,
 td.Invoice-no {
     padding-left: 30px;
+}
+
+.heading2, .mobile-timesheet, .mobile-EM, .desk {
+    display: none
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-y: scroll !important,
+}
+
+@media(max-width:425px) {
+    .time-sheet, .expenses-sheet, .heading, .full-timesheet, .Submit-expenses, .panel-heading .accordion-toggle::after, #Porder, #Invoice {
+        display: none;
+    }
+
+    .heading2, .mobile-timesheet, .mobile-EM, .desk {
+        display: block;
+    }
+
+    .heading2 {
+        padding-bottom: 0;
+        color: #6769AA;
+        font-weight: 500;
+    }
+
+    .card-header {
+        background-color: white;
+        border-bottom: none;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    .custom-card {
+        max-width: inherit;
+        height: auto;
+        border-radius: 0;
+        border: none;
+    }
+
+    .custom-card-deck {
+        position: relative;
+        top: 0px;
+    }
+
+    .container-fluid {
+        width: 100%;
+        padding: 0;
+        margin-right: auto;
+        margin-left: auto;
+        overflow-y:scroll !important,
+    }
+
+    .title-head {
+        margin-left: 0;
+        bottom: 0;
+        height: auto;
+        width: auto;
+        font-weight: 400;
+        color: #636262;
+    }
+
+    .mobile-timesheet, .mobile-EM {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    h5.card-title {
+        font-size: 16px;
+    }
+
+    .chevron-right::before {
+        margin-left: 87%;
+        bottom: 16%;
+        color: #6769AA;
+    }
+
+    .mr-up::before {
+        bottom: 20%;
+    }
+
+    .card-deck .card {
+        margin: 0;
+    }
+
+    .br-mb {
+        border-top: 2px solid #f3f2f1;
+    }
+
+    .pending-approval {
+        background-color: white;
+    }
+
+    .pending-approval {
+        top: 10px;
+    }
+
+    .panel-default:nth-child(n+1) {
+        border-bottom: 2px solid #f3f2f1;
+    }
+
+    h6.panel-title.accordion-toggle {
+        top: 0;
+        font-size: 14px;
+    }
+
+    .mrg-for-mb {
+        padding-bottom: 20px;
+    }
+
+    .ht-for-mobile1::before {
+        bottom: 52%;
+        margin-left: 92%;
+    }
+
+    .ht-for-mobile2::before {
+        bottom: 28%;
+        margin-left: 92%;
+    }
+
+    .ht-for-mobile3::before {
+        bottom: 7%;
+        margin-left: 92%;
+    }
+
+    .panel-heading {
+        padding: 5px 0px 5px 0px;
+    }
+}
+
+@media(max-width:320px) {
+    .title-head {
+        font-size: 12px;
+    }
+
+    .mobile-timesheet, .mobile-EM {
+        font-size: 14px;
+    }
+
+    .ht-for-mobile1::before, .ht-for-mobile2::before, .ht-for-mobile3::before {
+        margin-left: 93%;
+    }
 }

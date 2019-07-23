@@ -17,7 +17,7 @@ namespace EmployeeConnect.Models
     public class EventsAndTraining
     {
         [JsonProperty(PropertyName = "ETDate")]
-        public string ETDate { get; set; }
+        public DateTime ETDate { get; set; }
 
         [JsonProperty(PropertyName = "ETFlag")]
         public string ETFlag { get; set; }
