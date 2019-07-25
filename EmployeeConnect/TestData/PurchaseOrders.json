@@ -55,7 +55,7 @@
     {
       "poNumber": "739250",
       "InvoiceNo": "482561",
-      "description": "Gaming items",
+      "description": "Gaming Items",
       "vendorName": "Store D",
       "vendorNo": "25836",
       "totalAmount": "8500",
@@ -78,7 +78,7 @@
     {
       "poNumber": "739251",
       "InvoiceNo": "912321",
-      "description": "Gaming items",
+      "description": "Gaming Items",
       "vendorName": "Store D",
       "vendorNo": "25836",
       "totalAmount": "210000",
@@ -98,7 +98,7 @@
       "description": "Stationery Items",
       "vendorName": "Store A",
       "vendorNo": "97546",
-      "totalAmount": "26,524",
+      "totalAmount": "26524",
       "poStatus": "declined",
       "poDetails": [
         {
@@ -130,10 +130,10 @@
     {
       "poNumber": "739253",
       "InvoiceNo": "537282",
-      "description": "Office essentials",
+      "description": "Office Essentials",
       "vendorName": "Store A",
       "vendorNo": "97546",
-      "totalAmount": "2,47,800",
+      "totalAmount": "247800",
       "poStatus": "pending",
       "poDetails": [
         {
@@ -145,13 +145,13 @@
         {
           "itemCode": "9987565632",
           "itemDescription": "Twain File Cabinet with melamine finish",
-          "unitPrice": "12,000",
+          "unitPrice": "12000",
           "quantity": "7"
         },
         {
           "itemCode": "7896672342",
           "itemDescription": "Strip cut Paper Shredder Cd/DVD/credit card",
-          "unitPrice": "15,000",
+          "unitPrice": "15000",
           "quantity": "10"
         }
       ]
@@ -159,10 +159,10 @@
     {
       "poNumber": "739254",
       "InvoiceNo": "328815",
-      "description": "Pantry Etables",
+      "description": "Pantry Snacks",
       "vendorName": "Store P",
       "vendorNo": "97547",
-      "totalAmount": "1,70,000",
+      "totalAmount": "170000",
       "poStatus": "pending",
       "poDetails": [
         {
@@ -191,7 +191,7 @@
       "description": "Pantry Essentials",
       "vendorName": "Store P",
       "vendorNo": "97547",
-      "totalAmount": "1,10,000",
+      "totalAmount": "110000",
       "poStatus": "pending",
       "poDetails": [
         {

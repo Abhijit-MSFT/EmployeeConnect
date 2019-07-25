@@ -139,7 +139,7 @@
           "scopes": [
             "team"
           ],
-          "commands": [           
+          "commands": [
             {
               "title": "set preferences",
               "description": "set notification timings"
@@ -204,7 +204,7 @@
         {
           "id": "Task",
           "description": "Find a card for task",
-          "title": "Task",
+          "title": "Tasks",
           "initialRun": true,
           "parameters": [
             {
@@ -217,7 +217,7 @@
         {
           "id": "EventsAndTrainings",
           "description": "Find a card for Events and Training",
-          "title": "EventsAndTraining",
+          "title": "Events and Trainings",
           "initialRun": true,
           "parameters": [
             {

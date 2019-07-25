@@ -117,7 +117,7 @@ namespace EmployeeConnect.Dialogs
                         break;
                     case Common.Constants.SetPrefrences:
                         card = Helper.CardHelper.SetTimePrefrences();
-                        reply.Text = string.Format("Set a preferred time to receive notifications, for latest news, events, trainings and reminders.");
+                        reply.Text = string.Format("Set a preferred time to receive notifications for latest news, upcoming events and trainings and task reminders.");
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:

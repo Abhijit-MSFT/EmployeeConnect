@@ -123,7 +123,7 @@ namespace EmployeeConnect.Helper
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Please select a department to view policies";
-            string[] dept = { "Human Resources", "Payment and benefits", "IT & facilities", "Store Operations" };
+            string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
 
             string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
 
@@ -173,7 +173,7 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             card.content.title = "Please select a department to view it's tools";
 
-            string[] dept = { "Human Resources", "Payment and benefits", "IT & facilities", "Store Operations" };
+            string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
 
             string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
 
@@ -253,7 +253,12 @@ namespace EmployeeConnect.Helper
                             }
                         }
                     }
+                },
+                Actions =
+                {
+                    new AdaptiveSubmitAction() { Title = "Close", DataJson="{\"action\": \"close\"}" }
                 }
+
             };
             Attachment attachment = new Attachment();
 
@@ -394,7 +399,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The app identifies all your \r\r pending tasks and help \r\r you manage everything at \r\r one place.",
+                                Text = "The app identifies all your \r\r pending tasks and helps \r\r you manage everything at \r\r one place.",
                                 Wrap = true,
 
                             }
@@ -1248,23 +1253,23 @@ namespace EmployeeConnect.Helper
             item.type = "section";
             list.Add(item);
 
-            for (int i = 0; i < inventory.Count(); i++)
-            {
-                item = new Item();
-                var task = inventory.ElementAt(i);
-                item.title = task.description;
-                item.subtitle = "InventoryNumber: " + task.inventoryNo;
-                item.id = task.inventoryNo;
-                item.type = "resultItem";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/inventory.PNG";
-                item.tap = new Tap()
-                {
-                    type = "invoke",
-                    title = item.id,
-                    //value = "{ \"type\": \"task/fetch\", \"data\": \"po:" + task.inventoryNo.ToString() + "\"}"
-                };
-                list.Add(item);
-            }
+            //for (int i = 0; i < inventory.Count(); i++)
+            //{
+            //    item = new Item();
+            //    var task = inventory.ElementAt(i);
+            //    item.title = task.description;
+            //    item.subtitle = "InventoryNumber: " + task.inventoryNo;
+            //    item.id = task.inventoryNo;
+            //    item.type = "resultItem";
+            //    item.icon = ApplicationSettings.BaseUrl + "/Images/inventory.PNG";
+            //    item.tap = new Tap()
+            //    {
+            //        type = "invoke",
+            //        title = item.id,
+            //        //value = "{ \"type\": \"task/fetch\", \"data\": \"po:" + task.inventoryNo.ToString() + "\"}"
+            //    };
+            //    list.Add(item);
+            //}
             card.content.items = list.ToArray();
             Attachment attachment = new Attachment()
             {
@@ -1382,7 +1387,7 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             card.content.title = "Here are the tools under your HR department";
             string[] HRtools = { "Create business letter", "Create ticket", "Request leave", "View policies" };
-            string[] HRtoolsSub = { "Create a business letter within a predesigned color and template.", "For all HR tickets, the ticket type is being set as Employee Support.", "Request leave and check your status in the Leave application.", "Identify the purpose and objectives of Human Resources department." };
+            string[] HRtoolsSub = { "Create a business letter within a predesigned color and template.", "Raise a support ticket for any HR related queries.", "Request leave and check your status in the Leave application.", "View global policies for all employees." };
             string[] HRicons = { "/Images/createbusinessletter.JPG", "/Images/createticket.JPG", "/Images/requestleave.JPG", "/Images/viewpolicies.JPG" };
             for (int i = 0; i < HRtools.Count(); i++)
             {
@@ -1435,8 +1440,8 @@ namespace EmployeeConnect.Helper
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Here are the tools under your IT department";
-            string[] ITtools = { "Raise IT Support Ticket", "Make visitor request", "Event IT Support request", "Cafeteria services app" };
-            string[] ITtoolsSub = { "Submit your support case to review and respond.", "Fill a request form for short-term visitors.", "Fill out this form to request any equipment for events.", "Employees can order and pay here without waiting in long queues." };
+            string[] ITtools = { "Raise IT Support Ticket", "Submit Visitor Request", "Event IT Support Request", "Cafeteria Services App" };
+            string[] ITtoolsSub = { "Submit your support request to the IT team.", "Fill a request form for short-term visitors.", "Fill out this form to request any equipment for events.", "Order your meals from the cafeteria online." };
             string[] ITicons = { "/Images/itsupportticket.JPG", "/Images/VisitorRequest.JPG", "/Images/eventitsupport.JPG", "/Images/cafeteriaservices.JPG" };
             for (int i = 0; i < ITtools.Count(); i++)
             {
@@ -1879,14 +1884,20 @@ namespace EmployeeConnect.Helper
                             
                             new AdaptiveTextBlock()
                             {
-                                Text = "Try below Bot commands",
+                                Text = "Try these bot commands",
                                 Wrap = true ,
                                  Weight = AdaptiveTextWeight.Bolder,
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "Set Preferences \r\r Trending News \r\r Upcoming Events And Trainings \r\r Pending Submissions \r\r Pending Approvals \r\r My Tools \r\r Policies",
-                                Wrap = true ,                                
+                                Text = @"- Set Preferences
+                                - Trending News
+                                - Upcoming Events And Trainings
+                                - Pending Submissions
+                                - Pending Approvals
+                                - My Tools
+                                - Policies",
+                                Wrap = true 
                             }
                         }
                     }

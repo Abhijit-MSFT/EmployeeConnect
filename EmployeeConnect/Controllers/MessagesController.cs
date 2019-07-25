@@ -67,6 +67,7 @@ namespace EmployeeConnect.Controllers
                         // action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
                     }
                     taskInfo = GetTaskInfo(action);
+
                     taskEnvelope = new Models.TaskEnvelope
                     {
                         Task = new Models.Task()
@@ -303,6 +304,7 @@ namespace EmployeeConnect.Controllers
             {
                 taskInfo.Card = CardHelper.GetNewsCardbyId(actionInfo.Substring(5));
                 SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
+                taskInfo.Title = "News";
                 return taskInfo;
             }
             if (actionInfo.StartsWith("events:"))

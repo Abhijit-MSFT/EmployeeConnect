@@ -36,19 +36,22 @@
         var userName = "";
 
         microsoftTeams.getContext(function (context) {
-            userName = context.userPrincipalName;
-         $.ajax({
-                type: "POST",
-                url: "/Preferences/userName",
-                contentType: "application/json; charset=utf-8",
-                data: '{"UserName":"' + userName + '"}',
-                dataType: "json",
-                success: function (data) {
-                },
-                error: function () {
-                    console.log('A error');
-                }
-            });})
+            userName = context.upn;
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Preferences/userName",
+            //    contentType: "application/json; charset=utf-8",
+            //    data: '{"UserName":"' + userName + '"}',
+            //    dataType: "json",
+            //    success: function (data) {
+            //    },
+            //    error: function () {
+            //        console.log('A error');
+            //    }
+            //});
+            }
+        )
         function getTime(value) {
             newsSelectedTime = value;
         }
@@ -117,25 +120,19 @@
 
         }
 
-        function showNews() {
-            var url = '/showNews?userName=' + userName;
-            //var url =  url = "microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/Preference')"
-            microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/chat/0/0?users=28:@(EmployeeConnect.Helper.ApplicationSettings.AppId)');
-            location.href = url;
+        function SendCard(type) {
+            var url = "/" + type + "?userName=" + userName;
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                },
+                error: function () {
+                    console.log('A error');
+                }
+            });
         }
-
-            function showET() {
-            var url = '/ShowEnT?userName=' + userName;
-            microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/chat/0/0?users=28:@(EmployeeConnect.Helper.ApplicationSettings.AppId)');
-            location.href = url;
-        }
-
-            function showTask() {
-            var url = '/ShowTask?userName=' + userName;
-            microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/chat/0/0?users=28:@(EmployeeConnect.Helper.ApplicationSettings.AppId)');
-            location.href = url;
-        }
-
 
     </script>
 </head>
@@ -202,7 +199,7 @@
                             </div>
                         </div>
 
-                        <div class="image-text image_grid">
+                        <div class="image-text image_grid hide-for-mobile">
                             <label for="Economy">
                                 <img src="./imgs/Economy.jpg" alt-name="Economy" class="row-display" />
                             </label>
@@ -230,7 +227,7 @@
                             </div>
                         </div>
                         <br class="br">
-                        <div class="image-text image_grid">
+                        <div class="image-text image_grid hide-for-mobile">
                             <label for="Finance">
                                 <img src="./imgs/Finance.jpg" alt-name="Finance" class="row-display" />
                             </label>
@@ -257,7 +254,7 @@
                                 <div class="title-name">Software</div>
                             </div>
                         </div>
-                        <div class="image-text image_grid hide-for-mobile">
+                        <div class="image-text image_grid">
                             <label for="Animation">
                                 <img src="./imgs/Animation.gif" alt-name="Animation" class="row-display" />
                             </label>
@@ -266,7 +263,7 @@
                                 <div class="title-name">Animation</div>
                             </div>
                         </div>
-                        <div class="image-text image_grid hide-for-mobile">
+                        <div class="image-text image_grid">
                             <label for="Creative">
                                 <img src="./imgs/Creative.png" alt-name="Creative" class="row-display" />
                             </label>
@@ -275,7 +272,7 @@
                                 <div class="title-name">Creative</div>
                             </div>
                         </div>
-                        <div class="image-text image_grid hide-for-mobile">
+                        <div class="image-text image_grid">
                             <label for="IT">
                                 <img src="./imgs/IT.jpg" alt-name="IT" class="row-display" />
                             </label>
@@ -284,19 +281,19 @@
                                 <div class="title-name">IT</div>
                             </div>
                         </div>
-                        <div class="image-text image_grid hide-for-mobile">
+                        <div class="image-text image_grid">
                             <label for="Data">
-                                <img src="./imgs/Data.jpg" alt-name="Data" @(Model.News.First().SelectedCategories.Contains("Data") ? "checked" : "" ) class="row-display" />
+                                <img src="./imgs/Data.jpg" alt-name="Data" @(Model.News.First().SelectedCategories.Contains("Data") ? "checked" : "" ) class="row-display" id="Data" value="Data" onclick="getCategory()" />
                             </label>
                             <input type="checkbox" name="Data" id="Data" value="Data" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Data</div>
                             </div>
                         </div>
-                        <div class="explore-more">
+                        @*<div class="explore-more">
                             Explore more categories
                             <span class="rgt-chev"></span>
-                        </div>
+                        </div>*@
                         <div class="switch-title1">
                             <label class="switch">
                                 <input type="checkbox" checked onclick="toggleSliderNews()" />
@@ -318,7 +315,7 @@
                             </label>
                             <label class="radio-label">
                                 <input type="radio" checked name="radio" />
-                                <span class="text-align">Set a preffered time </span>
+                                <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
                             <select class="date-control" id="newsTime" onchange="getTime(this.value)">
@@ -333,7 +330,7 @@
                             </select>
                             <span class="chevron-down"></span>
                         </form>
-                        <a href="#" class="show-more" style="float:right" onclick="showNews();">Show News</a>
+                        <a href="#" class="show-more" style="float:right" onclick="SendCard('ShowNews');">Show News</a>
                     </div> <br><br class="br-for-mobile"><br class="br-for-mobile">
                 </div>
             </div>
@@ -347,7 +344,7 @@
                                 href="#Events">
                                 <span class="down-chev"></span>
                                 <span class="title">
-                                    Events & trainings
+                                    Events & Trainings
                                 </span>
                             </h6>
                         </div>
@@ -380,7 +377,7 @@
                             </label>
                             <label class="radio-label">
                                 <input type="radio" name="radio" checked />
-                                <span class="text-align">Set a preffered time </span>
+                                <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
                             <select class="date-control" id="EandTTime" onchange="getEnTTime(this.value)">
@@ -393,9 +390,9 @@
                                 <option value="4:00 pm">4:00 pm</option>
                                 <option value="5:00 pm">5:00 pm</option>
                             </select>
-                            <span class="chevron-down"></span> <br> <br /><br class="br-for-mobile">
+                            <span class="chevron-down"></span> <br /><br class="br-for-mobile">
                         </form>
-                        <div><a href="#" class="show-more" style="float:right; padding-bottom:20px;" onclick="showET();">Show Events and Trainings</a></div>
+                        <div><a href="#" class="show-more" style="float:right; padding-bottom:20px;" onclick="SendCard('ShowEnT');">Show Events and Trainings</a></div>
                     </div>
                 </div>
             </div>
@@ -409,7 +406,7 @@
                                 href="#Taskreminders">
                                 <span class="down-chev"></span>
                                 <span class="title">
-                                    Task reminders
+                                    Task Reminders
                                 </span>
                             </h6>
                         </div>
@@ -438,7 +435,6 @@
                                 <span class="text-align">Set a preffered time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <br>
                             <select class="date-control" id="taskTime" onchange="getTaskTime(this.value)">
                                 <option selected value="10:00 am">10:00 am</option>
                                 <option value="11:00 am">11:00 am</option>
@@ -449,9 +445,9 @@
                                 <option value="4:00 pm">4:00 pm</option>
                                 <option value="5:00 pm">5:00 pm</option>
                             </select>
-                            <span class="chevron-down"></span> <br><br>
+                            <span class="chevron-down"></span> <br>
                         </form>
-                        <a href="#" class="show-more" style="float:right;padding-bottom:40px;" onclick="showTask();">Show Task Reminder</a>
+                        <a href="#" class="show-more" style="float:right;padding-bottom:40px;" onclick="SendCard('ShowTask');">Show Task Reminder</a>
                         <br />
                     </div>
                 </div>

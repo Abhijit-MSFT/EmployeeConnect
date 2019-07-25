@@ -132,13 +132,13 @@ namespace EmployeeConnect
                 }
                 else
                 {
-                    List<string> searchTitle = eventsTrainings.EventsAndtraining.Select(c => c.ETTitle).Take(6).ToList();
-                    List<string> searchdetails = eventsTrainings.EventsAndtraining.Select(c => c.ETDetails).Take(6).ToList();
-                    List<string> searchdate = eventsTrainings.EventsAndtraining.Select(c => c.ETStartDate).Take(6).ToList();
-                    List<string> searchimage = eventsTrainings.EventsAndtraining.Select(c => c.ETThumbnailUrl).Take(6).ToList();
-                    List<string> searchETType = eventsTrainings.EventsAndtraining.Select(c => c.ETType).Take(6).ToList();
-                    List<string> searchETid = eventsTrainings.EventsAndtraining.Select(c => c.ETID).Take(6).ToList();
-                    List<bool> searchETar = eventsTrainings.EventsAndtraining.Select(c => c.UserAdded).Take(6).ToList();
+                    List<string> searchTitle = eventsTrainings.EventsAndtraining.Select(c => c.ETTitle).ToList();
+                    List<string> searchdetails = eventsTrainings.EventsAndtraining.Select(c => c.ETDetails).ToList();
+                    List<string> searchdate = eventsTrainings.EventsAndtraining.Select(c => c.ETStartDate).ToList();
+                    List<string> searchimage = eventsTrainings.EventsAndtraining.Select(c => c.ETThumbnailUrl).ToList();
+                    List<string> searchETType = eventsTrainings.EventsAndtraining.Select(c => c.ETType).ToList();
+                    List<string> searchETid = eventsTrainings.EventsAndtraining.Select(c => c.ETID).ToList();
+                    List<bool> searchETar = eventsTrainings.EventsAndtraining.Select(c => c.UserAdded).ToList();
                     attachments = new ComposeExtensionAttachment[searchTitle.Count];
                     for (int i = 0; i < searchTitle.Count; i++)
                     {
@@ -169,7 +169,7 @@ namespace EmployeeConnect
         }
         private static ComposeExtensionAttachment GetEventsAttachment(string image, string title, string date, string views, string id, bool userAdded)
         {
-            var card = new ThumbnailCard
+            var card = new HeroCard
             {
                 Title = title,
                 Subtitle = date,
@@ -197,7 +197,7 @@ namespace EmployeeConnect
         }
         private static ComposeExtensionAttachment GetNewsAttachment(string image, string title, string date, string views)
         {
-            var card = new ThumbnailCard
+            var card = new HeroCard
             {
                 Title = title,
                 Subtitle = date,
