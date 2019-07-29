@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Employee Connect intranet app for Microsoft Teams",
-    "full": "This app helps connects employees"
+    "full": "This app helps connects employees \r\n this is new app"
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
@@ -110,8 +110,8 @@
               "description": "View trending news"
             },
             {
-              "title": "upcoming events and training",
-              "description": "View your events and training"
+              "title": "upcoming events and trainings",
+              "description": "View your events and trainings"
             },
             {
               "title": "pending submissions",
@@ -149,8 +149,8 @@
               "description": "View trending news"
             },
             {
-              "title": "upcoming events and training",
-              "description": "View your events and training"
+              "title": "upcoming events and trainings",
+              "description": "View your events and trainings"
             },
             {
               "title": "pending tasks",

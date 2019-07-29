@@ -13,7 +13,7 @@
         public const string Welcome = "welcome";
         public const string SetPrefrences = "set preferences";
         public const string SetNewsPrefrences = "set news preferences";
-        public const string UpcomingEventsTraining = "upcoming events and training";
+        public const string UpcomingEventsTraining = "upcoming events and trainings";
         public const string ReviewTasks = "review tasks";
         public const string HumanResourceTools = "human resources tools";
         public const string ITFacilitiesTools = "it & facilities tools";

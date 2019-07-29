@@ -171,7 +171,7 @@ namespace EmployeeConnect.Helper
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
-            card.content.title = "Please select a department to view it's tools";
+            card.content.title = "Please select a department to view tools";
 
             string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
 
@@ -1862,8 +1862,74 @@ namespace EmployeeConnect.Helper
             return null;
         }
 
-        public static Attachment DefaultCard()
+        //public static Attachment DefaultCard()
+        //{
+        //    var card1 = new AdaptiveCard("1.0")
+        //    {
+        //        BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
+        //        Body = new List<AdaptiveElement>()
+        //        {
+        //            new AdaptiveContainer()
+        //            {
+        //                Items = new List<AdaptiveElement>()
+        //                {
+        //                    new AdaptiveTextBlock()
+        //                    {
+
+        //                        Text = "Welcome to Employee Connect",
+        //                        Weight = AdaptiveTextWeight.Bolder,
+        //                        Size = AdaptiveTextSize.Large
+
+        //                    },
+
+        //                    new AdaptiveTextBlock()
+        //                    {
+        //                        Text = "Try these bot commands",
+        //                        Wrap = true ,
+        //                         Weight = AdaptiveTextWeight.Bolder,
+        //                    },
+        //                    new AdaptiveTextBlock()
+        //                    {
+        //                        Text = @"- Set Preferences
+        //                        - Trending News
+        //                        - Upcoming Events And Trainings
+        //                        - Pending Submissions
+        //                        - Pending Approvals
+        //                        - My Tools
+        //                        - Policies",
+        //                        Wrap = true 
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    };            
+
+        //    Attachment attachment = new Attachment();
+
+        //    attachment.ContentType = AdaptiveCard.ContentType;
+
+        //    attachment.Content = card1;
+
+        //    return attachment;
+        //}
+
+        public static List<Attachment> DefaultCard()
         {
+            //Welcome Card
+            //var action = new List<AdaptiveAction>()
+            //{
+            //    //new AdaptiveSubmitAction()
+            //    //{
+            //    //    Title = "Let's get started",
+            //    //    DataJson = @"{'Action':'" + Constants.ShowPrefCard + "' }"
+            //    //}                
+
+            //    //new AdaptiveShowCardAction()
+            //    //{
+            //    //    Title = "Let's get Started",
+            //    //    Card=(AdaptiveCard)CardHelper.SetTimePrefrences().Content
+            //    //}
+            //};
             var card1 = new AdaptiveCard("1.0")
             {
                 BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
@@ -1875,42 +1941,127 @@ namespace EmployeeConnect.Helper
                         {
                             new AdaptiveTextBlock()
                             {
-
                                 Text = "Welcome to Employee Connect",
                                 Weight = AdaptiveTextWeight.Bolder,
                                 Size = AdaptiveTextSize.Large
-                                
                             },
-                            
+
                             new AdaptiveTextBlock()
                             {
-                                Text = "Try these bot commands",
+                                Text = "Keep yourself posted \r\rabout the latest news",
                                 Wrap = true ,
                                  Weight = AdaptiveTextWeight.Bolder,
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = @"- Set Preferences
-                                - Trending News
-                                - Upcoming Events And Trainings
-                                - Pending Submissions
-                                - Pending Approvals
-                                - My Tools
-                                - Policies",
-                                Wrap = true 
+                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation",
+                                Wrap = true ,
                             }
                         }
                     }
-                }
-            };            
+                },
 
-            Attachment attachment = new Attachment();
+                //Actions = action
+            };
+            var card2 = new AdaptiveCard("1.0")
+            {
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_2.png"),
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
 
-            attachment.ContentType = AdaptiveCard.ContentType;
+                        Items = new List<AdaptiveElement>()
+                        {
 
-            attachment.Content = card1;
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Welcome to Employee Connect",
+                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                            },
+                            /*new AdaptiveTextBlock()
+                            {
+                                Text = "Please sign in to get started",
+                                Wrap = true ,// True if text is allowed to wrap
+                            },*/
+                                new AdaptiveTextBlock()
+                            {
+                                Text = "Add events to your calendar",
+                                Wrap = true ,// True if text is allowed to wrap
+                                    Weight = AdaptiveTextWeight.Bolder
 
-            return attachment;
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings",
+                                Wrap = true ,// True if text is allowed to wrap
+                                MaxWidth = 2
+                            }
+                        }
+                            // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
+                            
+                    }
+                },
+
+                //Actions = action
+            };
+            var card3 = new AdaptiveCard("1.0")
+            {
+                BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_3.png"),
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Welcome to Employee Connect",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Size = AdaptiveTextSize.Large
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Create and manage your tasks",
+                                Wrap = true,
+                                Weight = AdaptiveTextWeight.Bolder
+
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "The app identifies all your \r\r pending tasks and helps \r\r you manage everything at \r\r one place.",
+                                Wrap = true,
+
+                            }
+                        }
+                    }
+                },
+
+                //Actions = action
+            };
+            List<Attachment> res = new List<Attachment>();
+            res.Add(new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card1
+            });
+            res.Add(new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card2
+            });
+            res.Add(new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card3
+            });
+
+
+            return res;
         }
+
     }
+
+   
 }

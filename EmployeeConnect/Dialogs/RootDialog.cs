@@ -176,12 +176,16 @@ namespace EmployeeConnect.Dialogs
                             reply.Text = "No tickets to show.";
                         break;
                     default:
+                        res = Helper.CardHelper.DefaultCard();
+                        for (int i = 0; i < res.Count(); i++)
+                            reply.Attachments.Add(res.ElementAt(i));
+                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                         //dont reply anything
-                        Attachment res1 = Helper.CardHelper.DefaultCard();
-                        //for (int i = 0; i < res.Count(); i++)
-                        //    reply.Attachments.Add(res.ElementAt(i));
-                        //reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-                        reply.Attachments.Add(res1);
+                        //Attachment res1 = Helper.CardHelper.DefaultCard();
+                        ////for (int i = 0; i < res.Count(); i++)
+                        ////    reply.Attachments.Add(res.ElementAt(i));
+                        ////reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                        //reply.Attachments.Add(res1);
                         break;
                         //return;
                 }
