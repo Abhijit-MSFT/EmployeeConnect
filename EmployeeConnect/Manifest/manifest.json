@@ -7,8 +7,8 @@
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://dcc542d8.ngrok.io",
-    "termsOfUseUrl": "https://dcc542d8.ngrok.io"
+    "privacyUrl": "https://a4a71fb6.ngrok.io",
+    "termsOfUseUrl": "https://a4a71fb6.ngrok.io"
   },
   "icons": {
     "color": "color.png",
@@ -20,15 +20,15 @@
   },
   "description": {
     "short": "Employee Connect intranet app for Microsoft Teams",
-    "full": "This app helps connects employees \r\n this is new app"
+    "full": "This app helps connects employees"
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
       "entityId": "currNews",
       "name": "News",
-      "contentUrl": "https://dcc542d8.ngrok.io/News",
-      "websiteUrl": "https://dcc542d8.ngrok.io/News",
+      "contentUrl": "https://a4a71fb6.ngrok.io/News",
+      "websiteUrl": "https://a4a71fb6.ngrok.io/News",
       "scopes": [
         "personal"
       ]
@@ -36,8 +36,8 @@
     {
       "entityId": "EandT",
       "name": "Events and Trainings",
-      "contentUrl": "https://dcc542d8.ngrok.io/EventandTrainingTab",
-      "websiteUrl": "https://dcc542d8.ngrok.io/EventandTrainingTab",
+      "contentUrl": "https://a4a71fb6.ngrok.io/EventandTrainingTab",
+      "websiteUrl": "https://a4a71fb6.ngrok.io/EventandTrainingTab",
       "scopes": [
         "personal"
       ]
@@ -45,8 +45,8 @@
     {
       "entityId": "tools",
       "name": "Tools",
-      "contentUrl": "https://dcc542d8.ngrok.io/Tools",
-      "websiteUrl": "https://dcc542d8.ngrok.io/Tools",
+      "contentUrl": "https://a4a71fb6.ngrok.io/Tools",
+      "websiteUrl": "https://a4a71fb6.ngrok.io/Tools",
       "scopes": [
         "personal"
       ]
@@ -54,8 +54,8 @@
     {
       "entityId": "tasks",
       "name": "Tasks",
-      "contentUrl": "https://dcc542d8.ngrok.io/Task",
-      "websiteUrl": "https://dcc542d8.ngrok.io/Task",
+      "contentUrl": "https://a4a71fb6.ngrok.io/Task",
+      "websiteUrl": "https://a4a71fb6.ngrok.io/Task",
       "scopes": [
         "personal"
       ]
@@ -63,8 +63,8 @@
     {
       "entityId": "policies",
       "name": "Policies",
-      "contentUrl": "https://dcc542d8.ngrok.io/Policies",
-      "websiteUrl": "https://dcc542d8.ngrok.io/Policies",
+      "contentUrl": "https://a4a71fb6.ngrok.io/Policies",
+      "websiteUrl": "https://a4a71fb6.ngrok.io/Policies",
       "scopes": [
         "personal"
       ]
@@ -72,8 +72,8 @@
     {
       "entityId": "preferences",
       "name": "Preferences",
-      "contentUrl": "https://dcc542d8.ngrok.io/Preferences?emailID={upn}",
-      "websiteUrl": "https://dcc542d8.ngrok.io/Preferences",
+      "contentUrl": "https://a4a71fb6.ngrok.io/Preferences?emailID={upn}",
+      "websiteUrl": "https://a4a71fb6.ngrok.io/Preferences",
       "scopes": [
         "personal"
       ]
@@ -81,8 +81,8 @@
     {
       "entityId": "Test",
       "name": "Test",
-      "contentUrl": "https://dcc542d8.ngrok.io/index.html",
-      "websiteUrl": "https://dcc542d8.ngrok.io/index.html",
+      "contentUrl": "https://a4a71fb6.ngrok.io/index.html",
+      "websiteUrl": "https://a4a71fb6.ngrok.io/index.html",
       "scopes": [
         "personal"
       ]

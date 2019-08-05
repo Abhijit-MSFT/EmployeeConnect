@@ -8,6 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 <link rel="stylesheet" href="./Content/Tasks.css" />
+<script src="~/Scripts/task.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -20,6 +21,7 @@
         <header class="heading">Pending submissons</header>
         <div class="card-deck custom-card-deck">
             <div class="card custom-card">
+                <div class="card-header heading2">Pending submissons</div>
                 <div class="card-body">
                     <img src="./Images/timesheet_icon.PNG" alt="time-sheet" class="time-sheet " />
                     <div class="mobile-timesheet">Pending Timesheet</div>
@@ -59,19 +61,19 @@
                         <h6 class="panel-title accordion-toggle"
                             data-toggle="collapse"
                             data-parent="#accordion"
-                            href="#Porder">
+                            href="#Porder" id='h6-heading'>
                             <span class="title"> Purchase order <span>(@Model.PendingPO.Length)</span> </span>
                         </h6>
                     </div>
-                    <span class="chevron-right desk ht-for-mobile1"></span>
+                    @*<span class="chevron-right desk ht-for-mobile1"></span>*@
                 </div>
                 <div id="Porder" class="panel-collapse">
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table tb-for-desktop">
                             <thead>
                                 <tr class="head-title-color">
                                     <th>PO no.</th>
-
+                                
                                     <th>Description</th>
                                     <th>Vendor name</th>
                                     <th>Vendor no.</th>
@@ -84,6 +86,7 @@
                                 {
                                     <tr class="row-highlight">
                                         <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                        
                                         <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
                                         <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
                                         <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
@@ -97,6 +100,37 @@
                                 }
                             </tbody>
                         </table>
+                        <table class="table tb-for-mobile">
+                            <thead>
+                                <tr class="head-title-color">
+                                    <th class="head-title-color">PO no.</th>
+                                   
+                                    <th class="head-title-color">Description</th>
+                                    <th class="head-title-color">Vendor name</th>
+                                    <th class="head-title-color">Vendor no.</th>
+                                    <th class="head-title-color">Amount</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PendingPO)
+                                {
+                                    <tr >
+                                        <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                        <td></td>
+                                        <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                        <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+
+                                        <td class="amount">
+                                            <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
+                                        </td>
+                                        <td></td>
+                                        <td class="review tb-for-mobile" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="panel-group" id="accordion">
@@ -105,7 +139,7 @@
                             <h6 class="panel-title accordion-toggle"
                                 data-toggle="collapse"
                                 data-parent="#accordion"
-                                href="#Invoice">
+                                href="#Invoice" id='invoice'>
                                 <span class="title"> Invoice <span>(@Model.ApprovedPO.Length)</span> </span>
                             </h6>
                             <span class="chevron-right desk ht-for-mobile2"></span>
@@ -113,7 +147,7 @@
                     </div>
                     <div id="Invoice" class="panel-collapse">
                         <div class="panel-body">
-                            <table class="table">
+                            <table class="table tb-for-desktop">
                                 <thead>
                                     <tr class="head-title-color">
                                         <th>Invoice no.</th>
@@ -129,6 +163,35 @@
                                     @foreach (var item in Model.ApprovedPO)
                                     {
                                         <tr class="row-highlight">
+                                            <td id="invoiceNoId" class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                            <td class="po-no1">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                            <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                            <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                            <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                            <td class="amount">
+                                                <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
+                                            </td>
+                                            <td class="reviewButton" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.InvoiceNo','@item.vendorNo');">Review</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <table class="table tb-for-mobile">
+                                <thead>
+                                    <tr>
+                                        <th class="head-title-color">Invoice no.</th>
+                                        <th class="head-title-color">PO no.</th>
+                                        <th class="head-title-color" >Description</th>
+                                        <th class="head-title-color">Vendor name</th>
+                                        <th class="head-title-color">Vendor no.</th>
+                                        <th class="head-title-color">Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ApprovedPO)
+                                    {
+                                        <tr>
                                             <td id="invoiceNoId" class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                             <td class="po-no1">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                             <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>

@@ -65,7 +65,7 @@ span.currency {
     font-size: 16px;
     position: absolute;
     margin-left: 10px;
-    content: "\E449";
+    content: "\E447";
     font-family: "Teams Assets";
     font-weight: bold;
 }
@@ -82,11 +82,11 @@ span.currency {
 }
 
 .panel-heading .accordion-toggle::after {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 600;
-    color: darkgray;
-    content: "\f0dd";
     float: left;
+    font-size: 16px;
+    content: "\E447";
+    font-family: "Teams Assets";
+    font-weight: bold;
     -moz-transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
@@ -97,7 +97,6 @@ h6.panel-title.accordion-toggle.collapsed::after {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     transform: rotate(-90deg);
-    /* content: "\f0da"; */
 }
 
 .table {
@@ -157,6 +156,7 @@ th {
 }
 
 td.po-no,
+td.Description,
 td.vendor-name,
 td.vendor-no,
 td.amount,
@@ -165,30 +165,36 @@ td.Invoice-no {
     padding-left: 30px;
 }
 
-.heading2, .mobile-timesheet, .mobile-EM, .desk {
-    display: none
+.heading2,
+.mobile-timesheet,
+.mobile-EM,
+.desk,
+.tb-for-mobile {
+    display: none;
 }
 
-.container-fluid {
-    width: 100%;
-    padding: 0;
-    margin-right: auto;
-    margin-left: auto;
-    overflow-y: scroll !important,
-}
-
-@media(max-width:425px) {
-    .time-sheet, .expenses-sheet, .heading, .full-timesheet, .Submit-expenses, .panel-heading .accordion-toggle::after, #Porder, #Invoice {
+@media (max-width: 425px) {
+    .time-sheet,
+    .expenses-sheet,
+    .heading,
+    .full-timesheet,
+    .Submit-expenses,
+    .hide-for-mobile,
+    .tb-for-desktop {
         display: none;
     }
 
-    .heading2, .mobile-timesheet, .mobile-EM, .desk {
+    .heading2,
+    .mobile-timesheet,
+    .mobile-EM,
+    .desk,
+    .tb-for-mobile {
         display: block;
     }
 
     .heading2 {
         padding-bottom: 0;
-        color: #6769AA;
+        color: #6769aa;
         font-weight: 500;
     }
 
@@ -218,7 +224,6 @@ td.Invoice-no {
         padding: 0;
         margin-right: auto;
         margin-left: auto;
-        overflow-y:scroll !important,
     }
 
     .title-head {
@@ -230,7 +235,8 @@ td.Invoice-no {
         color: #636262;
     }
 
-    .mobile-timesheet, .mobile-EM {
+    .mobile-timesheet,
+    .mobile-EM {
         margin-bottom: 10px;
         font-weight: bold;
     }
@@ -242,7 +248,19 @@ td.Invoice-no {
     .chevron-right::before {
         margin-left: 87%;
         bottom: 16%;
-        color: #6769AA;
+        color: #6769aa;
+    }
+
+    .panel-heading .accordion-toggle::after {
+        float: right;
+        margin-right: 3%;
+        color: #6769aa;
+    }
+
+    h6.panel-title.accordion-toggle.collapsed::after {
+        -webkit-transform: rotate(-180deg);
+        -moz-transform: rotate(-180deg);
+        transform: rotate(-180deg);
     }
 
     .mr-up::before {
@@ -265,12 +283,12 @@ td.Invoice-no {
         top: 10px;
     }
 
-    .panel-default:nth-child(n+1) {
-        border-bottom: 2px solid #f3f2f1;
+    .panel-default:nth-child(n + 1) {
+        border-top: 2px solid #f3f2f1;
     }
 
     h6.panel-title.accordion-toggle {
-        top: 0;
+        top: 4px;
         font-size: 14px;
     }
 
@@ -278,36 +296,70 @@ td.Invoice-no {
         padding-bottom: 20px;
     }
 
-    .ht-for-mobile1::before {
-        bottom: 52%;
-        margin-left: 92%;
-    }
-
-    .ht-for-mobile2::before {
-        bottom: 28%;
-        margin-left: 92%;
-    }
-
+    .ht-for-mobile1::before,
+    .ht-for-mobile2::before,
     .ht-for-mobile3::before {
-        bottom: 7%;
-        margin-left: 92%;
+        bottom: 14%;
+        margin-left: 89%;
     }
 
     .panel-heading {
         padding: 5px 0px 5px 0px;
     }
+
+    .review {
+        border: 1px solid #6264a7;
+        width: 70px;
+        height: auto;
+        text-align: center;
+        margin-left: 18px;
+        border-radius: 4px;
+        padding: 2px;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .table td,
+    .table th {
+        padding: 0.2rem;
+    }
+
+    .table td {
+        padding-left: 6rem;
+    }
+
+    tbody {
+        font-size: 14px;
+    }
+
+    .tb-for-desktop {
+        display: none;
+    }
 }
 
-@media(max-width:320px) {
+@media (max-width:375px) {
+    .panel-heading .accordion-toggle::after {
+        margin-right: 2%;
+    }
+}
+
+@media (max-width: 320px) {
     .title-head {
         font-size: 12px;
     }
 
-    .mobile-timesheet, .mobile-EM {
+    .mobile-timesheet,
+    .mobile-EM {
         font-size: 14px;
     }
 
-    .ht-for-mobile1::before, .ht-for-mobile2::before, .ht-for-mobile3::before {
+    .ht-for-mobile1::before,
+    .ht-for-mobile2::before,
+    .ht-for-mobile3::before {
         margin-left: 93%;
+    }
+
+    .panel-heading .accordion-toggle::after {
+        margin-right: 0%;
     }
 }

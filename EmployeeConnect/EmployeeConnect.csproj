@@ -482,6 +482,7 @@
     <Content Include="Manifest\color.png" />
     <Content Include="Manifest\outline.png" />
     <Content Include="obj\Debug\EmployeeConnect.csproj.FileListAbsolute.txt" />
+    <Content Include="Scripts\task.js" />
     <Content Include="Scripts\teamsapp.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

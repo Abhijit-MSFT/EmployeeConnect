@@ -29,7 +29,7 @@
                         @*<div class="left-chev"></div>
                         <div class="right-chev"></div>*@
                         @*<div class="month-date">@DateTime.Now.ToString("MMM, yyyy")</div>*@
-                        <div class="month-date">
+                        <div class="month-date"  style="float:right">
                             <select style="border-style:none; width:100px">
                                 <option>January</option>
                                 <option>February</option>
@@ -64,18 +64,18 @@
                             </div>
                             <div class="card custom-card">
                                 <div class="card-header header-flag">
-                                    <span class="flag"></span>
-                                    <span class="event">
-                                        @if (item.ETFlag == "E")
-                                        {
-                                            <span>Event</span>
-                                        }
-                                        else
-                                        {
-                                            <span>Training</span>
-                                        }
+                                    <span class="@(item.ETFlag == "E" ? "flag" : "badge-icon" )"></span>
+                                        <span class="event">
+                                            @if (item.ETFlag == "E")
+                                            {
+                                                <span>Event</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Training</span>
+                                            }
 
-                                    </span>
+                                        </span>
                                 </div>
 
                                 <div class="card-body body-top" onclick="submitEvent('@item.ETID');">
@@ -99,7 +99,7 @@
             <div class="col-12">
                 <div class="heading hd2">Other upcoming events and trainings</div>
                 @*<div class="month-date">@DateTime.Now.ToString("MMM, yyyy")</div>*@
-                <div class="month-date">
+                <div class="month-date" style="float:right">
                     <select style="border-style:none; width:100px">
                         <option>January</option>
                         <option>February</option>
@@ -125,7 +125,7 @@
 
                     <div class="card custom-card2">
                         <div class="card-header header-flag">
-                            <span class="flag"></span>
+                            <span class="@(item.ETFlag == "E" ? "flag" : "badge-icon" )"></span>
                             <span class="event">
                                 @if (item.ETFlag == "E")
                                 {
@@ -141,7 +141,7 @@
                             <div class="card-title main-title">
                                 @Html.DisplayFor(modelItem => item.ETTitle)
                             </div>
-                            <div class="time-icon2">
+                            <div class="time-icon">
                                 <div class="event-time for-header2-dateandtime">
                                     @Html.DisplayFor(modelItem => item.ETStartDate)
                                 </div>

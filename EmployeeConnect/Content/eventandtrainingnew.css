@@ -98,7 +98,7 @@ html {
     vertical-align: middle;
     font-weight: 600;
     margin-left: 20px;
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .down-chev::before {
@@ -178,7 +178,7 @@ html {
     margin-left: 43%;
 }
 
-.event {
+.event, .flag {
     font-size: 14px;
     color: #4286bc;
     vertical-align: middle;
@@ -186,7 +186,7 @@ html {
 }
 
 .time-icon::before {
-    content: "\F301";
+    content: "\E503";
     font-family: "Teams Assets";
     font-size: 14px;
     color: #9999a4;
@@ -246,7 +246,15 @@ html {
     vertical-align: middle;
 }
 
-.cal-icon {
+.date-icon::before {
+    content: "\E503";
+    font-family: "Teams Assets";
+    font-size: 18px;
+    color: #6365a8;
+    vertical-align: middle;
+}
+
+.cal-icon{
     position: relative;
     margin-top: 10px;
     cursor: pointer;
