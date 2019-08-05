@@ -51,8 +51,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="two-btn">
-                        <button type="submit" class="cancel">Undo</button>
-                        <button type="submit" class="BCT">Done</button>
+                        <button type="button" class="cancel" onclick="closePopUp('donedecline')">Undo</button>
+                        <button type="button" class="BCT"    onclick="closePopUp('donedecline')">Done</button>
                     </div>
                 </div>
             </div>
@@ -66,6 +66,13 @@
             console.log(`Submit handler - err: ${err}`);
             alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
+        function closePopUp() {
+            let undoInfo = {
+                action: "donedecline",
+            };
+            microsoftTeams.tasks.submitTask(undoInfo);
+            return true;
+        }
 
         function submit(type) {
             debugger;

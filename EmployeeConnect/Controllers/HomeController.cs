@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.IO;
+
 
 
 namespace EmployeeConnect.Controllers
@@ -46,20 +46,20 @@ namespace EmployeeConnect.Controllers
         {
             return View();
         }
-        
+
         [Route("Task")]
         public ActionResult Task()
         {
             PO taskList = new PO();
             taskList = GetDataHelper.GetPOs();
             PurchaseOrders[] filterList = new PurchaseOrders[taskList.PurchaseOrder.Length];
-          
+
             filterList = taskList.PurchaseOrder.Where(e => e.PoStatus != "declined").ToArray();
             PurchaseOrders[] approvedList = new PurchaseOrders[filterList.Length];
             PurchaseOrders[] pendingList = new PurchaseOrders[filterList.Length];
 
             approvedList = filterList.Where(i => i.PoStatus == "approved").ToArray();
-            pendingList =  filterList.Where(i => i.PoStatus == "pending").ToArray();
+            pendingList = filterList.Where(i => i.PoStatus == "pending").ToArray();
 
             taskList.ApprovedPO = approvedList;
             taskList.PendingPO = pendingList;
@@ -69,7 +69,7 @@ namespace EmployeeConnect.Controllers
         [Route("Tools")]
         public ActionResult Tools()
         {
-          return View();
+            return View();
         }
         [Route("createticket")]
         public ActionResult CreateTicket()
@@ -148,16 +148,16 @@ namespace EmployeeConnect.Controllers
                new JProperty("org", org),
                new JProperty("purpose", purpose),
                new JProperty("Date", date),
-               new JProperty("Time",time));
+               new JProperty("Time", time));
             var objectData = data.ToString();
-            GetDataHelper.saveVisitorInfo(data);      
+            GetDataHelper.saveVisitorInfo(data);
             JavaScriptSerializer js = new JavaScriptSerializer();
             var parsedData = js.Serialize(objectData);
             return parsedData;
         }
 
         [Route("ticketcomplete")]
-        public ActionResult TicketComplete(int ticketNoId,string description, string category, string priority)
+        public ActionResult TicketComplete(int ticketNoId, string description, string category, string priority)
         {
             List<string> ticketData = new List<string>();
             DateTime currentDate = DateTime.Now;
@@ -196,7 +196,7 @@ namespace EmployeeConnect.Controllers
         [Route("news")]
         public ActionResult News()
         {
-            NewsModel news = new NewsModel();            
+            NewsModel news = new NewsModel();
             int day = DateTime.Now.Day;
             if (day == 15 || day == 30)
             {
@@ -217,42 +217,63 @@ namespace EmployeeConnect.Controllers
         {
             Preference pref = new Preference();
             UPreferences userPref = GetDataHelper.readPreferences();
-            Preference user = userPref.preferences.Where(c => c.UserName == emailID).Select(d => d).FirstOrDefault();
-            //UPreferences PrefViewData = new UPreferences();
-            //PrefViewData.preferences[0] = user;
-            string[] cat = user.News.Select(c => c.SelectedCategories).FirstOrDefault();
-
-            return View(cat);
-        }
-
-        [Route("PreferenceInDb")]
-        public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName)
-        {
-            Preference pref = new Preference();
-            UPreferences userPref = GetDataHelper.readPreferences();
-            Preference user = userPref.preferences.Where(c => c.UserName == UserName).Select(d => d).FirstOrDefault();
-
-            if (user != null)
+            Preference user = new Preference() { UserName = emailID };
+            if (userPref == null)
             {
-                user.News[0].NewsNotificationFlag = newsNotificationFlag;
-                user.News[0].NewsNotificationTime = newsTime;
-                user.News[0].SelectedCategories = newsPrefCat;
-                user.News[0].NewsNotifyMe = newsNotifyMe;
-
-                user.EandT[0].EandTNotificationFlag = eandtflag;
-                user.EandT[0].EandTNotifyMe = eandtNotify;
-                user.EandT[0].EandTNotificationTime = eandtTime;
-
-                user.Task[0].TaskNotificationFlag = taskNotificationFlag;
-                user.Task[0].TaskNotificationTime = taskTime;
-                user.Task[0].TaskNotifyMe = taskNotifyMe;
-                
-                GetDataHelper.WritePreferences(user);
+                user = new Preference();// TODO: Add defaults
             }
             else
             {
+                user = userPref.preferences.FirstOrDefault(c => c.UserName == emailID);
+                if (user == null)
+                    user = new Preference() { UserName = emailID };
 
             }
+            return View(user);
+        }
+
+        [Route("PreferenceInDb")]
+        public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName, bool isAdded)
+        {
+            Preference pref = new Preference();
+            UPreferences userPref = GetDataHelper.readPreferences();
+            Preference user = new Preference() { UserName = UserName };
+            if (userPref != null)
+            {
+                user = userPref.preferences.FirstOrDefault(c => c.UserName == UserName);
+                if (user == null)
+                    user = new Preference() { UserName = UserName };
+            }
+
+
+            user.News[0].NewsNotificationFlag = newsNotificationFlag;
+            user.News[0].NewsNotificationTime = newsTime;
+
+            var oldPrefList = user.News[0].SelectedCategories.ToList();
+            foreach (var cat in newsPrefCat)
+            {
+                if (isAdded && !oldPrefList.Contains(cat))
+                    oldPrefList.Add(cat);
+                else
+                    oldPrefList.Remove(cat);
+
+            }
+            user.News[0].SelectedCategories = oldPrefList.ToArray();
+
+
+            // user.News[0].SelectedCategories = newsPrefCat;
+            user.News[0].NewsNotifyMe = newsNotifyMe;
+
+            user.EandT[0].EandTNotificationFlag = eandtflag;
+            user.EandT[0].EandTNotifyMe = eandtNotify;
+            user.EandT[0].EandTNotificationTime = eandtTime;
+
+            user.Task[0].TaskNotificationFlag = taskNotificationFlag;
+            user.Task[0].TaskNotificationTime = taskTime;
+            user.Task[0].TaskNotifyMe = taskNotifyMe;
+
+            GetDataHelper.WritePreferences(user);
+
         }
 
         [Route("policies")]
@@ -264,7 +285,7 @@ namespace EmployeeConnect.Controllers
 
         [Route("purchaseorder")]
         [HttpGet]
-        public ActionResult PurchaseOrder(string poNumber,string vendorno)
+        public ActionResult PurchaseOrder(string poNumber, string vendorno)
         {
             TempData["data"] = poNumber;
             ViewBag.vendorNo = vendorno;
@@ -299,9 +320,9 @@ namespace EmployeeConnect.Controllers
             PO poList = new PO();
             poList = GetDataHelper.GetPOs();
             TempData["data"] = poNo;
-            foreach(var item in poList.PurchaseOrder)
+            foreach (var item in poList.PurchaseOrder)
             {
-                if(item.PoNumber == poNo)
+                if (item.PoNumber == poNo)
                 {
                     GetDataHelper.updatePOStatus(poNo);
                 }
@@ -329,13 +350,14 @@ namespace EmployeeConnect.Controllers
         {
             EandTModel eventsListData = new EandTModel();
             eventsListData = GetDataHelper.GetEandT();
-            foreach(var item in eventsListData.EventsAndtraining)
+            foreach (var item in eventsListData.EventsAndtraining)
             {
-                if(item.ETID == id)
-                {                    
+                if (item.ETID == id)
+                {
                     GetDataHelper.ETStatusUpdate(item.ETID);
-               }
+                }
             }
+            eventsListData = GetDataHelper.GetEandT();
             EventsAndTraining[] EventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
             EventsAndTraining[] UpcomingEventGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];
             EventsAndTraining[] TrainingGrid = new EventsAndTraining[eventsListData.EventsAndtraining.Length];

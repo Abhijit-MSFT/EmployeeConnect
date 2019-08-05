@@ -279,6 +279,7 @@ span.range {
 
 .modal-dialog {
     max-width: 400px;
+    max-height: 150px;
 }
 
 .cancel,
@@ -319,8 +320,9 @@ span.range {
 }
 
 .two-btn {
-    padding-bottom: 50px;
+    padding-bottom: 40px;
     float: right;
+    margin-top: -30px;
 }
 
 .tick::before {
@@ -559,10 +561,12 @@ span.range {
     right: 5px;
 }
 
-body {
+/*body {
     background-color: #f3f2f1;
     padding: 20px;
     overflow: auto;
+}*/
+form#purchaseorder {
 }
 
 .custom-card-first-row,

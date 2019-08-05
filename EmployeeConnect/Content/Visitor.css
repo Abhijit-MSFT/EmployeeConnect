@@ -142,7 +142,8 @@
 }
 
 .date-control {
-    width: 200px;
+    width: 
+        px;
     height: 35px;
     padding-left: 10px;
     -webkit-appearance: none;
@@ -317,6 +318,7 @@ span.range {
 .two-btn {
     padding-bottom: 50px;
     float: right;
+    margin-top:-20px;
 }
 
 .tick::before {
@@ -476,6 +478,7 @@ span.range {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
     font-size: 18px;
+    margin-bottom:-15px;
 }
 
 .host,
@@ -510,6 +513,7 @@ span.range {
     position: relative;
     right: 25px;
     vertical-align: middle;
+    display:none;
 }
 
 .for-visitor::before {
@@ -559,6 +563,24 @@ body {
     background-color: #ffffff;
     padding: 20px;
     overflow: hidden !important;
+}
+.time-pick {
+    display: none;
+}
+
+.date-pick {
+    display: none;
+}
+
+
+#sendrequest {
+    margin-top: -40px !important;
+    overflow: auto;
+}
+
+#visitorregestration {
+    margin-top: -40px !important;
+    overflow: auto;
 }
 
 .custom-card-first-row,

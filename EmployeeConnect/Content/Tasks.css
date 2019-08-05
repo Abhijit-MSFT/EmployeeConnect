@@ -1,7 +1,13 @@
-﻿
+﻿@font-face {
+    font-family: "Teams Assets";
+    src: url("./fonts/TeamsAssets-Light.woff") format("woff"), url("./fonts/TeamsAssets-Light.woff2") format("woff2");
+    font-style: normal;
+}
+
 body {
     padding: 20px;
     background-color: #f3f2f1;
+    overflow: auto;
 }
 
 .heading {
@@ -24,18 +30,7 @@ span.currency {
     position: relative;
     bottom: 3px;
 }
-.reviewButton {
-    height: 35px;
-    width: 100px;
-    color: blue !important;
-    font-family: "Segoe UI";
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: center;
-    position: relative;
-    cursor: pointer;
-}
+
 .time-sheet,
 .expenses-sheet {
     width: 60px;
@@ -50,7 +45,7 @@ span.currency {
 
 .title-head {
     position: relative;
-    left: 65px;
+    margin-left: 65px;
     bottom: 10px;
     color: #5c5b5b;
     height: 20px;
@@ -61,15 +56,18 @@ span.currency {
 .Submit-expenses {
     position: relative;
     top: 15px;
-    left: 65px;
+    margin-left: 65px;
     color: #8586bb;
     cursor: pointer;
 }
 
-i.fas.fa-chevron-right {
-    font-size: 12px;
-    position: relative;
-    left: 5px;
+.chevron-right::before {
+    font-size: 16px;
+    position: absolute;
+    margin-left: 10px;
+    content: "\E447";
+    font-family: "Teams Assets";
+    font-weight: bold;
 }
 
 .panel-heading {
@@ -84,11 +82,11 @@ i.fas.fa-chevron-right {
 }
 
 .panel-heading .accordion-toggle::after {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 600;
-    color: darkgray;
-    content: "\f0dd";
     float: left;
+    font-size: 16px;
+    content: "\E447";
+    font-family: "Teams Assets";
+    font-weight: bold;
     -moz-transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
@@ -99,7 +97,6 @@ h6.panel-title.accordion-toggle.collapsed::after {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     transform: rotate(-90deg);
-    /* content: "\f0da"; */
 }
 
 .table {
@@ -150,7 +147,6 @@ h6 {
 .review {
     color: #6668a9;
     cursor: pointer;
-    text-align: center;
 }
 
 th {
@@ -160,10 +156,210 @@ th {
 }
 
 td.po-no,
+td.Description,
 td.vendor-name,
 td.vendor-no,
 td.amount,
 td.po-no1,
 td.Invoice-no {
     padding-left: 30px;
+}
+
+.heading2,
+.mobile-timesheet,
+.mobile-EM,
+.desk,
+.tb-for-mobile {
+    display: none;
+}
+
+@media (max-width: 425px) {
+    .time-sheet,
+    .expenses-sheet,
+    .heading,
+    .full-timesheet,
+    .Submit-expenses,
+    .hide-for-mobile,
+    .tb-for-desktop {
+        display: none;
+    }
+
+    .heading2,
+    .mobile-timesheet,
+    .mobile-EM,
+    .desk,
+    .tb-for-mobile {
+        display: block;
+    }
+
+    .heading2 {
+        padding-bottom: 0;
+        color: #6769aa;
+        font-weight: 500;
+    }
+
+    .card-header {
+        background-color: white;
+        border-bottom: none;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    .custom-card {
+        max-width: inherit;
+        height: auto;
+        border-radius: 0;
+        border: none;
+    }
+
+    .custom-card-deck {
+        position: relative;
+        top: 0px;
+    }
+
+    .container-fluid {
+        width: 100%;
+        padding: 0;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .title-head {
+        margin-left: 0;
+        bottom: 0;
+        height: auto;
+        width: auto;
+        font-weight: 400;
+        color: #636262;
+    }
+
+    .mobile-timesheet,
+    .mobile-EM {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    h5.card-title {
+        font-size: 16px;
+    }
+
+    .chevron-right::before {
+        margin-left: 87%;
+        bottom: 16%;
+        color: #6769aa;
+    }
+
+    .panel-heading .accordion-toggle::after {
+        float: right;
+        margin-right: 3%;
+        color: #6769aa;
+    }
+
+    h6.panel-title.accordion-toggle.collapsed::after {
+        -webkit-transform: rotate(-180deg);
+        -moz-transform: rotate(-180deg);
+        transform: rotate(-180deg);
+    }
+
+    .mr-up::before {
+        bottom: 20%;
+    }
+
+    .card-deck .card {
+        margin: 0;
+    }
+
+    .br-mb {
+        border-top: 2px solid #f3f2f1;
+    }
+
+    .pending-approval {
+        background-color: white;
+    }
+
+    .pending-approval {
+        top: 10px;
+    }
+
+    .panel-default:nth-child(n + 1) {
+        border-top: 2px solid #f3f2f1;
+    }
+
+    h6.panel-title.accordion-toggle {
+        top: 4px;
+        font-size: 14px;
+    }
+
+    .mrg-for-mb {
+        padding-bottom: 20px;
+    }
+
+    .ht-for-mobile1::before,
+    .ht-for-mobile2::before,
+    .ht-for-mobile3::before {
+        bottom: 14%;
+        margin-left: 89%;
+    }
+
+    .panel-heading {
+        padding: 5px 0px 5px 0px;
+    }
+
+    .review {
+        border: 1px solid #6264a7;
+        width: 70px;
+        height: auto;
+        text-align: center;
+        margin-left: 18px;
+        border-radius: 4px;
+        padding: 2px;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .table td,
+    .table th {
+        padding: 0.2rem;
+    }
+
+    .table td {
+        padding-left: 6rem;
+    }
+
+    tbody {
+        font-size: 14px;
+    }
+
+    .tb-for-desktop {
+        display: none;
+    }
+}
+
+@media (max-width:375px) {
+    .panel-heading .accordion-toggle::after {
+        margin-right: 2%;
+    }
+}
+
+@media (max-width: 320px) {
+    .title-head {
+        font-size: 12px;
+    }
+
+    .mobile-timesheet,
+    .mobile-EM {
+        font-size: 14px;
+    }
+
+    .ht-for-mobile1::before,
+    .ht-for-mobile2::before,
+    .ht-for-mobile3::before {
+        margin-left: 93%;
+    }
+
+    .panel-heading .accordion-toggle::after {
+        margin-right: 0%;
+    }
 }

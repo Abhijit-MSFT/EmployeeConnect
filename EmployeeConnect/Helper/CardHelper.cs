@@ -34,13 +34,13 @@ namespace EmployeeConnect.Helper
             item.type = "section";
             list.Add(item);
 
-            if (newsL != null)  //if it got the news
+            if (newsL != null) 
             {
                 var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
                 var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
 
                 int MaxNewsCount = TrendingNews.Count();
-                if (MaxNewsCount > 4)   //show 2 trending news
+                if (MaxNewsCount > 4)  
                     MaxNewsCount = 4;
 
                 for (int i = 0; i < MaxNewsCount; i++)
@@ -69,7 +69,7 @@ namespace EmployeeConnect.Helper
                 list.Add(item);
 
                 MaxNewsCount = SuggestedNews.Count();
-                if (SuggestedNews.Count() > 4)   //show 2 trending news
+                if (SuggestedNews.Count() > 4)
                     MaxNewsCount = 4;
 
                 for (int i = 0; i < MaxNewsCount; i++)
@@ -90,21 +90,7 @@ namespace EmployeeConnect.Helper
                     };
 
                     list.Add(item);
-                }
-
-                //for View More
-                /*item = new Item();
-                item.title = "View more";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/whiteImage.png";
-                item.type = "content";
-                item.id = deepLinkTab("currNews", "news");
-                item.tap = new Tap()
-                {
-                    type = "openUrl",
-                    value = deepLinkTab("currNews", "news")
-
-                };
-                list.Add(item);*/
+                }              
 
                 ListButton viewButton = new ListButton();
                 viewButton.type = "openUrl";
@@ -129,6 +115,7 @@ namespace EmployeeConnect.Helper
         {
             return string.Format("https://teams.microsoft.com/l/entity/{0}/{1}?webUrl={2}", EmployeeConnect.Helper.ApplicationSettings.AppId, EntityId, ApplicationSettings.BaseUrl + "/" + EntityName);
         }
+
         //Returns the policies ListCard having Policies for every department.
         public static Attachment GetPoliciesCard()
         {
@@ -136,7 +123,7 @@ namespace EmployeeConnect.Helper
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Please select a department to view policies";
-            string[] dept = { "Human Resources", "Payment and benefits", "IT & facilities", "Store Operations" };
+            string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
 
             string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
 
@@ -164,7 +151,7 @@ namespace EmployeeConnect.Helper
                     value = deepLinkTab("policies", "Policies")
                 };
 
-            list.Add(item);
+                list.Add(item);
             }
             card.content.items = list.ToArray();
 
@@ -181,14 +168,12 @@ namespace EmployeeConnect.Helper
         //Returns the Tools ListCard having Tools for every department.
         public static Attachment GetMyToolsCard()
         {
-
-
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
-            card.content.title = "Please select a department to view it's tools";
+            card.content.title = "Please select a department to view tools";
 
-            string[] dept = { "Human Resources", "Payment and benefits", "IT & facilities", "Store Operations" };
+            string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
 
             string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
 
@@ -268,7 +253,12 @@ namespace EmployeeConnect.Helper
                             }
                         }
                     }
+                },
+                Actions =
+                {
+                    new AdaptiveSubmitAction() { Title = "Close", DataJson="{\"action\": \"close\"}" }
                 }
+
             };
             Attachment attachment = new Attachment();
 
@@ -291,58 +281,50 @@ namespace EmployeeConnect.Helper
             }
             return null;    // id doesn't exist
         }
+
         public static List<Attachment> WelcomeCard()
         {
             //Welcome Card
             var action = new List<AdaptiveAction>()
             {
-                // submit action gathers up input fields, merges with optional data field and generates event to client asking for data to be submitted
-                new AdaptiveShowCardAction()
+                new AdaptiveSubmitAction()
                 {
-                    Title = "Let's get Started",
-                    Card=(AdaptiveCard)CardHelper.SetTimePrefrences().Content
-                }
+                    Title = "Let's get started",
+                    DataJson = @"{'Action':'" + Constants.ShowPrefCard + "' }"
+                }                
+
+                //new AdaptiveShowCardAction()
+                //{
+                //    Title = "Let's get Started",
+                //    Card=(AdaptiveCard)CardHelper.SetTimePrefrences().Content
+                //}
             };
             var card1 = new AdaptiveCard("1.0")
             {
                 BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
                 Body = new List<AdaptiveElement>()
                 {
-                    //BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
                     new AdaptiveContainer()
                     {
-                     //   BackgroundImage = ApplicationSettings.BaseUrl + "/Images/signin_1.png",
                         Items = new List<AdaptiveElement>()
-                        {
-                            // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
+                        {                        
                             new AdaptiveTextBlock()
                             {
-
                                 Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                
+                                Weight = AdaptiveTextWeight.Bolder, 
+                                Size = AdaptiveTextSize.Large                                
                             },
-                            // Adaptive FactSet item makes it simple to display a series of facts (e.g. name/value pairs) in a tabular form
-                           
-                            // ImageSet allows for the inclusion of a collection images like a photogallery
-                            /*new AdaptiveTextBlock()
-                            {
-                                Text = "Please sign in to get started",
-                                Wrap = true ,// True if text is allowed to wrap
-                                
-                            },*/
+                            
                             new AdaptiveTextBlock()
                             {
                                 Text = "Keep yourself posted \r\rabout the latest news",
-                                Wrap = true ,// True if text is allowed to wrap
+                                Wrap = true ,
                                  Weight = AdaptiveTextWeight.Bolder,
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation.",
-                                Wrap = true ,// True if text is allowed to wrap
-                                
+                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation",
+                                Wrap = true ,                                
                             }
                         }
                     }
@@ -374,14 +356,14 @@ namespace EmployeeConnect.Helper
                             },*/
                                 new AdaptiveTextBlock()
                             {
-                                Text = "Add events to your calender",
+                                Text = "Add events to your calendar",
                                 Wrap = true ,// True if text is allowed to wrap
                                     Weight = AdaptiveTextWeight.Bolder
 
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings.",
+                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings",
                                 Wrap = true ,// True if text is allowed to wrap
                                 MaxWidth = 2
                             }
@@ -405,25 +387,20 @@ namespace EmployeeConnect.Helper
                             new AdaptiveTextBlock()
                             {
                                 Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            /*new AdaptiveTextBlock()
-                            {
-                                Text = "Please sign in",
-                                Wrap = true,// True if text is allowed to wrap
-                            },*/
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Size = AdaptiveTextSize.Large
+                            },                            
                             new AdaptiveTextBlock()
                             {
                                 Text = "Create and manage your tasks",
-                                Wrap = true,// True if text is allowed to wrap
+                                Wrap = true,
                                 Weight = AdaptiveTextWeight.Bolder
 
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The apps identifies all your \r\r pending tasks and help \r\r you manage everything at \r\rone place.",
-                                Wrap = true,// True if text is allowed to wrap
+                                Text = "The app identifies all your \r\r pending tasks and helps \r\r you manage everything at \r\r one place.",
+                                Wrap = true,
 
                             }
                         }
@@ -951,7 +928,7 @@ namespace EmployeeConnect.Helper
             card.content.title = "Upcoming Events and Trainings";
             EandTModel EandTL = Helper.GetDataHelper.GetEandT();
             Item item;
-            if (EandTL != null)  
+            if (EandTL != null)
             {
                 var Events = EandTL.EventsAndtraining;
                 int MaxEventsCount = Events.Count();
@@ -978,9 +955,9 @@ namespace EmployeeConnect.Helper
                         item.title = title;
                         //item.icon = EandT.ETThumbnailUrl;
                         if (EandT.ETFlag == "E")
-                            item.icon = ApplicationSettings.BaseUrl + "/fonts/flagImg.JPG";
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/flagImg.png";
                         else
-                            item.icon = ApplicationSettings.BaseUrl + "/fonts/shapeEve.JPG";
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/shapeEve.png";
                         item.id = EandT.ETID;
                         item.subtitle = subtitle;
                         //item.flagImage = EandT.ETFlagImage;
@@ -1133,7 +1110,6 @@ namespace EmployeeConnect.Helper
                                     }
                                 }
                             }
-
                         }
                     }
                 },
@@ -1142,12 +1118,12 @@ namespace EmployeeConnect.Helper
                      new AdaptiveSubmitAction
                      {
                         Title ="Approve",
-                       Data="podecline"
+                       Data= new PODeclineData { action = "podecline" }  
                      },
                      new AdaptiveSubmitAction
                      {
                         Title ="Decline",
-                        Data="close_button"
+                        DataJson="{\"action\": \"close\"}"
                      }
                 }
             };
@@ -1235,17 +1211,17 @@ namespace EmployeeConnect.Helper
                 item = new Item();
                 var task = pending.ElementAt(i);
                 item.title = task.Description;
-                item.subtitle = "PoNumber: "+ task.PoNumber;
+                item.subtitle = "PoNumber: " + task.PoNumber;
                 item.id = task.PoNumber;
                 item.type = "resultItem";
                 item.icon = ApplicationSettings.BaseUrl + "/Images/purchase_order.PNG";
-                var url = "purchaseorder?poNumber=" + task.PoNumber.ToString()+"&vendorno="+task.vendorNo.ToString();
+                var url = "purchaseorder?poNumber=" + task.PoNumber.ToString() + "&vendorno=" + task.vendorNo.ToString();
                 item.tap = new Tap()
                 {
                     // /purchaseorder?poNumber="+PONumber+"&vendorno="+vendorNo;
                     type = "invoke",
                     title = item.id,
-                    value = "{ \"type\": \"task/fetch\", \"data\": \"" + url +  "\"}"
+                    value = "{ \"type\": \"task/fetch\", \"data\": \"" + url + "\"}"
                 };
                 list.Add(item);
             }
@@ -1260,7 +1236,7 @@ namespace EmployeeConnect.Helper
                 var task = invoice.ElementAt(i);
                 item.title = task.Description;
                 item.subtitle = "InvoiceNumber: " + task.PoNumber;
-                item.id =task.PoNumber;
+                item.id = task.PoNumber;
                 item.type = "resultItem";
                 item.icon = ApplicationSettings.BaseUrl + "/Images/invoice.PNG";
                 var url = "purchaseorder?poNumber=" + task.PoNumber.ToString() + "&vendorno=" + task.vendorNo.ToString();
@@ -1276,24 +1252,24 @@ namespace EmployeeConnect.Helper
             item.title = "Inventory";
             item.type = "section";
             list.Add(item);
-            
-            for (int i = 0; i < inventory.Count(); i++)
-            {
-                item = new Item();
-                var task = inventory.ElementAt(i);
-                item.title = task.description;
-                item.subtitle = "InventoryNumber: " + task.inventoryNo;
-                item.id =  task.inventoryNo;
-                item.type = "resultItem";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/inventory.PNG";
-                item.tap = new Tap()
-                {
-                    type = "invoke",
-                    title = item.id,
-                    //value = "{ \"type\": \"task/fetch\", \"data\": \"po:" + task.inventoryNo.ToString() + "\"}"
-                };
-                list.Add(item);
-            }
+
+            //for (int i = 0; i < inventory.Count(); i++)
+            //{
+            //    item = new Item();
+            //    var task = inventory.ElementAt(i);
+            //    item.title = task.description;
+            //    item.subtitle = "InventoryNumber: " + task.inventoryNo;
+            //    item.id = task.inventoryNo;
+            //    item.type = "resultItem";
+            //    item.icon = ApplicationSettings.BaseUrl + "/Images/inventory.PNG";
+            //    item.tap = new Tap()
+            //    {
+            //        type = "invoke",
+            //        title = item.id,
+            //        //value = "{ \"type\": \"task/fetch\", \"data\": \"po:" + task.inventoryNo.ToString() + "\"}"
+            //    };
+            //    list.Add(item);
+            //}
             card.content.items = list.ToArray();
             Attachment attachment = new Attachment()
             {
@@ -1401,6 +1377,7 @@ namespace EmployeeConnect.Helper
             };
             return attachment;
         }
+
         public static Attachment HumanResourceCard()
         {
 
@@ -1410,7 +1387,7 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             card.content.title = "Here are the tools under your HR department";
             string[] HRtools = { "Create business letter", "Create ticket", "Request leave", "View policies" };
-            string[] HRtoolsSub = { "Create a business letter within a predesigned color and template.", "For all HR tickets, the ticket type is being set as Employee Support.", "Request leave and check your status in the Leave application.", "Identify the purpose and objectives of Human Resources department." };
+            string[] HRtoolsSub = { "Create a business letter within a predesigned color and template.", "Raise a support ticket for any HR related queries.", "Request leave and check your status in the Leave application.", "View global policies for all employees." };
             string[] HRicons = { "/Images/createbusinessletter.JPG", "/Images/createticket.JPG", "/Images/requestleave.JPG", "/Images/viewpolicies.JPG" };
             for (int i = 0; i < HRtools.Count(); i++)
             {
@@ -1454,6 +1431,7 @@ namespace EmployeeConnect.Helper
             return attachment;
 
         }
+
         public static Attachment ITFacilitiesCard()
         {
 
@@ -1462,9 +1440,9 @@ namespace EmployeeConnect.Helper
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Here are the tools under your IT department";
-            string[] ITtools = { "Raise IT Support Ticket", "Make visitor request", "Event IT Support request", "Cafeteria services app" };
-            string[] ITtoolsSub = { "Submit your support case to review and respond.", "Fill a request form for short-term visitors.", "Fill out this form to request any equipment for events.", "Employees can order and pay here without waiting in long queues." };
-            string[] ITicons = { "/Images/itsupportticket.JPG", "/Images/makewifirequest.JPG", "/Images/eventitsupport.JPG", "/Images/cafeteriaservices.JPG" };
+            string[] ITtools = { "Raise IT Support Ticket", "Submit Visitor Request", "Event IT Support Request", "Cafeteria Services App" };
+            string[] ITtoolsSub = { "Submit your support request to the IT team.", "Fill a request form for short-term visitors.", "Fill out this form to request any equipment for events.", "Order your meals from the cafeteria online." };
+            string[] ITicons = { "/Images/itsupportticket.JPG", "/Images/VisitorRequest.JPG", "/Images/eventitsupport.JPG", "/Images/cafeteriaservices.JPG" };
             for (int i = 0; i < ITtools.Count(); i++)
             {
 
@@ -1506,10 +1484,9 @@ namespace EmployeeConnect.Helper
             return attachment;
 
         }
+
         public static Attachment PaymentsAndBenefitsCard()
         {
-
-
             var card = new ListCard();
             card.content = new Content();
             var list = new List<Item>();
@@ -1545,8 +1522,8 @@ namespace EmployeeConnect.Helper
             attachment.Content = card.content;
 
             return attachment;
-
         }
+
         public static Attachment StoreOperationsCard()
         {
 
@@ -1846,8 +1823,8 @@ namespace EmployeeConnect.Helper
                         new AdaptiveSubmitAction()
                         {
                             Title = "Close",
-                            Data = "close_button",
-                            //DataJson="close_button"
+                            // Data = ,
+                            DataJson="{\"action\": \"close\"}"
                         }
 
                 }
@@ -1857,8 +1834,7 @@ namespace EmployeeConnect.Helper
                 card.Actions.Add(new AdaptiveSubmitAction()
                 {
                     Title = status,
-                    Data = "ET" + id
-                    //DataJson = "Remove_Add"
+                    Data = new EventTaskData() { action = TaskModuleIds.toggleEventStatus, eventId = id }
                 });
             }
 
@@ -1875,56 +1851,117 @@ namespace EmployeeConnect.Helper
         public static EventsAndTraining getETByIds(EandTModel EandTL, string id)
         {
             if (EandTL == null)
+            {
                 return null;
+            }
             foreach (var ET in EandTL.EventsAndtraining)
             {
                 if (ET.ETID.Equals(id))
                     return ET;
             }
-            return null;    // id doesn't exist
+            return null;
         }
+
+        //public static Attachment DefaultCard()
+        //{
+        //    var card1 = new AdaptiveCard("1.0")
+        //    {
+        //        BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
+        //        Body = new List<AdaptiveElement>()
+        //        {
+        //            new AdaptiveContainer()
+        //            {
+        //                Items = new List<AdaptiveElement>()
+        //                {
+        //                    new AdaptiveTextBlock()
+        //                    {
+
+        //                        Text = "Welcome to Employee Connect",
+        //                        Weight = AdaptiveTextWeight.Bolder,
+        //                        Size = AdaptiveTextSize.Large
+
+        //                    },
+
+        //                    new AdaptiveTextBlock()
+        //                    {
+        //                        Text = "Try these bot commands",
+        //                        Wrap = true ,
+        //                         Weight = AdaptiveTextWeight.Bolder,
+        //                    },
+        //                    new AdaptiveTextBlock()
+        //                    {
+        //                        Text = @"- Set Preferences
+        //                        - Trending News
+        //                        - Upcoming Events And Trainings
+        //                        - Pending Submissions
+        //                        - Pending Approvals
+        //                        - My Tools
+        //                        - Policies",
+        //                        Wrap = true 
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    };            
+
+        //    Attachment attachment = new Attachment();
+
+        //    attachment.ContentType = AdaptiveCard.ContentType;
+
+        //    attachment.Content = card1;
+
+        //    return attachment;
+        //}
 
         public static List<Attachment> DefaultCard()
         {
             //Welcome Card
+            //var action = new List<AdaptiveAction>()
+            //{
+            //    //new AdaptiveSubmitAction()
+            //    //{
+            //    //    Title = "Let's get started",
+            //    //    DataJson = @"{'Action':'" + Constants.ShowPrefCard + "' }"
+            //    //}                
+
+            //    //new AdaptiveShowCardAction()
+            //    //{
+            //    //    Title = "Let's get Started",
+            //    //    Card=(AdaptiveCard)CardHelper.SetTimePrefrences().Content
+            //    //}
+            //};
             var card1 = new AdaptiveCard("1.0")
             {
                 BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
                 Body = new List<AdaptiveElement>()
                 {
-                    //BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
                     new AdaptiveContainer()
                     {
-                     //   BackgroundImage = ApplicationSettings.BaseUrl + "/Images/signin_1.png",
                         Items = new List<AdaptiveElement>()
                         {
-                            // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
                             new AdaptiveTextBlock()
                             {
-
                                 Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Size = AdaptiveTextSize.Large
                             },
-                            // Adaptive FactSet item makes it simple to display a series of facts (e.g. name/value pairs) in a tabular form
-                           
-                            // ImageSet allows for the inclusion of a collection images like a photogallery
+
                             new AdaptiveTextBlock()
                             {
                                 Text = "Keep yourself posted \r\rabout the latest news",
-                                Wrap = true ,// True if text is allowed to wrap
+                                Wrap = true ,
                                  Weight = AdaptiveTextWeight.Bolder,
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation.",
-                                Wrap = true ,// True if text is allowed to wrap
-                                
+                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation",
+                                Wrap = true ,
                             }
                         }
                     }
-                }
+                },
+
+                //Actions = action
             };
             var card2 = new AdaptiveCard("1.0")
             {
@@ -1943,16 +1980,21 @@ namespace EmployeeConnect.Helper
                                 Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                             },
-                            new AdaptiveTextBlock()
+                            /*new AdaptiveTextBlock()
                             {
-                                Text = "Add events to your calender",
+                                Text = "Please sign in to get started",
+                                Wrap = true ,// True if text is allowed to wrap
+                            },*/
+                                new AdaptiveTextBlock()
+                            {
+                                Text = "Add events to your calendar",
                                 Wrap = true ,// True if text is allowed to wrap
                                     Weight = AdaptiveTextWeight.Bolder
 
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings.",
+                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings",
                                 Wrap = true ,// True if text is allowed to wrap
                                 MaxWidth = 2
                             }
@@ -1960,7 +2002,9 @@ namespace EmployeeConnect.Helper
                             // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
                             
                     }
-                }
+                },
+
+                //Actions = action
             };
             var card3 = new AdaptiveCard("1.0")
             {
@@ -1974,26 +2018,27 @@ namespace EmployeeConnect.Helper
                             new AdaptiveTextBlock()
                             {
                                 Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Size = AdaptiveTextSize.Large
                             },
-
                             new AdaptiveTextBlock()
                             {
                                 Text = "Create and manage your tasks",
-                                Wrap = true,// True if text is allowed to wrap
+                                Wrap = true,
                                 Weight = AdaptiveTextWeight.Bolder
 
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The apps identifies all your \r\r pending tasks and help \r\r you manage everything at \r\rone place.",
-                                Wrap = true,// True if text is allowed to wrap
+                                Text = "The app identifies all your \r\r pending tasks and helps \r\r you manage everything at \r\r one place.",
+                                Wrap = true,
 
                             }
                         }
                     }
                 },
+
+                //Actions = action
             };
             List<Attachment> res = new List<Attachment>();
             res.Add(new Attachment()
@@ -2011,7 +2056,12 @@ namespace EmployeeConnect.Helper
                 ContentType = AdaptiveCard.ContentType,
                 Content = card3
             });
+
+
             return res;
         }
+
     }
+
+   
 }

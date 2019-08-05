@@ -17,7 +17,7 @@ namespace EmployeeConnect.Helper
     {
         public static string userName = "";
         public static NewsModel GetNews()
-        {            
+        {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
             NewsModel news = new NewsModel();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
@@ -44,6 +44,18 @@ namespace EmployeeConnect.Helper
 
         }
 
+        //public static PO GetPendingPOs()
+        //{
+        //    PO POs = GetDataHelper.GetPOs();
+        //    PurchaseOrders pendingPOs = POs.PurchaseOrder.Where(c => c.PoStatus == "pending").Select(d=>d).ToList();
+        //    string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/PurchaseOrders.json";
+        //    PO POs = new PO();
+        //    string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+        //    POs = (new JavaScriptSerializer().Deserialize<PO>(json));
+        //    return POs;
+
+        //}
+
         public static void updatePOStatus(string poNo)
         {
             if (poNo == null)
@@ -52,7 +64,7 @@ namespace EmployeeConnect.Helper
             string json = File.ReadAllText(file);
 
             Newtonsoft.Json.Linq.JObject poObj = Newtonsoft.Json.Linq.JObject.Parse(json);
-            for(int poCount =0; poCount<poObj["purchaseOrder"].Count();poCount++)
+            for (int poCount = 0; poCount < poObj["purchaseOrder"].Count(); poCount++)
             {
                 if (poObj["purchaseOrder"][poCount]["poNumber"].ToString().Equals(poNo))
                 {
@@ -206,36 +218,68 @@ namespace EmployeeConnect.Helper
 
             return uPref;
         }
-        
+
         public static UPreferences readPreferences()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
             string json = File.ReadAllText(file);
-            UPreferences uPref = new JavaScriptSerializer().Deserialize<UPreferences>(json);           
-            
+            UPreferences uPref = new JavaScriptSerializer().Deserialize<UPreferences>(json);
+
             return uPref;
         }
 
         //Updates the UPreferences json with the preference
-        public static void WritePreferences(Preference pref)
+        public static void WritePreferences(Preference newPref)
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
             string json = File.ReadAllText(file);
             int i;
             UPreferences uPref = new JavaScriptSerializer().Deserialize<UPreferences>(json);
-            List<Preference> list = uPref.preferences.ToList();
-            for (i = 0; i < list.Count(); i++)
+            if (uPref == null)
             {
-                if (list[i].UserName.Equals(pref.UserName))
-                {
-                    //rewrite
-                    list[i] = pref;
-                    break;
-                }                
+                uPref = new UPreferences();
+                // Add new record and return;
+                uPref.preferences = new[] { newPref };
+
+
             }
-            if (i == list.Count())
-                list.Add(pref);
-            uPref.preferences = list.ToArray();
+            else
+            {
+                var oldPrefList = uPref.preferences.ToList();
+                var oldPref = oldPrefList.FirstOrDefault(u => u.UserName == newPref.UserName);
+                if(oldPref == null)
+                {
+                    // TODO: update this logic
+                    var allPref = uPref.preferences.ToList();
+                    allPref.Add(newPref);
+                    uPref.preferences = allPref.ToArray();
+                }
+                else
+                {
+                    //var oldPrefList =  uPref.preferences.ToList();
+                    //var oldPrefObj = oldPrefList.FirstOrDefault(  )
+                    oldPrefList.Remove(oldPref);
+                    oldPrefList.Add(newPref);
+                    //uPref.preferences = oldPrefList.ToArray();
+                    // oldPref = newPref;
+                    uPref.preferences = oldPrefList.ToArray();
+                }
+                //var cat = uPref.preferences.Select(c => c.News).FirstOrDefault().Select(d => d.SelectedCategories).FirstOrDefault();
+
+                //List<Preference> list = uPref.preferences.ToList();
+                //for (i = 0; i < list.Count(); i++)
+                //{
+                //    if (list[i].UserName.Equals(pref.UserName))
+                //    {
+                //        //rewrite
+                //        list[i] = pref;
+                //        break;
+                //    }
+                //}
+                //if (i == list.Count())
+                //    list.Add(pref);
+                //uPref.preferences = list.ToArray();
+            }
             var convertedJson = JsonConvert.SerializeObject(uPref, Formatting.Indented);
             File.WriteAllText(file, convertedJson);
             return;
@@ -272,8 +316,8 @@ namespace EmployeeConnect.Helper
 
         public static void saveVisitorInfo(JObject visitorData)
         {
-           VisitorDataModel currentVisitor = new VisitorDataModel()
-            {               
+            VisitorDataModel currentVisitor = new VisitorDataModel()
+            {
 
                 VhostName = visitorData.GetValue("hostName").ToString(),
                 VhostLocation = visitorData.GetValue("hostLocation").ToString(),
@@ -283,7 +327,7 @@ namespace EmployeeConnect.Helper
                 Vorg = visitorData.GetValue("org").ToString(),
                 Vcontact = visitorData.GetValue("contactNo").ToString()
 
-           };
+            };
             JavaScriptSerializer js = new JavaScriptSerializer();
             string visitorJson = js.Serialize(currentVisitor);
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/VisitorReg") + @"/Visitors.json";
@@ -305,7 +349,7 @@ namespace EmployeeConnect.Helper
             var ticPriority = ticketData.GetValue("Priority").ToString();
             var ticCat = ticketData.GetValue("Category").ToString();
 
-            
+
             //currentTicket.Tickets[TicketCount].ticketNo = tNo;
             //currentTicket.Tickets[TicketCount].ticketDescription = ticDes;
             //currentTicket.Tickets[TicketCount].date = ticDate;
@@ -357,7 +401,7 @@ namespace EmployeeConnect.Helper
             newsM.news = prefNews.ToArray();
             return newsM;
         }
-               
+
         //news notification as per preferences
         public static async System.Threading.Tasks.Task CheckPrefAndSendNewsCard()
         {
@@ -378,11 +422,11 @@ namespace EmployeeConnect.Helper
                 {
                     card = Helper.CardHelper.getNewsCard(userName);
                     string uIn = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string tenID =  UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string serURL =  UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);                     
+                    string tenID = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    string serURL = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
+                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
                 }
-            }            
+            }
         }
 
         //eAndt notification as per preferences
@@ -447,7 +491,7 @@ namespace EmployeeConnect.Helper
             {
                 NewsModel news = GetNews();
                 int NewsCount = news.news.Count();
-                
+
                 DateTime[] last15Days = Enumerable.Range(0, 15).Select(i => DateTime.Now.Date.AddDays(-i)).ToArray();
 
                 for (int i = 0; i < NewsCount; i++)
@@ -473,14 +517,14 @@ namespace EmployeeConnect.Helper
 
                 for (int i = 0; i < eandtCount; i++)
                 {
-                    
+
 
                 }
 
 
                 string json = File.ReadAllText(filename);
             }
-            
+
 
             //EventsAndTraining et = new JavaScriptSerializer().Deserialize<EventsAndTraining>(json);
 
@@ -490,9 +534,9 @@ namespace EmployeeConnect.Helper
             //}
 
 
-            
+
         }
-      
+
     }
 }
 

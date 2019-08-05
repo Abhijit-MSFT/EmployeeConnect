@@ -180,6 +180,7 @@ div#car-root {
     cursor: pointer;
 }
 
+
 .car2-title {
     padding-top: 10px;
 }
@@ -240,7 +241,7 @@ h6.card-title.text {
     .exp-for-mobile,
     .exp-for-mobile2 {
         float: none;
-        position: relative;
+        position:relative;
         top: 450px;
         left: 20%;
         border: 1px solid #6264a7;
@@ -251,7 +252,7 @@ h6.card-title.text {
 
     .exp-for-mobile2 {
         top: 460px;
-        left: 2%;
+        left: 19%;
     }
 
     .business {
@@ -338,7 +339,7 @@ h6.card-title.text {
     }
 
     .exp-for-mobile2 {
-        left: -16px;
+        left: 18%;
     }
 }
 
@@ -358,7 +359,7 @@ h6.card-title.text {
     }
 
     .exp-for-mobile2 {
-        left: -35px;
+        left: 14%;
         font-size: 14px;
     }
 }

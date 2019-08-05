@@ -1,8 +1,7 @@
 @font-face {
-  font-family: "Teams Assets";
-  src: url("./fonts/TeamsAssets-Light.woff") format("woff"),
-    url("./fonts/TeamsAssets-Light.woff2") format("woff2");
-  font-style: normal;
+    font-family: "Teams Assets";
+    src: url("./fonts/TeamsAssets-Light.woff") format("woff"), url("./fonts/TeamsAssets-Light.woff2") format("woff2");
+    font-style: normal;
 }
 
 @font-face {
@@ -13,217 +12,267 @@
 }
 
 body {
-  height: 100%;
-  overflow: auto;
+    height: 100%;
+    overflow: auto;
 }
+
 html {
-  height: 100%;
+    height: 100%;
 }
+
 .header,
 .header2,
 .heading,
 .today,
 .month-date,
 .msg-for-header {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .header,
 .header2 {
-  background-color: #f6f6f7;
-  vertical-align: middle;
-  padding-top: 8px;
-  padding-bottom: 8px;
+    background-color: #f6f6f7;
+    vertical-align: middle;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
+
 .header2 {
-  margin-top: 30px;
+    margin-top: 30px;
 }
+
+.hd2 {
+    margin-left: 10px;
+}
+
 .heading {
-  font-size: 22px;
-  display: inline;
-  font-weight: 600;
-  vertical-align: middle;
+    font-size: 22px;
+    display: inline;
+    font-weight: 600;
+    vertical-align: middle;
 }
+
 .today {
-  display: inline;
-  background-color: #ebebec;
-  color: #656465;
-  padding: 5px 20px 5px 20px;
-  margin-left: 80px;
-  border-radius: 4px;
-  vertical-align: middle;
+    display: inline;
+    background-color: #ebebec;
+    color: #656465;
+    padding: 5px 20px 5px 20px;
+    margin-left: 80px;
+    border-radius: 4px;
+    vertical-align: middle;
 }
+
 .left-chev,
 .right-chev,
 .month-date,
 .down-chev,
 .date,
 .day {
-  display: inline;
+    display: inline;
 }
-.left-chev::before {
-  content: "\E420";
-  font-family: "Teams Assets";
-  font-size: 18px;
-  vertical-align: middle;
-  margin-left: 20px;
-  cursor: pointer;
-}
-.right-chev::before {
-  content: "\E421";
-  font-family: "Teams Assets";
-  font-size: 18px;
-  vertical-align: middle;
-  margin-left: 14px;
-  cursor: pointer;
-  opacity: 0.5;
-}
-.right-chev:hover::before {
-  opacity: 1;
-}
+
+    .left-chev::before {
+        content: "\E420";
+        font-family: "Teams Assets";
+        font-size: 18px;
+        vertical-align: middle;
+        margin-left: 20px;
+        cursor: pointer;
+    }
+
+    .right-chev::before {
+        content: "\E421";
+        font-family: "Teams Assets";
+        font-size: 18px;
+        vertical-align: middle;
+        margin-left: 14px;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    .right-chev:hover::before {
+        opacity: 1;
+    }
+
 .month-date {
-  vertical-align: middle;
-  font-weight: 600;
-  margin-left: 20px;
-  cursor: pointer;
+    vertical-align: middle;
+    font-weight: 600;
+    margin-left: 20px;
+    cursor: pointer;    
 }
+
 .down-chev::before {
-  content: "\E447";
-  font-family: "Teams Assets";
-  font-size: 14px;
-  margin-left: 5px;
-  vertical-align: middle;
-  cursor: pointer;
+    content: "\E447";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: middle;
+    cursor: pointer;
 }
+
 .msg-for-header {
-  color: #9c9b9b;
-  font-size: 16px;
+    color: #9c9b9b;
+    font-size: 14px;
+    margin-top: 10px;
 }
+
 .date-row {
-  padding-top: 20px;
+    padding-top: 20px;
 }
+
 .date {
-  font-size: 18px;
-  font-weight: 600;
+    font-size: 18px;
+    font-weight: 600;
 }
+.dates {
+    margin-bottom: 15px;
+}
+
 .day {
-  padding-left: 5px;
+    padding-left: 5px;
 }
+
 .flag::before {
-  content: "\E917";
-  font-family: "Teams Assets";
-  font-size: 20px;
-  color: #4286bc;
-  vertical-align: middle;
+    content: "\E917";
+    font-family: "Teams Assets";
+    font-size: 20px;
+    color: #4286bc;
+    vertical-align: middle;
 }
-/*.header-flag,
+
+.header-flag,
 .header-badge {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-  background-color: #efeff6;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  border-bottom-width: 0px;
-}*/
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    background-color: #efeff6;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-bottom-width: 0px;
+}
+
 .badge-icon::before {
-  content: "\E954";
-  font-family: "Teams Assets";
-  font-size: 20px;
-  color: #4286bc;
-  vertical-align: middle;
+    content: "\E954";
+    font-family: "Teams Assets";
+    font-size: 20px;
+    color: #4286bc;
+    vertical-align: middle;
 }
+
 .check::before {
-  content: "\F109";
-  font-family: "Teams Assets";
-  font-size: 14px;
-  color: #92c353;
-  vertical-align: text-bottom;
-  position: relative;
-  left: 40%;
+    content: "\F109";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #92c353;
+    vertical-align: text-bottom;
+    position: relative;
+    margin-left: 38%;
 }
+
 .star::before {
-  content: "\E40A";
-  font-family: "Teams Assets-Regular";
-  font-size: 14px;
-  color: #f5a623;
-  vertical-align: text-bottom;
-  position: relative;
-  left: 40%;
+    content: "\E40A";
+    font-family: "Teams Assets-Regular";
+    font-size: 14px;
+    color: #f5a623;
+    vertical-align: text-bottom;
+    position: relative;
+    margin-left: 43%;
 }
-.event {
-  font-size: 14px;
-  color: #4286bc;
-  vertical-align: middle;
-  font-weight: 500;
+
+.event, .flag {
+    font-size: 14px;
+    color: #4286bc;
+    vertical-align: middle;
+    font-weight: 500;
 }
+
 .time-icon::before {
-  content: "\F301";
-  font-family: "Teams Assets";
-  font-size: 14px;
-  color: #9999a4;
+    content: "\E503";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #9999a4;
 }
+
 .time-icon2::before {
-  content: "\F301";
-  font-family: "Teams Assets";
-  font-size: 12px;
-  color: #9999a4;
+    content: "\F301";
+    font-family: "Teams Assets";
+    font-size: 12px;
+    color: #9999a4;
 }
+
 .time-icon,
 .time-icon2,
 .location-icon,
 .web-icon {
-  padding-top: 5px;
+    padding-top: 5px;
 }
+
 .event-time,
 .location,
 .web {
-  color: #9999a4;
-  display: inline;
-  font-size: 12px;
-  padding-left: 10px;
-  position: relative;
-  bottom: 2px;
+    color: #9999a4;
+    display: inline;
+    font-size: 12px;
+    padding-left: 4px;
+    position: relative;
+    bottom: 2px;
 }
+
 .location-icon::before {
-  content: "\E610";
-  font-family: "Teams Assets";
-  font-size: 14px;
-  color: #9999a4;
+    content: "\E610";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #9999a4;
 }
+
 .web-icon::before {
-  content: "\E505";
-  font-family: "Teams Assets";
-  font-size: 14px;
-  color: #9999a4;
+    content: "\E505";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #9999a4;
 }
+
 .web-icon2::before {
-  content: "\E505";
-  font-family: "Teams Assets";
-  font-size: 12px;
-  color: #9999a4;
+    content: "\E505";
+    font-family: "Teams Assets";
+    font-size: 12px;
+    color: #9999a4;
 }
+
 .cal-icon::before {
-  content: "\E50A";
-  font-family: "Teams Assets";
-  font-size: 18px;
-  color: #6365a8;
-  vertical-align: middle;
+    content: "\E50A";
+    font-family: "Teams Assets";
+    font-size: 18px;
+    color: #6365a8;
+    vertical-align: middle;
 }
-.cal-icon {
-  position: relative;
-  margin-top: 10px;
-  cursor: pointer;
+
+.date-icon::before {
+    content: "\E503";
+    font-family: "Teams Assets";
+    font-size: 18px;
+    color: #6365a8;
+    vertical-align: middle;
 }
+
+.cal-icon{
+    position: relative;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 .check-icon-added::before {
-  content: "\E44F";
-  font-family: "Teams Assets";
-  font-size: 14px;
-  color: #bada76;
-  vertical-align: middle;
+    content: "\E44F";
+    font-family: "Teams Assets";
+    font-size: 14px;
+    color: #bada76;
+    vertical-align: middle;
 }
+
 .check-icon-added {
-  display: none;
-  margin-top: 10px;
+    display: none;
+    margin-top: 10px;
 }
+
 .main-title-msg,
 .main-title {
     position: relative;
@@ -238,111 +287,123 @@ html {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    cursor: pointer;
+    cursor:pointer;
 }
+
 .main-title {
-  height: 54px;
-  cursor: pointer;
+    height: auto;
 }
+
 .custom-card-deck {
-  position: relative;
-  top: 12px;
+    position: relative;
+    top: 12px;
 }
+
 .custom-card-deck2 {
-  position: relative;
-  top: 30px;
+    position: relative;
+    top: 30px;
+    margin: 0;
 }
+
 .custom-card {
-  height: auto;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  margin-bottom: 10px !important;
-  border-color: #d0d1e5 !important;
+    height: 160px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+    border-color: #d0d1e5 !important;
+}
+.eventflag {
+    background-image: url("");
+}
+.trainingflag {
+    background-image: url("/Images/");
 }
 .custom-card2 {
-  height: 220px;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  margin-bottom: 10px !important;
-  border-color: #d0d1e5 !important;
+    height: 200px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+    border-color: #d0d1e5 !important;
 }
+
+.card-body {
+    padding-top: 8px;
+}
+
 .mandatory,
 .featured {
-  position: relative;
-  left: 10%;
-  font-size: 14px;
-  /* vertical-align: middle; */
-  color: #767a7e;
+    position: relative;
+    font-size: 14px;
+    color: #767a7e;
 }
+
 .for-header2-dateandtime,
 .for-header2-stream {
-  font-size: 12px;
+    font-size: 12px;
 }
+
 .for-header2-cal {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 .cal,
 .check-added {
-  padding-left: 5px;
-  display: inline;
-  vertical-align: middle;
-  color: #6365a8;
+    padding-left: 5px;
+    display: inline;
+    vertical-align: middle;
+    color: #6365a8;
 }
+
 .check-added {
-  color: #9999a4;
-  padding-left: 6px;
+    color: #9999a4;
+    padding-left: 6px;
 }
+
 .register {
-  height: 30px;
-  width: 100px;
-  color: black;
-  font-family: "Segoe UI";
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  background-color: white;
-  border: 1px solid rgba(37, 36, 36, 0.15);
-  border-radius: none;
-  box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
-  position: relative;
-  top: 10px;
+    height: 30px;
+    width: 100px;
+    color: black;
+    font-family: "Segoe UI";
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    background-color: white;
+    border: 1px solid rgba(37, 36, 36, 0.15);
+    border-radius: none;
+    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 10px;
 }
 
+.my-calendar,
+.line,
+.show-all,
+.down-chev1,
+.down-chev2, .month {
+    display: none;
+}
 
-@media screen and (min-width: 1024px) and (max-width: 1440px) {
+.small-dev {
+    margin-top: 10px;
+}
+
+@media(min-width: 1024px) and (max-width: 1440px) {
     .heading {
         font-size: 18px;
     }
 
     .small-dev {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-
-    .check::before {
-        left: 38%;
-    }
-
-    .mandatory, .featured {
-        left: 38%;
-    }
-
-    .star::before {
-        left: 38%;
-    }
-
-    .dates {
-        flex: 0 0 25%;
-        max-width: 25%;
+        margin-top: 10px;
     }
 
     .main-title {
-        height: 20px;
+        height: auto;
         font-size: 14px;
     }
 
     .main-title-msg {
         font-size: 14px;
+        cursor
     }
 
     .body-top {
@@ -354,7 +415,7 @@ html {
     }
 
     .custom-card2 {
-        height: 180px;
+        height: 200px;
     }
 
     .day {
@@ -364,5 +425,270 @@ html {
 
     .date {
         font-size: 16px;
+    }
+
+    .cal-icon, .check-icon-added {
+        margin-top: 0px;
+    }
+
+    .for-header2-cal {
+        font-size: 12px;
+    }
+
+    .cal-icon::before {
+        font-size: 14px;
+    }
+
+    .register {
+        top: 0px;
+    }
+
+    .star, .check {
+        float: right
+    }
+
+        .star::before, .check::before {
+            margin-left: auto;
+        }
+}
+
+@media(max-width:1024px) {
+}
+
+@media (max-width: 425px) {
+    .heading,
+    .today,
+    .left-chev,
+    .right-chev,
+    .month-date,
+    .down-chev,
+    .msg-for-header,
+    .flag,
+    .badge-icon,
+    .time-icon::before,
+    .location-icon::before,
+    .web-icon::before,
+    .check,
+    .star, .time-icon2::before {
+        display: none;
+    }
+
+    .my-calendar,
+    .line,
+    .show-all,
+    .down-chev1,
+    .down-chev2, .month, .hd2 {
+        display: inline-block;
+    }
+
+    .my-calendar {
+        position: relative;
+        margin-left: 40%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .down-chev1 {
+        position: relative;
+        left: 15%;
+        vertical-align: text-bottom;
+    }
+
+    .down-chev2 {
+        position: relative;
+        left: 35%;
+        vertical-align: text-bottom;
+    }
+
+    .line {
+        position: relative;
+        left: 25%;
+        color: #e4e4e4;
+        font-size: 25px;
+    }
+
+    .show-all {
+        position: relative;
+        left: 35%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+    }
+
+    .down-chev1::before,
+    .down-chev2::before {
+        content: "\E447";
+        font-family: "Teams Assets";
+        font-size: 14px;
+        margin-left: 5px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    .header {
+        padding-top: 10px;
+    }
+
+    .header-flag,
+    .header-badge {
+        background-color: white;
+        padding-top: 0;
+    }
+
+    .event {
+        background-color: #e2e2f6;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        position: relative;
+        bottom: 5px;
+        margin-left: 10px;
+        padding: 0 5px 3px 5px;
+    }
+
+    .custom-card,
+    .custom-card2 {
+        border-left: 5px solid #6264a7 !important;
+        height: auto;
+    }
+
+    .body-top {
+        padding-top: 0px;
+    }
+
+    .event-time,
+    .location,
+    .web {
+        padding-left: 0;
+    }
+
+    .time-icon,
+    .time-icon2,
+    .location-icon,
+    .web-icon {
+        padding-top: 0;
+    }
+
+    .main-title-msg,
+    .main-title {
+        font-size: 16px;
+    }
+
+    .header2 {
+        margin-top: 0px;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    body {
+        background-color: #f3f2f1;
+    }
+
+    .card {
+        border: 0;
+    }
+
+    .card-body {
+        padding-top: 0;
+        padding-bottom: 4px;
+    }
+
+    .main-title {
+        height: auto;
+    }
+
+    .register {
+        top: 0px;
+        height: 30px;
+        width: 80px;
+    }
+
+    .cal-icon, .check-icon-added {
+        margin: 0;
+    }
+
+        .cal-icon::before {
+            font-size: 16px;
+            vertical-align: text-top;
+        }
+
+    .for-header2-cal {
+        font-size: 12px;
+    }
+
+    .check-added, .cal {
+        padding: 0;
+    }
+
+    .day, .month {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 15px 0 10px 0;
+    }
+
+    .date {
+        font-size: 14px;
+        font-weight: 400;
+        font-weight: bold;
+    }
+    .dates {
+        margin-bottom: 15px;
+    }
+    .hd2 {
+        font-size: 14px;
+        padding: 10px;
+        font-weight: bold;
+        margin-left: 14%;
+    }
+    
+}
+
+@media (max-width: 375px) {
+    .my-calendar {
+        left: 0%;
+    }
+
+    .down-chev1 {
+        left: 10%;
+    }
+
+    .down-chev2 {
+        left: 30%;
+    }
+
+    .line {
+        left: 20%;
+    }
+
+    .show-all {
+        left: 30%;
+    }
+    .hd2 {
+        margin-left: 8%;
+    }
+}
+
+@media (max-width: 320px) {
+    .my-calendar {
+        left: 0%;
+    }
+
+    .down-chev1 {
+        left: 5%;
+    }
+
+    .line {
+        left: 15%;
+    }
+
+    .show-all {
+        left: 25%;
+    }
+
+    .down-chev2 {
+        left: 25%;
+    }
+    .hd2 {
+        margin-left: 8%;
     }
 }

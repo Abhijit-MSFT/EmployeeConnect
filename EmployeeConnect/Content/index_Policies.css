@@ -1,41 +1,35 @@
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
-
 
 .sidebar {
     margin: 0;
     padding: 0;
     width: 300px;
-    background-color: #F3F2F1;
+    background-color: #f3f2f1;
     position: fixed;
     height: 100%;
     overflow: auto;
 }
 
-
-
     .sidebar a {
         display: block;
-        color: #A9A8A7;
+        color: #a9a8a7;
         padding: 8px;
         padding-left: 30px;
         text-decoration: none;
     }
 
         .sidebar a.active {
-            background-color: #E3E2EB;
+            background-color: #e3e2eb;
             color: black;
             font-weight: bold;
             cursor: pointer;
         }
 
-
-
         .sidebar a:hover:not(.active) {
-            background-color: #E3E2EB;
+            background-color: #e3e2eb;
             color: black;
         }
 
@@ -48,16 +42,16 @@ div.content {
 
 .head {
     margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .sub-heading {
     margin-top: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .sub-sub-heading {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
 }
 
@@ -65,16 +59,11 @@ div.content {
     font-size: 14px;
 }
 
-.not-show {
-    display: none !important;
+.display-show {
+    display: none;
 }
 
-.content > .active {
-    display: block !important;
-}
-
-
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
     .sidebar {
         width: 100%;
         height: auto;
@@ -90,11 +79,75 @@ div.content {
     }
 }
 
+/* for-mobile */
+@media (max-width: 425px) {
+    @font-face {
+        font-family: "Teams Assets";
+        src: url("./fonts/TeamsAssets-Light.woff") format("woff"), url("./fonts/TeamsAssets-Light.woff2") format("woff2");
+        font-style: normal;
+    }
 
+    body {
+        background-color: #f3f2f1;
+    }
 
-@media screen and (max-width: 400px) {
+    .display-show {
+        display: block;
+    }
+
     .sidebar a {
-        text-align: center;
+        text-align: left;
         float: none;
+        padding: 1rem 0rem 1rem 1rem;
+        color: black;
+        font-weight: bold;
+    }
+
+    .content,
+    a.RO {
+        display: none;
+    }
+
+    .sidebar {
+        background-color: white;
+    }
+
+        .sidebar a:nth-child(n + 1) {
+            border-bottom: 1px solid #f3f2f1;
+        }
+
+        .sidebar a.active {
+            background-color: white;
+        }
+
+    .hr-details {
+        margin-left: 15%;
+    }
+
+    .EB,
+    .PI,
+    .Com,
+    .service {
+        padding: 10px;
+    }
+
+    .HR::before, .PB::before, .IT::before {
+        content: "\E449";
+        font-family: "Teams Assets";
+        font-size: 16px;
+        font-weight: 600;
+        float: left;
+        transition: all 0.5s;
+    }
+
+    .HR.active::before, .PB.active::before, .IT.active::before {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+
+    .HR2, .PB2, .IT2 {
+        margin-left: 15px;
     }
 }
+/* for-mobile end*/

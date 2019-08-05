@@ -18,7 +18,7 @@
         microsoftTeams.initialize();
          function submitTicketComplete() {
              let ticketInfo = {
-                 action: "createticket",
+                 action: "editTicket",
             };
             microsoftTeams.tasks.submitTask(ticketInfo);
             return true;
@@ -31,7 +31,6 @@
             return true;
         }
     </script>
-    <form id="createticket">
         <div class="modal-dialog modal-dialog-centered custom-card2"
              role="document">
             <div class="modal-content content-radius">
@@ -64,13 +63,12 @@
                     </div>
                     
                     <div class="two-btn">
-                        <button type="submit" class="Close" onclick="closeTicketComplete('submit')">Close</button>
+                        <button type="button" class="Close" onclick="closeTicketComplete('submit')">Close</button>
                         @*<button type="button" class="Close" onclick="closeModel()">Close</button>*@
                         <button type="button" class="Edit" onclick="submitTicketComplete('createticket')">Edit</button>
                     </div>
                 </div>
             </div>
         </div>
-        </form>
         <script src="~/Scripts/teamsapp.js"></script>
 </body>

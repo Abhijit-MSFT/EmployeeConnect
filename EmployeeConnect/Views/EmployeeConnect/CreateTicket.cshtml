@@ -68,7 +68,7 @@
                         </label>
                     </form>
                     <div class="two-btn">
-                        <button type="submit" class="Close" onclick="closeTicket('submitTicket')">Close</button>
+                        <button type="button" class="Close" onclick="closeTicket('submitTicket')">Close</button>
                         @*<button type="submit" class="cancel">Cancel</button>*@
                         <button type="button" class="BCT"
                                onclick="submitCreateTicket('ticketcomplete');" >
@@ -106,9 +106,8 @@
                  contentType: "application/json; charset=utf-8",
                  data: '{"category":"' + categorySelected + '","description":"' + ticketDescription + '","prioritySelected":"' + prioritySelected + '"}', 
                  dataType: "json",
-             success: function (data) {   
-                 
-                   var parsedData = JSON.parse(data);
+             success: function (data) {                 
+                     var parsedData = JSON.parse(data);
                      var TicketNoId = parsedData.TicketNo;
                      var Description = parsedData.Description;
                      var ticketCategory = parsedData.Category;

@@ -5,4 +5,8 @@ $(document).ready(function () {
         $(selector).removeClass("active");
         $(this).addClass("active");
     });
+    $(".EB").click(function () {
+        $("#heading2").show()
+        d
+    });
 });
