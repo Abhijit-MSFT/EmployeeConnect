@@ -45,16 +45,12 @@ namespace EmployeeConnect.Dialogs
             string emailKey = GetEmailKey(activity);
             var userDetails = await GetCurrentUserDetails(activity);
             string userName = userDetails.UserPrincipalName;
-
-
             Models.UPreferences uPref = GetDataHelper.readPreferences();
             Models.Preference currUser = null;
             if (uPref != null && uPref.preferences != null)
             {
                 currUser = uPref.preferences.FirstOrDefault(c => c.UserName == userName);
             }
-
-
             if (currUser == null)
             {
                 string UniqueId = activity.From.Id;

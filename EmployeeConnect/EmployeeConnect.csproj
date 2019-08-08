@@ -257,6 +257,8 @@
     <Content Include="Content\Custom.css" />
     <Content Include="Content\declined.css" />
     <Content Include="Content\eventandtrainingnew.css" />
+    <Content Include="fonts\EandTEvent.png" />
+    <Content Include="fonts\Event-bot.png" />
     <Content Include="fonts\Flag.png" />
     <Content Include="fonts\flagEvents.JPG" />
     <Content Include="fonts\flagImg.png" />
@@ -267,6 +269,8 @@
     <Content Include="fonts\shapeEvent.JPG" />
     <Content Include="fonts\ShapeSnip.PNG" />
     <Content Include="fonts\Time.PNG" />
+    <Content Include="fonts\EandTTraining.png" />
+    <Content Include="fonts\training-bot.png" />
     <Content Include="fonts\Website.PNG" />
     <Content Include="Content\index.css" />
     <Content Include="Content\index_Policies.css" />

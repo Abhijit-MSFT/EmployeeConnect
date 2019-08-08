@@ -953,11 +953,7 @@ namespace EmployeeConnect.Helper
                         string title = EandT.ETTitle;
                         item = new Item();
                         item.title = title;
-                        //item.icon = EandT.ETThumbnailUrl;
-                        if (EandT.ETFlag == "E")
-                            item.icon = ApplicationSettings.BaseUrl + "/fonts/flagImg.png";
-                        else
-                            item.icon = ApplicationSettings.BaseUrl + "/fonts/shapeEve.png";
+                        item.icon = EandT.ETFlag == "E" ? ApplicationSettings.BaseUrl + "/fonts/EandTEvent.png" : ApplicationSettings.BaseUrl + "/fonts/EandTTraining.png";
                         item.id = EandT.ETID;
                         item.subtitle = subtitle;
                         //item.flagImage = EandT.ETFlagImage;
@@ -988,16 +984,12 @@ namespace EmployeeConnect.Helper
                 viewButton.title = "View all events";
                 viewButton.value = deepLinkTab("EandT", "Events and Trainings");
                 buttonsList.Add(viewButton);
-
-
-
                 card.content.buttons = buttonsList.ToArray();
                 card.content.items = list.ToArray();
             }
             Attachment attachment = new Attachment();
             attachment.ContentType = card.contentType;
             attachment.Content = card.content;
-
             return attachment;
         }
 
@@ -1035,12 +1027,7 @@ namespace EmployeeConnect.Helper
             //item.id = POlist.PurchaseOrder[i].PoNumber;
             item.type = "resultItem";
             item.icon = ApplicationSettings.BaseUrl + "/Images/expense_icon.PNG";
-            item.tap = new Tap()
-            {
-                type = "invoke",
-                title = item.id,
-                value = "{ \"type\": \"task/fetch\", \"data\": \"" + url + "\"}"
-            };
+           
             list.Add(item);
             card.content.items = list.ToArray();
             Attachment attachment = new Attachment();
@@ -1619,7 +1606,7 @@ namespace EmployeeConnect.Helper
                 {
                      new AdaptiveTextBlock()    //NewsBy on Date and Time
                             {
-                                Text = date+"\n\n"+SelectedEventsTrainings.ETStartTime+'-'+SelectedEventsTrainings.ETEndTime,
+                                Text = date+" "+SelectedEventsTrainings.ETStartTime+'-'+SelectedEventsTrainings.ETEndTime,
                                 Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                                 Wrap = true
@@ -1659,35 +1646,35 @@ namespace EmployeeConnect.Helper
 
             });
 
-            Insidelist3.Add(new AdaptiveColumn()
-            {
-                Items =
-                {
-                    new AdaptiveImage()
-                    {
-                        Url = new Uri(ApplicationSettings.BaseUrl + "/fonts/Website.png"),
-                        Size = AdaptiveImageSize.Small,
-                    }
-                },
-                Width = "auto"
+            //Insidelist3.Add(new AdaptiveColumn()
+            //{
+            //    Items =
+            //    {
+            //        new AdaptiveImage()
+            //        {
+            //            Url = new Uri(ApplicationSettings.BaseUrl + "/fonts/Website.png"),
+            //            Size = AdaptiveImageSize.Small,
+            //        }
+            //    },
+            //    Width = "auto"
 
-            });
-            Insidelist3.Add(new AdaptiveColumn()
-            {
-                Items =
-                {
-                     new AdaptiveTextBlock()    //NewsBy on Date and Time
-                            {
-                                Text = "Website",
-                                Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
+            //});
+            //Insidelist3.Add(new AdaptiveColumn()
+            //{
+            //    Items =
+            //    {
+            //         new AdaptiveTextBlock()    //NewsBy on Date and Time
+            //                {
+            //                    Text = "Website",
+            //                    Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
+            //                    Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+            //                    Wrap = true
 
-                            }
-                },
-                Width = "auto"
+            //                }
+            //    },
+            //    Width = "auto"
 
-            });
+            //});
 
 
             list1.Add(new AdaptiveColumn()
@@ -1744,18 +1731,18 @@ namespace EmployeeConnect.Helper
                 }
 
             });
-            list.Add(new AdaptiveColumn()
-            {
-                Items =
-                {           new AdaptiveColumnSet()
-                            {
-                                Columns = Insidelist3
-                            },
+            //list.Add(new AdaptiveColumn()
+            //{
+            //    Items =
+            //    {           new AdaptiveColumnSet()
+            //                {
+            //                    Columns = Insidelist3
+            //                },
 
 
-                }
+            //    }
 
-            });
+            //});
             string status = "";
             if (SelectedEventsTrainings.ETFlag == "E")
             {
