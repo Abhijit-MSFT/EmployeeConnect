@@ -177,11 +177,15 @@ td.Invoice-no {
     .time-sheet,
     .expenses-sheet,
     .heading,
-    .full-timesheet,
-    .Submit-expenses,
     .hide-for-mobile,
     .tb-for-desktop {
         display: none;
+    }
+
+    full-timesheet,
+    .Submit-expenses {
+        top: 8px;
+        margin-left: 0px !important;
     }
 
     .heading2,

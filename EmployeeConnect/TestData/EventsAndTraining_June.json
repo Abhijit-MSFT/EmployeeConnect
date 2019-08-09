@@ -45,7 +45,7 @@
       "ETType": "Seattle",
       "ETDetails": "Join us in Seattle at 8 a.m. PT on Friday, July 26, to watch the World Championship of Imagine Cup, our global student technology competition.",
       "ETAgenda": "Microsoft Imagine Championship Event",
-      "UserAdded": false,
+      "UserAdded": true,
       "ETMandatory": false
     },
     {
@@ -66,18 +66,18 @@
     },
     {
       "ETDate": "07-29-2019",
-      "ETFlag": "T", 
-      "ETID": "e1243", 
+      "ETFlag": "T",
+      "ETID": "e1243",
       "ETTitle": "Data and Artificial Intelligence Day",
       "ETStartDate": "07-29-2019",
       "ETEndDate": "07-29-2019",
       "ETStartTime": "10:00 AM",
       "ETEndTime": "5:00 PM",
-      "ETThumbnailUrl": "##BaseURL##/Images/Data and Aritificial Intelligence Day.jpg", 
+      "ETThumbnailUrl": "##BaseURL##/Images/Data and Aritificial Intelligence Day.jpg",
       "ETType": "Mandalyong City",
       "ETDetails": "Get insights into Microsoft's data strategy and AI solutions and learn more about our comprehensive suite of Azure data and AI services, including Azure SQL Database Managed Instance, Azure Cosmos DB, Azure Cognitive Services, Azure Machine Learning and Deep Learning services.",
       "ETAgenda": "Learn and grow",
-      "UserAdded": false,
+      "UserAdded": true,
       "ETMandatory": false
     },
     {
@@ -98,7 +98,7 @@
     },
     {
       "ETDate": "07-30-2019",
-      "ETFlag": "E", 
+      "ETFlag": "E",
       "ETID": "e1248",
       "ETTitle": "Fireside Chat with Satya",
       "ETStartDate": "07-30-2019",
@@ -125,7 +125,7 @@
       "ETType": "BLR Campus",
       "ETDetails": "Explore the latest developer tools and technologies along with hands on session with experts and learn how to put your skills to work in new areas-like IoT, Machine Learning, microservices and more.",
       "ETAgenda": "Development camp for Azure Services",
-      "UserAdded": true,
+      "UserAdded": false,
       "ETMandatory": false
     }
   ]

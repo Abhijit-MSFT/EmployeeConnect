@@ -27,11 +27,11 @@
                     <div class="mobile-timesheet">Pending Timesheet</div>
                     <h5 class="card-title">12</h5>
                     <h6 class="title-head">Days of pending timesheet</h6>
-                    <div class="full-timesheet">
+                    <div class="full-timesheet" onclick="openTimesheet('pendingdates');">
                         Fill timesheet
-                        <span class="chevron-right"></span>
+                        @*<span class="chevron-right"></span>*@
                     </div>
-                    <span class="chevron-right desk"></span>
+                    @*<span class="chevron-right desk"></span>*@
                 </div>
             </div>
             <div class="card custom-card">
@@ -46,9 +46,9 @@
                     <h6 class="title-head">Amount of unreconciled expenses</h6>
                     <div class="Submit-expenses">
                         Submit expenses
-                        <span class="chevron-right"></span>
+                        @*<span class="chevron-right"></span>*@
                     </div>
-                    <span class="chevron-right desk mr-up"></span>
+                    @*<span class="chevron-right desk mr-up"></span>*@
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                             <thead>
                                 <tr class="head-title-color">
                                     <th>PO no.</th>
-                                
+
                                     <th>Description</th>
                                     <th>Vendor name</th>
                                     <th>Vendor no.</th>
@@ -86,7 +86,7 @@
                                 {
                                     <tr class="row-highlight">
                                         <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
-                                        
+
                                         <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
                                         <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
                                         <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
@@ -99,38 +99,36 @@
                                     </tr>
                                 }
                             </tbody>
-                        </table>
+                        </table>                       
                         <table class="table tb-for-mobile">
-                            <thead>
-                                <tr class="head-title-color">
+                            @foreach (var item in Model.PendingPO)
+                            {
+                                <tr>
                                     <th class="head-title-color">PO no.</th>
-                                   
-                                    <th class="head-title-color">Description</th>
-                                    <th class="head-title-color">Vendor name</th>
-                                    <th class="head-title-color">Vendor no.</th>
-                                    <th class="head-title-color">Amount</th>
-                                    <th></th>
+                                    <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.PendingPO)
-                                {
-                                    <tr >
-                                        <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
-                                        <td></td>
-                                        <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
-                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
-                                        <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
-
-                                        <td class="amount">
-                                            <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
-                                        </td>
-                                        <td></td>
-                                        <td class="review tb-for-mobile" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                                <tr>
+                                    <th class="head-title-color">Description</th>
+                                    <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                </tr>
+                                <tr>
+                                    <th class="head-title-color">Vendor name</th>
+                                    <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                </tr>
+                                <tr>
+                                    <th class="head-title-color">Vendor no.</th>
+                                    <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                </tr>
+                                <tr>
+                                    <th class="head-title-color">Amount</th>
+                                    <td class="vendor-no">&#x20b9;@Html.DisplayFor(modelItem => item.TotalAmount)</td>                                    
+                                </tr>
+                                <tr class="review tb-for-mobile">
+                                    <td style="padding-left: 10px;" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
+                                </tr>
+                                
+                            }
+                        </table>                        
                     </div>
                 </div>
                 <div class="panel-group" id="accordion">
@@ -142,7 +140,7 @@
                                 href="#Invoice" id='invoice'>
                                 <span class="title"> Invoice <span>(@Model.ApprovedPO.Length)</span> </span>
                             </h6>
-                            <span class="chevron-right desk ht-for-mobile2"></span>
+                           
                         </div>
                     </div>
                     <div id="Invoice" class="panel-collapse">
@@ -177,33 +175,38 @@
                                 </tbody>
                             </table>
                             <table class="table tb-for-mobile">
-                                <thead>
+                                @foreach (var item in Model.ApprovedPO)
+                                {
                                     <tr>
                                         <th class="head-title-color">Invoice no.</th>
-                                        <th class="head-title-color">PO no.</th>
-                                        <th class="head-title-color" >Description</th>
-                                        <th class="head-title-color">Vendor name</th>
-                                        <th class="head-title-color">Vendor no.</th>
-                                        <th class="head-title-color">Amount</th>
-                                        
+                                        <td id="invoiceNoId" class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.ApprovedPO)
-                                    {
-                                        <tr>
-                                            <td id="invoiceNoId" class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
-                                            <td class="po-no1">@Html.DisplayFor(modelItem => item.PoNumber)</td>
-                                            <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
-                                            <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
-                                            <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
-                                            <td class="amount">
-                                                <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
-                                            </td>
-                                            <td class="reviewButton" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.InvoiceNo','@item.vendorNo');">Review</td>
-                                        </tr>
-                                    }
-                                </tbody>
+                                    <tr>
+                                        <th class="head-title-color">PO no.</th>
+                                        <td class="po-no1">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Description</th>
+                                        <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Vendor name</th>
+                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Vendor no.</th>
+                                        <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Amount</th>
+                                        <td class="vendor-no">&#x20b9;@Html.DisplayFor(modelItem => item.TotalAmount)</td>
+                                    </tr>
+                                    <tr class="review tb-for-mobile">
+                                        <td style="padding-left: 10px;" onclick="submitPurchaseOrder('@item.InvoiceNo','@item.vendorNo');">Review</td>
+                                    </tr>
+
+                                }                                
                             </table>
                         </div>
                     </div>
@@ -217,7 +220,7 @@
                                 href="#Inventory">
                                 <span class="title"> Inventory <span>(0)</span> </span>
                             </h6>
-                            <span class="chevron-right desk ht-for-mobile3"></span>
+                            <span class="desk ht-for-mobile3"></span>
                         </div>
                     </div>
                     <div id="Inventory" class="panel-collapse">
@@ -284,7 +287,7 @@
 
 
         };
-    
+
         function submitPurchaseOrder(poNo, vendorNumber) {
           //  debugger;
             var PONumber = poNo;
@@ -304,6 +307,28 @@
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/purchaseorder?poNumber="+PONumber+"&vendorno="+vendorNo;
                 taskInfo.height = "@(TaskModelUIConstant.PurchaseOrder.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.PurchaseOrder.Width)";
+
+
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+        function openTimesheet() {
+            let taskInfo = {
+                InvoiceNo: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/pendingdates";
+                taskInfo.height = "@(TaskModelUIConstant.PendingDates.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PendingDates.Width)";
 
 
             // Set fallback URL

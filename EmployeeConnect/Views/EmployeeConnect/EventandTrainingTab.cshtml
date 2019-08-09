@@ -59,23 +59,27 @@
 
                             <div class="dates">
                                 <div class="date">
-                                    <div class="date"><bold>@item.ETDate.ToString("d MMMM")</bold></div>
+                                    <div class="date"><bold>@item.ETDate.ToString("d MMM")</bold></div>
                                 </div>
                             </div>
                             <div class="card custom-card">
                                 <div class="card-header header-flag">
                                     <span class="@(item.ETFlag == "E" ? "flag" : "badge-icon" )"></span>
-                                        <span class="event">
-                                            @if (item.ETFlag == "E")
-                                            {
-                                                <span>Event</span>
-                                            }
-                                            else
-                                            {
-                                                <span>Training</span>
-                                            }
-
-                                        </span>
+                                    <span class="event">
+                                        @if (item.ETFlag == "E")
+                                        {
+                                            <span>Event</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Training</span>
+                                        }
+                                        @if (item.ETMandatory == true)
+                                        {
+                                            <span class="mandatoryFlag"></span>
+                                            <span class="mandatory">Mandatory</span>
+                                        }
+                                    </span>
                                 </div>
 
                                 <div class="card-body body-top" onclick="submitEvent('@item.ETID');">
@@ -135,24 +139,32 @@
                                 {
                                     <span>Training</span>
                                 }
+                                @if (item.ETMandatory == true)
+                                {
+                                    <span id="mandatoryFlag"></span>
+                                    <span class="mandatory">Mandatory</span>
+                                }
                             </span>
                         </div>
-                        <div class="card-body" onclick="submitEvent('@item.ETID');">
-                            <div class="card-title main-title">
-                                @Html.DisplayFor(modelItem => item.ETTitle)
-                            </div>
-                            <div class="time-icon">
-                                <div class="event-time for-header2-dateandtime">
-                                    @Html.DisplayFor(modelItem => item.ETStartDate)
+                        <div onclick="submitEvent('@item.ETID');">
+                            <div class="card-body" style="padding-bottom: 6px;">
+                                <div class="card-title main-title">
+                                    @Html.DisplayFor(modelItem => item.ETTitle)
+                                </div>
+                                <div class="time-icon">
+                                    <div class="event-time for-header2-dateandtime">
+                                        @Html.DisplayFor(modelItem => item.ETStartDate)
+                                    </div>
+                                </div>
+                                <div class="web-icon2">
+                                    <div class="web for-header2-stream"> @Html.DisplayFor(modelItem => item.ETType)</div>
                                 </div>
                             </div>
-                            <div class="web-icon2">
-                                <div class="web for-header2-stream"> @Html.DisplayFor(modelItem => item.ETType)</div>
-                            </div>
+                        </div>
                             <div class="cal-icon">
                                 <div class="cal for-header2-cal" onclick="AddToMyEventsGrid('@item.ETID')">Add to calendar</div>
                             </div>
-                        </div>
+                       
                     </div>
                 </div>
              }

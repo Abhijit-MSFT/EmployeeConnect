@@ -123,7 +123,7 @@ namespace EmployeeConnect.Helper
             card.content = new Content();
             var list = new List<Item>();
             card.content.title = "Please select a department to view policies";
-            string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
+            string[] dept = { "Human Resources", "Pay and Benefits", "IT & Facilities", "Store Operations" };
 
             string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
 
@@ -1582,6 +1582,7 @@ namespace EmployeeConnect.Helper
             string EandT = "";
             string date = "";
             string imagepath = "";
+            string mandatoryFlag="";
             if (SelectedEventsTrainings.ETFlag == "E")
                 imagepath = "/fonts/Flag.png";
             else
@@ -1595,6 +1596,11 @@ namespace EmployeeConnect.Helper
             if (SelectedEventsTrainings.ETFlag == "T")
                 EandT = "Training";
             else EandT = "Event";
+
+            if(SelectedEventsTrainings.ETMandatory == true)
+            {
+                mandatoryFlag = "*Mandatory";
+            }
             List<AdaptiveColumn> list = new List<AdaptiveColumn>();
             List<AdaptiveColumn> Insidelist1 = new List<AdaptiveColumn>();
             List<AdaptiveColumn> Insidelist2 = new List<AdaptiveColumn>();
@@ -1709,6 +1715,23 @@ namespace EmployeeConnect.Helper
                             new AdaptiveTextBlock()    //NewsBy on Date and Time
                             {
                                 Text = EandT,
+                                Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
+                                Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+                                Wrap = true
+
+                            }
+
+                },
+                Width = "auto"
+
+            });
+            list1.Add(new AdaptiveColumn()
+            {
+                Items =
+                {
+                            new AdaptiveTextBlock()    //NewsBy on Date and Time
+                            {
+                                Text = mandatoryFlag,
                                 Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                                 Wrap = true

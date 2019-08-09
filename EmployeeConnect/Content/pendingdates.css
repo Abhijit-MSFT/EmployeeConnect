@@ -163,26 +163,89 @@ tr:nth-child(n + 1) {
 
 @media(max-width:425px) {
     .sel {
-        width: 30%;
+        width: 27%;
+        height: 36px;
+        vertical-align: middle;
     }
 
     .hide {
         display: none;
     }
 
-    .custom-table {
-        width: max-content !important;
+    input.input-hrs {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    input.input-loc {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .PD-data {
+        font-size: 13px;
+        width: 100%;
+    }
+
+    .PT {
+        font-size: 14px;
+        vertical-align: middle !important;
+    }
+
+    .table td, .table th {
+        vertical-align: middle !important;
+    }
+
+    .time-clk::before {
+        position: relative;
+        font-size: 12px;
+    }
+
+    .given-time, .sub-time {
+        margin-left: 0px;
+        font-size: 12px;
+    }
+
+    .given-loc {
+        font-size: 12px;
+    }
+
+    .sel select {
+        font-size: 14px;
+    }
+
+    .sel::before {
+        top: 6px;
     }
 }
 
 @media(max-width:375px) {
     .sel {
-        width: 35%;
+        width: 28%;
+    }
+
+    .PT {
+        font-size: 11px;
+    }
+
+    .cancel, .submit {
+        height: 24px;
+        width: 70px;
+        font-size: 12px;
+    }
+
+    .PD-data, .sel select {
+        font-size: 12px;
+    }
+
+    input.input-hrs {
+        width: 70%;
+        font-size: 12px;
     }
 }
 
 @media(max-width:320px) {
     .sel {
-        width: 45%;
+        width: 35%;
     }
 }

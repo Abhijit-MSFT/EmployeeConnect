@@ -98,7 +98,7 @@ html {
     vertical-align: middle;
     font-weight: 600;
     margin-left: 20px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 .down-chev::before {
@@ -124,6 +124,7 @@ html {
     font-size: 18px;
     font-weight: 600;
 }
+
 .dates {
     margin-bottom: 15px;
 }
@@ -136,7 +137,8 @@ html {
     content: "\E917";
     font-family: "Teams Assets";
     font-size: 20px;
-    color: #4286bc;
+    /*color: #4286bc;*/
+    color: purple;
     vertical-align: middle;
 }
 
@@ -254,10 +256,11 @@ html {
     vertical-align: middle;
 }
 
-.cal-icon{
+.cal-icon {
     position: relative;
-    margin-top: 10px;
+    margin-top: 0px;
     cursor: pointer;
+    margin-left: 5px;
 }
 
 .check-icon-added::before {
@@ -287,11 +290,12 @@ html {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    cursor:pointer;
+    cursor: pointer;
+    height:50px;
 }
 
 .main-title {
-    height: auto;
+    height: 50px;
 }
 
 .custom-card-deck {
@@ -312,18 +316,24 @@ html {
     margin-bottom: 10px !important;
     border-color: #d0d1e5 !important;
 }
+
 .eventflag {
     background-image: url("");
 }
+
 .trainingflag {
     background-image: url("/Images/");
 }
+
 .custom-card2 {
     height: 200px;
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin-bottom: 10px !important;
     border-color: #d0d1e5 !important;
+}
+#mandatoryFlag{
+    background-image: url('../Images/Check.png');
 }
 
 .card-body {
@@ -335,6 +345,10 @@ html {
     position: relative;
     font-size: 14px;
     color: #767a7e;
+    vertical-align: middle;
+    float: right;
+    margin-top: 4px;
+    color: #4286bc;
 }
 
 .for-header2-dateandtime,
@@ -631,16 +645,17 @@ html {
         font-weight: 400;
         font-weight: bold;
     }
+
     .dates {
         margin-bottom: 15px;
     }
+
     .hd2 {
         font-size: 14px;
         padding: 10px;
         font-weight: bold;
         margin-left: 14%;
     }
-    
 }
 
 @media (max-width: 375px) {
@@ -663,6 +678,7 @@ html {
     .show-all {
         left: 30%;
     }
+
     .hd2 {
         margin-left: 8%;
     }
@@ -688,6 +704,7 @@ html {
     .down-chev2 {
         left: 25%;
     }
+
     .hd2 {
         margin-left: 8%;
     }
