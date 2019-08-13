@@ -166,7 +166,7 @@
                             <label for="Business">
                                 <img src="./imgs/Business.jpg" alt-name="Business" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Business" id="Business" @(Model.News.First().SelectedCategories.Contains("Business") ? "checked" : "") value="Business" onclick="getCategory()" />
+                            <input type="checkbox" name="Business" id="Business" @(Model.News.SelectedCategories.Contains("Business") ? "checked" : "") value="Business" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Business</div>
                             </div>
@@ -175,7 +175,7 @@
                             <label for="Design">
                                 <img src="./imgs/Design.jpg" alt-name="Design" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Design" @(Model.News.First().SelectedCategories.Contains("Design") ? "checked" : "") id="Design" value="Design" onclick="getCategory()" />
+                            <input type="checkbox" name="Design" @(Model.News.SelectedCategories.Contains("Design") ? "checked" : "") id="Design" value="Design" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Design</div>
                             </div>
@@ -184,7 +184,7 @@
                             <label for="Technology">
                                 <img src="./imgs/Technology.jpg" alt-name="Technology" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Technology" @(Model.News.First().SelectedCategories.Contains("Technology") ? "checked" : "" ) id="Technology" value="Technology" onclick="getCategory()" />
+                            <input type="checkbox" name="Technology" @(Model.News.SelectedCategories.Contains("Technology") ? "checked" : "" ) id="Technology" value="Technology" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Technology</div>
                             </div>
@@ -193,7 +193,7 @@
                             <label for="Media">
                                 <img src="./imgs/Media.jpg" alt-name="Media" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Media" @(Model.News.First().SelectedCategories.Contains("Media") ? "checked" : "" ) id="Media" value="Media" onclick="getCategory()" />
+                            <input type="checkbox" name="Media" @(Model.News.SelectedCategories.Contains("Media") ? "checked" : "" ) id="Media" value="Media" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Media</div>
                             </div>
@@ -203,7 +203,7 @@
                             <label for="Economy">
                                 <img src="./imgs/Economy.jpg" alt-name="Economy" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Economy" @(Model.News.First().SelectedCategories.Contains("Economy") ? "checked" : "" ) id="Economy" value="Economy" onclick="getCategory()" />
+                            <input type="checkbox" name="Economy" @(Model.News.SelectedCategories.Contains("Economy") ? "checked" : "" ) id="Economy" value="Economy" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Economy</div>
                             </div>
@@ -212,7 +212,7 @@
                             <label for="CS">
                                 <img src="./imgs/CS.jpg" alt-name="CS" class="row-display" />
                             </label>
-                            <input type="checkbox" name="CS" @(Model.News.First().SelectedCategories.Contains("CS") ? "checked" : "" ) id="CS" value="CS" onclick="getCategory()" />
+                            <input type="checkbox" name="CS" @(Model.News.SelectedCategories.Contains("CS") ? "checked" : "" ) id="CS" value="CS" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">CS</div>
                             </div>
@@ -221,7 +221,7 @@
                             <label for="Market">
                                 <img src="./imgs/Market.jpg" alt-name="Market" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Market" @(Model.News.First().SelectedCategories.Contains("Market") ? "checked" : "" ) id="Market" value="Market" onclick="getCategory()" />
+                            <input type="checkbox" name="Market" @(Model.News.SelectedCategories.Contains("Market") ? "checked" : "" ) id="Market" value="Market" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Market</div>
                             </div>
@@ -231,7 +231,7 @@
                             <label for="Finance">
                                 <img src="./imgs/Finance.jpg" alt-name="Finance" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Finance" @(Model.News.First().SelectedCategories.Contains("Finance") ? "checked" : "" ) id="Finance" value="Finance" onclick="getCategory()" />
+                            <input type="checkbox" name="Finance" @(Model.News.SelectedCategories.Contains("Finance") ? "checked" : "" ) id="Finance" value="Finance" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Finance</div>
                             </div>
@@ -240,7 +240,7 @@
                             <label for="Enterprise">
                                 <img src="./imgs/Enterprise.jpg" alt-name="Enterprise" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Enterprise" @(Model.News.First().SelectedCategories.Contains("AI") ? "checked" : "" ) id="Enterprise" value="Enterprise" onclick="getCategory()" />
+                            <input type="checkbox" name="Enterprise" @(Model.News.SelectedCategories.Contains("AI") ? "checked" : "" ) id="Enterprise" value="Enterprise" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">AI</div>
                             </div>
@@ -249,7 +249,7 @@
                             <label for="Software">
                                 <img src="./imgs/Software.jpg" alt-name="Software" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Software" @(Model.News.First().SelectedCategories.Contains("Software") ? "checked" : "" )id="Software" value="Software" onclick="getCategory()" />
+                            <input type="checkbox" name="Software" @(Model.News.SelectedCategories.Contains("Software") ? "checked" : "" )id="Software" value="Software" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Software</div>
                             </div>
@@ -258,7 +258,7 @@
                             <label for="Animation">
                                 <img src="./imgs/Animation.gif" alt-name="Animation" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Animation" @(Model.News.First().SelectedCategories.Contains("Animation") ? "checked" : "" ) id="Animation" value="Animation" onclick="getCategory()" />
+                            <input type="checkbox" name="Animation" @(Model.News.SelectedCategories.Contains("Animation") ? "checked" : "" ) id="Animation" value="Animation" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Animation</div>
                             </div>
@@ -267,7 +267,7 @@
                             <label for="Creative">
                                 <img src="./imgs/Creative.png" alt-name="Creative" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Creative" @(Model.News.First().SelectedCategories.Contains("Creative") ? "checked" : "" ) id="Creative" value="Creative" onclick="getCategory()" />
+                            <input type="checkbox" name="Creative" @(Model.News.SelectedCategories.Contains("Creative") ? "checked" : "" ) id="Creative" value="Creative" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Creative</div>
                             </div>
@@ -276,14 +276,14 @@
                             <label for="IT">
                                 <img src="./imgs/IT.jpg" alt-name="IT" class="row-display" />
                             </label>
-                            <input type="checkbox" name="IT" @(Model.News.First().SelectedCategories.Contains("IT") ? "checked" : "" ) id="IT" value="IT" onclick="getCategory()" />
+                            <input type="checkbox" name="IT" @(Model.News.SelectedCategories.Contains("IT") ? "checked" : "" ) id="IT" value="IT" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">IT</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Data">
-                                <img src="./imgs/Data.jpg" alt-name="Data" @(Model.News.First().SelectedCategories.Contains("Data") ? "checked" : "" ) class="row-display" id="Data" value="Data" onclick="getCategory()" />
+                                <img src="./imgs/Data.jpg" alt-name="Data" @(Model.News.SelectedCategories.Contains("Data") ? "checked" : "" ) class="row-display" id="Data" value="Data" onclick="getCategory()" />
                             </label>
                             <input type="checkbox" name="Data" id="Data" value="Data" onclick="getCategory()" />
                             <div class="tick">

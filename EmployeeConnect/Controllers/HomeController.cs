@@ -80,9 +80,9 @@ namespace EmployeeConnect.Controllers
         [Route("ShowNews")]
         public async Task<ActionResult> ShowNews(string userName)
         {
-            UPreferences uPref = GetDataHelper.readPreferences();
-            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
-            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+            Preference uPref = GetDataHelper.userPreference(userName);
+            //Preference user = uPref..Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = uPref.UserInfo.FirstOrDefault();
 
             var card = Helper.CardHelper.getNewsCard(userName);
             await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
@@ -93,9 +93,9 @@ namespace EmployeeConnect.Controllers
         [Route("ShowEnT")]
         public async Task<ActionResult> ShowEnT(string userName)
         {
-            UPreferences uPref = GetDataHelper.readPreferences();
-            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
-            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+            Preference uPref = GetDataHelper.userPreference(userName);
+            //Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = uPref.UserInfo.FirstOrDefault();
 
             var card = Helper.CardHelper.getETCard();
             await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
@@ -107,9 +107,9 @@ namespace EmployeeConnect.Controllers
         [Route("ShowTask")]
         public async Task<ActionResult> ShowTask(string userName)
         {
-            UPreferences uPref = GetDataHelper.readPreferences();
-            Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
-            UserInfo userInfo = user.UserInfo.FirstOrDefault();
+            Preference uPref = GetDataHelper.userPreference(userName);
+            //Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            UserInfo userInfo = uPref.UserInfo.FirstOrDefault();
 
             var card = Helper.CardHelper.PendingTasks();
             await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
@@ -215,8 +215,8 @@ namespace EmployeeConnect.Controllers
         [Route("preferences")]
         public ActionResult Preferences(string emailID)
         {
-            Preference pref = new Preference();
-            UPreferences userPref = GetDataHelper.readPreferences();
+            //Preference pref = new Preference();
+            Preference userPref = GetDataHelper.userPreference(emailID);
             Preference user = new Preference() { UserName = emailID };
             if (userPref == null)
             {
@@ -224,7 +224,7 @@ namespace EmployeeConnect.Controllers
             }
             else
             {
-                user = userPref.preferences.FirstOrDefault(c => c.UserName == emailID);
+                user = userPref;
                 if (user == null)
                     user = new Preference() { UserName = emailID };
 
@@ -235,21 +235,21 @@ namespace EmployeeConnect.Controllers
         [Route("PreferenceInDb")]
         public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName, bool isAdded)
         {
-            Preference pref = new Preference();
-            UPreferences userPref = GetDataHelper.readPreferences();
+            //Preference pref = new Preference();
+            Preference userPref = GetDataHelper.userPreference(UserName);
             Preference user = new Preference() { UserName = UserName };
             if (userPref != null)
             {
-                user = userPref.preferences.FirstOrDefault(c => c.UserName == UserName);
+                user = userPref;
                 if (user == null)
                     user = new Preference() { UserName = UserName };
             }
 
 
-            user.News[0].NewsNotificationFlag = newsNotificationFlag;
-            user.News[0].NewsNotificationTime = newsTime;
+            user.News.NewsNotificationFlag = newsNotificationFlag;
+            user.News.NewsNotificationTime = newsTime;
 
-            var oldPrefList = user.News[0].SelectedCategories.ToList();
+            var oldPrefList = user.News.SelectedCategories.ToList();
             foreach (var cat in newsPrefCat)
             {
                 if (isAdded && !oldPrefList.Contains(cat))
@@ -258,19 +258,19 @@ namespace EmployeeConnect.Controllers
                     oldPrefList.Remove(cat);
 
             }
-            user.News[0].SelectedCategories = oldPrefList.ToArray();
+            user.News.SelectedCategories = oldPrefList.ToArray();
 
 
             // user.News[0].SelectedCategories = newsPrefCat;
-            user.News[0].NewsNotifyMe = newsNotifyMe;
+            user.News.NewsNotifyMe = newsNotifyMe;
 
-            user.EandT[0].EandTNotificationFlag = eandtflag;
-            user.EandT[0].EandTNotifyMe = eandtNotify;
-            user.EandT[0].EandTNotificationTime = eandtTime;
+            user.EandT.EandTNotificationFlag = eandtflag;
+            user.EandT.EandTNotifyMe = eandtNotify;
+            user.EandT.EandTNotificationTime = eandtTime;
 
-            user.Task[0].TaskNotificationFlag = taskNotificationFlag;
-            user.Task[0].TaskNotificationTime = taskTime;
-            user.Task[0].TaskNotifyMe = taskNotifyMe;
+            user.Task.TaskNotificationFlag = taskNotificationFlag;
+            user.Task.TaskNotificationTime = taskTime;
+            user.Task.TaskNotifyMe = taskNotifyMe;
 
             GetDataHelper.WritePreferences(user);
 

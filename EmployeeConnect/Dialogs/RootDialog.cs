@@ -47,11 +47,11 @@ namespace EmployeeConnect.Dialogs
             string userName = userDetails.UserPrincipalName;
 
 
-            Models.UPreferences uPref = GetDataHelper.readPreferences();
+            Models.Preference uPref = GetDataHelper.userPreference(userName);
             Models.Preference currUser = null;
-            if (uPref != null && uPref.preferences != null)
+            if (uPref != null && uPref.UserInfo != null)
             {
-                currUser = uPref.preferences.FirstOrDefault(c => c.UserName == userName);
+                currUser = uPref;
             }
 
 
@@ -81,9 +81,9 @@ namespace EmployeeConnect.Dialogs
                 
 
                 userPref.UserInfo = new[] { uInfo };
-                userPref.News = new[] { newsPref };
-                userPref.EandT = new[] { entPref };
-                userPref.Task = new[] { taskPref };
+                userPref.News = newsPref;
+                userPref.EandT = entPref;
+                userPref.Task = taskPref;
 
                 GetDataHelper.WritePreferences(userPref);
 
@@ -253,29 +253,29 @@ namespace EmployeeConnect.Dialogs
             string TenantId = activity.GetChannelData<TeamsChannelData>().Tenant.Id;
 
 
-            Models.UPreferences uPref = GetDataHelper.readPreferences();
-            List<Models.Preference> Preflist = uPref.preferences.ToList();
-            if (Preflist.Select(c => c.UserName).Contains(userName))
-            {
+            //Models.UPreferences uPref = GetDataHelper.readPreferences();
+            //List<Models.Preference> Preflist = uPref.preferences.ToList();
+            //if (Preflist.Select(c => c.UserName).Contains(userName))
+            //{
 
-                string PrefFileName = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
+            //    string PrefFileName = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
 
-                //int uPrefCount = uPref.preferences.Count();
-                //for (int i = 0; i < uPrefCount; i++)
-                //{
-                //    if (Preflist[i].UserName.Equals(userName))
-                //    {
-                //        Preflist[i].UserInfo.FirstOrDefault().UniqueID = UniqueId;
-                //        Preflist[i].UserInfo.FirstOrDefault().TenantID = TenantId;
-                //        Preflist[i].UserInfo.FirstOrDefault().ServiceURl = ServiceURL;
-                //    }
+            //    //int uPrefCount = uPref.preferences.Count();
+            //    //for (int i = 0; i < uPrefCount; i++)
+            //    //{
+            //    //    if (Preflist[i].UserName.Equals(userName))
+            //    //    {
+            //    //        Preflist[i].UserInfo.FirstOrDefault().UniqueID = UniqueId;
+            //    //        Preflist[i].UserInfo.FirstOrDefault().TenantID = TenantId;
+            //    //        Preflist[i].UserInfo.FirstOrDefault().ServiceURl = ServiceURL;
+            //    //    }
 
-                //}
+            //    //}
 
-                //string json = JsonConvert.SerializeObject(uPref); //create json object
+            //    //string json = JsonConvert.SerializeObject(uPref); //create json object
 
-                //File.WriteAllText(PrefFileName, json);
-            }
+            //    //File.WriteAllText(PrefFileName, json);
+            //}
             //------------
             switch (actionDetails.Action)
             {

@@ -239,7 +239,6 @@
     <Compile Include="Models\EventsAndTrainings.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\ListCard.cs" />
-    <Compile Include="Models\NewsCategories.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\SetPreferences.cs" />
     <Compile Include="Models\Ticket.cs" />
