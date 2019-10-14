@@ -47,7 +47,7 @@ namespace EmployeeConnect.Dialogs
             string userName = userDetails.UserPrincipalName;
 
 
-            Models.Preference uPref = GetDataHelper.userPreference(userName);
+            Models.Preference uPref = GetDataHelper.UserPreference(userName);
             Models.Preference currUser = null;
             if (uPref != null && uPref.UserInfo != null)
             {
@@ -61,8 +61,10 @@ namespace EmployeeConnect.Dialogs
                 string ServiceURL = activity.ServiceUrl;
                 string TenantId = activity.GetChannelData<TeamsChannelData>().Tenant.Id;
 
-                Models.Preference userPref = new Models.Preference();
-                userPref.UserName = userName;
+                Models.Preference userPref = new Models.Preference
+                {
+                    UserName = userName
+                };                
                 Models.UserInfo uInfo = new Models.UserInfo();
                 Models.NewsPreference newsPref = new Models.NewsPreference();
                 Models.EandtPreference entPref = new Models.EandtPreference();
@@ -109,7 +111,7 @@ namespace EmployeeConnect.Dialogs
                 switch (message.Trim())
                 {
                     case Common.Constants.Welcome:
-                        string url = await getSigninUrl(activity);
+                        string url = await GetSigninUrl(activity);
                         res = Helper.CardHelper.WelcomeCard();
                         for (int i = 0; i < res.Count(); i++)
                             reply.Attachments.Add(res.ElementAt(i));
@@ -121,7 +123,7 @@ namespace EmployeeConnect.Dialogs
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.UpcomingEventsTraining:
-                        card = Helper.CardHelper.getETCard();
+                        card = Helper.CardHelper.GetETCard();
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.PendingApprovals:
@@ -140,7 +142,7 @@ namespace EmployeeConnect.Dialogs
                             reply.Text = "No pending submissions to show.";
                         break;
                     case Common.Constants.TrendingNews:
-                        card = Helper.CardHelper.getNewsCard(userName);
+                        card = Helper.CardHelper.GetNewsCard(userName);
                         reply.Attachments.Add(card);
                         break;
                     case Common.Constants.Policies:
@@ -199,45 +201,7 @@ namespace EmployeeConnect.Dialogs
                 return;
             }
         }
-        private static ThumbnailCard GetTaskModuleOptions()
-        {
-            ThumbnailCard card = new ThumbnailCard();
-            card.Title = "Task Module Invocation from Thumbnail Card";
-            card.Buttons = new List<CardAction>();
 
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.PurchaseOrder.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.PurchaseOrder.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.NewsCard.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.NewsCard.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.TicketComplete.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.TicketComplete.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.VisitorRegistration.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.VisitorRegistration.Id
-                }));
-            card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.SendRequest.ButtonTitle, null,
-                new Models.BotFrameworkCardValue<string>()
-                {
-                    Data = TaskModelUIConstant.SendRequest.Id
-                }));
-            //card.Buttons.Add(new CardAction("invoke", TaskModelUIConstant.EventCard.ButtonTitle, null,
-            //    new Models.BotFrameworkCardValue<string>()
-            //    {
-            //        Data = TaskModelUIConstant.EventCard.Id
-            //    }));
-
-            return card;
-        }
         private async Task HandleActions(IDialogContext context, Activity activity)
         {
             var actionDetails = JsonConvert.DeserializeObject<Models.ActionDetails<string>>(activity.Value.ToString());
@@ -251,39 +215,14 @@ namespace EmployeeConnect.Dialogs
             string UniqueId = activity.From.Id;
             string ServiceURL = activity.ServiceUrl;
             string TenantId = activity.GetChannelData<TeamsChannelData>().Tenant.Id;
-
-
-            //Models.UPreferences uPref = GetDataHelper.readPreferences();
-            //List<Models.Preference> Preflist = uPref.preferences.ToList();
-            //if (Preflist.Select(c => c.UserName).Contains(userName))
-            //{
-
-            //    string PrefFileName = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
-
-            //    //int uPrefCount = uPref.preferences.Count();
-            //    //for (int i = 0; i < uPrefCount; i++)
-            //    //{
-            //    //    if (Preflist[i].UserName.Equals(userName))
-            //    //    {
-            //    //        Preflist[i].UserInfo.FirstOrDefault().UniqueID = UniqueId;
-            //    //        Preflist[i].UserInfo.FirstOrDefault().TenantID = TenantId;
-            //    //        Preflist[i].UserInfo.FirstOrDefault().ServiceURl = ServiceURL;
-            //    //    }
-
-            //    //}
-
-            //    //string json = JsonConvert.SerializeObject(uPref); //create json object
-
-            //    //File.WriteAllText(PrefFileName, json);
-            //}
-            //------------
+                       
             switch (actionDetails.Action)
             {
                 case Constants.SetPrefrencesDone:   //Press Done button on set preferences
-                    EmployeeConnect.Models.SetPreferences setPref = Helper.GetDataHelper.setPreferencesData(activity.Value.ToString());
+                    EmployeeConnect.Models.SetPreferences setPref = Helper.GetDataHelper.SetPreferencesData(activity.Value.ToString());
                     setPref.UserName = userName;
                     //setPref.UserName = userDetails.Name;
-                    EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.makeUPrefObject(setPref, UniqueId, ServiceURL, TenantId);
+                    EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.MakeUPrefObject(setPref, UniqueId, ServiceURL, TenantId);
                     Helper.GetDataHelper.WritePreferences(pref);
                     reply.Text = "Your preferences are set.";
                     break;
@@ -295,7 +234,7 @@ namespace EmployeeConnect.Dialogs
                     return;
                 case Constants.TicketCancel:        //cancels the ticket with a ticket number:removes it from Ticket.json
                     string ticketno = actionDetails.TicketNo;
-                    if (cancelTicket(ticketno) == true)
+                    if (CancelTicket(ticketno) == true)
                         reply.Text = "Ticket deleted successfully";
                     else
                         reply.Text = "Ticket not available";
@@ -303,15 +242,6 @@ namespace EmployeeConnect.Dialogs
             }
             await context.PostAsync(reply);
             return;
-        }
-
-        private static async Task<Attachment> GetDetailedRoasterCard(Activity activity, TeamsChannelAccount userDetails)
-        {
-            //var details = JsonConvert.DeserializeObject<AirlineActionDetails>(activity.Value.ToString());
-            //Crew crew = await CabinCrewPlansHelper.ReadJson(userDetails.UserPrincipalName);
-            //var datePlan = crew.plan.FirstOrDefault(c => c.flightDetails.flightStartDate.Date.ToString() == details.Id);
-            //return CardHelper.GetDetailedRoster(datePlan);
-            return null;
         }
 
         private async Task<TeamsChannelAccount> GetCurrentUserDetails(Activity activity)
@@ -325,7 +255,7 @@ namespace EmployeeConnect.Dialogs
         }
 
         //Cancels the ticket with ticketNo,returns true if ticket removed
-        public bool cancelTicket(string ticketNo)
+        public bool CancelTicket(string ticketNo)
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Ticket.json";
             string json = File.ReadAllText(file);
@@ -345,80 +275,12 @@ namespace EmployeeConnect.Dialogs
             return false;
         }
 
-        private async Task SendOAuthCardAsync(IDialogContext context, Activity activity)
-        {
-            var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "Please sign in", "Sign In", true).ConfigureAwait(false);
-            await context.PostAsync(reply);
-            context.Wait(WaitForToken);
-        }
-        private async Task WaitForToken(IDialogContext context, IAwaitable<object> result)
-        {
-            var activity = await result as Activity;
-            var tokenResponse = activity.ReadTokenResponseContent();
-            if (tokenResponse != null)
-            {
-                // Use the token to do exciting things!
-            }
-            else
-            {
-                // Get the Activity Message as well as activity.value in case of Auto closing of pop-up
-                string input = activity.Type == ActivityTypes.Message ? Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity)
-                                                                : ((dynamic)(activity.Value)).state.ToString();
-                if (!string.IsNullOrEmpty(input))
-                {
-                    tokenResponse = await context.GetUserTokenAsync(ApplicationSettings.ConnectionName, input.Trim());
-                    if (tokenResponse != null)
-                    {
-                        context.ConversationData.SetValue<string>(GetEmailKey(context.Activity), tokenResponse.ToString());
-                        await context.PostAsync($"Your sign in was successful.Please check the commands to see what i can do!!");
-                        //string url = await getSigninUrl(activity);
-                        var reply = context.MakeMessage();
-                        List<Attachment> res = Helper.CardHelper.WelcomeCard();
-                        for (int i = 0; i < res.Count(); i++)
-                            reply.Attachments.Add(res.ElementAt(i));
-                        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-                        await context.PostAsync(reply);
-                        context.Wait(MessageReceivedAsync);
-                        return;
-                    }
-                }
-                await context.PostAsync($"Hmm. Something went wrong. Please initiate the SignIn again. Try sending help.");
-                context.Wait(MessageReceivedAsync);
-            }
-        }
         private static string GetEmailKey(IActivity activity)
-
         {
-
             return activity.From.Id + EmailKey;
-
         }
-        private static string GetProfileKey(IActivity activity)
 
-        {
-
-            return activity.From.Id + ProfileKey;
-
-        }
-        private async Task<string> GetUserEmailId(Activity activity)
-        {
-            // Fetch the members in the current conversation
-
-            ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-
-            var members = await connector.Conversations.GetConversationMembersAsync(activity.Conversation.Id);
-
-            return members.Where(m => m.Id == activity.From.Id).First().AsTeamsChannelAccount().UserPrincipalName.ToLower();
-
-        }
-        public static async Task Signout(string emailId, IDialogContext context)
-        {
-            context.ConversationData.RemoveValue(GetEmailKey(context.Activity));
-            await context.SignOutUserAsync(ApplicationSettings.ConnectionName);
-            await context.PostAsync($"We have cleared everything related to you.");
-
-        }
-        public static async Task<string> getSigninUrl(Activity activity)
+        public static async Task<string> GetSigninUrl(Activity activity)
         {
             var connectionName = "ReadProfile";
             // var authClient = activity.GetOAuthClient(new MicrosoftAppCredentials("57af17b5-0742-4dc8-b16f-c72cb30134cc", "jsYEJGD427;$ukmvgHQ85{#"));
@@ -429,10 +291,8 @@ namespace EmployeeConnect.Dialogs
             string link = "";
             // Check if the request comes with login state
             if (data != null && data["state"] != null)
-            {
-                // Verify Token.
+            {                
                 var token1 = await authClient.OAuthApi.GetUserTokenAsync(activity.From.Id, connectionName, data["state"].ToString());
-                // Do stuff with the token here.
             }
             else
             {

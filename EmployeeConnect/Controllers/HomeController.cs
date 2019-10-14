@@ -23,29 +23,6 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-        [Route("hello")]
-        public ActionResult Hello()
-        {
-            return View("Index");
-        }
-
-        [Route("first")]
-        public ActionResult First()
-        {
-            return View();
-        }
-
-        [Route("second")]
-        public ActionResult Second()
-        {
-            return View();
-        }
-
-        [Route("configure")]
-        public ActionResult Configure()
-        {
-            return View();
-        }
 
         [Route("Task")]
         public ActionResult Task()
@@ -66,11 +43,13 @@ namespace EmployeeConnect.Controllers
             taskList.PurchaseOrder = filterList;
             return View(taskList);
         }
+
         [Route("Tools")]
         public ActionResult Tools()
         {
             return View();
         }
+
         [Route("createticket")]
         public ActionResult CreateTicket()
         {
@@ -80,11 +59,11 @@ namespace EmployeeConnect.Controllers
         [Route("ShowNews")]
         public async Task<ActionResult> ShowNews(string userName)
         {
-            Preference uPref = GetDataHelper.userPreference(userName);
+            Preference uPref = GetDataHelper.UserPreference(userName);
             //Preference user = uPref..Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
             UserInfo userInfo = uPref.UserInfo.FirstOrDefault();
 
-            var card = Helper.CardHelper.getNewsCard(userName);
+            var card = Helper.CardHelper.GetNewsCard(userName);
             await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
 
             return View();
@@ -93,11 +72,11 @@ namespace EmployeeConnect.Controllers
         [Route("ShowEnT")]
         public async Task<ActionResult> ShowEnT(string userName)
         {
-            Preference uPref = GetDataHelper.userPreference(userName);
+            Preference uPref = GetDataHelper.UserPreference(userName);
             //Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
             UserInfo userInfo = uPref.UserInfo.FirstOrDefault();
 
-            var card = Helper.CardHelper.getETCard();
+            var card = Helper.CardHelper.GetETCard();
             await NotificationHelper.SendNotification(userInfo.UniqueID, userInfo.ServiceURl, userInfo.TenantID, card);
 
             return View();
@@ -107,7 +86,7 @@ namespace EmployeeConnect.Controllers
         [Route("ShowTask")]
         public async Task<ActionResult> ShowTask(string userName)
         {
-            Preference uPref = GetDataHelper.userPreference(userName);
+            Preference uPref = GetDataHelper.UserPreference(userName);
             //Preference user = uPref.preferences.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
             UserInfo userInfo = uPref.UserInfo.FirstOrDefault();
 
@@ -132,7 +111,7 @@ namespace EmployeeConnect.Controllers
                 new JProperty("TicketNo", ticketNumber),
                 new JProperty("Date", currentDate));
             var objectData = data.ToString();
-            GetDataHelper.saveTicketsInfo(data);
+            GetDataHelper.SaveTicketsInfo(data);
             JavaScriptSerializer js = new JavaScriptSerializer();
             var parsedData = js.Serialize(objectData);
             return parsedData;
@@ -150,7 +129,7 @@ namespace EmployeeConnect.Controllers
                new JProperty("Date", date),
                new JProperty("Time", time));
             var objectData = data.ToString();
-            GetDataHelper.saveVisitorInfo(data);
+            GetDataHelper.SaveVisitorInfo(data);
             JavaScriptSerializer js = new JavaScriptSerializer();
             var parsedData = js.Serialize(objectData);
             return parsedData;
@@ -200,11 +179,12 @@ namespace EmployeeConnect.Controllers
             int day = DateTime.Now.Day;
             if (day == 15 || day == 30)
             {
-                GetDataHelper.UpdateNewsMockData();
+                MockDataHelper.UpdateNewsMockData();
             }
             news = GetDataHelper.GetNews();
             return View(news);
         }
+
 
         [Route("getNewsInfo")]
         public JObject GetNewsInfo(string NewsId)
@@ -212,11 +192,12 @@ namespace EmployeeConnect.Controllers
             return JObject.FromObject(CardHelper.GetNewsCardbyId(NewsId));
         }
 
+
         [Route("preferences")]
         public ActionResult Preferences(string emailID)
         {
             //Preference pref = new Preference();
-            Preference userPref = GetDataHelper.userPreference(emailID);
+            Preference userPref = GetDataHelper.UserPreference(emailID);
             Preference user = new Preference() { UserName = emailID };
             if (userPref == null)
             {
@@ -232,11 +213,12 @@ namespace EmployeeConnect.Controllers
             return View(user);
         }
 
+
         [Route("PreferenceInDb")]
         public void PreferenceInDb(string[] newsPrefCat, string newsTime, bool newsNotificationFlag, string newsNotifyMe, string eandtTime, string eandtNotify, bool eandtflag, string taskNotifyMe, string taskTime, bool taskNotificationFlag, string UserName, bool isAdded)
         {
             //Preference pref = new Preference();
-            Preference userPref = GetDataHelper.userPreference(UserName);
+            Preference userPref = GetDataHelper.UserPreference(UserName);
             Preference user = new Preference() { UserName = UserName };
             if (userPref != null)
             {
@@ -276,6 +258,7 @@ namespace EmployeeConnect.Controllers
 
         }
 
+
         [Route("policies")]
         public ActionResult Policies()
         {
@@ -314,6 +297,7 @@ namespace EmployeeConnect.Controllers
             return View(poList);
         }
 
+
         [Route("podecline")]
         public ActionResult PODecline(string poNo, string reason, string comment)
         {
@@ -324,11 +308,12 @@ namespace EmployeeConnect.Controllers
             {
                 if (item.PoNumber == poNo)
                 {
-                    GetDataHelper.updatePOStatus(poNo);
+                    GetDataHelper.UpdatePOStatus(poNo);
                 }
             }
             return View();
         }
+
 
         [Route("declined")]
         public ActionResult Declined(string poNo)
@@ -344,6 +329,7 @@ namespace EmployeeConnect.Controllers
             //TempData["data"] = poNo;
             return View();
         }
+
 
         [Route("EventandTrainingTab")]
         public ActionResult EventandTrainingTab(string id)
@@ -373,6 +359,7 @@ namespace EmployeeConnect.Controllers
             eventsListData.UpcomingEventGrid = UpcomingEventGrid;
             return View(eventsListData);
         }
+
 
         [Route("getEventInfo")]
         public JObject GetEventInfo(string eventId)

@@ -483,7 +483,7 @@ html {
     .location-icon::before,
     .web-icon::before,
     .check,
-    .star, .time-icon2::before {
+    .star, .time-icon2::before, .mandatory {
         display: none;
     }
 
@@ -557,6 +557,10 @@ html {
         bottom: 5px;
         margin-left: 10px;
         padding: 0 5px 3px 5px;
+    }
+    .training {
+        position: relative;
+        top: 2px;
     }
 
     .custom-card,
@@ -655,6 +659,10 @@ html {
         padding: 10px;
         font-weight: bold;
         margin-left: 14%;
+    }
+    .rw-down {
+        bottom: 10px;
+        position: relative;
     }
 }
 

@@ -86,7 +86,7 @@
                                     <div class="card-title main-title-msg">
                                         @Html.DisplayFor(modelItem => item.ETTitle)
                                     </div>
-                                    <div class="time-icon">
+                                    <div class="time-icon2">
                                         <div class="event-time"> @Html.DisplayFor(modelItem => item.ETStartTime) -  @Html.DisplayFor(modelItem => item.ETEndTime)</div>
                                     </div>
                                     <div class="location-icon">
@@ -122,7 +122,7 @@
                 @*<div class="down-chev"></div>*@
             </div>
         </div>
-        <div class="row">
+        <div class="row rw-down">
             @foreach (var item in Model.UpcomingEventGrid)
             {
                 <div class="col-xl-2 col-lg-2 col-md-4 col-sm-11 small-dev">
@@ -137,7 +137,7 @@
                                 }
                                 else
                                 {
-                                    <span>Training</span>
+                                    <span class="training">Training</span>
                                 }
                                 @if (item.ETMandatory == true)
                                 {

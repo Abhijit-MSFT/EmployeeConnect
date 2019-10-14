@@ -278,7 +278,7 @@ option {
     padding-right: 21px;
 }
 
-.chevron-down::before {
+/*.chevron-down::before {
     content: "\E447";
     font-family: "Teams Assets";
     font-size: 22px;
@@ -288,16 +288,8 @@ option {
     margin-left: -1%;
     color: #9b9a99;
     cursor: pointer;
-}
-
-/*.chevron-down::before {
-    content: "\E447";
-    font-family: "Teams Assets";
-    font-size: 16px;
-    font-weight: 600;
-    float: left;
-    color: #6264a7;
 }*/
+
 
 .date-control {
     width: 160px;
@@ -388,13 +380,52 @@ option {
 .rules1 {
     display: none;
 }
-/* for Mobile */
-@media (max-width: 425px) {
-    .show-more,
-    .panel-heading .accordion-toggle::after,
-    .col-10,
-    .col-2,
-    .rules {
+.dropdown-menu {
+    width: fit-content;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: #edeff1;
+}
+
+.dropdown-toggle::after {
+    border: none;
+    padding: 9px;
+}
+
+.dropdown-toggle {
+    font-size: 16px;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+a {
+    color: black;
+}
+.chevron-down::before {
+    content: "\E447";
+    font-family: "Teams Assets";
+    font-size: 22px;
+    font-weight: 600;
+    float: right;
+    /* position: absolute; */
+    margin-right: 3%;
+    color: #9b9a99;
+    cursor: pointer;
+}
+a.show-more {
+    color: blueviolet;
+    font-size: 15px;
+}
+    a.show-more:hover {
+        text-decoration: underline;
+    }
+    /* for Mobile */
+    @media (max-width: 425px) {
+        .show-more, .panel-heading .accordion-toggle::after, .col-10, .col-2, .rules {
         display: none;
     }
 
@@ -487,9 +518,10 @@ option {
          margin-top: 0px !important; 
     }
 
-    .all-radio {
-    margin-top: 20px;
-    }
+        .all-radio {
+            margin-top: 20px;
+            height: 165px;
+        }
 
     span.news-updates {
         font-size: 16px;
@@ -517,11 +549,14 @@ option {
         position: relative;
         /*bottom: 50px;*/
     }
+    .dropdown-menu {
+        width: 160px;
+    }
 
-    .fa-chevron-down:before {
+    /*.fa-chevron-down:before {
         font-size: 14px;
         color: #9b9a99;
-    }
+    }*/
 
     .date-control {
         width: 160px;
@@ -547,6 +582,9 @@ option {
     .chevron-down::before {
         margin-left: -3%;
     }
+        .notify-task {
+            margin-top: 0px; 
+        }
 }
 
 @media (max-width: 375px) {

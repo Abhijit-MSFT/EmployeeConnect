@@ -2,46 +2,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using EmployeeConnect.Models;
-using System.Security.Principal;
-using Microsoft.Bot.Connector.Teams.Models;
 using AdaptiveCards;
-using Microsoft.Ajax.Utilities;
-using Antlr.Runtime.Tree;
-using Newtonsoft.Json;
-using System.Web.Script.Serialization;
-using System.Net;
-using System.Windows.Forms;
 using EmployeeConnect.Common;
 
 namespace EmployeeConnect.Helper
 {
     public class CardHelper
     {
-        //returns a news ListCard containing specific number of messages
-        public static Attachment getNewsCard(string username)
+        //Returns a news ListCard containing specific number of messages
+        public static Attachment GetNewsCard(string username)
         {
-            var card = new ListCard();
-            card.content = new Content();
+            var card = new ListCard()
+            {
+                content = new Content()
+            };
             var list = new List<Item>();
             var buttonsList = new List<ListButton>();
             card.content.title = "";
-            NewsModel newsL = Helper.GetDataHelper.getPreferredNews(username);
-            Item item;
-            item = new Item();
-            item.title = "Top stories for you";
-            item.type = "section";
+            NewsModel newsL = Helper.GetDataHelper.GetPreferredNews(username);
+            Item item = new Item
+            {
+                title = "Top stories for you",
+                type = "section"
+            };
+
             list.Add(item);
 
-            if (newsL != null) 
+            if (newsL != null)
             {
                 var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
                 var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
 
                 int MaxNewsCount = TrendingNews.Count();
-                if (MaxNewsCount > 4)  
-                    MaxNewsCount = 4;
+                if (MaxNewsCount > 5)
+                    MaxNewsCount = 5;
 
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
@@ -63,14 +58,17 @@ namespace EmployeeConnect.Helper
 
                     list.Add(item);
                 }
-                item = new Item();
-                item.title = "Suggested stories";
-                item.type = "section";
+                item = new Item()
+                {
+                    title = "Suggested stories",
+                    type = "section"
+                };
+
                 list.Add(item);
 
                 MaxNewsCount = SuggestedNews.Count();
-                if (SuggestedNews.Count() > 4)
-                    MaxNewsCount = 4;
+                if (SuggestedNews.Count() > 5)
+                    MaxNewsCount = 5;
 
                 for (int i = 0; i < MaxNewsCount; i++)
                 {
@@ -90,126 +88,32 @@ namespace EmployeeConnect.Helper
                     };
 
                     list.Add(item);
-                }              
+                }
 
                 ListButton viewButton = new ListButton();
                 viewButton.type = "openUrl";
                 viewButton.title = "View more";
-                viewButton.value = deepLinkTab("currNews", "news");
+                viewButton.value = DeepLinkTab("currNews", "news");
                 buttonsList.Add(viewButton);
 
                 card.content.buttons = buttonsList.ToArray();
                 card.content.items = list.ToArray();
 
             }
-            Attachment attachment = new Attachment();
-
-            attachment.ContentType = card.contentType;
-
-            attachment.Content = card.content;
-
-            return attachment;
-
-        }
-        public static string deepLinkTab(string EntityId, string EntityName)
-        {
-            return string.Format("https://teams.microsoft.com/l/entity/{0}/{1}?webUrl={2}", EmployeeConnect.Helper.ApplicationSettings.AppId, EntityId, ApplicationSettings.BaseUrl + "/" + EntityName);
-        }
-
-        //Returns the policies ListCard having Policies for every department.
-        public static Attachment GetPoliciesCard()
-        {
-            var card = new ListCard();
-            card.content = new Content();
-            var list = new List<Item>();
-            card.content.title = "Please select a department to view policies";
-            string[] dept = { "Human Resources", "Pay and Benefits", "IT & Facilities", "Store Operations" };
-
-            string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
-
-            for (int i = 0; i < 4; i++)
+            Attachment attachment = new Attachment()
             {
-
-                var item = new Item();
-                item.icon = iconurl[i];
-                item.id = i.ToString();
-                item.title = dept[i];
-                item.type = "resultItem";
-
-                //item.tap = new Tap()
-                //{
-                //    type = "messageBack",
-                //    //title = "title",
-                //    text = item.title + " policy"
-
-
-                //};
-                item.tap = new Tap()
-                {
-                    type = "openUrl",
-                    title = item.id,
-                    value = deepLinkTab("policies", "Policies")
-                };
-
-                list.Add(item);
-            }
-            card.content.items = list.ToArray();
-
-            Attachment attachment = new Attachment();
-
-            attachment.ContentType = card.contentType;
-
-            attachment.Content = card.content;
+                ContentType = card.contentType,
+                Content = card.content
+            };
 
             return attachment;
-
         }
 
-        //Returns the Tools ListCard having Tools for every department.
-        public static Attachment GetMyToolsCard()
-        {
-            var card = new ListCard();
-            card.content = new Content();
-            var list = new List<Item>();
-            card.content.title = "Please select a department to view tools";
-
-            string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
-
-            string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
-
-            for (int i = 0; i < 4; i++)
-            {
-
-                var item = new Item();
-                item.icon = iconurl[i];
-                item.id = i.ToString();
-                item.title = dept[i];
-                item.type = "resultItem";
-                item.tap = new Tap()
-                {
-                    type = "messageBack",
-                    text = item.title + " tools"
-                };
-
-                list.Add(item);
-            }
-            card.content.items = list.ToArray();
-
-            Attachment attachment = new Attachment();
-
-            attachment.ContentType = card.contentType;
-
-            attachment.Content = card.content;
-
-            return attachment;
-
-        }
-
-        //gets the specific news card on tap
+        //Gets the specific news card on tap
         public static Attachment GetNewsCardbyId(string id)
         {
             NewsModel newsL = Helper.GetDataHelper.GetNews();
-            var SelectedNews = getNewsById(newsL, id);
+            var SelectedNews = GetNewsById(newsL, id);
 
             if (SelectedNews == null)   //could not find the news
                 return null;
@@ -270,7 +174,7 @@ namespace EmployeeConnect.Helper
         }
 
         //Returns the News with specific NewsID
-        public static News getNewsById(NewsModel newsL, string id)
+        public static News GetNewsById(NewsModel newsL, string id)
         {
             if (newsL == null)
                 return null;
@@ -279,7 +183,96 @@ namespace EmployeeConnect.Helper
                 if (news.NewsID.Equals(id))
                     return news;
             }
-            return null;    // id doesn't exist
+            return null;
+        }
+
+        //Returns the policies ListCard having Policies for every department.
+        public static Attachment GetPoliciesCard()
+        {
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Please select a department to view policies";
+            string[] dept = { "Human Resources", "Pay and Benefits", "IT & Facilities", "Store Operations" };
+
+            string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                var item = new Item();
+                item.icon = iconurl[i];
+                item.id = i.ToString();
+                item.title = dept[i];
+                item.type = "resultItem";
+
+                //item.tap = new Tap()
+                //{
+                //    type = "messageBack",
+                //    //title = "title",
+                //    text = item.title + " policy"
+
+
+                //};
+                item.tap = new Tap()
+                {
+                    type = "openUrl",
+                    title = item.id,
+                    value = DeepLinkTab("policies", "Policies")
+                };
+
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
+        }
+
+        //Returns the Tools ListCard having Tools for every department.
+        public static Attachment GetMyToolsCard()
+        {
+            var card = new ListCard();
+            card.content = new Content();
+            var list = new List<Item>();
+            card.content.title = "Please select a department to view tools";
+
+            string[] dept = { "Human Resources", "Payment and Benefits", "IT & Facilities", "Store Operations" };
+
+            string[] iconurl = { ApplicationSettings.BaseUrl + "/Images/Human Resources.jpeg", ApplicationSettings.BaseUrl + "/Images/Payment and benefits.jpg", ApplicationSettings.BaseUrl + "/Images/ITFacilities.jpg", ApplicationSettings.BaseUrl + "/Images/Store Operations.jpg" };
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                var item = new Item();
+                item.icon = iconurl[i];
+                item.id = i.ToString();
+                item.title = dept[i];
+                item.type = "resultItem";
+                item.tap = new Tap()
+                {
+                    type = "messageBack",
+                    text = item.title + " tools"
+                };
+
+                list.Add(item);
+            }
+            card.content.items = list.ToArray();
+
+            Attachment attachment = new Attachment();
+
+            attachment.ContentType = card.contentType;
+
+            attachment.Content = card.content;
+
+            return attachment;
+
         }
 
         public static List<Attachment> WelcomeCard()
@@ -307,14 +300,14 @@ namespace EmployeeConnect.Helper
                     new AdaptiveContainer()
                     {
                         Items = new List<AdaptiveElement>()
-                        {                        
+                        {
                             new AdaptiveTextBlock()
                             {
                                 Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder, 
-                                Size = AdaptiveTextSize.Large                                
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Size = AdaptiveTextSize.Large
                             },
-                            
+
                             new AdaptiveTextBlock()
                             {
                                 Text = "Keep yourself posted \r\rabout the latest news",
@@ -324,7 +317,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveTextBlock()
                             {
                                 Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation",
-                                Wrap = true ,                                
+                                Wrap = true ,
                             }
                         }
                     }
@@ -389,7 +382,7 @@ namespace EmployeeConnect.Helper
                                 Text = "Welcome to Employee Connect",
                                 Weight = AdaptiveTextWeight.Bolder,
                                 Size = AdaptiveTextSize.Large
-                            },                            
+                            },
                             new AdaptiveTextBlock()
                             {
                                 Text = "Create and manage your tasks",
@@ -810,116 +803,7 @@ namespace EmployeeConnect.Helper
 
         }
 
-        public static AdaptiveCard SetNewsPreferences()
-        {
-            List<AdaptiveColumn> list = new List<AdaptiveColumn>();
-            list.Add(new AdaptiveColumn()
-            {
-                Items =
-                {
-
-                     new AdaptiveChoiceSetInput()
-                    {
-                        Id = "NewsCategory1",
-                        //Value = "1", // please set default value here
-                        Style = AdaptiveChoiceInputStyle.Expanded,
-                        IsMultiSelect=true,// set the style of Choice set to compact
-                        Wrap=true,
-                        Choices =
-                        {
-                            new AdaptiveChoice
-                            {
-                                Title ="Finance",
-                                Value = "1",
-                            },
-                            new AdaptiveChoice
-                            {
-                                Title = "Media",
-                                Value = "2",
-                            },
-                            new AdaptiveChoice
-                            {
-                                Title = "Art",
-                                Value = "3",
-                            }
-                        }
-                }
-               },
-                Width = "500"
-            });
-            list.Add(new AdaptiveColumn()
-            {
-                Items =
-                {
-                     new AdaptiveChoiceSetInput()
-                    {
-                        Id = "NewsCategory2",
-                        Style = AdaptiveChoiceInputStyle.Expanded,
-                        IsMultiSelect=true,// set the style of Choice set to compact
-                        Wrap=true,
-                        Choices =
-                        {
-                            new AdaptiveChoice
-                            {
-                                Title = "Business",
-                                Value = "4",
-                            },
-                            new AdaptiveChoice
-                            {
-                                Title = "Culture",
-                                Value = "5",
-                            },
-                            new AdaptiveChoice
-                            {
-                                Title = "Technology",
-                                Value = "6",
-                            }
-
-                        }
-                }
-               },
-                Width = "500"
-            });
-            var card = new AdaptiveCard("1.0")
-            {
-                Body = new List<AdaptiveElement>()
-                {
-                    new AdaptiveContainer()
-                    {
-                        Items = new List<AdaptiveElement>()
-                        {
-                            new AdaptiveTextBlock()
-                            {
-                                Text = "Select 5 or more categories.",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            new AdaptiveColumnSet()
-                            {
-                                Columns=list
-                            }
-                        }
-                    }
-                },
-                Actions = new List<AdaptiveAction>()
-                {
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Skip",
-                        DataJson=@"{'Action':'" + Constants.SetPrefrencesSkip+"' }"
-                    },
-                     new AdaptiveSubmitAction()
-                    {
-                        Title = "Done",
-                        DataJson=@"{'Action':'" + Constants.SetPrefrencesDone+"' }"
-                     }
-               }
-            };
-
-            return card;
-        }
-
-        public static Attachment getETCard()
+        public static Attachment GetETCard()
         {
             var card = new ListCard();
             card.content = new Content();
@@ -953,14 +837,9 @@ namespace EmployeeConnect.Helper
                         string title = EandT.ETTitle;
                         item = new Item();
                         item.title = title;
-                        //item.icon = EandT.ETThumbnailUrl;
-                        if (EandT.ETFlag == "E")
-                            item.icon = ApplicationSettings.BaseUrl + "/fonts/flagImg.png";
-                        else
-                            item.icon = ApplicationSettings.BaseUrl + "/fonts/shapeEve.png";
+                        item.icon = EandT.ETFlag == "E" ? ApplicationSettings.BaseUrl + "/fonts/EandTEvent.png" : ApplicationSettings.BaseUrl + "/fonts/EandTTraining.png";
                         item.id = EandT.ETID;
                         item.subtitle = subtitle;
-                        //item.flagImage = EandT.ETFlagImage;
                         item.type = "resultItem";
                         item.tap = new Tap()
                         {
@@ -972,21 +851,11 @@ namespace EmployeeConnect.Helper
                         list.Add(item);
                     }
                 }
-                /*item = new Item();
-                item.type = "resultItem";
-                item.title = "View more";
-                item.icon = ApplicationSettings.BaseUrl + "/Images/purpleImage.JPG";
-                item.tap = new Tap()
-                {
-                    type = "openUrl",
-                    value = deepLinkTab("EandT", "Events and Trainings")
-                };
 
-                list.Add(item);*/
                 ListButton viewButton = new ListButton();
                 viewButton.type = "openUrl";
                 viewButton.title = "View all events";
-                viewButton.value = deepLinkTab("EandT", "Events and Trainings");
+                viewButton.value = DeepLinkTab("EandT", "Events and Trainings");
                 buttonsList.Add(viewButton);
 
 
@@ -1035,12 +904,7 @@ namespace EmployeeConnect.Helper
             //item.id = POlist.PurchaseOrder[i].PoNumber;
             item.type = "resultItem";
             item.icon = ApplicationSettings.BaseUrl + "/Images/expense_icon.PNG";
-            item.tap = new Tap()
-            {
-                type = "invoke",
-                title = item.id,
-                value = "{ \"type\": \"task/fetch\", \"data\": \"" + url + "\"}"
-            };
+
             list.Add(item);
             card.content.items = list.ToArray();
             Attachment attachment = new Attachment();
@@ -1052,138 +916,6 @@ namespace EmployeeConnect.Helper
             return attachment;
         }
 
-        public static Attachment PendingTasksCard(string id)
-        {
-            EmployeeConnect.Models.PurchaseOrders POOrder = Helper.CardHelper.PendingTaskbyID(id);
-            var card = new AdaptiveCard("1.0")
-            {
-                Body = new List<AdaptiveElement>()
-                {
-                    new AdaptiveContainer()
-                    {
-                        Items = new List<AdaptiveElement>()
-                        {
-
-                            new AdaptiveTextBlock()
-                            {
-                                Text = "Reminder: You have a pending task to review",
-                                Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Default // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            new AdaptiveTextBlock()
-                            {
-                                Text = "Purchase Order",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            new AdaptiveFactSet
-                            {
-                                Separator = true,
-                                Spacing = AdaptiveSpacing.ExtraLarge,
-                                Facts =
-                                {
-                                    // Describes a fact in a Adaptive FactSet as a key/value pair
-                                    new AdaptiveFact
-                                    {
-                                        Title = "P.O. No.",
-                                        Value = "\t"+POOrder.PoNumber,
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Description",
-                                        Value = POOrder.Description
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Vendor Name",
-                                        Value =  POOrder.VendorName
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Vendor No.",
-                                        Value = POOrder.vendorNo
-                                    },
-                                    new AdaptiveFact
-                                    {
-                                        Title = "Amount",
-                                        Value = POOrder.TotalAmount
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                Actions = new List<AdaptiveAction>()
-                {
-                     new AdaptiveSubmitAction
-                     {
-                        Title ="Approve",
-                       Data= new PODeclineData { action = "podecline" }  
-                     },
-                     new AdaptiveSubmitAction
-                     {
-                        Title ="Decline",
-                        DataJson="{\"action\": \"close\"}"
-                     }
-                }
-            };
-            Attachment attachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card
-            };
-            return attachment;
-        }
-
-        public static EmployeeConnect.Models.PurchaseOrders PendingTaskbyID(string id)
-        {
-            PO POlist = new PO();
-            POlist = Helper.GetDataHelper.GetPOs();
-            for (int i = 0; i < POlist.PurchaseOrder.Count(); i++)
-            {
-                if (id.Equals(POlist.PurchaseOrder[i].PoNumber))
-                    return POlist.PurchaseOrder[i];
-            }
-            return new EmployeeConnect.Models.PurchaseOrders();
-        }
-        public static AdaptiveCard ReviewTasks()
-        {
-            AdaptiveCard card = new AdaptiveCard("1.0")
-            {
-                Body = new List<AdaptiveElement>()
-                {
-                    new AdaptiveContainer()
-                    {
-                        Items = new List<AdaptiveElement>()
-                        {
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "Reminder: You have a pending task to review",
-                        Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Default, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    },
-                    new AdaptiveTextBlock()
-                    {
-                        Text = "You have timesheet waiting for " + 12 + " days",
-                        Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                        Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                    }
-                        }
-                    }
-                },
-                Actions = new List<AdaptiveAction>()
-                {
-                    new AdaptiveSubmitAction()
-                    {
-                        Title = "Fill timesheet",
-                       // DataJson = "get the data"
-                    }
-
-                 }
-
-            };
-            return card;
-        }
         public static Attachment PendingApprovals()
         {
             var card = new ListCard();
@@ -1198,7 +930,7 @@ namespace EmployeeConnect.Helper
             list.Add(item);
 
             PO POList = Helper.GetDataHelper.GetPOs();
-            InventoryModel InvList = Helper.GetDataHelper.getInventoryData();
+            InventoryModel InvList = Helper.GetDataHelper.GetInventoryData();
 
             var pending = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("pending"));
 
@@ -1281,7 +1013,7 @@ namespace EmployeeConnect.Helper
 
         public static Attachment Ticket()
         {
-            TicketModel tickets = GetDataHelper.getTicket();
+            TicketModel tickets = GetDataHelper.GetTicket();
             Tics firstTicket = tickets.ticket.FirstOrDefault();
             if (firstTicket == null)
                 return null;
@@ -1574,7 +1306,7 @@ namespace EmployeeConnect.Helper
         public static Attachment GetETbyID(string id)
         {
             EandTModel EandTL = Helper.GetDataHelper.GetEandT();
-            var SelectedEventsTrainings = getETByIds(EandTL, id);
+            var SelectedEventsTrainings = GetETByIds(EandTL, id);
 
             if (SelectedEventsTrainings == null)   //could not find the news
                 return null;
@@ -1582,7 +1314,7 @@ namespace EmployeeConnect.Helper
             string EandT = "";
             string date = "";
             string imagepath = "";
-            string mandatoryFlag="";
+            string mandatoryFlag = "";
             if (SelectedEventsTrainings.ETFlag == "E")
                 imagepath = "/fonts/Flag.png";
             else
@@ -1597,7 +1329,7 @@ namespace EmployeeConnect.Helper
                 EandT = "Training";
             else EandT = "Event";
 
-            if(SelectedEventsTrainings.ETMandatory == true)
+            if (SelectedEventsTrainings.ETMandatory == true)
             {
                 mandatoryFlag = "*Mandatory";
             }
@@ -1625,7 +1357,7 @@ namespace EmployeeConnect.Helper
                 {
                      new AdaptiveTextBlock()    //NewsBy on Date and Time
                             {
-                                Text = date+"\n\n"+SelectedEventsTrainings.ETStartTime+'-'+SelectedEventsTrainings.ETEndTime,
+                                Text = date+" "+SelectedEventsTrainings.ETStartTime+'-'+SelectedEventsTrainings.ETEndTime,
                                 Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                                 Wrap = true
@@ -1665,35 +1397,35 @@ namespace EmployeeConnect.Helper
 
             });
 
-            Insidelist3.Add(new AdaptiveColumn()
-            {
-                Items =
-                {
-                    new AdaptiveImage()
-                    {
-                        Url = new Uri(ApplicationSettings.BaseUrl + "/fonts/Website.png"),
-                        Size = AdaptiveImageSize.Small,
-                    }
-                },
-                Width = "auto"
+            //Insidelist3.Add(new AdaptiveColumn()
+            //{
+            //    Items =
+            //    {
+            //        new AdaptiveImage()
+            //        {
+            //            Url = new Uri(ApplicationSettings.BaseUrl + "/fonts/Website.png"),
+            //            Size = AdaptiveImageSize.Small,
+            //        }
+            //    },
+            //    Width = "auto"
 
-            });
-            Insidelist3.Add(new AdaptiveColumn()
-            {
-                Items =
-                {
-                     new AdaptiveTextBlock()    //NewsBy on Date and Time
-                            {
-                                Text = "Website",
-                                Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                                Wrap = true
+            //});
+            //Insidelist3.Add(new AdaptiveColumn()
+            //{
+            //    Items =
+            //    {
+            //         new AdaptiveTextBlock()    //NewsBy on Date and Time
+            //                {
+            //                    Text = "Website",
+            //                    Weight = AdaptiveTextWeight.Bolder,    // set the weight of text e.g. Bolder, Light, Normal
+            //                    Size = AdaptiveTextSize.Medium,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+            //                    Wrap = true
 
-                            }
-                },
-                Width = "auto"
+            //                }
+            //    },
+            //    Width = "auto"
 
-            });
+            //});
 
 
             list1.Add(new AdaptiveColumn()
@@ -1767,18 +1499,18 @@ namespace EmployeeConnect.Helper
                 }
 
             });
-            list.Add(new AdaptiveColumn()
-            {
-                Items =
-                {           new AdaptiveColumnSet()
-                            {
-                                Columns = Insidelist3
-                            },
+            //list.Add(new AdaptiveColumn()
+            //{
+            //    Items =
+            //    {           new AdaptiveColumnSet()
+            //                {
+            //                    Columns = Insidelist3
+            //                },
 
 
-                }
+            //    }
 
-            });
+            //});
             string status = "";
             if (SelectedEventsTrainings.ETFlag == "E")
             {
@@ -1871,7 +1603,7 @@ namespace EmployeeConnect.Helper
             return attachment;
         }
 
-        public static EventsAndTraining getETByIds(EandTModel EandTL, string id)
+        public static EventsAndTraining GetETByIds(EandTModel EandTL, string id)
         {
             if (EandTL == null)
             {
@@ -2084,7 +1816,13 @@ namespace EmployeeConnect.Helper
             return res;
         }
 
+        public static string DeepLinkTab(string EntityId, string EntityName)
+        {
+            return string.Format("https://teams.microsoft.com/l/entity/{0}/{1}?webUrl={2}", EmployeeConnect.Helper.ApplicationSettings.AppId, EntityId, ApplicationSettings.BaseUrl + "/" + EntityName);
+        }
+
+
     }
 
-   
+
 }

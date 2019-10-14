@@ -35,6 +35,7 @@ namespace EmployeeConnect.Controllers
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
+
         private async Task<HttpResponseMessage> HandleInvokeActivity(Activity activity)
         {
             var activityValue = activity.Value.ToString();

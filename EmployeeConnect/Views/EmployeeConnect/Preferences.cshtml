@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -38,18 +37,6 @@
         microsoftTeams.getContext(function (context) {
             userName = context.upn;
 
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Preferences/userName",
-            //    contentType: "application/json; charset=utf-8",
-            //    data: '{"UserName":"' + userName + '"}',
-            //    dataType: "json",
-            //    success: function (data) {
-            //    },
-            //    error: function () {
-            //        console.log('A error');
-            //    }
-            //});
             }
         )
         function getTime(value) {
@@ -133,6 +120,15 @@
                 }
             });
         }
+        $(document).ready(function () {
+            $(".dropdown-menu li").click(function () {
+                var selText = $(this).text();
+                $(this)
+                    .parents(".help")
+                    .find(".dropdown-toggle")
+                    .html(selText);
+            });
+        });
 
     </script>
 </head>
@@ -164,7 +160,7 @@
                     <div class="panel-body body-height">
                         <div class="image-text image_grid">
                             <label for="Business">
-                                <img src="./imgs/Business.jpg" alt-name="Business" class="row-display" />
+                                <img src="./Images/Business.jpg" alt-name="Business" class="row-display" />
                             </label>
                             <input type="checkbox" name="Business" id="Business" @(Model.News.SelectedCategories.Contains("Business") ? "checked" : "") value="Business" onclick="getCategory()" />
                             <div class="tick">
@@ -173,7 +169,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Design">
-                                <img src="./imgs/Design.jpg" alt-name="Design" class="row-display" />
+                                <img src="./Images/Design.jpg" alt-name="Design" class="row-display" />
                             </label>
                             <input type="checkbox" name="Design" @(Model.News.SelectedCategories.Contains("Design") ? "checked" : "") id="Design" value="Design" onclick="getCategory()" />
                             <div class="tick">
@@ -182,7 +178,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Technology">
-                                <img src="./imgs/Technology.jpg" alt-name="Technology" class="row-display" />
+                                <img src="./Images/Technology.jpg" alt-name="Technology" class="row-display" />
                             </label>
                             <input type="checkbox" name="Technology" @(Model.News.SelectedCategories.Contains("Technology") ? "checked" : "" ) id="Technology" value="Technology" onclick="getCategory()" />
                             <div class="tick">
@@ -191,7 +187,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Media">
-                                <img src="./imgs/Media.jpg" alt-name="Media" class="row-display" />
+                                <img src="./Images/Media.jpg" alt-name="Media" class="row-display" />
                             </label>
                             <input type="checkbox" name="Media" @(Model.News.SelectedCategories.Contains("Media") ? "checked" : "" ) id="Media" value="Media" onclick="getCategory()" />
                             <div class="tick">
@@ -201,7 +197,7 @@
 
                         <div class="image-text image_grid hide-for-mobile">
                             <label for="Economy">
-                                <img src="./imgs/Economy.jpg" alt-name="Economy" class="row-display" />
+                                <img src="./Images/Economy.jpg" alt-name="Economy" class="row-display" />
                             </label>
                             <input type="checkbox" name="Economy" @(Model.News.SelectedCategories.Contains("Economy") ? "checked" : "" ) id="Economy" value="Economy" onclick="getCategory()" />
                             <div class="tick">
@@ -210,7 +206,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="CS">
-                                <img src="./imgs/CS.jpg" alt-name="CS" class="row-display" />
+                                <img src="./Images/CS.jpg" alt-name="CS" class="row-display" />
                             </label>
                             <input type="checkbox" name="CS" @(Model.News.SelectedCategories.Contains("CS") ? "checked" : "" ) id="CS" value="CS" onclick="getCategory()" />
                             <div class="tick">
@@ -219,7 +215,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Market">
-                                <img src="./imgs/Market.jpg" alt-name="Market" class="row-display" />
+                                <img src="./Images/Market.jpg" alt-name="Market" class="row-display" />
                             </label>
                             <input type="checkbox" name="Market" @(Model.News.SelectedCategories.Contains("Market") ? "checked" : "" ) id="Market" value="Market" onclick="getCategory()" />
                             <div class="tick">
@@ -229,7 +225,7 @@
                         <br class="br">
                         <div class="image-text image_grid hide-for-mobile">
                             <label for="Finance">
-                                <img src="./imgs/Finance.jpg" alt-name="Finance" class="row-display" />
+                                <img src="./Images/Finance.jpg" alt-name="Finance" class="row-display" />
                             </label>
                             <input type="checkbox" name="Finance" @(Model.News.SelectedCategories.Contains("Finance") ? "checked" : "" ) id="Finance" value="Finance" onclick="getCategory()" />
                             <div class="tick">
@@ -238,7 +234,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Enterprise">
-                                <img src="./imgs/Enterprise.jpg" alt-name="Enterprise" class="row-display" />
+                                <img src="./Images/Enterprise.jpg" alt-name="Enterprise" class="row-display" />
                             </label>
                             <input type="checkbox" name="Enterprise" @(Model.News.SelectedCategories.Contains("AI") ? "checked" : "" ) id="Enterprise" value="Enterprise" onclick="getCategory()" />
                             <div class="tick">
@@ -247,7 +243,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Software">
-                                <img src="./imgs/Software.jpg" alt-name="Software" class="row-display" />
+                                <img src="./Images/Software.jpg" alt-name="Software" class="row-display" />
                             </label>
                             <input type="checkbox" name="Software" @(Model.News.SelectedCategories.Contains("Software") ? "checked" : "" )id="Software" value="Software" onclick="getCategory()" />
                             <div class="tick">
@@ -256,7 +252,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Animation">
-                                <img src="./imgs/Animation.gif" alt-name="Animation" class="row-display" />
+                                <img src="./Images/Animation.gif" alt-name="Animation" class="row-display" />
                             </label>
                             <input type="checkbox" name="Animation" @(Model.News.SelectedCategories.Contains("Animation") ? "checked" : "" ) id="Animation" value="Animation" onclick="getCategory()" />
                             <div class="tick">
@@ -265,7 +261,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Creative">
-                                <img src="./imgs/Creative.png" alt-name="Creative" class="row-display" />
+                                <img src="./Images/Creative.png" alt-name="Creative" class="row-display" />
                             </label>
                             <input type="checkbox" name="Creative" @(Model.News.SelectedCategories.Contains("Creative") ? "checked" : "" ) id="Creative" value="Creative" onclick="getCategory()" />
                             <div class="tick">
@@ -274,7 +270,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="IT">
-                                <img src="./imgs/IT.jpg" alt-name="IT" class="row-display" />
+                                <img src="./Images/IT.jpg" alt-name="IT" class="row-display" />
                             </label>
                             <input type="checkbox" name="IT" @(Model.News.SelectedCategories.Contains("IT") ? "checked" : "" ) id="IT" value="IT" onclick="getCategory()" />
                             <div class="tick">
@@ -283,7 +279,7 @@
                         </div>
                         <div class="image-text image_grid">
                             <label for="Data">
-                                <img src="./imgs/Data.jpg" alt-name="Data" @(Model.News.SelectedCategories.Contains("Data") ? "checked" : "" ) class="row-display" id="Data" value="Data" onclick="getCategory()" />
+                                <img src="./Images/Data.jpg" alt-name="Data" @(Model.News.SelectedCategories.Contains("Data") ? "checked" : "" ) class="row-display" id="Data" value="Data" onclick="getCategory()" />
                             </label>
                             <input type="checkbox" name="Data" id="Data" value="Data" onclick="getCategory()" />
                             <div class="tick">
@@ -318,20 +314,22 @@
                                 <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" id="newsTime" onchange="getTime(this.value)">
-                                <option selected value="10:00 am">10:00 am</option>
-                                <option value="11:00 am">11:00 am</option>
-                                <option value="12:00 am">12:00 am</option>
-                                <option value="1:00 pm">1:00 pm</option>
-                                <option value="2:00 pm">2:00 pm</option>
-                                <option value="3:00 pm">3:00 pm</option>
-                                <option value="4:00 pm">4:00 pm</option>
-                                <option value="5:00 pm">5:00 pm</option>
-                            </select>
-                            <span class="chevron-down"></span>
+                            <div class="help date-control" data-toggle="dropdown" id="newsTime" onchange="getTime(this.value)">
+                                <a class="dropdown-toggle chevron-down" href="#">Select</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item"  value="10:00 am">10:00 am</li>
+                                    <li class="dropdown-item"  value="11:00 am">11:00 am</li>
+                                    <li class="dropdown-item"  value="12:00 pm">12:00 pm</li>
+                                    <li class="dropdown-item"  value="1:00 pm">1:00 pm</li>
+                                    <li class="dropdown-item"  value="2:00 pm">2:00 pm</li>
+                                    <li class="dropdown-item"  value="3:00 pm">3:00 pm</li>
+                                    <li class="dropdown-item"  value="4:00 pm">4:00 pm</li>
+                                    <li class="dropdown-item"  value="5:00 pm">5:00 pm</li>
+                                </ul>
+                            </div>
                         </form>
                         <a href="#" class="show-more" style="float:right" onclick="SendCard('ShowNews');">Show News</a>
-                    </div> <br><br class="br-for-mobile"><br class="br-for-mobile">
+                    </div> <br class="br-for-mobile"><br class="br-for-mobile">
                 </div>
             </div>
         </div>
@@ -380,17 +378,19 @@
                                 <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" id="EandTTime" onchange="getEnTTime(this.value)">
-                                <option selected value="10:00 am">10:00 am</option>
-                                <option value="11:00 am">11:00 am</option>
-                                <option value="12:00 am">12:00 am</option>
-                                <option value="1:00 pm">1:00 pm</option>
-                                <option value="2:00 pm">2:00 pm</option>
-                                <option value="3:00 pm">3:00 pm</option>
-                                <option value="4:00 pm">4:00 pm</option>
-                                <option value="5:00 pm">5:00 pm</option>
-                            </select>
-                            <span class="chevron-down"></span> <br /><br class="br-for-mobile">
+                            <div class="help date-control" data-toggle="dropdown" id="EandTTime" onchange="getEnTTime(this.value)">
+                                <a class="dropdown-toggle chevron-down" href="#">Select</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item" value="10:00 am">10:00 am</li>
+                                    <li class="dropdown-item" value="11:00 am">11:00 am</li>
+                                    <li class="dropdown-item" value="12:00 pm">12:00 pm</li>
+                                    <li class="dropdown-item" value="1:00 pm">1:00 pm</li>
+                                    <li class="dropdown-item" value="2:00 pm">2:00 pm</li>
+                                    <li class="dropdown-item" value="3:00 pm">3:00 pm</li>
+                                    <li class="dropdown-item" value="4:00 pm">4:00 pm</li>
+                                    <li class="dropdown-item" value="5:00 pm">5:00 pm</li>
+                                </ul>
+                            </div>
                         </form>
                         <div><a href="#" class="show-more" style="float:right; padding-bottom:20px;" onclick="SendCard('ShowEnT');">Show Events and Trainings</a></div>
                     </div>
@@ -435,20 +435,21 @@
                                 <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" id="taskTime" onchange="getTaskTime(this.value)">
-                                <option selected value="10:00 am">10:00 am</option>
-                                <option value="11:00 am">11:00 am</option>
-                                <option value="12:00 am">12:00 am</option>
-                                <option value="1:00 pm">1:00 pm</option>
-                                <option value="2:00 pm">2:00 pm</option>
-                                <option value="3:00 pm">3:00 pm</option>
-                                <option value="4:00 pm">4:00 pm</option>
-                                <option value="5:00 pm">5:00 pm</option>
-                            </select>
-                            <span class="chevron-down"></span> <br>
+                            <div class="help date-control" data-toggle="dropdown" id="taskTime" onchange="getTaskTime(this.value)">
+                                <a class="dropdown-toggle chevron-down" href="#">Select</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item" value="10:00 am">10:00 am</li>
+                                    <li class="dropdown-item" value="11:00 am">11:00 am</li>
+                                    <li class="dropdown-item" value="12:00 pm">12:00 pm</li>
+                                    <li class="dropdown-item" value="1:00 pm">1:00 pm</li>
+                                    <li class="dropdown-item" value="2:00 pm">2:00 pm</li>
+                                    <li class="dropdown-item" value="3:00 pm">3:00 pm</li>
+                                    <li class="dropdown-item" value="4:00 pm">4:00 pm</li>
+                                    <li class="dropdown-item" value="5:00 pm">5:00 pm</li>
+                                </ul>
+                            </div>
                         </form>
-                        <a href="#" class="show-more" style="float:right;padding-bottom:40px;" onclick="SendCard('ShowTask');">Show Task Reminder</a>
-                        <br />
+                        <a href="#" class="show-more" style="float:right;padding-bottom:20px;" onclick="SendCard('ShowTask');">Show Task Reminder</a>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ using System.Web;
 namespace EmployeeConnect.Models
 {
     public class TaskInfo
-    {                                               //Cards not there
+    {                                              
         [JsonProperty("url")]
         public string Url { get; set; }
 

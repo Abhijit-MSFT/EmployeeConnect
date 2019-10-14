@@ -24,7 +24,6 @@ namespace EmployeeConnect
             }
             if (query.CommandId == "News")
             {
-
                 NewsModel news = GetDataHelper.GetNews();
                 var title = "";
                 var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "newsTitle");

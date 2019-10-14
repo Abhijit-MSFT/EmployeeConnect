@@ -16,7 +16,7 @@ body {
     box-sizing: border-box;
     background-color: white;
     width: 10%;
-    height: 40px;
+    height: 27px;
 }
 
     .sel::before {
@@ -24,7 +24,7 @@ body {
         font-family: "Teams Assets";
         position: absolute;
         color: #04838a;
-        top: 8px;
+        top: 2px;
         right: 0.5rem;
         pointer-events: none;
     }
@@ -34,7 +34,7 @@ body {
         font-size: 16px;
         font-weight: 400;
         line-height: 20px;
-        padding: 8px 0 0 12px;
+        padding: 4px 0 0 12px;
         color: #242424;
         -webkit-appearance: none;
         -ms-appearance: none;

@@ -70,7 +70,6 @@ public class UIConstants
         public const string pendingDates = "pendingdates";
         public const string editTicket = "editTicket";
         public const string editVisitorRequest = "editVisitorRequest";
-
         public const string toggleEventStatus = "toggleEventStatus";
         
     }

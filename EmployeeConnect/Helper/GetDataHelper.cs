@@ -16,6 +16,7 @@ namespace EmployeeConnect.Helper
     public class GetDataHelper
     {
         public static string userName = "";
+
         public static NewsModel GetNews()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
@@ -44,7 +45,7 @@ namespace EmployeeConnect.Helper
 
         }
 
-        public static void updatePOStatus(string poNo)
+        public static void UpdatePOStatus(string poNo)
         {
             if (poNo == null)
                 return;
@@ -65,7 +66,7 @@ namespace EmployeeConnect.Helper
 
             return;
         }
-        public static TicketsDataModel getTickets()
+        public static TicketsDataModel GetTickets()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets/") + @"/Tickets.json";
             TicketsDataModel ticket = new TicketsDataModel();
@@ -74,7 +75,7 @@ namespace EmployeeConnect.Helper
             return ticket;
         }
 
-        public static TicketModel getTicket()
+        public static TicketModel GetTicket()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Ticket.json";
             TicketModel ticket = new TicketModel();
@@ -83,7 +84,7 @@ namespace EmployeeConnect.Helper
             return ticket;
         }
 
-        public static InventoryModel getInventoryData()
+        public static InventoryModel GetInventoryData()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Inventory.json";
             InventoryModel inventory = new InventoryModel();
@@ -93,7 +94,7 @@ namespace EmployeeConnect.Helper
         }
 
         //to get the preferences from the card json 
-        public static SetPreferences setPreferencesData(string json)
+        public static SetPreferences SetPreferencesData(string json)
         {
             SetPreferences pref = new SetPreferences();
             pref = (new JavaScriptSerializer().Deserialize<SetPreferences>(json));
@@ -102,7 +103,7 @@ namespace EmployeeConnect.Helper
         }
 
         //Makes a UPrefObject from SetPreferences object
-        public static Preference makeUPrefObject(SetPreferences pref, string uID, string serviceURL, string tenID)
+        public static Preference MakeUPrefObject(SetPreferences pref, string uID, string serviceURL, string tenID)
         {
             Preference uPref = new Preference();
             uPref.UserName = pref.UserName;
@@ -192,7 +193,7 @@ namespace EmployeeConnect.Helper
             return uPref;
         }
         
-        public static UPreferences readPreferences()
+        public static UPreferences ReadPreferences()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
             UPreferences pref = new UPreferences();
@@ -201,9 +202,9 @@ namespace EmployeeConnect.Helper
             return pref;
         }
 
-        public static Preference userPreference(string userName)
+        public static Preference UserPreference(string userName)
         {
-            UPreferences uPrefs = GetDataHelper.readPreferences();
+            UPreferences uPrefs = GetDataHelper.ReadPreferences();
             Preference uPref = uPrefs.Preferences.Where(c => c.UserName == userName).FirstOrDefault(); ;
             return uPref;
         }
@@ -284,7 +285,7 @@ namespace EmployeeConnect.Helper
             }
         }
 
-        public static void saveVisitorInfo(JObject visitorData)
+        public static void SaveVisitorInfo(JObject visitorData)
         {
             VisitorDataModel currentVisitor = new VisitorDataModel()
             {
@@ -306,9 +307,9 @@ namespace EmployeeConnect.Helper
             }
         }
              
-        public static void saveTicketsInfo(JObject ticketData)
+        public static void SaveTicketsInfo(JObject ticketData)
         {
-            TicketsDataModel currentTicket = GetDataHelper.getTickets();
+            TicketsDataModel currentTicket = GetDataHelper.GetTickets();
 
             int TicketCount = currentTicket.Tickets.Count();
             var tNo = Convert.ToInt32(ticketData.GetValue("TicketNo"));
@@ -326,9 +327,9 @@ namespace EmployeeConnect.Helper
             }
         }
                
-        public static NewsModel getPreferredNews(string username)
+        public static NewsModel GetPreferredNews(string username)
         {
-            Preference uPref = userPreference(username);
+            Preference uPref = UserPreference(username);
             NewsModel news = GetNews();
             
             string[] categories = uPref.News.SelectedCategories;
@@ -347,140 +348,8 @@ namespace EmployeeConnect.Helper
             return news;
         }
 
-        //news notification as per preferences
-        public static async System.Threading.Tasks.Task CheckPrefAndSendNewsCard()
-        {
-            UPreferences UserPref = GetDataHelper.readPreferences();
-            int UPrefCount = UserPref.Preferences.Count();
-            Attachment card = null;
-
-            for (int i = 0; i < UPrefCount; i++)
-            {
-                string userName = UserPref.Preferences[i].UserName;
-
-                string NewsNotificationTime1 = UserPref.Preferences[i].News.NewsNotificationTime;
-                DateTime NewsNotificationTime = DateTime.ParseExact(UserPref.Preferences[i].News.NewsNotificationTime, "H:mm tt", CultureInfo.InvariantCulture);
-                //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
-
-                DateTime currTime = DateTime.Now;
-                if (NewsNotificationTime >= currTime.AddMinutes(-10) || NewsNotificationTime <= currTime.AddMinutes(10))
-                {
-                    card = Helper.CardHelper.getNewsCard(userName);
-                    string uIn = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string tenID = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string serURL = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
-                }
-            }
-        }
-
-        //eAndt notification as per preferences
-        public static async System.Threading.Tasks.Task CheckPrefAndSendEandTCard()
-        {
-            UPreferences UserPref = GetDataHelper.readPreferences();
-            int UPrefCount = UserPref.Preferences.Count();
-            Attachment card = null;
-
-            for (int i = 0; i < UPrefCount; i++)
-            {
-                string userName = UserPref.Preferences[i].UserName;
-                DateTime ETNotificationTime = DateTime.ParseExact(UserPref.Preferences[i].EandT.EandTNotificationTime.ToString(), "H:mm tt", CultureInfo.InvariantCulture);
-
-                //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
-
-                DateTime currTime = DateTime.Now;
-                if (ETNotificationTime >= currTime.AddMinutes(-10) || ETNotificationTime <= currTime.AddMinutes(10))
-                {
-                    card = Helper.CardHelper.getETCard();
-                    string uIn = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string tenID = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string serURL = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
-                }
-            }
-        }
-
-        //Task notification as per preferences
-        //public static async System.Threading.Tasks.Task CheckPrefAndSendTaskCard()
-        //{
-        //    UPreferences UserPref = GetDataHelper.readPreferences();
-        //    int UPrefCount = UserPref.Preferences.Count();
-        //    Attachment card = null;
-
-        //    for (int i = 0; i < UPrefCount; i++)
-        //    {
-        //        string userName = UserPref.Preferences[i].UserName;
-        //        DateTime TaskNotificationTime = DateTime.ParseExact(UserPref.Preferences[i].Task.Select(c => c.TaskNotificationTime).ToString(), "H:mm tt", CultureInfo.InvariantCulture);
-
-        //        //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
-
-        //        DateTime currTime = DateTime.Now;
-        //        if (TaskNotificationTime >= currTime.AddMinutes(-10) || TaskNotificationTime <= currTime.AddMinutes(10))
-        //        {
-        //            card = Helper.CardHelper.PendingTasksCard();
-        //            string uIn = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-        //            string tenID = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-        //            string serURL = UserPref.Preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-        //            await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
-        //        }
-        //    }
-        //}
 
 
-            //Update MockData
-
-            public static void UpdateNewsMockData()
-        {
-            string filename = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
-            if (File.Exists(filename))
-            {
-                NewsModel news = GetNews();
-                int NewsCount = news.news.Count();
-
-                DateTime[] last15Days = Enumerable.Range(0, 15).Select(i => DateTime.Now.Date.AddDays(-i)).ToArray();
-
-                for (int i = 0; i < NewsCount; i++)
-                {
-                    Random r = new Random();
-                    int randomnum = r.Next(0, last15Days.Length);
-                    news.news[i].NewsDateTIme = last15Days[randomnum].ToString("M/dd/yyyy, h:mm tt");
-
-                }
-                string json = JsonConvert.SerializeObject(news); //create json object
-
-                File.WriteAllText(filename, json);
-            }
-        }
-
-        public static void UpdateETMockData()
-        {
-            string filename = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-            if (File.Exists(filename))
-            {
-                EandTModel eandt = GetEandT();
-                int eandtCount = eandt.EventsAndtraining.Count();
-
-                for (int i = 0; i < eandtCount; i++)
-                {
-
-
-                }
-
-
-                string json = File.ReadAllText(filename);
-            }
-
-
-            //EventsAndTraining et = new JavaScriptSerializer().Deserialize<EventsAndTraining>(json);
-
-            //foreach(EventsAndTraining i in et)
-            //{
-            //    et.ETDate = DateTime.Now.Date.ToString("MM/dd/yyyy");
-            //}
-
-
-
-        }
 
     }
 }

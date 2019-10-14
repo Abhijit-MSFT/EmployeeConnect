@@ -7,8 +7,8 @@
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://d58496d2.ngrok.io",
-    "termsOfUseUrl": "https://d58496d2.ngrok.io"
+    "privacyUrl": "https://8c4f4334.ngrok.io",
+    "termsOfUseUrl": "https://8c4f4334.ngrok.io"
   },
   "icons": {
     "color": "color.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "currNews",
       "name": "News",
-      "contentUrl": "https://d58496d2.ngrok.io/News",
-      "websiteUrl": "https://d58496d2.ngrok.io/News",
+      "contentUrl": "https://8c4f4334.ngrok.io/News",
+      "websiteUrl": "https://8c4f4334.ngrok.io/News",
       "scopes": [
         "personal"
       ]
@@ -36,8 +36,8 @@
     {
       "entityId": "EandT",
       "name": "Events and Trainings",
-      "contentUrl": "https://d58496d2.ngrok.io/EventandTrainingTab",
-      "websiteUrl": "https://d58496d2.ngrok.io/EventandTrainingTab",
+      "contentUrl": "https://8c4f4334.ngrok.io/EventandTrainingTab",
+      "websiteUrl": "https://8c4f4334.ngrok.io/EventandTrainingTab",
       "scopes": [
         "personal"
       ]
@@ -45,8 +45,8 @@
     {
       "entityId": "tools",
       "name": "Tools",
-      "contentUrl": "https://d58496d2.ngrok.io/Tools",
-      "websiteUrl": "https://d58496d2.ngrok.io/Tools",
+      "contentUrl": "https://8c4f4334.ngrok.io/Tools",
+      "websiteUrl": "https://8c4f4334.ngrok.io/Tools",
       "scopes": [
         "personal"
       ]
@@ -54,8 +54,8 @@
     {
       "entityId": "tasks",
       "name": "Tasks",
-      "contentUrl": "https://d58496d2.ngrok.io/Task",
-      "websiteUrl": "https://d58496d2.ngrok.io/Task",
+      "contentUrl": "https://8c4f4334.ngrok.io/Task",
+      "websiteUrl": "https://8c4f4334.ngrok.io/Task",
       "scopes": [
         "personal"
       ]
@@ -63,8 +63,8 @@
     {
       "entityId": "policies",
       "name": "Policies",
-      "contentUrl": "https://d58496d2.ngrok.io/Policies",
-      "websiteUrl": "https://d58496d2.ngrok.io/Policies",
+      "contentUrl": "https://8c4f4334.ngrok.io/Policies",
+      "websiteUrl": "https://8c4f4334.ngrok.io/Policies",
       "scopes": [
         "personal"
       ]
@@ -72,8 +72,8 @@
     {
       "entityId": "preferences",
       "name": "Preferences",
-      "contentUrl": "https://d58496d2.ngrok.io/Preferences?emailID={upn}",
-      "websiteUrl": "https://d58496d2.ngrok.io/Preferences",
+      "contentUrl": "https://8c4f4334.ngrok.io/Preferences?emailID={upn}",
+      "websiteUrl": "https://8c4f4334.ngrok.io/Preferences",
       "scopes": [
         "personal"
       ]
@@ -81,8 +81,8 @@
     {
       "entityId": "Test",
       "name": "Test",
-      "contentUrl": "https://d58496d2.ngrok.io/index.html",
-      "websiteUrl": "https://d58496d2.ngrok.io/index.html",
+      "contentUrl": "https://8c4f4334.ngrok.io/index.html",
+      "websiteUrl": "https://8c4f4334.ngrok.io/index.html",
       "scopes": [
         "personal"
       ]
