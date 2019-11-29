@@ -7,15 +7,15 @@
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://8c4f4334.ngrok.io",
-    "termsOfUseUrl": "https://8c4f4334.ngrok.io"
+    "privacyUrl": "https://b8bb3c71.ngrok.io",
+    "termsOfUseUrl": "https://b8bb3c71.ngrok.io"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Test Employee Connect",
+    "short": "Employee-Connect_SpfxChanges",
     "full": "This is Employee_Connect app"
   },
   "description": {
@@ -27,8 +27,8 @@
     {
       "entityId": "currNews",
       "name": "News",
-      "contentUrl": "https://8c4f4334.ngrok.io/News",
-      "websiteUrl": "https://8c4f4334.ngrok.io/News",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype",
       "scopes": [
         "personal"
       ]
@@ -36,8 +36,8 @@
     {
       "entityId": "EandT",
       "name": "Events and Trainings",
-      "contentUrl": "https://8c4f4334.ngrok.io/EventandTrainingTab",
-      "websiteUrl": "https://8c4f4334.ngrok.io/EventandTrainingTab",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Events-And-Trainings.aspx",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Events-And-Trainings.aspx",
       "scopes": [
         "personal"
       ]
@@ -45,8 +45,8 @@
     {
       "entityId": "tools",
       "name": "Tools",
-      "contentUrl": "https://8c4f4334.ngrok.io/Tools",
-      "websiteUrl": "https://8c4f4334.ngrok.io/Tools",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Tools.aspx",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Tools.aspx",
       "scopes": [
         "personal"
       ]
@@ -54,8 +54,8 @@
     {
       "entityId": "tasks",
       "name": "Tasks",
-      "contentUrl": "https://8c4f4334.ngrok.io/Task",
-      "websiteUrl": "https://8c4f4334.ngrok.io/Task",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Task.aspx",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Task.aspx",
       "scopes": [
         "personal"
       ]
@@ -63,8 +63,8 @@
     {
       "entityId": "policies",
       "name": "Policies",
-      "contentUrl": "https://8c4f4334.ngrok.io/Policies",
-      "websiteUrl": "https://8c4f4334.ngrok.io/Policies",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Policies.aspx#heading3s",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Policies.aspx#heading3",
       "scopes": [
         "personal"
       ]
@@ -72,17 +72,8 @@
     {
       "entityId": "preferences",
       "name": "Preferences",
-      "contentUrl": "https://8c4f4334.ngrok.io/Preferences?emailID={upn}",
-      "websiteUrl": "https://8c4f4334.ngrok.io/Preferences",
-      "scopes": [
-        "personal"
-      ]
-    },
-    {
-      "entityId": "Test",
-      "name": "Test",
-      "contentUrl": "https://8c4f4334.ngrok.io/index.html",
-      "websiteUrl": "https://8c4f4334.ngrok.io/index.html",
+      "contentUrl": "https://b8bb3c71.ngrok.io/Preferences?emailID={upn}",
+      "websiteUrl": "https://b8bb3c71.ngrok.io/Preferences",
       "scopes": [
         "personal"
       ]
@@ -268,6 +259,12 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "token.botframework.com"
-  ]
+    "employeeconnect-9566.azurewebsites.net",
+    "token.botframework.com",
+    "avadheshftc.sharepoint.com"
+  ],
+  "webApplicationInfo": {
+    "id": "00000003-0000-0ff1-ce00-000000000000",
+    "resource": "https://avadheshftc.sharepoint.com"
+  }
 }

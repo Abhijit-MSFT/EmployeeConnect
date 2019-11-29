@@ -200,7 +200,7 @@
                 $("#HRtools").addClass("show");
             }
         });
-        submitHandler = (err, result) => {
+      submitHandler = (err, result) => {
            if (result.action == "ticketcomplete") {
                 let taskInfo = {
                     height: null,
@@ -281,8 +281,6 @@
              if (result.action == "submitVisitor") {
                  microsoftTeams.tasks.submitTask(taskInfo);
             }
-            // console.log(`Submit handler - err: ${err}`);
-            //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
         function submitTools(type) {
@@ -311,6 +309,11 @@
                 taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
             }
+
+            @*var encodedWebUrl = encodeURI('"@(ApplicationSettings.BaseUrl)" + "/createticket";');
+            var encodedContext = encodeURI('{"subEntityId": "createTicket"}');
+            var taskModuleUrl = 'https://teams.microsoft.com/l/entity/3b28c87b-83d7-47ca-8e8c-5870f08595a5/?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
+            microsoftTeams.executeDeepLink(taskItemUrl);*@
 
 
 

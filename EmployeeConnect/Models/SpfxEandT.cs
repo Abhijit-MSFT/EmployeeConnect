@@ -21,7 +21,7 @@ namespace EmployeeConnect.Models
         public int Id { get; set; }
         public object ServerRedirectedEmbedUri { get; set; }
         public string ServerRedirectedEmbedUrl { get; set; }
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public string ContentTypeId { get; set; }
         public string Title { get; set; }
         public DateTime Modified { get; set; }

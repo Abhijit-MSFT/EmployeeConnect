@@ -20,7 +20,9 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             var buttonsList = new List<ListButton>();
             card.content.title = "";
-            NewsModel newsL = Helper.GetDataHelper.GetPreferredNews(username);
+            //SpfxNews newsL = Helper.GetDataHelper.GetPreferredNews(username);
+            SpfxNews newsL = Helper.GetDataHelper.ReadNews();
+            List<Values> newsValues = newsL.value.Where(c => c.Category != null).Select(d => d).ToList();
             Item item = new Item
             {
                 title = "Top stories for you",
@@ -31,21 +33,24 @@ namespace EmployeeConnect.Helper
 
             if (newsL != null)
             {
-                var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
-                var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
+                //var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
+                //var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
+
+                var TrendingNews = newsValues;
+                var SuggestedNews = newsValues;
 
                 int MaxNewsCount = TrendingNews.Count();
                 if (MaxNewsCount > 5)
                     MaxNewsCount = 5;
 
-                for (int i = 0; i < MaxNewsCount; i++)
+                for (int i = 1; i < MaxNewsCount; i++)
                 {
                     var news = TrendingNews.ElementAt(i);
-                    string subtitle = news.DetailedNews.Substring(0, 100) + "...";
+                    string subtitle = news.Description.Substring(0, 100) + "...";
                     item = new Item();
-                    item.title = news.NewsTitle;
-                    item.icon = news.NewsThumbnailUrl;
-                    item.id = news.NewsID;
+                    item.title = news.Title;
+                    item.icon = news.BannerImageUrl.Url;
+                    item.id = news.Id.ToString();
                     item.subtitle = subtitle;
                     item.type = "resultItem";
                     item.tap = new Tap()
@@ -64,20 +69,23 @@ namespace EmployeeConnect.Helper
                     type = "section"
                 };
 
-                list.Add(item);
+                list.Add(item);               
+
+               
+                
 
                 MaxNewsCount = SuggestedNews.Count();
                 if (SuggestedNews.Count() > 5)
-                    MaxNewsCount = 5;
+                    MaxNewsCount = 6;
 
-                for (int i = 0; i < MaxNewsCount; i++)
+                for (int i = MaxNewsCount; i < SuggestedNews.Count(); i++)
                 {
                     var news = SuggestedNews.ElementAt(i);
-                    string subtitle = news.DetailedNews.Substring(0, 100) + "...";
+                    string subtitle = news.Description.Substring(0, 100) + "...";
                     item = new Item();
-                    item.title = news.NewsTitle;
-                    item.icon = news.NewsThumbnailUrl;
-                    item.id = news.NewsID;
+                    item.title = news.Title;
+                    item.icon = news.BannerImageUrl.Url;
+                    item.id = news.Id.ToString();
                     item.subtitle = subtitle;
                     item.type = "resultItem";
                     item.tap = new Tap()
@@ -110,9 +118,75 @@ namespace EmployeeConnect.Helper
         }
 
         //Gets the specific news card on tap
+        //public static Attachment GetNewsCardbyId(string id)
+        //{
+        //    //NewsModel newsL = Helper.GetDataHelper.GetNews();
+        //    SpfxNews newsL = Helper.GetDataHelper.ReadNews();
+        //    var SelectedNews = GetNewsById(newsL, id);
+
+        //    if (SelectedNews == null)   //could not find the news
+        //        return null;
+        //    var card = new AdaptiveCard("1.0")
+        //    {
+        //        Body = new List<AdaptiveElement>()
+        //        {
+        //            new AdaptiveContainer()
+        //            {
+        //                Items = new List<AdaptiveElement>()
+        //                {
+        //                    new AdaptiveImage
+        //                    {
+        //                        HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+        //                        Url = new Uri(SelectedNews.BannerImageUrl.Url), //change this to copied images in Images_Spfxc folder
+        //                        Id="imgId"
+        //                    },
+        //                    new AdaptiveTextBlock() //Title of News
+        //                    {
+        //                        Text = SelectedNews.Title,
+        //                        Weight = AdaptiveTextWeight.Bolder,     // set the weight of text e.g. Bolder, Light, Normal
+        //                        Size = AdaptiveTextSize.Large,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+        //                        Wrap = true,
+        //                        Id="TextId1"
+        //                    },
+        //                        new AdaptiveTextBlock()     //NewsBy on Date and Time
+        //                    {
+        //                        //Text = "By " + SelectedNews.NewsBy + " on " + SelectedNews.NewsDateTIme,
+        //                        Text = SelectedNews.Modified.ToString("M/d/yyyy"),
+        //                        Weight = AdaptiveTextWeight.Lighter,    // set the weight of text e.g. Bolder, Light, Normal
+        //                        Size = AdaptiveTextSize.Small,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+        //                        Wrap = true,
+        //                        Id="TextId2"
+        //                    },
+        //                    new AdaptiveTextBlock()     //Detailed News
+        //                    {
+        //                        Text = SelectedNews.Description,
+        //                        Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
+        //                        Size = AdaptiveTextSize.Default,       // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
+        //                        Wrap = true,
+        //                        Id="TextId3"
+        //                    }
+        //                }
+        //            }
+        //        },
+        //        Actions =
+        //        {
+        //            new AdaptiveSubmitAction() { Title = "Close", DataJson="{\"action\": \"close\"}" }
+        //        }
+
+        //    };
+        //    Attachment attachment = new Attachment();
+
+        //    attachment.ContentType = AdaptiveCard.ContentType;
+
+        //    attachment.Content = card;
+
+        //    return attachment;
+        //}
+
         public static Attachment GetNewsCardbyId(string id)
         {
-            NewsModel newsL = Helper.GetDataHelper.GetNews();
+            //NewsModel newsL = Helper.GetDataHelper.GetNews();
+            SpfxNews newsL = Helper.GetDataHelper.ReadNews();
             var SelectedNews = GetNewsById(newsL, id);
 
             if (SelectedNews == null)   //could not find the news
@@ -128,12 +202,12 @@ namespace EmployeeConnect.Helper
                             new AdaptiveImage
                             {
                                 HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
-                                Url = new Uri(SelectedNews.NewsThumbnailUrl),
+                                Url = new Uri(SelectedNews.BannerImageUrl.Url), //change this to copied images in Images_Spfxc folder
                                 Id="imgId"
                             },
                             new AdaptiveTextBlock() //Title of News
                             {
-                                Text = SelectedNews.NewsTitle,
+                                Text = SelectedNews.Title,
                                 Weight = AdaptiveTextWeight.Bolder,     // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                                 Wrap = true,
@@ -141,7 +215,8 @@ namespace EmployeeConnect.Helper
                             },
                                 new AdaptiveTextBlock()     //NewsBy on Date and Time
                             {
-                                Text = "By " + SelectedNews.NewsBy + " on " + SelectedNews.NewsDateTIme,
+                                //Text = "By " + SelectedNews.NewsBy + " on " + SelectedNews.NewsDateTIme,
+                                Text = SelectedNews.Modified.ToString("M/d/yyyy"),
                                 Weight = AdaptiveTextWeight.Lighter,    // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Small,          // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                                 Wrap = true,
@@ -149,12 +224,12 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveTextBlock()     //Detailed News
                             {
-                                Text = SelectedNews.DetailedNews,
+                                Text = SelectedNews.Description,
                                 Weight = AdaptiveTextWeight.Default, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Default,       // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                                 Wrap = true,
                                 Id="TextId3"
-                            }
+                            }                            
                         }
                     }
                 },
@@ -172,15 +247,14 @@ namespace EmployeeConnect.Helper
 
             return attachment;
         }
-
         //Returns the News with specific NewsID
-        public static News GetNewsById(NewsModel newsL, string id)
+        public static Values GetNewsById(SpfxNews newsL, string id)
         {
             if (newsL == null)
                 return null;
-            foreach (var news in newsL.news)
+            foreach (var news in newsL.value)
             {
-                if (news.NewsID.Equals(id))
+                if (news.Id.Equals(id))
                     return news;
             }
             return null;
@@ -467,7 +541,7 @@ namespace EmployeeConnect.Helper
                         }
                 }
                },
-                Width = "500"
+               
             });
             list.Add(new AdaptiveColumn()
             {
@@ -510,7 +584,7 @@ namespace EmployeeConnect.Helper
                         }
                 }
                },
-                Width = "500"
+               
             });
             var card = new AdaptiveCard("1.0")
             {
@@ -616,7 +690,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "Event and training",
+                                Text = "Events and trainings",
                                 Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
                                 Size = AdaptiveTextSize.Large, // set the size of text e.g. Extra Large, Large, Medium, Normal, Small
                             },
@@ -810,11 +884,11 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             var buttonsList = new List<ListButton>();
             card.content.title = "Upcoming Events and Trainings";
-            EandTModel EandTL = Helper.GetDataHelper.GetEandT();
+            SpfxEandT EandTL = Helper.GetDataHelper.ReadEandT();
             Item item;
             if (EandTL != null)
             {
-                var Events = EandTL.EventsAndtraining;
+                var Events = EandTL.value;
                 int MaxEventsCount = Events.Count();
                 int count = 0;
                 //DateTime CurrDate = new DateTime(2019, 6, 1);
@@ -823,22 +897,41 @@ namespace EmployeeConnect.Helper
                 {
                     var EandT = Events.ElementAt(i);
                     string date = "";
-                    if (EandT.ETStartDate == EandT.ETEndDate)
-                        date = EandT.ETStartDate;
+                    if (EandT.EventDate == EandT.EndDate)
+                        date = EandT.EventDate.ToString();
                     else
-                        date = EandT.ETStartDate + " to " + EandT.ETEndDate;
-                    DateTime Dstart = DateTime.ParseExact(EandT.ETStartDate, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    DateTime Dend = DateTime.ParseExact(EandT.ETEndDate, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    if (count == 5)
-                        break;
-                    if (Dstart <= CurrDate.AddDays(15) && EandT.UserAdded && Dend >= CurrDate.AddDays(-15))
+                        date = EandT.EventDate.ToString("M/d/yyyy") + " to " + EandT.EndDate.ToString("M/d/yyyy");
+                    //DateTime Dstart = DateTime.ParseExact(EandT.EventDate.ToString(), "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    //DateTime Dend = DateTime.ParseExact(EandT.EndDate.ToString(), "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    DateTime Dstart = EandT.EventDate;
+                    DateTime Dend = EandT.EndDate;
+
+                    //if (count == 5)
+                    //    break;
+                    if (Dstart <= CurrDate.AddDays(15) && Dend >= CurrDate.AddDays(-15))
                     {
-                        string subtitle = date + ' ' + "from" + ' ' + EandT.ETStartTime + '-' + EandT.ETEndTime;
-                        string title = EandT.ETTitle;
+                        string subtitle = date + ' ' + "from" + ' ' + EandT.EventDate.ToString("h:m tt") + ' ' + '-' + ' ' + EandT.EndDate.ToString("h:m tt");
+                        string title = EandT.Title;
                         item = new Item();
                         item.title = title;
-                        item.icon = EandT.ETFlag == "E" ? ApplicationSettings.BaseUrl + "/fonts/EandTEvent.png" : ApplicationSettings.BaseUrl + "/fonts/EandTTraining.png";
-                        item.id = EandT.ETID;
+                    //Meeting, Business, Birthday, null                  
+                    switch (EandT.Category)
+                    {
+                        case "Meeting":
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/Meeting.png";
+                            break;
+                        case "Business":
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/Business.png";
+                            break;
+                        case "Birthday":
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/Birthday.png";
+                            break;
+                        default:
+                            item.icon = ApplicationSettings.BaseUrl + "/fonts/Meeting.png";
+                            break;
+                    }
+
+                    item.id = EandT.Id.ToString();
                         item.subtitle = subtitle;
                         item.type = "resultItem";
                         item.tap = new Tap()

@@ -240,7 +240,9 @@
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\ListCard.cs" />
     <Compile Include="Models\News.cs" />
+    <Compile Include="Models\News_Spfx.cs" />
     <Compile Include="Models\SetPreferences.cs" />
+    <Compile Include="Models\SpfxEandT.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\TicketsDataModel.cs" />
     <Compile Include="Models\UPreferences.cs" />
@@ -256,6 +258,8 @@
     <Content Include="Content\Custom.css" />
     <Content Include="Content\declined.css" />
     <Content Include="Content\eventandtrainingnew.css" />
+    <Content Include="fonts\Birthday.png" />
+    <Content Include="fonts\Business.png" />
     <Content Include="fonts\EandTEvent.png" />
     <Content Include="fonts\EandTTraining.png" />
     <Content Include="fonts\Event-bot.png" />
@@ -264,6 +268,7 @@
     <Content Include="fonts\flagImg.png" />
     <Content Include="fonts\FlagSnip.PNG" />
     <Content Include="fonts\Location.PNG" />
+    <Content Include="fonts\Meeting.png" />
     <Content Include="fonts\Shape.png" />
     <Content Include="fonts\shapeEve.png" />
     <Content Include="fonts\shapeEvent.JPG" />
@@ -433,6 +438,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images_Spfx\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
@@ -473,6 +479,8 @@
     <Content Include="TestData\VisitorReg\Visitors.json" />
     <Content Include="TestData\SupportTickets\Tickets.json" />
     <Content Include="Views\EmployeeConnect\pendingdates.cshtml" />
+    <Content Include="TestData\newsMock.json" />
+    <Content Include="TestData\EandTMock.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

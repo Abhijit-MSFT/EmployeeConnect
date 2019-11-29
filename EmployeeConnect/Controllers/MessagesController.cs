@@ -8,6 +8,7 @@ using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,6 +23,7 @@ namespace EmployeeConnect.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
+            //GetDataHelper.GetEandTFromSPandWriteToFile();
             switch (activity.Type)
             {
                 case ActivityTypes.Message:
@@ -300,17 +302,47 @@ namespace EmployeeConnect.Controllers
         private static TaskInfo GetTaskInfo(string actionInfo)
         {
 
+
+            string EandTID = actionInfo.Substring(7);
+            string newsID = actionInfo.Substring(5);
+          
             TaskInfo taskInfo = new TaskInfo();
             if (actionInfo.StartsWith("news:"))
             {
-                taskInfo.Card = CardHelper.GetNewsCardbyId(actionInfo.Substring(5));
-                SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
-                taskInfo.Title = "News";
-                return taskInfo;
+                Dictionary<int, string> newsDic = new Dictionary<int, string>();
+
+                newsDic.Add(33, "Bringing-human-like-reasoning-to-driverless-car-navigation.aspx");
+                newsDic.Add(32, "Microsoft-Hackathon-2019-winning-team--‘Think-bigger-–-and-believe-you-can-change-the-world’.aspx");
+                newsDic.Add(31, "How-building-robots-together-is-opening-doors-and-hearts.aspx");
+                newsDic.Add(29, "Microsoft%E2%80%99s-AI-for-Accessibility-grant-winners--%E2%80%98You-want-to-be-seen-as-the-person-you-are.aspx");
+                newsDic.Add(30, "Xbox-Game-Pass-Subscription-Service-Headed-to-PC-With-Over-100-Titles.aspx");
+                newsDic.Add(40, "With-a-hop,-a-skip-and-a-jump,-high-flying-robot-leaps-through-obstacles-with-ease.aspx");
+                newsDic.Add(41, "Teaching-language-models-grammar-really-does-make-them-smarter.aspx");
+                newsDic.Add(42, "Unmoored’--Times-Square-installation-shows-how-artists-can-anchor-storytelling-with-mixed-reality.aspx");
+                newsDic.Add(43, "How-gamers-with-disabilities-helped-design-the-new-Xbox-Adaptive-Controller’s-elegantly-accessible-packaging.aspx");
+                newsDic.Add(45, "How-(and-Why)-Collaboration-Brings-About-Stronger,-More-Creative-Web-Design.aspx");
+                newsDic.Add(44, "What’s-the-solution-to-the-growing-problem-of-passwords--You,-says-Microsoft.aspx");
+
+                if (newsDic.ContainsKey(Convert.ToInt32(newsID)))
+                {
+                    string newsName = newsDic[Convert.ToInt32(newsID)];
+
+                    taskInfo.Url = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/"+ newsName;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
+                    taskInfo.Title = "News";
+                    return taskInfo;
+                }
+               
+               
+
+                //taskInfo.Card = CardHelper.GetNewsCardbyId(actionInfo.Substring(5));            
+       
             }
             if (actionInfo.StartsWith("events:"))
             {
-                taskInfo.Card = CardHelper.GetETbyID(actionInfo.Substring(7));
+               // string EandTID = actionInfo.Substring(7);
+                //taskInfo.Card = CardHelper.GetETbyID(actionInfo.Substring(7));
+                 taskInfo.Url = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/Event.aspx?ListGuid=59c3fe4a-12f2-4ece-bcf2-eb850a0c357d&ItemId=" + EandTID;
                 SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
                 return taskInfo;
             }

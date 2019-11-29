@@ -10,7 +10,7 @@ namespace EmployeeConnect.Common
       public static UIConstants PurchaseOrder { get; set; } =
             new UIConstants(900, 600, "Purchase Order", TaskModuleIds.PurchaseOrder, "Purchase Order");
         public static UIConstants  NewsCard { get; set; } =
-            new UIConstants(750, 650, "News Card", TaskModuleIds.Newscard, "News Card");
+            new UIConstants(1000, 900, "News Card", TaskModuleIds.Newscard, "News Card");
         public static UIConstants CreateTicket { get; set; } =
         new UIConstants(560, 480, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
@@ -27,7 +27,7 @@ namespace EmployeeConnect.Common
         new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");    
 
         public static UIConstants ETCard { get; set; } =
-        new UIConstants(750, 600, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");
+        new UIConstants(850, 700, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");
 
         public static UIConstants POCard { get; set; } =
         new UIConstants(750,600, "PO Card", TaskModuleIds.ETcard, "PO Card");

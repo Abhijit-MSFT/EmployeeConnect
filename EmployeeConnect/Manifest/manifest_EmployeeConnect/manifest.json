@@ -27,8 +27,8 @@
     {
       "entityId": "currNews",
       "name": "News",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/News",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/News",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype",
       "scopes": [
         "personal"
       ]
@@ -36,8 +36,8 @@
     {
       "entityId": "EandT",
       "name": "Events and Trainings",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/EventandTrainingTab",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/EventandTrainingTab",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Events-And-Trainings.aspx",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Events-And-Trainings.aspx",
       "scopes": [
         "personal"
       ]
@@ -45,8 +45,8 @@
     {
       "entityId": "tools",
       "name": "Tools",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Tools",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Tools",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Tools.aspx",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Tools.aspx",
       "scopes": [
         "personal"
       ]
@@ -54,8 +54,8 @@
     {
       "entityId": "tasks",
       "name": "Tasks",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Task",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Task",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Task.aspx",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/Task.aspx",
       "scopes": [
         "personal"
       ]
@@ -258,7 +258,13 @@
     "messageTeamMembers"
   ],
   "validDomains": [
+    "*.ngrok.io",
     "employeeconnect-9566.azurewebsites.net",
-    "token.botframework.com"
-  ]
+    "token.botframework.com",
+    "avadheshftc.sharepoint.com"
+  ],
+  "webApplicationInfo": {
+    "id": "00000003-0000-0ff1-ce00-000000000000",
+    "resource": "https://avadheshftc.sharepoint.com"
+  }
 }

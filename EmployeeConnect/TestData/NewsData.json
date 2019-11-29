@@ -5,7 +5,9 @@
       "category": "AI",
       "newsTitle": "Microsoft’s AI for Accessibility grant winners: ‘You want to be seen as the person you are",
       "latestOrTrendingFlag": "Trending",
-      "newsThumbnailUrl": "https://3f095968.ngrok.io/Images/Microsoft's AI for Accessibility.JPG",
+      "newsThumbnailUrl":  "/Images/Microsoft's AI for Accessibility.JPG",
+      //"ApplicationSettings.BaseUrl" "+",
+      //"/"
       "newsBy": "Anumeha Chaturvedi",
       "newsDateTIme": "8-03-2019, 12:00 AM",
       "detailedNews": "John Robinson was born without the extensions of his arms or legs. As a child, and an adult, he rejected wearing prostheses. They worked, but they were uncomfortable, and he never felt like himself with them on. And that’s all Robinson really wanted to be, just himself.It’s why he understands the frustrations many other people with disabilities face in trying to get people to see who they really are – especially when it comes to looking for employment. And why his organization, Our Ability, is among seven new recipients of Microsoft’s AI for Accessibility grants to people using AI-powered technology to make the world a more inclusive place.",
@@ -17,7 +19,7 @@
       "newsTitle": "Xbox Game Pass Subscription Service Headed to PC With Over 100 Titles",
       "latestOrTrendingFlag": "Trending",
       "newsThumbnailUrl": "https://3f095968.ngrok.io/Images/XBOX Game Pass Subscription.JPG",
-      "newsBy": "THE WASHING TON POST",
+      "newsBy": "THE WASHINGTON POST",
       "newsDateTIme": "8-03-2019, 12:00 AM",
       "detailedNews": "New Delhi: Microsoft is bringing the Xbox Game Pass subscription service over to the PC ecosystem. The chief of Microsoft's Xbox division, Phil Spencer, has announced that Xbox Game Pass is headed to PC, giving PC gamers the benefits enjoyed by their Xbox counterparts such as access to over 100-games on the Windows platform and the ability to play a title from the Xbox Game Studios on the very day of its global release for a monthly fee. Additionally, PC games from the Xbox Game Studios will also be made available on third-party online stores on launch day. Moreover, the company also looks forward to enabling support for native Win32 games to the Microsoft Store. ",
       "noOfViews": "200"

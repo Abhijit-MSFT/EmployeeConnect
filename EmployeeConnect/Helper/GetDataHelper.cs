@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
 using Microsoft.Bot.Builder.Dialogs;
@@ -26,6 +31,7 @@ namespace EmployeeConnect.Helper
             return news;
         }
 
+
         public static EandTModel GetEandT()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
@@ -33,6 +39,138 @@ namespace EmployeeConnect.Helper
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
             eventsTrainings = (new JavaScriptSerializer().Deserialize<EandTModel>(json));
             return eventsTrainings;
+        }
+
+        //This method is added as part spfx change. this method brings data from sharepoint and writes in testData files 
+        public static async System.Threading.Tasks.Task GetEandTFromSPandWriteToFile() // need to decide how many time it will run and update the data file.
+        {
+            string token = await GetDataHelper.GetAuthenticationToken();
+            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/Lists(guid'59c3fe4a-12f2-4ece-bcf2-eb850a0c357d')/items";
+            SpfxEandT EandT = null;
+            using (var client = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
+                {
+                    string location = System.Web.Hosting.HostingEnvironment.MapPath(@"~\TestData\");
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                    using (HttpResponseMessage response = await client.SendAsync(request))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var json = await response.Content.ReadAsStringAsync();
+                            try
+                            {
+                                EandT = (new JavaScriptSerializer().Deserialize<SpfxEandT>(json));
+                                File.WriteAllText(location + "EandTMock.json", json);
+
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+        public static SpfxEandT ReadEandT()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EandTMock.json";
+            SpfxEandT EandT = new SpfxEandT();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            EandT = new JavaScriptSerializer().Deserialize<SpfxEandT>(json);
+            return EandT;
+        }
+
+        //This method is added as part of spfx changes. This method gets the authentication token
+        private static async Task<string> GetAuthenticationToken()
+        {
+            string clientID = "cbdefffb-376f-401f-a306-c1bbeec3a916@d634c2da-9cba-459a-aad1-81df852f770f";
+            string appSec = "S87Hf9yRiMBv6fQeQmmDh1jC6/qzDCFtdIbuzU5FeyI=";
+            string url = "https://accounts.accesscontrol.windows.net/tokens/OAuth/2";
+            string res = "00000003-0000-0ff1-ce00-000000000000/avadheshftc.sharepoint.com@d634c2da-9cba-459a-aad1-81df852f770f";
+            string body = $"grant_type=client_credentials&client_id={clientID}&client_secret={appSec}&resource={res}";
+
+            HttpClient httpclient = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = (new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded"));
+            HttpResponseMessage response = await httpclient.SendAsync(request);
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(responseBody);
+            
+            string accessToken = null;
+            accessToken = JsonConvert.DeserializeObject< GetDataHelper.TokenResponse>(responseBody).access_token;
+            return accessToken;
+        }
+        
+        //This method is part of spfx changes. This method is to get the sharepoint data and save it to test data location for bot
+        public static async System.Threading.Tasks.Task GetNewsFromSPandWriteToFile() // need to decide how many time it will run and update the data file.
+        {
+            string token = await GetDataHelper.GetAuthenticationToken();
+            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/lists(guid'01830dd5-78f8-4de7-bb0f-298474a907a9')/items";
+            SpfxNews news = null;
+            using (var client = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
+                {
+                    string location = System.Web.Hosting.HostingEnvironment.MapPath(@"~\TestData\");
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                    using (HttpResponseMessage response = await client.SendAsync(request))
+                    {                        
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var json = await response.Content.ReadAsStringAsync();                            
+                            try
+                            {
+                                news = (new JavaScriptSerializer().Deserialize<SpfxNews>(json));
+                                File.WriteAllText(location + "newsMock.json", json);
+                                
+                            }
+                            catch (Exception ex)
+                            {
+                                
+                            }
+
+                        }                        
+                    }
+                }
+            }
+        }
+
+        public static SpfxNews ReadNews()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/newsMock.json";
+            SpfxNews news = new SpfxNews();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            news = new JavaScriptSerializer().Deserialize<SpfxNews>(json);
+            
+            return news;
+        }
+
+        public static void DownloadImages()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/newsMock.json";
+            string ImageLocation = System.Web.Hosting.HostingEnvironment.MapPath("~/Images_Spfx/");
+            SpfxNews newNews = new SpfxNews();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            newNews = (new JavaScriptSerializer().Deserialize<SpfxNews>(json));
+            List<string> Imageurls = newNews.value.Select(c => c.BannerImageUrl.Url).ToList();
+            for(int i = 1; i < Imageurls.Count; i++)
+            {
+                using(WebClient webclient = new WebClient())
+                {
+                    webclient.DownloadFileAsync(new Uri(Imageurls[i]), ImageLocation + i + ".jpg"); // images are not opening
+                }
+            }
         }
 
         public static PO GetPOs()
@@ -327,28 +465,31 @@ namespace EmployeeConnect.Helper
             }
         }
                
-        public static NewsModel GetPreferredNews(string username)
+        public static SpfxNews GetPreferredNews(string username)
         {
             Preference uPref = UserPreference(username);
-            NewsModel news = GetNews();
+            SpfxNews news = ReadNews();
             
             string[] categories = uPref.News.SelectedCategories;
 
             //if cat count is zero then return all the news cats
             if (categories.Count() == 0) return news;
 
-            var prefNews = new List<News>();
+            var prefNews = new List<Values>();
             for (int i = 0; i < categories.Count(); i++)
             {
-                var newss = news.news.Where(w => w.Category.Equals(categories[i]));
+                var newss = news.value.Where(w => w.Category.Equals(categories[i]));
                 prefNews = prefNews.Concat(newss).ToList();
             }
 
-            news.news = prefNews.ToArray();
+            news.value = prefNews.ToArray();
             return news;
         }
 
-
+        public class TokenResponse
+        {
+            public string access_token { get; set; }
+        }
 
 
     }
