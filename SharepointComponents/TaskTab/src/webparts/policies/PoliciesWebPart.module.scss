@@ -1,0 +1,82 @@
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
+
+.policies {
+  .container {
+    width: auto;
+    margin: 0px auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .row {
+    @include ms-Grid-row;
+    color: black;
+    // padding: 20px;
+  }
+
+  .column1 {
+    @include ms-Grid-col;
+    @include ms-lg3;
+    @include ms-sm12;
+  }
+  .column2 {
+    @include ms-Grid-col;
+    @include ms-lg9;
+    @include ms-sm12;
+  }
+
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #f3f2f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #a9a8a7;
+    padding: 8px;
+    padding-left: 30px;
+    text-decoration: none;
+  }
+  a.active {
+    background-color: #e3e2eb;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    .sidebar {
+      color: black;
+    }
+  }
+
+  .sidebar a:hover:not(.active) {
+    background-color: #e3e2eb;
+    color: black;
+  }
+
+  div.content {
+    margin-left: 10px;
+    padding: 20px 16px;
+    width: auto;
+  }
+  .head {
+    margin-bottom: 20px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .subheading {
+    margin-top: 10px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .subsubheading {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+  }
+  .bulletpts {
+    font-size: 14px;
+  }
+  .hrdetails {
+    margin-left: 15%;
+  }
+}

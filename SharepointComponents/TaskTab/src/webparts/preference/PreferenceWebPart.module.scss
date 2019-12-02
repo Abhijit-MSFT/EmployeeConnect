@@ -1,0 +1,262 @@
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
+
+.preferencesTab {
+  .container {
+    width: 100%;
+    padding: 15px 0 0 15px;
+    margin: auto;
+  }
+
+  .row:first-child, .row2 {
+    @include ms-Grid-row;
+    @include ms-fontColor-white;
+    // background-color: $ms-color-themeDark;
+    padding: 20px;
+    border-bottom: 5px solid #f3f2f1;
+    margin: 0 !important;
+  }
+.row3 {
+    @include ms-Grid-row;
+    @include ms-fontColor-white;
+    padding: 20px;
+    margin: 0 !important;
+  }
+  .column1 {
+    @include ms-Grid-col;
+    @include ms-lg2;
+    @include ms-sm12;
+  }
+  .column2 {
+    @include ms-Grid-col;
+    @include ms-lg10;
+    @include ms-sm12;
+  }
+  .rules {
+    color: #969595;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Segoe UI";
+  }
+  .title {
+    @include ms-font-xl;
+    color: black;
+  }
+
+  .subTitle {
+    @include ms-font-l;
+    @include ms-fontColor-white;
+  }
+  .showmore {
+    height: 25px;
+    width: auto;
+    color: white;
+    background-color: #6264a7;
+    font-family: "Segoe UI";
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid rgba(37, 36, 36, 0.15);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
+    float: right;
+  }
+  .columnheight {
+    position: relative;
+    top: 10px;
+    display: inline;
+  }
+
+  .img1 {
+    display: inline;
+    height: 90px;
+    width: 90px;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  .tick {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    height: 100%;
+    width: calc(100% - 20px);
+    padding: 0 10px;
+    box-sizing: border-box;
+    pointer-events: none;
+    border-radius: 500px;
+  }
+
+  .name {
+    position: relative;
+    color: white;
+    top: 20px;
+    float: left;
+    font-weight: 400;
+    font-family: "Segoe UI";
+    outline-color: black;
+    font-size: 14px;
+  }
+  .columnheight input:checked + .tick::after {
+    content: "\2713";
+    position: absolute;
+    left: 100%;
+    width: 22%;
+    height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -148%);
+    color: white;
+    background-color: #7fba00;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 50%;
+  }
+  input {
+    display: none;
+  }
+  .explore {
+    color: #6264a7;
+    position: relative;
+    padding-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .switcht {
+    padding-top: 10px;
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 25px;
+    &input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+  }
+  input:checked + .slider {
+    background-color: #92c353;
+  }
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50px;
+  }
+  .newsupdates {
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 5px;
+    color: black;
+    vertical-align: top;
+  }
+  .notify {
+    position: relative;
+    margin-left: 50px;
+    color: #5f5e5e;
+    font-family: "Segoe UI";
+  }
+  .allradio {
+    position: relative;
+    top: 15px;
+    margin-left: 50px;
+  }
+  .radiolabel {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .radiolabel input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    border: 1px solid;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+
+  .radiolabel input ~ .checkmark {
+    border: 1px solid grey;
+  }
+
+  .radiolabel input:checked ~ .checkmark {
+    background-color: #6264a7;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    box-sizing: border-box;
+    position: relative;
+    padding: 0;
+  }
+
+  .radiolabel .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .radiolabel input ~ .checkmark {
+    border: 1px solid grey;
+  }
+  span.textalign {
+    position: relative;
+    bottom: 5px;
+    color: #aeadad;
+  }
+:checked + .textalign {
+    color: black;
+}
+
+  .datecontrol {
+    width: 200px;
+    height: 35px;
+    padding-left: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    background-color: #f3f2f1 !important;
+    color: black;
+    border-radius: 3px;
+    position: relative;
+    left: 14px;
+    border: none;
+    cursor: pointer;
+}
+}
