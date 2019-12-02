@@ -17,6 +17,8 @@ import * as strings from "TaskWebPartStrings";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { SPComponentLoader } from "@microsoft/sp-loader";
 microsoftTeams.initialize();
+import "jquery";
+require("bootstrap");
 
 export interface ITaskTabWebPartProps {
   description: string;
@@ -57,9 +59,10 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
   public constructor() {
     super();
     SPComponentLoader.loadCss(
-      "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     );
   }
+
   //Rendering TaskList data
   private _getTaskListData(): Promise<ISPTaskLists> {
     //Rest API to call SharePoint list
@@ -73,6 +76,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         return response.json();
       });
   }
+
   //Getting Invoice List Data
   private _getInvoiceListData(): Promise<ISPInvoiceLists> {
     //Rest API to call SharePoint list
@@ -86,6 +90,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         return response.json();
       });
   }
+
   //Rendering task List
   private _renderTaskList(items: ISPTaskList[]): void {
     let html: string = "";
@@ -144,6 +149,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
     //}
   }
 
+
   public render(): void {
     //existing code
     this.domElement.innerHTML += `
@@ -171,8 +177,9 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         </div>
         <div class="${styles.row}">
         <div class="${styles.heading}"> Pending Approvals </div>
-         <div class="${styles.subheading}">Purchased Order (${this
-      ._renderTaskList.length})</div>
+         <div class="${styles.subheading}">Purchased Order (${
+      this._renderTaskList.length
+    })</div>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -189,8 +196,9 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             </tbody>
         </table>
         </div>
-          <div class="${styles.subheading}">Invoice (${this._renderInvoiceList
-      .length})
+          <div class="${styles.subheading}">Invoice (${
+      this._renderInvoiceList.length
+    })
       </div>
          <table class="table table-bordered">
           <thead>
@@ -209,7 +217,53 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
           </tbody>
         </table>
       <div class="${styles.subheading}">Inventory (0)</div>
-       </div>`;
+       </div>
+
+       <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>`;
     // this._setButtonEventHandlers();
   }
   private _setButtonEventHandlers(): void {

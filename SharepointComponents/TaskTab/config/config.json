@@ -33,7 +33,7 @@
       "globalName": "jquery"
     },
     "bootstrap": {
-      "path": "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",
+      "path": "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js",
       "globalName": "bootstrap",
       "globalDependencies": ["jquery"]
     }
