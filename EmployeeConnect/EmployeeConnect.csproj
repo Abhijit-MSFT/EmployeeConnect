@@ -481,6 +481,7 @@
     <Content Include="Views\EmployeeConnect\pendingdates.cshtml" />
     <Content Include="TestData\newsMock.json" />
     <Content Include="TestData\EandTMock.json" />
+    <Content Include="Views\EmployeeConnect\TestView.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
