@@ -23,7 +23,6 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-
         [Route("Task")]
         public ActionResult Task()
         {
