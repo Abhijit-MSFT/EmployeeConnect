@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
 using Microsoft.Bot.Builder.Dialogs;
@@ -16,14 +21,16 @@ namespace EmployeeConnect.Helper
     public class GetDataHelper
     {
         public static string userName = "";
+
         public static NewsModel GetNews()
-        {            
+        {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
             NewsModel news = new NewsModel();
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
             news = (new JavaScriptSerializer().Deserialize<NewsModel>(json));
             return news;
         }
+
 
         public static EandTModel GetEandT()
         {
@@ -32,6 +39,138 @@ namespace EmployeeConnect.Helper
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
             eventsTrainings = (new JavaScriptSerializer().Deserialize<EandTModel>(json));
             return eventsTrainings;
+        }
+
+        //This method is added as part spfx change. this method brings data from sharepoint and writes in testData files 
+        public static async System.Threading.Tasks.Task GetEandTFromSPandWriteToFile() // need to decide how many time it will run and update the data file.
+        {
+            string token = await GetDataHelper.GetAuthenticationToken();
+            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/Lists(guid'59c3fe4a-12f2-4ece-bcf2-eb850a0c357d')/items";
+            SpfxEandT EandT = null;
+            using (var client = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
+                {
+                    string location = System.Web.Hosting.HostingEnvironment.MapPath(@"~\TestData\");
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                    using (HttpResponseMessage response = await client.SendAsync(request))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var json = await response.Content.ReadAsStringAsync();
+                            try
+                            {
+                                EandT = (new JavaScriptSerializer().Deserialize<SpfxEandT>(json));
+                                File.WriteAllText(location + "EandTMock.json", json);
+
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+        public static SpfxEandT ReadEandT()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EandTMock.json";
+            SpfxEandT EandT = new SpfxEandT();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            EandT = new JavaScriptSerializer().Deserialize<SpfxEandT>(json);
+            return EandT;
+        }
+
+        //This method is added as part of spfx changes. This method gets the authentication token
+        private static async Task<string> GetAuthenticationToken()
+        {
+            string clientID = "cbdefffb-376f-401f-a306-c1bbeec3a916@d634c2da-9cba-459a-aad1-81df852f770f";
+            string appSec = "S87Hf9yRiMBv6fQeQmmDh1jC6/qzDCFtdIbuzU5FeyI=";
+            string url = "https://accounts.accesscontrol.windows.net/tokens/OAuth/2";
+            string res = "00000003-0000-0ff1-ce00-000000000000/avadheshftc.sharepoint.com@d634c2da-9cba-459a-aad1-81df852f770f";
+            string body = $"grant_type=client_credentials&client_id={clientID}&client_secret={appSec}&resource={res}";
+
+            HttpClient httpclient = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = (new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded"));
+            HttpResponseMessage response = await httpclient.SendAsync(request);
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(responseBody);
+            
+            string accessToken = null;
+            accessToken = JsonConvert.DeserializeObject< GetDataHelper.TokenResponse>(responseBody).access_token;
+            return accessToken;
+        }
+        
+        //This method is part of spfx changes. This method is to get the sharepoint data and save it to test data location for bot
+        public static async System.Threading.Tasks.Task GetNewsFromSPandWriteToFile() // need to decide how many time it will run and update the data file.
+        {
+            string token = await GetDataHelper.GetAuthenticationToken();
+            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/lists(guid'01830dd5-78f8-4de7-bb0f-298474a907a9')/items";
+            SpfxNews news = null;
+            using (var client = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
+                {
+                    string location = System.Web.Hosting.HostingEnvironment.MapPath(@"~\TestData\");
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                    using (HttpResponseMessage response = await client.SendAsync(request))
+                    {                        
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var json = await response.Content.ReadAsStringAsync();                            
+                            try
+                            {
+                                news = (new JavaScriptSerializer().Deserialize<SpfxNews>(json));
+                                File.WriteAllText(location + "newsMock.json", json);
+                                
+                            }
+                            catch (Exception ex)
+                            {
+                                
+                            }
+
+                        }                        
+                    }
+                }
+            }
+        }
+
+        public static SpfxNews ReadNews()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/newsMock.json";
+            SpfxNews news = new SpfxNews();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            news = new JavaScriptSerializer().Deserialize<SpfxNews>(json);
+            
+            return news;
+        }
+
+        public static void DownloadImages()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/newsMock.json";
+            string ImageLocation = System.Web.Hosting.HostingEnvironment.MapPath("~/Images_Spfx/");
+            SpfxNews newNews = new SpfxNews();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            newNews = (new JavaScriptSerializer().Deserialize<SpfxNews>(json));
+            List<string> Imageurls = newNews.value.Select(c => c.BannerImageUrl.Url).ToList();
+            for(int i = 1; i < Imageurls.Count; i++)
+            {
+                using(WebClient webclient = new WebClient())
+                {
+                    webclient.DownloadFileAsync(new Uri(Imageurls[i]), ImageLocation + i + ".jpg"); // images are not opening
+                }
+            }
         }
 
         public static PO GetPOs()
@@ -44,7 +183,7 @@ namespace EmployeeConnect.Helper
 
         }
 
-        public static void updatePOStatus(string poNo)
+        public static void UpdatePOStatus(string poNo)
         {
             if (poNo == null)
                 return;
@@ -52,7 +191,7 @@ namespace EmployeeConnect.Helper
             string json = File.ReadAllText(file);
 
             Newtonsoft.Json.Linq.JObject poObj = Newtonsoft.Json.Linq.JObject.Parse(json);
-            for(int poCount =0; poCount<poObj["purchaseOrder"].Count();poCount++)
+            for (int poCount = 0; poCount < poObj["purchaseOrder"].Count(); poCount++)
             {
                 if (poObj["purchaseOrder"][poCount]["poNumber"].ToString().Equals(poNo))
                 {
@@ -65,22 +204,16 @@ namespace EmployeeConnect.Helper
 
             return;
         }
-        //public static GNews GetNewsData()
-        //{
-        //    string url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=491637f419cd4bf297467458807be25f";
-        //    using (WebClient client = new WebClient())
-        //    {
-        //        GNews news = null;
-        //        string json = null;
+        public static TicketsDataModel GetTickets()
+        {
+            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets/") + @"/Tickets.json";
+            TicketsDataModel ticket = new TicketsDataModel();
+            string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
+            ticket = (new JavaScriptSerializer().Deserialize<TicketsDataModel>(json));
+            return ticket;
+        }
 
-        //        json = client.DownloadString(url);
-        //        news = (new JavaScriptSerializer().Deserialize<GNews>(json));
-        //        //return news;
-        //        return news.status == "ok" ? news : null;
-        //    }
-        //}
-
-        public static TicketModel getTicket()
+        public static TicketModel GetTicket()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Ticket.json";
             TicketModel ticket = new TicketModel();
@@ -89,7 +222,7 @@ namespace EmployeeConnect.Helper
             return ticket;
         }
 
-        public static InventoryModel getInventoryData()
+        public static InventoryModel GetInventoryData()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Inventory.json";
             InventoryModel inventory = new InventoryModel();
@@ -99,7 +232,7 @@ namespace EmployeeConnect.Helper
         }
 
         //to get the preferences from the card json 
-        public static SetPreferences setPreferencesData(string json)
+        public static SetPreferences SetPreferencesData(string json)
         {
             SetPreferences pref = new SetPreferences();
             pref = (new JavaScriptSerializer().Deserialize<SetPreferences>(json));
@@ -108,7 +241,7 @@ namespace EmployeeConnect.Helper
         }
 
         //Makes a UPrefObject from SetPreferences object
-        public static Preference makeUPrefObject(SetPreferences pref, string uID, string serviceURL, string tenID)
+        public static Preference MakeUPrefObject(SetPreferences pref, string uID, string serviceURL, string tenID)
         {
             Preference uPref = new Preference();
             uPref.UserName = pref.UserName;
@@ -187,52 +320,89 @@ namespace EmployeeConnect.Helper
                     newsPref.SelectedCategories[i] = category[Int32.Parse(arr[i]) - 1];
             }
             uPref.UserInfo = new UserInfo[1];
-            uPref.News = new NewsPreference[1];
-            uPref.EandT = new EandtPreference[1];
-            uPref.Task = new TaskPreference[1];
+            uPref.News = new NewsPreference();
+            uPref.EandT = new EandtPreference();
+            uPref.Task = new TaskPreference();
             uPref.UserInfo[0] = uInfo;
-            uPref.News[0] = newsPref;
-            uPref.EandT[0] = entPref;
-            uPref.Task[0] = taskPref;
+            uPref.News = newsPref;
+            uPref.EandT = entPref;
+            uPref.Task = taskPref;
 
             return uPref;
         }
         
-        public static UPreferences readPreferences()
+        public static UPreferences ReadPreferences()
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
+            UPreferences pref = new UPreferences();
             string json = File.ReadAllText(file);
-            UPreferences uPref = new JavaScriptSerializer().Deserialize<UPreferences>(json);           
-            
+            pref = new JavaScriptSerializer().Deserialize<UPreferences>(json);
+            return pref;
+        }
+
+        public static Preference UserPreference(string userName)
+        {
+            UPreferences uPrefs = GetDataHelper.ReadPreferences();
+            Preference uPref = uPrefs.Preferences.Where(c => c.UserName == userName).FirstOrDefault(); ;
             return uPref;
         }
 
-        //Updates the UPreferences json with the preference
-        public static void WritePreferences(Preference pref)
+        public static void WritePreferences(Preference newPref)
         {
             string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
             string json = File.ReadAllText(file);
             int i;
             UPreferences uPref = new JavaScriptSerializer().Deserialize<UPreferences>(json);
-            List<Preference> list = uPref.preferences.ToList();
-            for (i = 0; i < list.Count(); i++)
+            if (uPref == null)
             {
-                if (list[i].UserName.Equals(pref.UserName))
-                {
-                    //rewrite
-                    list[i] = pref;
-                    break;
-                }                
+                uPref = new UPreferences();
+                // Add new record and return;
+                uPref.Preferences = new[] { newPref };
+
+
             }
-            if (i == list.Count())
-                list.Add(pref);
-            uPref.preferences = list.ToArray();
+            else
+            {
+                var oldPrefList = uPref.Preferences.ToList();
+                var oldPref = oldPrefList.FirstOrDefault(u => u.UserName == newPref.UserName);
+                if (oldPref == null)
+                {
+                    // TODO: update this logic
+                    var allPref = uPref.Preferences.ToList();
+                    allPref.Add(newPref);
+                    uPref.Preferences = allPref.ToArray();
+                }
+                else
+                {
+                    //var oldPrefList =  uPref.preferences.ToList();
+                    //var oldPrefObj = oldPrefList.FirstOrDefault(  )
+                    oldPrefList.Remove(oldPref);
+                    oldPrefList.Add(newPref);
+                    //uPref.preferences = oldPrefList.ToArray();
+                    // oldPref = newPref;
+                    uPref.Preferences = oldPrefList.ToArray();
+                }
+                //var cat = uPref.preferences.Select(c => c.News).FirstOrDefault().Select(d => d.SelectedCategories).FirstOrDefault();
+
+                //List<Preference> list = uPref.preferences.ToList();
+                //for (i = 0; i < list.Count(); i++)
+                //{
+                //    if (list[i].UserName.Equals(pref.UserName))
+                //    {
+                //        //rewrite
+                //        list[i] = pref;
+                //        break;
+                //    }
+                //}
+                //if (i == list.Count())
+                //    list.Add(pref);
+                //uPref.preferences = list.ToArray();
+            }
             var convertedJson = JsonConvert.SerializeObject(uPref, Formatting.Indented);
             File.WriteAllText(file, convertedJson);
             return;
         }
-
-        //changes the status of eT Registered<->Unregistered, Added<->Remove
+               
         public static void ETStatusUpdate(string ETid)
         {
             if (ETid == null)
@@ -246,14 +416,6 @@ namespace EmployeeConnect.Helper
                 if (ETObj["EventsAndTraining"][i]["ETID"].ToString().Equals(ETid))
                 {
                     ETObj["EventsAndTraining"][i]["UserAdded"] = !(bool)ETObj["EventsAndTraining"][i]["UserAdded"];
-
-                    ////Event
-                    //if (ETObj["EventsAndTraining"][i]["ETFlag"].Equals("E"))
-                    //    ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"] = ETObj["EventsAndTraining"][i]["ETAddRemoveFlag"].Equals("Removed") ? "Added" : "Removed";
-
-                    ////Training
-                    //else
-                    //    ETObj["EventsAndTraining"][i]["register"] = ETObj["EventsAndTraining"][i]["register"].Equals("true") ? "false" : "true";
                     string FileOutput = Newtonsoft.Json.JsonConvert.SerializeObject(ETObj, Newtonsoft.Json.Formatting.Indented);
                     File.WriteAllText(file, FileOutput);
                     break;
@@ -261,11 +423,10 @@ namespace EmployeeConnect.Helper
             }
         }
 
-        public static void saveVisitorInfo(JObject visitorData)
+        public static void SaveVisitorInfo(JObject visitorData)
         {
-           VisitorDataModel currentVisitor = new VisitorDataModel()
-            {               
-
+            VisitorDataModel currentVisitor = new VisitorDataModel()
+            {
                 VhostName = visitorData.GetValue("hostName").ToString(),
                 VhostLocation = visitorData.GetValue("hostLocation").ToString(),
                 Vdate = visitorData.GetValue("Date").ToString(),
@@ -274,7 +435,7 @@ namespace EmployeeConnect.Helper
                 Vorg = visitorData.GetValue("org").ToString(),
                 Vcontact = visitorData.GetValue("contactNo").ToString()
 
-           };
+            };
             JavaScriptSerializer js = new JavaScriptSerializer();
             string visitorJson = js.Serialize(currentVisitor);
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/VisitorReg") + @"/Visitors.json";
@@ -283,199 +444,54 @@ namespace EmployeeConnect.Helper
                 File.AppendAllText(filePath, visitorJson);
             }
         }
-
-        public static void saveTicketsInfo(JObject ticketData)
+             
+        public static void SaveTicketsInfo(JObject ticketData)
         {
-            TicketsDataModel currentTicket = new TicketsDataModel()
-            {
-                ticketNo = Convert.ToInt32(ticketData.GetValue("TicketNo")),
-                ticketDescription = ticketData.GetValue("Description").ToString(),
-                date = ticketData.GetValue("Date").ToString(),
-                priority = ticketData.GetValue("Priority").ToString(),
-                category = ticketData.GetValue("Category").ToString()
-            };
+            TicketsDataModel currentTicket = GetDataHelper.GetTickets();
+
+            int TicketCount = currentTicket.Tickets.Count();
+            var tNo = Convert.ToInt32(ticketData.GetValue("TicketNo"));
+            var ticDes = ticketData.GetValue("Description").ToString();
+            var ticDate = ticketData.GetValue("Date").ToString();
+            var ticPriority = ticketData.GetValue("Priority").ToString();
+            var ticCat = ticketData.GetValue("Category").ToString();
+
             JavaScriptSerializer js = new JavaScriptSerializer();
             string TicketJson = js.Serialize(currentTicket);
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/SupportTickets") + @"/Tickets.json";
             if (File.Exists(filePath))
             {
-                File.AppendAllText(filePath, TicketJson);
+                File.WriteAllText(filePath, TicketJson);
             }
-
-        }
-
-        public static UPreferences getPreferences()
-        {
-            string file = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/Preferences/Userpreferences.json";
-            UPreferences pref = new UPreferences();
-            string json = File.ReadAllText(file);
-            pref = new JavaScriptSerializer().Deserialize<UPreferences>(json);
-            return pref;
-        }
-
-        public static NewsModel getPreferredNews(string username)
-        {
-            UPreferences uPref = getPreferences();
-            List<EmployeeConnect.Models.Preference> list = uPref.preferences.ToList();
-            int i;
-            for (i = 0; i < list.Count(); i++)
-            {
-                if (list[i].UserName.Equals(username))
-                {
-                    break;
-                }
-            }
-            NewsModel newsM = GetNews();
-            if (i == list.Count())
-            {
-                return newsM;
-            }
-            string[] categories = list[i].News[0].SelectedCategories;
-            var prefNews = new List<News>();
-            for (int j = 0; j < categories.Count(); j++)
-            {
-                var news = newsM.news.Where(w => w.Category.Equals(categories[j]));
-                prefNews = prefNews.Concat(news).ToList();
-            }
-            newsM.news = prefNews.ToArray();
-            return newsM;
         }
                
-        //news notification as per preferences
-        public static async System.Threading.Tasks.Task CheckPrefAndSendNewsCard()
+        public static SpfxNews GetPreferredNews(string username)
         {
-            UPreferences UserPref = GetDataHelper.readPreferences();
-            int UPrefCount = UserPref.preferences.Count();
-            Attachment card = null;
-
-            for (int i = 0; i < UPrefCount; i++)
-            {
-                string userName = UserPref.preferences[i].UserName;
-
-                string NewsNotificationTime1 = UserPref.preferences[i].News.Select(c => c.NewsNotificationTime).FirstOrDefault();
-                DateTime NewsNotificationTime = DateTime.ParseExact(UserPref.preferences[i].News.Select(c => c.NewsNotificationTime).FirstOrDefault(), "H:mm tt", CultureInfo.InvariantCulture);
-                //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
-
-                DateTime currTime = DateTime.Now;
-                if (NewsNotificationTime >= currTime.AddMinutes(-10) || NewsNotificationTime <= currTime.AddMinutes(10))
-                {
-                    card = Helper.CardHelper.getNewsCard(userName);
-                    string uIn = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string tenID =  UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string serURL =  UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);                     
-                }
-            }            
-        }
-
-        //eAndt notification as per preferences
-        public static async System.Threading.Tasks.Task CheckPrefAndSendEandTCard()
-        {
-            UPreferences UserPref = GetDataHelper.readPreferences();
-            int UPrefCount = UserPref.preferences.Count();
-            Attachment card = null;
-
-            for (int i = 0; i < UPrefCount; i++)
-            {
-                string userName = UserPref.preferences[i].UserName;
-                DateTime ETNotificationTime = DateTime.ParseExact(UserPref.preferences[i].EandT.Select(c => c.EandTNotificationTime).ToString(), "H:mm tt", CultureInfo.InvariantCulture);
-
-                //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
-
-                DateTime currTime = DateTime.Now;
-                if (ETNotificationTime >= currTime.AddMinutes(-10) || ETNotificationTime <= currTime.AddMinutes(10))
-                {
-                    card = Helper.CardHelper.getETCard();
-                    string uIn = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string tenID = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    string serURL = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-                    await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
-                }
-            }
-        }
-
-        ////Task notification as per preferences
-        //public static async System.Threading.Tasks.Task CheckPrefAndSendTaskCard()
-        //{
-        //    UPreferences UserPref = GetDataHelper.readPreferences();
-        //    int UPrefCount = UserPref.preferences.Count();
-        //    Attachment card = null;
-
-        //    for (int i = 0; i < UPrefCount; i++)
-        //    {
-        //        string userName = UserPref.preferences[i].UserName;
-        //        DateTime TaskNotificationTime = DateTime.ParseExact(UserPref.preferences[i].Task.Select(c => c.TaskNotificationTime).ToString(), "H:mm tt", CultureInfo.InvariantCulture);
-
-        //        //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
-
-        //        DateTime currTime = DateTime.Now;
-        //        if (TaskNotificationTime >= currTime.AddMinutes(-10) || TaskNotificationTime <= currTime.AddMinutes(10))
-        //        {
-        //            card = Helper.CardHelper.PendingTasksCard();
-        //            string uIn = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-        //            string tenID = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-        //            string serURL = UserPref.preferences[i].UserInfo.Select(c => c.UniqueID).ToString();
-        //            await NotificationHelper.SendNotification(uIn, serURL, tenID, card);
-        //        }
-        //    }
-        //}
-
-
-        //Update MockData
-
-        public static void UpdateNewsMockData()
-        {
-            string filename = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/NewsData.json";
-            if (File.Exists(filename))
-            {
-                NewsModel news = GetNews();
-                int NewsCount = news.news.Count();
-                
-                DateTime[] last15Days = Enumerable.Range(0, 15).Select(i => DateTime.Now.Date.AddDays(-i)).ToArray();
-
-                for (int i = 0; i < NewsCount; i++)
-                {
-                    Random r = new Random();
-                    int randomnum = r.Next(0, last15Days.Length);
-                    news.news[i].NewsDateTIme = last15Days[randomnum].ToString("M/dd/yyyy, h:mm tt");
-
-                }
-                string json = JsonConvert.SerializeObject(news); //create json object
-
-                File.WriteAllText(filename, json);
-            }
-        }
-
-        public static void UpdateETMockData()
-        {
-            string filename = System.Web.Hosting.HostingEnvironment.MapPath("~/TestData/") + @"/EventsAndTraining_June.json";
-            if (File.Exists(filename))
-            {
-                EandTModel eandt = GetEandT();
-                int eandtCount = eandt.EventsAndtraining.Count();
-
-                for (int i = 0; i < eandtCount; i++)
-                {
-                    
-
-                }
-
-
-                string json = File.ReadAllText(filename);
-            }
+            Preference uPref = UserPreference(username);
+            SpfxNews news = ReadNews();
             
+            string[] categories = uPref.News.SelectedCategories;
 
-            //EventsAndTraining et = new JavaScriptSerializer().Deserialize<EventsAndTraining>(json);
+            //if cat count is zero then return all the news cats
+            if (categories.Count() == 0) return news;
 
-            //foreach(EventsAndTraining i in et)
-            //{
-            //    et.ETDate = DateTime.Now.Date.ToString("MM/dd/yyyy");
-            //}
+            var prefNews = new List<Values>();
+            for (int i = 0; i < categories.Count(); i++)
+            {
+                var newss = news.value.Where(w => w.Category.Equals(categories[i]));
+                prefNews = prefNews.Concat(newss).ToList();
+            }
 
-
-            
+            news.value = prefNews.ToArray();
+            return news;
         }
-      
+
+        public class TokenResponse
+        {
+            public string access_token { get; set; }
+        }
+
+
     }
 }
 

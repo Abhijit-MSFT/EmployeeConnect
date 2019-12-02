@@ -9,7 +9,7 @@ using System.Web;
 namespace EmployeeConnect.Models
 {
     public class TaskInfo
-    {                                               //Cards not there
+    {                                              
         [JsonProperty("url")]
         public string Url { get; set; }
 
@@ -46,7 +46,7 @@ namespace EmployeeConnect.Models
         public TaskInfo TaskInfo { get; set; }
 
         [JsonProperty("type")]
-        public TaskType Type { get; set; }
+        public string Type { get; set; }
     }
 
     public enum TaskType

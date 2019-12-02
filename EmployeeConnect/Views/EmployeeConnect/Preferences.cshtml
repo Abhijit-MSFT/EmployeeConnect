@@ -1,4 +1,10 @@
-﻿
+﻿@model EmployeeConnect.Models.Preference
+
+@{
+    Layout = null;
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,17 +13,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="@("https://unpkg.com/@microsoft/teams-js@1.4.1/dist/MicrosoftTeams.min.js")"></script>
     <link href="~/Content/index_Preferences.css" rel="stylesheet" />
 
     <title>Preferences Tab</title>
     <script>
         microsoftTeams.initialize();
 
-        var newsCategory = ["Technology", "CS", "Software", "Animation", "IT", "AI"];
         var newsSelectedTime = "10:00 AM";
         var newsNotificationFlag = true;
         var newNotifyMe = true;
@@ -29,7 +34,11 @@
         var taskNotifyFlag = true;
         var userName = "";
 
-        microsoftTeams.getContext(function (context) {userName = context.userPrincipalName})
+        microsoftTeams.getContext(function (context) {
+            userName = context.upn;
+
+            }
+        )
         function getTime(value) {
             newsSelectedTime = value;
         }
@@ -39,7 +48,7 @@
         function getTaskTime(value) {
             taskNotificationTime = value;
         }
-       
+
         function toggleSliderEnT() {
             if (event.currentTarget.checked == true) {
                 entNotificationFlag = true;
@@ -61,44 +70,65 @@
                 newNotifyMe = "false";
             }
         }
+
+
+
         function getCategory() {
-            if (event.target.checked == true) {
+            debugger;
+            var newsCategory = new Array();
+          
                 newsCategory.push(event.currentTarget.value);
-          $.ajax({
-            type: "POST",
-            url: "/PreferenceInDb",
-              contentType: "application/json; charset=utf-8",
-              data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '","UserName":"' + userName + '"}', 
-            dataType: "json",
-            success: function (data) {
-            },
-            error: function () {
-                console.log('A error');
-            }
+                let obj = {};
+                obj.newsPrefCat = newsCategory;
+                obj.newsTime = newsSelectedTime;
+                obj.newsNotificationFlag = newsNotificationFlag;
+                obj.newsNotifyMe = newNotifyMe;
+                obj.eandtTime = entNotificationTime;
+                obj.eandtNotify = entNotifyMe;
+                obj.eandtflag = entNotificationFlag;
+                obj.taskNotifyMe = taskNotifyme;
+                obj.taskTime = taskNotificationTime;
+                obj.taskNotificationFlag = taskNotifyFlag;
+                obj.UserName = userName;
+                obj.IsAdded = event.target.checked;
+                $.ajax({
+                    type: "POST",
+                    url: "/PreferenceInDb",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(obj),
+                    // data: '{"newsPrefCat":"' + newsCategory + '","newsTime":"' + newsSelectedTime + '","newsNotificationFlag":"' + newsNotificationFlag + '","newsNotifyMe":"' + newNotifyMe + '","eandtTime":"' + entNotificationTime + '","eandtNotify":"' + entNotifyMe + '","eandtflag":"' + entNotificationFlag + '","taskNotifyMe":"' + taskNotifyme + '","taskTime":"' + taskNotificationTime + '","taskNotificationFlag":"' + taskNotifyFlag + '","UserName":"' + userName + '"}',
+                    dataType: "json",
+                    success: function (data) {
+                    },
+                    error: function () {
+                        console.log('A error');
+                    }
+                });
+
+        }
+
+        function SendCard(type) {
+            var url = "/" + type + "?userName=" + userName;
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                },
+                error: function () {
+                    console.log('A error');
+                }
+            });
+        }
+        $(document).ready(function () {
+            $(".dropdown-menu li").click(function () {
+                var selText = $(this).text();
+                $(this)
+                    .parents(".help")
+                    .find(".dropdown-toggle")
+                    .html(selText);
+            });
         });
-            }
-           
-        }
-
-        function showNews() {
-            var url = '/showNews?userName=' + userName;
-            //var url =  url = "microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/Preference')"
-            microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/chat/0/0?users=28:@(EmployeeConnect.Helper.ApplicationSettings.AppId)');
-            location.href = url;
-        }
-
-            function showET() {
-            var url = '/ShowEnT?userName=' + userName;
-            microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/chat/0/0?users=28:@(EmployeeConnect.Helper.ApplicationSettings.AppId)');
-            location.href = url;
-        }
-
-            function showTask() {
-            var url = '/ShowTask?userName=' + userName;
-            microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/chat/0/0?users=28:@(EmployeeConnect.Helper.ApplicationSettings.AppId)');
-            location.href = url;
-        }
-      
 
     </script>
 </head>
@@ -106,12 +136,13 @@
 <body>
     <div class="container-fluid">
         <div class="row first-row">
-            <div class="col-2 h-100">
+            <div class="col-2 h-100 for-mobile">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h6 class="panel-title title1 accordion-toggle" data-toggle="collapse" data-parent="#accordion"
                                 href="#News">
+                                <span class="down-chev"></span>
                                 <span class="title">
                                     News
                                 </span>
@@ -120,147 +151,148 @@
                     </div>
                 </div>
             </div>
-            <div class="col-10">
-                <div class="rules">Pick 5 or more topics for news updates</div>
+            <div class="col-10 for-mobile">
+                <div class="rules">Pick topics for news updates</div>
                 <div id="News" class="panel-collapse">
+                    <div class="rules1" style="display:none;">Pick topics for news updates</div>
                     @*<a href="#" style="float:right;" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/5004f5ec-ecbf-4fcc-9848-cc8943dc0077/currNews');">Show Newsss</a>*@
-                    <button type="button" style="float:right; height: 35px; width: 100px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="showNews();">Show News</button>
+                    @*<button type="button" class="show-more" style="background-color: #6264a7;color: white;float: right;border: 1px solid rgba(37, 36, 36, 0.15);box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);font-family:Segoe UI;font-size: 14px; font-weight: 500;line-height: 20px;text-align: center; cursor:pointer;" onclick="showNews();">Show News</button>*@
                     <div class="panel-body body-height">
                         <div class="image-text image_grid">
                             <label for="Business">
-                                <img src="./imgs/Business.jpg" alt-name="Business" class="row-display" />
+                                <img src="./Images/Business.jpg" alt-name="Business" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Business" checked id="Business" value="Business" onclick="getCategory()"/>
+                            <input type="checkbox" name="Business" id="Business" @(Model.News.SelectedCategories.Contains("Business") ? "checked" : "") value="Business" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Business</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Design">
-                                <img src="./imgs/Design.jpg" alt-name="Design" class="row-display" />
+                                <img src="./Images/Design.jpg" alt-name="Design" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Design" id="Design" value="Design" onclick="getCategory()"/>
+                            <input type="checkbox" name="Design" @(Model.News.SelectedCategories.Contains("Design") ? "checked" : "") id="Design" value="Design" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Design</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Technology">
-                                <img src="./imgs/Technology.jpg" alt-name="Technology" class="row-display" />
+                                <img src="./Images/Technology.jpg" alt-name="Technology" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Technology" id="Technology" value="Technology" onclick="getCategory()"/>
+                            <input type="checkbox" name="Technology" @(Model.News.SelectedCategories.Contains("Technology") ? "checked" : "" ) id="Technology" value="Technology" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Technology</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Media">
-                                <img src="./imgs/Media.jpg" alt-name="Media" class="row-display" />
+                                <img src="./Images/Media.jpg" alt-name="Media" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Media" id="Media" value="Media" onclick="getCategory()"/>
+                            <input type="checkbox" name="Media" @(Model.News.SelectedCategories.Contains("Media") ? "checked" : "" ) id="Media" value="Media" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Media</div>
                             </div>
                         </div>
 
-                        <div class="image-text image_grid">
+                        <div class="image-text image_grid hide-for-mobile">
                             <label for="Economy">
-                                <img src="./imgs/Economy.jpg" alt-name="Economy" class="row-display" />
+                                <img src="./Images/Economy.jpg" alt-name="Economy" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Economy" id="Economy" value="Economy" onclick="getCategory()"/>
+                            <input type="checkbox" name="Economy" @(Model.News.SelectedCategories.Contains("Economy") ? "checked" : "" ) id="Economy" value="Economy" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Economy</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="CS">
-                                <img src="./imgs/CS.jpg" alt-name="CS" class="row-display" />
+                                <img src="./Images/CS.jpg" alt-name="CS" class="row-display" />
                             </label>
-                            <input type="checkbox" name="CS" id="CS" value="CS" onclick="getCategory()"/>
+                            <input type="checkbox" name="CS" @(Model.News.SelectedCategories.Contains("CS") ? "checked" : "" ) id="CS" value="CS" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">CS</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Market">
-                                <img src="./imgs/Market.jpg" alt-name="Market" class="row-display" />
+                                <img src="./Images/Market.jpg" alt-name="Market" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Market" id="Market" value="Market" onclick="getCategory()"/>
+                            <input type="checkbox" name="Market" @(Model.News.SelectedCategories.Contains("Market") ? "checked" : "" ) id="Market" value="Market" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Market</div>
                             </div>
                         </div>
-                    <br/>
-                        <div class="image-text image_grid">
+                        <br class="br">
+                        <div class="image-text image_grid hide-for-mobile">
                             <label for="Finance">
-                                <img src="./imgs/Finance.jpg" alt-name="Finance" class="row-display" />
+                                <img src="./Images/Finance.jpg" alt-name="Finance" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Finance" id="Finance" value="Finance" onclick="getCategory()"/>
+                            <input type="checkbox" name="Finance" @(Model.News.SelectedCategories.Contains("Finance") ? "checked" : "" ) id="Finance" value="Finance" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Finance</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Enterprise">
-                                <img src="./imgs/Enterprise.jpg" alt-name="Enterprise" class="row-display" />
+                                <img src="./Images/Enterprise.jpg" alt-name="Enterprise" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Enterprise" id="Enterprise" value="Enterprise" onclick="getCategory()"/>
+                            <input type="checkbox" name="Enterprise" @(Model.News.SelectedCategories.Contains("AI") ? "checked" : "" ) id="Enterprise" value="Enterprise" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">AI</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Software">
-                                <img src="./imgs/Software.jpg" alt-name="Software" class="row-display" />
+                                <img src="./Images/Software.jpg" alt-name="Software" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Software" id="Software" value="Software" onclick="getCategory()"/>
+                            <input type="checkbox" name="Software" @(Model.News.SelectedCategories.Contains("Software") ? "checked" : "" )id="Software" value="Software" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Software</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Animation">
-                                <img src="./imgs/Animation.gif" alt-name="Animation" class="row-display" />
+                                <img src="./Images/Animation.gif" alt-name="Animation" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Animation" id="Animation" value="Animation" onclick="getCategory()"/>
+                            <input type="checkbox" name="Animation" @(Model.News.SelectedCategories.Contains("Animation") ? "checked" : "" ) id="Animation" value="Animation" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Animation</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Creative">
-                                <img src="./imgs/Creative.png" alt-name="Creative" class="row-display" />
+                                <img src="./Images/Creative.png" alt-name="Creative" class="row-display" />
                             </label>
-                            <input type="checkbox" name="Creative" id="Creative" value="Creative" onclick="getCategory()"/>
+                            <input type="checkbox" name="Creative" @(Model.News.SelectedCategories.Contains("Creative") ? "checked" : "" ) id="Creative" value="Creative" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Creative</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="IT">
-                                <img src="./imgs/IT.jpg" alt-name="IT" class="row-display" />
+                                <img src="./Images/IT.jpg" alt-name="IT" class="row-display" />
                             </label>
-                            <input type="checkbox" name="IT" id="IT" value="IT" onclick="getCategory()"/>
+                            <input type="checkbox" name="IT" @(Model.News.SelectedCategories.Contains("IT") ? "checked" : "" ) id="IT" value="IT" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">IT</div>
                             </div>
                         </div>
                         <div class="image-text image_grid">
                             <label for="Data">
-                                <img src="./imgs/Data.jpg" alt-name="Data" class="row-display" />
+                                <img src="./Images/Data.jpg" alt-name="Data" @(Model.News.SelectedCategories.Contains("Data") ? "checked" : "" ) class="row-display" id="Data" value="Data" onclick="getCategory()" />
                             </label>
-                            <input type="checkbox" name="Data" id="Data" value="Data" onclick="getCategory()"/>
+                            <input type="checkbox" name="Data" id="Data" value="Data" onclick="getCategory()" />
                             <div class="tick">
                                 <div class="title-name">Data</div>
                             </div>
                         </div>
-
-                        <div class="explore-more">
+                        @*<div class="explore-more">
                             Explore more categories
-                        </div>
+                            <span class="rgt-chev"></span>
+                        </div>*@
                         <div class="switch-title1">
                             <label class="switch">
-                                <input type="checkbox" checked onclick="toggleSliderNews()"/>
+                                <input type="checkbox" checked onclick="toggleSliderNews()" />
                                 <span class="slider round"></span>
                             </label>
                             <span class="news-updates">Send notifications about news updates</span>
@@ -268,62 +300,66 @@
                         <div class="notify">Notify me at</div>
                         <form class="all-radio">
                             <label class="radio-label">
-                                <input type="radio" name="radio" value ="10:00 AM" onclick="getTime(this.value)"/>
+                                <input type="radio" name="radio" value="10:00 AM" onclick="getTime(this.value)" />
                                 <span class="text-align">Beginning of the day</span>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="radio-label">
-                                <input type="radio" name="radio" value="5:00 PM" onclick="getTime(this.value)"/>
+                                <input type="radio" name="radio" value="5:00 PM" onclick="getTime(this.value)" />
                                 <span class="text-align" onclick="getTime(this.value)">End of the day</span>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="radio-label">
                                 <input type="radio" checked name="radio" />
-                                <span class="text-align">Set a preffered time </span>
+                                <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" style="height:52px;width:135px;padding-bottom:20px;" id="newsTime" onchange="getTime(this.value)">
-                                <option selected value="10:00 am">10:00 am</option>
-                                <option value="11:00 am">11:00 am</option>
-                                <option value="12:00 am">12:00 am</option>
-                                <option value="1:00 pm">1:00 pm</option>
-                                <option value="2:00 pm">2:00 pm</option>
-                                <option value="3:00 pm">3:00 pm</option>
-                                <option value="4:00 pm">4:00 pm</option>
-                                <option value="5:00 pm">5:00 pm</option>
-                            </select>
-                            <i class="fas fa-chevron-down"></i>
+                            <div class="help date-control" data-toggle="dropdown" id="newsTime" onchange="getTime(this.value)">
+                                <a class="dropdown-toggle chevron-down" href="#">Select</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item"  value="10:00 am">10:00 am</li>
+                                    <li class="dropdown-item"  value="11:00 am">11:00 am</li>
+                                    <li class="dropdown-item"  value="12:00 pm">12:00 pm</li>
+                                    <li class="dropdown-item"  value="1:00 pm">1:00 pm</li>
+                                    <li class="dropdown-item"  value="2:00 pm">2:00 pm</li>
+                                    <li class="dropdown-item"  value="3:00 pm">3:00 pm</li>
+                                    <li class="dropdown-item"  value="4:00 pm">4:00 pm</li>
+                                    <li class="dropdown-item"  value="5:00 pm">5:00 pm</li>
+                                </ul>
+                            </div>
                         </form>
-                    </div> <br><br><br>
+                        <a href="#" class="show-more" style="float:right" onclick="SendCard('ShowNews');">Show News</a>
+                    </div> <br class="br-for-mobile"><br class="br-for-mobile">
                 </div>
             </div>
         </div>
         <div class="row second-row">
-            <div class="col-2 h-100">
+            <div class="col-2 h-100 for-mobile">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h6 class="panel-title title2 accordion-toggle" data-toggle="collapse" data-parent="#accordion"
                                 href="#Events">
+                                <span class="down-chev"></span>
                                 <span class="title">
-                                    Events & trainings
+                                    Events & Trainings
                                 </span>
                             </h6>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-10 for-mobile">
                 <div id="Events" class="panel-collapse">
                     @*<button type="button" style="float:right; height: 35px; width: 180px; margin-top:5px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/EandT')">Show Event and Training</button>*@
-                    <button type="button" style="float:right; height: 35px; width: 180px; margin-top:5px; color: white; background-color: #6264a7; font-family: Segoe UI; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="showET();">Show Event and Training</button>
+                    @*<button type="button" class="show-more for-events" onclick="showET();">Show Event and Training</button>*@
                     <div class="panel-body">
                         <div class="switch-title">
                             <label class="switch">
                                 <input type="checkbox" checked onclick="toggleSliderEnT()" />
                                 <span class="slider round"></span>
                             </label>
-                            <span class="events-training">Send notifications about new events & training</span>
+                            <span class="events-training">Send notifications about new events & trainings</span>
                         </div>
                         <div class="notify">Notify me at</div>
                         <form class="all-radio">
@@ -339,44 +375,48 @@
                             </label>
                             <label class="radio-label">
                                 <input type="radio" name="radio" checked />
-                                <span class="text-align">Set a preffered time </span>
+                                <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <select class="date-control" style="width:120px;" id="EandTTime" onchange="getEnTTime(this.value)">
-                                <option selected value="10:00 am">10:00 am</option>
-                                <option value="11:00 am">11:00 am</option>
-                                <option value="12:00 am">12:00 am</option>
-                                <option value="1:00 pm">1:00 pm</option>
-                                <option value="2:00 pm">2:00 pm</option>
-                                <option value="3:00 pm">3:00 pm</option>
-                                <option value="4:00 pm">4:00 pm</option>
-                                <option value="5:00 pm">5:00 pm</option>
-                            </select>
-                            <i class="fas fa-chevron-down"></i> <br><br><br>
+                            <div class="help date-control" data-toggle="dropdown" id="EandTTime" onchange="getEnTTime(this.value)">
+                                <a class="dropdown-toggle chevron-down" href="#">Select</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item" value="10:00 am">10:00 am</li>
+                                    <li class="dropdown-item" value="11:00 am">11:00 am</li>
+                                    <li class="dropdown-item" value="12:00 pm">12:00 pm</li>
+                                    <li class="dropdown-item" value="1:00 pm">1:00 pm</li>
+                                    <li class="dropdown-item" value="2:00 pm">2:00 pm</li>
+                                    <li class="dropdown-item" value="3:00 pm">3:00 pm</li>
+                                    <li class="dropdown-item" value="4:00 pm">4:00 pm</li>
+                                    <li class="dropdown-item" value="5:00 pm">5:00 pm</li>
+                                </ul>
+                            </div>
                         </form>
+                        <div><a href="#" class="show-more" style="float:right; padding-bottom:20px;" onclick="SendCard('ShowEnT');">Show Events and Trainings</a></div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-2 h-100">
+            <div class="col-2 h-100 for-mobile">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h6 class="panel-title title2 accordion-toggle" data-toggle="collapse" data-parent="#accordion"
                                 href="#Taskreminders">
+                                <span class="down-chev"></span>
                                 <span class="title">
-                                    Task reminders
+                                    Task Reminders
                                 </span>
                             </h6>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-10 for-mobile">
                 <div id="Taskreminders" class="panel-collapse">
                     @*<button type="button" style="float:right; height: 35px; width: 180px; color: white; background-color: #6264a7; font-family: Segoe UI; margin-top:5px; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="microsoftTeams.executeDeepLink('https://teams.microsoft.com/l/entity/@(EmployeeConnect.Helper.ApplicationSettings.AppId)/tasks')">Show Task Reminder</button>*@
-                    <button type="button" style="float:right; height: 35px; width: 180px; color: white; background-color: #6264a7; font-family: Segoe UI; margin-top:5px; font-size: 14px; font-weight: 500; line-height: 20px; text-align: center; border: 1px solid rgba(37, 36, 36, 0.15); border-radius: 2px; box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1)" onclick="showTask();">Show Task Reminder</button>
+                    @*<button type="button" class="show-more for-task" onclick="showTask();">Show Task Reminder</button>*@
                     <div class="panel-body">
                         <div class="notify notify-task">Notify me at</div>
                         <form class="all-radio">
@@ -392,22 +432,24 @@
                             </label>
                             <label class="radio-label">
                                 <input type="radio" name="radio" />
-                                <span class="text-align">Set a preffered time </span>
+                                <span class="text-align">Set a preferred time </span>
                                 <span class="checkmark"></span>
                             </label>
-                            <br>
-                            <select class="date-control" style="width:120px;" id="taskTime" onchange="getTaskTime(this.value)">
-                                <option selected value="10:00 am">10:00 am</option>
-                                <option value="11:00 am">11:00 am</option>
-                                <option value="12:00 am">12:00 am</option>
-                                <option value="1:00 pm">1:00 pm</option>
-                                <option value="2:00 pm">2:00 pm</option>
-                                <option value="3:00 pm">3:00 pm</option>
-                                <option value="4:00 pm">4:00 pm</option>
-                                <option value="5:00 pm">5:00 pm</option>
-                            </select>
-                            <i class="fas fa-chevron-down"></i> <br><br><br>
+                            <div class="help date-control" data-toggle="dropdown" id="taskTime" onchange="getTaskTime(this.value)">
+                                <a class="dropdown-toggle chevron-down" href="#">Select</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item" value="10:00 am">10:00 am</li>
+                                    <li class="dropdown-item" value="11:00 am">11:00 am</li>
+                                    <li class="dropdown-item" value="12:00 pm">12:00 pm</li>
+                                    <li class="dropdown-item" value="1:00 pm">1:00 pm</li>
+                                    <li class="dropdown-item" value="2:00 pm">2:00 pm</li>
+                                    <li class="dropdown-item" value="3:00 pm">3:00 pm</li>
+                                    <li class="dropdown-item" value="4:00 pm">4:00 pm</li>
+                                    <li class="dropdown-item" value="5:00 pm">5:00 pm</li>
+                                </ul>
+                            </div>
                         </form>
+                        <a href="#" class="show-more" style="float:right;padding-bottom:20px;" onclick="SendCard('ShowTask');">Show Task Reminder</a>
                     </div>
                 </div>
             </div>

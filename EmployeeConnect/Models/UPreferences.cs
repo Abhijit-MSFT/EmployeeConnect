@@ -7,16 +7,18 @@ namespace EmployeeConnect.Models
 {
     public class UPreferences
     {
-        public Preference[] preferences { get; set; }
+        public UPreferences() { }
+        public Preference[] Preferences { get; set; }
     }
 
     public class Preference
     {
+        public Preference(){ }
         public string UserName { get; set; }
-        public UserInfo[] UserInfo { get; set; }  
-        public NewsPreference[] News { get; set; }
-        public EandtPreference[] EandT { get; set; }
-        public TaskPreference[] Task { get; set; }
+        public UserInfo[] UserInfo { get; set; } = new[] { new UserInfo() };    
+        public NewsPreference News { get; set; } = new NewsPreference() { SelectedCategories = new string[] { } };
+        public EandtPreference EandT { get; set; } = new EandtPreference() ;
+        public TaskPreference Task { get; set; } = new TaskPreference();
     }
 
     public class NewsPreference

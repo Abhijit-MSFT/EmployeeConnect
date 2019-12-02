@@ -1,42 +1,43 @@
-﻿using System;
+﻿using EmployeeConnect.Common;
+using EmployeeConnect.Dialogs;
+using EmployeeConnect.Helper;
+using EmployeeConnect.Models;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector;
+using Microsoft.Bot.Connector.Teams;
+using Microsoft.Bot.Connector.Teams.Models;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using EmployeeConnect.Dialogs;
-using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams.Models;
-using EmployeeConnect.Helper;
-using Newtonsoft.Json;
-using EmployeeConnect.Common;
-using Newtonsoft.Json.Linq;
-using EmployeeConnect.Models;
-using System.IO;
-using Microsoft.Bot.Connector.Teams;
 
 namespace EmployeeConnect.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        [HttpPost]  
+        [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
+            //GetDataHelper.GetEandTFromSPandWriteToFile();
             switch (activity.Type)
             {
                 case ActivityTypes.Message:
                     await Conversation.SendAsync(activity, () => new RootDialog());
                     break;
                 case ActivityTypes.Invoke:
-                     return await HandleInvokeActivity(activity);
+                    return await HandleInvokeActivity(activity);
                 case ActivityTypes.ConversationUpdate:
                     await HandleConversationUpdate(activity);
                     break;
             }
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
+
         private async Task<HttpResponseMessage> HandleInvokeActivity(Activity activity)
         {
             var activityValue = activity.Value.ToString();
@@ -55,70 +56,241 @@ namespace EmployeeConnect.Controllers
                     return response != null ? Request.CreateResponse<ComposeExtensionResponse>(response) : new HttpResponseMessage(HttpStatusCode.OK);
                 case "task/fetch":
                     // Handle fetching task module content
-                    Models.BotFrameworkCardValue<string> action;
+                    string action = string.Empty;
 
                     try
                     {
-                        action = JsonConvert.DeserializeObject<Models.TaskModuleActionData<string>>(activityValue).Data;
+                        var input = JsonConvert.DeserializeObject<TaskFetchData>(activityValue);
+                        action = input.data.data;
+
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
+                        Console.WriteLine(ex);
+                        // action = JsonConvert.DeserializeObject<Models.BotFrameworkCardValue<string>>(activityValue);
                     }
-                    taskInfo = GetTaskInfo(action.Data);
+                    taskInfo = GetTaskInfo(action);
+
                     taskEnvelope = new Models.TaskEnvelope
                     {
                         Task = new Models.Task()
                         {
-                            Type = Models.TaskType.Continue,
+                            Type = Models.TaskType.Continue.ToString().ToLower(),
                             TaskInfo = taskInfo
                         }
                     };
                     return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "task/submit":
-                    string data = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
-                    //string datajson = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).DataJson;
+                    string taskId = JsonConvert.DeserializeObject<TaskModuleSubmitData<TicketTaskData>>(activityValue).Data.action;
+                    //string commandid = details.commandId;
+                    switch (taskId)
+                    {
 
-                    if (data.Length > 2 && data.Substring(0, 2) == "ET")
-                    {
-                        ETid = data.Substring(2);
-                        //will update the button action Added<->Removed
-                        GetDataHelper.ETStatusUpdate(ETid);
-                        return new HttpResponseMessage(HttpStatusCode.Accepted);
-                    }
-                    switch (data)
-                    {
-                        //When close is pressed on task module card
-                        case "close_button":
-                            break;
-                        case "podecline":
-                            taskInfo = GetTaskInfo(data);
+                        case "ticketcomplete":
+                            var createTicketData = JsonConvert.DeserializeObject<SubmitActionData<TicketTaskData>>(activityValue).data;
+                            taskInfo = GetTaskInfo(taskId);
+                            var ticketurl = "?ticketNoId=" + createTicketData.ticketNo + "&description=" + createTicketData.TDescription + "&category=" + createTicketData.TCategory + "&priority=" + createTicketData.TPriority;
+                            taskInfo.Url = taskInfo.Url + ticketurl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + ticketurl;
+
                             taskEnvelope = new Models.TaskEnvelope
                             {
                                 Task = new Models.Task()
                                 {
-                                    Type = Models.TaskType.Continue,
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                        case "podecline":
+                            var podeclineData = JsonConvert.DeserializeObject<SubmitActionData<PODeclineData>>(activityValue).data;
+                            taskInfo = GetTaskInfo(taskId);
+                            var declineUrl = "?poNo=" + podeclineData.poNumber;
+                            taskInfo.Url = taskInfo.Url + declineUrl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + declineUrl;
+
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                        case "decline":
+                            var declineData = JsonConvert.DeserializeObject<SubmitActionData<DeclineData>>(activityValue).data;
+                            taskId = "declined";
+                            taskInfo = GetTaskInfo(taskId);
+                            var decUrl = "?poNo=" + declineData.PONo + "&reason=" + declineData.reason + "&comment=" + declineData.comments;
+                            taskInfo.Url = taskInfo.Url + decUrl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + decUrl;
+
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                        case "editVisitorRequest":
+                            taskInfo = GetTaskInfo(taskId);
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
                                     TaskInfo = taskInfo
                                 }
                             };
                             return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
-                        default:    //need to build
+                        case "editTicket":
+
+                            taskInfo = GetTaskInfo(taskId);
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+
+                        case "sendrequest":
+                            var savevisitordata = JsonConvert.DeserializeObject<SubmitActionData<VisitorData>>(activityValue).data;
+                            taskInfo = GetTaskInfo(taskId);
+                            var vurl = "?Date=" + savevisitordata.Vdate + "&Time=" + savevisitordata.Vtime + "&Contact=" + savevisitordata.Vcontact + "&location=" + savevisitordata.VhostLocation + "&purpose=" + savevisitordata.Vpurpose + "&hostName=" + savevisitordata.VhostName + "&org=" + savevisitordata.Vorg;
+                            taskInfo.Url = taskInfo.Url + vurl;
+                            taskInfo.FallbackUrl = taskInfo.FallbackUrl + vurl;
+
+                            taskEnvelope = new Models.TaskEnvelope
+                            {
+                                Task = new Models.Task()
+                                {
+                                    Type = Models.TaskType.Continue.ToString().ToLower(),
+                                    TaskInfo = taskInfo
+                                }
+                            };
+
+                            return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+
+                        case TaskModuleIds.toggleEventStatus:
+                            // TODO Event - EventTaskData
+                            var eventData = JsonConvert.DeserializeObject<SubmitActionData<EventTaskData>>(activityValue).data;
+
+                            //will update the button action Added<->Removed
+                            GetDataHelper.ETStatusUpdate(eventData.eventId);
+                            return new HttpResponseMessage(HttpStatusCode.Accepted);
+
+                        default: // Handled all remaining cases for task module. Ex-  Close, PoDeclinedClosed
+                            return Request.CreateResponse(HttpStatusCode.OK);
+
+                    }
+                case "composeExtension/submitAction":
+
+                    var details = JsonConvert.DeserializeObject<SubmitActionData>(activityValue);
+                    string commandid = details.commandId;
+                    switch (details.commandId)
+                    {
+                        case "createticket":
+                            var createTicketData = JsonConvert.DeserializeObject<SubmitActionData<TicketTaskData>>(activityValue);
+                            if (createTicketData.data == null)
+                            {
+                                commandid = details.commandId;
+                                taskInfo = GetTaskInfo(commandid);
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                            else if (createTicketData.data.action == "submit")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
+                            else if (createTicketData.data.action == "submitTicket")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
+                            else
+                            {
+                                commandid = createTicketData.data.action;
+                                taskInfo = GetTaskInfo(commandid);
+                                var ticketurl = "?ticketNoId=" + createTicketData.data.ticketNo + "&description=" + createTicketData.data.TDescription + "&category=" + createTicketData.data.TCategory + "&priority=" + createTicketData.data.TPriority;
+                                taskInfo.Url = taskInfo.Url + ticketurl;
+                                taskInfo.FallbackUrl = taskInfo.FallbackUrl + ticketurl;
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                        case "visitorregistration":
+                            var savevisitordata = JsonConvert.DeserializeObject<SubmitActionData<VisitorData>>(activityValue);
+
+                            if (savevisitordata.data == null)
+                            {
+                                commandid = details.commandId;
+                                taskInfo = GetTaskInfo(commandid);
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                            else if (savevisitordata.data.action == "submitVisitor")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
+                            else if (savevisitordata.data.action == "submitRequest")
+                            {
+                                return Request.CreateResponse(HttpStatusCode.OK);
+                            }
+                            else
+                            {
+                                commandid = savevisitordata.data.action;
+                                taskInfo = GetTaskInfo(commandid);
+                                var ticketurl = "?Date=" + savevisitordata.data.Vdate + "&Time=" + savevisitordata.data.Vtime + "&Contact=" + savevisitordata.data.Vcontact + "&location=" + savevisitordata.data.VhostLocation + "&purpose=" + savevisitordata.data.Vpurpose + "&hostName=" + savevisitordata.data.VhostName + "&org=" + savevisitordata.data.Vorg;
+                                taskInfo.Url = taskInfo.Url + ticketurl;
+                                taskInfo.FallbackUrl = taskInfo.FallbackUrl + ticketurl;
+                                taskEnvelope = new Models.TaskEnvelope
+                                {
+                                    Task = new Models.Task()
+                                    {
+                                        Type = Models.TaskType.Continue.ToString().ToLower(),
+                                        TaskInfo = taskInfo
+                                    }
+                                };
+
+                                return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
+                            }
+                        default:
+                            commandid = details.commandId;
                             break;
                     }
                     break;
-                case "composeExtension/submitAction":
-                    string commandid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).commandId;
-                    taskInfo = GetTaskInfo(commandid);
-                    taskEnvelope = new Models.TaskEnvelope
-                    {
-                        Task = new Models.Task()
-                        {
-                            Type = Models.TaskType.Continue,
-                            TaskInfo = taskInfo
-                        }
-                    };
-
-                    return Request.CreateResponse(HttpStatusCode.OK, taskEnvelope);
                 case "composeExtension/onCardButtonClicked":
                     ETid = JsonConvert.DeserializeObject<Models.TaskModuleSubmitData<string>>(activityValue).Data;
                     GetDataHelper.ETStatusUpdate(ETid);
@@ -130,16 +302,47 @@ namespace EmployeeConnect.Controllers
         private static TaskInfo GetTaskInfo(string actionInfo)
         {
 
+
+            string EandTID = actionInfo.Substring(7);
+            string newsID = actionInfo.Substring(5);
+          
             TaskInfo taskInfo = new TaskInfo();
             if (actionInfo.StartsWith("news:"))
             {
-                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetNewsCardbyId(actionInfo.Substring(5)));
-                SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
-                return taskInfo;
+                Dictionary<int, string> newsDic = new Dictionary<int, string>();
+
+                newsDic.Add(33, "Bringing-human-like-reasoning-to-driverless-car-navigation.aspx");
+                newsDic.Add(32, "Microsoft-Hackathon-2019-winning-team--‘Think-bigger-–-and-believe-you-can-change-the-world’.aspx");
+                newsDic.Add(31, "How-building-robots-together-is-opening-doors-and-hearts.aspx");
+                newsDic.Add(29, "Microsoft%E2%80%99s-AI-for-Accessibility-grant-winners--%E2%80%98You-want-to-be-seen-as-the-person-you-are.aspx");
+                newsDic.Add(30, "Xbox-Game-Pass-Subscription-Service-Headed-to-PC-With-Over-100-Titles.aspx");
+                newsDic.Add(40, "With-a-hop,-a-skip-and-a-jump,-high-flying-robot-leaps-through-obstacles-with-ease.aspx");
+                newsDic.Add(41, "Teaching-language-models-grammar-really-does-make-them-smarter.aspx");
+                newsDic.Add(42, "Unmoored’--Times-Square-installation-shows-how-artists-can-anchor-storytelling-with-mixed-reality.aspx");
+                newsDic.Add(43, "How-gamers-with-disabilities-helped-design-the-new-Xbox-Adaptive-Controller’s-elegantly-accessible-packaging.aspx");
+                newsDic.Add(45, "How-(and-Why)-Collaboration-Brings-About-Stronger,-More-Creative-Web-Design.aspx");
+                newsDic.Add(44, "What’s-the-solution-to-the-growing-problem-of-passwords--You,-says-Microsoft.aspx");
+
+                if (newsDic.ContainsKey(Convert.ToInt32(newsID)))
+                {
+                    string newsName = newsDic[Convert.ToInt32(newsID)];
+
+                    taskInfo.Url = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/teamslogon.aspx?spfx=true&dest=/sites/EmployeeConnectPrototype/SitePages/"+ newsName;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.NewsCard);
+                    taskInfo.Title = "News";
+                    return taskInfo;
+                }
+               
+               
+
+                //taskInfo.Card = CardHelper.GetNewsCardbyId(actionInfo.Substring(5));            
+       
             }
             if (actionInfo.StartsWith("events:"))
             {
-                taskInfo.Card = JObject.FromObject(Helper.CardHelper.GetETbyID(actionInfo.Substring(7)));
+               // string EandTID = actionInfo.Substring(7);
+                //taskInfo.Card = CardHelper.GetETbyID(actionInfo.Substring(7));
+                 taskInfo.Url = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_layouts/15/Event.aspx?ListGuid=59c3fe4a-12f2-4ece-bcf2-eb850a0c357d&ItemId=" + EandTID;
                 SetTaskInfo(taskInfo, TaskModelUIConstant.ETCard);
                 return taskInfo;
             }
@@ -189,7 +392,14 @@ namespace EmployeeConnect.Controllers
                     taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.pendingDates;
                     SetTaskInfo(taskInfo, TaskModelUIConstant.PendingDates);
                     break;
-
+                case TaskModuleIds.editTicket:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.CreateTicket;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.CreateTicket);
+                    break;
+                case TaskModuleIds.editVisitorRequest:
+                    taskInfo.Url = taskInfo.FallbackUrl = ApplicationSettings.BaseUrl + "/" + TaskModuleIds.VisitorRegistration;
+                    SetTaskInfo(taskInfo, TaskModelUIConstant.VisitorRegistration);
+                    break;
                 default:
                     break;
             }
@@ -212,7 +422,7 @@ namespace EmployeeConnect.Controllers
             ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
             var channelData = message.GetChannelData<TeamsChannelData>();
             // Treat 1:1 add/remove events as if they were add/remove of a team member
-            
+
             if (channelData.EventType == null)
             {
                 if (message.MembersAdded != null)

@@ -279,6 +279,7 @@ span.range {
 
 .modal-dialog {
     max-width: 400px;
+    max-height: 330px;
 }
 
 .cancel,
@@ -559,11 +560,11 @@ span.range {
     right: 5px;
 }
 
-body {
+/*body {
     background-color: #f3f2f1;
     padding: 20px;
     overflow: auto;
-}
+}*/
 
 .custom-card-first-row,
 .custom-card-first-row-one,

@@ -1,7 +1,10 @@
 ﻿@model EmployeeConnect.Models.NewsModel
-    @using System;
+@using System;
 @using EmployeeConnect.Common;
 
+@{
+    Layout = "";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="@("https://unpkg.com/@microsoft/teams-js@1.4.1/dist/MicrosoftTeams.min.js")"></script>
     <title>News</title>
 </head>
 <body>
@@ -22,25 +26,28 @@
             <div class="col-12">
                 <div class="lt">Latest News</div>
                 <div class="for-you dis-in">For you</div>
-                <div class="Explore dis-in"><a href="https://news.microsoft.com/en-in/">Explore more</a></div>
+                <div class="Explore dis-in exp-for-mobile"><a target="_blank" href="https://news.microsoft.com/">Explore more</a></div>
                 <div id="root" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#root" data-slide-to="0" class="active"></li>
                         <li data-target="#root" data-slide-to="1"></li>
                         <li data-target="#root" data-slide-to="2"></li>
                     </ol>
-                    <div class="carousel-inner" id="carousel">
+                    <div class="carousel-inner carousel1-for-mb" id="carousel">
                         <div class="carousel-item active">
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 0; i < 4; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3 @(i ==0 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==0 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
                                             </h6>
+                                            <p class="card-text text desc">
+                                                @Html.DisplayFor(model => Model.news[i].DetailedNews)
+                                            </p>
                                             <div class="author-month">
                                                 <p class="card-text author">
                                                     <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
@@ -60,13 +67,16 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 5; i < 9; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3 col-md-3 @(i ==5 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==5 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
                                             </h6>
+                                            <p class="card-text text desc">
+                                                @Html.DisplayFor(model => Model.news[i].DetailedNews)
+                                            </p>
                                             <div class="author-month">
                                                 <p class="card-text author">
                                                     <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
@@ -86,13 +96,16 @@
                             <div class="card-deck col-12 custom-deck">
                                 @for (int i = 10; i < 14; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
+                                    <div class="card col-3  @(i ==10 ? "custom-main-card" : "custom-sub-cards")">
                                         <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');"/>
+                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="@(i ==10 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
                                         <div class="card-body">
                                             <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
                                                 @Html.DisplayFor(model => Model.news[i].NewsTitle)
                                             </h6>
+                                            <p class="card-text text desc">
+                                                @Html.DisplayFor(model => Model.news[i].DetailedNews)
+                                            </p>
                                             <div class="author-month">
                                                 <p class="card-text author">
                                                     <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
@@ -116,34 +129,72 @@
         <div class="row custom-row">
             <div class="col-12">
                 <div class="lt dis-in">Trending stories</div>
-                <div class="Explore dis-in"><a href="https://news.microsoft.com/en-in/">Explore more</a></div>
-                <div id="car-root" class="carousel slide" data-ride="carousel">
+                <div class="Explore dis-in exp-for-mobile2"><a target="_blank" href="https://www.msn.com/en-us/news/bing/">Explore more</a></div>
+                <div id="car-root" class="carousel slide stop-for-mb" data-ride="carousel">
                     <ol class="carousel-indicators carousel2 ">
                         <li data-target="#car-root" data-slide-to="0" class="active"></li>
                         <li data-target="#car-root" data-slide-to="1"></li>
                         <li data-target="#car-root" data-slide-to="2"></li>
                     </ol>
-                    <div class="carousel-inner" id="carousel">
+                    <div class="carousel-inner carousel2-for-mb" id="carousel">
                         <div class="carousel-item active">
                             <div class="card-deck col-12 custom-deck">
-                                @for (int i = 15; i < 19; i++)
+                                @for (int i = 15; i <= 15; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
-                                        <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
-                                        <div class="card-body">
-                                            <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
-                                                @Html.DisplayFor(model => Model.news[i].NewsTitle)
-                                            </h6>
-                                            <div class="author-month">
-                                                <p class="card-text author">
-                                                    <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
-                                                    <span class="dot"></span>
-                                                    <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                    <div class="card col-3 car2-custom-main-card sub-card2">
+                                        <div class="row no-gutters">
+                                            <div class="desktop-none">
+                                                <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
+                                                <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" id="img-for-mobile" class="@(i == 15 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                            </div>
+                                            <div class="col-md-8 col-8 desktop-none1">
+                                                <div class="card-body">
+                                                    <br class="dis-none-for-desk">
+                                                    <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                                        @Html.DisplayFor(model => Model.news[i].NewsTitle)
+                                                    </h6>
+                                                    <p class="card-text text desc">
+                                                        @Html.DisplayFor(model => Model.news[i].DetailedNews)
+                                                    </p>
+                                                    <div class="author-date">
+                                                        <p class="card-text author">
+                                                            <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
+                                                            <span class="dot"></span>
+                                                            <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                                        </p>
+                                                        <p class="card-text text-muted view">
+                                                            <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @for (int i = 16; i < 19; i++)
+                                {
+                                    <div class="card col-3 car2-custom-main-card sub-card2">
+                                        <div class="row no-gutters">
+                                            <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
+                                            <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" id="img-for-mobile" class="@(i ==15 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                            <div class="card-body">
+                                                @*<br class="dis-none-for-desk">*@
+                                                <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                                    @Html.DisplayFor(model => Model.news[i].NewsTitle)
+                                                </h6>
+                                                <p class="card-text text desc">
+                                                    @Html.DisplayFor(model => Model.news[i].DetailedNews)
                                                 </p>
-                                                <p class="card-text text-muted view">
-                                                    <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
-                                                </p>
+                                                <div class="author-date">
+                                                    <p class="card-text author">
+                                                        <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
+                                                        <span class="dot"></span>
+                                                        <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                                    </p>
+                                                    <p class="card-text text-muted view">
+                                                        <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -152,24 +203,62 @@
                         </div>
                         <div class="carousel-item">
                             <div class="card-deck col-12 custom-deck">
-                                @for (int i = 20; i < 24; i++)
+                                @for (int i = 20; i <= 20; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
-                                        <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
-                                        <div class="card-body">
-                                            <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
-                                                @Html.DisplayFor(model => Model.news[i].NewsTitle)
-                                            </h6>
-                                            <div class="author-month">
-                                                <p class="card-text author">
-                                                    <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
-                                                    <span class="dot"></span>
-                                                    <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                    <div class="card col-3 car2-custom-main-card sub-card2">
+                                        <div class="row no-gutters">
+                                            <div class="desktop-none">
+                                                <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
+                                                <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" id="img-for-mobile" class="@(i == 20 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                            </div>
+                                            <div class="col-md-8 col-8 desktop-none1">
+                                                <div class="card-body">
+                                                    <br class="dis-none-for-desk">
+                                                    <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                                        @Html.DisplayFor(model => Model.news[i].NewsTitle)
+                                                    </h6>
+                                                    <p class="card-text text desc">
+                                                        @Html.DisplayFor(model => Model.news[i].DetailedNews)
+                                                    </p>
+                                                    <div class="author-date">
+                                                        <p class="card-text author">
+                                                            <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
+                                                            <span class="dot"></span>
+                                                            <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                                        </p>
+                                                        <p class="card-text text-muted view">
+                                                            <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @for (int i = 21; i < 24; i++)
+                                {
+                                    <div class="card col-3 car2-custom-main-card sub-card2">
+                                        <div class="row no-gutters">
+                                            <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
+                                            <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" id="img-for-mobile" class="@(i ==20 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                            <div class="card-body">
+                                                @*<br class="dis-none-for-desk">*@
+                                                <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                                    @Html.DisplayFor(model => Model.news[i].NewsTitle)
+                                                </h6>
+                                                <p class="card-text text desc">
+                                                    @Html.DisplayFor(model => Model.news[i].DetailedNews)
                                                 </p>
-                                                <p class="card-text text-muted view">
-                                                    <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
-                                                </p>
+                                                <div class="author-date">
+                                                    <p class="card-text author">
+                                                        <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
+                                                        <span class="dot"></span>
+                                                        <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                                    </p>
+                                                    <p class="card-text text-muted view">
+                                                        <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -178,24 +267,62 @@
                         </div>
                         <div class="carousel-item">
                             <div class="card-deck col-12 custom-deck">
-                                @for (int i = 25; i < 29; i++)
+                                @for (int i = 25; i <= 25; i++)
                                 {
-                                    <div class="card col-6 custom-main-card">
-                                        <div class="business">@Html.DisplayFor(model => Model.news[i].Category)</div>
-                                        <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" class="main-card-img" onclick="submit('@Model.news[i].NewsID.ToString()');" />
-                                        <div class="card-body">
-                                            <h6 class="card-title text" onclick="submit('@Model.news[i].NewsID.ToString()');">
-                                                @Html.DisplayFor(model => Model.news[i].NewsTitle)
-                                            </h6>
-                                            <div class="author-month">
-                                                <p class="card-text author">
-                                                    <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
-                                                    <span class="dot"></span>
-                                                    <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                    <div class="card col-3 car2-custom-main-card sub-card2">
+                                        <div class="row no-gutters">
+                                            <div class="desktop-none">
+                                                <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
+                                                <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" id="img-for-mobile" class="@(i == 25 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                            </div>
+                                            <div class="col-md-8 col-8 desktop-none1">
+                                                <div class="card-body">
+                                                    <br class="dis-none-for-desk">
+                                                    <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                                        @Html.DisplayFor(model => Model.news[i].NewsTitle)
+                                                    </h6>
+                                                    <p class="card-text text desc">
+                                                        @Html.DisplayFor(model => Model.news[i].DetailedNews)
+                                                    </p>
+                                                    <div class="author-date">
+                                                        <p class="card-text author">
+                                                            <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
+                                                            <span class="dot"></span>
+                                                            <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                                        </p>
+                                                        <p class="card-text text-muted view">
+                                                            <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @for (int i = 26; i < 29; i++)
+                                {
+                                    <div class="card col-3 car2-custom-main-card sub-card2">
+                                        <div class="row no-gutters">
+                                            <div class="technology">@Html.DisplayFor(model => Model.news[i].Category)</div>
+                                            <img src="@Html.DisplayFor(model => Model.news[i].NewsThumbnailUrl)" id="img-for-mobile" class="@(i ==25 ? "main-card-img" : "sub-card-img")" onclick="submit('@Model.news[i].NewsID.ToString()');" />
+                                            <div class="card-body">
+                                                @*<br class="dis-none-for-desk">*@
+                                                <h6 class="card-title text car2-title" onclick="submit('@Model.news[i].NewsID.ToString()');">
+                                                    @Html.DisplayFor(model => Model.news[i].NewsTitle)
+                                                </h6>
+                                                <p class="card-text text desc">
+                                                    @Html.DisplayFor(model => Model.news[i].DetailedNews)
                                                 </p>
-                                                <p class="card-text text-muted view">
-                                                    <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
-                                                </p>
+                                                <div class="author-date">
+                                                    <p class="card-text author">
+                                                        <small class="text-muted">@Html.DisplayFor(model => Model.news[i].NewsBy)</small>
+                                                        <span class="dot"></span>
+                                                        <small class="text-muted date">@Html.DisplayFor(model => Model.news[i].NewsDateTIme)</small>
+                                                    </p>
+                                                    <p class="card-text text-muted view">
+                                                        <small class="text-muted views">@Html.DisplayFor(model => Model.news[i].NoOfViews) <span>views</span></small>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -221,14 +348,14 @@
                 url: null,
                 fallbackUrl: null,
             };
-            
+
             var url = "/GetNewsInfo?NewsId=" + NewsId;
             $.ajax({
                     url: url,
                     type: 'get',
                     contentType: 'application/json',
-                    success: function (data, textStatus, jQxhr) {
-                        taskInfo.card = data;
+                success: function (data, textStatus, jQxhr) {
+                    taskInfo.card = JSON.parse(data);
                         taskInfo.height = "@(TaskModelUIConstant.NewsCard.Height)";
                         taskInfo.width = "@(TaskModelUIConstant.NewsCard.Width)";
                         microsoftTeams.tasks.startTask(taskInfo, submitHandler);
@@ -238,6 +365,7 @@
                     }
             });
         }
+
     </script>
 </body>
 </html>

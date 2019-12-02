@@ -1,6 +1,10 @@
-﻿@model EmployeeConnect.Models.PO
+﻿
+
+@model EmployeeConnect.Models.PO
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
+
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,8 +20,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="HR">Human Resources</div>
-                <div class="P-10">
+                <div class="HR" data-toggle="collapse" data-target="#HRtools">Human Resources</div>
+                <div class="P-10 collapse" id="HRtools">
                     <div class="card shadow-sm custom-card-first-row">
                         <div class="card-body">
                             <span alt-name="create letter"
@@ -37,8 +41,7 @@
                             </span>
                             <div class="CT">Create ticket</div>
                             <p class="CT-des">
-                                For all HR tickets, the ticket type is being set as Employee
-                                Support.
+                                For all HR tickets, the ticket type is set as Employee Support.
                             </p>
                         </div>
                     </div>
@@ -57,15 +60,17 @@
                             <span alt-name="policies" class="HR-tabs policies"></span>
                             <div class="VP">View policies</div>
                             <p class="VP-des">
-                                Identify the purpose and objectives of Humana Resources
-                                department.
+                                Identify the purpose and objectives of HR department.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="PB">Pay and benefits</div>
-                <div class="P-10">
+                <div class="PB title accordion-toggle" data-toggle="collapse" data-target="#Pay-benefits">
+                    Pay and Benefits
+                </div>
+
+                <div class="P-10 collapse" id="Pay-benefits">
                     <div class="card shadow-sm custom-card-PB-second-row">
                         <div class="card-body">
                             <span alt-name="download-payslip"
@@ -83,7 +88,8 @@
                             </span>
                             <div class="CFT">Create finance ticket</div>
                             <p class="CFT-des">
-                               Open a support ticket with the Finance and Operations support.
+                                Open a support ticket with the Finance and Operations
+                                support.
                             </p>
                         </div>
                     </div>
@@ -109,12 +115,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="IF">IT and facilities</div>
-                <div class="P-10">
+                <div class="IF title accordion-toggle" data-toggle="collapse" data-target="#itandfacilities">IT and Facilities</div>
+                <div class="P-10 collapse" id="itandfacilities">
                     <div class="card shadow-sm custom-card-IF-third-row">
                         <div class="card-body">
                             <span class="IF-tabs support"></span>
-                            <div class="RIST">Raise IT Support Ticket</div>
+                            <div class="RIST">Raise IT support ticket</div>
                             <p class="RIST-des">
                                 Submit your support case to review and respond.
                             </p>
@@ -123,7 +129,7 @@
                     <div class="card shadow-sm custom-card-IF-third-row-one">
                         <div class="card-body" onclick="submitTools('visitorregistration');">
                             <span class="IF-tabs wife-request"> </span>
-                            <div class="GWR">Submit Visitor request</div>
+                            <div class="GWR">Submit visitor request</div>
                             <p class="GWR-des">
                                 Fill a  request form for short-term visitors.
                             </p>
@@ -132,7 +138,7 @@
                     <div class="card shadow-sm custom-card-IF-third-row-two">
                         <div class="card-body">
                             <span class="IF-tabs event-support "></span>
-                            <div class="EISR">Event IT Support request</div>
+                            <div class="EISR">Event IT support request</div>
                             <p class="EISR-des">
                                 Fill out this form to request any equiepment for events.
                             </p>
@@ -148,14 +154,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="RO">Retail operations</div>
-                <div class="P-10">
+                <div class="RO title accordion-toggle" data-toggle="collapse"
+                     data-target="#retail-operations"
+                     >Retail Operations</div>
+                <div class="P-10 collapse" id="retail-operations">
                     <div class="card shadow-sm custom-card-RO-fourth-row">
                         <div class="card-body">
                             <span class="RO-tabs Inventory"> </span>
                             <div class="IR">Inventory request</div>
                             <p class="IR-des">
                                 Inventory form to request supplies.
+
                             </p>
                         </div>
                     </div>
@@ -184,10 +193,15 @@
     <script src="~/Scripts/teamsapp.js"></script>
     <script>
     microsoftTeams.initialize();
-
-        submitHandler = (err, result) => {
-            debugger;
-            if (result.action == "ticketcomplete") {
+        $("document").ready(function () {
+            if ($(window).width() > 425) {
+                $(".P-10").addClass("show");
+            } else {
+                $("#HRtools").addClass("show");
+            }
+        });
+      submitHandler = (err, result) => {
+           if (result.action == "ticketcomplete") {
                 let taskInfo = {
                     height: null,
                     width: null,
@@ -203,20 +217,21 @@
                 taskInfo.fallbackUrl = taskInfo.url;
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
             }
-            if (result.action == "createticket") {
+            if (result.action == "createticket" || result.action == "editTicket" ) {
+                debugger;
                 let taskInfo = {
              //   title: null,
                 height: null,
                 width: null,
                 url: null,
                 fallbackUrl: null,
-            };
-
+                };
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/createticket";
                 taskInfo.height = "@(TaskModelUIConstant.CreateTicket.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.CreateTicket.Width)";
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
-           
+                return;
+
             }
             if (result.action == "sendrequest") {
                   let taskInfo = {
@@ -226,7 +241,7 @@
                 url: null,
                 fallbackUrl: null,
                 };
-                
+
 
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/sendrequest?Date=" + result.VDate +"&Time="+result.VTime +"&Contact="+result.VContact +"&location="+result.VLocation+"&purpose=" + result.VPurpose + "&hostName="+result.VHostName+ "&org="+result.VOrg;
                 taskInfo.height = "@(TaskModelUIConstant.SendRequest.Height)";
@@ -235,23 +250,27 @@
             // Set fallback URL
                 taskInfo.fallbackUrl = taskInfo.url;
                 microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                return;
             }
-            if (result.action == "visitorregistration") {
-                   let taskInfo = {
-                title: null,
-                height: null,
-                width: null,
-                url: null,
-                fallbackUrl: null,
-            };
+            if (result.action == "visitorregistration" || result.action == "editVisitorRequest")
+            {
+                    debugger;
+                       let taskInfo = {
+                    title: null,
+                    height: null,
+                    width: null,
+                    url: null,
+                    fallbackUrl: null,
+                };
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
-                taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
+                    taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/visitorregistration";
+                    taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
+                    taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
 
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                // Set fallback URL
+                taskInfo.fallbackUrl = taskInfo.url;
+                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                return;
             }
             if (result.action == "submit") {
                 microsoftTeams.tasks.submitTask(taskInfo);
@@ -262,8 +281,6 @@
              if (result.action == "submitVisitor") {
                  microsoftTeams.tasks.submitTask(taskInfo);
             }
-            // console.log(`Submit handler - err: ${err}`);
-            //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
         function submitTools(type) {
@@ -292,6 +309,11 @@
                 taskInfo.height = "@(TaskModelUIConstant.VisitorRegistration.Height)";
                 taskInfo.width = "@(TaskModelUIConstant.VisitorRegistration.Width)";
             }
+
+            @*var encodedWebUrl = encodeURI('"@(ApplicationSettings.BaseUrl)" + "/createticket";');
+            var encodedContext = encodeURI('{"subEntityId": "createTicket"}');
+            var taskModuleUrl = 'https://teams.microsoft.com/l/entity/3b28c87b-83d7-47ca-8e8c-5870f08595a5/?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
+            microsoftTeams.executeDeepLink(taskItemUrl);*@
 
 
 

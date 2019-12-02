@@ -1,67 +1,75 @@
 ﻿@model EmployeeConnect.Models.PO
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
+@using System.Globalization;
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 <link rel="stylesheet" href="./Content/Tasks.css" />
+<script src="~/Scripts/task.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="@("https://unpkg.com/@microsoft/teams-js@1.4.1/dist/MicrosoftTeams.min.js")"></script>
 <title>Tasks Tab</title>
 
 <body>
-
     <div class="container-fluid">
-
         <header class="heading">Pending submissons</header>
         <div class="card-deck custom-card-deck">
             <div class="card custom-card">
+                <div class="card-header heading2">Pending submissons</div>
                 <div class="card-body">
-                    <img src="./Images/timesheet_icon.png" alt="time-sheet" class="time-sheet" />
+                    <img src="./Images/timesheet_icon.PNG" alt="time-sheet" class="time-sheet " />
+                    <div class="mobile-timesheet">Pending Timesheet</div>
                     <h5 class="card-title">12</h5>
                     <h6 class="title-head">Days of pending timesheet</h6>
-                    <div class="full-timesheet">
+                    <div class="full-timesheet" onclick="openTimesheet('pendingdates');">
                         Fill timesheet
-                        <i class="fas fa-chevron-right"></i>
+                        @*<span class="chevron-right"></span>*@
                     </div>
+                    @*<span class="chevron-right desk"></span>*@
                 </div>
             </div>
             <div class="card custom-card">
-                <div class="card-body">
-                    <img src="./Images/expense_icon.png"
+                <div class="card-body br-mb">
+                    <img src="./Images/expense_icon.PNG"
                          alt="expenses-sheet"
                          class="expenses-sheet" />
+                    <div class="mobile-EM">Expense Manager</div>
                     <h5 class="card-title">
                         <span class="currency">&#x20b9;</span> 25,000
                     </h5>
                     <h6 class="title-head">Amount of unreconciled expenses</h6>
                     <div class="Submit-expenses">
                         Submit expenses
-                        <i class="fas fa-chevron-right"></i>
+                        @*<span class="chevron-right"></span>*@
                     </div>
+                    @*<span class="chevron-right desk mr-up"></span>*@
                 </div>
             </div>
         </div>
         <div class="pending-approval">
             <header class="heading">Pending approvals</header>
+            <div class="card-header heading2 mrg-for-mb">Pending Approvals</div>
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h6 class="panel-title accordion-toggle"
                             data-toggle="collapse"
                             data-parent="#accordion"
-                            href="#Porder">
+                            href="#Porder" id='h6-heading'>
                             <span class="title"> Purchase order <span>(@Model.PendingPO.Length)</span> </span>
                         </h6>
                     </div>
+                    @*<span class="chevron-right desk ht-for-mobile1"></span>*@
                 </div>
                 <div id="Porder" class="panel-collapse">
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table tb-for-desktop">
                             <thead>
                                 <tr class="head-title-color">
                                     <th>PO no.</th>
@@ -76,21 +84,51 @@
                             <tbody>
                                 @foreach (var item in Model.PendingPO)
                                 {
-                                <tr class="row-highlight">
-                                    <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
-                                    <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
-                                    <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
-                                    <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
-                                    
-                                    <td class="amount">
-                                        <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
-                                    </td>
-                                    <td></td>
-                                    <td class="reviewButton" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
-                                </tr>
+                                    <tr class="row-highlight">
+                                        <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+
+                                        <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                        <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+
+                                        <td class="amount">
+                                            <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
+                                        </td>
+                                        <td></td>
+                                        <td class="reviewButton" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
+                                    </tr>
                                 }
                             </tbody>
-                        </table>
+                        </table>                       
+                        <table class="table tb-for-mobile">
+                            @foreach (var item in Model.PendingPO)
+                            {
+                                <tr>
+                                    <th class="head-title-color">PO no.</th>
+                                    <td id="poNoid" class="po-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                </tr>
+                                <tr>
+                                    <th class="head-title-color">Description</th>
+                                    <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                </tr>
+                                <tr>
+                                    <th class="head-title-color">Vendor name</th>
+                                    <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                </tr>
+                                <tr>
+                                    <th class="head-title-color">Vendor no.</th>
+                                    <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                </tr>
+                                <tr>
+                                    <th class="head-title-color">Amount</th>
+                                    <td class="vendor-no">&#x20b9;@Html.DisplayFor(modelItem => item.TotalAmount)</td>                                    
+                                </tr>
+                                <tr class="review tb-for-mobile">
+                                    <td style="padding-left: 10px;" onclick="submitPurchaseOrder('@item.PoNumber','@item.vendorNo');">Review</td>
+                                </tr>
+                                
+                            }
+                        </table>                        
                     </div>
                 </div>
                 <div class="panel-group" id="accordion">
@@ -99,14 +137,15 @@
                             <h6 class="panel-title accordion-toggle"
                                 data-toggle="collapse"
                                 data-parent="#accordion"
-                                href="#Invoice">
+                                href="#Invoice" id='invoice'>
                                 <span class="title"> Invoice <span>(@Model.ApprovedPO.Length)</span> </span>
                             </h6>
+                           
                         </div>
                     </div>
                     <div id="Invoice" class="panel-collapse">
                         <div class="panel-body">
-                            <table class="table">
+                            <table class="table tb-for-desktop">
                                 <thead>
                                     <tr class="head-title-color">
                                         <th>Invoice no.</th>
@@ -130,10 +169,44 @@
                                             <td class="amount">
                                                 <span>&#x20b9;</span> @Html.DisplayFor(modelItem => item.TotalAmount)
                                             </td>
-                                            <td class="reviewButton" onclick="submitPurchaseOrder('@item.InvoiceNo','@item.vendorNo');">Review</td>
+                                            <td class="reviewButton" style="cursor:pointer; color:blue;" onclick="submitPurchaseOrder('@item.InvoiceNo','@item.vendorNo');">Review</td>
                                         </tr>
                                     }
                                 </tbody>
+                            </table>
+                            <table class="table tb-for-mobile">
+                                @foreach (var item in Model.ApprovedPO)
+                                {
+                                    <tr>
+                                        <th class="head-title-color">Invoice no.</th>
+                                        <td id="invoiceNoId" class="Invoice-no">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">PO no.</th>
+                                        <td class="po-no1">@Html.DisplayFor(modelItem => item.PoNumber)</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Description</th>
+                                        <td class="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Vendor name</th>
+                                        <td class="vendor-name">@Html.DisplayFor(modelItem => item.VendorName)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Vendor no.</th>
+                                        <td class="vendor-no">@Html.DisplayFor(modelItem => item.vendorNo)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="head-title-color">Amount</th>
+                                        <td class="vendor-no">&#x20b9;@Html.DisplayFor(modelItem => item.TotalAmount)</td>
+                                    </tr>
+                                    <tr class="review tb-for-mobile">
+                                        <td style="padding-left: 10px;" onclick="submitPurchaseOrder('@item.InvoiceNo','@item.vendorNo');">Review</td>
+                                    </tr>
+
+                                }                                
                             </table>
                         </div>
                     </div>
@@ -147,6 +220,7 @@
                                 href="#Inventory">
                                 <span class="title"> Inventory <span>(0)</span> </span>
                             </h6>
+                            <span class="desk ht-for-mobile3"></span>
                         </div>
                     </div>
                     <div id="Inventory" class="panel-collapse">
@@ -159,50 +233,55 @@
     </div>
     <script>
     microsoftTeams.initialize();
-
     submitHandler = (err, result) => {
 
-          //  console.log(`Submit handler - err: ${err}`);
-        //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
-        debugger;
-            if (result.action == "podecline") {
-                  let taskInfo = {
-                    InvoiceNo: null,
-                    height: null,
-                    width: null,
-                    url: null,
-                    fallbackUrl: null,
-                };
+        if (result.action == "podecline") {
+            let taskInfo = {
+                InvoiceNo: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
 
 
-                    taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline?poNo=" + result.poNumber +"&POreason="+result.reason+ "&POComment="+result.comment;
-                    taskInfo.height = "@(TaskModelUIConstant.PoDecline.Height)";
-                    taskInfo.width = "@(TaskModelUIConstant.PoDecline.Width)";
+            taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/podecline?poNo=" + result.poNumber + "&POreason=" + result.reason + "&POComment=" + result.comment;
+            taskInfo.height = "@(TaskModelUIConstant.PoDecline.Height)";
+            taskInfo.width = "@(TaskModelUIConstant.PoDecline.Width)";
 
 
-                // Set fallback URL
-                taskInfo.fallbackUrl = taskInfo.url;
-                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
 
         }
         if (result.action == "decline") {
             debugger;
-             let taskInfo = {
-             //   title: null,
+            let taskInfo = {
+                //   title: null,
                 height: null,
                 width: null,
                 url: null
             };
 
-                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined?poNo=" + result.PONo;
-                taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
-                taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
+            taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/declined?poNo=" + result.PONo;
+            taskInfo.height = "@(TaskModelUIConstant.Declined.Height)";
+            taskInfo.width = "@(TaskModelUIConstant.Declined.Width)";
 
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         }
-        if (result.action == "decline") {
+        if (result.action == "cancelPo") {
+            microsoftTeams.tasks.submitTask();
+        }
+     /*   if (result.action == "decline") {
+            microsoftTeams.tasks.submitTask();
+        }*/
+        if (result.action == "closePending") {
+                microsoftTeams.tasks.submitTask();
+        }
+        if (result.action == "donedecline") {
             microsoftTeams.tasks.submitTask();
         }
 
@@ -210,7 +289,7 @@
         };
 
         function submitPurchaseOrder(poNo, vendorNumber) {
-            debugger;
+          //  debugger;
             var PONumber = poNo;
             var vendorNo = vendorNumber;
             let taskInfo = {
@@ -233,9 +312,28 @@
             // Set fallback URL
             taskInfo.fallbackUrl = taskInfo.url;
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+        function openTimesheet() {
+            let taskInfo = {
+                InvoiceNo: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+
+            //taskInfo.title = "Purchase Order";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+
+                taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/pendingdates";
+                taskInfo.height = "@(TaskModelUIConstant.PendingDates.Height)";
+                taskInfo.width = "@(TaskModelUIConstant.PendingDates.Width)";
 
 
-
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         }
     </script>
 

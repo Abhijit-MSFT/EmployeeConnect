@@ -13,7 +13,7 @@
         public const string Welcome = "welcome";
         public const string SetPrefrences = "set preferences";
         public const string SetNewsPrefrences = "set news preferences";
-        public const string UpcomingEventsTraining = "upcoming events and training";
+        public const string UpcomingEventsTraining = "upcoming events and trainings";
         public const string ReviewTasks = "review tasks";
         public const string HumanResourceTools = "human resources tools";
         public const string ITFacilitiesTools = "it & facilities tools";
@@ -23,6 +23,7 @@
         public const string WifiRequest = "visitor's wi-fi request";
         public const string ViewTicket = "view tickets";
         public const string SetPrefrencesDone = "set preferences done";
+        public const string ShowPrefCard = "show preference card";
         public const string SetPrefrencesSkip = "set preferences skip";
         public const string TicketCancel = "Cancel ticket";
 

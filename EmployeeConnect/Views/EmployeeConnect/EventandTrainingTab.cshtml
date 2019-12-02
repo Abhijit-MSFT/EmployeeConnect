@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Event.css" />
+    @*<link rel="stylesheet" href="~/Content/Event.css" />*@
     <link href="~/Content/eventandtrainingnew.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>*@
@@ -25,151 +25,46 @@
             <div class="col-12">
                 <div class="row header">
                     <div class="col-12">
-                        <div class="heading">My events and trainings</div>
-                        <div class="today">Today</div>
-                        <div class="left-chev"></div>
-                        <div class="right-chev"></div>
-                        <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
-                        <div class="down-chev"></div>
-                    </div>
+                        <div class="heading">My calendar</div>
+                        @*<div class="left-chev"></div>
+                        <div class="right-chev"></div>*@
+                        @*<div class="month-date">@DateTime.Now.ToString("MMM, yyyy")</div>*@
+                        <div class="month-date"  style="float:right">
+                            <select style="border-style:none; width:100px">
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option selected>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                            </select>
+                        </div>
+                            <div class="my-calendar">My calendar</div>                           
+                        </div>
                 </div>
                 <div class="msg-for-header">
                     Mandatory trainings are automatically addded to your list
                 </div>
-                <div class="row date-row">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-2">
-                                <div class="date">16</div>
-                                <div class="day">Thursday</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="date">17</div>
-                                <div class="day">Friday</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="date">23</div>
-                                <div class="day">Thursday</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="date">28</div>
-                                <div class="day">Tuesday</div>
-                            </div>
-                            <div class="col-2">
-                                <!-- add date here -->
-                            </div>
-                            <div class="col-2">
-                                <!-- add date here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <br />
                 <div class="row">
+                    @foreach (var item in Model.EventGrid)
+                    {
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 small-dev">
 
-                    <div class="col-12">
-                        <div class="card-deck custom-card-deck">
-                            @foreach (var item in Model.EventGrid)
-                            {
-                                <div class="col-2">
-                                    <div class="card custom-card">
-                                        <div class="card-header header-flag">
-                                            <span class="flag"></span>
-                                            <span class="event">
-                                                @if (item.ETFlag == "E")
-                                                {
-                                                    <span>Event</span>
-                                                }
-                                                else
-                                                {
-                                                    <span>Training</span>
-                                                }
-
-                                            </span>
-                                        </div>
-
-                                        <div class="card-body" onclick="submitEvent('@item.ETID');">
-                                            <div class="card-title main-title-msg">
-                                                @Html.DisplayFor(modelItem => item.ETTitle)
-                                            </div>
-                                            <div class="time-icon">
-                                                <div class="event-time"> @Html.DisplayFor(modelItem => item.ETStartTime) -  @Html.DisplayFor(modelItem => item.ETEndTime)</div>
-                                            </div>
-                                            <div class="location-icon">
-                                                <div class="location"> @Html.DisplayFor(modelItem => item.ETType)</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            }
-                        </div>
-                    </div>
-
-                </div>
-
-                @*<div class="row">
-                        <div class="col-12">
-                            <div class="card-deck custom-card-deck">
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <div class="card custom-card">
-                                        <div class="card-header header-badge">
-                                            <span class="badge-icon"></span>
-                                            <span class="event">Training</span>
-                                            <span class="check">
-                                                <span class="mandatory">Mandatory</span>
-                                            </span>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-title main-title-msg">
-                                                Platform overviews training
-                                            </div>
-                                            <div class="time-icon">
-                                                <div class="event-time">02:00 - 04:00 PM</div>
-                                            </div>
-                                            <div class="web-icon">
-                                                <div class="web">Online stream</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
-                                </div>
-                                <div class="col-2">
-                                    <!-- add data here -->
+                            <div class="dates">
+                                <div class="date">
+                                    <div class="date"><bold>@item.ETDate.ToString("d MMM")</bold></div>
                                 </div>
                             </div>
-                        </div>
-                    </div>*@
-            </div>
-        </div>
-        <div class="row header2">
-            <div class="col-12">
-                <div class="heading">Other upcoming events and trainings</div>
-                <div class="today">Today</div>
-                <div class="month-date">@DateTime.Now.Month, @DateTime.Now.Year</div>
-                <div class="down-chev"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card-deck custom-card-deck2">
-                    @foreach (var item in Model.UpcomingEventGrid)
-                    {
-                        <div class="col-2">
-                            <div class="card custom-card2">
+                            <div class="card custom-card">
                                 <div class="card-header header-flag">
-                                    <span class="flag"></span>
+                                    <span class="@(item.ETFlag == "E" ? "flag" : "badge-icon" )"></span>
                                     <span class="event">
                                         @if (item.ETFlag == "E")
                                         {
@@ -179,22 +74,23 @@
                                         {
                                             <span>Training</span>
                                         }
+                                        @if (item.ETMandatory == true)
+                                        {
+                                            <span class="mandatoryFlag"></span>
+                                            <span class="mandatory">Mandatory</span>
+                                        }
                                     </span>
                                 </div>
-                                <div class="card-body" onclick="submitEvent('@item.ETID');">
-                                    <div class="card-title main-title">
+
+                                <div class="card-body body-top" onclick="submitEvent('@item.ETID');">
+                                    <div class="card-title main-title-msg">
                                         @Html.DisplayFor(modelItem => item.ETTitle)
                                     </div>
                                     <div class="time-icon2">
-                                        <div class="event-time for-header2-dateandtime">
-                                            @Html.DisplayFor(modelItem => item.ETStartDate)
-                                        </div>
+                                        <div class="event-time"> @Html.DisplayFor(modelItem => item.ETStartTime) -  @Html.DisplayFor(modelItem => item.ETEndTime)</div>
                                     </div>
-                                    <div class="web-icon2">
-                                        <div class="web for-header2-stream"> @Html.DisplayFor(modelItem => item.ETType)</div>
-                                    </div>
-                                    <div class="cal-icon">
-                                        <div class="cal for-header2-cal" onclick="AddToMyEventsGrid('@item.ETID')">Add to calendar</div>
+                                    <div class="location-icon">
+                                        <div class="location"> @Html.DisplayFor(modelItem => item.ETType)</div>
                                     </div>
                                 </div>
                             </div>
@@ -202,6 +98,76 @@
                     }
                 </div>
             </div>
+        </div>
+        <div class="row header2">
+            <div class="col-12">
+                <div class="heading hd2">Other upcoming events and trainings</div>
+                @*<div class="month-date">@DateTime.Now.ToString("MMM, yyyy")</div>*@
+                <div class="month-date" style="float:right">
+                    <select style="border-style:none; width:100px">
+                        <option>January</option>
+                        <option>February</option>
+                        <option>March</option>
+                        <option>April</option>
+                        <option>May</option>
+                        <option>June</option>
+                        <option selected>July</option>
+                        <option>August</option>
+                        <option>September</option>
+                        <option>October</option>
+                        <option>November</option>
+                        <option>December</option>
+                    </select>
+                </div>
+                @*<div class="down-chev"></div>*@
+            </div>
+        </div>
+        <div class="row rw-down">
+            @foreach (var item in Model.UpcomingEventGrid)
+            {
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-11 small-dev">
+
+                    <div class="card custom-card2">
+                        <div class="card-header header-flag">
+                            <span class="@(item.ETFlag == "E" ? "flag" : "badge-icon" )"></span>
+                            <span class="event">
+                                @if (item.ETFlag == "E")
+                                {
+                                    <span>Event</span>
+                                }
+                                else
+                                {
+                                    <span class="training">Training</span>
+                                }
+                                @if (item.ETMandatory == true)
+                                {
+                                    <span id="mandatoryFlag"></span>
+                                    <span class="mandatory">Mandatory</span>
+                                }
+                            </span>
+                        </div>
+                        <div onclick="submitEvent('@item.ETID');">
+                            <div class="card-body" style="padding-bottom: 6px;">
+                                <div class="card-title main-title">
+                                    @Html.DisplayFor(modelItem => item.ETTitle)
+                                </div>
+                                <div class="time-icon">
+                                    <div class="event-time for-header2-dateandtime">
+                                        @Html.DisplayFor(modelItem => item.ETStartDate)
+                                    </div>
+                                </div>
+                                <div class="web-icon2">
+                                    <div class="web for-header2-stream"> @Html.DisplayFor(modelItem => item.ETType)</div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="cal-icon">
+                                <div class="cal for-header2-cal" onclick="AddToMyEventsGrid('@item.ETID')">Add to calendar</div>
+                            </div>
+                       
+                    </div>
+                </div>
+             }
         </div>
     </div>
 
@@ -215,9 +181,7 @@
 
         submitHandler = (err, result) => {
             debugger;
-            result = result.substring(2, result.length);
-            location.href='@Url.Action("EventAndTrainingTab","Home")?id='+result;
-            console.log(`Submit handler - err: ${err}`);
+            location.href = '@Url.Action("EventAndTrainingTab","Home")?id=' + result.eventId;
             //alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
@@ -241,8 +205,8 @@
                     url: url,
                     type: 'get',
                     contentType: 'application/json',
-                    success: function (data, textStatus, jQxhr) {
-                        taskInfo.card = data;
+                success: function (data, textStatus, jQxhr) {
+                        taskInfo.card = JSON.parse(data);
                         taskInfo.height = "@(TaskModelUIConstant.ETCard.Height)";
                         taskInfo.width = "@(TaskModelUIConstant.ETCard.Width)";
                         microsoftTeams.tasks.startTask(taskInfo, submitHandler);
