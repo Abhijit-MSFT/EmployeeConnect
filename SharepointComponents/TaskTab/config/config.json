@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "task-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/task/TaskWebPart.js",
+          "manifest": "./src/webparts/task/TaskWebPart.manifest.json"
+        }
+      ]
+    },
+    "preference-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/preference/PreferenceWebPart.js",
+          "manifest": "./src/webparts/preference/PreferenceWebPart.manifest.json"
+        }
+      ]
+    },
+    "policies-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/policies/PoliciesWebPart.js",
+          "manifest": "./src/webparts/policies/PoliciesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {
+    "jquery": {
+      "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js",
+      "globalName": "jquery"
+    },
+    "bootstrap": {
+      "path": "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",
+      "globalName": "bootstrap",
+      "globalDependencies": ["jquery"]
+    }
+  },
+  "localizedResources": {
+    "TaskWebPartStrings": "lib/webparts/task/loc/{locale}.js",
+    "PreferenceWebPartStrings": "lib/webparts/preference/loc/{locale}.js",
+    "PoliciesWebPartStrings": "lib/webparts/policies/loc/{locale}.js"
+  }
+}
