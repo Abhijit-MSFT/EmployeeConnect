@@ -38,6 +38,11 @@
         "type": "path",
         "path": "dist/preference-web-part.js"
       },
+      "jquery": {
+        "type": "path",
+        "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
+        "globalName": "jquery"
+      },
       "PreferenceWebPartStrings": {
         "defaultPath": "lib/webparts/preference/loc/en-us.js",
         "type": "localizedPath",

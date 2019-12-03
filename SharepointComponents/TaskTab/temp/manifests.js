@@ -981,6 +981,11 @@ var MANIFESTS_ARRAY = [
           "type": "path",
           "path": "dist/preference-web-part.js"
         },
+        "jquery": {
+          "type": "path",
+          "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
+          "globalName": "jquery"
+        },
         "PreferenceWebPartStrings": {
           "defaultPath": "lib/webparts/preference/loc/en-us.js",
           "type": "localizedPath",
@@ -1107,6 +1112,11 @@ var MANIFESTS_ARRAY = [
           "type": "path",
           "path": "dist/task-web-part.js"
         },
+        "jquery": {
+          "type": "path",
+          "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
+          "globalName": "jquery"
+        },
         "bootstrap": {
           "type": "path",
           "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
@@ -1114,11 +1124,6 @@ var MANIFESTS_ARRAY = [
             "jquery"
           ],
           "globalName": "bootstrap"
-        },
-        "jquery": {
-          "type": "path",
-          "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
-          "globalName": "jquery"
         },
         "TaskWebPartStrings": {
           "defaultPath": "lib/webparts/task/loc/en-us.js",

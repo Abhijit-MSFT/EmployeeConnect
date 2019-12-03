@@ -9,6 +9,7 @@ import styles from "./PreferenceWebPart.module.scss";
 import * as strings from "PreferenceWebPartStrings";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { SPComponentLoader } from "@microsoft/sp-loader";
+import * as $ from "jquery";
 
 microsoftTeams.initialize();
 
@@ -24,6 +25,25 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
     SPComponentLoader.loadCss(
       "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     );
+
+    // tslint:disable-next-line:no-function-expression
+    $(document).ready(function() {
+  $("#news-update").click(function() {
+    if ($(this).prop("checked") == true) {
+      $(".radio, #drop1").prop("disabled", false);
+    } else if ($(this).prop("checked") == false) {
+      $(".radio,#drop1").prop("disabled", true);
+    }
+  });
+
+  $("#news-update2").click(function() {
+    if ($(this).prop("checked") == true) {
+      $(".radio1, #drop2").prop("disabled", false);
+    } else if ($(this).prop("checked") == false) {
+      $(".radio1, #drop2").prop("disabled", true);
+    }
+  });
+    });
   }
 
   public render(): void {
@@ -223,30 +243,30 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
               <div class="${styles.explore}">Explore more categories</div>
               <div class="${styles.switcht}">
               <label class="${styles.switch}">
-                <input type="checkbox" checked />
+                <input type="checkbox" id='news-update' checked />
                 <span class="${styles.slider}"></span>
               </label>
-              <span class="${styles.newsupdates}">Send notifications about news updates</span>
+              <span class="${styles.newsupdates}" id='news-update'>Send notifications about news updates</span>
             </div>
             <div class="${styles.notify}">Notify me at</div>
 
-            <form class="${styles.allradio}">
+            <form class="${styles.allradio}" id="radioButtonTask"'>
               <label class="${styles.radiolabel}">
-                <input type="radio" name="radio" />
+                <input type="radio" name="radio" class="radio"/>
                 <span class="${styles.textalign}">Beginning of the day</span>
                 <span class="${styles.checkmark}"></span>
               </label>
               <label class="${styles.radiolabel}">
-                <input type="radio" name="radio" />
+                <input type="radio" name="radio" class="radio"/>
                 <span class="${styles.textalign}">End of the day</span>
                 <span class="${styles.checkmark}"></span>
               </label>
               <label class="${styles.radiolabel}">
-                <input type="radio" checked name="radio" />
+                <input type="radio" checked name="radio" class="radio"/>
                 <span class="${styles.textalign}">Set a preferred time </span>
                 <span class="${styles.checkmark}"></span>
               </label>
-              <select class="${styles.datecontrol}">
+              <select class="${styles.datecontrol}" id='drop1'>
                 <option selected>9:00 am</option>
                 <option>Option 2</option>
               </select>
@@ -265,7 +285,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
   <button type="button" class="${styles.showmore}">Show Events & trainings</button>
             <div class="${styles.switcht}">
               <label class="${styles.switch}">
-                <input type="checkbox" checked />
+                <input type="checkbox" id='news-update2' checked />
                 <span class="${styles.slider}"></span>
               </label>
               <span class="${styles.newsupdates}">Send notifications about new events & training</span>
@@ -274,21 +294,21 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
 
             <form class="${styles.allradio}">
               <label class="${styles.radiolabel}">
-                <input type="radio" name="radio" />
+                <input type="radio" name="radio" class="radio1"/>
                 <span class="${styles.textalign}">Beginning of the day</span>
                 <span class="${styles.checkmark}"></span>
               </label>
               <label class="${styles.radiolabel}">
-                <input type="radio" name="radio" />
+                <input type="radio" name="radio" class="radio1"/>
                 <span class="${styles.textalign}">End of the day</span>
                 <span class="${styles.checkmark}"></span>
               </label>
               <label class="${styles.radiolabel}">
-                <input type="radio" checked name="radio" />
+                <input type="radio" checked name="radio" class="radio1"/>
                 <span class="${styles.textalign}">Set a preferred time </span>
                 <span class="${styles.checkmark}"></span>
               </label>
-              <select class="${styles.datecontrol}">
+              <select class="${styles.datecontrol}" id="drop2">
                 <option selected>4:30 pm</option>
                 <option>Option 2</option>
               </select>
