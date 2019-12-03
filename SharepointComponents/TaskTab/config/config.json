@@ -29,15 +29,17 @@
   },
   "externals": {
     "jquery": {
-      "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js",
+      "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
       "globalName": "jquery"
     },
     "bootstrap": {
-      "path": "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js",
+      "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
       "globalName": "bootstrap",
       "globalDependencies": ["jquery"]
     }
   },
+
+
   "localizedResources": {
     "TaskWebPartStrings": "lib/webparts/task/loc/{locale}.js",
     "PreferenceWebPartStrings": "lib/webparts/preference/loc/{locale}.js",
