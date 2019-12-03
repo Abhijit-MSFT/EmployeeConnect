@@ -21,6 +21,7 @@ namespace EmployeeConnect.Helper
     public class GetDataHelper
     {
         public static string userName = "";
+        public static string lastName = "";
 
         public static NewsModel GetNews()
         {
