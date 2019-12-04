@@ -6,10 +6,15 @@
         "Vendorno",
         "allradio",
         "antialiased",
+        "columnheight",
+        "datecontrol",
         "donedecline",
         "forin",
+        "newsupdates",
         "podecline",
         "preconfigured",
-        "purchaseorder"
+        "purchaseorder",
+        "radiolabel",
+        "textalign"
     ]
 }
