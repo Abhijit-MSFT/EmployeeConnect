@@ -23,7 +23,7 @@ body {
     font-family: "Teams Assets";
     font-weight: 600;
     color: darkgray;
-    content: "\E447";
+    content: "E447";
     float: left;
     -moz-transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
@@ -279,7 +279,7 @@ option {
 }
 
 /*.chevron-down::before {
-    content: "\E447";
+    content: "E447";
     font-family: "Teams Assets";
     font-size: 22px;
     font-weight: 600;
@@ -354,7 +354,7 @@ option {
     }
 
         .image_grid input:checked + .tick::after {
-            content: "\2713";
+            content: "2713";
             position: absolute;
             top: 20%;
             left: 82%;
@@ -406,7 +406,7 @@ a {
     color: black;
 }
 .chevron-down::before {
-    content: "\E447";
+    content: "E447";
     font-family: "Teams Assets";
     font-size: 22px;
     font-weight: 600;
@@ -471,7 +471,7 @@ a.show-more {
     }
 
     .down-chev::before {
-        content: "\E447";
+        content: "E447";
         font-family: "Teams Assets";
         font-size: 16px;
         font-weight: 600;
@@ -488,7 +488,7 @@ a.show-more {
     }
 
     .rgt-chev::before {
-        content: "\E449";
+        content: "E449";
         font-family: "Teams Assets";
         font-size: 16px;
         font-weight: 600;

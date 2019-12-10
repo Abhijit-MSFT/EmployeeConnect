@@ -243,8 +243,11 @@
     <Compile Include="Models\News_Spfx.cs" />
     <Compile Include="Models\SetPreferences.cs" />
     <Compile Include="Models\SpfxEandT.cs" />
+    <Compile Include="Models\SpfxPODetails.cs" />
+    <Compile Include="Models\SpfxPurchaseOrder.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\TicketsDataModel.cs" />
+    <Compile Include="Models\SPFXPreferences.cs" />
     <Compile Include="Models\UPreferences.cs" />
     <Compile Include="Models\PurchaseOrders.cs" />
     <Compile Include="Models\TaskModel.cs" />
@@ -481,7 +484,9 @@
     <Content Include="Views\EmployeeConnect\pendingdates.cshtml" />
     <Content Include="TestData\newsMock.json" />
     <Content Include="TestData\EandTMock.json" />
-    <Content Include="Views\EmployeeConnect\TestView.cshtml" />
+    <Content Include="TestData\purchaseOrderMock.json" />
+    <Content Include="TestData\PreferencesMock.json" />
+    <Content Include="TestData\PODetailsMock.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

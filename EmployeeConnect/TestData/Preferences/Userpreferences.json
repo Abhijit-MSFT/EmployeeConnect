@@ -67,11 +67,8 @@
       ],
       "news": {
         "selectedCategories": [
-          "AI",
-          "Data",
-          "CS",
-          "Technology",
-          "IT"
+          "Finance",
+          "Design"
         ],
         "newsNotificationFlag": true,
         "newsNotifyMe": "true",

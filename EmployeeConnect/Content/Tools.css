@@ -23,65 +23,65 @@
 }
 
     .create-icon::before {
-        content: "\E328";
+        content: "E328";
     }
 
     .ticket-creation::before {
-        content: "\E13F";
+        content: "E13F";
     }
 
     .leave-request::before {
-        content: "\E503";
+        content: "E503";
     }
 
     .policies::before {
-        content: "\E451";
+        content: "E451";
     }
 
     .download-payslip::before {
-        content: "\E459";
+        content: "E459";
     }
 
     .create-finance-tkt::before {
-        content: "\E13F";
+        content: "E13F";
     }
 
     .submit-benefits::before {
-        content: "\E971";
+        content: "E971";
     }
 
 .view-benefits::before {
-    content: "\E451";
+    content: "E451";
     font-family: "Teams Assets";
     font-size: 22px;
 }
 
 .support::before {
-    content: "\E21A";
+    content: "E21A";
 }
 
 .wife-request::before {
-    content: "\E200";
+    content: "E200";
 }
 
 .event-support::before {
-    content: "\E917";
+    content: "E917";
 }
 
 .cafe-service::before {
-    content: "\E984";
+    content: "E984";
 }
 
 .Inventory::before {
-    content: "\E459";
+    content: "E459";
 }
 
 .RO-timesheet::before {
-    content: "\E501";
+    content: "E501";
 }
 
 .Ro-SI::before {
-    content: "\E137";
+    content: "E137";
 }
 
 .CBL,
@@ -195,7 +195,7 @@
 }
 
     .down-chevron::before {
-        content: "\E41E";
+        content: "E41E";
         font-family: "Teams Assets";
     }
 
@@ -321,7 +321,7 @@ span.range {
 }
 
 .tick::before {
-    content: "\E44F";
+    content: "E44F";
     font-family: "Teams Assets";
     font-size: 22px;
     color: #a7d050;
@@ -384,7 +384,7 @@ span.range {
 }
 
     .exclamation::before {
-        content: "\E62B";
+        content: "E62B";
         font-family: "Teams Assets";
         color: #943670;
     }
@@ -457,7 +457,7 @@ span.range {
 }
 
 .cancel-icon::before {
-    content: "\E413";
+    content: "E413";
     font-family: "Teams Assets";
     color: #c4314b;
     font-weight: bold;
@@ -495,7 +495,7 @@ span.range {
 }
 
 .id-card::before {
-    content: "\E201";
+    content: "E201";
     font-family: "Teams Assets";
     float: right;
     bottom: 30px;
@@ -514,7 +514,7 @@ span.range {
 }
 
 .for-visitor::before {
-    content: "\E41E";
+    content: "E41E";
     font-family: "Teams Assets";
     position: relative;
     float: right;
@@ -539,7 +539,7 @@ span.range {
 }
 
 .date-pick::before {
-    content: "\E503";
+    content: "E503";
     font-family: "Teams Assets";
     position: relative;
     float: right;
@@ -548,7 +548,7 @@ span.range {
 }
 
 .time-pick::before {
-    content: "\F301";
+    content: "F301";
     font-family: "Teams Assets";
     position: relative;
     float: right;
@@ -728,7 +728,7 @@ body {
     }
 
     .HR::before, .PB::before, .IF::before, .RO::before {
-        content: "\E447";
+        content: "E447";
         font-family: "Teams Assets";
         font-size: 18px;
         font-weight: 600;

@@ -65,7 +65,7 @@ namespace EmployeeConnect
             }
             else if (query.CommandId == "Task")
             {
-                PO task = GetDataHelper.GetPOs();
+                SpfxPurchaseOrder task = GetDataHelper.GetPOs();
                 var title = "";
                 var titleParam = query.Parameters?.FirstOrDefault(p => p.Name == "tasktitle");
                 var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", "result"));
@@ -73,8 +73,10 @@ namespace EmployeeConnect
                 if (titleParam != null)
                 {
                     title = titleParam.Value.ToString();
-                    List<string> description = task.PurchaseOrder.Select(a => a.Description).Where(c => c.ToLower().Contains(title.ToLower())).Select(d => d).ToList();
-                    List<string> totamount = task.PurchaseOrder.Where(a => a.Description.ToLower().Contains(title.ToLower())).Select(c => c.TotalAmount).ToList();
+                    //List<string> description = task.PurchaseOrder.Select(a => a.Description).Where(c => c.ToLower().Contains(title.ToLower())).Select(d => d).ToList();
+                    //List<string> totamount = task.PurchaseOrder.Where(a => a.Description.ToLower().Contains(title.ToLower())).Select(c => c.TotalAmount).ToList();
+                    List<string> description = task.value.Select(a => a.Description).Where(c => c.ToLower().Contains(title.ToLower())).Select(d => d).ToList();
+                    List<string> totamount = task.value.Where(a => a.Description.ToLower().Contains(title.ToLower())).Select(c => c.TotalAmount).ToList();
 
                     int attacCount = description.Count();
                     attachments = new ComposeExtensionAttachment[attacCount];
@@ -87,8 +89,8 @@ namespace EmployeeConnect
                 }
                 else
                 {
-                    List<string> description = task.PurchaseOrder.Where(b=>b.PoStatus == "pending").Select(c => c.Description).Take(20).ToList();
-                    List<string> totamount = task.PurchaseOrder.Where(b=>b.PoStatus == "pending").Select(c => c.TotalAmount).Take(20).ToList();
+                    List<string> description = task.value.Where(b=>b.PoStatus == "pending").Select(c => c.Description).Take(20).ToList();
+                    List<string> totamount = task.value.Where(b=>b.PoStatus == "pending").Select(c => c.TotalAmount).Take(20).ToList();
                     attachments = new ComposeExtensionAttachment[description.Count()];
                     for (int i = 0; i < description.Count(); i++)
                     {

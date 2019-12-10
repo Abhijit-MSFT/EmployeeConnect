@@ -23,7 +23,8 @@ namespace EmployeeConnect.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-            //GetDataHelper.GetEandTFromSPandWriteToFile();
+            //GetDataHelper.GetNewsFromSPandWriteToFile();
+            //await Helper.GetDataHelper.GetTasksandWriteToFile();
             switch (activity.Type)
             {
                 case ActivityTypes.Message:

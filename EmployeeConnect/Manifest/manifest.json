@@ -7,8 +7,8 @@
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://e7babee6.ngrok.io",
-    "termsOfUseUrl": "https://e7babee6.ngrok.io"
+    "privacyUrl": "https://456c3cba.ngrok.io",
+    "termsOfUseUrl": "https://456c3cba.ngrok.io"
   },
   "icons": {
     "color": "color.png",
@@ -72,8 +72,8 @@
     {
       "entityId": "preferences",
       "name": "Preferences",
-      "contentUrl": "https://b8bb3c71.ngrok.io/Preferences?emailID={upn}",
-      "websiteUrl": "https://b8bb3c71.ngrok.io/Preferences",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Preference.aspx?emailID={upn}",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Preference.aspx",
       "scopes": [
         "personal"
       ]
@@ -123,6 +123,10 @@
             {
               "title": "help",
               "description": "Walkthrough"
+            },
+            {
+              "title": "refresh",
+              "description": "Refresh mock data"
             }
           ]
         },
@@ -162,6 +166,10 @@
             {
               "title": "help",
               "description": "Walkthrough"
+            },
+            {
+              "title": "refresh",
+              "description": "Refresh mock data"
             },
             {
               "title": "pending submissions",
