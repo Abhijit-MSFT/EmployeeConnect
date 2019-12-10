@@ -283,6 +283,47 @@ namespace EmployeeConnect.Dialogs
             return false;
         }
 
+        //private async Task SendOAuthCardAsync(IDialogContext context, Activity activity)
+        //{
+        //    var reply = await context.Activity.CreateOAuthReplyAsync(ApplicationSettings.ConnectionName, "Please sign in", "Sign In", true).ConfigureAwait(false);
+        //    await context.PostAsync(reply);
+        //    context.Wait(WaitForToken);
+        //}
+        //private async Task WaitForToken(IDialogContext context, IAwaitable<object> result)
+        //{
+        //    var activity = await result as Activity;
+        //    var tokenResponse = activity.ReadTokenResponseContent();
+        //    if (tokenResponse != null)
+        //    {
+        //        // Use the token to do exciting things!
+        //    }
+        //    else
+        //    {
+        //        // Get the Activity Message as well as activity.value in case of Auto closing of pop-up
+        //        string input = activity.Type == ActivityTypes.Message ? Microsoft.Bot.Connector.Teams.ActivityExtensions.GetTextWithoutMentions(activity)
+        //                                                        : ((dynamic)(activity.Value)).state.ToString();
+        //        if (!string.IsNullOrEmpty(input))
+        //        {
+        //            tokenResponse = await context.GetUserTokenAsync(ApplicationSettings.ConnectionName, input.Trim());
+        //            if (tokenResponse != null)
+        //            {
+        //                context.ConversationData.SetValue<string>(GetEmailKey(context.Activity), tokenResponse.ToString());
+        //                await context.PostAsync($"Your sign in was successful.Please check the commands to see what i can do!!");
+        //                //string url = await getSigninUrl(activity);
+        //                var reply = context.MakeMessage();
+        //                List<Attachment> res = Helper.CardHelper.WelcomeCard();
+        //                for (int i = 0; i < res.Count(); i++)
+        //                    reply.Attachments.Add(res.ElementAt(i));
+        //                reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+        //                await context.PostAsync(reply);
+        //                context.Wait(MessageReceivedAsync);
+        //                return;
+        //            }
+        //        }
+        //        await context.PostAsync($"Hmm. Something went wrong. Please initiate the SignIn again. Try sending help.");
+        //        context.Wait(MessageReceivedAsync);
+        //    }
+        //}
         private static string GetEmailKey(IActivity activity)
         {
             return activity.From.Id + EmailKey;
