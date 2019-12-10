@@ -95,7 +95,7 @@ namespace EmployeeConnect.Dialogs
             if (!context.ConversationData.ContainsKey(emailKey))
             {
                 //await SendOAuthCardAsync(context, (Activity)context.Activity);
-                //return;
+                return;
             }
 
             if (userDetails == null)
@@ -117,8 +117,16 @@ namespace EmployeeConnect.Dialogs
                             reply.Attachments.Add(res.ElementAt(i));
                         reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                         break;
+                    case Common.Constants.Refresh:
+                        await Helper.GetDataHelper.GetNewsFromSPandWriteToFile();
+                        await Helper.GetDataHelper.GetEandTFromSPandWriteToFile();
+                        await Helper.GetDataHelper.GetTasksandWriteToFile();
+                        await Helper.GetDataHelper.GetPODetailsandWriteToFile();
+                        await Helper.GetDataHelper.GetPreferencesandWriteToFile();
+                        reply.Text = "Data is updated.";
+                        break;
                     case Common.Constants.SetPrefrences:
-                        card = Helper.CardHelper.SetTimePrefrences();
+                        card = Helper.CardHelper.SetTimePreference();
                         reply.Text = string.Format("Set a preferred time to receive notifications for latest news, upcoming events and trainings and task reminders.");
                         reply.Attachments.Add(card);
                         break;
@@ -227,7 +235,7 @@ namespace EmployeeConnect.Dialogs
                     reply.Text = "Your preferences are set.";
                     break;
                 case Constants.ShowPrefCard:   //Press Skip button on set preferences
-                    reply.Attachments.Add(CardHelper.SetTimePrefrences());
+                    reply.Attachments.Add(CardHelper.SetTimePreference());
                     break;
                 case Constants.SetPrefrencesSkip:   //Press Skip button on set preferences
                     reply.Text = "";

@@ -132,7 +132,7 @@ div.content {
     }
 
     .HR::before, .PB::before, .IT::before {
-        content: "\E449";
+        content: "E449";
         font-family: "Teams Assets";
         font-size: 16px;
         font-weight: 600;

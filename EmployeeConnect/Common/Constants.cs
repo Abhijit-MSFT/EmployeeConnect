@@ -26,6 +26,6 @@
         public const string ShowPrefCard = "show preference card";
         public const string SetPrefrencesSkip = "set preferences skip";
         public const string TicketCancel = "Cancel ticket";
-
+        public const string Refresh = "refresh";
     }
 }

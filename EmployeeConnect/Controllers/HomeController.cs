@@ -23,25 +23,25 @@ namespace EmployeeConnect.Controllers
             return View();
         }
 
-        [Route("Task")]
-        public ActionResult Task()
-        {
-            PO taskList = new PO();
-            taskList = GetDataHelper.GetPOs();
-            PurchaseOrders[] filterList = new PurchaseOrders[taskList.PurchaseOrder.Length];
+        //[Route("Task")]
+        //public ActionResult Task()
+        //{
+        //    PO taskList = new PO();
+        //    taskList = GetDataHelper.GetPOs();
+        //    PurchaseOrders[] filterList = new PurchaseOrders[taskList.PurchaseOrder.Length];
 
-            filterList = taskList.PurchaseOrder.Where(e => e.PoStatus != "declined").ToArray();
-            PurchaseOrders[] approvedList = new PurchaseOrders[filterList.Length];
-            PurchaseOrders[] pendingList = new PurchaseOrders[filterList.Length];
+        //    filterList = taskList.PurchaseOrder.Where(e => e.PoStatus != "declined").ToArray();
+        //    PurchaseOrders[] approvedList = new PurchaseOrders[filterList.Length];
+        //    PurchaseOrders[] pendingList = new PurchaseOrders[filterList.Length];
 
-            approvedList = filterList.Where(i => i.PoStatus == "approved").ToArray();
-            pendingList = filterList.Where(i => i.PoStatus == "pending").ToArray();
+        //    approvedList = filterList.Where(i => i.PoStatus == "approved").ToArray();
+        //    pendingList = filterList.Where(i => i.PoStatus == "pending").ToArray();
 
-            taskList.ApprovedPO = approvedList;
-            taskList.PendingPO = pendingList;
-            taskList.PurchaseOrder = filterList;
-            return View(taskList);
-        }
+        //    taskList.ApprovedPO = approvedList;
+        //    taskList.PendingPO = pendingList;
+        //    taskList.PurchaseOrder = filterList;
+        //    return View(taskList);
+        //}
 
         [Route("Tools")]
         public ActionResult Tools()
@@ -271,23 +271,25 @@ namespace EmployeeConnect.Controllers
         {
             TempData["data"] = poNumber;
             ViewBag.vendorNo = vendorno;
-            PO poList = new PO();
-            poList = GetDataHelper.GetPOs();
-            var podetaillist = poList.PurchaseOrder[0].PoDetails;
-            for (int item = 0; item < poList.PurchaseOrder.Length; item++)
-            {
-                if (poList.PurchaseOrder[item].PoNumber == poNumber)
-                {
-                    podetaillist = poList.PurchaseOrder[item].PoDetails;
-                    break;
-                }
-            }
-            poList.PoDetails = podetaillist;
+            SpfxPODetails poList = new SpfxPODetails();
+            poList = GetDataHelper.GetPODetails();
+            List<POValue> podetaillist = poList.value.Where(a=>a.PONumber.Equals(poNumber)).ToList();
+            //for (int item = 0; item < poList.value.Length; item++)
+            //{
+            //    if (poList.value[item].PONumber == poNumber)
+            //    {
+            //        podetaillist = poList.value[item];
+            //        break;
+            //    }
+            //}
+            //poList.value = podetaillist;
+
             int poTotal = 0;
-            for (int poCount = 0; poCount < poList.PoDetails.Length; poCount++)
+            for (int poCount = 0; poCount < podetaillist.Count; poCount++)
             {
-                poList.PoDetails[poCount].Total = (Convert.ToInt32(poList.PoDetails[poCount].UnitPrice) * Convert.ToInt32(poList.PoDetails[poCount].Quantity)).ToString();
-                poTotal += Convert.ToInt32(poList.PoDetails[poCount].Total);
+                podetaillist[poCount].Total = (Convert.ToInt32(podetaillist[poCount].UnitPrice) * Convert.ToInt32(podetaillist[poCount].Quantity));
+                //poTotal += Convert.ToInt32(poList.value[poCount]);
+                poTotal = poTotal + Convert.ToInt32(podetaillist[poCount].Total);
             }
             string TotalPOSum = poTotal.ToString();
             ViewData["Sum"] = TotalPOSum;
@@ -297,21 +299,21 @@ namespace EmployeeConnect.Controllers
         }
 
 
-        [Route("podecline")]
-        public ActionResult PODecline(string poNo, string reason, string comment)
-        {
-            PO poList = new PO();
-            poList = GetDataHelper.GetPOs();
-            TempData["data"] = poNo;
-            foreach (var item in poList.PurchaseOrder)
-            {
-                if (item.PoNumber == poNo)
-                {
-                    GetDataHelper.UpdatePOStatus(poNo);
-                }
-            }
-            return View();
-        }
+        //[Route("podecline")]
+        //public ActionResult PODecline(string poNo, string reason, string comment)
+        //{
+        //    PO poList = new PO();
+        //    poList = GetDataHelper.GetPOs();
+        //    TempData["data"] = poNo;
+        //    foreach (var item in poList.PurchaseOrder)
+        //    {
+        //        if (item.PoNumber == poNo)
+        //        {
+        //            GetDataHelper.UpdatePOStatus(poNo);
+        //        }
+        //    }
+        //    return View();
+        //}
 
 
         [Route("declined")]

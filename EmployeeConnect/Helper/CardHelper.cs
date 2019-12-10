@@ -20,9 +20,9 @@ namespace EmployeeConnect.Helper
             var list = new List<Item>();
             var buttonsList = new List<ListButton>();
             card.content.title = "";
-            //SpfxNews newsL = Helper.GetDataHelper.GetPreferredNews(username);
-            SpfxNews newsL = Helper.GetDataHelper.ReadNews();
-            List<Values> newsValues = newsL.value.Where(c => c.Category != null).Select(d => d).ToList();
+            List<Values> newsL = Helper.GetDataHelper.GetPreferredNews(username);
+            //SpfxNews newsL = Helper.GetDataHelper.ReadNews();
+            //List<Values> newsValues = newsL.Where(c => c.Category != null).Select(d => d).ToList();
             Item item = new Item
             {
                 title = "Top stories for you",
@@ -36,8 +36,8 @@ namespace EmployeeConnect.Helper
                 //var TrendingNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Trending"));
                 //var SuggestedNews = newsL.news.Where(w => w.LatestOrTrendingFlag.Equals("Latest"));
 
-                var TrendingNews = newsValues;
-                var SuggestedNews = newsValues;
+                var TrendingNews = newsL;
+                var SuggestedNews = newsL;
 
                 int MaxNewsCount = TrendingNews.Count();
                 if (MaxNewsCount > 5)
@@ -497,8 +497,10 @@ namespace EmployeeConnect.Helper
             return res;
         }
 
-        public static Attachment SetTimePrefrences()
+        public static Attachment SetTimePreference()
         {
+            //get the current users preferences to show selected in the card
+            //SPFXPreferences prefs = GetDataHelper.ReadPrefernecesfromSPData();
             List<AdaptiveColumn> list = new List<AdaptiveColumn>();
             list.Add(new AdaptiveColumn()
             {
@@ -507,16 +509,19 @@ namespace EmployeeConnect.Helper
                      new AdaptiveChoiceSetInput()
                     {
                         Id = "NewsCategory1",
-                        //Value = "1", // please set default value here
+                        Value = "1,3", // please set default value here
                         Style = AdaptiveChoiceInputStyle.Expanded,
                         IsMultiSelect=true,// set the style of Choice set to compact
                         Wrap=true,
+                        
+                        
                         Choices =
                          {
                             new AdaptiveChoice
                             {
                                 Title ="Finance",
                                 Value = "1",
+
                             },
                             new AdaptiveChoice
                             {
@@ -965,8 +970,8 @@ namespace EmployeeConnect.Helper
 
         public static Attachment PendingTasks()
         {
-            PO POlist = new PO();
-            POlist = Helper.GetDataHelper.GetPOs();
+            //PO POlist = new PO();
+            //POlist = Helper.GetDataHelper.GetPOs();
 
 
 
@@ -1022,12 +1027,16 @@ namespace EmployeeConnect.Helper
             item.type = "section";
             list.Add(item);
 
-            PO POList = Helper.GetDataHelper.GetPOs();
+            SpfxPurchaseOrder POList = Helper.GetDataHelper.GetPOs();
             InventoryModel InvList = Helper.GetDataHelper.GetInventoryData();
 
-            var pending = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("pending"));
+            //var pending = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("pending"));
 
-            var invoice = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("approved"));
+            //var invoice = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("approved"));
+
+            var pending = POList.value.Where(a => a.PoStatus.Equals("Pending"));
+
+            var invoice = POList.value.Where(a => a.PoStatus.Equals("Approved"));
 
             var inventory = InvList.Inventory;
 
@@ -1037,7 +1046,7 @@ namespace EmployeeConnect.Helper
                 var task = pending.ElementAt(i);
                 item.title = task.Description;
                 item.subtitle = "PoNumber: " + task.PoNumber;
-                item.id = task.PoNumber;
+                item.id = task.PoNumber.ToString();
                 item.type = "resultItem";
                 item.icon = ApplicationSettings.BaseUrl + "/Images/purchase_order.PNG";
                 var url = "purchaseorder?poNumber=" + task.PoNumber.ToString() + "&vendorno=" + task.vendorNo.ToString();
@@ -1061,7 +1070,7 @@ namespace EmployeeConnect.Helper
                 var task = invoice.ElementAt(i);
                 item.title = task.Description;
                 item.subtitle = "InvoiceNumber: " + task.PoNumber;
-                item.id = task.PoNumber;
+                item.id = task.PoNumber.ToString();
                 item.type = "resultItem";
                 item.icon = ApplicationSettings.BaseUrl + "/Images/invoice.PNG";
                 var url = "purchaseorder?poNumber=" + task.PoNumber.ToString() + "&vendorno=" + task.vendorNo.ToString();
