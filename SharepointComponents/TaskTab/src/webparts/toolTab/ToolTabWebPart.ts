@@ -19,75 +19,247 @@ export interface IToolTabWebPartProps {
 export default class ToolTabWebPart extends BaseClientSideWebPart<
   IToolTabWebPartProps
 > {
+  [x: string]: any;
   public render(): void {
     let cssURL =
       "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
+
     SPComponentLoader.loadCss(cssURL);
 
     this.domElement.innerHTML = `
-      <div class="${styles.toolTab}">
-        <div class="${styles.container}">
+      <div class="${styles.toolTab} id="accordion"">
         <div class="${styles.row}">
-        <div class="${styles.column}" id="accordion">
-          <div class="HR ar accordion-toggle"
+        <div class="col-12" >
+          <div class="${styles.HR} ar accordion-toggle"
                   data-toggle="collapse"
                   data-parent="#accordion"
                   data-target="#HRtools" aria-expanded="false"
                   >Human Resources
                 </div>
-          <div class="P-10 panel-collapse" id="HRtools">
-            <div class="card shadow-sm custom-card-first-row">
-              <div class="card-body">
+          <div class="${styles.P10} panel-collapse" id="HRtools">
+            <div class="${styles.card} ${styles.shadowsm}">
+              <div class=${styles.cbody}>
                 <span
                   alt-name="create letter"
-                  class="HR-tabs create-icon"
+                  class=${styles.createicon}
                 ></span>
-                <div class="CBL">Create business letter</div>
-                <p class="CBL-des">
+                <div class="${styles.CBL}">Create business letter</div>
+                <p class="${styles.CBLdes}">
                   Create a business letter within a predesigned color and
                   template.
                 </p>
               </div>
-            </div>
-            <div class="card shadow-sm custom-card-first-row-one" data-toggle="modal"
-                data-target="#create-ticket">
-              <div class="card-body">
-                <span
-                  alt-name="ticket-creation"
-                  class="HR-tabs ticket-creation"
-                >
-                </span>
-                <div class="CT">Create ticket</div>
-                <p class="CT-des">
-                  For all HR tickets, the ticket type is being set as Employee
-                  Support.
-                </p>
               </div>
-            </div>
-            <div class="card shadow-sm custom-card-first-row-two">
-              <div class="card-body">
+
+            <div class="${styles.card} ${styles.shadowsm}">
+              <div class=${styles.cbody}>
                 <span
-                  alt-name="leave-request"
-                  class="HR-tabs leave-request"
+                  alt-name="create letter"
+                  class=${styles.createicon}
                 ></span>
-                <div class="RL">Request leave</div>
-                <p class="RL-des">
-                  Request leave and check your status in the Leave application.
+                <div class="${styles.CBL}">Create ticket</div>
+                <p class="${styles.CBLdes}">
+                For all HR tickets, the ticket type is being set as Employee Support.
                 </p>
               </div>
-            </div>
-            <div class="card shadow-sm custom-card-first-row-three">
-              <div class="card-body">
-                <span alt-name="policies" class="HR-tabs policies"></span>
-                <div class="VP">View policies</div>
-                <p class="VP-des">
-                  Identify the purpose and objectives of Humana Resources
-                  department.
+              </div>
+
+              <div class="${styles.card} ${styles.shadowsm}">
+              <div class=${styles.cbody}>
+                <span
+                  alt-name="create letter"
+                  class=${styles.createicon}
+                ></span>
+                <div class="${styles.CBL}">Request leave</div>
+                <p class="${styles.CBLdes}">
+                Request leave and check your status in the Leave application.
                 </p>
               </div>
+              </div>
+
+              <div class="${styles.card} ${styles.shadowsm}">
+              <div class=${styles.cbody}>
+                <span
+                  alt-name="create letter"
+                  class=${styles.createicon}
+                ></span>
+                <div class="${styles.CBL}">View policies</div>
+                <p class="${styles.CBLdes}">
+                Identify the purpose and objectives of Humana Resources department.
+                </p>
+              </div>
+              </div>
+
+
+              <div class="${styles.HR} ar accordion-toggle"
+              data-toggle="collapse"
+              data-parent="#accordion"
+              data-target="#Pay-benefits" aria-expanded="false"
+              >Pay and benefits
             </div>
+      <div class="${styles.P10} panel-collapse" id="Pay-benefits">
+        <div class="${styles.card} ${styles.shadowsm}">
+          <div class=${styles.cbody}>
+            <span
+              alt-name="create letter"
+              class=${styles.createicon}
+            ></span>
+            <div class="${styles.CBL}">Download payslip</div>
+            <p class="${styles.CBLdes}">
+            Create a business letter within a predesigned color and template.
+            </p>
           </div>
+          </div>
+
+        <div class="${styles.card} ${styles.shadowsm}">
+          <div class=${styles.cbody}>
+            <span
+              alt-name="create letter"
+              class=${styles.createicon}
+            ></span>
+            <div class="${styles.CBL}">Create finance ticket</div>
+            <p class="${styles.CBLdes}">
+            For all HR tickets, the ticket type is being set as Employee Support.
+            </p>
+          </div>
+          </div>
+
+          <div class="${styles.card} ${styles.shadowsm}">
+          <div class=${styles.cbody}>
+            <span
+              alt-name="create letter"
+              class=${styles.createicon}
+            ></span>
+            <div class="${styles.CBL}">Submit benefits claim</div>
+            <p class="${styles.CBLdes}">
+            Request leave and check your status in the Leave application.
+            </p>
+          </div>
+          </div>
+
+          <div class="${styles.card} ${styles.shadowsm}">
+          <div class=${styles.cbody}>
+            <span
+              alt-name="create letter"
+              class=${styles.createicon}
+            ></span>
+            <div class="${styles.CBL}">View benefits policies</div>
+            <p class="${styles.CBLdes}">
+            Identify the purpose and objectives of Humana Resources department.
+            </p>
+          </div>
+          </div>
+
+
+          <div class="${styles.HR} ar accordion-toggle"
+          data-toggle="collapse"
+          data-parent="#accordion"
+          data-target="#itandfacilities" aria-expanded="false"
+          >IT and facilities
+        </div>
+  <div class="${styles.P10} panel-collapse" id="itandfacilities">
+    <div class="${styles.card} ${styles.shadowsm}">
+      <div class=${styles.cbody}>
+        <span
+          alt-name="create letter"
+          class=${styles.createicon}
+        ></span>
+        <div class="${styles.CBL}">Raise IT Support Ticket</div>
+        <p class="${styles.CBLdes}">
+        Create a business letter within a predesigned color and template.
+        </p>
       </div>
+      </div>
+
+    <div class="${styles.card} ${styles.shadowsm}">
+      <div class=${styles.cbody}>
+        <span
+          alt-name="create letter"
+          class=${styles.createicon}
+        ></span>
+        <div class="${styles.CBL}">Visitor wi-fi request</div>
+        <p class="${styles.CBLdes}">
+        For all HR tickets, the ticket type is being set as Employee Support.
+        </p>
+      </div>
+      </div>
+
+      <div class="${styles.card} ${styles.shadowsm}">
+      <div class=${styles.cbody}>
+        <span
+          alt-name="create letter"
+          class=${styles.createicon}
+        ></span>
+        <div class="${styles.CBL}">Event IT Support request</div>
+        <p class="${styles.CBLdes}">
+        Request leave and check your status in the Leave application.
+        </p>
+      </div>
+      </div>
+
+      <div class="${styles.card} ${styles.shadowsm}">
+      <div class=${styles.cbody}>
+        <span
+          alt-name="create letter"
+          class=${styles.createicon}
+        ></span>
+        <div class="${styles.CBL}">Cafeteria service app</div>
+        <p class="${styles.CBLdes}">
+        Identify the purpose and objectives of Humana Resources department.
+        </p>
+      </div>
+      </div>
+
+
+      <div class="${styles.HR} ar accordion-toggle"
+                  data-toggle="collapse"
+                  data-parent="#accordion"
+                  data-target="#retail-operations" aria-expanded="false"
+                  >Retail operations
+                </div>
+          <div class="${styles.P10} panel-collapse" id="retail-operations">
+            <div class="${styles.card} ${styles.shadowsm}">
+              <div class=${styles.cbody}>
+                <span
+                  alt-name="create letter"
+                  class=${styles.createicon}
+                ></span>
+                <div class="${styles.CBL}">Inventory request</div>
+                <p class="${styles.CBLdes}">
+                Create a business letter within a predesigned color and template.
+                </p>
+              </div>
+              </div>
+
+            <div class="${styles.card} ${styles.shadowsm}">
+              <div class=${styles.cbody}>
+                <span
+                  alt-name="create letter"
+                  class=${styles.createicon}
+                ></span>
+                <div class="${styles.CBL}">Timesheet</div>
+                <p class="${styles.CBLdes}">
+                For all HR tickets, the ticket type is being set as Employee Support.
+                </p>
+              </div>
+              </div>
+
+              <div class="${styles.card} ${styles.shadowsm}">
+              <div class=${styles.cbody}>
+                <span
+                  alt-name="create letter"
+                  class=${styles.createicon}
+                ></span>
+                <div class="${styles.CBL}">Store info</div>
+                <p class="${styles.CBLdes}">
+                Request leave and check your status in the Leave application.
+                </p>
+              </div>
+              </div>
+
+              </div>
+          </div>
+          </div>
       </div>`;
   }
 

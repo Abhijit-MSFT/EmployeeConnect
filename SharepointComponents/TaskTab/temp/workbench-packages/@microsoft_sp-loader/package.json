@@ -1,4 +1,10 @@
 {
+  "_args": [
+    [
+      "@microsoft/sp-loader@1.9.1",
+      "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab"
+    ]
+  ],
   "_from": "@microsoft/sp-loader@1.9.1",
   "_id": "@microsoft/sp-loader@1.9.1",
   "_inBundle": false,
@@ -24,10 +30,8 @@
     "/@microsoft/sp-webpart-workbench"
   ],
   "_resolved": "https://registry.npmjs.org/@microsoft/sp-loader/-/sp-loader-1.9.1.tgz",
-  "_shasum": "d774df250c8b2332a7c50660dd44fbf25c70dd40",
-  "_spec": "@microsoft/sp-loader@1.9.1",
-  "_where": "D:\\SPFX\\Employee-connect\\TaskTab\\node_modules\\@microsoft\\sp-webpart-base",
-  "bundleDependencies": false,
+  "_spec": "1.9.1",
+  "_where": "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab",
   "dependencies": {
     "@microsoft/office-ui-fabric-react-bundle": "1.9.1",
     "@microsoft/sp-core-library": "1.9.1",
@@ -51,7 +55,6 @@
     "requirejs": "2.1.20",
     "tslib": "~1.9.3"
   },
-  "deprecated": false,
   "description": "The SharePoint Framework loader",
   "devDependencies": {
     "@microsoft/loader-raw-script": "1.2.155",

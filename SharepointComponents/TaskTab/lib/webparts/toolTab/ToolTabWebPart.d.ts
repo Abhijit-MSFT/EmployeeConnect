@@ -5,6 +5,7 @@ export interface IToolTabWebPartProps {
     description: string;
 }
 export default class ToolTabWebPart extends BaseClientSideWebPart<IToolTabWebPartProps> {
+    [x: string]: any;
     render(): void;
     protected readonly dataVersion: Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;

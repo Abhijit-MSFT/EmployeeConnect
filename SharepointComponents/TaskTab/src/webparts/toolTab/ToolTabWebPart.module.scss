@@ -1,77 +1,192 @@
-@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
-
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
+@font-face {
+  font-family: "Teams Assets";
+  src: url("https://github.com/Abhijit-MSFT/EmployeeConnect/blob/master/SharepointComponents/TaskTab/dist/fonts/TeamsAssets-Light.woff")
+      format("woff"),
+    url("https://github.com/Abhijit-MSFT/EmployeeConnect/blob/master/SharepointComponents/TaskTab/dist/fonts/TeamsAssets-Light.woff")
+      format("woff2");
+  font-style: normal;
+}
 .toolTab {
-  .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  }
-
   .row {
     @include ms-Grid-row;
-    @include ms-fontColor-white;
-    background-color: $ms-color-themeDark;
-    padding: 20px;
+    padding: 5px;
   }
 
   .column {
     @include ms-Grid-col;
-    @include ms-lg10;
-    @include ms-xl8;
+    @include ms-lg12;
     @include ms-xlPush2;
     @include ms-lgPush1;
   }
-
-  .title {
-    @include ms-font-xl;
-    @include ms-fontColor-white;
-  }
-
-  .subTitle {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .description {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .button {
-    // Our button
-    text-decoration: none;
-    height: 32px;
-
-    // Primary Button
-    min-width: 80px;
-    background-color: $ms-color-themePrimary;
-    border-color: $ms-color-themePrimary;
-    color: $ms-color-white;
-
-    // Basic Button
-    outline: transparent;
-    position: relative;
-    font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
-    -webkit-font-smoothing: antialiased;
-    font-size: $ms-font-size-m;
-    font-weight: $ms-font-weight-regular;
-    border-width: 0;
-    text-align: center;
+  .HR,
+  .PB,
+  .RO,
+  .IF {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Segoe UI";
     cursor: pointer;
-    display: inline-block;
-    padding: 0 16px;
+    margin: 1% 0 1% 0;
+  }
+  .P10 {
+    padding-top: 10px;
+    padding-bottom: 40px;
+  }
 
-    .label {
-      font-weight: $ms-font-weight-semibold;
-      font-size: $ms-font-size-m;
-      height: 32px;
-      line-height: 32px;
-      margin: 0 4px;
-      vertical-align: top;
-      display: inline-block;
+  .shadowsm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  }
+  .card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    width: 22%;
+    height: 20%;
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+    font-family: "Segoe UI";
+    font-size: 16px;
+  }
+  .cbody {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+  }
+
+  .CBL,
+  .CT,
+  .RL,
+  .VP,
+  .DP,
+  .CFT,
+  .SBC,
+  .VBP,
+  .RIST,
+  .GWR,
+  .EISR,
+  .CSA,
+  .IR,
+  .timesheet,
+  .SI {
+    font-weight: 600;
+    padding-top: 6px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .CBLdes,
+  .CTdes,
+  .RLdes,
+  .VPdes,
+  .Pdes,
+  .FTdes,
+  .BCdes,
+  .VPdes,
+  .ISTdes,
+  .GRdes,
+  .ISRdes,
+  .CSAdes,
+  .IRdes,
+  .timesheetdes,
+  .SIdes {
+    padding-top: 6px;
+    color: #adacac;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    width: auto;
+  }
+
+  .createicon,
+  .ticket-creation,
+  .leave-request,
+  .policies,
+  .download-payslip,
+  .create-finance-tkt,
+  .submit-benefits,
+  .support,
+  .wife-request,
+  .event-support,
+  .cafe-service,
+  .Inventory,
+  .RO-timesheet,
+  .Ro-SI {
+    font-family: "Teams Assets";
+    font-size: 22px;
+  }
+
+  // .createicon::before {
+  //   content: "\E328";
+  // }
+
+  // .ticket-creation::before {
+  //   content: "\E13F";
+  // }
+
+  // .leave-request::before {
+  //   content: "\E503";
+  // }
+
+  // .policies::before {
+  //   content: "\E451";
+  // }
+
+  // .download-payslip::before {
+  //   content: "\E459";
+  // }
+
+  // .create-finance-tkt::before {
+  //   content: "\E13F";
+  // }
+
+  // .submit-benefits::before {
+  //   content: "\E971";
+  // }
+
+  // .view-benefits::before {
+  //   content: "\E451";
+  //   font-family: "Teams Assets";
+  //   font-size: 22px;
+  // }
+
+  // .support::before {
+  //   content: "\E21A";
+  // }
+
+  // .wife-request::before {
+  //   content: "\E123";
+  // }
+
+  // .event-support::before {
+  //   content: "\E917";
+  // }
+
+  // .cafe-service::before {
+  //   content: "\E984";
+  // }
+
+  // .Inventory::before {
+  //   content: "\E459";
+  // }
+
+  // .RO-timesheet::before {
+  //   content: "\E501";
+  // }
+
+  // .Ro-SI::before {
+  //   content: "\E137";
+  // }
+
+  @media (max-width: 425px) {
+    .card {
+      width: 100%;
     }
   }
 }
