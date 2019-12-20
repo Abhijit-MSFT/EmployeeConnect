@@ -8,8 +8,6 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from "@microsoft/sp-webpart-base";
-import { escape } from "@microsoft/sp-lodash-subset";
-import { IWebPartContext } from "@microsoft/sp-webpart-base";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import styles from "./TaskWebPart.module.scss";
 import * as strings from "TaskWebPartStrings";
