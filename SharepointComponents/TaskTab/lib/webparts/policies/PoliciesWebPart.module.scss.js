@@ -1,20 +1,20 @@
 /* tslint:disable */
 require("./PoliciesWebPart.module.css");
 var styles = {
-    policies: 'policies_689c2a05',
-    container: 'container_689c2a05',
-    row: 'row_689c2a05',
-    column1: 'column1_689c2a05',
-    'ms-Grid': 'ms-Grid_689c2a05',
-    column2: 'column2_689c2a05',
-    sidebar: 'sidebar_689c2a05',
-    active: 'active_689c2a05',
-    content: 'content_689c2a05',
-    head: 'head_689c2a05',
-    subheading: 'subheading_689c2a05',
-    subsubheading: 'subsubheading_689c2a05',
-    bulletpts: 'bulletpts_689c2a05',
-    hrdetails: 'hrdetails_689c2a05'
+    policies: 'policies_5308d5f3',
+    container: 'container_5308d5f3',
+    row: 'row_5308d5f3',
+    column1: 'column1_5308d5f3',
+    'ms-Grid': 'ms-Grid_5308d5f3',
+    column2: 'column2_5308d5f3',
+    sidebar: 'sidebar_5308d5f3',
+    active: 'active_5308d5f3',
+    content: 'content_5308d5f3',
+    head: 'head_5308d5f3',
+    subheading: 'subheading_5308d5f3',
+    subsubheading: 'subsubheading_5308d5f3',
+    bulletpts: 'bulletpts_5308d5f3',
+    hrdetails: 'hrdetails_5308d5f3'
 };
 export default styles;
 /* tslint:enable */ 

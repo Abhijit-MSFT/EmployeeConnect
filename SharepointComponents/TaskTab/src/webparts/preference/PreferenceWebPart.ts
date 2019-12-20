@@ -17,7 +17,6 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { SPComponentLoader } from "@microsoft/sp-loader";
 import * as $ from "jquery";
 import { string, func, bool } from "prop-types";
-import { Items, ConsoleListener } from "sp-pnp-js";
 microsoftTeams.initialize();
 
 var updatePrefObj = {
