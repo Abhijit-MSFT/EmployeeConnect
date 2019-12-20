@@ -8,8 +8,6 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from "@microsoft/sp-webpart-base";
-import { escape } from "@microsoft/sp-lodash-subset";
-import { IWebPartContext } from "@microsoft/sp-webpart-base";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import styles from "./TaskWebPart.module.scss";
 import * as strings from "TaskWebPartStrings";
@@ -17,6 +15,9 @@ import * as strings from "TaskWebPartStrings";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { SPComponentLoader } from "@microsoft/sp-loader";
 microsoftTeams.initialize();
+import "jquery";
+import "bootstrap";
+require("bootstrap");
 
 export interface ITaskTabWebPartProps {
   description: string;
@@ -54,12 +55,6 @@ export interface ISInvoiceList {
 export default class TaskTabWebPart extends BaseClientSideWebPart<
   ITaskTabWebPartProps
 > {
-  public constructor() {
-    super();
-    SPComponentLoader.loadCss(
-      "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    );
-  }
   //Rendering TaskList data
   private _getTaskListData(): Promise<ISPTaskLists> {
     //Rest API to call SharePoint list
@@ -73,6 +68,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         return response.json();
       });
   }
+
   //Getting Invoice List Data
   private _getInvoiceListData(): Promise<ISPInvoiceLists> {
     //Rest API to call SharePoint list
@@ -86,6 +82,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         return response.json();
       });
   }
+
   //Rendering task List
   private _renderTaskList(items: ISPTaskList[]): void {
     let html: string = "";
@@ -145,72 +142,120 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
   }
 
   public render(): void {
-    //existing code
-    this.domElement.innerHTML += `
-      <div class="${styles.taskTab}">
-       <div class="${styles.heading}"> Pending Submissions </div>
-        <div class="${styles.container}">
-          <div class="${styles.row}">
-            <div class="${styles.grid1}">
-              <span class="${styles.title}">12 Days of pending timesheet</span>
-              <div>
-              <a href="https://aka.ms/spfx" class="${styles.button}">
-                <span class="${styles.label}">Timesheet</span>
-              </a>
+    let cssURL =
+      "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
+    SPComponentLoader.loadCss(cssURL);
+    this.domElement.innerHTML = `
+     <div class="${styles.taskTab}">
+           <div class="${styles.heading}"> Pending Submissions </div>
+              <div class="${styles.row}">
+                <div class="${styles.grid1}">
+                  <span class="${
+                    styles.title
+                  }">12 Days of pending timesheet</span>
+                  <div>
+                  <a href="https://aka.ms/spfx" class="${styles.button}">
+                    <span class="${styles.label}">Timesheet</span>
+                  </a>
+                  </div>
+                </div>
+                 <div class="${styles.grid2}">
+                  <span class="${
+                    styles.title
+                  }">$25,000 Unreconciled expenses</span>
+                  <div>
+                  <a href="https://aka.ms/spfx" class="${styles.button}">
+                    <span class="${styles.label}">Expenses</span>
+                  </a>
+                  </div>
+                </div>
               </div>
-            </div>
-             <div class="${styles.grid2}">
-              <span class="${styles.title}">$25,000 Unreconciled expenses</span>
-              <div>
-              <a href="https://aka.ms/spfx" class="${styles.button}">
-                <span class="${styles.label}">Expenses</span>
-              </a>
-              </div>
-            </div>
+              <div class="${styles.row}">
+              <div class="${styles.heading}"> Pending Approvals </div>
+   <div class="panel-group" id="accordion">
+                <div class="${styles.panel}">
+                      <div class="${
+                        styles.subheading
+                      }" data-toggle="collapse" data-parent="#accordion" href="#collapse1">Purchased Order (${
+      this._renderTaskList.length
+    })</div>
+                  <div id="collapse1" class="panel-collapse collapse">
+                    <div>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">PoNumber</th>
+                          <th scope="col">Description</th>
+                          <th scope="col">VendorName</th>
+                          <th scope="col">VendorNo</th>
+                          <th scope="col">TotalAmount</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                        <tbody id="spTaskListContainer">
+                          ${this._renderListAsync()}
+                        </tbody>
+                    </table>
+                    </div>
+                    </div>
+       </div>
+                    <div class="${styles.panel}">
+                          <div class="${
+                            styles.subheading
+                          }" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Invoice (${
+      this._renderInvoiceList.length
+    })
           </div>
-        </div>
-        <div class="${styles.row}">
-        <div class="${styles.heading}"> Pending Approvals </div>
-         <div class="${styles.subheading}">Purchased Order (${this
-      ._renderTaskList.length})</div>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">PoNumber</th>
-              <th scope="col">Description</th>
-              <th scope="col">VendorName</th>
-              <th scope="col">VendorNo</th>
-              <th scope="col">TotalAmount</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-            <tbody id="spTaskListContainer">
-              ${this._renderListAsync()}
-            </tbody>
-        </table>
-        </div>
-          <div class="${styles.subheading}">Invoice (${this._renderInvoiceList
-      .length})
-      </div>
-         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">InvoiceNo</th>
-              <th scope="col">PoNumber</th>
-              <th scope="col">Description</th>
-              <th scope="col">VendorName</th>
-              <th scope="col">VendorNo</th>
-              <th scope="col">Amount</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody id="spInvoiceListContainer">
-            ${this._renderInvoiceListAsync()}
-          </tbody>
-        </table>
-      <div class="${styles.subheading}">Inventory (0)</div>
-       </div>`;
-    // this._setButtonEventHandlers();
+                      <div id="collapse2" class="panel-collapse collapse in">
+                        <div>
+                          <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">InvoiceNo</th>
+                              <th scope="col">PoNumber</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">VendorName</th>
+                              <th scope="col">VendorNo</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody id="spInvoiceListContainer">
+                            ${this._renderInvoiceListAsync()}
+                          </tbody>
+                        </table>
+                        </div>
+                      </div>
+                    </div>
+            <div class="${styles.panel}">
+                   <div class="${
+                     styles.subheading
+                   }" data-toggle="collapse" data-parent="#accordion" href="#collapse3">Inventory (0)</div>
+              <div id="collapse3" class="panel-collapse collapse">
+                <div>
+                <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">InvoiceNo</th>
+                              <th scope="col">PoNumber</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">VendorName</th>
+                              <th scope="col">VendorNo</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody id="spInvoiceListContainer">
+                            ${this._renderInvoiceListAsync()}
+                          </tbody>
+                        </table>
+                </div>
+              </div>
+            </div>
+   </div>
+   </div>
+   </div>
+ </div>`;
   }
   private _setButtonEventHandlers(): void {
     this.domElement

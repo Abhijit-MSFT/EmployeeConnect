@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "d2865084-ab74-41f5-9cf0-afac7226c9df",
+  "alias": "ToolTabWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart","TeamsTab"],
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { "default": "ToolTab" },
+    "description": { "default": "Deals about activities " },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "ToolTab"
+    }
+  }]
+}

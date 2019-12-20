@@ -1,4 +1,5 @@
 @import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
+@import url(https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css);
 
 .taskTab {
   .container {
@@ -30,6 +31,7 @@
   .subheading {
     font-size: 18px;
     color: gray;
+    cursor: pointer;
   }
 
   .title {
@@ -80,8 +82,8 @@
     color: $ms-color-white;
     outline: transparent;
     position: relative;
-    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system,
-      BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue",
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: $ms-font-size-m;
     font-weight: $ms-font-weight-regular;
@@ -105,8 +107,7 @@
 
   .list {
     color: #333333;
-    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial,
-      sans-serif;
+    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial, sans-serif;
     font-size: 14px;
     font-weight: normal;
     box-sizing: border-box;
@@ -120,8 +121,7 @@
   .listItem {
     color: #333333;
     vertical-align: center;
-    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial,
-      sans-serif;
+    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial, sans-serif;
     font-size: 14px;
     font-weight: normal;
     box-sizing: border-box;
@@ -131,5 +131,26 @@
     *zoom: 1;
     padding: 9px 28px 3px;
     position: relative;
+  }
+  .panel{
+    padding: 10px 0 10px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #e8e4e4;
+  }
+
+  @media (max-width: 768px) {
+    .grid1,
+    .grid2 {
+      width: 49%;
+    }
+  }
+  @media (max-width: 425px) {
+    .grid1,
+    .grid2 {
+      width: 100%;
+    }
+    .grid2 {
+      margin: 10px 0 0 0;
+    }
   }
 }

@@ -25,22 +25,33 @@
           "manifest": "./src/webparts/policies/PoliciesWebPart.manifest.json"
         }
       ]
+    },
+    "tool-tab-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/toolTab/ToolTabWebPart.js",
+          "manifest": "./src/webparts/toolTab/ToolTabWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {
     "jquery": {
-      "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js",
+      "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
       "globalName": "jquery"
     },
     "bootstrap": {
-      "path": "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",
+      "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
       "globalName": "bootstrap",
-      "globalDependencies": ["jquery"]
+      "globalDependencies": [
+        "jquery"
+      ]
     }
   },
   "localizedResources": {
     "TaskWebPartStrings": "lib/webparts/task/loc/{locale}.js",
     "PreferenceWebPartStrings": "lib/webparts/preference/loc/{locale}.js",
-    "PoliciesWebPartStrings": "lib/webparts/policies/loc/{locale}.js"
+    "PoliciesWebPartStrings": "lib/webparts/policies/loc/{locale}.js",
+    "ToolTabWebPartStrings": "lib/webparts/toolTab/loc/{locale}.js"
   }
 }

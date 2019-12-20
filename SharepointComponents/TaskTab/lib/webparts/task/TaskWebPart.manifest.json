@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "fefc85e6-8e32-4f3b-979e-8a0f128a5c85",
+  "alias": "TaskWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart","TeamsTab","SharePointFullPage"],
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { "default": "Task" },
+    "description": { "default": "Employee Tasks" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "Task"
+    }
+  }]
+}
