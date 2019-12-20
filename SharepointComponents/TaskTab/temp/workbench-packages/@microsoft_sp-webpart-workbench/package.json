@@ -1,4 +1,11 @@
 {
+  "_args": [
+    [
+      "@microsoft/sp-webpart-workbench@1.9.1",
+      "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab"
+    ]
+  ],
+  "_development": true,
   "_from": "@microsoft/sp-webpart-workbench@1.9.1",
   "_id": "@microsoft/sp-webpart-workbench@1.9.1",
   "_inBundle": false,
@@ -28,10 +35,8 @@
     "#DEV:/"
   ],
   "_resolved": "https://registry.npmjs.org/@microsoft/sp-webpart-workbench/-/sp-webpart-workbench-1.9.1.tgz",
-  "_shasum": "f98b6b400a37f996fd821dfbc79bd92a260fe7bf",
-  "_spec": "@microsoft/sp-webpart-workbench@1.9.1",
-  "_where": "D:\\SPFX\\Employee-connect\\TaskTab",
-  "bundleDependencies": false,
+  "_spec": "1.9.1",
+  "_where": "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab",
   "dependencies": {
     "@microsoft/gulp-core-build-serve": "3.3.39",
     "@microsoft/node-core-library": "3.13.0",
@@ -58,7 +63,6 @@
     "react-dom": "16.8.5",
     "tslib": "~1.9.3"
   },
-  "deprecated": false,
   "description": "The SharePoint Workbench",
   "devDependencies": {
     "@ms/content-handler": "0.1.0",

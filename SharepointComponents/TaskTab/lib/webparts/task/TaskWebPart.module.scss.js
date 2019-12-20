@@ -1,22 +1,22 @@
 /* tslint:disable */
 require("./TaskWebPart.module.css");
 var styles = {
-    taskTab: 'taskTab_47c71a0b',
-    container: 'container_47c71a0b',
-    row: 'row_47c71a0b',
-    column: 'column_47c71a0b',
-    'ms-Grid': 'ms-Grid_47c71a0b',
-    heading: 'heading_47c71a0b',
-    subheading: 'subheading_47c71a0b',
-    title: 'title_47c71a0b',
-    review: 'review_47c71a0b',
-    grid1: 'grid1_47c71a0b',
-    grid2: 'grid2_47c71a0b',
-    button: 'button_47c71a0b',
-    label: 'label_47c71a0b',
-    list: 'list_47c71a0b',
-    listItem: 'listItem_47c71a0b',
-    panel: 'panel_47c71a0b'
+    taskTab: 'taskTab_38f18ae2',
+    container: 'container_38f18ae2',
+    row: 'row_38f18ae2',
+    column: 'column_38f18ae2',
+    'ms-Grid': 'ms-Grid_38f18ae2',
+    heading: 'heading_38f18ae2',
+    subheading: 'subheading_38f18ae2',
+    title: 'title_38f18ae2',
+    review: 'review_38f18ae2',
+    grid1: 'grid1_38f18ae2',
+    grid2: 'grid2_38f18ae2',
+    button: 'button_38f18ae2',
+    label: 'label_38f18ae2',
+    list: 'list_38f18ae2',
+    listItem: 'listItem_38f18ae2',
+    panel: 'panel_38f18ae2'
 };
 export default styles;
 /* tslint:enable */ 

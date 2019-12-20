@@ -1,4 +1,10 @@
 {
+  "_args": [
+    [
+      "react-dom@16.8.5",
+      "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab"
+    ]
+  ],
   "_from": "react-dom@16.8.5",
   "_id": "react-dom@16.8.5",
   "_inBundle": false,
@@ -22,9 +28,8 @@
     "/@microsoft/sp-webpart-workbench"
   ],
   "_resolved": "https://registry.npmjs.org/react-dom/-/react-dom-16.8.5.tgz",
-  "_shasum": "b3e37d152b49e07faaa8de41fdf562be3463335e",
-  "_spec": "react-dom@16.8.5",
-  "_where": "D:\\SPFX\\Employee-connect\\TaskTab\\node_modules\\@microsoft\\sp-loader",
+  "_spec": "16.8.5",
+  "_where": "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab",
   "browser": {
     "./server.js": "./server.browser.js",
     "./unstable-fizz.js": "./unstable-fizz.browser.js"
@@ -37,14 +42,12 @@
   "bugs": {
     "url": "https://github.com/facebook/react/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "loose-envify": "^1.1.0",
     "object-assign": "^4.1.1",
     "prop-types": "^15.6.2",
     "scheduler": "^0.13.5"
   },
-  "deprecated": false,
   "description": "React package for working with the DOM.",
   "files": [
     "LICENSE",
