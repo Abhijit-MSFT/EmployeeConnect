@@ -1,4 +1,4 @@
-﻿@model EmployeeConnect.Models.PO
+﻿@model EmployeeConnect.Models.SpfxPODetails
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
 <head>
@@ -61,7 +61,7 @@
                                     <td class="th-head">Quantity</td>
                                     <td class="th-head th-total">Total</td>
                                 </tr>
-                                @foreach (var item in Model.PoDetails)
+                                @foreach (var item in Model.value)
                                 {
                                     <tr>
                                         <td class="cnt">@Html.DisplayFor(modelItem => item.ItemCode)</td>

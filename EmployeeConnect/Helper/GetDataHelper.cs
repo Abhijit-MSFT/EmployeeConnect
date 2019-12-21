@@ -45,6 +45,38 @@ namespace EmployeeConnect.Helper
             accessToken = JsonConvert.DeserializeObject<GetDataHelper.TokenResponse>(responseBody).access_token;
             return accessToken;
         }
+
+
+        public static async System.Threading.Tasks.Task UploadFileToSP(string fileLocation)
+        {
+            //using (var clientContext = TokenHelper.GetClientContextWithAccessToken(sharepointUrl.ToString(), appOnlyAccessToken))
+            //{
+            try
+            {
+                string token = await GetDataHelper.GetAuthenticationToken();
+                byte[] bytefile = System.IO.File.ReadAllBytes(fileLocation);
+                //byte[] bytefile = System.Web.Hosting.HostingEnvironment.MapPath(fileLocation);
+
+                //HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(hostWeb + "/_api/web/GetFolderByServerRelativeUrl('Shared%20Documents')/Files/add(url='filename.txt',overwrite=true)");
+                HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create("https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativeUrl('Shared%20Documents')/Files/add(url='TestFile.txt',overwrite=true)");
+
+                //https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/EmployeeConnectPrototype/Shared%20Documents')/Files
+                //https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativeUrl('Shared%20Documents')/Files
+                endpointRequest.Method = "POST";
+                endpointRequest.Headers.Add("binaryStringRequestBody", "true");
+                endpointRequest.Headers.Add("Authorization", "Bearer " + token);
+                endpointRequest.GetRequestStream().Write(bytefile, 0, bytefile.Length);
+
+                HttpWebResponse endpointresponse = (HttpWebResponse)endpointRequest.GetResponse();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+            //}
+        }
         
         public static NewsModel GetNews()
         {
@@ -518,6 +550,32 @@ namespace EmployeeConnect.Helper
             File.WriteAllText(file, convertedJson);
             return;
         }
+
+        public static async System.Threading.Tasks.Task<bool> WritePrefsToSPList(string body)
+        {
+            string token = await GetDataHelper.GetAuthenticationToken();
+            
+            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/lists/GetByTitle('PreferencesList')/items";
+            using (var client = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
+                {                    
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    request.Content = new StringContent(body, Encoding.UTF8, "application/json");
+
+                    using (HttpResponseMessage response = await client.SendAsync(request))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            return true;
+
+                        }
+                        return false;
+                    }
+                }
+            }
+        }
                
         public static void ETStatusUpdate(string ETid)
         {
@@ -606,7 +664,7 @@ namespace EmployeeConnect.Helper
             return newCatNotNull;
         }
 
-        public static SPFXPreferences ReadPrefernecesfromSPData()
+        public static prefValue ReadPrefernecesfromSPData(string userName)
         {
             List<string> prefs = new List<string>();
 
@@ -615,7 +673,8 @@ namespace EmployeeConnect.Helper
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
             preferences = new JavaScriptSerializer().Deserialize<SPFXPreferences>(json);
 
-            return preferences;
+            prefValue prefValue = preferences.value.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+            return prefValue;
         }
 
         public class TokenResponse

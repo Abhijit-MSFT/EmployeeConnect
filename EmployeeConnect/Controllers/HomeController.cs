@@ -273,16 +273,7 @@ namespace EmployeeConnect.Controllers
             ViewBag.vendorNo = vendorno;
             SpfxPODetails poList = new SpfxPODetails();
             poList = GetDataHelper.GetPODetails();
-            List<POValue> podetaillist = poList.value.Where(a=>a.PONumber.Equals(poNumber)).ToList();
-            //for (int item = 0; item < poList.value.Length; item++)
-            //{
-            //    if (poList.value[item].PONumber == poNumber)
-            //    {
-            //        podetaillist = poList.value[item];
-            //        break;
-            //    }
-            //}
-            //poList.value = podetaillist;
+            var podetaillist = poList.value.Where(a=>a.PONumber.Equals(poNumber)).ToList();
 
             int poTotal = 0;
             for (int poCount = 0; poCount < podetaillist.Count; poCount++)

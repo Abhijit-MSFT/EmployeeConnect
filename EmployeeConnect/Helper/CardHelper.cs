@@ -5,6 +5,7 @@ using System.Linq;
 using EmployeeConnect.Models;
 using AdaptiveCards;
 using EmployeeConnect.Common;
+using System.Text.RegularExpressions;
 
 namespace EmployeeConnect.Helper
 {
@@ -497,10 +498,12 @@ namespace EmployeeConnect.Helper
             return res;
         }
 
-        public static Attachment SetTimePreference()
+        public static Attachment SetTimePreference(string userName)
         {
+            
             //get the current users preferences to show selected in the card
-            //SPFXPreferences prefs = GetDataHelper.ReadPrefernecesfromSPData();
+            prefValue prefs = GetDataHelper.ReadPrefernecesfromSPData(userName);
+            string newsCat = Regex.Replace(prefs.SelectedCategories.Trim(), " *, *", ",");
             List<AdaptiveColumn> list = new List<AdaptiveColumn>();
             list.Add(new AdaptiveColumn()
             {
@@ -509,7 +512,7 @@ namespace EmployeeConnect.Helper
                      new AdaptiveChoiceSetInput()
                     {
                         Id = "NewsCategory1",
-                        Value = "1,3", // please set default value here
+                        Value = newsCat, // please set default value here
                         Style = AdaptiveChoiceInputStyle.Expanded,
                         IsMultiSelect=true,// set the style of Choice set to compact
                         Wrap=true,
@@ -520,28 +523,28 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoice
                             {
                                 Title ="Finance",
-                                Value = "1",
+                                Value = "Finance",
 
                             },
                             new AdaptiveChoice
                             {
                                 Title = "Media",
-                                Value = "2",
+                                Value = "Media",
                             },
                             new AdaptiveChoice
                             {
                                 Title = "Design",
-                                Value = "3",
+                                Value = "Design",
                             },
                             new AdaptiveChoice
                             {
                                 Title = "AI",
-                                Value = "4",
+                                Value = "AI",
                             },
                             new AdaptiveChoice
                             {
                                 Title = "Data",
-                                Value = "5",
+                                Value = "Data",
                             },
                         }
                 }
@@ -555,6 +558,7 @@ namespace EmployeeConnect.Helper
                      new AdaptiveChoiceSetInput()
                     {
                         Id = "NewsCategory2",
+                        Value = newsCat, // please set default value here
                         Style = AdaptiveChoiceInputStyle.Expanded,
                         IsMultiSelect=true,// set the style of Choice set to compact
                         Wrap=true,
@@ -563,27 +567,27 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoice
                             {
                                 Title = "Business",
-                                Value = "6",
+                                Value = "Business",
                             },
                             new AdaptiveChoice
                             {
                                 Title = "CS",
-                                Value = "7",
+                                Value = "CS",
                             },
                             new AdaptiveChoice
                             {
                                 Title = "Technology",
-                                Value = "8",
+                                Value = "Technology",
                             },
                             new AdaptiveChoice
                             {
                                 Title = "Animation",
-                                Value = "9",
+                                Value = "Animation",
                             },
                             new AdaptiveChoice
                             {
                                 Title = "IT",
-                                Value = "10",
+                                Value = "IT",
                             },
 
                         }
@@ -898,7 +902,7 @@ namespace EmployeeConnect.Helper
                 int count = 0;
                 //DateTime CurrDate = new DateTime(2019, 6, 1);
                 DateTime CurrDate = DateTime.Now;
-                for (int i = 0; i < MaxEventsCount; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     var EandT = Events.ElementAt(i);
                     string date = "";
@@ -913,9 +917,9 @@ namespace EmployeeConnect.Helper
 
                     //if (count == 5)
                     //    break;
-                    if (Dstart <= CurrDate.AddDays(15) && Dend >= CurrDate.AddDays(-15))
-                    {
-                        string subtitle = date + ' ' + "from" + ' ' + EandT.EventDate.ToString("h:m tt") + ' ' + '-' + ' ' + EandT.EndDate.ToString("h:m tt");
+                    //if (Dstart <= CurrDate.AddDays(15) && Dend >= CurrDate.AddDays(-15))
+                    //{
+                        string subtitle = date + ' ' + "from" + ' ' + EandT.EventDate.ToString("h:mm tt") + ' ' + '-' + ' ' + EandT.EndDate.ToString("h:mm tt");
                         string title = EandT.Title;
                         item = new Item();
                         item.title = title;
@@ -947,7 +951,7 @@ namespace EmployeeConnect.Helper
                         };
                         count++;
                         list.Add(item);
-                    }
+                    //}
                 }
 
                 ListButton viewButton = new ListButton();
