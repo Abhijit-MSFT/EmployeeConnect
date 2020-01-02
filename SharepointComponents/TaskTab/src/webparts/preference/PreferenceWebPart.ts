@@ -21,7 +21,7 @@ microsoftTeams.initialize();
 
 var updatePrefObj = {
   UserName: "",
-  UniqueID0: "",
+  Uni_ID: "",
   TenantID: "",
   ServiceURL: "",
   SelectedCategories: [""],
@@ -49,7 +49,7 @@ export interface PreferenceModel {
 var existingUser: string;
 export interface userInfo {
   UserName: string;
-  UniqueID0: string;
+  Uni_ID: string;
   TenantID: string;
   ServiceURL: string;
   SelectedCategories: [""];
@@ -72,7 +72,7 @@ let categoriesArray = {
   readCatArr: [
     "Business",
     "Animation",
-    "Travel",
+    "AI",
     "Design",
     "IT",
     "Creative",
@@ -129,7 +129,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
     microsoftTeams.getContext(context => {
       updatePrefObj.UserName = context.userPrincipalName;
       updatePrefObj.TenantID = context.userObjectId;
-      updatePrefObj.UniqueID0 = context.tid;
+      updatePrefObj.Uni_ID = context.tid;
       existingUser = updatePrefObj.UserName;
     });
     //this._renderListAsync();
@@ -143,7 +143,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
       ): void => {
         this.context.spHttpClient
           .get(
-            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('Preferences%20List')/items?$orderby=Id desc&$top=1&$select=id`,
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PreferencesList')/items?$orderby=Id desc&$top=1&$select=id`,
             SPHttpClient.configurations.v1,
             {
               headers: {
@@ -187,7 +187,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
           console.log(`Loading information about item ID: ${itemId}...`);
 
           return this.context.spHttpClient.get(
-            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('Preferences%20List')/items(${latestItemId})?$select=Title,Id`,
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PreferencesList')/items(${latestItemId})?$select=Title,Id`,
             SPHttpClient.configurations.v1,
             {
               headers: {
@@ -209,7 +209,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
         const body: string = JSON.stringify({
           Title: `Updated Item`,
           UserName: updatePrefObj.UserName,
-          UniqueID0: updatePrefObj.UniqueID0,
+          Uni_ID: updatePrefObj.Uni_ID,
           TenantID: updatePrefObj.TenantID,
           SelectedCategories: `${updatePrefObj.SelectedCategories}`,
           //  Item: `${updatePrefObj.Item}`,
@@ -254,7 +254,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
     var requestURL = this.context.pageContext.web.absoluteUrl;
     return this.context.spHttpClient
       .get(
-        requestURL + `/_api/web/lists/GetByTitle('Preferences%20List')/items`,
+        requestURL + `/_api/web/lists/GetByTitle('PreferencesList')/items`,
         SPHttpClient.configurations.v1
       )
       .then((response: SPHttpClientResponse) => {
@@ -321,7 +321,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
     newsCategory = intersectionCategoryEvent;
     console.log(newsCategory);
     let business = document.querySelector("#Business");
-    let Travel = document.querySelector("#Travel");
+    let AI = document.querySelector("#AI");
     let Design = document.querySelector("#Design");
     let Technology = document.querySelector("#Technology");
     let Media = document.querySelector("#Media");
@@ -602,13 +602,13 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
         this.updateItem(updatePrefObj.SelectedCategories.toString());
       }
     });
-    Travel.addEventListener("click", event => {
-      if (newsCategory.indexOf("Travel") == -1) {
-        newsCategory.push("Travel");
+    AI.addEventListener("click", event => {
+      if (newsCategory.indexOf("AI") == -1) {
+        newsCategory.push("AI");
         updatePrefObj.SelectedCategories = newsCategory;
         this.updateItem(updatePrefObj.SelectedCategories.toString());
       } else {
-        var index = updatePrefObj.SelectedCategories.indexOf("Travel");
+        var index = updatePrefObj.SelectedCategories.indexOf("AI");
         updatePrefObj.SelectedCategories.splice(index, 1);
         // updatePrefObj.SelectedCategories = newsCategory;
         this.updateItem(updatePrefObj.SelectedCategories.toString());
@@ -693,18 +693,18 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
               </div>
 
                <div class="${styles.columnheight}">
-                <label for="Travel">
+                <label for="AI">
                     <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Travel.jpg" class="${
                       styles.img1
                     }">
                   </label>
                   <input type="checkbox" ${
-                    intersectionCategory.indexOf("Travel") > -1
+                    intersectionCategory.indexOf("AI") > -1
                       ? "checked"
                       : console.log(intersectionCategory)
-                  }  name="Travel" id="Travel" class="category"/>
+                  }  name="AI" id="AI" class="category"/>
                     <div class="${styles.tick}">
-                      <div class="${styles.name}">Travel</div>
+                      <div class="${styles.name}">AI</div>
                     </div>
               </div>
 
@@ -851,7 +851,6 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
                       <div class="${styles.name}">Software</div>
                     </div>
               </div>
-
               <div class="${styles.columnheight}">
                 <label for="Art">
                     <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Art.jpg" class="${

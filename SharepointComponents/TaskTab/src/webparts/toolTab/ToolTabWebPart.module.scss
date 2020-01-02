@@ -8,11 +8,19 @@
   font-style: normal;
 }
 .toolTab {
+  @media (max-width: 768px) {
+    .grid1,
+    .heading {
+      display: none !important;
+    }
+    .grid2 {
+      display: none !important;
+    }
+  }
   .row {
     @include ms-Grid-row;
     padding: 5px;
   }
-
   .column {
     @include ms-Grid-col;
     @include ms-lg12;
@@ -28,6 +36,11 @@
     font-family: "Segoe UI";
     cursor: pointer;
     margin: 1% 0 1% 0;
+    margin-top: 24px;
+    margin-bottom: -5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
   }
   .P10 {
     padding-top: 10px;
@@ -104,20 +117,7 @@
     width: auto;
   }
 
-  .createicon,
-  .ticket-creation,
-  .leave-request,
-  .policies,
-  .download-payslip,
-  .create-finance-tkt,
-  .submit-benefits,
-  .support,
-  .wife-request,
-  .event-support,
-  .cafe-service,
-  .Inventory,
-  .RO-timesheet,
-  .Ro-SI {
+  .createicon {
     font-family: "Teams Assets";
     font-size: 22px;
   }

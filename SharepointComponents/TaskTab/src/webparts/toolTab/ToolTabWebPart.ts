@@ -52,7 +52,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
               </div>
 
             <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody}>
+              <div class=${styles.cbody} id="createTicket">
                 <span
                   alt-name="create letter"
                   class=${styles.createicon}
@@ -85,7 +85,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                 ></span>
                 <div class="${styles.CBL}">View policies</div>
                 <p class="${styles.CBLdes}">
-                Identify the purpose and objectives of Humana Resources department.
+                Identify the purpose and objectives of HR department.
                 </p>
               </div>
               </div>
@@ -106,7 +106,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
             ></span>
             <div class="${styles.CBL}">Download payslip</div>
             <p class="${styles.CBLdes}">
-            Create a business letter within a predesigned color and template.
+            View online pay slips and full payment histories.
             </p>
           </div>
           </div>
@@ -119,7 +119,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
             ></span>
             <div class="${styles.CBL}">Create finance ticket</div>
             <p class="${styles.CBLdes}">
-            For all HR tickets, the ticket type is being set as Employee Support.
+            Open a support ticket with the Finance and Operations support.
             </p>
           </div>
           </div>
@@ -132,7 +132,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
             ></span>
             <div class="${styles.CBL}">Submit benefits claim</div>
             <p class="${styles.CBLdes}">
-            Request leave and check your status in the Leave application.
+            Submit a claim from your account to start the process.
             </p>
           </div>
           </div>
@@ -145,7 +145,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
             ></span>
             <div class="${styles.CBL}">View benefits policies</div>
             <p class="${styles.CBLdes}">
-            Identify the purpose and objectives of Humana Resources department.
+            Read common queries about servicing your policy.
             </p>
           </div>
           </div>
@@ -166,20 +166,20 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
         ></span>
         <div class="${styles.CBL}">Raise IT Support Ticket</div>
         <p class="${styles.CBLdes}">
-        Create a business letter within a predesigned color and template.
+        Submit your support case to review and respond.
         </p>
       </div>
       </div>
 
     <div class="${styles.card} ${styles.shadowsm}">
-      <div class=${styles.cbody}>
+      <div class=${styles.cbody} id="visitorRequest">
         <span
           alt-name="create letter"
           class=${styles.createicon}
         ></span>
-        <div class="${styles.CBL}">Visitor wi-fi request</div>
+        <div class="${styles.CBL}">Submit Visitor Request</div>
         <p class="${styles.CBLdes}">
-        For all HR tickets, the ticket type is being set as Employee Support.
+        Fill a request form for short-term visitors.
         </p>
       </div>
       </div>
@@ -192,7 +192,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
         ></span>
         <div class="${styles.CBL}">Event IT Support request</div>
         <p class="${styles.CBLdes}">
-        Request leave and check your status in the Leave application.
+        Fill out this form to request any equiepment for events.
         </p>
       </div>
       </div>
@@ -205,8 +205,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
         ></span>
         <div class="${styles.CBL}">Cafeteria service app</div>
         <p class="${styles.CBLdes}">
-        Identify the purpose and objectives of Humana Resources department.
-        </p>
+        Emloyee can order and pay here without waiting in long queue. </p>
       </div>
       </div>
 
@@ -226,7 +225,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                 ></span>
                 <div class="${styles.CBL}">Inventory request</div>
                 <p class="${styles.CBLdes}">
-                Create a business letter within a predesigned color and template.
+                Inventory form to request supplies.
                 </p>
               </div>
               </div>
@@ -239,8 +238,8 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                 ></span>
                 <div class="${styles.CBL}">Timesheet</div>
                 <p class="${styles.CBLdes}">
-                For all HR tickets, the ticket type is being set as Employee Support.
-                </p>
+                Weekly Timesheet setup.
+                  </p>
               </div>
               </div>
 
@@ -252,7 +251,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                 ></span>
                 <div class="${styles.CBL}">Store info</div>
                 <p class="${styles.CBLdes}">
-                Request leave and check your status in the Leave application.
+                Your store information.
                 </p>
               </div>
               </div>
@@ -261,6 +260,115 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
           </div>
           </div>
       </div>`;
+    this._setButtonEventHandlers();
+  }
+
+  public _setButtonEventHandlers(): void {
+    this.domElement
+      .querySelector("#createTicket")
+      .addEventListener("click", () => {
+        this.createTicket();
+      });
+    this.domElement
+      .querySelector("#visitorRequest")
+      .addEventListener("click", () => {
+        this.visitorRequest();
+      });
+  }
+  private createTicket() {
+    microsoftTeams.initialize();
+    let taskInfo = {
+      title: null,
+      height: null,
+      width: null,
+      url: null,
+      card: null,
+      fallbackUrl: null,
+      completionBotId: null
+    };
+
+    taskInfo.url =
+      "https://employeeconnect-9566.azurewebsites.net/createticket";
+    taskInfo.title = "Create Ticket";
+    taskInfo.height = 510;
+    taskInfo.width = 430;
+    taskInfo.fallbackUrl = taskInfo.url;
+    microsoftTeams.tasks.startTask(taskInfo, this.submitHandler);
+  }
+  private visitorRequest() {
+    microsoftTeams.initialize();
+    let taskInfo = {
+      title: null,
+      height: null,
+      width: null,
+      url: null,
+      card: null,
+      fallbackUrl: null,
+      completionBotId: null
+    };
+
+    taskInfo.url =
+      "https://employeeconnect-9566.azurewebsites.net/visitorregistration";
+    taskInfo.title = "Visitor Request";
+    taskInfo.height = 510;
+    taskInfo.width = 430;
+    taskInfo.fallbackUrl = taskInfo.url;
+    microsoftTeams.tasks.startTask(taskInfo, this.submitHandler);
+  }
+
+  public submitHandler(err, result) {
+    if (result.action == "ticketcomplete") {
+      let taskInfo = {
+        height: null,
+        width: null,
+        url: null,
+        fallbackUrl: null
+      };
+      taskInfo.url =
+        "https://employeeconnect-9566.azurewebsites.net/ticketcomplete?ticketNoId=" +
+        result.ticketNo +
+        "&description=" +
+        result.TDescription +
+        "&category=" +
+        result.TCategory +
+        "&priority=" +
+        result.TPriority;
+      taskInfo.height = 510;
+      taskInfo.width = 430;
+      taskInfo.fallbackUrl = taskInfo.url;
+      microsoftTeams.tasks.startTask(taskInfo);
+    }
+    if (result.action == "createTicket") {
+      let taskInfo = {
+        height: null,
+        width: null,
+        url: null,
+        fallbackUrl: null
+      };
+      taskInfo.url =
+        "https://employeeconnect-9566.azurewebsites.net/createticket";
+      taskInfo.height = "medium";
+      taskInfo.width = "medium";
+      taskInfo.fallbackUrl = taskInfo.url;
+      microsoftTeams.tasks.startTask(taskInfo, this.submitHandler);
+    }
+    if (result.action == "sendrequest") {
+      let taskInfo = {
+        height: null,
+        width: null,
+        url: null,
+        fallbackUrl: null
+      };
+      taskInfo.url =
+        "https://employeeconnect-9566.azurewebsites.net/sendrequest?=" +
+        result.vDate +
+        "&Time=" +
+        result.vTime;
+      taskInfo.height = "medium";
+      taskInfo.width = "medium";
+      taskInfo.fallbackUrl = taskInfo.url;
+      microsoftTeams.tasks.startTask(taskInfo);
+    }
   }
 
   protected get dataVersion(): Version {

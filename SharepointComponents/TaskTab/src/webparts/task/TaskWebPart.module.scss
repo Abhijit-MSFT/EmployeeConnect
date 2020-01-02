@@ -5,8 +5,49 @@
   .container {
     max-width: auto;
     margin: 0px auto;
+    position: relative;
+    top: -18px;
+  }
+  .tableGrid {
+    position: relative;
+    top: -20px;
+    background: #fff;
+  }
+  .grid1_b73c1c19 {
+    width: 22% !important;
   }
 
+  .grid2_b73c1c19 {
+    width: 22% !important;
+  }
+
+  .subheading_b73c1c19 {
+    margin: 10px;
+  }
+
+  .heading_b73c1c19 {
+    margin-top: 20px;
+  }
+
+  thead {
+    background: #f8f8f8;
+  }
+
+  th {
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  td {
+    font-size: 11px;
+    font-weight: 400;
+    color: #333;
+  }
+
+  a.button_b73c1c19 {
+    background: transparent !important;
+    color: #3b8ce3 !important;
+  }
   .row {
     @include ms-Grid-row;
     @include ms-fontColor-white;
@@ -22,18 +63,42 @@
     @include ms-xlPush2;
     @include ms-lgPush1;
   }
-
+  .taskTab_bb7e768f .subheading_bb7e768f {
+    font-size: 13px;
+    color: gray;
+    cursor: pointer;
+  }
   .heading {
     font-size: 22px;
     color: black;
   }
-
-  .subheading {
+  .headingPending {
+    font-size: 22px;
+    margin-top: 25px;
+    color: black;
+  }
+  .taskTab_bb7e768f .heading_bb7e768f {
     font-size: 18px;
-    color: gray;
-    cursor: pointer;
+    font-weight: 500;
+    padding-bottom: 5px;
+    padding-top: 0px;
   }
 
+  table.container_bb7e768f {
+    margin-top: 0px !important;
+    border: none !important;
+    position: relative;
+    top: -18px;
+  }
+  .subheading {
+    font-size: 13px;
+    color: gray;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .heading_d5fef6f0 {
+    margin-bottom: 30px !important;
+  }
   .title {
     color: black;
     font-weight: bold;
@@ -43,7 +108,7 @@
   }
 
   .review {
-    color: blueviolet;
+    color: #0078d4;
     cursor: pointer;
 
     &:hover {
@@ -64,6 +129,7 @@
     background-repeat: no-repeat;
     left: 0 !important;
     height: 160px;
+    width: 22% !important;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
 
@@ -72,18 +138,38 @@
     background-repeat: no-repeat;
     margin-left: 2%;
   }
+  td,
+  th {
+    border-left: none !important;
+    border-right: none !important;
+    color: black;
+  }
+
+  .heading_8e03eadd {
+    margin-top: 25px !important;
+    padding-bottom: 5px;
+  }
+
+  tbody#spInvoiceListContainer {
+    position: relative;
+  }
+
+  a.button_8e03eadd {
+    background: transparent !important;
+    color: #0078d4 !important;
+  }
 
   .button {
     text-decoration: none;
     height: 32px;
     min-width: 80px;
-    background-color: $ms-color-themePrimary;
+    background: transparent !important;
+    color: #0078d4 !important;
     border-color: $ms-color-themePrimary;
-    color: $ms-color-white;
     outline: transparent;
     position: relative;
-    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue",
-      sans-serif;
+    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system,
+      BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: $ms-font-size-m;
     font-weight: $ms-font-weight-regular;
@@ -99,6 +185,7 @@
       font-size: $ms-font-size-m;
       height: 32px;
       line-height: 32px;
+      font-family: "Segoe UI";
       margin: 0 4px;
       vertical-align: top;
       display: inline-block;
@@ -107,7 +194,8 @@
 
   .list {
     color: #333333;
-    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial, sans-serif;
+    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial,
+      sans-serif;
     font-size: 14px;
     font-weight: normal;
     box-sizing: border-box;
@@ -121,7 +209,8 @@
   .listItem {
     color: #333333;
     vertical-align: center;
-    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial, sans-serif;
+    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial,
+      sans-serif;
     font-size: 14px;
     font-weight: normal;
     box-sizing: border-box;
@@ -132,7 +221,7 @@
     padding: 9px 28px 3px;
     position: relative;
   }
-  .panel{
+  .panel {
     padding: 10px 0 10px 0;
     background-color: #fff;
     border-bottom: 1px solid #e8e4e4;
@@ -141,12 +230,14 @@
   @media (max-width: 768px) {
     .grid1,
     .grid2 {
-      width: 49%;
+      display: none;
+      width: 22%;
     }
   }
   @media (max-width: 425px) {
     .grid1,
     .grid2 {
+      display: none;
       width: 100%;
     }
     .grid2 {
