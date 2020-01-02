@@ -1,5 +1,12 @@
 @import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
-
+@font-face {
+  font-family: "Teams Assets";
+  src: url("https://github.com/Abhijit-MSFT/EmployeeConnect/blob/master/SharepointComponents/TaskTab/dist/fonts/TeamsAssets-Light.woff")
+      format("woff"),
+    url("https://github.com/Abhijit-MSFT/EmployeeConnect/blob/master/SharepointComponents/TaskTab/dist/fonts/TeamsAssets-Light.woff")
+      format("woff2");
+  font-style: normal;
+}
 .preferencesTab {
   .container {
     width: 100%;
@@ -7,7 +14,8 @@
     margin: auto;
   }
 
-  .row:first-child, .row2 {
+  .row:first-child,
+  .row2 {
     @include ms-Grid-row;
     @include ms-fontColor-white;
     // background-color: $ms-color-themeDark;
@@ -15,7 +23,7 @@
     border-bottom: 5px solid #f3f2f1;
     margin: 0 !important;
   }
-.row3 {
+  .row3 {
     @include ms-Grid-row;
     @include ms-fontColor-white;
     padding: 20px;
@@ -37,6 +45,7 @@
     font-weight: 400;
     font-family: "Segoe UI";
   }
+
   .title {
     @include ms-font-xl;
     color: black;
@@ -239,9 +248,9 @@
     bottom: 5px;
     color: #aeadad;
   }
-:checked + .textalign {
+  :checked + .textalign {
     color: black;
-}
+  }
 
   .datecontrol {
     width: 200px;
@@ -258,5 +267,5 @@
     left: 14px;
     border: none;
     cursor: pointer;
-}
+  }
 }
