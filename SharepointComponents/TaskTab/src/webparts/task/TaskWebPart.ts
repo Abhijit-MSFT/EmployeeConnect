@@ -139,7 +139,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
               <td>${item.VendorName}</td>
               <td id="vendorNo">${item.InvoiceNo}</td>
               <td>&#8377; ${item.TotalAmount}</td>
-              <td id="buttonReview" name="buttonReview" value=${item.PoNumber} alt=${item.InvoiceNo} class="${styles.review} reviewButton" id='review'>Review</td>          
+              <td id="buttonReview" name="buttonReview" value=${item.PoNumber} alt=${item.InvoiceNo} class="${styles.review} reviewButton" id='review'>Review</td>
               </tr>
 `;
       //this._setButtonEventHandlers();
@@ -173,9 +173,9 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
               <td>${item.Vendorname}</td>
               <td id="vendorNo">${item.Vendorno_x002e_}</td>
                <td>&#8377; ${item.Amount}</td>
-               
+
                <td id="buttonReview" name="buttonReview"  value = ${item.POno_x002e_} alt=${item.Vendorno_x002e_} class="${styles.review} reviewButton" id='review'>Review</td>
-            
+
                </tr>
 `;
       //this._setButtonEventHandlers();
@@ -217,7 +217,9 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       <div class="${styles.taskTab}">
        <div class="${
          styles.heading
-       }" style="padding-bottom: 20px !important;"> Pending submissions </div>
+       }" style="padding-bottom: 20px !important;" id="${
+      styles.ps
+    }"> Pending submissions </div>
         <div class="${styles.container}">
           <div class="${styles.row}">
             <div class="${styles.grid1}">
@@ -243,10 +245,11 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         <div class="${styles.row}">
         <div class="${styles.headingPending}"> Pending approvals </div>
          <div class="${styles.subheading}">Purchased order (${poCount})</div>
-        <table class="${styles.container} table table-bordered">
+        <table class="${styles.container} table">
           <thead>
             <tr>
               <th scope="col">Po no.</th>
+              <th scope="col"></th>
               <th scope="col">Description</th>
               <th scope="col">Vendor name</th>
               <th scope="col">Vendor no.</th>
@@ -255,14 +258,14 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             </tr>
           </thead>
             <tbody id="spTaskListContainer">
-               ${this._renderListAsync()}            
+               ${this._renderListAsync()}
             </tbody>
         </table>
         </div>
           <div class="${styles.subheading}">Invoice (${invoiceCount})
       </div>
-   
-         <table class="${styles.tableGrid} table table-bordered">
+
+         <table class="table">
           <thead>
             <tr>
               <th scope="col">Invoice no.</th>
@@ -275,8 +278,8 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             </tr>
           </thead>
           <tbody id="spInvoiceListContainer">
-            ${this._renderInvoiceListAsync()}    
-       
+            ${this._renderInvoiceListAsync()}
+
           </tbody>
         </table>
       <div class="${styles.subheading}">Inventory (0)</div>

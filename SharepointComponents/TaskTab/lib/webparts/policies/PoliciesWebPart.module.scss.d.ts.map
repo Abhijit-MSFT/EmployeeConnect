@@ -1,1 +1,1 @@
-{"version":3,"file":"PoliciesWebPart.module.scss.d.ts","sourceRoot":"","sources":["../../../src/webparts/policies/PoliciesWebPart.module.scss.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,MAAM;;;;;;;;;;;;;;;CAeX,CAAC;AAEF,eAAe,MAAM,CAAC"}
+{"version":3,"file":"PoliciesWebPart.module.scss.d.ts","sourceRoot":"","sources":["../../../src/webparts/policies/PoliciesWebPart.module.scss.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,MAAM;;;;;;;;;;;;;;;;CAgBX,CAAC;AAEF,eAAe,MAAM,CAAC"}

@@ -1,5 +1,8 @@
 declare const styles: {
     toolTab: string;
+    grid1: string;
+    heading: string;
+    grid2: string;
     row: string;
     column: string;
     'ms-Grid': string;
@@ -41,19 +44,6 @@ declare const styles: {
     timesheetdes: string;
     SIdes: string;
     createicon: string;
-    'ticket-creation': string;
-    'leave-request': string;
-    policies: string;
-    'download-payslip': string;
-    'create-finance-tkt': string;
-    'submit-benefits': string;
-    support: string;
-    'wife-request': string;
-    'event-support': string;
-    'cafe-service': string;
-    Inventory: string;
-    'RO-timesheet': string;
-    'Ro-SI': string;
 };
 export default styles;
 //# sourceMappingURL=ToolTabWebPart.module.scss.d.ts.map

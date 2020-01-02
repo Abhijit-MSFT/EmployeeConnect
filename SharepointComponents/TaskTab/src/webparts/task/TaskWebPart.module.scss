@@ -8,11 +8,6 @@
     position: relative;
     top: -18px;
   }
-  .tableGrid {
-    position: relative;
-    top: -20px;
-    background: #fff;
-  }
   .grid1_b73c1c19 {
     width: 22% !important;
   }
@@ -82,13 +77,6 @@
     font-weight: 500;
     padding-bottom: 5px;
     padding-top: 0px;
-  }
-
-  table.container_bb7e768f {
-    margin-top: 0px !important;
-    border: none !important;
-    position: relative;
-    top: -18px;
   }
   .subheading {
     font-size: 13px;
@@ -236,12 +224,17 @@
   }
   @media (max-width: 425px) {
     .grid1,
-    .grid2 {
+    .grid2,
+    #ps {
       display: none;
-      width: 100%;
     }
     .grid2 {
       margin: 10px 0 0 0;
+    }
+    thead th,
+    .heading,
+    .subheading {
+      font-size: xx-small;
     }
   }
 }

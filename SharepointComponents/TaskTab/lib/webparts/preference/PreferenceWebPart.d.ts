@@ -9,7 +9,7 @@ export interface PreferenceModel {
 }
 export interface userInfo {
     UserName: string;
-    UniqueID0: string;
+    Uni_ID: string;
     TenantID: string;
     ServiceURL: string;
     SelectedCategories: [""];

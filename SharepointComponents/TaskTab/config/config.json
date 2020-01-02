@@ -41,7 +41,7 @@
       "globalName": "jquery"
     },
     "bootstrap": {
-      "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
+      "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js",
       "globalName": "bootstrap",
       "globalDependencies": [
         "jquery"

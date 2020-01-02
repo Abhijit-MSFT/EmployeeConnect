@@ -78,4 +78,13 @@
   .hrdetails {
     margin-left: 15%;
   }
+  #hr{
+    display: none;
+  }
+
+  @media (max-width: 425px){
+  #hr{
+    display: block;
+  }
+}
 }

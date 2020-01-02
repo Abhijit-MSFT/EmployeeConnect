@@ -27,7 +27,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
     SPComponentLoader.loadCss(cssURL);
 
     this.domElement.innerHTML = `
-      <div class="${styles.toolTab} id="accordion"">
+      <div class="${styles.toolTab}" id="accordion">
         <div class="${styles.row}">
         <div class="col-12" >
           <div class="${styles.HR} ar accordion-toggle"

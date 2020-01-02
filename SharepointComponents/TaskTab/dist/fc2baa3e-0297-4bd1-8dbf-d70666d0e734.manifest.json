@@ -38,15 +38,14 @@
         "type": "path",
         "path": "dist/policies-web-part.js"
       },
+      "jquery": {
+        "type": "path",
+        "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
+        "globalName": "jquery"
+      },
       "PoliciesWebPartStrings": {
         "defaultPath": "lib/webparts/policies/loc/en-us.js",
-        "type": "localizedPath",
-        "paths": {}
-      },
-      "@microsoft/sp-webpart-base": {
-        "type": "component",
-        "version": "1.9.1",
-        "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
+        "type": "localizedPath"
       },
       "@microsoft/sp-core-library": {
         "type": "component",
@@ -57,6 +56,11 @@
         "type": "component",
         "version": "1.9.1",
         "id": "1c6c9123-7aac-41f3-a376-3caea41ed83f"
+      },
+      "@microsoft/sp-webpart-base": {
+        "type": "component",
+        "version": "1.9.1",
+        "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
       }
     }
   }

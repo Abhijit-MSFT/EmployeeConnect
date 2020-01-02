@@ -1,9 +1,20 @@
 import { Version } from "@microsoft/sp-core-library";
 import { BaseClientSideWebPart, IPropertyPaneConfiguration } from "@microsoft/sp-webpart-base";
-import "jquery";
-import "bootstrap";
 export interface ITaskTabWebPartProps {
     description: string;
+    POLength: number;
+    InvoiceLentgh: number;
+}
+export interface ISPPOLists {
+    value: ISPPODetail[];
+}
+export interface ISPPODetail {
+    PONumber: string;
+    InvoiceNo: string;
+    ItemCode: string;
+    ItemDescription: string;
+    UnitPrice: string;
+    Quantity: string;
 }
 export interface ISPTaskLists {
     value: ISPTaskList[];
@@ -16,6 +27,8 @@ export interface ISPTaskList {
     VendorNo: string;
     TotalAmount: string;
     PoStatus: string;
+    Title?: string;
+    Id: number;
 }
 export interface ISPInvoiceLists {
     value: ISInvoiceList[];
@@ -27,9 +40,13 @@ export interface ISInvoiceList {
     Vendorname: string;
     Vendorno_x002e_: string;
     Amount: string;
+    Title?: string;
+    Id: number;
 }
 export default class TaskTabWebPart extends BaseClientSideWebPart<ITaskTabWebPartProps> {
+    constructor();
     private _getTaskListData;
+    private _getPODetailList;
     private _getInvoiceListData;
     private _renderTaskList;
     private _renderInvoiceList;
@@ -37,7 +54,12 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<ITaskTabWebPar
     private _renderInvoiceListAsync;
     render(): void;
     private _setButtonEventHandlers;
-    private submitHandler;
+    private pendingDates;
+    private submitPurchaseOrder;
+    private getLatestItemId;
+    private UpdateListItem;
+    private deleteItem;
+    submitHandler(err: any, result: any): void;
     protected readonly dataVersion: Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
 }
