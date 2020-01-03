@@ -76,10 +76,92 @@ export default class PoliciesWebPart extends BaseClientSideWebPart<
                   >
                   <span class="HR">Human resources</span>
                   </a>
-                      <div id='hr' class="panel-collapse">
-                        <div class="service">Service</div>
-                      </div>
 
+                        <div class="${styles.service}">
+                      <div class="${styles.head}">
+                          <h4>Human Resource Policies</h4>
+                          This document contains all policies-related information for employees.
+                          Please contact your HR representative for any queries.
+                      </div>
+                        <h6 class="${styles.subheading}">1.1 Annual Leave</h6>
+                          <p class="${styles.subsubheading}">
+                            Important guidelines for the annual leave policy are listed below:
+                          </p>
+                              <ul class="${styles.bulletpts}">
+                                <li>
+                                  All employees are entitled to a total of 15 annual leaves during the
+                                  calendar year
+                                </li>
+                                <li>
+                                  The annual leave cycle is based on calendar year (January 1 to
+                                  December 31)
+                                </li>
+                                <li>
+                                  Weekly off/holidays falling during the leave period are excluded
+                                  from the number of leave days taken
+                                </li>
+                                <li>
+                                  Only 5 unused annual leaves can be carried forward to the next
+                                  calendar year
+                                </li>
+                                <li>
+                                  Employees who join during the course of the year will receive annual
+                                  leaves on a pro-rated basis
+                                </li>
+                                <li>
+                                  If an employee leaves during the leave cycle and has taken more
+                                  leaves than the eligibility, the excess leaves taken will be
+                                  adjusted against the full and final settlement
+                                </li>
+                                <li>
+                                  All employees need to apply for leaves using the designated vacation
+                                  tool
+                                </li>
+                                <li>
+                                  All annual leaves must be approved by managers before the leave
+                                  period begins
+                                </li>
+                              </ul>
+                                    <h6 class="${styles.subheading}">1.2 Sick Leave</h6>
+                                        <p class="${styles.subsubheading}">
+                                          Important guidelines for the sick leave policy are listed below:
+                                        </p>
+                                            <ul class="${styles.bulletpts}">
+                                              <li>
+                                                All employees are entitled to a total of 12 sick leaves during the
+                                                calendar year
+                                              </li>
+                                              <li>
+                                                The sick leave cycle is based on calendar year (January 1 to
+                                                December 31)
+                                              </li>
+                                              <li>
+                                                Weekly off/holidays falling during the leave period are excluded
+                                                from the number of leave days taken
+                                              </li>
+                                              <li>
+                                                Unused sick leaves cannot be carried forward to the next calendar
+                                                year
+                                              </li>
+                                              <li>
+                                                Employees who join during the course of the year will receive sick
+                                                leaves on a pro-rated basis
+                                              </li>
+                                              <li>
+                                                If an employee leaves during the leave cycle and has taken more
+                                                leaves than the eligibility, the excess leaves taken will be
+                                                adjusted against the full and final settlement
+                                              </li>
+                                              <li>
+                                                All employees need to apply for sick leaves using the designated
+                                                vacation tool after re-joining work
+                                              </li>
+                                              <li>
+                                                If an employee takes more than 5 consecutive sick leaves, he/she
+                                                will be required to furnish a medical certificate
+                                              </li>
+                                            </ul>
+                      </div>
                   <a class="${styles}" href="#heading2">
                     <span class="PB">Pay & Benefits</span>
                   </a>

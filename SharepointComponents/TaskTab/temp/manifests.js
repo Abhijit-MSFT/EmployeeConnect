@@ -988,27 +988,28 @@ var MANIFESTS_ARRAY = [
         },
         "PreferenceWebPartStrings": {
           "defaultPath": "lib/webparts/preference/loc/en-us.js",
-          "type": "localizedPath"
+          "type": "localizedPath",
+          "paths": {}
         },
-        "@microsoft/sp-core-library": {
+        "@microsoft/sp-webpart-base": {
           "type": "component",
           "version": "1.9.1",
-          "id": "7263c7d0-1d6a-45ec-8d85-d4d1d234171b"
+          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         },
         "@microsoft/sp-http": {
           "type": "component",
           "version": "1.9.1",
           "id": "c07208f0-ea3b-4c1a-9965-ac1b825211a6"
         },
+        "@microsoft/sp-core-library": {
+          "type": "component",
+          "version": "1.9.1",
+          "id": "7263c7d0-1d6a-45ec-8d85-d4d1d234171b"
+        },
         "@microsoft/sp-loader": {
           "type": "component",
           "version": "1.9.1",
           "id": "1c6c9123-7aac-41f3-a376-3caea41ed83f"
-        },
-        "@microsoft/sp-webpart-base": {
-          "type": "component",
-          "version": "1.9.1",
-          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         }
       }
     }
@@ -1052,22 +1053,28 @@ var MANIFESTS_ARRAY = [
           "type": "path",
           "path": "dist/tool-tab-web-part.js"
         },
-        "bootstrap": {
-          "type": "path",
-          "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
-          "globalDependencies": [
-            "jquery"
-          ],
-          "globalName": "bootstrap"
-        },
         "jquery": {
           "type": "path",
           "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
           "globalName": "jquery"
         },
+        "bootstrap": {
+          "type": "path",
+          "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js",
+          "globalDependencies": [
+            "jquery"
+          ],
+          "globalName": "bootstrap"
+        },
         "ToolTabWebPartStrings": {
           "defaultPath": "lib/webparts/toolTab/loc/en-us.js",
-          "type": "localizedPath"
+          "type": "localizedPath",
+          "paths": {}
+        },
+        "@microsoft/sp-webpart-base": {
+          "type": "component",
+          "version": "1.9.1",
+          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         },
         "@microsoft/sp-core-library": {
           "type": "component",
@@ -1078,11 +1085,6 @@ var MANIFESTS_ARRAY = [
           "type": "component",
           "version": "1.9.1",
           "id": "1c6c9123-7aac-41f3-a376-3caea41ed83f"
-        },
-        "@microsoft/sp-webpart-base": {
-          "type": "component",
-          "version": "1.9.1",
-          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         }
       }
     }
@@ -1134,7 +1136,13 @@ var MANIFESTS_ARRAY = [
         },
         "PoliciesWebPartStrings": {
           "defaultPath": "lib/webparts/policies/loc/en-us.js",
-          "type": "localizedPath"
+          "type": "localizedPath",
+          "paths": {}
+        },
+        "@microsoft/sp-webpart-base": {
+          "type": "component",
+          "version": "1.9.1",
+          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         },
         "@microsoft/sp-core-library": {
           "type": "component",
@@ -1145,11 +1153,6 @@ var MANIFESTS_ARRAY = [
           "type": "component",
           "version": "1.9.1",
           "id": "1c6c9123-7aac-41f3-a376-3caea41ed83f"
-        },
-        "@microsoft/sp-webpart-base": {
-          "type": "component",
-          "version": "1.9.1",
-          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         }
       }
     }
@@ -1196,27 +1199,28 @@ var MANIFESTS_ARRAY = [
         },
         "TaskWebPartStrings": {
           "defaultPath": "lib/webparts/task/loc/en-us.js",
-          "type": "localizedPath"
+          "type": "localizedPath",
+          "paths": {}
         },
-        "@microsoft/sp-core-library": {
+        "@microsoft/sp-webpart-base": {
           "type": "component",
           "version": "1.9.1",
-          "id": "7263c7d0-1d6a-45ec-8d85-d4d1d234171b"
+          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         },
         "@microsoft/sp-http": {
           "type": "component",
           "version": "1.9.1",
           "id": "c07208f0-ea3b-4c1a-9965-ac1b825211a6"
         },
+        "@microsoft/sp-core-library": {
+          "type": "component",
+          "version": "1.9.1",
+          "id": "7263c7d0-1d6a-45ec-8d85-d4d1d234171b"
+        },
         "@microsoft/sp-loader": {
           "type": "component",
           "version": "1.9.1",
           "id": "1c6c9123-7aac-41f3-a376-3caea41ed83f"
-        },
-        "@microsoft/sp-webpart-base": {
-          "type": "component",
-          "version": "1.9.1",
-          "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         }
       }
     }

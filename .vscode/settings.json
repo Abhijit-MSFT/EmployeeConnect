@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "Invoiceno",
+        "Ldes",
         "Newsnotification",
         "Notificaition",
         "Oreason",
@@ -9,7 +10,9 @@
         "allradio",
         "antialiased",
         "bulletpts",
+        "cbody",
         "columnheight",
+        "createicon",
         "datecontrol",
         "donedecline",
         "forin",
@@ -18,6 +21,7 @@
         "preconfigured",
         "purchaseorder",
         "radiolabel",
+        "shadowsm",
         "subsubheading",
         "textalign"
     ]

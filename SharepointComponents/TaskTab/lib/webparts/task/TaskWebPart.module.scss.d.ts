@@ -17,9 +17,13 @@ declare const styles: {
     subheading: string;
     heading_d5fef6f0: string;
     title: string;
+    title2: string;
+    ft: string;
     review: string;
     grid1: string;
     grid2: string;
+    img: string;
+    img2: string;
     heading_8e03eadd: string;
     spInvoiceListContainer: string;
     button_8e03eadd: string;

@@ -13,7 +13,7 @@ declare const styles: {
     subsubheading: string;
     bulletpts: string;
     hrdetails: string;
-    hr: string;
+    service: string;
 };
 export default styles;
 //# sourceMappingURL=PoliciesWebPart.module.scss.d.ts.map

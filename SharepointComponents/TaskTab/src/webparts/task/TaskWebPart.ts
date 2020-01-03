@@ -21,6 +21,9 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { SPComponentLoader } from "@microsoft/sp-loader";
 import { IframeHTMLAttributes } from "react";
 microsoftTeams.initialize();
+const leaderImgSrc = "1.jpg";
+
+
 let poCount = 0;
 let invoiceCount = 0;
 let renderFlag = true;
@@ -223,21 +226,27 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         <div class="${styles.container}">
           <div class="${styles.row}">
             <div class="${styles.grid1}">
-              <span class="${styles.title}">12 Days of pending timesheet</span>
+            <div class="${styles.img}"></div>
+            <h5 class="${styles.title}">12</h5>
+            <h6 class="${styles.title2}">Days of pending timesheet</h6>
+            <div class="${styles.ft}">
+              Fill timesheet >
+              <span class="chevron-right"></span>
+            </div>
               <div>
-              <a class="${styles.button}">
-                <span id="full-timesheet" class="${
-                  styles.label
-                }">Fill timesheet ></span>
-              </a>
               </div>
             </div>
              <div class="${styles.grid2}">
-              <span class="${styles.title}">$25,000 Unreconciled expenses</span>
+             <div class="${styles.img2}"></div>
+              <h5 class="${styles.title}">
+              <span class="currency">&#x20b9;</span> 25,000
+            </h5>
+            <h6 class="${styles.title2}">Amount of unreconciled expenses</h6>
               <div>
-              <a href="https://aka.ms/spfx" class="${styles.button}">
-                <span class="${styles.label}">Sumbit expenses ></span>
-              </a>
+              <div class="${styles.ft}">
+              Submit expenses >
+              <span class="chevron-right"></span>
+            </div>
               </div>
             </div>
           </div>
