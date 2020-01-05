@@ -21,6 +21,9 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { SPComponentLoader } from "@microsoft/sp-loader";
 import { IframeHTMLAttributes } from "react";
 microsoftTeams.initialize();
+const leaderImgSrc = "1.jpg";
+
+
 let poCount = 0;
 let invoiceCount = 0;
 let renderFlag = true;
@@ -139,7 +142,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
               <td>${item.VendorName}</td>
               <td id="vendorNo">${item.InvoiceNo}</td>
               <td>&#8377; ${item.TotalAmount}</td>
-              <td id="buttonReview" name="buttonReview" value=${item.PoNumber} alt=${item.InvoiceNo} class="${styles.review} reviewButton" id='review'>Review</td>          
+              <td id="buttonReview" name="buttonReview" value=${item.PoNumber} alt=${item.InvoiceNo} class="${styles.review} reviewButton" id='review'>Review</td>
               </tr>
 `;
       //this._setButtonEventHandlers();
@@ -173,9 +176,9 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
               <td>${item.Vendorname}</td>
               <td id="vendorNo">${item.Vendorno_x002e_}</td>
                <td>&#8377; ${item.Amount}</td>
-               
+
                <td id="buttonReview" name="buttonReview"  value = ${item.POno_x002e_} alt=${item.Vendorno_x002e_} class="${styles.review} reviewButton" id='review'>Review</td>
-            
+
                </tr>
 `;
       //this._setButtonEventHandlers();
@@ -217,25 +220,33 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       <div class="${styles.taskTab}">
        <div class="${
          styles.heading
-       }" style="padding-bottom: 20px !important;"> Pending submissions </div>
+       }" style="padding-bottom: 20px !important;" id="${
+      styles.ps
+    }"> Pending submissions </div>
         <div class="${styles.container}">
           <div class="${styles.row}">
             <div class="${styles.grid1}">
-              <span class="${styles.title}">12 Days of pending timesheet</span>
+            <div class="${styles.img}"></div>
+            <h5 class="${styles.title}">12</h5>
+            <h6 class="${styles.title2}">Days of pending timesheet</h6>
+            <div class="${styles.ft}">
+              Fill timesheet >
+              <span class="chevron-right"></span>
+            </div>
               <div>
-              <a class="${styles.button}">
-                <span id="full-timesheet" class="${
-                  styles.label
-                }">Fill timesheet ></span>
-              </a>
               </div>
             </div>
              <div class="${styles.grid2}">
-              <span class="${styles.title}">$25,000 Unreconciled expenses</span>
+             <div class="${styles.img2}"></div>
+              <h5 class="${styles.title}">
+              <span class="currency">&#x20b9;</span> 25,000
+            </h5>
+            <h6 class="${styles.title2}">Amount of unreconciled expenses</h6>
               <div>
-              <a href="https://aka.ms/spfx" class="${styles.button}">
-                <span class="${styles.label}">Sumbit expenses ></span>
-              </a>
+              <div class="${styles.ft}">
+              Submit expenses >
+              <span class="chevron-right"></span>
+            </div>
               </div>
             </div>
           </div>
@@ -243,10 +254,11 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         <div class="${styles.row}">
         <div class="${styles.headingPending}"> Pending approvals </div>
          <div class="${styles.subheading}">Purchased order (${poCount})</div>
-        <table class="${styles.container} table table-bordered">
+        <table class="${styles.container} table">
           <thead>
             <tr>
               <th scope="col">Po no.</th>
+              <th scope="col"></th>
               <th scope="col">Description</th>
               <th scope="col">Vendor name</th>
               <th scope="col">Vendor no.</th>
@@ -255,14 +267,14 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             </tr>
           </thead>
             <tbody id="spTaskListContainer">
-               ${this._renderListAsync()}            
+               ${this._renderListAsync()}
             </tbody>
         </table>
         </div>
           <div class="${styles.subheading}">Invoice (${invoiceCount})
       </div>
-   
-         <table class="${styles.tableGrid} table table-bordered">
+
+         <table class="table">
           <thead>
             <tr>
               <th scope="col">Invoice no.</th>
@@ -275,8 +287,8 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             </tr>
           </thead>
           <tbody id="spInvoiceListContainer">
-            ${this._renderInvoiceListAsync()}    
-       
+            ${this._renderInvoiceListAsync()}
+
           </tbody>
         </table>
       <div class="${styles.subheading}">Inventory (0)</div>

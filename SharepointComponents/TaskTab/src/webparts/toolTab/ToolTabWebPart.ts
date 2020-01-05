@@ -27,234 +27,237 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
     SPComponentLoader.loadCss(cssURL);
 
     this.domElement.innerHTML = `
-      <div class="${styles.toolTab} id="accordion"">
+      <div class="${styles.toolTab}" id="accordion">
         <div class="${styles.row}">
-        <div class="col-12" >
-          <div class="${styles.HR} ar accordion-toggle"
-                  data-toggle="collapse"
-                  data-parent="#accordion"
-                  data-target="#HRtools" aria-expanded="false"
-                  >Human Resources
-                </div>
-          <div class="${styles.P10} panel-collapse" id="HRtools">
-            <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody}>
-                <span
-                  alt-name="create letter"
-                  class=${styles.createicon}
-                ></span>
-                <div class="${styles.CBL}">Create business letter</div>
-                <p class="${styles.CBLdes}">
-                  Create a business letter within a predesigned color and
-                  template.
-                </p>
-              </div>
-              </div>
+          <div class="col-12" >
+            <div class="${styles.HR} ar accordion-toggle"
+                    data-toggle="collapse"
+                    data-parent="#accordion"
+                    data-target="#HRtools" aria-expanded="false"
+                    >Human Resources
+                  </div>
+                    <div class="${styles.P10} panel-collapse" id="HRtools">
+                      <div class="${styles.card} ${styles.shadowsm}">
+                        <div class=${styles.cbody}>
+                          <span
+                            alt-name="create letter"
+                            class=${styles.createicon}
+                          ></span>
+                          <div class="${styles.CBL}">Create business letter</div>
+                          <p class="${styles.CBLdes}">
+                            Create a business letter within a predesigned color and
+                            template.
+                          </p>
+                        </div>
+                        </div>
 
-            <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody} id="createTicket">
-                <span
-                  alt-name="create letter"
-                  class=${styles.createicon}
-                ></span>
-                <div class="${styles.CBL}">Create ticket</div>
-                <p class="${styles.CBLdes}">
-                For all HR tickets, the ticket type is being set as Employee Support.
-                </p>
-              </div>
-              </div>
+                        <div class="${styles.card} ${styles.shadowsm}">
+                          <div class=${styles.cbody} id="createTicket">
+                            <span
+                              alt-name="create letter"
+                              class=${styles.createicon}
+                            ></span>
+                            <div class="${styles.CBL}">Create ticket</div>
+                            <p class="${styles.CBLdes}">
+                            For all HR tickets, the ticket type is being set as Employee Support.
+                            </p>
+                          </div>
+                          </div>
 
-              <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody}>
-                <span
-                  alt-name="create letter"
-                  class=${styles.createicon}
-                ></span>
-                <div class="${styles.CBL}">Request leave</div>
-                <p class="${styles.CBLdes}">
-                Request leave and check your status in the Leave application.
-                </p>
-              </div>
-              </div>
+                          <div class="${styles.card} ${styles.shadowsm}">
+                          <div class=${styles.cbody}>
+                            <span
+                              alt-name="create letter"
+                              class=${styles.createicon}
+                            ></span>
+                            <div class="${styles.CBL}">Request leave</div>
+                            <p class="${styles.CBLdes}">
+                            Request leave and check your status in the Leave application.
+                            </p>
+                          </div>
+                          </div>
 
-              <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody}>
-                <span
-                  alt-name="create letter"
-                  class=${styles.createicon}
-                ></span>
-                <div class="${styles.CBL}">View policies</div>
-                <p class="${styles.CBLdes}">
-                Identify the purpose and objectives of HR department.
-                </p>
-              </div>
-              </div>
+                          <div class="${styles.card} ${styles.shadowsm}">
+                          <div class=${styles.cbody}>
+                            <span
+                              alt-name="create letter"
+                              class=${styles.createicon}
+                            ></span>
+                            <div class="${styles.CBL}">View policies</div>
+                            <p class="${styles.CBLdes}">
+                            Identify the purpose and objectives of HR department.
+                            </p>
+                          </div>
+                          </div>
+                  </div>
 
+                    <div class="${styles.HR} ar accordion-toggle"
+                    data-toggle="collapse"
+                    data-parent="#accordion"
+                    data-target="#Pay-benefits" aria-expanded="false"
+                    >Pay and benefits
+                  </div>
 
-              <div class="${styles.HR} ar accordion-toggle"
-              data-toggle="collapse"
-              data-parent="#accordion"
-              data-target="#Pay-benefits" aria-expanded="false"
-              >Pay and benefits
-            </div>
-      <div class="${styles.P10} panel-collapse" id="Pay-benefits">
-        <div class="${styles.card} ${styles.shadowsm}">
-          <div class=${styles.cbody}>
-            <span
-              alt-name="create letter"
-              class=${styles.createicon}
-            ></span>
-            <div class="${styles.CBL}">Download payslip</div>
-            <p class="${styles.CBLdes}">
-            View online pay slips and full payment histories.
-            </p>
-          </div>
-          </div>
+                    <div class="${styles.P10} panel-collapse" id="Pay-benefits">
+                      <div class="${styles.card} ${styles.shadowsm}">
+                        <div class=${styles.cbody}>
+                          <span
+                            alt-name="create letter"
+                            class=${styles.createicon}
+                          ></span>
+                          <div class="${styles.CBL}">Download payslip</div>
+                          <p class="${styles.CBLdes}">
+                          View online pay slips and full payment histories.
+                          </p>
+                        </div>
+                        </div>
 
-        <div class="${styles.card} ${styles.shadowsm}">
-          <div class=${styles.cbody}>
-            <span
-              alt-name="create letter"
-              class=${styles.createicon}
-            ></span>
-            <div class="${styles.CBL}">Create finance ticket</div>
-            <p class="${styles.CBLdes}">
-            Open a support ticket with the Finance and Operations support.
-            </p>
-          </div>
-          </div>
+                        <div class="${styles.card} ${styles.shadowsm}">
+                          <div class=${styles.cbody}>
+                            <span
+                              alt-name="create letter"
+                              class=${styles.createicon}
+                            ></span>
+                            <div class="${styles.CBL}">Create finance ticket</div>
+                            <p class="${styles.CBLdes}">
+                            Open a support ticket with the Finance and Operations support.
+                            </p>
+                          </div>
+                          </div>
 
-          <div class="${styles.card} ${styles.shadowsm}">
-          <div class=${styles.cbody}>
-            <span
-              alt-name="create letter"
-              class=${styles.createicon}
-            ></span>
-            <div class="${styles.CBL}">Submit benefits claim</div>
-            <p class="${styles.CBLdes}">
-            Submit a claim from your account to start the process.
-            </p>
-          </div>
-          </div>
+                          <div class="${styles.card} ${styles.shadowsm}">
+                          <div class=${styles.cbody}>
+                            <span
+                              alt-name="create letter"
+                              class=${styles.createicon}
+                            ></span>
+                            <div class="${styles.CBL}">Submit benefits claim</div>
+                            <p class="${styles.CBLdes}">
+                            Submit a claim from your account to start the process.
+                            </p>
+                          </div>
+                          </div>
 
-          <div class="${styles.card} ${styles.shadowsm}">
-          <div class=${styles.cbody}>
-            <span
-              alt-name="create letter"
-              class=${styles.createicon}
-            ></span>
-            <div class="${styles.CBL}">View benefits policies</div>
-            <p class="${styles.CBLdes}">
-            Read common queries about servicing your policy.
-            </p>
-          </div>
-          </div>
-
-
-          <div class="${styles.HR} ar accordion-toggle"
-          data-toggle="collapse"
-          data-parent="#accordion"
-          data-target="#itandfacilities" aria-expanded="false"
-          >IT and facilities
-        </div>
-  <div class="${styles.P10} panel-collapse" id="itandfacilities">
-    <div class="${styles.card} ${styles.shadowsm}">
-      <div class=${styles.cbody}>
-        <span
-          alt-name="create letter"
-          class=${styles.createicon}
-        ></span>
-        <div class="${styles.CBL}">Raise IT Support Ticket</div>
-        <p class="${styles.CBLdes}">
-        Submit your support case to review and respond.
-        </p>
-      </div>
-      </div>
-
-    <div class="${styles.card} ${styles.shadowsm}">
-      <div class=${styles.cbody} id="visitorRequest">
-        <span
-          alt-name="create letter"
-          class=${styles.createicon}
-        ></span>
-        <div class="${styles.CBL}">Submit Visitor Request</div>
-        <p class="${styles.CBLdes}">
-        Fill a request form for short-term visitors.
-        </p>
-      </div>
-      </div>
-
-      <div class="${styles.card} ${styles.shadowsm}">
-      <div class=${styles.cbody}>
-        <span
-          alt-name="create letter"
-          class=${styles.createicon}
-        ></span>
-        <div class="${styles.CBL}">Event IT Support request</div>
-        <p class="${styles.CBLdes}">
-        Fill out this form to request any equiepment for events.
-        </p>
-      </div>
-      </div>
-
-      <div class="${styles.card} ${styles.shadowsm}">
-      <div class=${styles.cbody}>
-        <span
-          alt-name="create letter"
-          class=${styles.createicon}
-        ></span>
-        <div class="${styles.CBL}">Cafeteria service app</div>
-        <p class="${styles.CBLdes}">
-        Emloyee can order and pay here without waiting in long queue. </p>
-      </div>
-      </div>
+                          <div class="${styles.card} ${styles.shadowsm}">
+                          <div class=${styles.cbody}>
+                            <span
+                              alt-name="create letter"
+                              class=${styles.createicon}
+                            ></span>
+                            <div class="${styles.CBL}">View benefits policies</div>
+                            <p class="${styles.CBLdes}">
+                            Read common queries about servicing your policy.
+                            </p>
+                          </div>
+                          </div>
+                    </div>
 
 
-      <div class="${styles.HR} ar accordion-toggle"
-                  data-toggle="collapse"
-                  data-parent="#accordion"
-                  data-target="#retail-operations" aria-expanded="false"
-                  >Retail operations
-                </div>
-          <div class="${styles.P10} panel-collapse" id="retail-operations">
-            <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody}>
-                <span
-                  alt-name="create letter"
-                  class=${styles.createicon}
-                ></span>
-                <div class="${styles.CBL}">Inventory request</div>
-                <p class="${styles.CBLdes}">
-                Inventory form to request supplies.
-                </p>
-              </div>
-              </div>
+                        <div class="${styles.HR} ar accordion-toggle"
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        data-target="#itandfacilities" aria-expanded="false"
+                        >IT and facilities
+                      </div>
+                        <div class="${styles.P10} panel-collapse" id="itandfacilities">
+                          <div class="${styles.card} ${styles.shadowsm}">
+                            <div class=${styles.cbody}>
+                              <span
+                                alt-name="create letter"
+                                class=${styles.createicon}
+                              ></span>
+                              <div class="${styles.CBL}">Raise IT Support Ticket</div>
+                              <p class="${styles.CBLdes}">
+                              Submit your support case to review and respond.
+                              </p>
+                            </div>
+                            </div>
 
-            <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody}>
-                <span
-                  alt-name="create letter"
-                  class=${styles.createicon}
-                ></span>
-                <div class="${styles.CBL}">Timesheet</div>
-                <p class="${styles.CBLdes}">
-                Weekly Timesheet setup.
-                  </p>
-              </div>
-              </div>
+                            <div class="${styles.card} ${styles.shadowsm}">
+                              <div class=${styles.cbody} id="visitorRequest">
+                                <span
+                                  alt-name="create letter"
+                                  class=${styles.createicon}
+                                ></span>
+                                <div class="${styles.CBL}">Submit Visitor Request</div>
+                                <p class="${styles.CBLdes}">
+                                Fill a request form for short-term visitors.
+                                </p>
+                              </div>
+                              </div>
 
-              <div class="${styles.card} ${styles.shadowsm}">
-              <div class=${styles.cbody}>
-                <span
-                  alt-name="create letter"
-                  class=${styles.createicon}
-                ></span>
-                <div class="${styles.CBL}">Store info</div>
-                <p class="${styles.CBLdes}">
-                Your store information.
-                </p>
-              </div>
-              </div>
+                              <div class="${styles.card} ${styles.shadowsm}">
+                              <div class=${styles.cbody}>
+                                <span
+                                  alt-name="create letter"
+                                  class=${styles.createicon}
+                                ></span>
+                                <div class="${styles.CBL}">Event IT Support request</div>
+                                <p class="${styles.CBLdes}">
+                                Fill out this form to request any equiepment for events.
+                                </p>
+                              </div>
+                              </div>
+
+                              <div class="${styles.card} ${styles.shadowsm}">
+                              <div class=${styles.cbody}>
+                                <span
+                                  alt-name="create letter"
+                                  class=${styles.createicon}
+                                ></span>
+                                <div class="${styles.CBL}">Cafeteria service app</div>
+                                <p class="${styles.CBLdes}">
+                                Emloyee can order and pay here without waiting in long queue. </p>
+                              </div>
+                              </div>
+                      </div>
+
+                    <div class="${styles.HR} ar accordion-toggle"
+                                data-toggle="collapse"
+                                data-parent="#accordion"
+                                data-target="#retail-operations" aria-expanded="false"
+                                >Retail operations
+                              </div>
+                              <div class="${styles.P10} panel-collapse" id="retail-operations">
+                                <div class="${styles.card} ${styles.shadowsm}">
+                                  <div class=${styles.cbody}>
+                                    <span
+                                      alt-name="create letter"
+                                      class=${styles.createicon}
+                                    ></span>
+                                    <div class="${styles.CBL}">Inventory request</div>
+                                    <p class="${styles.CBLdes}">
+                                    Inventory form to request supplies.
+                                    </p>
+                                  </div>
+                                  </div>
+
+                                  <div class="${styles.card} ${styles.shadowsm}">
+                                    <div class=${styles.cbody}>
+                                      <span
+                                        alt-name="create letter"
+                                        class=${styles.createicon}
+                                      ></span>
+                                      <div class="${styles.CBL}">Timesheet</div>
+                                      <p class="${styles.CBLdes}">
+                                      Weekly Timesheet setup.
+                                        </p>
+                                    </div>
+                                    </div>
+
+                                    <div class="${styles.card} ${styles.shadowsm}">
+                                    <div class=${styles.cbody}>
+                                      <span
+                                        alt-name="create letter"
+                                        class=${styles.createicon}
+                                      ></span>
+                                      <div class="${styles.CBL}">Store info</div>
+                                      <p class="${styles.CBLdes}">
+                                      Your store information.
+                                      </p>
+                                    </div>
+                                    </div>
+                                    </div>
 
               </div>
           </div>

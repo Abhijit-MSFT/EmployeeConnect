@@ -78,4 +78,16 @@
   .hrdetails {
     margin-left: 15%;
   }
+  .service{
+    display: none;
+  }
+
+  @media (max-width: 425px){
+  .column2{
+    display: none;
+  }
+  .service{
+    display: block;
+  }
+}
 }

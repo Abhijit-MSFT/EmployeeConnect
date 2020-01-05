@@ -20,7 +20,7 @@ import * as $ from "jquery";
 microsoftTeams.initialize();
 var updatePrefObj = {
     UserName: "",
-    UniqueID0: "",
+    Uni_ID: "",
     TenantID: "",
     ServiceURL: "",
     SelectedCategories: [""],
@@ -44,7 +44,7 @@ var categoriesArray = {
     readCatArr: [
         "Business",
         "Animation",
-        "Travel",
+        "AI",
         "Design",
         "IT",
         "Creative",
@@ -96,7 +96,7 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
         microsoftTeams.getContext(function (context) {
             updatePrefObj.UserName = context.userPrincipalName;
             updatePrefObj.TenantID = context.userObjectId;
-            updatePrefObj.UniqueID0 = context.tid;
+            updatePrefObj.Uni_ID = context.tid;
             existingUser = updatePrefObj.UserName;
         });
         return _this;
@@ -106,7 +106,7 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             _this.context.spHttpClient
-                .get(_this.context.pageContext.web.absoluteUrl + "/_api/web/lists/getbytitle('Preferences%20List')/items?$orderby=Id desc&$top=1&$select=id", SPHttpClient.configurations.v1, {
+                .get(_this.context.pageContext.web.absoluteUrl + "/_api/web/lists/getbytitle('PreferencesList')/items?$orderby=Id desc&$top=1&$select=id", SPHttpClient.configurations.v1, {
                 headers: {
                     Accept: "application/json;odata=nometadata",
                     "odata-version": ""
@@ -138,7 +138,7 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
             }
             latestItemId = itemId;
             console.log("Loading information about item ID: " + itemId + "...");
-            return _this.context.spHttpClient.get(_this.context.pageContext.web.absoluteUrl + "/_api/web/lists/getbytitle('Preferences%20List')/items(" + latestItemId + ")?$select=Title,Id", SPHttpClient.configurations.v1, {
+            return _this.context.spHttpClient.get(_this.context.pageContext.web.absoluteUrl + "/_api/web/lists/getbytitle('PreferencesList')/items(" + latestItemId + ")?$select=Title,Id", SPHttpClient.configurations.v1, {
                 headers: {
                     Accept: "application/json;odata=nometadata",
                     "odata-version": ""
@@ -154,7 +154,7 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
             var body = JSON.stringify({
                 Title: "Updated Item",
                 UserName: updatePrefObj.UserName,
-                UniqueID0: updatePrefObj.UniqueID0,
+                Uni_ID: updatePrefObj.Uni_ID,
                 TenantID: updatePrefObj.TenantID,
                 SelectedCategories: "" + updatePrefObj.SelectedCategories,
                 //  Item: `${updatePrefObj.Item}`,
@@ -190,7 +190,7 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
         //Rest API to call SharePoint list
         var requestURL = this.context.pageContext.web.absoluteUrl;
         return this.context.spHttpClient
-            .get(requestURL + "/_api/web/lists/GetByTitle('Preferences%20List')/items", SPHttpClient.configurations.v1)
+            .get(requestURL + "/_api/web/lists/GetByTitle('PreferencesList')/items", SPHttpClient.configurations.v1)
             .then(function (response) {
             return response.json();
         });
@@ -244,7 +244,7 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
         newsCategory = intersectionCategoryEvent;
         console.log(newsCategory);
         var business = document.querySelector("#Business");
-        var Travel = document.querySelector("#Travel");
+        var AI = document.querySelector("#AI");
         var Design = document.querySelector("#Design");
         var Technology = document.querySelector("#Technology");
         var Media = document.querySelector("#Media");
@@ -534,14 +534,14 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
                 _this.updateItem(updatePrefObj.SelectedCategories.toString());
             }
         });
-        Travel.addEventListener("click", function (event) {
-            if (newsCategory.indexOf("Travel") == -1) {
-                newsCategory.push("Travel");
+        AI.addEventListener("click", function (event) {
+            if (newsCategory.indexOf("AI") == -1) {
+                newsCategory.push("AI");
                 updatePrefObj.SelectedCategories = newsCategory;
                 _this.updateItem(updatePrefObj.SelectedCategories.toString());
             }
             else {
-                var index = updatePrefObj.SelectedCategories.indexOf("Travel");
+                var index = updatePrefObj.SelectedCategories.indexOf("AI");
                 updatePrefObj.SelectedCategories.splice(index, 1);
                 // updatePrefObj.SelectedCategories = newsCategory;
                 _this.updateItem(updatePrefObj.SelectedCategories.toString());
@@ -592,9 +592,9 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
         newsCategory.push(intersectionCategory);
         this.domElement.innerHTML = "\n      <div class=\"" + styles.preferencesTab + "\">\n        <div class=\"" + styles.container + "\">\n          <div class=\"" + styles.row + "\">\n            <div class=\"" + styles.column1 + "\">\n              <span class=\"" + styles.title + "\">News</span>\n            </div>\n\n            <div class=\"" + styles.column2 + "\" id=\"Allcategories\">\n              <div class=\"" + styles.rules + "\">Pick 5 or more topics for news updates\n              </div>\n               <button type=\"button\" class=\"" + styles.showmore + "\" id=\"showNews\">Show News</button>\n\n             <div class=\"" + styles.columnheight + "\">\n                <label for=\"Business\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Business.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" name=\"Business\" " + (intersectionCategory.indexOf("Business") > -1
             ? "checked"
-            : console.log(intersectionCategory)) + " id=\"Business\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Business</div>\n                    </div>\n              </div>\n\n               <div class=\"" + styles.columnheight + "\">\n                <label for=\"Travel\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Travel.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Travel") > -1
+            : console.log(intersectionCategory)) + " id=\"Business\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Business</div>\n                    </div>\n              </div>\n\n               <div class=\"" + styles.columnheight + "\">\n                <label for=\"AI\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Travel.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("AI") > -1
             ? "checked"
-            : console.log(intersectionCategory)) + "  name=\"Travel\" id=\"Travel\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Travel</div>\n                    </div>\n              </div>\n\n              <div class=\"" + styles.columnheight + "\">\n                <label for=\"Design\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Design.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Design") > -1
+            : console.log(intersectionCategory)) + "  name=\"AI\" id=\"AI\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">AI</div>\n                    </div>\n              </div>\n\n              <div class=\"" + styles.columnheight + "\">\n                <label for=\"Design\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Design.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Design") > -1
             ? "checked"
             : console.log(intersectionCategory)) + " name=\"Design\"  id=\"Design\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Design</div>\n                    </div>\n              </div>\n\n              <div class=\"" + styles.columnheight + "\">\n                <label for=\"Technology\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Technology.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Technology") > -1
             ? "checked"
@@ -612,7 +612,7 @@ var PreferencesTabWebPart = /** @class */ (function (_super) {
             ? "checked"
             : console.log(intersectionCategory)) + " name=\"Enterprise\" id=\"Enterprise\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Enterprise</div>\n                    </div>\n              </div>\n              <div class=\"" + styles.columnheight + "\">\n                <label for=\"Software\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Software.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Software") > -1
             ? "checked"
-            : console.log(intersectionCategory)) + "  name=\"Software\" id=\"Software\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Software</div>\n                    </div>\n              </div>\n\n              <div class=\"" + styles.columnheight + "\">\n                <label for=\"Art\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Art.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Art") > -1
+            : console.log(intersectionCategory)) + "  name=\"Software\" id=\"Software\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Software</div>\n                    </div>\n              </div>\n              <div class=\"" + styles.columnheight + "\">\n                <label for=\"Art\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Art.jpg\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Art") > -1
             ? "checked"
             : console.log(intersectionCategory)) + " name=\"Art\" id=\"Art\" class=\"category\"/>\n                    <div class=\"" + styles.tick + "\">\n                      <div class=\"" + styles.name + "\">Art</div>\n                    </div>\n              </div>\n\n              <div class=\"" + styles.columnheight + "\">\n                <label for=\"Animation\">\n                    <img src=\"https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Animation.gif\" class=\"" + styles.img1 + "\">\n                  </label>\n                  <input type=\"checkbox\" " + (intersectionCategory.indexOf("Animation") > -1
             ? "checked"

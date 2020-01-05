@@ -44,7 +44,7 @@
   }
   .P10 {
     padding-top: 10px;
-    padding-bottom: 40px;
+    // padding-bottom: 40px;
   }
 
   .shadowsm {
@@ -184,9 +184,17 @@
   //   content: "\E137";
   // }
 
+  @media (max-width: 1024px) {
+    .card {
+      width: 46%;
+      margin-bottom: 20px;
+    }
+  }
+
   @media (max-width: 425px) {
     .card {
       width: 100%;
+      margin-bottom: 20px;
     }
   }
 }

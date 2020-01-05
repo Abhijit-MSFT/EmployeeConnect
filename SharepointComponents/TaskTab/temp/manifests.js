@@ -996,6 +996,11 @@ var MANIFESTS_ARRAY = [
           "version": "1.9.1",
           "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         },
+        "@microsoft/sp-http": {
+          "type": "component",
+          "version": "1.9.1",
+          "id": "c07208f0-ea3b-4c1a-9965-ac1b825211a6"
+        },
         "@microsoft/sp-core-library": {
           "type": "component",
           "version": "1.9.1",
@@ -1005,11 +1010,6 @@ var MANIFESTS_ARRAY = [
           "type": "component",
           "version": "1.9.1",
           "id": "1c6c9123-7aac-41f3-a376-3caea41ed83f"
-        },
-        "@microsoft/sp-http": {
-          "type": "component",
-          "version": "1.9.1",
-          "id": "c07208f0-ea3b-4c1a-9965-ac1b825211a6"
         }
       }
     }
@@ -1060,7 +1060,7 @@ var MANIFESTS_ARRAY = [
         },
         "bootstrap": {
           "type": "path",
-          "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
+          "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js",
           "globalDependencies": [
             "jquery"
           ],
@@ -1129,6 +1129,11 @@ var MANIFESTS_ARRAY = [
           "type": "path",
           "path": "dist/policies-web-part.js"
         },
+        "jquery": {
+          "type": "path",
+          "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
+          "globalName": "jquery"
+        },
         "PoliciesWebPartStrings": {
           "defaultPath": "lib/webparts/policies/loc/en-us.js",
           "type": "localizedPath",
@@ -1192,19 +1197,6 @@ var MANIFESTS_ARRAY = [
           "type": "path",
           "path": "dist/task-web-part.js"
         },
-        "jquery": {
-          "type": "path",
-          "path": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
-          "globalName": "jquery"
-        },
-        "bootstrap": {
-          "type": "path",
-          "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
-          "globalDependencies": [
-            "jquery"
-          ],
-          "globalName": "bootstrap"
-        },
         "TaskWebPartStrings": {
           "defaultPath": "lib/webparts/task/loc/en-us.js",
           "type": "localizedPath",
@@ -1215,6 +1207,11 @@ var MANIFESTS_ARRAY = [
           "version": "1.9.1",
           "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
         },
+        "@microsoft/sp-http": {
+          "type": "component",
+          "version": "1.9.1",
+          "id": "c07208f0-ea3b-4c1a-9965-ac1b825211a6"
+        },
         "@microsoft/sp-core-library": {
           "type": "component",
           "version": "1.9.1",
@@ -1224,11 +1221,6 @@ var MANIFESTS_ARRAY = [
           "type": "component",
           "version": "1.9.1",
           "id": "1c6c9123-7aac-41f3-a376-3caea41ed83f"
-        },
-        "@microsoft/sp-http": {
-          "type": "component",
-          "version": "1.9.1",
-          "id": "c07208f0-ea3b-4c1a-9965-ac1b825211a6"
         }
       }
     }
