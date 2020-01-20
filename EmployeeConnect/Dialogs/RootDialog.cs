@@ -118,11 +118,11 @@ namespace EmployeeConnect.Dialogs
                         reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                         break;
                     case Common.Constants.Refresh:
-                        await Helper.GetDataHelper.GetNewsFromSPandWriteToFile();
+                        //await Helper.GetDataHelper.GetNewsFromSPandWriteToFile();
                         //await Helper.GetDataHelper.GetEandTFromSPandWriteToFile();
                         await Helper.GetDataHelper.GetTasksandWriteToFile();
-                        await Helper.GetDataHelper.GetPODetailsandWriteToFile();
-                        await Helper.GetDataHelper.GetPreferencesandWriteToFile();
+                        //await Helper.GetDataHelper.GetPODetailsandWriteToFile();
+                        //await Helper.GetDataHelper.GetPreferencesandWriteToFile();
                         reply.Text = "Cache is updated.";
                         break;
                     case Common.Constants.SetPrefrences:

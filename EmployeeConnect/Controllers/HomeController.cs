@@ -269,8 +269,10 @@ namespace EmployeeConnect.Controllers
         [HttpGet]
         public ActionResult PurchaseOrder(string poNumber, string vendorno)
         {
-            TempData["data"] = poNumber;
-            ViewBag.vendorNo = vendorno;
+            
+            
+            // TempData["data"] = poNumber;
+            // ViewBag.vendorNo = vendorno;
             SpfxPODetails poList = new SpfxPODetails();
             poList = GetDataHelper.GetPODetails();
             List<POValue> podetaillist = poList.value.Where(a=>a.PONumber.Equals(poNumber)).ToList();
@@ -283,11 +285,14 @@ namespace EmployeeConnect.Controllers
                 poTotal = poTotal + Convert.ToInt32(podetaillist[poCount].Total);
             }
             string TotalPOSum = poTotal.ToString();
-            ViewData["Sum"] = TotalPOSum;
-            ViewData["poDetails"] = podetaillist;
+            // ViewData["Sum"] = TotalPOSum;
+
+            var purchaseViewModel = new PurchaseViewModel() { PoNumber = poNumber, TotalSum =TotalPOSum, PoValues = podetaillist, VendorNumber = vendorno };
+
+            // ViewData["poDetails"] = podetaillist;
 
 
-            return View();
+            return View(purchaseViewModel);
         }
 
 

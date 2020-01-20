@@ -1032,13 +1032,14 @@ namespace EmployeeConnect.Helper
             list.Add(item);
 
             SpfxPurchaseOrder POList = Helper.GetDataHelper.GetPOs();
+            SpfxPODetails PODetails = Helper.GetDataHelper.GetPODetails();
             InventoryModel InvList = Helper.GetDataHelper.GetInventoryData();
 
             //var pending = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("pending"));
 
             //var invoice = POList.PurchaseOrder.Where(w => w.PoStatus.Equals("approved"));
 
-            var pending = POList.value.Where(a => a.PoStatus.Equals("Pending"));
+            var pending = POList.value.Where(a => a.PoStatus.Equals("pending"));
 
             var invoice = POList.value.Where(a => a.PoStatus.Equals("Approved"));
 

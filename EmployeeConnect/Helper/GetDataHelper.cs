@@ -176,7 +176,7 @@ namespace EmployeeConnect.Helper
         public static async System.Threading.Tasks.Task GetTasksandWriteToFile() // need to decide how many time it will run and update the data file.
         {
             string token = await GetDataHelper.GetAuthenticationToken();
-            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/Lists(guid'51bd5e15-d8ac-4820-aed2-a1e29f2b32dc')/items";
+            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/Lists(guid'326cdbd1-840e-4ee7-be55-4019301c2126')/items";
             SpfxPurchaseOrder PO = null;
             using (var client = new HttpClient())
             {

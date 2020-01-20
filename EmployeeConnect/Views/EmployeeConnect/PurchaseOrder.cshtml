@@ -1,6 +1,4 @@
-﻿@model List<EmployeeConnect.Models.POValue>
-@model List<EmployeeConnect.Models.SpfxPODetails>
-@model EmployeeConnect.Models.SpfxPODetails
+﻿@model EmployeeConnect.Models.PurchaseViewModel
 
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
@@ -29,10 +27,10 @@
             console.log(`Submit handler - err: ${err}`);
             // alert("Result = " + JSON.stringify(result) + "nError = " + JSON.stringify(err));
         };
-        function submitApprove(poNo) {
-            debugger;
+        function submitApprove(poNo, status) {
             var poTaskInfo = {
                 poNumber: poNo,
+                poStatus: status,
                 action: "podecline",
             }
             microsoftTeams.tasks.submitTask(poTaskInfo);
@@ -43,14 +41,14 @@
         <div class="modal-content">
             <div class="modal-header mh">
                 <h5>
-                    Purchase order no. @TempData["data"]
+                    Purchase order no. @Model.PoNumber
                 </h5>
                 <div class="total-h">Total Amount</div>
-                <span class="vendor">Vendor no. @ViewBag.vendorNo</span><br />
+                <span class="vendor">Vendor no. @Model.VendorNumber</span><br />
                 <span class="store">Store A</span>
                 <div class="T-amount">
                     <span class="currency">&#x20b9;</span>
-                    <span class="t-amount">@ViewData["Sum"]</span>
+                    <span class="t-amount">@Model.TotalSum </span>
                 </div>
             </div>
             <div class="modal-body mb">
@@ -64,7 +62,7 @@
                                 <td class="th-head">Quantity</td>
                                 <td class="th-head th-total">Total</td>
                             </tr>
-                            @foreach (var item in Model.value)
+                            @foreach (var item in Model.PoValues)
                             {
                                 <tr>
                                     <td class="cnt">@Html.DisplayFor(modelItem => item.ItemCode)</td>
@@ -84,8 +82,8 @@
                     </table>
                 </div>
                 <div class="modal-footer foo">
-                    <button class="decline" onclick="submitApprove('@TempData["data"]');">Decline</button>
-                    <button class="approve" onclick="submitApprove('@TempData["data"]');">Approve</button>
+                    <button class="decline" onclick="submitApprove('@TempData["data"]', "Decline");">Decline</button>
+                    <button class="approve" onclick="submitApprove('@TempData["data"]', "Approve");">Approve</button>
                 </div>
             </div>
         </div>

@@ -6,8 +6,7 @@
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     border: 0 !important;
-    width: 107% !important;
-    
+    width: 100% !important;
 }
 
 h5 {
@@ -133,7 +132,14 @@ tr:nth-child(n + 3) {
     .modal-dialog {
         margin: auto !important;
     }
+
+    .modal-dialog {
+        max-width: none !important;
+        margin: 1.75rem auto;
+        overflow: hidden !important;
+    }
 }
+
 
 
 
