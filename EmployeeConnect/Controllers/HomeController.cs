@@ -273,7 +273,7 @@ namespace EmployeeConnect.Controllers
             ViewBag.vendorNo = vendorno;
             SpfxPODetails poList = new SpfxPODetails();
             poList = GetDataHelper.GetPODetails();
-            var podetaillist = poList.value.Where(a=>a.PONumber.Equals(poNumber)).ToList();
+            List<POValue> podetaillist = poList.value.Where(a=>a.PONumber.Equals(poNumber)).ToList();
 
             int poTotal = 0;
             for (int poCount = 0; poCount < podetaillist.Count; poCount++)
@@ -284,9 +284,10 @@ namespace EmployeeConnect.Controllers
             }
             string TotalPOSum = poTotal.ToString();
             ViewData["Sum"] = TotalPOSum;
+            ViewData["poDetails"] = podetaillist;
 
 
-            return View(poList);
+            return View();
         }
 
 

@@ -1,4 +1,7 @@
-﻿@model EmployeeConnect.Models.SpfxPODetails
+﻿@model List<EmployeeConnect.Models.POValue>
+@model List<EmployeeConnect.Models.SpfxPODetails>
+@model EmployeeConnect.Models.SpfxPODetails
+
 @using EmployeeConnect.Common;
 @using EmployeeConnect.Helper;
 <head>
@@ -21,70 +24,70 @@
     <script src="~/Scripts/teamsapp.js"></script>
     <script>
         microsoftTeams.initialize();
-           submitHandler = (err, result) => {
+        submitHandler = (err, result) => {
             debugger;
             console.log(`Submit handler - err: ${err}`);
-           // alert("Result = " + JSON.stringify(result) + "nError = " + JSON.stringify(err));
+            // alert("Result = " + JSON.stringify(result) + "nError = " + JSON.stringify(err));
         };
-         function submitApprove(poNo) {
+        function submitApprove(poNo) {
             debugger;
-             var poTaskInfo = {
-                 poNumber: poNo,
-                 action: "podecline",
+            var poTaskInfo = {
+                poNumber: poNo,
+                action: "podecline",
             }
-             microsoftTeams.tasks.submitTask(poTaskInfo); 
+            microsoftTeams.tasks.submitTask(poTaskInfo);
 
         }
     </script>
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header mh">
-                    <h5>
-                        Purchase order no. @TempData["data"]
-                    </h5>
-                    <div class="total-h">Total Amount</div>
-                    <span class="vendor">Vendor no. @ViewBag.vendorNo</span><br />
-                    <span class="store">Store A</span>
-                    <div class="T-amount">
-                        <span class="currency">&#x20b9;</span>
-                        <span class="t-amount">@ViewData["Sum"]</span>
-                    </div>
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header mh">
+                <h5>
+                    Purchase order no. @TempData["data"]
+                </h5>
+                <div class="total-h">Total Amount</div>
+                <span class="vendor">Vendor no. @ViewBag.vendorNo</span><br />
+                <span class="store">Store A</span>
+                <div class="T-amount">
+                    <span class="currency">&#x20b9;</span>
+                    <span class="t-amount">@ViewData["Sum"]</span>
                 </div>
-                <div class="modal-body mb">
-                    <div class="row">
-                        <table class="table">
-                            <tbody>
+            </div>
+            <div class="modal-body mb">
+                <div class="row">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="th-head">Item code</td>
+                                <td class="th-head">Description</td>
+                                <td class="th-head">Unit price</td>
+                                <td class="th-head">Quantity</td>
+                                <td class="th-head th-total">Total</td>
+                            </tr>
+                            @foreach (var item in Model.value)
+                            {
                                 <tr>
-                                    <td class="th-head">Item code</td>
-                                    <td class="th-head">Description</td>
-                                    <td class="th-head">Unit price</td>
-                                    <td class="th-head">Quantity</td>
-                                    <td class="th-head th-total">Total</td>
+                                    <td class="cnt">@Html.DisplayFor(modelItem => item.ItemCode)</td>
+                                    <td class="cnt desc">
+                                        @Html.DisplayFor(modelItem => item.ItemDescription)
+                                    </td>
+                                    <td class="cnt">
+                                        <span class="currency1">&#x20b9;</span>  @Html.DisplayFor(modelItem => item.UnitPrice)
+                                    </td>
+                                    <td class="cnt">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td class="cnt th-total">
+                                        <span class="currency1">&#x20b9;</span> @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
                                 </tr>
-                                @foreach (var item in Model.value)
-                                {
-                                    <tr>
-                                        <td class="cnt">@Html.DisplayFor(modelItem => item.ItemCode)</td>
-                                        <td class="cnt desc">
-                                            @Html.DisplayFor(modelItem => item.ItemDescription)
-                                        </td>
-                                        <td class="cnt">
-                                            <span class="currency1">&#x20b9;</span>  @Html.DisplayFor(modelItem => item.UnitPrice)
-                                        </td>
-                                        <td class="cnt">@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td class="cnt th-total">
-                                            <span class="currency1">&#x20b9;</span> @Html.DisplayFor(modelItem => item.Total)
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer foo">
-                        <button  class="decline" onclick="submitApprove('@TempData["data"]');">Decline</button>
-                        <button class="approve" onclick="submitApprove('@TempData["data"]');">Approve</button>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer foo">
+                    <button class="decline" onclick="submitApprove('@TempData["data"]');">Decline</button>
+                    <button class="approve" onclick="submitApprove('@TempData["data"]');">Approve</button>
                 </div>
             </div>
         </div>
+    </div>
 </body>

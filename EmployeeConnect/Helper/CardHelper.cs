@@ -1779,11 +1779,11 @@ namespace EmployeeConnect.Helper
             //Welcome Card
             //var action = new List<AdaptiveAction>()
             //{
-            //    //new AdaptiveSubmitAction()
-            //    //{
-            //    //    Title = "Let's get started",
-            //    //    DataJson = @"{'Action':'" + Constants.ShowPrefCard + "' }"
-            //    //}                
+            //    new AdaptiveSubmitAction()
+            //    {
+            //        Title = "Let's get started",
+            //        DataJson = @"{'Action':'" + Constants.ShowPrefCard + "' }"
+            //    }
 
             //    //new AdaptiveShowCardAction()
             //    //{
@@ -1800,23 +1800,57 @@ namespace EmployeeConnect.Helper
                     {
                         Items = new List<AdaptiveElement>()
                         {
+
                             new AdaptiveTextBlock()
                             {
                                 Text = "Welcome to Employee Connect",
                                 Weight = AdaptiveTextWeight.Bolder,
-                                Size = AdaptiveTextSize.Large
+                                Size = AdaptiveTextSize.Large,
+                                Height = AdaptiveHeight.Stretch
                             },
 
                             new AdaptiveTextBlock()
                             {
                                 Text = "Keep yourself posted \r\rabout the latest news",
                                 Wrap = true ,
-                                 Weight = AdaptiveTextWeight.Bolder,
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Height =AdaptiveHeight.Stretch
                             },
                             new AdaptiveTextBlock()
                             {
                                 Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation",
                                 Wrap = true ,
+                                Height =AdaptiveHeight.Stretch
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
                             }
                         }
                     }
@@ -1858,6 +1892,36 @@ namespace EmployeeConnect.Helper
                                 Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings",
                                 Wrap = true ,// True if text is allowed to wrap
                                 MaxWidth = 2
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
                             }
                         }
                             // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
@@ -1894,6 +1958,36 @@ namespace EmployeeConnect.Helper
                                 Text = "The app identifies all your \r\r pending tasks and helps \r\r you manage everything at \r\r one place.",
                                 Wrap = true,
 
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
                             }
                         }
                     }

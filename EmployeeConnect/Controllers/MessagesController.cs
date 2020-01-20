@@ -29,8 +29,7 @@ namespace EmployeeConnect.Controllers
             //var x = Helper.GetDataHelper.ReadPrefernecesfromSPData("surbhi@adftclab.in");
             //await Helper.GetDataHelper.WritePrefsToSPList(body);
             //await Helper.GetDataHelper.GetEandTFromSPandWriteToFile();
-            //string filelocation =  "~/Images/hololens.jpg";
-            //await Helper.GetDataHelper.UploadFileToSP(filelocation);
+            
             switch (activity.Type)
             {
                 case ActivityTypes.Message:

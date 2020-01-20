@@ -22,9 +22,9 @@ namespace EmployeeConnect.Common
     public static UIConstants SendRequest { get; set; } =
     new UIConstants(400, 459, "Send Request", TaskModuleIds.SendRequest, "Send Request");
         public static UIConstants PoDecline { get; set; } =
-        new UIConstants(400, 367, "PO Decline", TaskModuleIds.PODecline, "PO Decline");
+        new UIConstants(400, 320, "PO Decline", TaskModuleIds.PODecline, "PO Decline"); // changed it for testing - Abhijit - original was 367
         public static UIConstants Declined { get; set; } =
-        new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");    
+        new UIConstants(400, 170, "Declined", TaskModuleIds.Declined, "Declined");    // changed it for testing - Abhijit
 
         public static UIConstants ETCard { get; set; } =
         new UIConstants(850, 700, "ET Card: Inputs", TaskModuleIds.ETcard, "ET Card");

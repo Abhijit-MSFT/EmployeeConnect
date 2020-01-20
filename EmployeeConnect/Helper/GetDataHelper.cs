@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,7 +10,6 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using EmployeeConnect.Models;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -47,36 +45,33 @@ namespace EmployeeConnect.Helper
         }
 
 
-        public static async System.Threading.Tasks.Task UploadFileToSP(string fileLocation)
-        {
-            //using (var clientContext = TokenHelper.GetClientContextWithAccessToken(sharepointUrl.ToString(), appOnlyAccessToken))
-            //{
-            try
-            {
-                string token = await GetDataHelper.GetAuthenticationToken();
-                byte[] bytefile = System.IO.File.ReadAllBytes(fileLocation);
-                //byte[] bytefile = System.Web.Hosting.HostingEnvironment.MapPath(fileLocation);
+        //public static async System.Threading.Tasks.Task UploadFileToSPAsync(string fileLocation)
+        //{            
+        //    try
+        //    {
+        //        string filename = Path.GetFileName(fileLocation);
+        //        string token = await GetDataHelper.GetAuthenticationToken();
+        //        FileStream stream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
+        //        BinaryReader br = new BinaryReader(stream);
+        //        long numBytes = new FileInfo(fileLocation).Length;
+        //        byte[] bytefile = br.ReadBytes((int)new FileInfo(fileLocation).Length);
 
-                //HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(hostWeb + "/_api/web/GetFolderByServerRelativeUrl('Shared%20Documents')/Files/add(url='filename.txt',overwrite=true)");
-                HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create("https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativeUrl('Shared%20Documents')/Files/add(url='TestFile.txt',overwrite=true)");
+        //        HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create("https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativeUrl('Shared%20Documents')/Files/add(url='" + filename + "',overwrite=true)");
+        //        //HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create("https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativeUrl('UserUploaded%20Documents')/Files/add(url='" + filename + "',overwrite=true)");
 
-                //https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/EmployeeConnectPrototype/Shared%20Documents')/Files
-                //https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/Web/GetFolderByServerRelativeUrl('Shared%20Documents')/Files
-                endpointRequest.Method = "POST";
-                endpointRequest.Headers.Add("binaryStringRequestBody", "true");
-                endpointRequest.Headers.Add("Authorization", "Bearer " + token);
-                endpointRequest.GetRequestStream().Write(bytefile, 0, bytefile.Length);
+        //        endpointRequest.Method = "POST";
+        //        endpointRequest.Headers.Add("binaryStringRequestBody", "true");
+        //        endpointRequest.Headers.Add("Authorization", "Bearer " + token);
+        //        endpointRequest.GetRequestStream().Write(bytefile, 0, bytefile.Length);
 
-                HttpWebResponse endpointresponse = (HttpWebResponse)endpointRequest.GetResponse();
-            }
-            catch (Exception ex)
-            {
+        //        HttpWebResponse endpointresponse = (HttpWebResponse)endpointRequest.GetResponse();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw ex;
-            }
-            
-            //}
-        }
+        //        throw ex;
+        //    }            
+        //}
         
         public static NewsModel GetNews()
         {
@@ -391,6 +386,8 @@ namespace EmployeeConnect.Helper
         //Makes a UPrefObject from SetPreferences object
         public static Preference MakeUPrefObject(SetPreferences pref, string uID, string serviceURL, string tenID)
         {
+
+            
             Preference uPref = new Preference();
             uPref.UserName = pref.UserName;
             UserInfo uInfo = new UserInfo();
@@ -401,11 +398,14 @@ namespace EmployeeConnect.Helper
             uInfo.ServiceURl = serviceURL;
             uInfo.TenantID = tenID;
             newsPref.NewsNotificationFlag = true;
-            newsPref.NewsNotifyMe = "true";
+            newsPref.NewsNotifyMe = "True";
             entPref.EandTNotificationFlag = true;
-            entPref.EandTNotifyMe = "true";
-            taskPref.TaskNotificationFlag = true;
+            entPref.EandTNotifyMe = "True";
+            //taskPref.TaskNotificationFlag = true; //this flag is not provided in the front end
             taskPref.TaskNotifyMe = "true";
+
+            //string body = "{'UserName':'AB', 'Uni_ID':'likansf3993', 'TenantID':'7454731348764','ServiceURL':'abcghij','SelectedCategories':'a, b, c','NewsNotificationTime':' ','EnTNotifyMe':' ','EnTNotificationTime':' ','TaskNotificationTime':' ','NewsNotificationFlag':' ','EnTNotificationFlag':' ','NewsNotifyMe':' '}";
+
             string[] time = { "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM" };
             string[] category = { "Finance", "Media", "Design", "AI", "Data", "Business", "CS", "Technology", "Animation", "IT" };
             switch (pref.SetNewsChoice)
@@ -465,7 +465,8 @@ namespace EmployeeConnect.Helper
                 var arr = newsCategory.Split(',');
                 newsPref.SelectedCategories = new string[arr.Count()];
                 for (int i = 0; i < arr.Count(); i++)
-                    newsPref.SelectedCategories[i] = category[Int32.Parse(arr[i]) - 1];
+                    //newsPref.SelectedCategories[i] = category[Int32.Parse(arr[i]) - 1];
+                    newsPref.SelectedCategories[i] = arr[i];
             }
             uPref.UserInfo = new UserInfo[1];
             uPref.News = new NewsPreference();
@@ -551,10 +552,16 @@ namespace EmployeeConnect.Helper
             return;
         }
 
-        public static async System.Threading.Tasks.Task<bool> WritePrefsToSPList(string body)
+        public static async System.Threading.Tasks.Task<bool> WritePrefsToSPList(Preference body)
         {
             string token = await GetDataHelper.GetAuthenticationToken();
+            //"{'UserName':'AB', 'Uni_ID':'likansf3993', 'TenantID':'7454731348764','ServiceURL':'abcghij','SelectedCategories':'a, b, c','NewsNotificationTime':' ','EnTNotifyMe':' ','EnTNotificationTime':' ','TaskNotificationTime':' ','NewsNotificationFlag':' ','EnTNotificationFlag':' ','NewsNotifyMe':' '}";
+            string cats = string.Join(",", body.News.SelectedCategories);
+            //change below code to some model
+            string finalBody = "{'UserName' :'" + body.UserName + "', 'Uni_ID' :'" + body.UserInfo[0].UniqueID + "', 'TenantID' :'" + body.UserInfo[0].TenantID + "', 'ServiceURL' :'" + body.UserInfo[0].ServiceURl + "', 'SelectedCategories' :'" + cats + "', 'NewsNotificationTime' :'" + body.News.NewsNotificationTime + "', 'EnTNotifyMe' :'" + body.EandT.EandTNotifyMe + "', 'EnTNotificationTime' :'" + body.EandT.EandTNotificationTime + "', 'TaskNotificationTime' :'" + body.Task.TaskNotificationTime + "', 'NewsNotificationFlag' :'" + body.News.NewsNotificationFlag + "', 'EnTNotificationFlag' :'" + body.EandT.EandTNotificationFlag + "', 'NewsNotifyMe' :'" + body.News.NewsNotifyMe + "'}";
+
             
+
             string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/lists/GetByTitle('PreferencesList')/items";
             using (var client = new HttpClient())
             {
@@ -562,7 +569,7 @@ namespace EmployeeConnect.Helper
                 {                    
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                    request.Content = new StringContent(body, Encoding.UTF8, "application/json");
+                    request.Content = new StringContent(finalBody, Encoding.UTF8, "application/json");
 
                     using (HttpResponseMessage response = await client.SendAsync(request))
                     {
@@ -685,6 +692,10 @@ namespace EmployeeConnect.Helper
 
     }
 }
+
+
+
+
 
 
 

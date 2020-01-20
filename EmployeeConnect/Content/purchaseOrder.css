@@ -6,7 +6,8 @@
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     border: 0 !important;
-    width:90px;
+    width: 107% !important;
+    
 }
 
 h5 {
@@ -98,6 +99,8 @@ tr:nth-child(n + 3) {
     margin-top: 30px;
 }
 
+
+
 .decline,
 .approve {
     height: 30px;
@@ -124,6 +127,15 @@ tr:nth-child(n + 3) {
         padding: .75rem !important;
     }
 }
+
+@media (min-width: 576px) {
+
+    .modal-dialog {
+        margin: auto !important;
+    }
+}
+
+
 
 @media(max-width:425px) {
     .cnt {

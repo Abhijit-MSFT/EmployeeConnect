@@ -119,11 +119,11 @@ namespace EmployeeConnect.Dialogs
                         break;
                     case Common.Constants.Refresh:
                         await Helper.GetDataHelper.GetNewsFromSPandWriteToFile();
-                        await Helper.GetDataHelper.GetEandTFromSPandWriteToFile();
+                        //await Helper.GetDataHelper.GetEandTFromSPandWriteToFile();
                         await Helper.GetDataHelper.GetTasksandWriteToFile();
                         await Helper.GetDataHelper.GetPODetailsandWriteToFile();
                         await Helper.GetDataHelper.GetPreferencesandWriteToFile();
-                        reply.Text = "Data is updated.";
+                        reply.Text = "Cache is updated.";
                         break;
                     case Common.Constants.SetPrefrences:
                         card = Helper.CardHelper.SetTimePreference(userName);
@@ -229,9 +229,8 @@ namespace EmployeeConnect.Dialogs
                 case Constants.SetPrefrencesDone:   //Press Done button on set preferences
                     EmployeeConnect.Models.SetPreferences setPref = Helper.GetDataHelper.SetPreferencesData(activity.Value.ToString());
                     setPref.UserName = userName;
-                    //setPref.UserName = userDetails.Name;
                     EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.MakeUPrefObject(setPref, UniqueId, ServiceURL, TenantId);
-                    Helper.GetDataHelper.WritePreferences(pref);
+                    await Helper.GetDataHelper.WritePrefsToSPList(pref);
                     reply.Text = "Your preferences are set.";
                     break;
                 case Constants.ShowPrefCard:   //Press Skip button on set preferences

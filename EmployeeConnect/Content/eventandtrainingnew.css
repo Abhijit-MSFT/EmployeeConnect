@@ -29,6 +29,14 @@ html {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+span.ms-Button-textContainer.textContainer-93 {
+    display: none;
+}
+
+span.ms-Button-flexContainer.flexContainer-92 {
+    display: none;
+}
+
 .header,
 .header2 {
     background-color: #f6f6f7;
@@ -417,7 +425,6 @@ html {
 
     .main-title-msg {
         font-size: 14px;
-        cursor
     }
 
     .body-top {
@@ -465,6 +472,7 @@ html {
             margin-left: auto;
         }
 }
+
 
 @media(max-width:1024px) {
 }
