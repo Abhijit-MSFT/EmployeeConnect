@@ -138,11 +138,14 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       html += `
             <tr>
               <td scope="row" class="poNumber">${item.PoNumber}</td>
+              <td></td>
+              <td></td>
               <td>${item.Description}</td>
               <td>${item.VendorName}</td>
               <td id="vendorNo">${item.InvoiceNo}</td>
               <td>&#8377; ${item.TotalAmount}</td>
               <td id="buttonReview" name="buttonReview" value=${item.PoNumber} alt=${item.InvoiceNo} class="${styles.review} reviewButton" id='review'>Review</td>
+              <td></td>
               </tr>
 `;
       //this._setButtonEventHandlers();
@@ -259,10 +262,12 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             <tr>
               <th scope="col">Po no.</th>
               <th scope="col"></th>
+              <th scope="col"></th>
               <th scope="col">Description</th>
               <th scope="col">Vendor name</th>
               <th scope="col">Vendor no.</th>
               <th scope="col">Amount</th>
+              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>

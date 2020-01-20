@@ -38,20 +38,20 @@ export default class PoliciesWebPart extends BaseClientSideWebPart<
         $("#heading1").show();
       });
 
-      $(".PB").on("click", () => {
-        $("#heading1,#heading3,#heading4").hide();
-        $("#heading2").show();
-      });
+      // $(".PB").on("click", () => {
+      //   $("#heading1,#heading3,#heading4").hide();
+      //   $("#heading2").show();
+      // });
 
-      $(".IT").on("click", () => {
-        $("#heading1,#heading2,#heading4").hide();
-        $("#heading3").show();
-      });
+      // $(".IT").on("click", () => {
+      //   $("#heading1,#heading2,#heading4").hide();
+      //   $("#heading3").show();
+      // });
 
-      $(".RO").on("click", () => {
-        $("#heading1,#heading2,#heading3").hide();
-        $("#heading4").show();
-      });
+      // $(".RO").on("click", () => {
+      //   $("#heading1,#heading2,#heading3").hide();
+      //   $("#heading4").show();
+      // });
     });
   }
 
@@ -68,7 +68,7 @@ export default class PoliciesWebPart extends BaseClientSideWebPart<
             <div class="${styles.column1}">
               <div class="${styles.sidebar}">
                 <a
-                  class="${styles} accordion-toggle"
+                  class="${styles.active} accordion-toggle"
                   data-toggle="collapse"
                    data-parent="#accordion"
                   data-target="#hr" aria-expanded="false"
@@ -260,9 +260,6 @@ export default class PoliciesWebPart extends BaseClientSideWebPart<
                                               </li>
                                             </ul>
                       </div>
-                      <div id="heading2">.</div>
-                      <div id="heading3">..</div>
-                      <div id="heading4">...</div>
                   </div>
               </div>
           </div>

@@ -671,10 +671,10 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
               <div class="${
                 styles.rules
               }">Pick 5 or more topics for news updates
+              <button type="button" class="${
+                styles.showmore
+              }" id="showNews">Show News</button>
               </div>
-               <button type="button" class="${
-                 styles.showmore
-               }" id="showNews">Show News</button>
 
              <div class="${styles.columnheight}">
                 <label for="Business">
@@ -710,7 +710,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
 
               <div class="${styles.columnheight}">
                 <label for="Design">
-                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Design.jpg" class="${
+                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/design.png" class="${
                       styles.img1
                     }">
                   </label>
@@ -726,7 +726,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
 
               <div class="${styles.columnheight}">
                 <label for="Technology">
-                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Technology.jpg" class="${
+                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/tech.jpg" class="${
                       styles.img1
                     }">
                   </label>
@@ -869,7 +869,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
 
               <div class="${styles.columnheight}">
                 <label for="Animation">
-                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Animation.gif" class="${
+                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/animation.gif" class="${
                       styles.img1
                     }">
                   </label>
@@ -901,7 +901,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
 
                <div class="${styles.columnheight}">
                 <label for="Health">
-                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/Health.jpg" class="${
+                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/health.jpg" class="${
                       styles.img1
                     }">
                   </label>
@@ -933,7 +933,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
 
               <div class="${styles.columnheight}">
                 <label for="IT">
-                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/IT.jpg" class="${
+                    <img src="https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/Shared%20Documents/img/it.jpeg" class="${
                       styles.img1
                     }">
                   </label>
