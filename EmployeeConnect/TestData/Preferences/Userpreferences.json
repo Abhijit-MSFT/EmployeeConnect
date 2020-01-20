@@ -67,22 +67,22 @@
       ],
       "news": {
         "selectedCategories": [
-          "Finance",
-          "Design"
+          "AI",
+          "Business"
         ],
         "newsNotificationFlag": true,
         "newsNotifyMe": "true",
-        "newsNotificationTime": "8:00 AM"
+        "newsNotificationTime": "11:00 AM"
       },
       "eandT": {
         "eandTNotificationFlag": true,
         "eandTNotifyMe": "true",
-        "eandTNotificationTime": "8:00 AM"
+        "eandTNotificationTime": "11:00 AM"
       },
       "task": {
-        "taskNotificationFlag": true,
+        "taskNotificationFlag": false,
         "taskNotifyMe": "true",
-        "taskNotificationTime": "8:00 AM"
+        "taskNotificationTime": "11:00 AM"
       }
     }
   ]

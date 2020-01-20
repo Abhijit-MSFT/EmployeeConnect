@@ -23,8 +23,13 @@ namespace EmployeeConnect.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-            //GetDataHelper.GetNewsFromSPandWriteToFile();
-            //await Helper.GetDataHelper.GetTasksandWriteToFile();
+            //string body = "{'UserName':'AB', 'Uni_ID':'likansf3993', 'TenantID':'7454731348764','ServiceURL':'abcghij','SelectedCategories':'a, b, c','NewsNotificationTime':' ','EnTNotifyMe':' ','EnTNotificationTime':' ','TaskNotificationTime':' ','NewsNotificationFlag':' ','EnTNotificationFlag':' ','NewsNotifyMe':' '}";
+            
+
+            //var x = Helper.GetDataHelper.ReadPrefernecesfromSPData("surbhi@adftclab.in");
+            //await Helper.GetDataHelper.WritePrefsToSPList(body);
+            //await Helper.GetDataHelper.GetEandTFromSPandWriteToFile();
+            
             switch (activity.Type)
             {
                 case ActivityTypes.Message:

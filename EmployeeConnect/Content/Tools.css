@@ -129,6 +129,7 @@
     border-radius: 0 !important;
     background-clip: border-box !important;
     border: 0 !important;
+    margin-left:-23px;
 }
 
 .custom-header {
@@ -564,7 +565,7 @@ body {
 
 #ticketcomplete {
     margin-top: -10px !important;
-    padding-left:50px; 
+    padding-left:11px; 
 }
 
 .custom-card-first-row,

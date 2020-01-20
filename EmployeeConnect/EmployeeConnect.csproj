@@ -223,6 +223,7 @@
     <Compile Include="Common\TaskModelUIConstant.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Models\PurchaseViewModel.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="EchoBot.cs" />
     <Compile Include="Global.asax.cs">

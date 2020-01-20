@@ -63,8 +63,8 @@
     {
       "entityId": "policies",
       "name": "Policies",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Policies",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Policies",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Policies.aspx#heading3s",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Policies.aspx#heading3",
       "scopes": [
         "personal"
       ]
@@ -72,8 +72,8 @@
     {
       "entityId": "preferences",
       "name": "Preferences",
-      "contentUrl": "https://employeeconnect-9566.azurewebsites.net/Preferences?emailID={upn}",
-      "websiteUrl": "https://employeeconnect-9566.azurewebsites.net/Preferences",
+      "contentUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Preference.aspx?emailID={upn}",
+      "websiteUrl": "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/SitePages/Preference.aspx",
       "scopes": [
         "personal"
       ]
@@ -123,6 +123,10 @@
             {
               "title": "help",
               "description": "Walkthrough"
+            },
+            {
+              "title": "refresh",
+              "description": "Refresh mock data"
             }
           ]
         },
@@ -132,39 +136,43 @@
           ],
           "commands": [
             {
-              "title": "Set preferences",
-              "description": "Set notification timings"
+              "title": "set preferences",
+              "description": "set notification timings"
             },
             {
-              "title": "Trending news",
+              "title": "trending news",
               "description": "View trending news"
             },
             {
-              "title": "Upcoming events and trainings",
+              "title": "upcoming events and trainings",
               "description": "View your events and trainings"
             },
             {
-              "title": "Pending tasks",
+              "title": "pending tasks",
               "description": "Complete pending tasks"
             },
             {
-              "title": "Pending approvals",
+              "title": "pending approvals",
               "description": "Review pending approvals"
             },
             {
-              "title": "My tools",
+              "title": "my tools",
               "description": "View your tools"
             },
             {
-              "title": "Policies",
+              "title": "policies",
               "description": "View policies"
             },
             {
-              "title": "Help",
+              "title": "help",
               "description": "Walkthrough"
             },
             {
-              "title": "Pending submissions",
+              "title": "refresh",
+              "description": "Refresh mock data"
+            },
+            {
+              "title": "pending submissions",
               "description": "Complete pending tasks"
             }
           ]
