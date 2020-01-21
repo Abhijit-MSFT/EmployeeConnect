@@ -379,7 +379,7 @@ namespace EmployeeConnect.Helper
         {
             SetPreferences pref = new SetPreferences();
             pref = (new JavaScriptSerializer().Deserialize<SetPreferences>(json));
-            userName = pref.UserName;
+            //userName = pref.UserName;
             return pref;
         }
 
@@ -411,13 +411,13 @@ namespace EmployeeConnect.Helper
             switch (pref.SetNewsChoice)
             {
                 case "1":
-                    newsPref.NewsNotificationTime = "8:00 AM";
+                    newsPref.NewsNotificationTime = Convert.ToDateTime("8:00 AM");
                     break;
                 case "2":
-                    newsPref.NewsNotificationTime = "5:00 PM";
+                    newsPref.NewsNotificationTime = Convert.ToDateTime("5:00 PM");
                     break;
                 case "3":
-                    newsPref.NewsNotificationTime = time[Int32.Parse(pref.SetNewsPreferredTime) - 1];
+                    newsPref.NewsNotificationTime = Convert.ToDateTime(pref.SetNewsPreferredTime);
                     break;
                 default:
                     break;
@@ -425,13 +425,13 @@ namespace EmployeeConnect.Helper
             switch (pref.SetENTChoice)
             {
                 case "1":
-                    entPref.EandTNotificationTime = "8:00 AM";
+                    entPref.EandTNotificationTime = Convert.ToDateTime("8:00 AM");
                     break;
                 case "2":
-                    entPref.EandTNotificationTime = "5:00 PM";
+                    entPref.EandTNotificationTime = Convert.ToDateTime("5:00 PM");
                     break;
                 case "3":
-                    entPref.EandTNotificationTime = time[Int32.Parse(pref.SetENTPreferredTime) - 1];
+                    entPref.EandTNotificationTime = Convert.ToDateTime(pref.SetENTPreferredTime);
                     break;
                 default:
                     break;
@@ -439,13 +439,13 @@ namespace EmployeeConnect.Helper
             switch (pref.SetTaskRemindersChoice)
             {
                 case "1":
-                    taskPref.TaskNotificationTime = "8:00 AM";
+                    taskPref.TaskNotificationTime = Convert.ToDateTime("8:00 AM");
                     break;
                 case "2":
-                    taskPref.TaskNotificationTime = "5:00 PM";
+                    taskPref.TaskNotificationTime = Convert.ToDateTime("5:00 PM");
                     break;
                 case "3":
-                    taskPref.TaskNotificationTime = time[Int32.Parse(pref.SetTaskReminderPreferredTime) - 1];
+                    taskPref.TaskNotificationTime = Convert.ToDateTime(pref.SetTaskReminderPreferredTime);
                     break;
                 default:
                     break;

@@ -159,14 +159,16 @@ namespace EmployeeConnect.Controllers
         [Route("sendrequest")]
         public ActionResult SendRequest(string Date, string Time, string Contact, string location, string purpose, string hostName, string org)
         {
-            List<string> visitorData = new List<string>();
-            visitorData.Add(Date);
-            visitorData.Add(Time);
-            visitorData.Add(Contact);
-            visitorData.Add(location);
-            visitorData.Add(purpose);
-            visitorData.Add(hostName);
-            visitorData.Add(org);
+            List<string> visitorData = new List<string>
+            {
+                Date,
+                Time,
+                Contact,
+                location,
+                purpose,
+                hostName,
+                org
+            };
             ViewBag.visitorList = visitorData;
             return View();
         }
@@ -228,7 +230,7 @@ namespace EmployeeConnect.Controllers
 
 
             user.News.NewsNotificationFlag = newsNotificationFlag;
-            user.News.NewsNotificationTime = newsTime;
+            user.News.NewsNotificationTime = Convert.ToDateTime(newsTime);
 
             var oldPrefList = user.News.SelectedCategories.ToList();
             foreach (var cat in newsPrefCat)
@@ -247,10 +249,10 @@ namespace EmployeeConnect.Controllers
 
             user.EandT.EandTNotificationFlag = eandtflag;
             user.EandT.EandTNotifyMe = eandtNotify;
-            user.EandT.EandTNotificationTime = eandtTime;
+            user.EandT.EandTNotificationTime = Convert.ToDateTime(eandtTime);
 
             user.Task.TaskNotificationFlag = taskNotificationFlag;
-            user.Task.TaskNotificationTime = taskTime;
+            user.Task.TaskNotificationTime = Convert.ToDateTime(taskTime);
             user.Task.TaskNotifyMe = taskNotifyMe;
 
             GetDataHelper.WritePreferences(user);

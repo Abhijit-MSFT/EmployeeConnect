@@ -118,11 +118,11 @@ namespace EmployeeConnect.Dialogs
                         reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                         break;
                     case Common.Constants.Refresh:
-                        //await Helper.GetDataHelper.GetNewsFromSPandWriteToFile();
+                        await Helper.GetDataHelper.GetNewsFromSPandWriteToFile();
                         //await Helper.GetDataHelper.GetEandTFromSPandWriteToFile();
                         await Helper.GetDataHelper.GetTasksandWriteToFile();
-                        //await Helper.GetDataHelper.GetPODetailsandWriteToFile();
-                        //await Helper.GetDataHelper.GetPreferencesandWriteToFile();
+                        await Helper.GetDataHelper.GetPODetailsandWriteToFile();
+                        await Helper.GetDataHelper.GetPreferencesandWriteToFile();
                         reply.Text = "Cache is updated.";
                         break;
                     case Common.Constants.SetPrefrences:
@@ -230,7 +230,8 @@ namespace EmployeeConnect.Dialogs
                     EmployeeConnect.Models.SetPreferences setPref = Helper.GetDataHelper.SetPreferencesData(activity.Value.ToString());
                     setPref.UserName = userName;
                     EmployeeConnect.Models.Preference pref = Helper.GetDataHelper.MakeUPrefObject(setPref, UniqueId, ServiceURL, TenantId);
-                    await Helper.GetDataHelper.WritePrefsToSPList(pref);
+                    bool writeFlag = await Helper.GetDataHelper.WritePrefsToSPList(pref);
+                    if (writeFlag) await Helper.GetDataHelper.GetPreferencesandWriteToFile();
                     reply.Text = "Your preferences are set.";
                     break;
                 case Constants.ShowPrefCard:   //Press Skip button on set preferences

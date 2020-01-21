@@ -126,7 +126,7 @@
             },
             {
               "title": "refresh",
-              "description": "Refresh cache"
+              "description": "Refresh mock data"
             }
           ]
         },
@@ -169,7 +169,7 @@
             },
             {
               "title": "refresh",
-              "description": "Refresh cache"
+              "description": "Refresh mock data"
             },
             {
               "title": "pending submissions",

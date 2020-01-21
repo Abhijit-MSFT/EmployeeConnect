@@ -27,21 +27,21 @@ namespace EmployeeConnect.Models
         public string[] SelectedCategories { get; set; }
         public bool NewsNotificationFlag { get; set; }
         public string NewsNotifyMe { get; set; }
-        public string NewsNotificationTime { get; set; }
+        public DateTime NewsNotificationTime { get; set; }
     }
 
     public class EandtPreference
     {
         public bool EandTNotificationFlag { get; set; }
         public string EandTNotifyMe { get; set; }
-        public string EandTNotificationTime { get; set; }
+        public DateTime EandTNotificationTime { get; set; }
     }
 
     public class TaskPreference
     {
         public bool TaskNotificationFlag { get; set; }
         public string TaskNotifyMe { get; set; }
-        public string TaskNotificationTime { get; set; }
+        public DateTime TaskNotificationTime { get; set; }
     }
 }
 
