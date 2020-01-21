@@ -8,6 +8,7 @@
     position: relative;
     top: -18px;
   }
+
   .grid1_b73c1c19 {
     width: 22% !important;
   }
@@ -43,6 +44,7 @@
     background: transparent !important;
     color: #3b8ce3 !important;
   }
+
   .row {
     @include ms-Grid-row;
     @include ms-fontColor-white;
@@ -58,35 +60,42 @@
     @include ms-xlPush2;
     @include ms-lgPush1;
   }
+
   .taskTab_bb7e768f .subheading_bb7e768f {
     font-size: 13px;
     color: gray;
     cursor: pointer;
   }
+
   .heading {
     font-size: 22px;
     color: black;
   }
+
   .headingPending {
     font-size: 22px;
     margin-top: 25px;
     color: black;
   }
+
   .taskTab_bb7e768f .heading_bb7e768f {
     font-size: 18px;
     font-weight: 500;
     padding-bottom: 5px;
     padding-top: 0px;
   }
+
   .subheading {
     font-size: 13px;
     color: gray;
     cursor: pointer;
     margin-top: 8px;
   }
+
   .heading_d5fef6f0 {
     margin-bottom: 30px !important;
   }
+
   .title {
     color: black;
     font-weight: bold;
@@ -95,13 +104,14 @@
     top: 10px;
     display: inline;
   }
+
   .title2 {
     color: black;
     font-weight: bold;
     position: relative;
-    margin-top: 5%;
-    margin-left: 20%;
+    margin-top: 3%;
   }
+
   .ft {
     color: #8586bb;
     margin: 10% 0 0 19%;
@@ -140,6 +150,7 @@
     // background-repeat: no-repeat;
     margin-left: 2%;
   }
+
   .img,
   .img2 {
     content: url("./imgs/1.png");
@@ -148,9 +159,11 @@
     border-radius: 50%;
     float: left;
   }
+
   .img2 {
     content: url("./imgs/2.png");
   }
+
   td,
   th {
     border-left: none !important;
@@ -181,8 +194,7 @@
     border-color: $ms-color-themePrimary;
     outline: transparent;
     position: relative;
-    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue",
-      sans-serif;
+    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: $ms-font-size-m;
     font-weight: $ms-font-weight-regular;
@@ -232,6 +244,7 @@
     padding: 9px 28px 3px;
     position: relative;
   }
+
   .panel {
     padding: 10px 0 10px 0;
     background-color: #fff;
@@ -245,15 +258,18 @@
       width: 22%;
     }
   }
+
   @media (max-width: 425px) {
     .grid1,
     .grid2,
     #ps {
       display: none;
     }
+
     .grid2 {
       margin: 10px 0 0 0;
     }
+
     thead th,
     .heading,
     .subheading {

@@ -23,10 +23,10 @@ import { IframeHTMLAttributes } from "react";
 microsoftTeams.initialize();
 const leaderImgSrc = "1.jpg";
 
-
 let poCount = 0;
 let invoiceCount = 0;
 let renderFlag = true;
+let flagCheck = true;
 export interface ITaskTabWebPartProps {
   description: string;
   POLength: number;
@@ -71,6 +71,7 @@ export interface ISInvoiceList {
   Description: string;
   Vendorname: string;
   Vendorno_x002e_: string;
+  PoStatus: string;
   Amount: string;
   Title?: string;
   Id: number;
@@ -101,18 +102,18 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
 
   //Get PO Details List
 
-  private _getPODetailList(): Promise<ISPPODetail> {
-    //Rest API to call SharePoint list
-    var requestURL = this.context.pageContext.web.absoluteUrl;
-    return this.context.spHttpClient
-      .get(
-        requestURL + `/_api/web/lists/GetByTitle('PODetails')/items`,
-        SPHttpClient.configurations.v1
-      )
-      .then((response: SPHttpClientResponse) => {
-        return response.json();
-      });
-  }
+  // private _getPODetailList(): Promise<ISPPODetail> {
+  //   //Rest API to call SharePoint list
+  //   var requestURL = this.context.pageContext.web.absoluteUrl;
+  //   return this.context.spHttpClient
+  //     .get(
+  //       requestURL + `/_api/web/lists/GetByTitle('PODetails')/items`,
+  //       SPHttpClient.configurations.v1
+  //     )
+  //     .then((response: SPHttpClientResponse) => {
+  //       return response.json();
+  //     });
+  // }
 
   //Getting Invoice List Data
   private _getInvoiceListData(): Promise<ISPInvoiceLists> {
@@ -135,20 +136,19 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
     let vendorNo = this.domElement.getElementsByTagName("tr");
     poCount = items.length;
     items.forEach((item: ISPTaskList) => {
-      html += `
+      if (item.PoStatus == "Pending") {
+        html += `
             <tr>
               <td scope="row" class="poNumber">${item.PoNumber}</td>
-              <td></td>
-              <td></td>
               <td>${item.Description}</td>
               <td>${item.VendorName}</td>
               <td id="vendorNo">${item.InvoiceNo}</td>
               <td>&#8377; ${item.TotalAmount}</td>
               <td id="buttonReview" name="buttonReview" value=${item.PoNumber} alt=${item.InvoiceNo} class="${styles.review} reviewButton" id='review'>Review</td>
-              <td></td>
               </tr>
 `;
-      //this._setButtonEventHandlers();
+        //this._setButtonEventHandlers();
+      }
     });
 
     //const reviewButton:Element = this.domElement.querySelector(".reviewButton");
@@ -171,7 +171,8 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
     let html: string = "";
     invoiceCount = items.length;
     items.forEach((item: ISInvoiceList) => {
-      html += `
+      if (item.PoStatus == "Pending") {
+        html += `
             <tr>
               <td scope="row">${item.Invoiceno_x002e_}</td>
               <td id="poNumber">${item.POno_x002e_}</td>
@@ -184,7 +185,8 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
 
                </tr>
 `;
-      //this._setButtonEventHandlers();
+        //this._setButtonEventHandlers();
+      }
     });
 
     //const reviewButton:Element = this.domElement.querySelector(".reviewButton");
@@ -200,12 +202,14 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       //this.showEvent(this);
       this.submitPurchaseOrder(event);
     });
+
     //this._setButtonEventHandlers();
   }
 
   private _renderListAsync(): void {
     this._getTaskListData().then(response => {
       this._renderTaskList(response.value);
+      //  this.updatePOStatus(response.value);
     });
     //}
   }
@@ -213,6 +217,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
   private _renderInvoiceListAsync(): void {
     this._getInvoiceListData().then(response => {
       this._renderInvoiceList(response.value);
+      //this.updatePOStatus(response.value);
     });
     //}
   }
@@ -232,7 +237,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             <div class="${styles.img}"></div>
             <h5 class="${styles.title}">12</h5>
             <h6 class="${styles.title2}">Days of pending timesheet</h6>
-            <div class="${styles.ft}">
+            <div class="${styles.ft}" id="fill-timesheet" style="margin-top:16%">
               Fill timesheet >
               <span class="chevron-right"></span>
             </div>
@@ -256,18 +261,15 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         </div>
         <div class="${styles.row}">
         <div class="${styles.headingPending}"> Pending approvals </div>
-         <div class="${styles.subheading}">Purchased order (${poCount})</div>
+         <div class="${styles.subheading}">Purchased Orders</div>
         <table class="${styles.container} table">
           <thead>
             <tr>
               <th scope="col">Po no.</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
               <th scope="col">Description</th>
               <th scope="col">Vendor name</th>
               <th scope="col">Vendor no.</th>
               <th scope="col">Amount</th>
-              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -276,10 +278,10 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             </tbody>
         </table>
         </div>
-          <div class="${styles.subheading}">Invoice (${invoiceCount})
+          <div class="${styles.subheading}">Invoice
       </div>
 
-         <table class="table">
+         <table class="table" style="position:relative;top:-16px;">
           <thead>
             <tr>
               <th scope="col">Invoice no.</th>
@@ -302,7 +304,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
   }
 
   private _setButtonEventHandlers(): void {
-    let button = document.body.querySelector("#full-timesheet");
+    let button = document.body.querySelector("#fill-timesheet");
     button.addEventListener("click", () => {
       this.pendingDates();
     });
@@ -322,8 +324,11 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
     microsoftTeams.tasks.startTask(taskInfoObj, this.submitHandler);
   }
   private submitPurchaseOrder(event) {
+    //console.log(event);
+    //console.log(this.submitHandler);
     let PONumber = event.srcElement.attributes[2].value;
     let vendorNo = event.srcElement.attributes[3].value;
+    this.updatePoStatus(PONumber);
     let taskInfo = {
       InvoiceNo: null,
       height: null,
@@ -337,14 +342,14 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       PONumber +
       "&vendorno=" +
       vendorNo;
-    taskInfo.height = "900";
-    taskInfo.width = "600";
+    taskInfo.height = "750";
+    taskInfo.width = "480";
     taskInfo.fallbackUrl = taskInfo.url;
     microsoftTeams.tasks.startTask(taskInfo, this.submitHandler);
-    this.deleteItem();
+    //this.updatePOStatus();
   }
 
-  private getLatestItemId(): Promise<number> {
+  private getLatestItemId(selectPoNumber): Promise<number> {
     return new Promise<number>(
       (
         resolve: (itemId: number) => void,
@@ -352,7 +357,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       ): void => {
         this.context.spHttpClient
           .get(
-            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PurchaseOrders')/items?$orderby=Id desc&$top=1&$select=id`,
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PurchaseOrders')/items?$select=id,PoNumber`,
             SPHttpClient.configurations.v1,
             {
               headers: {
@@ -371,47 +376,36 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
               reject(error);
             }
           )
-          .then((response: { value: { Id: number }[] }): void => {
-            if (response.value.length === 0) {
-              resolve(-1);
-            } else {
-              resolve(response.value[0].Id);
+          .then(
+            (response: { value: { Id: number; PoNumber: number }[] }): void => {
+              if (response.value.length === 0) {
+                resolve(-1);
+              } else {
+                response.value.forEach(element => {
+                  if (element.PoNumber == selectPoNumber) {
+                    resolve(element.Id);
+                  }
+                });
+              }
             }
-          });
+          );
       }
     );
   }
-  //Update the existing list item
-  private UpdateListItem() {
-    let poNumber: number = undefined;
-    let etag: string = undefined;
-    this.context.spHttpClient.get(
-      `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle("PurchaseOrders")/items(848930)`,
-      SPHttpClient.configurations.v1,
-      {
-        headers: {
-          Accept: "application/json;oData=nometadat",
-          "odata-version": ""
-        }
-      }
-    );
-  }
+  //Update Po Status
+  public updatePoStatus(selectPoNumber): void {
+    //  alert("Called");
+    var poStatus = "";
+    if (flagCheck) {
+      poStatus = "Approved";
+      flagCheck = false;
+    } else {
+      poStatus = "Declined";
+      flagCheck = true;
+    }
 
-  // private ReadListItem(){
-  //   let poNumber:number = undefined;
-  //   poNumber = 848930;
-  //   this.context.spHttpClient.get(`${this.context.pageContext.absoluteUrl}/_api/web/lists/getByTitle("TaskList")/Items(848930)`,
-  //   SPHttpClient.configurations.v1,
-  //   Headers:{
-  //     'Accept':'application/json;oData=nometadat',
-  //     'odata-version':''
-  //   });
-  // }
-  private deleteItem(): void {
-    // this.updateStatus("Loading latest items...");
     let latestItemId: number = undefined;
-    let etag: string = undefined;
-    this.getLatestItemId()
+    this.getLatestItemId(selectPoNumber)
       .then(
         (itemId: number): Promise<SPHttpClientResponse> => {
           if (itemId === -1) {
@@ -419,11 +413,10 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
           }
 
           latestItemId = itemId;
-          // this.updateStatus(
-          //   `Loading information about item ID: ${latestItemId}...`
-          // );
+          console.log(`Loading information about item ID: ${itemId}...`);
+
           return this.context.spHttpClient.get(
-            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PurchaseOrders')/items(${latestItemId})?$select=Id`,
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PurchaseOrders')/items(${latestItemId})?$select=Title,Id`,
             SPHttpClient.configurations.v1,
             {
               headers: {
@@ -436,40 +429,45 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       )
       .then(
         (response: SPHttpClientResponse): Promise<ISPTaskList> => {
-          etag = response.headers.get("ETag");
           return response.json();
         }
       )
-      .then(
-        (item: ISPTaskList): Promise<SPHttpClientResponse> => {
-          //this.updateStatus(`Deleting item with ID: ${latestItemId}...`);
-          return this.context.spHttpClient.post(
-            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PurchaseOrders')/items(${latestItemId})`,
+      .then((item: ISPTaskList): void => {
+        //  console.log(`Item ID1: ${item.Id}, Title: ${item.Title}`);
+        //item.NotificaitionTime = updateObj;
+        const body: string = JSON.stringify({
+          PoStatus: `${poStatus}`
+        });
+
+        console.log(item.Id);
+        this.context.spHttpClient
+          .post(
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists(guid%27326cdbd1-840e-4ee7-be55-4019301c2126%27)/items(${item.Id})`,
             SPHttpClient.configurations.v1,
             {
               headers: {
                 Accept: "application/json;odata=nometadata",
-                "Content-type": "application/json;odata=verbose",
+                "Content-type": "application/json;odata=nometadata",
                 "odata-version": "",
-                "IF-MATCH": etag,
-                "X-HTTP-Method": "DELETE"
-              }
+                "IF-MATCH": "*",
+                "X-HTTP-Method": "MERGE"
+              },
+              body: body
+            }
+          )
+          .then(
+            (response: SPHttpClientResponse): void => {
+              console.log(`Item with ID: ${latestItemId} successfully updated`);
+            },
+            (error: any): void => {
+              console.log(`Error updating item: ${error}`);
             }
           );
-        }
-      )
-      .then(
-        (response: SPHttpClientResponse): void => {
-          // this.updateStatus(
-          //   `Item with ID: ${latestItemId} successfully deleted`
-          // );
-        },
-        (error: any): void => {
-          //this.updateStatus(`Error deleting item: ${error}`);
-        }
-      );
+      });
+    //window.location.reload();
   }
   public submitHandler(err, result) {
+    console.log(event);
     if (result.action == "podecline") {
       let taskInfo = {
         InvoiceNo: null,
