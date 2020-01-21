@@ -1,1 +1,816 @@
-define("fc2baa3e-0297-4bd1-8dbf-d70666d0e734_0.0.1",["jquery","@microsoft/sp-webpart-base","@microsoft/sp-core-library","@microsoft/sp-loader","PoliciesWebPartStrings"],function(e,n,t,i,a){return function(e){var n={};function t(i){if(n[i])return n[i].exports;var a=n[i]={i:i,l:!1,exports:{}};return e[i].call(a.exports,a,a.exports,t),a.l=!0,a.exports}return t.m=e,t.c=n,t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{enumerable:!0,get:i})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,n){if(1&n&&(e=t(e)),8&n)return e;if(4&n&&"object"==typeof e&&e&&e.__esModule)return e;var i=Object.create(null);if(t.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:e}),2&n&&"string"!=typeof e)for(var a in e)t.d(i,a,function(n){return e[n]}.bind(null,a));return i},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="",t(t.s=27)}([function(n,t){n.exports=e},,function(e,t){e.exports=n},,function(e,n){e.exports=t},function(e,n){e.exports=i},function(e,n){e.exports=function(e){var n=[];return n.toString=function(){return this.map(function(n){var t=function(e,n){var t=e[1]||"",i=e[3];if(!i)return t;if(n&&"function"==typeof btoa){var a=(o=i,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))+" */"),l=i.sources.map(function(e){return"/*# sourceURL="+i.sourceRoot+e+" */"});return[t].concat(l).concat([a]).join("\n")}var o;return[t].join("\n")}(n,e);return n[2]?"@media "+n[2]+"{"+t+"}":t}).join("")},n.i=function(e,t){"string"==typeof e&&(e=[[null,e,""]]);for(var i={},a=0;a<this.length;a++){var l=this[a][0];"number"==typeof l&&(i[l]=!0)}for(a=0;a<e.length;a++){var o=e[a];"number"==typeof o[0]&&i[o[0]]||(t&&!o[2]?o[2]=t:t&&(o[2]="("+o[2]+") and ("+t+")"),n.push(o))}},n}},function(e,n,t){"use strict";(function(e){var t,i=this&&this.__assign||function(){return(i=Object.assign||function(e){for(var n,t=1,i=arguments.length;t<i;t++)for(var a in n=arguments[t])Object.prototype.hasOwnProperty.call(n,a)&&(e[a]=n[a]);return e}).apply(this,arguments)};Object.defineProperty(n,"__esModule",{value:!0});var a="undefined"==typeof window?e:window,l=a&&a.CSPSettings&&a.CSPSettings.nonce,o=function(){var e=a.__themeState__||{theme:void 0,lastStyleElement:void 0,registeredStyles:[]};e.runState||(e=i({},e,{perf:{count:0,duration:0},runState:{flushTimer:0,mode:0,buffer:[]}}));e.registeredThemableStyles||(e=i({},e,{registeredThemableStyles:[]}));return a.__themeState__=e,e}(),r=/[\'\"]\[theme:\s*(\w+)\s*(?:\,\s*default:\s*([\\"\']?[\.\,\(\)\#\-\s\w]*[\.\,\(\)\#\-\w][\"\']?))?\s*\][\'\"]/g,s=1e4,c=function(){return"undefined"!=typeof performance&&performance.now?performance.now():Date.now()};function d(e){var n=c();e();var t=c();o.perf.duration+=t-n}function u(){d(function(){var e=o.runState.buffer.slice();o.runState.buffer=[];var n=[].concat.apply([],e);n.length>0&&p(n)})}function p(e,n){o.loadStyles?o.loadStyles(m(e).styleString,e):t?function(e,n){if("undefined"==typeof document)return;var t=document.getElementsByTagName("head")[0],i=o.registeredStyles,a=o.lastStyleElement,l=a?a.styleSheet:void 0,r=l?l.cssText:"",c=i[i.length-1],d=m(e).styleString;(!a||r.length+d.length>s)&&((a=document.createElement("style")).type="text/css",n?(t.replaceChild(a,n.styleElement),n.styleElement=a):t.appendChild(a),n||(c={styleElement:a,themableStyle:e},i.push(c)));a.styleSheet.cssText+=h(d),Array.prototype.push.apply(c.themableStyle,e),o.lastStyleElement=a}(e,n):function(e){if("undefined"==typeof document)return;var n=document.getElementsByTagName("head")[0],t=document.createElement("style"),i=m(e),a=i.styleString,r=i.themable;t.type="text/css",l&&t.setAttribute("nonce",l);t.appendChild(document.createTextNode(a)),o.perf.count++,n.appendChild(t);var s={styleElement:t,themableStyle:e};r?o.registeredThemableStyles.push(s):o.registeredStyles.push(s)}(e)}function f(e){void 0===e&&(e=3),3!==e&&2!==e||(b(o.registeredStyles),o.registeredStyles=[]),3!==e&&1!==e||(b(o.registeredThemableStyles),o.registeredThemableStyles=[])}function b(e){e.forEach(function(e){var n=e&&e.styleElement;n&&n.parentElement&&n.parentElement.removeChild(n)})}function h(e){return e&&(e=m(y(e)).styleString),e}function m(e){var n=o.theme,t=!1;return{styleString:(e||[]).map(function(e){var i=e.theme;if(i){t=!0;var a=n?n[i]:void 0,l=e.defaultValue||"inherit";return n&&!a&&console,a||l}return e.rawString}).join(""),themable:t}}function y(e){var n=[];if(e){for(var t=0,i=void 0;i=r.exec(e);){var a=i.index;a>t&&n.push({rawString:e.substring(t,a)}),n.push({theme:i[1],defaultValue:i[2]}),t=r.lastIndex}n.push({rawString:e.substring(t)})}return n}n.loadStyles=function(e,n){void 0===n&&(n=!1),d(function(){var i=Array.isArray(e)?e:y(e);void 0===t&&(t=function(){var e=!1;if("undefined"!=typeof document){var n=document.createElement("style");n.type="text/css",e=!!n.styleSheet}return e}());var a=o.runState,l=a.mode,r=a.buffer,s=a.flushTimer;n||1===l?(r.push(i),s||(o.runState.flushTimer=setTimeout(function(){o.runState.flushTimer=0,u()},0))):p(i)})},n.configureLoadStyles=function(e){o.loadStyles=e},n.configureRunMode=function(e){o.runState.mode=e},n.flush=u,n.loadTheme=function(e){o.theme=e,function(){if(o.theme){for(var e=[],n=0,t=o.registeredThemableStyles;n<t.length;n++){var i=t[n];e.push(i.themableStyle)}e.length>0&&(f(1),p([].concat.apply([],e)))}}()},n.clearStyles=f,n.detokenize=h,n.splitStyles=y}).call(this,t(8))},function(e,n){var t;t=function(){return this}();try{t=t||new Function("return this")()}catch(e){"object"==typeof window&&(t=window)}e.exports=t},,,function(e,n){e.exports=a},,,,,,,,,function(e,n,t){var i=t(21),a=t(7);"string"==typeof i&&(i=[[e.i,i]]);for(var l=0;l<i.length;l++)a.loadStyles(i[l][1],!0);i.locals&&(e.exports=i.locals)},function(e,n,t){(e.exports=t(6)(!1)).push([e.i,'.policies_09724b53 .container_09724b53{width:auto;margin:0 auto}.policies_09724b53 .row_09724b53{margin:0 -8px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#000}.policies_09724b53 .row_09724b53:after,.policies_09724b53 .row_09724b53:before{display:table;content:"";line-height:0}.policies_09724b53 .row_09724b53:after{clear:both}.policies_09724b53 .column1_09724b53{position:relative;min-height:1px;padding-left:8px;padding-right:8px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%}[dir=ltr] .policies_09724b53 .column1_09724b53{float:left}[dir=rtl] .policies_09724b53 .column1_09724b53{float:right}.policies_09724b53 .column1_09724b53 .ms-Grid_09724b53{padding:0}@media (min-width:640px){.policies_09724b53 .column1_09724b53{width:25%}}.policies_09724b53 .column2_09724b53{position:relative;min-height:1px;padding-left:8px;padding-right:8px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%}[dir=ltr] .policies_09724b53 .column2_09724b53{float:left}[dir=rtl] .policies_09724b53 .column2_09724b53{float:right}.policies_09724b53 .column2_09724b53 .ms-Grid_09724b53{padding:0}@media (min-width:640px){.policies_09724b53 .column2_09724b53{width:75%}}.policies_09724b53 .sidebar_09724b53{margin:0;padding:0;width:auto;background-color:#f3f2f1;height:100vh;overflow:auto}.policies_09724b53 .sidebar_09724b53 a{display:block;color:#a9a8a7;padding:8px;padding-left:30px;text-decoration:none}.policies_09724b53 a.active_09724b53{background-color:#e3e2eb;color:#000;font-weight:700;cursor:pointer}.policies_09724b53 a.active_09724b53 .sidebar_09724b53{color:#000}.policies_09724b53 .sidebar_09724b53 a:hover:not(.active_09724b53){background-color:#e3e2eb;color:#000}.policies_09724b53 div.content_09724b53{margin-left:auto;padding:auto;width:auto}.policies_09724b53 .head_09724b53{margin-bottom:20px;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.policies_09724b53 .subheading_09724b53{margin-top:10px;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.policies_09724b53 .subsubheading_09724b53{font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;margin:0}.policies_09724b53 .bulletpts_09724b53{font-size:14px}.policies_09724b53 .hrdetails_09724b53{margin-left:15%}.policies_09724b53 .service_09724b53{display:none}@media (max-width:425px){.policies_09724b53 .column2_09724b53{display:none}.policies_09724b53 .service_09724b53{display:block}}',""])},,,,,,function(e,n,t){"use strict";t.r(n);var i=t(4),a=t(2);t(20);var l,o={policies:"policies_09724b53",container:"container_09724b53",row:"row_09724b53",column1:"column1_09724b53","ms-Grid":"ms-Grid_09724b53",column2:"column2_09724b53",sidebar:"sidebar_09724b53",active:"active_09724b53",content:"content_09724b53",head:"head_09724b53",subheading:"subheading_09724b53",subsubheading:"subsubheading_09724b53",bulletpts:"bulletpts_09724b53",hrdetails:"hrdetails_09724b53",service:"service_09724b53"},r=t(11),s=t(5),c=t(0),d=(l=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,n){e.__proto__=n}||function(e,n){for(var t in n)n.hasOwnProperty(t)&&(e[t]=n[t])},function(e,n){function t(){this.constructor=e}l(e,n),e.prototype=null===n?Object.create(n):(t.prototype=n.prototype,new t)}),u=function(e){function n(){var n=e.call(this)||this;return c(document).ready(function(){c("#heading2,#heading3,#heading4").hide();c("div a").on("click",function(){c("div a").removeClass("active"),c(n).addClass("active")}),c(".HR").on("click",function(){c("#heading2,#heading3,#heading4").hide(),c("#heading1").show()})}),n}return d(n,e),n.prototype.render=function(){s.SPComponentLoader.loadCss("https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"),this.domElement.innerHTML='\n      <div class="'+o.policies+'" id="accordion">\n        <div class="'+o.container+'">\n          <div class="'+o.row+'">\n            <div class="'+o.column1+'">\n              <div class="'+o.sidebar+'">\n                <a\n                  class="'+o.active+' accordion-toggle"\n                  data-toggle="collapse"\n                   data-parent="#accordion"\n                  data-target="#hr" aria-expanded="false"\n                  href="#heading1"\n                  >\n                  <span class="HR">Human resources</span>\n                  </a>\n\n                        <div class="'+o.service+'">\n                      <div class="'+o.head+'">\n                          <h4>Human Resource Policies</h4>\n                          This document contains all policies-related information for employees.\n                          Please contact your HR representative for any queries.\n                      </div>\n                        <h6 class="'+o.subheading+'">1.1 Annual Leave</h6>\n                          <p class="'+o.subsubheading+'">\n                            Important guidelines for the annual leave policy are listed below:\n                          </p>\n                              <ul class="'+o.bulletpts+'">\n                                <li>\n                                  All employees are entitled to a total of 15 annual leaves during the\n                                  calendar year\n                                </li>\n                                <li>\n                                  The annual leave cycle is based on calendar year (January 1 to\n                                  December 31)\n                                </li>\n                                <li>\n                                  Weekly off/holidays falling during the leave period are excluded\n                                  from the number of leave days taken\n                                </li>\n                                <li>\n                                  Only 5 unused annual leaves can be carried forward to the next\n                                  calendar year\n                                </li>\n                                <li>\n                                  Employees who join during the course of the year will receive annual\n                                  leaves on a pro-rated basis\n                                </li>\n                                <li>\n                                  If an employee leaves during the leave cycle and has taken more\n                                  leaves than the eligibility, the excess leaves taken will be\n                                  adjusted against the full and final settlement\n                                </li>\n                                <li>\n                                  All employees need to apply for leaves using the designated vacation\n                                  tool\n                                </li>\n                                <li>\n                                  All annual leaves must be approved by managers before the leave\n                                  period begins\n                                </li>\n                              </ul>\n                                    <h6 class="'+o.subheading+'">1.2 Sick Leave</h6>\n                                        <p class="'+o.subsubheading+'">\n                                          Important guidelines for the sick leave policy are listed below:\n                                        </p>\n                                            <ul class="'+o.bulletpts+'">\n                                              <li>\n                                                All employees are entitled to a total of 12 sick leaves during the\n                                                calendar year\n                                              </li>\n                                              <li>\n                                                The sick leave cycle is based on calendar year (January 1 to\n                                                December 31)\n                                              </li>\n                                              <li>\n                                                Weekly off/holidays falling during the leave period are excluded\n                                                from the number of leave days taken\n                                              </li>\n                                              <li>\n                                                Unused sick leaves cannot be carried forward to the next calendar\n                                                year\n                                              </li>\n                                              <li>\n                                                Employees who join during the course of the year will receive sick\n                                                leaves on a pro-rated basis\n                                              </li>\n                                              <li>\n                                                If an employee leaves during the leave cycle and has taken more\n                                                leaves than the eligibility, the excess leaves taken will be\n                                                adjusted against the full and final settlement\n                                              </li>\n                                              <li>\n                                                All employees need to apply for sick leaves using the designated\n                                                vacation tool after re-joining work\n                                              </li>\n                                              <li>\n                                                If an employee takes more than 5 consecutive sick leaves, he/she\n                                                will be required to furnish a medical certificate\n                                              </li>\n                                            </ul>\n                      </div>\n                  <a class="'+o+'" href="#heading2">\n                    <span class="PB">Pay & Benefits</span>\n                  </a>\n                  <a class="'+o+'" href="#heading3">\n                    <span class="IT">IT facilities</span>\n                  </a>\n                  <a class="'+o+'" href="#heading4">\n                    <span class="RO">Retail operations</span>\n                  </a>\n                </div>\n            </div>\n             <div class="'+o.column2+'">\n                <div class="'+o.content+'">\n                  <div id="heading1">\n                      <div class="'+o.head+'">\n                          <h4>Human Resource Policies</h4>\n                          This document contains all policies-related information for employees.\n                          Please contact your HR representative for any queries.\n                      </div>\n                        <h6 class="'+o.subheading+'">1.1 Annual Leave</h6>\n                          <p class="'+o.subsubheading+'">\n                            Important guidelines for the annual leave policy are listed below:\n                          </p>\n                              <ul class="'+o.bulletpts+'">\n                                <li>\n                                  All employees are entitled to a total of 15 annual leaves during the\n                                  calendar year\n                                </li>\n                                <li>\n                                  The annual leave cycle is based on calendar year (January 1 to\n                                  December 31)\n                                </li>\n                                <li>\n                                  Weekly off/holidays falling during the leave period are excluded\n                                  from the number of leave days taken\n                                </li>\n                                <li>\n                                  Only 5 unused annual leaves can be carried forward to the next\n                                  calendar year\n                                </li>\n                                <li>\n                                  Employees who join during the course of the year will receive annual\n                                  leaves on a pro-rated basis\n                                </li>\n                                <li>\n                                  If an employee leaves during the leave cycle and has taken more\n                                  leaves than the eligibility, the excess leaves taken will be\n                                  adjusted against the full and final settlement\n                                </li>\n                                <li>\n                                  All employees need to apply for leaves using the designated vacation\n                                  tool\n                                </li>\n                                <li>\n                                  All annual leaves must be approved by managers before the leave\n                                  period begins\n                                </li>\n                              </ul>\n                                    <h6 class="'+o.subheading+'">1.2 Sick Leave</h6>\n                                        <p class="'+o.subsubheading+'">\n                                          Important guidelines for the sick leave policy are listed below:\n                                        </p>\n                                            <ul class="'+o.bulletpts+'">\n                                              <li>\n                                                All employees are entitled to a total of 12 sick leaves during the\n                                                calendar year\n                                              </li>\n                                              <li>\n                                                The sick leave cycle is based on calendar year (January 1 to\n                                                December 31)\n                                              </li>\n                                              <li>\n                                                Weekly off/holidays falling during the leave period are excluded\n                                                from the number of leave days taken\n                                              </li>\n                                              <li>\n                                                Unused sick leaves cannot be carried forward to the next calendar\n                                                year\n                                              </li>\n                                              <li>\n                                                Employees who join during the course of the year will receive sick\n                                                leaves on a pro-rated basis\n                                              </li>\n                                              <li>\n                                                If an employee leaves during the leave cycle and has taken more\n                                                leaves than the eligibility, the excess leaves taken will be\n                                                adjusted against the full and final settlement\n                                              </li>\n                                              <li>\n                                                All employees need to apply for sick leaves using the designated\n                                                vacation tool after re-joining work\n                                              </li>\n                                              <li>\n                                                If an employee takes more than 5 consecutive sick leaves, he/she\n                                                will be required to furnish a medical certificate\n                                              </li>\n                                            </ul>\n                      </div>\n                  </div>\n              </div>\n          </div>\n        </div>\n      </div>'},Object.defineProperty(n.prototype,"dataVersion",{get:function(){return i.Version.parse("1.0")},enumerable:!0,configurable:!0}),n.prototype.getPropertyPaneConfiguration=function(){return{pages:[{header:{description:r.PropertyPaneDescription},groups:[{groupName:r.BasicGroupName,groupFields:[Object(a.PropertyPaneTextField)("description",{label:r.DescriptionFieldLabel})]}]}]}},n}(a.BaseClientSideWebPart);n.default=u}])});
+define("fc2baa3e-0297-4bd1-8dbf-d70666d0e734_0.0.1", ["@microsoft/sp-core-library","@microsoft/sp-loader","@microsoft/sp-webpart-base","PoliciesWebPartStrings","jquery"], function(__WEBPACK_EXTERNAL_MODULE__microsoft_sp_core_library__, __WEBPACK_EXTERNAL_MODULE__microsoft_sp_loader__, __WEBPACK_EXTERNAL_MODULE__microsoft_sp_webpart_base__, __WEBPACK_EXTERNAL_MODULE_PoliciesWebPartStrings__, __WEBPACK_EXTERNAL_MODULE_jquery__) { return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./lib/webparts/policies/PoliciesWebPart.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./lib/webparts/policies/PoliciesWebPart.js":
+/*!**************************************************!*\
+  !*** ./lib/webparts/policies/PoliciesWebPart.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @microsoft/sp-core-library */ "@microsoft/sp-core-library");
+/* harmony import */ var _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @microsoft/sp-webpart-base */ "@microsoft/sp-webpart-base");
+/* harmony import */ var _microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PoliciesWebPart.module.scss */ "./lib/webparts/policies/PoliciesWebPart.module.scss.js");
+/* harmony import */ var PoliciesWebPartStrings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! PoliciesWebPartStrings */ "PoliciesWebPartStrings");
+/* harmony import */ var PoliciesWebPartStrings__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(PoliciesWebPartStrings__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @microsoft/sp-loader */ "@microsoft/sp-loader");
+/* harmony import */ var _microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+
+var PoliciesWebPart = /** @class */ (function (_super) {
+    __extends(PoliciesWebPart, _super);
+    function PoliciesWebPart() {
+        var _this = _super.call(this) || this;
+        jquery__WEBPACK_IMPORTED_MODULE_5__(document).ready(function () {
+            jquery__WEBPACK_IMPORTED_MODULE_5__("#heading2,#heading3,#heading4").hide();
+            var selector = "div a";
+            // $(selector).on("click",()=> {
+            //   $(selector).removeClass("active");
+            //   $(this).addClass("active");
+            // });
+            jquery__WEBPACK_IMPORTED_MODULE_5__(selector).on("click", function () {
+                jquery__WEBPACK_IMPORTED_MODULE_5__(selector).removeClass("active");
+                jquery__WEBPACK_IMPORTED_MODULE_5__(_this).addClass("active");
+            });
+            jquery__WEBPACK_IMPORTED_MODULE_5__(".HR").on("click", function () {
+                jquery__WEBPACK_IMPORTED_MODULE_5__("#heading2,#heading3,#heading4").hide();
+                jquery__WEBPACK_IMPORTED_MODULE_5__("#heading1").show();
+            });
+            // $(".PB").on("click", () => {
+            //   $("#heading1,#heading3,#heading4").hide();
+            //   $("#heading2").show();
+            // });
+            // $(".IT").on("click", () => {
+            //   $("#heading1,#heading2,#heading4").hide();
+            //   $("#heading3").show();
+            // });
+            // $(".RO").on("click", () => {
+            //   $("#heading1,#heading2,#heading3").hide();
+            //   $("#heading4").show();
+            // });
+        });
+        return _this;
+    }
+    PoliciesWebPart.prototype.render = function () {
+        var cssURL = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css";
+        _microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_4__["SPComponentLoader"].loadCss(cssURL);
+        this.domElement.innerHTML = "\n      <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].policies + "\" id=\"accordion\">\n        <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].container + "\">\n          <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].row + "\">\n            <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].column1 + "\">\n              <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].sidebar + "\">\n                <a\n                  class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].active + " accordion-toggle\"\n                  data-toggle=\"collapse\"\n                   data-parent=\"#accordion\"\n                  data-target=\"#hr\" aria-expanded=\"false\"\n                  href=\"#heading1\"\n                  >\n                  <span class=\"HR\">Human resources</span>\n                  </a>\n\n                        <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].service + "\">\n                      <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].head + "\">\n                          <h4>Human Resource Policies</h4>\n                          This document contains all policies-related information for employees.\n                          Please contact your HR representative for any queries.\n                      </div>\n                        <h6 class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subheading + "\">1.1 Annual Leave</h6>\n                          <p class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subsubheading + "\">\n                            Important guidelines for the annual leave policy are listed below:\n                          </p>\n                              <ul class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].bulletpts + "\">\n                                <li>\n                                  All employees are entitled to a total of 15 annual leaves during the\n                                  calendar year\n                                </li>\n                                <li>\n                                  The annual leave cycle is based on calendar year (January 1 to\n                                  December 31)\n                                </li>\n                                <li>\n                                  Weekly off/holidays falling during the leave period are excluded\n                                  from the number of leave days taken\n                                </li>\n                                <li>\n                                  Only 5 unused annual leaves can be carried forward to the next\n                                  calendar year\n                                </li>\n                                <li>\n                                  Employees who join during the course of the year will receive annual\n                                  leaves on a pro-rated basis\n                                </li>\n                                <li>\n                                  If an employee leaves during the leave cycle and has taken more\n                                  leaves than the eligibility, the excess leaves taken will be\n                                  adjusted against the full and final settlement\n                                </li>\n                                <li>\n                                  All employees need to apply for leaves using the designated vacation\n                                  tool\n                                </li>\n                                <li>\n                                  All annual leaves must be approved by managers before the leave\n                                  period begins\n                                </li>\n                              </ul>\n                                    <h6 class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subheading + "\">1.2 Sick Leave</h6>\n                                        <p class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subsubheading + "\">\n                                          Important guidelines for the sick leave policy are listed below:\n                                        </p>\n                                            <ul class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].bulletpts + "\">\n                                              <li>\n                                                All employees are entitled to a total of 12 sick leaves during the\n                                                calendar year\n                                              </li>\n                                              <li>\n                                                The sick leave cycle is based on calendar year (January 1 to\n                                                December 31)\n                                              </li>\n                                              <li>\n                                                Weekly off/holidays falling during the leave period are excluded\n                                                from the number of leave days taken\n                                              </li>\n                                              <li>\n                                                Unused sick leaves cannot be carried forward to the next calendar\n                                                year\n                                              </li>\n                                              <li>\n                                                Employees who join during the course of the year will receive sick\n                                                leaves on a pro-rated basis\n                                              </li>\n                                              <li>\n                                                If an employee leaves during the leave cycle and has taken more\n                                                leaves than the eligibility, the excess leaves taken will be\n                                                adjusted against the full and final settlement\n                                              </li>\n                                              <li>\n                                                All employees need to apply for sick leaves using the designated\n                                                vacation tool after re-joining work\n                                              </li>\n                                              <li>\n                                                If an employee takes more than 5 consecutive sick leaves, he/she\n                                                will be required to furnish a medical certificate\n                                              </li>\n                                            </ul>\n                      </div>\n                  <a class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"] + "\" href=\"#heading2\">\n                    <span class=\"PB\">Pay & Benefits</span>\n                  </a>\n                  <a class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"] + "\" href=\"#heading3\">\n                    <span class=\"IT\">IT facilities</span>\n                  </a>\n                  <a class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"] + "\" href=\"#heading4\">\n                    <span class=\"RO\">Retail operations</span>\n                  </a>\n                </div>\n            </div>\n             <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].column2 + "\">\n                <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].content + "\">\n                  <div id=\"heading1\">\n                      <div class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].head + "\">\n                          <h4>Human Resource Policies</h4>\n                          This document contains all policies-related information for employees.\n                          Please contact your HR representative for any queries.\n                      </div>\n                        <h6 class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subheading + "\">1.1 Annual Leave</h6>\n                          <p class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subsubheading + "\">\n                            Important guidelines for the annual leave policy are listed below:\n                          </p>\n                              <ul class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].bulletpts + "\">\n                                <li>\n                                  All employees are entitled to a total of 15 annual leaves during the\n                                  calendar year\n                                </li>\n                                <li>\n                                  The annual leave cycle is based on calendar year (January 1 to\n                                  December 31)\n                                </li>\n                                <li>\n                                  Weekly off/holidays falling during the leave period are excluded\n                                  from the number of leave days taken\n                                </li>\n                                <li>\n                                  Only 5 unused annual leaves can be carried forward to the next\n                                  calendar year\n                                </li>\n                                <li>\n                                  Employees who join during the course of the year will receive annual\n                                  leaves on a pro-rated basis\n                                </li>\n                                <li>\n                                  If an employee leaves during the leave cycle and has taken more\n                                  leaves than the eligibility, the excess leaves taken will be\n                                  adjusted against the full and final settlement\n                                </li>\n                                <li>\n                                  All employees need to apply for leaves using the designated vacation\n                                  tool\n                                </li>\n                                <li>\n                                  All annual leaves must be approved by managers before the leave\n                                  period begins\n                                </li>\n                              </ul>\n                                    <h6 class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subheading + "\">1.2 Sick Leave</h6>\n                                        <p class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].subsubheading + "\">\n                                          Important guidelines for the sick leave policy are listed below:\n                                        </p>\n                                            <ul class=\"" + _PoliciesWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].bulletpts + "\">\n                                              <li>\n                                                All employees are entitled to a total of 12 sick leaves during the\n                                                calendar year\n                                              </li>\n                                              <li>\n                                                The sick leave cycle is based on calendar year (January 1 to\n                                                December 31)\n                                              </li>\n                                              <li>\n                                                Weekly off/holidays falling during the leave period are excluded\n                                                from the number of leave days taken\n                                              </li>\n                                              <li>\n                                                Unused sick leaves cannot be carried forward to the next calendar\n                                                year\n                                              </li>\n                                              <li>\n                                                Employees who join during the course of the year will receive sick\n                                                leaves on a pro-rated basis\n                                              </li>\n                                              <li>\n                                                If an employee leaves during the leave cycle and has taken more\n                                                leaves than the eligibility, the excess leaves taken will be\n                                                adjusted against the full and final settlement\n                                              </li>\n                                              <li>\n                                                All employees need to apply for sick leaves using the designated\n                                                vacation tool after re-joining work\n                                              </li>\n                                              <li>\n                                                If an employee takes more than 5 consecutive sick leaves, he/she\n                                                will be required to furnish a medical certificate\n                                              </li>\n                                            </ul>\n                      </div>\n                  </div>\n              </div>\n          </div>\n        </div>\n      </div>";
+    };
+    Object.defineProperty(PoliciesWebPart.prototype, "dataVersion", {
+        get: function () {
+            return _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__["Version"].parse("1.0");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PoliciesWebPart.prototype.getPropertyPaneConfiguration = function () {
+        return {
+            pages: [
+                {
+                    header: {
+                        description: PoliciesWebPartStrings__WEBPACK_IMPORTED_MODULE_3__["PropertyPaneDescription"]
+                    },
+                    groups: [
+                        {
+                            groupName: PoliciesWebPartStrings__WEBPACK_IMPORTED_MODULE_3__["BasicGroupName"],
+                            groupFields: [
+                                Object(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__["PropertyPaneTextField"])("description", {
+                                    label: PoliciesWebPartStrings__WEBPACK_IMPORTED_MODULE_3__["DescriptionFieldLabel"]
+                                })
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+    };
+    return PoliciesWebPart;
+}(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__["BaseClientSideWebPart"]));
+/* harmony default export */ __webpack_exports__["default"] = (PoliciesWebPart);
+
+
+/***/ }),
+
+/***/ "./lib/webparts/policies/PoliciesWebPart.module.css":
+/*!**********************************************************!*\
+  !*** ./lib/webparts/policies/PoliciesWebPart.module.css ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--4-1!./PoliciesWebPart.module.css */ "./node_modules/css-loader/index.js?!./lib/webparts/policies/PoliciesWebPart.module.css");
+var loader = __webpack_require__(/*! ./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js */ "./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js");
+
+if(typeof content === "string") content = [[module.i, content]];
+
+// add the styles to the DOM
+for (var i = 0; i < content.length; i++) loader.loadStyles(content[i][1], true);
+
+if(content.locals) module.exports = content.locals;
+
+/***/ }),
+
+/***/ "./lib/webparts/policies/PoliciesWebPart.module.scss.js":
+/*!**************************************************************!*\
+  !*** ./lib/webparts/policies/PoliciesWebPart.module.scss.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* tslint:disable */
+__webpack_require__(/*! ./PoliciesWebPart.module.css */ "./lib/webparts/policies/PoliciesWebPart.module.css");
+var styles = {
+    policies: 'policies_09724b53',
+    container: 'container_09724b53',
+    row: 'row_09724b53',
+    column1: 'column1_09724b53',
+    'ms-Grid': 'ms-Grid_09724b53',
+    column2: 'column2_09724b53',
+    sidebar: 'sidebar_09724b53',
+    active: 'active_09724b53',
+    content: 'content_09724b53',
+    head: 'head_09724b53',
+    subheading: 'subheading_09724b53',
+    subsubheading: 'subsubheading_09724b53',
+    bulletpts: 'bulletpts_09724b53',
+    hrdetails: 'hrdetails_09724b53',
+    service: 'service_09724b53'
+};
+/* harmony default export */ __webpack_exports__["default"] = (styles);
+/* tslint:enable */ 
+
+
+/***/ }),
+
+/***/ "./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+/**
+ * An IThemingInstruction can specify a rawString to be preserved or a theme slot and a default value
+ * to use if that slot is not specified by the theme.
+ */
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+// IE needs to inject styles using cssText. However, we need to evaluate this lazily, so this
+// value will initialize as undefined, and later will be set once on first loadStyles injection.
+var _injectStylesWithCssText;
+// Store the theming state in __themeState__ global scope for reuse in the case of duplicate
+// load-themed-styles hosted on the page.
+var _root = (typeof window === 'undefined') ? global : window; // tslint:disable-line:no-any
+// Nonce string to inject into script tag if one provided. This is used in CSP (Content Security Policy).
+var _styleNonce = _root && _root.CSPSettings && _root.CSPSettings.nonce;
+var _themeState = initializeThemeState();
+/**
+ * Matches theming tokens. For example, "[theme: themeSlotName, default: #FFF]" (including the quotes).
+ */
+// tslint:disable-next-line:max-line-length
+var _themeTokenRegex = /[\'\"]\[theme:\s*(\w+)\s*(?:\,\s*default:\s*([\\"\']?[\.\,\(\)\#\-\s\w]*[\.\,\(\)\#\-\w][\"\']?))?\s*\][\'\"]/g;
+/** Maximum style text length, for supporting IE style restrictions. */
+var MAX_STYLE_CONTENT_SIZE = 10000;
+var now = function () { return (typeof performance !== 'undefined' && !!performance.now) ? performance.now() : Date.now(); };
+function measure(func) {
+    var start = now();
+    func();
+    var end = now();
+    _themeState.perf.duration += end - start;
+}
+/**
+ * initialize global state object
+ */
+function initializeThemeState() {
+    var state = _root.__themeState__ || {
+        theme: undefined,
+        lastStyleElement: undefined,
+        registeredStyles: []
+    };
+    if (!state.runState) {
+        state = __assign({}, (state), { perf: {
+                count: 0,
+                duration: 0
+            }, runState: {
+                flushTimer: 0,
+                mode: 0 /* sync */,
+                buffer: []
+            } });
+    }
+    if (!state.registeredThemableStyles) {
+        state = __assign({}, (state), { registeredThemableStyles: [] });
+    }
+    _root.__themeState__ = state;
+    return state;
+}
+/**
+ * Loads a set of style text. If it is registered too early, we will register it when the window.load
+ * event is fired.
+ * @param {string | ThemableArray} styles Themable style text to register.
+ * @param {boolean} loadAsync When true, always load styles in async mode, irrespective of current sync mode.
+ */
+function loadStyles(styles, loadAsync) {
+    if (loadAsync === void 0) { loadAsync = false; }
+    measure(function () {
+        var styleParts = Array.isArray(styles) ? styles : splitStyles(styles);
+        if (_injectStylesWithCssText === undefined) {
+            _injectStylesWithCssText = shouldUseCssText();
+        }
+        var _a = _themeState.runState, mode = _a.mode, buffer = _a.buffer, flushTimer = _a.flushTimer;
+        if (loadAsync || mode === 1 /* async */) {
+            buffer.push(styleParts);
+            if (!flushTimer) {
+                _themeState.runState.flushTimer = asyncLoadStyles();
+            }
+        }
+        else {
+            applyThemableStyles(styleParts);
+        }
+    });
+}
+exports.loadStyles = loadStyles;
+/**
+ * Allows for customizable loadStyles logic. e.g. for server side rendering application
+ * @param {(processedStyles: string, rawStyles?: string | ThemableArray) => void}
+ * a loadStyles callback that gets called when styles are loaded or reloaded
+ */
+function configureLoadStyles(loadStylesFn) {
+    _themeState.loadStyles = loadStylesFn;
+}
+exports.configureLoadStyles = configureLoadStyles;
+/**
+ * Configure run mode of load-themable-styles
+ * @param mode load-themable-styles run mode, async or sync
+ */
+function configureRunMode(mode) {
+    _themeState.runState.mode = mode;
+}
+exports.configureRunMode = configureRunMode;
+/**
+ * external code can call flush to synchronously force processing of currently buffered styles
+ */
+function flush() {
+    measure(function () {
+        var styleArrays = _themeState.runState.buffer.slice();
+        _themeState.runState.buffer = [];
+        var mergedStyleArray = [].concat.apply([], styleArrays);
+        if (mergedStyleArray.length > 0) {
+            applyThemableStyles(mergedStyleArray);
+        }
+    });
+}
+exports.flush = flush;
+/**
+ * register async loadStyles
+ */
+function asyncLoadStyles() {
+    return setTimeout(function () {
+        _themeState.runState.flushTimer = 0;
+        flush();
+    }, 0);
+}
+/**
+ * Loads a set of style text. If it is registered too early, we will register it when the window.load event
+ * is fired.
+ * @param {string} styleText Style to register.
+ * @param {IStyleRecord} styleRecord Existing style record to re-apply.
+ */
+function applyThemableStyles(stylesArray, styleRecord) {
+    if (_themeState.loadStyles) {
+        _themeState.loadStyles(resolveThemableArray(stylesArray).styleString, stylesArray);
+    }
+    else {
+        _injectStylesWithCssText ?
+            registerStylesIE(stylesArray, styleRecord) :
+            registerStyles(stylesArray);
+    }
+}
+/**
+ * Registers a set theme tokens to find and replace. If styles were already registered, they will be
+ * replaced.
+ * @param {theme} theme JSON object of theme tokens to values.
+ */
+function loadTheme(theme) {
+    _themeState.theme = theme;
+    // reload styles.
+    reloadStyles();
+}
+exports.loadTheme = loadTheme;
+/**
+ * Clear already registered style elements and style records in theme_State object
+ * @param option - specify which group of registered styles should be cleared.
+ * Default to be both themable and non-themable styles will be cleared
+ */
+function clearStyles(option) {
+    if (option === void 0) { option = 3 /* all */; }
+    if (option === 3 /* all */ || option === 2 /* onlyNonThemable */) {
+        clearStylesInternal(_themeState.registeredStyles);
+        _themeState.registeredStyles = [];
+    }
+    if (option === 3 /* all */ || option === 1 /* onlyThemable */) {
+        clearStylesInternal(_themeState.registeredThemableStyles);
+        _themeState.registeredThemableStyles = [];
+    }
+}
+exports.clearStyles = clearStyles;
+function clearStylesInternal(records) {
+    records.forEach(function (styleRecord) {
+        var styleElement = styleRecord && styleRecord.styleElement;
+        if (styleElement && styleElement.parentElement) {
+            styleElement.parentElement.removeChild(styleElement);
+        }
+    });
+}
+/**
+ * Reloads styles.
+ */
+function reloadStyles() {
+    if (_themeState.theme) {
+        var themableStyles = [];
+        for (var _i = 0, _a = _themeState.registeredThemableStyles; _i < _a.length; _i++) {
+            var styleRecord = _a[_i];
+            themableStyles.push(styleRecord.themableStyle);
+        }
+        if (themableStyles.length > 0) {
+            clearStyles(1 /* onlyThemable */);
+            applyThemableStyles([].concat.apply([], themableStyles));
+        }
+    }
+}
+/**
+ * Find theme tokens and replaces them with provided theme values.
+ * @param {string} styles Tokenized styles to fix.
+ */
+function detokenize(styles) {
+    if (styles) {
+        styles = resolveThemableArray(splitStyles(styles)).styleString;
+    }
+    return styles;
+}
+exports.detokenize = detokenize;
+/**
+ * Resolves ThemingInstruction objects in an array and joins the result into a string.
+ * @param {ThemableArray} splitStyleArray ThemableArray to resolve and join.
+ */
+function resolveThemableArray(splitStyleArray) {
+    var theme = _themeState.theme;
+    var themable = false;
+    // Resolve the array of theming instructions to an array of strings.
+    // Then join the array to produce the final CSS string.
+    var resolvedArray = (splitStyleArray || []).map(function (currentValue) {
+        var themeSlot = currentValue.theme;
+        if (themeSlot) {
+            themable = true;
+            // A theming annotation. Resolve it.
+            var themedValue = theme ? theme[themeSlot] : undefined;
+            var defaultValue = currentValue.defaultValue || 'inherit';
+            // Warn to console if we hit an unthemed value even when themes are provided, but only if "DEBUG" is true.
+            // Allow the themedValue to be undefined to explicitly request the default value.
+            if (theme && !themedValue && console && !(themeSlot in theme) && "boolean" !== 'undefined' && true) {
+                console.warn("Theming value not provided for \"" + themeSlot + "\". Falling back to \"" + defaultValue + "\".");
+            }
+            return themedValue || defaultValue;
+        }
+        else {
+            // A non-themable string. Preserve it.
+            return currentValue.rawString;
+        }
+    });
+    return {
+        styleString: resolvedArray.join(''),
+        themable: themable
+    };
+}
+/**
+ * Split tokenized CSS into an array of strings and theme specification objects
+ * @param {string} styles Tokenized styles to split.
+ */
+function splitStyles(styles) {
+    var result = [];
+    if (styles) {
+        var pos = 0; // Current position in styles.
+        var tokenMatch = void 0; // tslint:disable-line:no-null-keyword
+        while (tokenMatch = _themeTokenRegex.exec(styles)) {
+            var matchIndex = tokenMatch.index;
+            if (matchIndex > pos) {
+                result.push({
+                    rawString: styles.substring(pos, matchIndex)
+                });
+            }
+            result.push({
+                theme: tokenMatch[1],
+                defaultValue: tokenMatch[2] // May be undefined
+            });
+            // index of the first character after the current match
+            pos = _themeTokenRegex.lastIndex;
+        }
+        // Push the rest of the string after the last match.
+        result.push({
+            rawString: styles.substring(pos)
+        });
+    }
+    return result;
+}
+exports.splitStyles = splitStyles;
+/**
+ * Registers a set of style text. If it is registered too early, we will register it when the
+ * window.load event is fired.
+ * @param {ThemableArray} styleArray Array of IThemingInstruction objects to register.
+ * @param {IStyleRecord} styleRecord May specify a style Element to update.
+ */
+function registerStyles(styleArray) {
+    if (typeof document === 'undefined') {
+        return;
+    }
+    var head = document.getElementsByTagName('head')[0];
+    var styleElement = document.createElement('style');
+    var _a = resolveThemableArray(styleArray), styleString = _a.styleString, themable = _a.themable;
+    styleElement.type = 'text/css';
+    if (_styleNonce) {
+        styleElement.setAttribute('nonce', _styleNonce);
+    }
+    styleElement.appendChild(document.createTextNode(styleString));
+    _themeState.perf.count++;
+    head.appendChild(styleElement);
+    var record = {
+        styleElement: styleElement,
+        themableStyle: styleArray
+    };
+    if (themable) {
+        _themeState.registeredThemableStyles.push(record);
+    }
+    else {
+        _themeState.registeredStyles.push(record);
+    }
+}
+/**
+ * Registers a set of style text, for IE 9 and below, which has a ~30 style element limit so we need
+ * to register slightly differently.
+ * @param {ThemableArray} styleArray Array of IThemingInstruction objects to register.
+ * @param {IStyleRecord} styleRecord May specify a style Element to update.
+ */
+function registerStylesIE(styleArray, styleRecord) {
+    if (typeof document === 'undefined') {
+        return;
+    }
+    var head = document.getElementsByTagName('head')[0];
+    var registeredStyles = _themeState.registeredStyles;
+    var lastStyleElement = _themeState.lastStyleElement;
+    var stylesheet = lastStyleElement ? lastStyleElement.styleSheet : undefined;
+    var lastStyleContent = stylesheet ? stylesheet.cssText : '';
+    var lastRegisteredStyle = registeredStyles[registeredStyles.length - 1];
+    var resolvedStyleText = resolveThemableArray(styleArray).styleString;
+    if (!lastStyleElement || (lastStyleContent.length + resolvedStyleText.length) > MAX_STYLE_CONTENT_SIZE) {
+        lastStyleElement = document.createElement('style');
+        lastStyleElement.type = 'text/css';
+        if (styleRecord) {
+            head.replaceChild(lastStyleElement, styleRecord.styleElement);
+            styleRecord.styleElement = lastStyleElement;
+        }
+        else {
+            head.appendChild(lastStyleElement);
+        }
+        if (!styleRecord) {
+            lastRegisteredStyle = {
+                styleElement: lastStyleElement,
+                themableStyle: styleArray
+            };
+            registeredStyles.push(lastRegisteredStyle);
+        }
+    }
+    lastStyleElement.styleSheet.cssText += detokenize(resolvedStyleText);
+    Array.prototype.push.apply(lastRegisteredStyle.themableStyle, styleArray); // concat in-place
+    // Preserve the theme state.
+    _themeState.lastStyleElement = lastStyleElement;
+}
+/**
+ * Checks to see if styleSheet exists as a property off of a style element.
+ * This will determine if style registration should be done via cssText (<= IE9) or not
+ */
+function shouldUseCssText() {
+    var useCSSText = false;
+    if (typeof document !== 'undefined') {
+        var emptyStyle = document.createElement('style');
+        emptyStyle.type = 'text/css';
+        useCSSText = !!emptyStyle.styleSheet;
+    }
+    return useCSSText;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./lib/webparts/policies/PoliciesWebPart.module.css":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--4-1!./lib/webparts/policies/PoliciesWebPart.module.css ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".policies_09724b53 .container_09724b53{width:auto;margin:0 auto}.policies_09724b53 .row_09724b53{margin:0 -8px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#000}.policies_09724b53 .row_09724b53:after,.policies_09724b53 .row_09724b53:before{display:table;content:\"\";line-height:0}.policies_09724b53 .row_09724b53:after{clear:both}.policies_09724b53 .column1_09724b53{position:relative;min-height:1px;padding-left:8px;padding-right:8px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%}[dir=ltr] .policies_09724b53 .column1_09724b53{float:left}[dir=rtl] .policies_09724b53 .column1_09724b53{float:right}.policies_09724b53 .column1_09724b53 .ms-Grid_09724b53{padding:0}@media (min-width:640px){.policies_09724b53 .column1_09724b53{width:25%}}.policies_09724b53 .column2_09724b53{position:relative;min-height:1px;padding-left:8px;padding-right:8px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%}[dir=ltr] .policies_09724b53 .column2_09724b53{float:left}[dir=rtl] .policies_09724b53 .column2_09724b53{float:right}.policies_09724b53 .column2_09724b53 .ms-Grid_09724b53{padding:0}@media (min-width:640px){.policies_09724b53 .column2_09724b53{width:75%}}.policies_09724b53 .sidebar_09724b53{margin:0;padding:0;width:auto;background-color:#f3f2f1;height:100vh;overflow:auto}.policies_09724b53 .sidebar_09724b53 a{display:block;color:#a9a8a7;padding:8px;padding-left:30px;text-decoration:none}.policies_09724b53 a.active_09724b53{background-color:#e3e2eb;color:#000;font-weight:700;cursor:pointer}.policies_09724b53 a.active_09724b53 .sidebar_09724b53{color:#000}.policies_09724b53 .sidebar_09724b53 a:hover:not(.active_09724b53){background-color:#e3e2eb;color:#000}.policies_09724b53 div.content_09724b53{margin-left:auto;padding:auto;width:auto}.policies_09724b53 .head_09724b53{margin-bottom:20px;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.policies_09724b53 .subheading_09724b53{margin-top:10px;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.policies_09724b53 .subsubheading_09724b53{font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;margin:0}.policies_09724b53 .bulletpts_09724b53{font-size:14px}.policies_09724b53 .hrdetails_09724b53{margin-left:15%}.policies_09724b53 .service_09724b53{display:none}@media (max-width:425px){.policies_09724b53 .column2_09724b53{display:none}.policies_09724b53 .service_09724b53{display:block}}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ "@microsoft/sp-core-library":
+/*!*********************************************!*\
+  !*** external "@microsoft/sp-core-library" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__microsoft_sp_core_library__;
+
+/***/ }),
+
+/***/ "@microsoft/sp-loader":
+/*!***************************************!*\
+  !*** external "@microsoft/sp-loader" ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__microsoft_sp_loader__;
+
+/***/ }),
+
+/***/ "@microsoft/sp-webpart-base":
+/*!*********************************************!*\
+  !*** external "@microsoft/sp-webpart-base" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__microsoft_sp_webpart_base__;
+
+/***/ }),
+
+/***/ "PoliciesWebPartStrings":
+/*!*****************************************!*\
+  !*** external "PoliciesWebPartStrings" ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_PoliciesWebPartStrings__;
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jquery" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_jquery__;
+
+/***/ })
+
+/******/ })});;
+//# sourceMappingURL=policies-web-part.js.map
