@@ -61,6 +61,7 @@
     font-weight: 400;
     font-family: "Segoe UI";
   }
+
   .title {
     @include ms-font-xl;
     color: black;
@@ -84,6 +85,7 @@
     box-shadow: 0 2px 4px -0.75px rgba(0, 0, 0, 0.1);
     float: right;
   }
+
   .columnheight {
     position: relative;
     top: 10px;
@@ -101,6 +103,7 @@
       opacity: 1;
     }
   }
+
   .tick {
     position: absolute;
     top: 0;
@@ -123,6 +126,7 @@
     outline-color: black;
     font-size: 14px;
   }
+
   .columnheight input:checked + .tick::after {
     content: "\2713";
     position: absolute;
@@ -265,6 +269,7 @@
     position: relative;
     bottom: 5px;
     color: #aeadad;
+    font-weight: 300;
   }
   :checked + .textalign {
     color: black;

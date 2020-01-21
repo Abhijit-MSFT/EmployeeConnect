@@ -1,21 +1,21 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "fefc85e6-8e32-4f3b-979e-8a0f128a5c85",
-  "alias": "TaskWebPart",
+  "id": "d2865084-ab74-41f5-9cf0-afac7226c9df",
+  "alias": "ToolTabWebPart",
   "componentType": "WebPart",
   "version": "*",
   "manifestVersion": 2,
   "requiresCustomScript": false,
-  "supportedHosts": ["SharePointWebPart","TeamsTab","SharePointFullPage"],
+  "supportedHosts": ["SharePointWebPart","TeamsTab"],
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
     "group": { "default": "Other" },
-    "title": { "default": "Task" },
-    "description": { "default": "Employee Tasks" },
+    "title": { "default": "ToolTab" },
+    "description": { "default": "Deals about activities " },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "Task"
+      "description": "ToolTab"
     }
   }]
 }

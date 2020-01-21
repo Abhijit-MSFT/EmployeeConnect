@@ -19,8 +19,7 @@
   .grid1_b73c1c19 {
     width: 22% !important;
   }
-  .chevron,
-  .chevron2 {
+  .chevron,.chevron2 {
     float: left;
     display: flex;
     position: absolute;
@@ -32,7 +31,7 @@
       font-family: "Teams Assets";
       font-size: 16px;
       font-weight: 600;
-      color: #8595d3;
+      color: #8595D3;
       margin-top: -130%;
       cursor: pointer;
     }
@@ -53,6 +52,25 @@
     margin-top: 20px;
   }
 
+  thead {
+    background: #f8f8f8;
+  }
+
+  th {
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  td {
+    font-size: 11px;
+    font-weight: 400;
+    color: #333;
+  }
+
+  a.button_b73c1c19 {
+    background: transparent !important;
+    color: #3b8ce3 !important;
+  }
   .row {
     @include ms-Grid-row;
     @include ms-fontColor-white;
@@ -68,27 +86,58 @@
     @include ms-xlPush2;
     @include ms-lgPush1;
   }
-
+  .taskTab_bb7e768f .subheading_bb7e768f {
+    font-size: 13px;
+    color: gray;
+    cursor: pointer;
+  }
   .heading {
     font-size: 22px;
     color: black;
   }
-
-  .subheading {
-    font-size: 18px;
-    color: gray;
+  .headingPending {
+    font-size: 22px;
+    margin-top: 25px;
+    color: black;
   }
-
+  .taskTab_bb7e768f .heading_bb7e768f {
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 5px;
+    padding-top: 0px;
+  }
+  .subheading {
+    font-size: 13px;
+    color: gray;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .heading_d5fef6f0 {
+    margin-bottom: 30px !important;
+  }
   .title {
     color: black;
     font-weight: bold;
     padding: 2px;
     position: relative;
     top: 10px;
+    display: inline;
+  }
+  .title2 {
+    color: black;
+    font-weight: bold;
+    position: relative;
+    margin-top: 5%;
+    margin-left: 20%;
+  }
+  .ft {
+    color: #8586bb;
+    margin: 10% 0 0 19%;
+    cursor: pointer;
   }
 
   .review {
-    color: blueviolet;
+    color: #0078d4;
     cursor: pointer;
 
     &:hover {
@@ -103,28 +152,61 @@
     @include ms-lg3;
     @include ms-xlPush2;
     @include ms-lgPush1;
-    background-image: url("./imgs/pending3.png");
-    background-size: 120px 80px;
-    background-position: center;
-    background-repeat: no-repeat;
+    // background-image: url("./imgs/pending3.png");
+    // background-size: 120px 80px;
+    // background-position: center;
+    // background-repeat: no-repeat;
+    padding: 1.25rem;
     left: 0 !important;
     height: 160px;
+    width: 350px !important;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
 
   .grid2 {
-    background-image: url("./imgs/expenses3.png");
-    background-repeat: no-repeat;
+    // background-image: url("./imgs/expenses3.png");
+    // background-repeat: no-repeat;
     margin-left: 2%;
+  }
+  .img,
+  .img2 {
+    content: url("./imgs/1.png");
+    height: 55px;
+    width: 60px;
+    border-radius: 50%;
+    float: left;
+  }
+  .img2 {
+    content: url("./imgs/2.png");
+  }
+  td,
+  th {
+    border-left: none !important;
+    border-right: none !important;
+    color: black;
+  }
+
+  .heading_8e03eadd {
+    margin-top: 25px !important;
+    padding-bottom: 5px;
+  }
+
+  tbody#spInvoiceListContainer {
+    position: relative;
+  }
+
+  a.button_8e03eadd {
+    background: transparent !important;
+    color: #0078d4 !important;
   }
 
   .button {
     text-decoration: none;
     height: 32px;
     min-width: 80px;
-    background-color: $ms-color-themePrimary;
+    background: transparent !important;
+    color: #0078d4 !important;
     border-color: $ms-color-themePrimary;
-    color: $ms-color-white;
     outline: transparent;
     position: relative;
     font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue",
@@ -144,6 +226,7 @@
       font-size: $ms-font-size-m;
       height: 32px;
       line-height: 32px;
+      font-family: "Segoe UI";
       margin: 0 4px;
       vertical-align: top;
       display: inline-block;
@@ -176,5 +259,33 @@
     *zoom: 1;
     padding: 9px 28px 3px;
     position: relative;
+  }
+  .panel {
+    padding: 10px 0 10px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #e8e4e4;
+  }
+
+  @media (max-width: 768px) {
+    .grid1,
+    .grid2 {
+      display: none;
+      width: 22%;
+    }
+  }
+  @media (max-width: 425px) {
+    .grid1,
+    .grid2,
+    #ps {
+      display: none;
+    }
+    .grid2 {
+      margin: 10px 0 0 0;
+    }
+    thead th,
+    .heading,
+    .subheading {
+      font-size: xx-small;
+    }
   }
 }
