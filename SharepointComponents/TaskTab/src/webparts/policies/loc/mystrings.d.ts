@@ -4,7 +4,7 @@ declare interface IPoliciesWebPartStrings {
   DescriptionFieldLabel: string;
 }
 
-declare module 'PoliciesWebPartStrings' {
+declare module "PoliciesWebPartStrings" {
   const strings: IPoliciesWebPartStrings;
   export = strings;
 }

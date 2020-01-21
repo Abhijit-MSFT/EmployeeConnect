@@ -4,7 +4,7 @@ declare interface IPreferenceWebPartStrings {
   DescriptionFieldLabel: string;
 }
 
-declare module 'PreferenceWebPartStrings' {
+declare module "PreferenceWebPartStrings" {
   const strings: IPreferenceWebPartStrings;
   export = strings;
 }

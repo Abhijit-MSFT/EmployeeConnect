@@ -19,7 +19,8 @@
   .grid1_b73c1c19 {
     width: 22% !important;
   }
-  .chevron,.chevron2 {
+  .chevron,
+  .chevron2 {
     float: left;
     display: flex;
     position: absolute;
@@ -31,7 +32,7 @@
       font-family: "Teams Assets";
       font-size: 16px;
       font-weight: 600;
-      color: #8595D3;
+      color: #8595d3;
       margin-top: -130%;
       cursor: pointer;
     }
@@ -126,8 +127,8 @@
     color: $ms-color-white;
     outline: transparent;
     position: relative;
-    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system,
-      BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue",
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: $ms-font-size-m;
     font-weight: $ms-font-weight-regular;
@@ -151,8 +152,7 @@
 
   .list {
     color: #333333;
-    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial,
-      sans-serif;
+    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial, sans-serif;
     font-size: 14px;
     font-weight: normal;
     box-sizing: border-box;
@@ -166,8 +166,7 @@
   .listItem {
     color: #333333;
     vertical-align: center;
-    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial,
-      sans-serif;
+    font-family: "Segoe UI Regular WestEuropean", "Segoe UI", Tahoma, Arial, sans-serif;
     font-size: 14px;
     font-weight: normal;
     box-sizing: border-box;

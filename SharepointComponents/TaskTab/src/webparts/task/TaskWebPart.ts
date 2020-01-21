@@ -178,8 +178,9 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         </div>
         <div class="${styles.row}">
         <div class="${styles.heading}"> Pending Approvals </div>
-         <div class="${styles.subheading}">Purchased Order (${this
-      ._renderTaskList.length})</div>
+         <div class="${styles.subheading}">Purchased Order (${
+      this._renderTaskList.length
+    })</div>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -196,8 +197,9 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
             </tbody>
         </table>
         </div>
-          <div class="${styles.subheading}">Invoice (${this._renderInvoiceList
-      .length})
+          <div class="${styles.subheading}">Invoice (${
+      this._renderInvoiceList.length
+    })
       </div>
          <table class="table table-bordered">
           <thead>

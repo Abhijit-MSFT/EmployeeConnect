@@ -4,7 +4,7 @@ declare interface ITaskWebPartStrings {
   DescriptionFieldLabel: string;
 }
 
-declare module 'TaskWebPartStrings' {
+declare module "TaskWebPartStrings" {
   const strings: ITaskWebPartStrings;
   export = strings;
 }
