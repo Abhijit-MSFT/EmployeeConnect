@@ -1,0 +1,38 @@
+declare const styles: {
+    taskTab: string;
+    container: string;
+    grid1_b73c1c19: string;
+    grid2_b73c1c19: string;
+    subheading_b73c1c19: string;
+    heading_b73c1c19: string;
+    button_b73c1c19: string;
+    row: string;
+    column: string;
+    'ms-Grid': string;
+    taskTab_bb7e768f: string;
+    subheading_bb7e768f: string;
+    heading: string;
+    headingPending: string;
+    heading_bb7e768f: string;
+    subheading: string;
+    heading_d5fef6f0: string;
+    title: string;
+    title2: string;
+    ft: string;
+    review: string;
+    grid1: string;
+    grid2: string;
+    img: string;
+    img2: string;
+    heading_8e03eadd: string;
+    spInvoiceListContainer: string;
+    button_8e03eadd: string;
+    button: string;
+    label: string;
+    list: string;
+    listItem: string;
+    panel: string;
+    ps: string;
+};
+export default styles;
+//# sourceMappingURL=TaskWebPart.module.scss.d.ts.map

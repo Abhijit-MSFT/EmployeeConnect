@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "fc2baa3e-0297-4bd1-8dbf-d70666d0e734",
+  "alias": "PoliciesWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart","TeamsTab","SharePointFullPage"],
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { "default": "Policies" },
+    "description": { "default": "Deals about emp policies" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "Policies"
+    }
+  }]
+}

@@ -1,0 +1,32 @@
+declare const styles: {
+    preferencesTab: string;
+    container: string;
+    row: string;
+    row2: string;
+    row3: string;
+    column1: string;
+    'ms-Grid': string;
+    column2: string;
+    rules: string;
+    title: string;
+    subTitle: string;
+    showmore: string;
+    columnheight: string;
+    img1: string;
+    tick: string;
+    name: string;
+    explore: string;
+    switcht: string;
+    switch: string;
+    switchinput: string;
+    slider: string;
+    newsupdates: string;
+    notify: string;
+    allradio: string;
+    radiolabel: string;
+    checkmark: string;
+    textalign: string;
+    datecontrol: string;
+};
+export default styles;
+//# sourceMappingURL=PreferenceWebPart.module.scss.d.ts.map
