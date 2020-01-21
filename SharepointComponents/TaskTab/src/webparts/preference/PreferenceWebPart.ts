@@ -11,6 +11,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { SPComponentLoader } from "@microsoft/sp-loader";
 
 microsoftTeams.initialize();
+import * as bootstrap from "bootstrap";
 
 export interface IPreferencesTabWebPartProps {
   description: string;
@@ -24,6 +25,155 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
     SPComponentLoader.loadCss(
       "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     );
+    SPComponentLoader.loadCss(
+      "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    );
+
+    $(document).ready(() => {
+      $(".toggleClassNews").click(() => {
+        debugger;
+        console.log($(this).prop("checked"));
+        if ($(".toggleClassNews").prop("checked") == true) {
+          $(".radio, #newsTimeD").prop("disabled", false);
+        } else if ($(".toggleClassNews").prop("checked") == false) {
+          $(".radio, #newsTimeD").prop("disabled", true);
+        }
+      });
+
+      $(".toggleEntTimeClass").click(() => {
+        debugger;
+        console.log($(".toggleEntTimeClass").prop("checked"));
+        if ($(".toggleEntTimeClass").prop("checked") == true) {
+          $(".radio1, #entTimeD").prop("disabled", false);
+        } else if ($(".toggleEntTimeClass").prop("checked") == false) {
+          $(".radio1, #entTimeD").prop("disabled", true);
+        }
+      });
+      this._renderListAsync();
+    });
+
+    microsoftTeams.initialize();
+    microsoftTeams.getContext(context => {
+      updatePrefObj.UserName = context.userPrincipalName;
+      updatePrefObj.TenantID = context.userObjectId;
+      updatePrefObj.Uni_ID = context.tid;
+      existingUser = updatePrefObj.UserName;
+    });
+    //this._renderListAsync();
+  }
+
+  public getLatestItemId(): Promise<number> {
+    return new Promise<number>(
+      (
+        resolve: (itemId: number) => void,
+        reject: (error: any) => void
+      ): void => {
+        this.context.spHttpClient
+          .get(
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PreferencesList')/items?$orderby=Id desc&$top=1&$select=id`,
+            SPHttpClient.configurations.v1,
+            {
+              headers: {
+                Accept: "application/json;odata=nometadata",
+                "odata-version": ""
+              }
+            }
+          )
+          .then(
+            (
+              response: SPHttpClientResponse
+            ): Promise<{ value: { Id: number }[] }> => {
+              return response.json();
+            },
+            (error: any): void => {
+              reject(error);
+            }
+          )
+          .then((response: { value: { Id: number }[] }): void => {
+            if (response.value.length === 0) {
+              resolve(-1);
+            } else {
+              resolve(response.value[0].Id);
+            }
+          });
+      }
+    );
+  }
+
+  //Update preferences data
+  public updateItem(updateObj): void {
+    let latestItemId: number = undefined;
+    this.getLatestItemId()
+      .then(
+        (itemId: number): Promise<SPHttpClientResponse> => {
+          if (itemId === -1) {
+            throw new Error("No items found in the list");
+          }
+
+          latestItemId = itemId;
+          console.log(`Loading information about item ID: ${itemId}...`);
+
+          return this.context.spHttpClient.get(
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('PreferencesList')/items(${latestItemId})?$select=Title,Id`,
+            SPHttpClient.configurations.v1,
+            {
+              headers: {
+                Accept: "application/json;odata=nometadata",
+                "odata-version": ""
+              }
+            }
+          );
+        }
+      )
+      .then(
+        (response: SPHttpClientResponse): Promise<userInfo> => {
+          return response.json();
+        }
+      )
+      .then((item: userInfo): void => {
+        //  console.log(`Item ID1: ${item.Id}, Title: ${item.Title}`);
+        //item.NotificaitionTime = updateObj;
+        const body: string = JSON.stringify({
+          Title: `Updated Item`,
+          UserName: updatePrefObj.UserName,
+          Uni_ID: updatePrefObj.Uni_ID,
+          TenantID: updatePrefObj.TenantID,
+          SelectedCategories: `${updatePrefObj.SelectedCategories}`,
+          //  Item: `${updatePrefObj.Item}`,
+          EnTNotificationTime: `${updatePrefObj.EnTNotificationTime}`,
+          NewsNotificationTime: `${updatePrefObj.NewsNotificationTime}`,
+          TaskNotificationTime: `${updatePrefObj.TaskNotificationTime}`,
+          NewsNotificationFlag: `${updatePrefObj.NewsnotificationFlag}`,
+          // TaskNotificationFlag: `${updatePrefObj.TaskNotificationFlag}`,
+          EnTNotificationFlag: `${updatePrefObj.EnTNotificationFlag}`,
+          NewsNotifyMe: `${updatePrefObj.NewsNotifyMe}`,
+          EnTNotifyMe: `${updatePrefObj.NotifyMe}`
+        });
+        console.log(body);
+        this.context.spHttpClient
+          .post(
+            `${this.context.pageContext.web.absoluteUrl}/_api/web/lists(guid%27e8937172-f3f3-478e-97bb-d5699f8d8945%27)/items(${latestItemId})`,
+            SPHttpClient.configurations.v1,
+            {
+              headers: {
+                Accept: "application/json;odata=nometadata",
+                "Content-type": "application/json;odata=nometadata",
+                "odata-version": "",
+                "IF-MATCH": "*",
+                "X-HTTP-Method": "MERGE"
+              },
+              body: body
+            }
+          )
+          .then(
+            (response: SPHttpClientResponse): void => {
+              console.log(`Item with ID: ${latestItemId} successfully updated`);
+            },
+            (error: any): void => {
+              console.log(`Error updating item: ${error}`);
+            }
+          );
+      });
   }
 
   public render(): void {
@@ -246,11 +396,14 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
                 <span class="${styles.textalign}">Set a preferred time </span>
                 <span class="${styles.checkmark}"></span>
               </label>
-              <select class="${styles.datecontrol}">
+              <span class="${styles.chevron}">
+              </span>
+              <select class="${styles.datecontrol}" id="newsTimeD">
                 <option selected>9:00 am</option>
                 <option>Option 2</option>
               </select>
-              <span class="chevron-down"></span>  <!--added here-->
+
+                <!--added here-->
             </form><br/>
 
               </div>
@@ -288,9 +441,18 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
                 <span class="${styles.textalign}">Set a preferred time </span>
                 <span class="${styles.checkmark}"></span>
               </label>
-              <select class="${styles.datecontrol}">
-                <option selected>4:30 pm</option>
-                <option>Option 2</option>
+              <span class="${styles.chevron}">
+              </span>
+              <select class="${styles.datecontrol}" id="entTimeD">
+              <option selected>9:00 am</option>
+              <option>10:00 am</option>
+              <option>11:00 am</option>
+              <option>12:00 am</option>
+              <option>1:00 pm</option>
+              <option>2:00 pm</option>
+              <option>3:00 pm</option>
+              <option>4:00 pm</option>
+              <option>5:00 pm</option>
               </select>
               <span class="chevron-down"></span>  <!--added here-->
             </form> <br/>

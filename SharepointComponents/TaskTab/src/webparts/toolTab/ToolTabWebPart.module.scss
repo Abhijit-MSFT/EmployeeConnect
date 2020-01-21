@@ -1,0 +1,212 @@
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
+@font-face {
+  font-family: "Teams Assets";
+  src: url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EQLbWsb-BIREmvuOAMk7mSMBjJM505O7Jx4-4sXjxCZjDw?e=pEj018")
+      format("woff"),
+    url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EbMqjEFO9ixJqZ3H152zkOsBdD3ED4JDopx_ydz_tdQMhw?e=OekPkb")
+      format("woff2");
+  font-style: normal;
+}
+.toolTab {
+  @media (max-width: 768px) {
+    .grid1,
+    .heading {
+      display: none !important;
+    }
+    .grid2 {
+      display: none !important;
+    }
+  }
+  .row {
+    @include ms-Grid-row;
+    padding: 5px;
+  }
+  .column {
+    @include ms-Grid-col;
+    @include ms-lg12;
+    @include ms-xlPush2;
+    @include ms-lgPush1;
+  }
+  .HR,
+  .PB,
+  .RO,
+  .IF {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Segoe UI";
+    cursor: pointer;
+    margin: 1% 0 1% 0;
+    margin-top: 24px;
+    margin-bottom: -5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+  }
+  .P10 {
+    padding-top: 10px;
+    // padding-bottom: 40px;
+  }
+
+  .shadowsm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  }
+  .card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    width: 22%;
+    height: 20%;
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+    font-family: "Segoe UI";
+    font-size: 16px;
+  }
+  .cbody {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+  }
+
+  .CBL,
+  .CT,
+  .RL,
+  .VP,
+  .DP,
+  .CFT,
+  .SBC,
+  .VBP,
+  .RIST,
+  .GWR,
+  .EISR,
+  .CSA,
+  .IR,
+  .timesheet,
+  .SI {
+    font-weight: 600;
+    padding-top: 6px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .CBLdes,
+  .CTdes,
+  .RLdes,
+  .VPdes,
+  .Pdes,
+  .FTdes,
+  .BCdes,
+  .VPdes,
+  .ISTdes,
+  .GRdes,
+  .ISRdes,
+  .CSAdes,
+  .IRdes,
+  .timesheetdes,
+  .SIdes {
+    padding-top: 6px;
+    color: #adacac;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    width: auto;
+  }
+
+  .createicon,
+  .ticketcreation,
+  .leaverequest,
+  .policies,
+  .downloadpayslip,
+  .createfinancetkt,
+  .submitbenefits,
+  .viewbenefits,
+  .support,
+  .wiferequest,
+  .eventsupport,
+  .cafeservice,
+  .Inventory,
+  .ROtimesheet,
+  .RoSI {
+    font-family: "Teams Assets";
+    font-size: 22px;
+  }
+
+  .createicon::before {
+    content: "\E328";
+  }
+
+  .ticketcreation::before {
+    content: "\E13F";
+  }
+
+  .leaverequest::before {
+    content: "\E503";
+  }
+
+  .policies::before {
+    content: "\E451";
+  }
+
+  .downloadpayslip::before {
+    content: "\E459";
+  }
+
+  .createfinancetkt::before {
+    content: "\E13F";
+  }
+
+  .submitbenefits::before {
+    content: "\E971";
+  }
+
+  .viewbenefits::before {
+    content: "\E451";
+  }
+
+  .support::before {
+    content: "\E21A";
+  }
+
+  .wiferequest::before {
+    content: "\E200";
+  }
+
+  .eventsupport::before {
+    content: "\E917";
+  }
+
+  .cafeservice::before {
+    content: "\E984";
+  }
+
+  .Inventory::before {
+    content: "\E203";
+  }
+
+  .ROtimesheet::before {
+    content: "\E501";
+  }
+
+  .RoSI::before {
+    content: "\E137";
+  }
+
+  @media (max-width: 1024px) {
+    .card {
+      width: 46%;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .card {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+}

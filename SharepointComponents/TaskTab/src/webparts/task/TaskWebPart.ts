@@ -152,7 +152,13 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
         <div class="${styles.container}">
           <div class="${styles.row}">
             <div class="${styles.grid1}">
-              <span class="${styles.title}">12 Days of pending timesheet</span>
+            <div class="${styles.img}"></div>
+            <h5 class="${styles.title}">12</h5>
+            <h6 class="${styles.title2}">Days of pending timesheet</h6>
+            <div class="${styles.ft}">
+              Fill timesheet
+              <span class="${styles.chevron}"></span>
+            </div>
               <div>
               <a href="https://aka.ms/spfx" class="${styles.button}">
                 <span class="${styles.label}">Timesheet</span>
@@ -162,9 +168,10 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
              <div class="${styles.grid2}">
               <span class="${styles.title}">$25,000 Unreconciled expenses</span>
               <div>
-              <a href="https://aka.ms/spfx" class="${styles.button}">
-                <span class="${styles.label}">Expenses</span>
-              </a>
+              <div class="${styles.ft}">
+              Submit expenses
+              <span class="${styles.chevron2}"></span>
+            </div>
               </div>
             </div>
           </div>
