@@ -28,6 +28,8 @@
             // alert("Result = " + JSON.stringify(result) + "nError = " + JSON.stringify(err));
         };
         function submitApprove(poNo, status) {
+            alert(poNo);
+            debugger;
             var poTaskInfo = {
                 poNumber: poNo,
                 poStatus: status,
@@ -47,7 +49,7 @@
                 <span class="vendor">Vendor no. @Model.VendorNumber</span><br />
                 <span class="store">Store A</span>
                 <div class="T-amount">
-                    <span class="currency">&#x20b9;</span>
+                    <span class="currency">&#36;</span>
                     <span class="t-amount">@Model.TotalSum </span>
                 </div>
             </div>
@@ -70,11 +72,11 @@
                                         @Html.DisplayFor(modelItem => item.ItemDescription)
                                     </td>
                                     <td class="cnt">
-                                        <span class="currency1">&#x20b9;</span>  @Html.DisplayFor(modelItem => item.UnitPrice)
+                                        <span class="currency1">&#36;</span>  @Html.DisplayFor(modelItem => item.UnitPrice)
                                     </td>
                                     <td class="cnt">@Html.DisplayFor(modelItem => item.Quantity)</td>
                                     <td class="cnt th-total">
-                                        <span class="currency1">&#x20b9;</span> @Html.DisplayFor(modelItem => item.Total)
+                                        <span class="currency1">&#36;</span> @Html.DisplayFor(modelItem => item.Total)
                                     </td>
                                 </tr>
                             }

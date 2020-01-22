@@ -2,20 +2,20 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
   "manifestVersion": "1.5",
   "version": "1.0.0",
-  "id": "bf0fb57b-4fe9-42b2-8c9f-b996159d2963",
+  "id": "3b28c87b-83d7-47ca-8e8c-5870f08595a5",
   "packageName": "com.microsoft.teams.devapp",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://employeeconnect-9566.azurewebsites.net",
-    "termsOfUseUrl": "https://employeeconnect-9566.azurewebsites.net"
+    "privacyUrl": "https://9cbd4e69.ngrok.io",
+    "termsOfUseUrl": "https://9cbd4e69.ngrok.io"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Employee Connect",
+    "short": "Employee-Connect_SpfxChanges",
     "full": "This is Employee_Connect app"
   },
   "description": {
@@ -81,7 +81,7 @@
   ],
   "bots": [
     {
-      "botId": "bf0fb57b-4fe9-42b2-8c9f-b996159d2963",
+      "botId": "3b28c87b-83d7-47ca-8e8c-5870f08595a5",
       "scopes": [
         "personal",
         "team"
@@ -126,7 +126,7 @@
             },
             {
               "title": "refresh",
-              "description": "Refresh mock data"
+              "description": "Refresh cache"
             }
           ]
         },
@@ -169,7 +169,7 @@
             },
             {
               "title": "refresh",
-              "description": "Refresh mock data"
+              "description": "Refresh cache"
             },
             {
               "title": "pending submissions",
@@ -184,7 +184,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "bf0fb57b-4fe9-42b2-8c9f-b996159d2963",
+      "botId": "3b28c87b-83d7-47ca-8e8c-5870f08595a5",
       "canUpdateConfiguration": false,
       "commands": [
         {
@@ -276,3 +276,11 @@
     "resource": "https://avadheshftc.sharepoint.com"
   }
 }
+
+
+
+
+
+
+
+
