@@ -4,7 +4,7 @@
   "value": [
     {
       "odata.type": "SP.Data.Preferences_x0020_ListListItem",
-      "odata.id": "09edcc58-4663-4ebd-a911-a44361a91e89",
+      "odata.id": "d6daa73d-f936-4ddf-b13c-be58cc72bb7c",
       "odata.etag": "\"2\"",
       "odata.editLink": "Web/Lists(guid'e8937172-f3f3-478e-97bb-d5699f8d8945')/Items(4)",
       "FileSystemObjectType": 0,
@@ -34,14 +34,14 @@
       "OData__UIVersionString": "1.0",
       "Attachments": false,
       "GUID": "3fad259b-c94a-490c-8a39-ebae206fbf2b"
-    },
+    },    
     {
       "odata.type": "SP.Data.Preferences_x0020_ListListItem",
-      "odata.id": "43534bb2-1788-4ad7-a5b5-2fb14ae7ceb3",
+      "odata.id": "86f1a01d-eef7-4e12-81cd-a6628e8d5751",
       "odata.etag": "\"1\"",
-      "odata.editLink": "Web/Lists(guid'e8937172-f3f3-478e-97bb-d5699f8d8945')/Items(18)",
+      "odata.editLink": "Web/Lists(guid'e8937172-f3f3-478e-97bb-d5699f8d8945')/Items(20)",
       "FileSystemObjectType": 0,
-      "Id": 18,
+      "Id": 20,
       "ServerRedirectedEmbedUri": null,
       "ServerRedirectedEmbedUrl": "",
       "ContentTypeId": "0x01005AB3F5D8B017394BBCFD62E1E6FAEECD",
@@ -51,22 +51,22 @@
       "SelectedCategories": "Design,AI,Business,Technology",
       "TenantID": "d634c2da-9cba-459a-aad1-81df852f770f",
       "ServiceURL": "https://smba.trafficmanager.net/apac/",
-      "NewsNotificationTime": "1/21/2020 2:00:00 PM",
+      "NewsNotificationTime": "1/22/2020 2:00:00 PM",
       "EnTNotifyMe": "True",
-      "EnTNotificationTime": "1/21/2020 10:00:00 AM",
-      "TaskNotificationTime": "1/21/2020 10:00:00 AM",
+      "EnTNotificationTime": "1/22/2020 10:00:00 AM",
+      "TaskNotificationTime": "1/22/2020 10:00:00 AM",
       "NewsNotificationFlag": "True",
       "EnTNotificationFlag": "True",
       "NewsNotifyMe": "True",
       "Uni_ID": "29:1DdhCEsXYqECCvX4tZqpYspVJqDTxNZpqHsZngMnC7zMyuhIuhuHC4AxVEt07egsuALVIez9R2-lDzXPlRXczag",
-      "ID": 18,
-      "Modified": "2020-01-21T03:01:49Z",
-      "Created": "2020-01-21T03:01:49Z",
+      "ID": 20,
+      "Modified": "2020-01-21T23:52:55Z",
+      "Created": "2020-01-21T23:52:55Z",
       "AuthorId": 1073741822,
       "EditorId": 1073741822,
       "OData__UIVersionString": "1.0",
       "Attachments": false,
-      "GUID": "202998f5-c955-42d4-b52c-5b1b638ef033"
+      "GUID": "b453a686-7036-49b0-a869-a698ab0fd4de"
     }
   ]
 }

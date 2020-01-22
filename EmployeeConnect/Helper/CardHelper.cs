@@ -500,19 +500,36 @@ namespace EmployeeConnect.Helper
 
         public static Attachment SetTimePreference(string userName)
         {
-            
+
+            string newsCat = null;
+            string newsT = null;
+            string newsTime = null;
+            string setNewsTime = "1";
+            string EnTT = null;
+            string EnTTime = null;
+            string setEnTTime = "1";
+            string taskT = null;
+            string taskTime = null;
+            string setTaskTime = "1";
+
             //get the current users preferences to show selected in the card
             prefValue prefs = GetDataHelper.ReadPrefernecesfromSPData(userName);
-            string newsCat = Regex.Replace(prefs.SelectedCategories.Trim(), " *, *", ",");
-            string newsT = prefs.NewsNotificationTime.ToString("h:mm tt");
-            string newsTime = prefs.NewsNotificationTime.ToString("hh");
-            string setNewsTime = (newsTime != "8" && newsTime != "5") ? "3" : (newsTime == "8") ? "1" : "2";
-            string EnTT = prefs.EnTNotificationTime.ToString("h:mm tt");
-            string EnTTime = prefs.EnTNotificationTime.ToString("hh");
-            string setEnTTime = (EnTTime != "8" && EnTTime != "5") ? "3" : (EnTTime == "8") ? "1" : "2";
-            string taskT = prefs.TaskNotificationTime.ToString("h:mm tt");
-            string taskTime = prefs.TaskNotificationTime.ToString("hh");
-            string setTaskTime = (taskTime != "8" && taskTime != "5") ? "3" : (taskTime == "8") ? "1" : "2";
+
+            if (prefs != null)
+            {
+                newsCat = Regex.Replace(prefs.SelectedCategories.Trim(), " *, *", ",");
+                newsT = prefs.NewsNotificationTime.ToString("h:mm tt");
+                newsTime = prefs.NewsNotificationTime.ToString("hh");
+                setNewsTime = (newsTime != "8" && newsTime != "5") ? "3" : (newsTime == "8") ? "1" : "2";
+                EnTT = prefs.EnTNotificationTime.ToString("h:mm tt");
+                EnTTime = prefs.EnTNotificationTime.ToString("hh");
+                setEnTTime = (EnTTime != "8" && EnTTime != "5") ? "3" : (EnTTime == "8") ? "1" : "2";
+                taskT = prefs.TaskNotificationTime.ToString("h:mm tt");
+                taskTime = prefs.TaskNotificationTime.ToString("hh");
+                setTaskTime = (taskTime != "8" && taskTime != "5") ? "3" : (taskTime == "8") ? "1" : "2";
+            }
+            
+            
             List<AdaptiveColumn> list = new List<AdaptiveColumn>();
             list.Add(new AdaptiveColumn()
             {

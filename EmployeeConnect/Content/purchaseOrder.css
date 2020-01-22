@@ -60,7 +60,7 @@ table {
 }
 
 .t-amount {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 500;
     bottom: 8px;
     position: relative;
@@ -85,7 +85,7 @@ table {
 }
 
 .desc {
-    width: 310px;
+    width: 200px;
     color: black;
 }
 

@@ -554,34 +554,45 @@ namespace EmployeeConnect.Helper
 
         public static async System.Threading.Tasks.Task<bool> WritePrefsToSPList(Preference body)
         {
+
+            prefValue p = GetDataHelper.ReadPrefernecesfromSPData(body.UserName);
             string token = await GetDataHelper.GetAuthenticationToken();
-            //"{'UserName':'AB', 'Uni_ID':'likansf3993', 'TenantID':'7454731348764','ServiceURL':'abcghij','SelectedCategories':'a, b, c','NewsNotificationTime':' ','EnTNotifyMe':' ','EnTNotificationTime':' ','TaskNotificationTime':' ','NewsNotificationFlag':' ','EnTNotificationFlag':' ','NewsNotifyMe':' '}";
-            string cats = string.Join(",", body.News.SelectedCategories);
-            //change below code to some model
-            string finalBody = "{'UserName' :'" + body.UserName + "', 'Uni_ID' :'" + body.UserInfo[0].UniqueID + "', 'TenantID' :'" + body.UserInfo[0].TenantID + "', 'ServiceURL' :'" + body.UserInfo[0].ServiceURl + "', 'SelectedCategories' :'" + cats + "', 'NewsNotificationTime' :'" + body.News.NewsNotificationTime + "', 'EnTNotifyMe' :'" + body.EandT.EandTNotifyMe + "', 'EnTNotificationTime' :'" + body.EandT.EandTNotificationTime + "', 'TaskNotificationTime' :'" + body.Task.TaskNotificationTime + "', 'NewsNotificationFlag' :'" + body.News.NewsNotificationFlag + "', 'EnTNotificationFlag' :'" + body.EandT.EandTNotificationFlag + "', 'NewsNotifyMe' :'" + body.News.NewsNotifyMe + "'}";
 
-            
+            if (p != null) // change this condition to == null and handle the else part as update 
+            {             
+                string cats = string.Join(",", body.News.SelectedCategories);
+                //change below code to model
+                string finalBody = "{'UserName' :'" + body.UserName + "', 'Uni_ID' :'" + body.UserInfo[0].UniqueID + "', 'TenantID' :'" + body.UserInfo[0].TenantID + "', 'ServiceURL' :'" + body.UserInfo[0].ServiceURl + "', 'SelectedCategories' :'" + cats + "', 'NewsNotificationTime' :'" + body.News.NewsNotificationTime + "', 'EnTNotifyMe' :'" + body.EandT.EandTNotifyMe + "', 'EnTNotificationTime' :'" + body.EandT.EandTNotificationTime + "', 'TaskNotificationTime' :'" + body.Task.TaskNotificationTime + "', 'NewsNotificationFlag' :'" + body.News.NewsNotificationFlag + "', 'EnTNotificationFlag' :'" + body.EandT.EandTNotificationFlag + "', 'NewsNotifyMe' :'" + body.News.NewsNotifyMe + "'}";
 
-            string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/lists/GetByTitle('PreferencesList')/items";
-            using (var client = new HttpClient())
-            {
-                using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
-                {                    
-                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                    request.Content = new StringContent(finalBody, Encoding.UTF8, "application/json");
 
-                    using (HttpResponseMessage response = await client.SendAsync(request))
+
+                string endpoint = "https://avadheshftc.sharepoint.com/sites/EmployeeConnectPrototype/_api/web/lists/GetByTitle('PreferencesList')/items";
+                using (var client = new HttpClient())
+                {
+                    using (var request = new HttpRequestMessage(HttpMethod.Post, endpoint))
                     {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            return true;
+                        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                        request.Content = new StringContent(finalBody, Encoding.UTF8, "application/json");
 
+                        using (HttpResponseMessage response = await client.SendAsync(request))
+                        {
+                            if (response.IsSuccessStatusCode)
+                            {
+                                return true;
+
+                            }
+                            return false;
                         }
-                        return false;
                     }
                 }
             }
+            else
+            {
+                return false;
+                //write logic to handle the update list item rather than creating new one
+            }
+            
         }
                
         public static void ETStatusUpdate(string ETid)
@@ -680,8 +691,14 @@ namespace EmployeeConnect.Helper
             string json = File.ReadAllText(file).Replace("##BaseURL##", ApplicationSettings.BaseUrl);
             preferences = new JavaScriptSerializer().Deserialize<SPFXPreferences>(json);
 
-            prefValue prefValue = preferences.value.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
-            return prefValue;
+            if(preferences != null)
+            {
+                prefValue prefValue = preferences.value.Where(c => c.UserName == userName).Select(d => d).FirstOrDefault();
+                return prefValue;
+            }
+
+            return null;
+            
         }
 
         public class TokenResponse
