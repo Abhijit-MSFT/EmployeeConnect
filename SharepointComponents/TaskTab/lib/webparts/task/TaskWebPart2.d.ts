@@ -62,4 +62,4 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<ITaskTabWebPar
     protected readonly dataVersion: Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
 }
-//# sourceMappingURL=TaskWebPart.d.ts.map
+//# sourceMappingURL=TaskWebPart2.d.ts.map

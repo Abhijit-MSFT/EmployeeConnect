@@ -44,6 +44,20 @@ declare const styles: {
     timesheetdes: string;
     SIdes: string;
     createicon: string;
+    ticketcreation: string;
+    leaverequest: string;
+    policies: string;
+    downloadpayslip: string;
+    createfinancetkt: string;
+    submitbenefits: string;
+    viewbenefits: string;
+    support: string;
+    wiferequest: string;
+    eventsupport: string;
+    cafeservice: string;
+    Inventory: string;
+    ROtimesheet: string;
+    RoSI: string;
 };
 export default styles;
 //# sourceMappingURL=ToolTabWebPart.module.scss.d.ts.map

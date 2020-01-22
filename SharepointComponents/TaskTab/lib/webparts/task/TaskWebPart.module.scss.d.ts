@@ -2,6 +2,8 @@ declare const styles: {
     taskTab: string;
     container: string;
     grid1_b73c1c19: string;
+    chevron: string;
+    chevron2: string;
     grid2_b73c1c19: string;
     subheading_b73c1c19: string;
     heading_b73c1c19: string;

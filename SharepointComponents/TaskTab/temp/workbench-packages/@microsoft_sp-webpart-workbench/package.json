@@ -2,7 +2,7 @@
   "_args": [
     [
       "@microsoft/sp-webpart-workbench@1.9.1",
-      "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab"
+      "d:\\Github\\Sharepoint EC\\EC\\SharepointComponents\\TaskTab"
     ]
   ],
   "_development": true,
@@ -36,7 +36,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@microsoft/sp-webpart-workbench/-/sp-webpart-workbench-1.9.1.tgz",
   "_spec": "1.9.1",
-  "_where": "D:\\Git hub\\EmployeeConnectwebpart\\SharepointComponents\\TaskTab",
+  "_where": "d:\\Github\\Sharepoint EC\\EC\\SharepointComponents\\TaskTab",
   "dependencies": {
     "@microsoft/gulp-core-build-serve": "3.3.39",
     "@microsoft/node-core-library": "3.13.0",

@@ -18,15 +18,16 @@
     display: flex;
     position: absolute;
     z-index: 1;
-    margin-left: 35%;
+    margin-left: 5%;
 
     &::before {
       content: "\E447";
       font-family: "Teams Assets";
-      font-size: 22px;
-      font-weight: 600;
-      color: gray;
-      cursor: pointer;
+      position: absolute;
+      color: #04838a;
+      top: 8px;
+      right: 0.5rem;
+      pointer-events: none;
     }
   }
 
@@ -92,7 +93,7 @@
     display: inline;
   }
 
-  .img1{
+  .img1 {
     display: inline;
     height: 90px;
     width: 90px;
@@ -286,7 +287,6 @@
     background-color: #f3f2f1 !important;
     color: black;
     border-radius: 3px;
-    position: relative;
     left: 14px;
     border: none;
     cursor: pointer;
