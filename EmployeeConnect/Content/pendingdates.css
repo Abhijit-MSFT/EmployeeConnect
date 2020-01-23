@@ -20,7 +20,7 @@ body {
 }
 
     .sel::before {
-        content: "E447";
+        content: "\E447";
         font-family: "Teams Assets";
         position: absolute;
         color: #04838a;
@@ -120,7 +120,7 @@ body {
 }
 
 .time-clk::before {
-    content: "F301";
+    content: "\F301";
     font-family: "Teams Assets";
     position: absolute;
 }

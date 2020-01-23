@@ -12,7 +12,7 @@ namespace EmployeeConnect.Common
         public static UIConstants  NewsCard { get; set; } =
             new UIConstants(1000, 900, "News Card", TaskModuleIds.Newscard, "News Card");
         public static UIConstants CreateTicket { get; set; } =
-        new UIConstants(560, 480, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
+        new UIConstants(500, 480, "Create Ticket", TaskModuleIds.CreateTicket, "Create Ticket");
 
         public static UIConstants TicketComplete { get; set; } =
         new UIConstants(350, 450, "Ticket Complete", TaskModuleIds.TicketComplete, "Ticket Complete");
