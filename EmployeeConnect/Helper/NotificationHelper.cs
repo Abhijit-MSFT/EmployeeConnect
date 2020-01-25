@@ -62,8 +62,9 @@ namespace EmployeeConnect.Helper
             {
                 string userName = UserPref.Preferences[i].UserName;
 
-                string NewsNotificationTime1 = UserPref.Preferences[i].News.NewsNotificationTime;
-                DateTime NewsNotificationTime = DateTime.ParseExact(UserPref.Preferences[i].News.NewsNotificationTime, "H:mm tt", CultureInfo.InvariantCulture);
+                DateTime NewsNotificationTime1 = UserPref.Preferences[i].News.NewsNotificationTime;
+                //DateTime NewsNotificationTime = DateTime.ParseExact(UserPref.Preferences[i].News.NewsNotificationTime, "H:mm tt", CultureInfo.InvariantCulture);
+                DateTime NewsNotificationTime = UserPref.Preferences[i].News.NewsNotificationTime;
                 //List<string[]> NewsCat = UserPref.preferences[i].News.Select(c => c.SelectedCategories).ToList();
 
                 DateTime currTime = DateTime.Now;

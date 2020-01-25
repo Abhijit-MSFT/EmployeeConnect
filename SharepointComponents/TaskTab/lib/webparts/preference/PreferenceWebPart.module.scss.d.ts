@@ -1,6 +1,7 @@
 declare const styles: {
     preferencesTab: string;
     container: string;
+    chevron: string;
     row: string;
     row2: string;
     row3: string;

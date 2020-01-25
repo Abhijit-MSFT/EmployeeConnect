@@ -55,7 +55,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                           <div class=${styles.cbody} id="createTicket">
                             <span
                               alt-name="create letter"
-                              class=${styles.createicon}
+                              class=${styles.ticketcreation}
                             ></span>
                             <div class="${styles.CBL}">Create ticket</div>
                             <p class="${styles.CBLdes}">
@@ -68,7 +68,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                           <div class=${styles.cbody}>
                             <span
                               alt-name="create letter"
-                              class=${styles.createicon}
+                              class=${styles.leaverequest}
                             ></span>
                             <div class="${styles.CBL}">Request leave</div>
                             <p class="${styles.CBLdes}">
@@ -81,7 +81,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                           <div class=${styles.cbody}>
                             <span
                               alt-name="create letter"
-                              class=${styles.createicon}
+                              class=${styles.policies}
                             ></span>
                             <div class="${styles.CBL}">View policies</div>
                             <p class="${styles.CBLdes}">
@@ -103,7 +103,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                         <div class=${styles.cbody}>
                           <span
                             alt-name="create letter"
-                            class=${styles.createicon}
+                            class=${styles.downloadpayslip}
                           ></span>
                           <div class="${styles.CBL}">Download payslip</div>
                           <p class="${styles.CBLdes}">
@@ -116,7 +116,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                           <div class=${styles.cbody}>
                             <span
                               alt-name="create letter"
-                              class=${styles.createicon}
+                              class=${styles.createfinancetkt}
                             ></span>
                             <div class="${styles.CBL}">Create finance ticket</div>
                             <p class="${styles.CBLdes}">
@@ -129,7 +129,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                           <div class=${styles.cbody}>
                             <span
                               alt-name="create letter"
-                              class=${styles.createicon}
+                              class=${styles.submitbenefits}
                             ></span>
                             <div class="${styles.CBL}">Submit benefits claim</div>
                             <p class="${styles.CBLdes}">
@@ -142,7 +142,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                           <div class=${styles.cbody}>
                             <span
                               alt-name="create letter"
-                              class=${styles.createicon}
+                              class=${styles.viewbenefits}
                             ></span>
                             <div class="${styles.CBL}">View benefits policies</div>
                             <p class="${styles.CBLdes}">
@@ -164,7 +164,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                             <div class=${styles.cbody}>
                               <span
                                 alt-name="create letter"
-                                class=${styles.createicon}
+                                class=${styles.support}
                               ></span>
                               <div class="${styles.CBL}">Raise IT Support Ticket</div>
                               <p class="${styles.CBLdes}">
@@ -177,7 +177,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                               <div class=${styles.cbody} id="visitorRequest">
                                 <span
                                   alt-name="create letter"
-                                  class=${styles.createicon}
+                                  class=${styles.wiferequest}
                                 ></span>
                                 <div class="${styles.CBL}">Submit Visitor Request</div>
                                 <p class="${styles.CBLdes}">
@@ -190,7 +190,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                               <div class=${styles.cbody}>
                                 <span
                                   alt-name="create letter"
-                                  class=${styles.createicon}
+                                  class=${styles.eventsupport}
                                 ></span>
                                 <div class="${styles.CBL}">Event IT Support request</div>
                                 <p class="${styles.CBLdes}">
@@ -203,7 +203,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                               <div class=${styles.cbody}>
                                 <span
                                   alt-name="create letter"
-                                  class=${styles.createicon}
+                                  class=${styles.cafeservice}
                                 ></span>
                                 <div class="${styles.CBL}">Cafeteria service app</div>
                                 <p class="${styles.CBLdes}">
@@ -223,7 +223,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                                   <div class=${styles.cbody}>
                                     <span
                                       alt-name="create letter"
-                                      class=${styles.createicon}
+                                      class=${styles.Inventory}
                                     ></span>
                                     <div class="${styles.CBL}">Inventory request</div>
                                     <p class="${styles.CBLdes}">
@@ -236,7 +236,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                                     <div class=${styles.cbody}>
                                       <span
                                         alt-name="create letter"
-                                        class=${styles.createicon}
+                                        class=${styles.ROtimesheet}
                                       ></span>
                                       <div class="${styles.CBL}">Timesheet</div>
                                       <p class="${styles.CBLdes}">
@@ -249,7 +249,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                                     <div class=${styles.cbody}>
                                       <span
                                         alt-name="create letter"
-                                        class=${styles.createicon}
+                                        class=${styles.RoSI}
                                       ></span>
                                       <div class="${styles.CBL}">Store info</div>
                                       <p class="${styles.CBLdes}">

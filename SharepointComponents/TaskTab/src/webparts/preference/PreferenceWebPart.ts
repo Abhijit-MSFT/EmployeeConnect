@@ -101,6 +101,9 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
     SPComponentLoader.loadCss(
       "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     );
+    SPComponentLoader.loadCss(
+      "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    );
 
     $(document).ready(() => {
       $(".toggleClassNews").click(() => {
@@ -989,6 +992,7 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
                 <span class="${styles.textalign}">Set a preferred time </span>
                 <span class="${styles.checkmark}"></span>
               </label>
+              <div class="${styles.chevron}">
               <select class="${styles.datecontrol}" id="newsTimeD">
                 <option selected>9:00 am</option>
                 <option>10:00 am</option>
@@ -1000,8 +1004,10 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
                 <option>4:00 pm</option>
                 <option>5:00 pm</option>
               </select>
-              <span class="chevron-down"></span>  <!--added here-->
-            </form><br/>
+              </div>
+
+                <!--added here-->
+            </form><br/><br/><br/>
 
               </div>
           </div>
@@ -1041,19 +1047,21 @@ export default class PreferencesTabWebPart extends BaseClientSideWebPart<
                 <span class="${styles.textalign}">Set a preferred time </span>
                 <span class="${styles.checkmark}"></span>
               </label>
+              <div class="${styles.chevron}">
               <select class="${styles.datecontrol}" id="entTimeD">
-              <option selected>9:00 am</option>
-              <option>10:00 am</option>
-              <option>11:00 am</option>
-              <option>12:00 am</option>
-              <option>1:00 pm</option>
-              <option>2:00 pm</option>
-              <option>3:00 pm</option>
-              <option>4:00 pm</option>
-              <option>5:00 pm</option>
+                <option selected>9:00 am</option>
+                <option>10:00 am</option>
+                <option>11:00 am</option>
+                <option>12:00 am</option>
+                <option>1:00 pm</option>
+                <option>2:00 pm</option>
+                <option>3:00 pm</option>
+                <option>4:00 pm</option>
+                <option>5:00 pm</option>
               </select>
-              <span class="chevron-down"></span>  <!--added here-->
-            </form> <br/>
+              </div>
+               <!--added here-->
+            </form> <br/><br/><br/>
 
             </div>
               </div>

@@ -1,9 +1,9 @@
 @import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
 @font-face {
   font-family: "Teams Assets";
-  src: url("https://github.com/Abhijit-MSFT/EmployeeConnect/blob/master/SharepointComponents/TaskTab/dist/fonts/TeamsAssets-Light.woff")
+  src: url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EQLbWsb-BIREmvuOAMk7mSMBjJM505O7Jx4-4sXjxCZjDw?e=pEj018")
       format("woff"),
-    url("https://github.com/Abhijit-MSFT/EmployeeConnect/blob/master/SharepointComponents/TaskTab/dist/fonts/TeamsAssets-Light.woff")
+    url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EbMqjEFO9ixJqZ3H152zkOsBdD3ED4JDopx_ydz_tdQMhw?e=OekPkb")
       format("woff2");
   font-style: normal;
 }
@@ -12,6 +12,23 @@
     width: 100%;
     padding: 15px 0 0 15px;
     margin: auto;
+  }
+  .chevron {
+    float: left;
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    margin-left: 5%;
+
+    &::before {
+      content: "\E447";
+      font-family: "Teams Assets";
+      position: absolute;
+      color: #04838a;
+      top: 8px;
+      right: 0.5rem;
+      pointer-events: none;
+    }
   }
 
   .row:first-child,
@@ -76,16 +93,16 @@
     display: inline;
   }
 
-  .img1{
+  .img1 {
     display: inline;
     height: 90px;
     width: 90px;
     border-radius: 10px;
     cursor: pointer;
     opacity: 0.9;
-    &:hover{
-        opacity: 1;
-      }
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .tick {
@@ -109,7 +126,7 @@
     font-family: "Segoe UI";
     outline-color: black;
     font-size: 14px;
-    }
+  }
 
   .columnheight input:checked + .tick::after {
     content: "\2713";
@@ -270,15 +287,14 @@
     background-color: #f3f2f1 !important;
     color: black;
     border-radius: 3px;
-    position: relative;
     left: 14px;
     border: none;
     cursor: pointer;
   }
 
-  @media (max-width: 425px){
-  button{
-    display: none;
+  @media (max-width: 425px) {
+    button {
+      display: none;
+    }
   }
-}
 }

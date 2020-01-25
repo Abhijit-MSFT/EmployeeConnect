@@ -1,5 +1,13 @@
 @import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
 @import url(https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css);
+@font-face {
+  font-family: "Teams Assets";
+  src: url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EQLbWsb-BIREmvuOAMk7mSMBjJM505O7Jx4-4sXjxCZjDw?e=pEj018")
+      format("woff"),
+    url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EbMqjEFO9ixJqZ3H152zkOsBdD3ED4JDopx_ydz_tdQMhw?e=OekPkb")
+      format("woff2");
+  font-style: normal;
+}
 
 .taskTab {
   .container {
@@ -10,6 +18,26 @@
   }
   .grid1_b73c1c19 {
     width: 22% !important;
+  }
+  .chevron,.chevron2 {
+    float: left;
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    margin-left: 24%;
+
+    &::before {
+      content: "\E449";
+      font-family: "Teams Assets";
+      font-size: 16px;
+      font-weight: 600;
+      color: #8595D3;
+      margin-top: -130%;
+      cursor: pointer;
+    }
+  }
+  .chevron2 {
+    margin-left: 30%;
   }
 
   .grid2_b73c1c19 {

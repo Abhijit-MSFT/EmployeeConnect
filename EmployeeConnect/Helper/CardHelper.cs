@@ -504,6 +504,15 @@ namespace EmployeeConnect.Helper
             //get the current users preferences to show selected in the card
             prefValue prefs = GetDataHelper.ReadPrefernecesfromSPData(userName);
             string newsCat = Regex.Replace(prefs.SelectedCategories.Trim(), " *, *", ",");
+            string newsT = prefs.NewsNotificationTime.ToString("h:mm tt");
+            string newsTime = prefs.NewsNotificationTime.ToString("hh");
+            string setNewsTime = (newsTime != "8" && newsTime != "5") ? "3" : (newsTime == "8") ? "1" : "2";
+            string EnTT = prefs.EnTNotificationTime.ToString("h:mm tt");
+            string EnTTime = prefs.EnTNotificationTime.ToString("hh");
+            string setEnTTime = (EnTTime != "8" && EnTTime != "5") ? "3" : (EnTTime == "8") ? "1" : "2";
+            string taskT = prefs.TaskNotificationTime.ToString("h:mm tt");
+            string taskTime = prefs.TaskNotificationTime.ToString("hh");
+            string setTaskTime = (taskTime != "8" && taskTime != "5") ? "3" : (taskTime == "8") ? "1" : "2";
             List<AdaptiveColumn> list = new List<AdaptiveColumn>();
             list.Add(new AdaptiveColumn()
             {
@@ -613,7 +622,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetNewsChoice",
-                                Value = "1", // please set default value here
+                                Value = setNewsTime, // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
                                 {
@@ -640,50 +649,50 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetNewsPreferredTime",
-                                Value = "1",
+                                Value = newsT,
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
                                     new AdaptiveChoice
                                     {
                                         Title = "9:00 AM",
-                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "9:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "10:00 AM",
-                                        Value = "2" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "10:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
 
                                     new AdaptiveChoice
                                     {
                                         Title = "11:00 AM",
-                                        Value = "3" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "11:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "12:00 PM",
-                                        Value = "4"
+                                        Value = "12:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "1:00 PM",
-                                        Value = "5"
+                                        Value = "1:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "2:00 PM",
-                                        Value = "6"
+                                        Value = "2:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "3:00 PM",
-                                        Value = "7"
+                                        Value = "3:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "4:00 PM",
-                                        Value = "8"
+                                        Value = "4:00 PM"
                                     }
                                 }
                             },
@@ -706,7 +715,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetENTChoice",
-                                Value = "1", // please set default value here
+                                Value = setEnTTime, // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
                                 {
@@ -733,50 +742,50 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetENTPreferredTime",
-                                Value = "1",
+                                Value = EnTT,
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
-                                    new AdaptiveChoice
+                                     new AdaptiveChoice
                                     {
                                         Title = "9:00 AM",
-                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "9:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "10:00 AM",
-                                        Value = "2" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "10:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
 
                                     new AdaptiveChoice
                                     {
                                         Title = "11:00 AM",
-                                        Value = "3" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "11:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "12:00 PM",
-                                        Value = "4"
+                                        Value = "12:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "1:00 PM",
-                                        Value = "5"
+                                        Value = "1:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "2:00 PM",
-                                        Value = "6"
+                                        Value = "2:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "3:00 PM",
-                                        Value = "7"
+                                        Value = "3:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "4:00 PM",
-                                        Value = "8"
+                                        Value = "4:00 PM"
                                     }
                                 }
                             },
@@ -789,7 +798,7 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetTaskRemindersChoice",
-                                Value = "1", // please set default value here
+                                Value = setTaskTime, // please set default value here
                                 Style = AdaptiveChoiceInputStyle.Expanded, // set the style of Choice set to compact
                                 Choices =
                                 {
@@ -816,50 +825,50 @@ namespace EmployeeConnect.Helper
                             new AdaptiveChoiceSetInput()
                             {
                                 Id = "SetTaskReminderPreferredTime",
-                                Value = "1",
+                                Value = taskT,
                                 Style = AdaptiveChoiceInputStyle.Compact,
                                 Choices =
                                 {
-                                    new AdaptiveChoice
+                                     new AdaptiveChoice
                                     {
                                         Title = "9:00 AM",
-                                        Value = "1" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "9:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "10:00 AM",
-                                        Value = "2" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "10:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
 
                                     new AdaptiveChoice
                                     {
                                         Title = "11:00 AM",
-                                        Value = "3" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
+                                        Value = "11:00 AM" // do not use a “,” in the value, since MultiSelect ChoiceSet returns a comma-delimited string of choice values
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "12:00 PM",
-                                        Value = "4"
+                                        Value = "12:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "1:00 PM",
-                                        Value = "5"
+                                        Value = "1:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "2:00 PM",
-                                        Value = "6"
+                                        Value = "2:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "3:00 PM",
-                                        Value = "7"
+                                        Value = "3:00 PM"
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = "4:00 PM",
-                                        Value = "8"
+                                        Value = "4:00 PM"
                                     }
                                 }
                             }

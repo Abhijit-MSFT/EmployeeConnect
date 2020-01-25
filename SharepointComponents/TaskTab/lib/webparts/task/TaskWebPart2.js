@@ -124,7 +124,7 @@ var TaskTabWebPart = /** @class */ (function (_super) {
     };
     TaskTabWebPart.prototype.render = function () {
         //existing code
-        this.domElement.innerHTML += "\n      <div class=\"" + styles.taskTab + "\">\n       <div class=\"" + styles.heading + "\" style=\"padding-bottom: 20px !important;\" id=\"" + styles.ps + "\"> Pending submissions </div>\n        <div class=\"" + styles.container + "\">\n          <div class=\"" + styles.row + "\">\n            <div class=\"" + styles.grid1 + "\">\n            <div class=\"" + styles.img + "\"></div>\n            <h5 class=\"" + styles.title + "\">12</h5>\n            <h6 class=\"" + styles.title2 + "\">Days of pending timesheet</h6>\n            <div class=\"" + styles.ft + "\" id=\"fill-timesheet\">\n              Fill timesheet\n              <span class=\"" + styles.chevron + "\"></span>\n            </div>\n              <div>\n              </div>\n            </div>\n             <div class=\"" + styles.grid2 + "\">\n             <div class=\"" + styles.img2 + "\"></div>\n              <h5 class=\"" + styles.title + "\">\n              <span class=\"currency\">&#x20b9;</span> 25,000\n            </h5>\n            <h6 class=\"" + styles.title2 + "\">Amount of unreconciled expenses</h6>\n              <div>\n              <div class=\"" + styles.ft + "\">\n              Submit expenses\n              <span class=\"" + styles.chevron2 + "\"></span>\n            </div>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"" + styles.row + "\">\n        <div class=\"" + styles.headingPending + "\"> Pending approvals </div>\n         <div class=\"" + styles.subheading + "\">Purchased Orders</div>\n        <table class=\"" + styles.container + " table\">\n          <thead>\n            <tr>\n              <th scope=\"col\">Po no.</th>\n              <th scope=\"col\">Description</th>\n              <th scope=\"col\">Vendor name</th>\n              <th scope=\"col\">Vendor no.</th>\n              <th scope=\"col\">Amount</th>\n              <th scope=\"col\"></th>\n            </tr>\n          </thead>\n            <tbody id=\"spTaskListContainer\">\n               " + this._renderListAsync() + "\n            </tbody>\n        </table>\n        </div>\n          <div class=\"" + styles.subheading + "\">Invoice\n      </div>\n         <table class=\"table\" style=\"position:relative;top:-16px;\">\n          <thead>\n            <tr>\n              <th scope=\"col\">Invoice no.</th>\n              <th scope=\"col\">Po no.</th>\n              <th scope=\"col\">Description</th>\n              <th scope=\"col\">Vendor name</th>\n              <th scope=\"col\">Vendor no.</th>\n              <th scope=\"col\">Amount</th>\n              <th scope=\"col\"></th>\n            </tr>\n          </thead>\n          <tbody id=\"spInvoiceListContainer\">\n            " + this._renderInvoiceListAsync() + "\n          </tbody>\n        </table>\n      <div class=\"" + styles.subheading + "\">Inventory (0)</div>\n       </div>";
+        this.domElement.innerHTML += "\n      <div class=\"" + styles.taskTab + "\">\n       <div class=\"" + styles.heading + "\" style=\"padding-bottom: 20px !important;\" id=\"" + styles.ps + "\"> Pending submissions </div>\n        <div class=\"" + styles.container + "\">\n          <div class=\"" + styles.row + "\">\n            <div class=\"" + styles.grid1 + "\">\n            <div class=\"" + styles.img + "\"></div>\n            <h5 class=\"" + styles.title + "\">12</h5>\n            <h6 class=\"" + styles.title2 + "\">Days of pending timesheet</h6>\n            <div class=\"" + styles.ft + "\" id=\"fill-timesheet\" style=\"margin-top:16%\">\n              Fill timesheet\n              <span class=\"" + styles.chevron + "\"></span>\n            </div>\n              <div>\n              </div>\n            </div>\n             <div class=\"" + styles.grid2 + "\">\n             <div class=\"" + styles.img2 + "\"></div>\n              <h5 class=\"" + styles.title + "\">\n              <span class=\"currency\">&#x20b9;</span> 25,000\n            </h5>\n            <h6 class=\"" + styles.title2 + "\">Amount of unreconciled expenses</h6>\n              <div>\n              <div class=\"" + styles.ft + "\">\n              Submit expenses\n              <span class=\"" + styles.chevron + "\"></span>\n            </div>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"" + styles.row + "\">\n        <div class=\"" + styles.headingPending + "\"> Pending approvals </div>\n         <div class=\"" + styles.subheading + "\">Purchased Orders</div>\n        <table class=\"" + styles.container + " table\">\n          <thead>\n            <tr>\n              <th scope=\"col\">Po no.</th>\n              <th scope=\"col\">Description</th>\n              <th scope=\"col\">Vendor name</th>\n              <th scope=\"col\">Vendor no.</th>\n              <th scope=\"col\">Amount</th>\n              <th scope=\"col\"></th>\n            </tr>\n          </thead>\n            <tbody id=\"spTaskListContainer\">\n               " + this._renderListAsync() + "\n            </tbody>\n        </table>\n        </div>\n          <div class=\"" + styles.subheading + "\">Invoice\n      </div>\n         <table class=\"table\" style=\"position:relative;top:-16px;\">\n          <thead>\n            <tr>\n              <th scope=\"col\">Invoice no.</th>\n              <th scope=\"col\">Po no.</th>\n              <th scope=\"col\">Description</th>\n              <th scope=\"col\">Vendor name</th>\n              <th scope=\"col\">Vendor no.</th>\n              <th scope=\"col\">Amount</th>\n              <th scope=\"col\"></th>\n            </tr>\n          </thead>\n          <tbody id=\"spInvoiceListContainer\">\n            " + this._renderInvoiceListAsync() + "\n          </tbody>\n        </table>\n      <div class=\"" + styles.subheading + "\">Inventory (0)</div>\n       </div>";
         this._setButtonEventHandlers();
     };
     TaskTabWebPart.prototype._setButtonEventHandlers = function () {
@@ -260,28 +260,27 @@ var TaskTabWebPart = /** @class */ (function (_super) {
         //window.location.reload();
     };
     TaskTabWebPart.prototype.submitHandler = function (err, result) {
-        //console.log(event);
+        console.log(event);
         if (result.action == "podecline") {
-            microsoftTeams.tasks.submitTask();
-            // let taskInfo = {
-            //   InvoiceNo: null,
-            //   height: null,
-            //   width: null,
-            //   url: null,
-            //   fallbackUrl: null
-            // };
-            // taskInfo.url =
-            //   "https://employeeconnect-9566.azurewebsites.net/podecline?poNo=" +
-            //   result.poNumber +
-            //   "&POreason=" +
-            //   result.reason +
-            //   "&POComment=" +
-            //   result.comment;
-            // taskInfo.height = "400";
-            // taskInfo.width = "367";
-            // // Set fallback URL
-            // taskInfo.fallbackUrl = taskInfo.url;
-            // microsoftTeams.tasks.startTask(taskInfo);
+            var taskInfo = {
+                InvoiceNo: null,
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null
+            };
+            taskInfo.url =
+                "https://employeeconnect-9566.azurewebsites.net/podecline?poNo=" +
+                    result.poNumber +
+                    "&POreason=" +
+                    result.reason +
+                    "&POComment=" +
+                    result.comment;
+            taskInfo.height = "400";
+            taskInfo.width = "367";
+            // Set fallback URL
+            taskInfo.fallbackUrl = taskInfo.url;
+            microsoftTeams.tasks.startTask(taskInfo);
         }
         if (result.action == "cancelPo") {
             microsoftTeams.tasks.submitTask();
@@ -327,4 +326,4 @@ var TaskTabWebPart = /** @class */ (function (_super) {
     return TaskTabWebPart;
 }(BaseClientSideWebPart));
 export default TaskTabWebPart;
-//# sourceMappingURL=TaskWebPart.js.map
+//# sourceMappingURL=TaskWebPart2.js.map
