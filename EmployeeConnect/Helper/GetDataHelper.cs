@@ -19,6 +19,7 @@ namespace EmployeeConnect.Helper
     public class GetDataHelper
     {
         public static string userName = "";
+        public static string lastName = "";
 
         //This method is added as part of spfx changes. This method gets the authentication token
         private static async Task<string> GetAuthenticationToken()
