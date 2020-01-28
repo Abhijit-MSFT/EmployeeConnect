@@ -350,7 +350,7 @@ namespace EmployeeConnect.Helper
 
         }
 
-        public static List<Attachment> WelcomeCard()
+        public static List<Attachment> DefaultCard()
         {
             //Welcome Card
             var action = new List<AdaptiveAction>()
@@ -380,19 +380,52 @@ namespace EmployeeConnect.Helper
                             {
                                 Text = "Welcome to Employee Connect",
                                 Weight = AdaptiveTextWeight.Bolder,
-                                Size = AdaptiveTextSize.Large
+                                Size = AdaptiveTextSize.Large,
+                                Height = AdaptiveHeight.Stretch
                             },
 
                             new AdaptiveTextBlock()
                             {
-                                Text = "Keep yourself posted \r\rabout the latest news",
+                                Text = "Keep yourself posted with\r\r the latest news and much more",
                                 Wrap = true ,
-                                 Weight = AdaptiveTextWeight.Bolder,
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Height = AdaptiveHeight.Stretch
                             },
+                             new AdaptiveTextBlock()
+                            {
+                                Text = "The bot will keep you updated\r\r  on the latest news in your organisation",
+                                Wrap = true ,
+                                Height =AdaptiveHeight.Stretch
+                            },                         
                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation",
+                                Text = "Try these commands \r\r" +
+                                "- Trending News \r\r" +
+                                "- Set Preferences",
+                                Weight = AdaptiveTextWeight.Bolder,
                                 Wrap = true ,
+                                Height =AdaptiveHeight.Stretch
+                            },
+
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
                             }
                         }
                     }
@@ -431,9 +464,39 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings",
+                                Text = "The bot can send notifications \r\rto remind you about the latest \r\r events and trainings",
                                 Wrap = true ,// True if text is allowed to wrap
                                 MaxWidth = 2
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Try these commands \r\r" +
+                                "- Events And Trainings \r\r" +
+                                "- Policies",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Wrap = true ,
+                                Height =AdaptiveHeight.Stretch
+                            },
+
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
                             }
                         }
                             // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
@@ -467,9 +530,40 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The app identifies all your \r\r pending tasks and helps \r\r you manage everything at \r\r one place.",
+                                Text = "The app identifies all your pending tasks \r\r and helps you manage everything at \r\r one place.",
                                 Wrap = true,
 
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Try these commands \r\r" +
+                                "- Pending Submissions \r\r" +
+                                "- Pending Approvals"+
+                                "- My Tools",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Wrap = true ,
+                                Height =AdaptiveHeight.Stretch
+                            },
+
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
                             }
                         }
                     }
@@ -1801,23 +1895,9 @@ namespace EmployeeConnect.Helper
         //    return attachment;
         //}
 
-        public static List<Attachment> DefaultCard()
+        public static List<Attachment> WelcomeCard()
         {
-            //Welcome Card
-            //var action = new List<AdaptiveAction>()
-            //{
-            //    new AdaptiveSubmitAction()
-            //    {
-            //        Title = "Let's get started",
-            //        DataJson = @"{'Action':'" + Constants.ShowPrefCard + "' }"
-            //    }
 
-            //    //new AdaptiveShowCardAction()
-            //    //{
-            //    //    Title = "Let's get Started",
-            //    //    Card=(AdaptiveCard)CardHelper.SetTimePrefrences().Content
-            //    //}
-            //};
             var card1 = new AdaptiveCard("1.0")
             {
                 BackgroundImage = new AdaptiveBackgroundImage(ApplicationSettings.BaseUrl + "/Images/signin_1.png"),
@@ -1831,34 +1911,44 @@ namespace EmployeeConnect.Helper
                             new AdaptiveTextBlock()
                             {
                                 Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder,
+                                Weight = AdaptiveTextWeight.Bolder,                                
                                 Size = AdaptiveTextSize.Large,
                                 Height = AdaptiveHeight.Stretch
                             },
 
                             new AdaptiveTextBlock()
                             {
-                                Text = "Keep yourself posted \r\rabout the latest news",
+                                Text = "Keep yourself posted with\r\r the latest news and much more",
                                 Wrap = true ,
                                 Weight = AdaptiveTextWeight.Bolder,
-                                Height =AdaptiveHeight.Stretch
+                                Height = AdaptiveHeight.Stretch
                             },
-                            new AdaptiveTextBlock()
+                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot will keep you \r\r updated on the latest \r\r news in your organisation",
+                                Text = "The bot will keep you updated\r\r  on the latest news in your organisation",
                                 Wrap = true ,
                                 Height =AdaptiveHeight.Stretch
                             },
-                            new AdaptiveColumnSet()
+                            // new AdaptiveColumnSet()
+                            //{
+                            //    Columns = new List<AdaptiveColumn>()
+                            //    {
+                            //        new AdaptiveColumn()
+                            //        {
+                            //            Height = AdaptiveHeight.Stretch
+                            //        }
+                            //    }
+                            //},
+                            new AdaptiveTextBlock()
                             {
-                                Columns = new List<AdaptiveColumn>()
-                                {
-                                    new AdaptiveColumn()
-                                    {
-                                        Height = AdaptiveHeight.Stretch
-                                    }
-                                }
-                            },
+                                Text = "Try these commands \r\r" +
+                                "- Trending News \r\r" +
+                                "- Set Preferences",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Wrap = true ,
+                                Height =AdaptiveHeight.Stretch
+                            },                           
+
                             new AdaptiveColumnSet()
                             {
                                 Columns = new List<AdaptiveColumn>()
@@ -1899,25 +1989,40 @@ namespace EmployeeConnect.Helper
                             new AdaptiveTextBlock()
                             {
                                 Text = "Welcome to Employee Connect",
-                                Weight = AdaptiveTextWeight.Bolder, // set the weight of text e.g. Bolder, Light, Normal
-                                Size = AdaptiveTextSize.Large// set the size of text e.g. Extra Large, Large, Medium, Normal, Small
-                            },
-                            /*new AdaptiveTextBlock()
+                                Weight = AdaptiveTextWeight.Bolder, 
+                                Size = AdaptiveTextSize.Large
+                            },                            
+                            new AdaptiveTextBlock()
                             {
-                                Text = "Please sign in to get started",
-                                Wrap = true ,// True if text is allowed to wrap
-                            },*/
-                                new AdaptiveTextBlock()
-                            {
-                                Text = "Add events to your calendar",
-                                Wrap = true ,// True if text is allowed to wrap
-                                    Weight = AdaptiveTextWeight.Bolder
+                                Text = "Add and view events to your calendar",
+                                Wrap = true ,
+                                Weight = AdaptiveTextWeight.Bolder
 
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The bot can send \r\r notifications to remind \r\r you about the latest \r\r events and trainings",
-                                Wrap = true ,// True if text is allowed to wrap
+                                Text = "The bot can send notifications\r\r to remind you about the latest \r\r events and trainings",
+                                //Weight = AdaptiveTextWeight.Bolder,
+                                Wrap = true ,
+                                MaxWidth = 2
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Height = AdaptiveHeight.Stretch
+                                    }
+                                }
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text = "Try these commands\r\r " +
+                                "- Events and Trainings\r\r" +
+                                "- Policies",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Wrap = true ,
                                 MaxWidth = 2
                             },
                             new AdaptiveColumnSet()
@@ -1939,17 +2044,7 @@ namespace EmployeeConnect.Helper
                                         Height = AdaptiveHeight.Stretch
                                     }
                                 }
-                            },
-                            new AdaptiveColumnSet()
-                            {
-                                Columns = new List<AdaptiveColumn>()
-                                {
-                                    new AdaptiveColumn()
-                                    {
-                                        Height = AdaptiveHeight.Stretch
-                                    }
-                                }
-                            }
+                            },                    
                         }
                             // TextBlock Item allows for the inclusion of text, with various font sizes, weight and color
                             
@@ -1982,7 +2077,7 @@ namespace EmployeeConnect.Helper
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text = "The app identifies all your \r\r pending tasks and helps \r\r you manage everything at \r\r one place.",
+                                Text = "The app identifies all your pending tasks  \r\rand helps you manage everything at \r\r one place.",
                                 Wrap = true,
 
                             },
@@ -1996,15 +2091,16 @@ namespace EmployeeConnect.Helper
                                     }
                                 }
                             },
-                            new AdaptiveColumnSet()
+                            new AdaptiveTextBlock()
                             {
-                                Columns = new List<AdaptiveColumn>()
-                                {
-                                    new AdaptiveColumn()
-                                    {
-                                        Height = AdaptiveHeight.Stretch
-                                    }
-                                }
+                               Text = "Try these commands\r\r " +
+                                "- Pending Submissions\r\r" +
+                                "- Pending Approvals\r\r" +
+                                "- My Tools",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Wrap = true ,
+                                MaxWidth = 2
+
                             },
                             new AdaptiveColumnSet()
                             {
@@ -2015,7 +2111,7 @@ namespace EmployeeConnect.Helper
                                         Height = AdaptiveHeight.Stretch
                                     }
                                 }
-                            }
+                            },                          
                         }
                     }
                 },
