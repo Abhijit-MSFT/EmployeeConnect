@@ -178,7 +178,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
               <td id="poNumber">${item.POno_x002e_}</td>
               <td>${item.Description}</td>
               <td>${item.Vendorname}</td>
-              <td id="vendorNo">${item.Vendorno_x002e_}</td>
+              <td id="vendorNo" class="${styles.vno}">${item.Vendorno_x002e_}</td>
                <td>&#8377; ${item.Amount}</td>
                <td id="buttonReview" name="buttonReview"  value = ${item.POno_x002e_} alt=${item.Vendorno_x002e_} class="${styles.review} reviewButton" id='review'>Review</td>
                </tr>
@@ -226,9 +226,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
       <div class="${styles.taskTab}">
        <div class="${
          styles.heading
-       }" style="padding-bottom: 20px !important;" id="${
-      styles.ps
-    }"> Pending submissions </div>
+       }" style="padding-bottom: 20px !important;"> Pending submissions </div>
         <div class="${styles.container}">
           <div class="${styles.row}">
             <div class="${styles.grid1}">
@@ -285,7 +283,7 @@ export default class TaskTabWebPart extends BaseClientSideWebPart<
               <th scope="col">Po no.</th>
               <th scope="col">Description</th>
               <th scope="col">Vendor name</th>
-              <th scope="col">Vendor no.</th>
+              <th scope="col" class="${styles.vno}">Vendor no.</th>
               <th scope="col">Amount</th>
               <th scope="col"></th>
             </tr>

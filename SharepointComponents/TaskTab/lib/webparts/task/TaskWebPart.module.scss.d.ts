@@ -34,7 +34,7 @@ declare const styles: {
     list: string;
     listItem: string;
     panel: string;
-    ps: string;
+    vno: string;
 };
 export default styles;
 //# sourceMappingURL=TaskWebPart.module.scss.d.ts.map

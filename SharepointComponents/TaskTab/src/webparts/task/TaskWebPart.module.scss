@@ -19,25 +19,26 @@
   .grid1_b73c1c19 {
     width: 22% !important;
   }
-  .chevron,.chevron2 {
+  .chevron,
+  .chevron2 {
     float: left;
     display: flex;
     position: absolute;
     z-index: 1;
-    margin-left: 24%;
+    margin-left: 28%;
 
     &::before {
       content: "\E449";
       font-family: "Teams Assets";
       font-size: 16px;
       font-weight: 600;
-      color: #8595D3;
+      color: #8595d3;
       margin-top: -130%;
       cursor: pointer;
     }
   }
   .chevron2 {
-    margin-left: 30%;
+    margin-left: 35%;
   }
 
   .grid2_b73c1c19 {
@@ -117,6 +118,7 @@
   }
   .title {
     color: black;
+    font-size: medium;
     font-weight: bold;
     padding: 2px;
     position: relative;
@@ -129,6 +131,7 @@
     position: relative;
     margin-top: 5%;
     margin-left: 20%;
+    font-size: medium;
   }
   .ft {
     color: #8586bb;
@@ -159,7 +162,7 @@
     padding: 1.25rem;
     left: 0 !important;
     height: 160px;
-    width: 350px !important;
+    width: 350px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
 
@@ -267,25 +270,38 @@
   }
 
   @media (max-width: 768px) {
-    .grid1,
-    .grid2 {
-      display: none;
-      width: 22%;
-    }
+    // .grid1,
+    // .grid2 {
+    //   display: none;
+    //   width: 22%;
+    // }
   }
   @media (max-width: 425px) {
     .grid1,
-    .grid2,
-    #ps {
-      display: none;
+    .grid2 {
+      width: 100% !important;
+      height: 130px;
+      font-size: small;
     }
     .grid2 {
-      margin: 10px 0 0 0;
+      margin-top: 4%;
+      margin-left: 0 !important;
     }
     thead th,
-    .heading,
     .subheading {
       font-size: xx-small;
+    }
+    .vno,
+    .chevron,
+    .chevron2 {
+      display: none;
+    }
+    .ft {
+      margin: 5% 0 0 19%;
+    }
+    th,
+    td {
+      padding: 0.5rem !important;
     }
   }
 }
