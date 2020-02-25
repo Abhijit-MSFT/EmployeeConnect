@@ -1,10 +1,11 @@
 @import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss";
 @font-face {
   font-family: "Teams Assets";
-  src: url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EQLbWsb-BIREmvuOAMk7mSMBjJM505O7Jx4-4sXjxCZjDw?e=pEj018")
-      format("woff"),
-    url("https://avadheshftc.sharepoint.com/:u:/s/EmployeeConnectPrototype/EbMqjEFO9ixJqZ3H152zkOsBdD3ED4JDopx_ydz_tdQMhw?e=OekPkb")
-      format("woff2");
+  // src: url("../fonts/TeamsAssets-Light.woff");
+  //   format("woff"),
+  // url("../fonts/TeamsAssets-Light.woff2");
+  //   format("woff2");
+  src: url("../fonts/TeamsAssets-Light.woff");
   font-style: normal;
 }
 .toolTab {
