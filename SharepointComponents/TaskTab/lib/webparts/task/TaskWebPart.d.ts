@@ -26,18 +26,25 @@ export interface ISInvoiceList {
     Description: string;
     Vendorname: string;
     Vendorno_x002e_: string;
+    PoStatus: string;
     Amount: string;
 }
 export default class TaskTabWebPart extends BaseClientSideWebPart<ITaskTabWebPartProps> {
+    constructor();
     private _getTaskListData;
     private _getInvoiceListData;
+    private updatePOStatus;
     private _renderTaskList;
     private _renderInvoiceList;
     private _renderListAsync;
     private _renderInvoiceListAsync;
     render(): void;
     private _setButtonEventHandlers;
-    private submitHandler;
+    private pendingDates;
+    private submitPurchaseOrder;
+    private getLatestItemId;
+    updatePoStatus(updateObj: any): void;
+    submitHandler(err: any, result: any): void;
     protected readonly dataVersion: Version;
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
 }
