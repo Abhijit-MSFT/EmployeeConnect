@@ -23,7 +23,7 @@
     "ajv-keywords": "^3.4.1",
     "bootstrap": "^4.4.1",
     "eslint": "^6.7.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8",
     "sass": "^1.23.7",
