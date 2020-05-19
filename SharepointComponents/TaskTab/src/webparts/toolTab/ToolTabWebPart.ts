@@ -2,7 +2,7 @@ import { Version } from "@microsoft/sp-core-library";
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
 } from "@microsoft/sp-webpart-base";
 import { escape } from "@microsoft/sp-lodash-subset";
 import styles from "./ToolTabWebPart.module.scss";
@@ -166,7 +166,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                                 alt-name="create letter"
                                 class=${styles.support}
                               ></span>
-                              <div class="${styles.CBL}">Raise IT Support Ticket</div>
+                              <div class="${styles.CBL}">Raise it support ticket</div>
                               <p class="${styles.CBLdes}">
                               Submit your support case to review and respond.
                               </p>
@@ -179,7 +179,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                                   alt-name="create letter"
                                   class=${styles.wiferequest}
                                 ></span>
-                                <div class="${styles.CBL}">Submit Visitor Request</div>
+                                <div class="${styles.CBL}">Submit visitor request</div>
                                 <p class="${styles.CBLdes}">
                                 Fill a request form for short-term visitors.
                                 </p>
@@ -192,7 +192,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
                                   alt-name="create letter"
                                   class=${styles.eventsupport}
                                 ></span>
-                                <div class="${styles.CBL}">Event IT Support request</div>
+                                <div class="${styles.CBL}">Event it support request</div>
                                 <p class="${styles.CBLdes}">
                                 Fill out this form to request any equiepment for events.
                                 </p>
@@ -287,7 +287,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
       url: null,
       card: null,
       fallbackUrl: null,
-      completionBotId: null
+      completionBotId: null,
     };
 
     taskInfo.url =
@@ -307,7 +307,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
       url: null,
       card: null,
       fallbackUrl: null,
-      completionBotId: null
+      completionBotId: null,
     };
 
     taskInfo.url =
@@ -325,7 +325,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
         height: null,
         width: null,
         url: null,
-        fallbackUrl: null
+        fallbackUrl: null,
       };
       taskInfo.url =
         "https://employeeconnect-9566.azurewebsites.net/ticketcomplete?ticketNoId=" +
@@ -346,7 +346,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
         height: null,
         width: null,
         url: null,
-        fallbackUrl: null
+        fallbackUrl: null,
       };
       taskInfo.url =
         "https://employeeconnect-9566.azurewebsites.net/createticket";
@@ -360,7 +360,7 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
         height: null,
         width: null,
         url: null,
-        fallbackUrl: null
+        fallbackUrl: null,
       };
       taskInfo.url =
         "https://employeeconnect-9566.azurewebsites.net/sendrequest?=" +
@@ -383,20 +383,20 @@ export default class ToolTabWebPart extends BaseClientSideWebPart<
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: strings.PropertyPaneDescription,
           },
           groups: [
             {
               groupName: strings.BasicGroupName,
               groupFields: [
                 PropertyPaneTextField("description", {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
+                  label: strings.DescriptionFieldLabel,
+                }),
+              ],
+            },
+          ],
+        },
+      ],
     };
   }
 }

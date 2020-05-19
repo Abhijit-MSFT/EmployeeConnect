@@ -1,2 +1,1041 @@
-define("d2865084-ab74-41f5-9cf0-afac7226c9df_0.0.1",["jquery","@microsoft/sp-webpart-base","@microsoft/sp-loader","@microsoft/sp-core-library","ToolTabWebPartStrings","bootstrap"],function(e,t,a,n,o,i){return function(e){var t={};function a(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,a),o.l=!0,o.exports}return a.m=e,a.c=t,a.d=function(e,t,n){a.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},a.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},a.t=function(e,t){if(1&t&&(e=a(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(a.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)a.d(n,o,function(t){return e[t]}.bind(null,o));return n},a.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return a.d(t,"a",t),t},a.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},a.p="",function(){var e,t=document.getElementsByTagName("script"),n=new RegExp("\\/tool-tab-web-part(_[a-z0-9-]+)*\\.js","i");if(t&&t.length)for(var o=0;o<t.length;o++)if(t[o]){var i=t[o].getAttribute("src");if(i&&i.match(n)){e=i.substring(0,i.lastIndexOf("/")+1);break}}if(!e)for(var r in window.__setWebpackPublicPathLoaderSrcRegistry__)if(r&&r.match(n)){e=r.substring(0,r.lastIndexOf("/")+1);break}a.p=e}(),a(a.s=29)}([function(t,a){t.exports=e},function(e,t,a){window,e.exports=function(e){var t={};function a(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,a),o.l=!0,o.exports}return a.m=e,a.c=t,a.d=function(e,t,n){a.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},a.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},a.t=function(e,t){if(1&t&&(e=a(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(a.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)a.d(n,o,function(t){return e[t]}.bind(null,o));return n},a.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return a.d(t,"a",t),t},a.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},a.p="",a(a.s=0)}([function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),function(e){for(var a in e)t.hasOwnProperty(a)||(t[a]=e[a])}(a(1))},function(e,t,a){"use strict";var n=this&&this.__rest||function(e,t){var a={};for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&t.indexOf(n)<0&&(a[n]=e[n]);if(null!=e&&"function"==typeof Object.getOwnPropertySymbols){var o=0;for(n=Object.getOwnPropertySymbols(e);o<n.length;o++)t.indexOf(n[o])<0&&(a[n[o]]=e[n[o]])}return a};function o(e){for(var t="^",a=e.split("."),n=0;n<a.length;n++)t+=(n>0?"[.]":"")+a[n].replace("*","[^/^.]+");return t+="$"}Object.defineProperty(t,"__esModule",{value:!0});var i=function(e){for(var t="",a=0;a<e.length;a++)t+=(0===a?"":"|")+o(e[a]);return new RegExp(t)}(["https://teams.microsoft.com","https://teams.microsoft.us","https://gov.teams.microsoft.us","https://dod.teams.microsoft.us","https://int.teams.microsoft.com","https://devspaces.skype.com","https://ssauth.skype.com","http://dev.local","http://dev.local:8080","https://msft.spoppe.com","https://*.sharepoint.com","https://*.sharepoint-df.com","https://*.sharepointonline.com","https://outlook.office.com","https://outlook-sdf.office.com"]),r={},s={settings:"settings",content:"content",authentication:"authentication",remove:"remove",task:"task"};!function(e){var t,a,n,o=function(){this.enabled=!0};e.MenuItem=o,function(e){e.dropDown="dropDown",e.popOver="popOver"}(e.MenuListType||(e.MenuListType={})),r.navBarMenuItemPress=function(e){t&&t(e)||(j(),A(c,"handleNavBarMenuItemPress",[e]))},r.actionMenuItemPress=function(e){a&&a(e)||(j(),A(c,"handleActionMenuItemPress",[e]))},r.setModuleView=function(e){n&&n(e)||(j(),A(c,"viewConfigItemPress",[e]))},e.setUpViews=function(e,t){j(),n=t,A(c,"setUpViews",[e])},e.setNavBarMenu=function(e,a){j(),t=a,A(c,"setNavBarMenu",[e])},e.showActionMenu=function(e,t){j(),a=t,A(c,"showActionMenu",[e])}}(t.menus||(t.menus={}));var l,c,f,u,d,p,v,h,b,m,g,_,y,T=!1,w=!1,S=[],k=[],C=0,x={},I=!1;function P(){window.print()}function R(e){j(),h=e,e&&A(c,"registerHandler",["themeChange"])}function E(e){j(),b=e,e&&A(c,"registerHandler",["fullScreen"])}function B(e){j(),m=e,e&&A(c,"registerHandler",["backButton"])}function L(){j();var e=A(c,"navigateBack",[]);x[e]=function(e){if(!e)throw new Error("Back navigation is not supported in the current client or context.")}}function O(e){j(),g=e,e&&A(c,"registerHandler",["beforeUnload"])}function j(){for(var e=[],t=0;t<arguments.length;t++)e[t]=arguments[t];if(!T)throw new Error("The library has not yet been initialized");if(p&&e&&e.length>0){for(var a=!1,n=0;n<e.length;n++)if(e[n]===p){a=!0;break}if(!a)throw new Error("This call is not allowed in the '"+p+"' context")}}function H(e){if(e&&e.data&&"object"==typeof e.data){var t=e.source||e.originalEvent.source,a=e.origin||e.originalEvent.origin;t===l||a!==l.location.origin&&!i.test(a.toLowerCase())||(function(e,t){c&&e!==c?u&&e!==u||(u=e,d=t):(c=e,f=t),c&&c.closed&&(c=null,f=null),u&&u.closed&&(u=null,d=null),F(c),F(u)}(t,a),t===c?M(e):t===u&&function(e){if("id"in e.data&&"func"in e.data){var t=e.data,a=r[t.func];if(a){var n=a.apply(this,t.args);n&&z(u,t.id,Array.isArray(n)?n:[n])}else{var o=A(c,t.func,t.args);x[o]=function(){for(var e=[],a=0;a<arguments.length;a++)e[a]=arguments[a];u&&z(u,t.id,e)}}}}(e))}}function M(e){if("id"in e.data){var t=e.data,a=x[t.id];a&&(a.apply(null,t.args),delete x[t.id])}else if("func"in e.data){t=e.data;var n=r[t.func];n&&n.apply(this,t.args)}}function U(e){return e===c?S:e===u?k:[]}function q(e){return e===c?f:e===u?d:null}function F(e){for(var t=q(e),a=U(e);e&&t&&a.length>0;)e.postMessage(a.shift(),t)}function N(e,t){var a=l.setInterval(function(){0===U(e).length&&(clearInterval(a),t())},100)}function A(e,t,a){var n=function(e,t){return{id:C++,func:e,args:t||[]}}(t,a);if(w)l&&l.nativeInterface&&l.nativeInterface.framelessPostMessage(JSON.stringify(n));else{var o=q(e);e&&o?e.postMessage(n,o):U(e).push(n)}return n.id}function z(e,t,a){var n=function(e,t){return{id:e,args:t||[]}}(t,a),o=q(e);e&&o&&e.postMessage(n,o)}r.themeChange=function(e){h&&h(e),u&&A(u,"themeChange",[e])},r.fullScreenChange=function(e){b&&b(e)},r.backButtonPress=function(){m&&m()||L()},r.beforeUnload=function(){var e=function(){A(c,"readyToUnload",[])};g&&g(e)||e()},r.changeSettings=function(){_&&_()},t.initialize=function(e){if(void 0===e&&(e=window),!T){T=!0;var t=function(e){return H(e)};(c=(l=e).parent!==l.self?l.parent:l.opener)?l.addEventListener("message",t,!1):(w=!0,window.onNativeMessage=M);try{f="*";var a=A(c,"initialize",["1.4.2"]);x[a]=function(e,t){p=e,v=t}}finally{f=null}this._uninitialize=function(){p&&(R(null),E(null),B(null),O(null)),p===s.settings&&y.registerOnSaveHandler(null),p===s.remove&&y.registerOnRemoveHandler(null),w||l.removeEventListener("message",t,!1),T=!1,c=null,f=null,S=[],u=null,d=null,k=[],C=0,x={},p=null,v=null,w=!1}}},t._uninitialize=function(){},t.enablePrintCapability=function(){I||(I=!0,j(),document.addEventListener("keydown",function(e){(e.ctrlKey||e.metaKey)&&80===e.keyCode&&(P(),e.cancelBubble=!0,e.preventDefault(),e.stopImmediatePropagation())}))},t.print=P,t.getContext=function(e){j();var t=A(c,"getContext");x[t]=e},t.registerOnThemeChangeHandler=R,t.registerFullScreenHandler=E,t.registerBackButtonHandler=B,t.navigateBack=L,t.registerBeforeUnloadHandler=O,t.registerChangeSettingsHandler=function(e){j(s.content),_=e,e&&A(c,"registerHandler",["changeSettings"])},t.navigateCrossDomain=function(e){j(s.content,s.settings,s.remove,s.task);var t=A(c,"navigateCrossDomain",[e]);x[t]=function(e){if(!e)throw new Error("Cross-origin navigation is only supported for URLs matching the pattern registered in the manifest.")}},t.getTabInstances=function(e,t){j();var a=A(c,"getTabInstances",[t]);x[a]=e},t.getUserJoinedTeams=function(e,t){j();var a=A(c,"getUserJoinedTeams",[t]);x[a]=e},t.getMruTabInstances=function(e,t){j();var a=A(c,"getMruTabInstances",[t]);x[a]=e},t.shareDeepLink=function(e){j(s.content),A(c,"shareDeepLink",[e.subEntityId,e.subEntityLabel,e.subEntityWebUrl])},t.openFilePreview=function(e){j(s.content);var t=[e.entityId,e.title,e.description,e.type,e.objectUrl,e.downloadUrl,e.webPreviewUrl,e.webEditUrl,e.baseUrl,e.editFile,e.subEntityId];A(c,"openFilePreview",t)},t.showNotification=function(e){j(s.content);var t=[e.message,e.notificationType];A(c,"showNotification",t)},t.executeDeepLink=function(e){j(s.content);var t=A(c,"executeDeepLink",[e]);x[t]=function(e,t){if(!e)throw new Error(t)}},t.uploadCustomApp=function(e){j();var t=A(c,"uploadCustomApp",[e]);x[t]=function(e,t){if(!e)throw new Error(t)}},t.navigateToTab=function(e){j();var t=A(c,"navigateToTab",[e]);x[t]=function(e){if(!e)throw new Error("Invalid internalTabInstanceId and/or channelId were/was provided")}},function(e){var t,a;r["settings.save"]=function(e){var a=new n(e);t?t(a):a.notifySuccess()},r["settings.remove"]=function(){var e=new o;a?a(e):e.notifySuccess()},e.setValidityState=function(e){j(s.settings,s.remove),A(c,"settings.setValidityState",[e])},e.getSettings=function(e){j(s.content,s.settings,s.remove);var t=A(c,"settings.getSettings");x[t]=e},e.setSettings=function(e){j(s.content,s.settings);var t=A(c,"settings.setSettings",[e]);x[t]=function(e,t){if(!e)throw new Error(t)}},e.registerOnSaveHandler=function(e){j(s.settings),t=e,e&&A(c,"registerHandler",["save"])},e.registerOnRemoveHandler=function(e){j(s.remove),a=e,e&&A(c,"registerHandler",["remove"])};var n=function(){function e(e){this.notified=!1,this.result=e||{}}return e.prototype.notifySuccess=function(){this.ensureNotNotified(),A(c,"settings.save.success"),this.notified=!0},e.prototype.notifyFailure=function(e){this.ensureNotNotified(),A(c,"settings.save.failure",[e]),this.notified=!0},e.prototype.ensureNotNotified=function(){if(this.notified)throw new Error("The SaveEvent may only notify success or failure once.")},e}(),o=function(){function e(){this.notified=!1}return e.prototype.notifySuccess=function(){this.ensureNotNotified(),A(c,"settings.remove.success"),this.notified=!0},e.prototype.notifyFailure=function(e){this.ensureNotNotified(),A(c,"settings.remove.failure",[e]),this.notified=!0},e.prototype.ensureNotNotified=function(){if(this.notified)throw new Error("The removeEvent may only notify success or failure once.")},e}()}(y=t.settings||(t.settings={})),function(e){var t,a;function n(){i();try{u&&u.close()}finally{u=null,d=null}}function o(e){t=e,n();var a=t.width||600,o=t.height||400;a=Math.min(a,l.outerWidth-400),o=Math.min(o,l.outerHeight-200);var i=document.createElement("a");i.href=t.url;var r=void 0!==l.screenLeft?l.screenLeft:l.screenX,s=void 0!==l.screenTop?l.screenTop:l.screenY;r+=l.outerWidth/2-a/2,s+=l.outerHeight/2-o/2,(u=l.open(i.href,"_blank","toolbar=no, location=yes, status=no, menubar=no, scrollbars=yes, top="+s+", left="+r+", width="+a+", height="+o))?f():p("FailedToOpenWindow")}function i(){a&&(clearInterval(a),a=0),delete r.initialize,delete r.navigateCrossDomain}function f(){i(),a=l.setInterval(function(){if(!u||u.closed)p("CancelledByUser");else{var e=d;try{d="*",A(u,"ping")}finally{d=e}}},100),r.initialize=function(){return[s.authentication,v]},r.navigateCrossDomain=function(e){return!1}}function p(e){try{t&&t.failureCallback&&t.failureCallback(e)}finally{t=null,n()}}function h(e,t,a){if(e){var n=document.createElement("a");n.href=decodeURIComponent(e),n.host&&n.host!==window.location.host&&"outlook.office.com"===n.host&&n.search.indexOf("client_type=Win32_Outlook")>-1&&(t&&"result"===t&&(a&&(n.href=b(n.href,"result",a)),l.location.assign(b(n.href,"authSuccess",""))),t&&"reason"===t&&(a&&(n.href=b(n.href,"reason",a)),l.location.assign(b(n.href,"authFailure",""))))}}function b(e,t,a){var n=e.indexOf("#"),o=-1===n?"#":e.substr(n);return o=o+"&"+t+(""!==a?"="+a:""),(e=-1===n?e:e.substr(0,n))+o}r["authentication.authenticate.success"]=function(e){try{t&&t.successCallback&&t.successCallback(e)}finally{t=null,n()}},r["authentication.authenticate.failure"]=p,e.registerAuthenticationHandlers=function(e){t=e},e.authenticate=function(e){var a=void 0!==e?e:t;if(j(s.content,s.settings,s.remove,s.task),"desktop"===v||"android"===v||"ios"===v){var n=document.createElement("a");n.href=a.url;var i=A(c,"authentication.authenticate",[n.href,a.width,a.height]);x[i]=function(e,t){e?a.successCallback(t):a.failureCallback(t)}}else o(a)},e.getAuthToken=function(e){j();var t=A(c,"authentication.getAuthToken",[e.resources]);x[t]=function(t,a){t?e.successCallback(a):e.failureCallback(a)}},e.getUser=function(e){j();var t=A(c,"authentication.getUser");x[t]=function(t,a){t?e.successCallback(a):e.failureCallback(a)}},e.notifySuccess=function(e,t){h(t,"result",e),j(s.authentication),A(c,"authentication.authenticate.success",[e]),N(c,function(){return setTimeout(function(){return l.close()},200)})},e.notifyFailure=function(e,t){h(t,"reason",e),j(s.authentication),A(c,"authentication.authenticate.failure",[e]),N(c,function(){return setTimeout(function(){return l.close()},200)})}}(t.authentication||(t.authentication={})),t.sendCustomMessage=function(e,t){return j(),A(c,e,t)},function(e){e.startTask=function(e,t){j(s.content);var a=A(c,"tasks.startTask",[e]);x[a]=t},e.updateTask=function(e){j(s.content,s.task),e.width,e.height;var t=n(e,["width","height"]);if(Object.keys(t).length)throw new Error("updateTask requires a taskInfo argument containing only width and height");A(c,"tasks.updateTask",[e])},e.submitTask=function(e,t){j(s.content,s.task),A(c,"tasks.completeTask",[e,Array.isArray(t)?t:[t]])}}(t.tasks||(t.tasks={})),t.getChatMembers=function(e){j();var t=A(c,"getChatMembers");x[t]=e}}])},function(e,a){e.exports=t},function(e,t){e.exports=a},,function(e,t){e.exports=n},function(e,t){e.exports=function(e){var t=[];return t.toString=function(){return this.map(function(t){var a=function(e,t){var a=e[1]||"",n=e[3];if(!n)return a;if(t&&"function"==typeof btoa){var o=(r=n,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(r))))+" */"),i=n.sources.map(function(e){return"/*# sourceURL="+n.sourceRoot+e+" */"});return[a].concat(i).concat([o]).join("\n")}var r;return[a].join("\n")}(t,e);return t[2]?"@media "+t[2]+"{"+a+"}":a}).join("")},t.i=function(e,a){"string"==typeof e&&(e=[[null,e,""]]);for(var n={},o=0;o<this.length;o++){var i=this[o][0];"number"==typeof i&&(n[i]=!0)}for(o=0;o<e.length;o++){var r=e[o];"number"==typeof r[0]&&n[r[0]]||(a&&!r[2]?r[2]=a:a&&(r[2]="("+r[2]+") and ("+a+")"),t.push(r))}},t}},function(e,t,a){"use strict";(function(e){var a,n=this&&this.__assign||function(){return(n=Object.assign||function(e){for(var t,a=1,n=arguments.length;a<n;a++)for(var o in t=arguments[a])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)};Object.defineProperty(t,"__esModule",{value:!0});var o="undefined"==typeof window?e:window,i=o&&o.CSPSettings&&o.CSPSettings.nonce,r=function(){var e=o.__themeState__||{theme:void 0,lastStyleElement:void 0,registeredStyles:[]};e.runState||(e=n({},e,{perf:{count:0,duration:0},runState:{flushTimer:0,mode:0,buffer:[]}}));e.registeredThemableStyles||(e=n({},e,{registeredThemableStyles:[]}));return o.__themeState__=e,e}(),s=/[\'\"]\[theme:\s*(\w+)\s*(?:\,\s*default:\s*([\\"\']?[\.\,\(\)\#\-\s\w]*[\.\,\(\)\#\-\w][\"\']?))?\s*\][\'\"]/g,l=1e4,c=function(){return"undefined"!=typeof performance&&performance.now?performance.now():Date.now()};function f(e){var t=c();e();var a=c();r.perf.duration+=a-t}function u(){f(function(){var e=r.runState.buffer.slice();r.runState.buffer=[];var t=[].concat.apply([],e);t.length>0&&d(t)})}function d(e,t){r.loadStyles?r.loadStyles(b(e).styleString,e):a?function(e,t){if("undefined"==typeof document)return;var a=document.getElementsByTagName("head")[0],n=r.registeredStyles,o=r.lastStyleElement,i=o?o.styleSheet:void 0,s=i?i.cssText:"",c=n[n.length-1],f=b(e).styleString;(!o||s.length+f.length>l)&&((o=document.createElement("style")).type="text/css",t?(a.replaceChild(o,t.styleElement),t.styleElement=o):a.appendChild(o),t||(c={styleElement:o,themableStyle:e},n.push(c)));o.styleSheet.cssText+=h(f),Array.prototype.push.apply(c.themableStyle,e),r.lastStyleElement=o}(e,t):function(e){if("undefined"==typeof document)return;var t=document.getElementsByTagName("head")[0],a=document.createElement("style"),n=b(e),o=n.styleString,s=n.themable;a.type="text/css",i&&a.setAttribute("nonce",i);a.appendChild(document.createTextNode(o)),r.perf.count++,t.appendChild(a);var l={styleElement:a,themableStyle:e};s?r.registeredThemableStyles.push(l):r.registeredStyles.push(l)}(e)}function p(e){void 0===e&&(e=3),3!==e&&2!==e||(v(r.registeredStyles),r.registeredStyles=[]),3!==e&&1!==e||(v(r.registeredThemableStyles),r.registeredThemableStyles=[])}function v(e){e.forEach(function(e){var t=e&&e.styleElement;t&&t.parentElement&&t.parentElement.removeChild(t)})}function h(e){return e&&(e=b(m(e)).styleString),e}function b(e){var t=r.theme,a=!1;return{styleString:(e||[]).map(function(e){var n=e.theme;if(n){a=!0;var o=t?t[n]:void 0,i=e.defaultValue||"inherit";return t&&!o&&console,o||i}return e.rawString}).join(""),themable:a}}function m(e){var t=[];if(e){for(var a=0,n=void 0;n=s.exec(e);){var o=n.index;o>a&&t.push({rawString:e.substring(a,o)}),t.push({theme:n[1],defaultValue:n[2]}),a=s.lastIndex}t.push({rawString:e.substring(a)})}return t}t.loadStyles=function(e,t){void 0===t&&(t=!1),f(function(){var n=Array.isArray(e)?e:m(e);void 0===a&&(a=function(){var e=!1;if("undefined"!=typeof document){var t=document.createElement("style");t.type="text/css",e=!!t.styleSheet}return e}());var o=r.runState,i=o.mode,s=o.buffer,l=o.flushTimer;t||1===i?(s.push(n),l||(r.runState.flushTimer=setTimeout(function(){r.runState.flushTimer=0,u()},0))):d(n)})},t.configureLoadStyles=function(e){r.loadStyles=e},t.configureRunMode=function(e){r.runState.mode=e},t.flush=u,t.loadTheme=function(e){r.theme=e,function(){if(r.theme){for(var e=[],t=0,a=r.registeredThemableStyles;t<a.length;t++){var n=a[t];e.push(n.themableStyle)}e.length>0&&(p(1),d([].concat.apply([],e)))}}()},t.clearStyles=p,t.detokenize=h,t.splitStyles=m}).call(this,a(8))},function(e,t){var a;a=function(){return this}();try{a=a||new Function("return this")()}catch(e){"object"==typeof window&&(a=window)}e.exports=a},,,,function(e,t){e.exports=o},function(e,t){e.exports=function(e){return"string"!=typeof e?e:(/^['"].*['"]$/.test(e)&&(e=e.slice(1,-1)),/["'() \t\n]/.test(e)?'"'+e.replace(/"/g,'\\"').replace(/\n/g,"\\n")+'"':e)}},,,,,,,,,function(e,t,a){var n=a(23),o=a(7);"string"==typeof n&&(n=[[e.i,n]]);for(var i=0;i<n.length;i++)o.loadStyles(n[i][1],!0);n.locals&&(e.exports=n.locals)},function(e,t,a){var n=a(13);(e.exports=a(6)(!1)).push([e.i,"@font-face{font-family:Teams Assets;src:url("+n(a(24))+');font-style:normal}@media (max-width:768px){.toolTab_a0f05e5a .grid1_a0f05e5a,.toolTab_a0f05e5a .grid2_a0f05e5a,.toolTab_a0f05e5a .heading_a0f05e5a{display:none!important}}.toolTab_a0f05e5a .row_a0f05e5a{margin:0 -8px;-webkit-box-sizing:border-box;box-sizing:border-box;padding:5px}.toolTab_a0f05e5a .row_a0f05e5a:after,.toolTab_a0f05e5a .row_a0f05e5a:before{display:table;content:"";line-height:0}.toolTab_a0f05e5a .row_a0f05e5a:after{clear:both}.toolTab_a0f05e5a .column_a0f05e5a{position:relative;min-height:1px;padding-left:8px;padding-right:8px;-webkit-box-sizing:border-box;box-sizing:border-box}[dir=ltr] .toolTab_a0f05e5a .column_a0f05e5a{float:left}[dir=rtl] .toolTab_a0f05e5a .column_a0f05e5a{float:right}.toolTab_a0f05e5a .column_a0f05e5a .ms-Grid_a0f05e5a{padding:0}@media (min-width:640px){.toolTab_a0f05e5a .column_a0f05e5a{width:100%}}@media (min-width:1024px){[dir=ltr] .toolTab_a0f05e5a .column_a0f05e5a{left:16.66667%}[dir=rtl] .toolTab_a0f05e5a .column_a0f05e5a{right:16.66667%}}@media (min-width:640px){[dir=ltr] .toolTab_a0f05e5a .column_a0f05e5a{left:8.33333%}[dir=rtl] .toolTab_a0f05e5a .column_a0f05e5a{right:8.33333%}}.toolTab_a0f05e5a .HR_a0f05e5a,.toolTab_a0f05e5a .IF_a0f05e5a,.toolTab_a0f05e5a .PB_a0f05e5a,.toolTab_a0f05e5a .RO_a0f05e5a{font-size:16px;font-family:Segoe UI;cursor:pointer;margin:1% 0;margin-top:24px;margin-bottom:-5px;font-size:14px;font-weight:700;color:#333}.toolTab_a0f05e5a .P10_a0f05e5a{padding-top:10px}.toolTab_a0f05e5a .shadowsm_a0f05e5a{-webkit-box-shadow:0 .125rem .25rem rgba(0,0,0,.075)!important;box-shadow:0 .125rem .25rem rgba(0,0,0,.075)!important}.toolTab_a0f05e5a .card_a0f05e5a{position:relative;display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem;width:22%;height:20%;display:inline-block;margin-right:15px;cursor:pointer;font-family:Segoe UI;font-size:16px}.toolTab_a0f05e5a .cbody_a0f05e5a{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}.toolTab_a0f05e5a .CBL_a0f05e5a,.toolTab_a0f05e5a .CFT_a0f05e5a,.toolTab_a0f05e5a .CSA_a0f05e5a,.toolTab_a0f05e5a .CT_a0f05e5a,.toolTab_a0f05e5a .DP_a0f05e5a,.toolTab_a0f05e5a .EISR_a0f05e5a,.toolTab_a0f05e5a .GWR_a0f05e5a,.toolTab_a0f05e5a .IR_a0f05e5a,.toolTab_a0f05e5a .RIST_a0f05e5a,.toolTab_a0f05e5a .RL_a0f05e5a,.toolTab_a0f05e5a .SBC_a0f05e5a,.toolTab_a0f05e5a .SI_a0f05e5a,.toolTab_a0f05e5a .timesheet_a0f05e5a,.toolTab_a0f05e5a .VBP_a0f05e5a,.toolTab_a0f05e5a .VP_a0f05e5a{font-weight:600;padding-top:6px;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.toolTab_a0f05e5a .BCdes_a0f05e5a,.toolTab_a0f05e5a .CBLdes_a0f05e5a,.toolTab_a0f05e5a .CSAdes_a0f05e5a,.toolTab_a0f05e5a .CTdes_a0f05e5a,.toolTab_a0f05e5a .FTdes_a0f05e5a,.toolTab_a0f05e5a .GRdes_a0f05e5a,.toolTab_a0f05e5a .IRdes_a0f05e5a,.toolTab_a0f05e5a .ISRdes_a0f05e5a,.toolTab_a0f05e5a .ISTdes_a0f05e5a,.toolTab_a0f05e5a .Pdes_a0f05e5a,.toolTab_a0f05e5a .RLdes_a0f05e5a,.toolTab_a0f05e5a .SIdes_a0f05e5a,.toolTab_a0f05e5a .timesheetdes_a0f05e5a,.toolTab_a0f05e5a .VPdes_a0f05e5a{padding-top:6px;color:#adacac;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;font-size:14px;width:auto}.toolTab_a0f05e5a .cafeservice_a0f05e5a,.toolTab_a0f05e5a .createfinancetkt_a0f05e5a,.toolTab_a0f05e5a .createicon_a0f05e5a,.toolTab_a0f05e5a .downloadpayslip_a0f05e5a,.toolTab_a0f05e5a .eventsupport_a0f05e5a,.toolTab_a0f05e5a .Inventory_a0f05e5a,.toolTab_a0f05e5a .leaverequest_a0f05e5a,.toolTab_a0f05e5a .policies_a0f05e5a,.toolTab_a0f05e5a .RoSI_a0f05e5a,.toolTab_a0f05e5a .ROtimesheet_a0f05e5a,.toolTab_a0f05e5a .submitbenefits_a0f05e5a,.toolTab_a0f05e5a .support_a0f05e5a,.toolTab_a0f05e5a .ticketcreation_a0f05e5a,.toolTab_a0f05e5a .viewbenefits_a0f05e5a,.toolTab_a0f05e5a .wiferequest_a0f05e5a{font-family:Teams Assets;font-size:22px}.toolTab_a0f05e5a .createicon_a0f05e5a:before{content:"\\E328"}.toolTab_a0f05e5a .ticketcreation_a0f05e5a:before{content:"\\E13F"}.toolTab_a0f05e5a .leaverequest_a0f05e5a:before{content:"\\E503"}.toolTab_a0f05e5a .policies_a0f05e5a:before{content:"\\E451"}.toolTab_a0f05e5a .downloadpayslip_a0f05e5a:before{content:"\\E459"}.toolTab_a0f05e5a .createfinancetkt_a0f05e5a:before{content:"\\E13F"}.toolTab_a0f05e5a .submitbenefits_a0f05e5a:before{content:"\\E971"}.toolTab_a0f05e5a .viewbenefits_a0f05e5a:before{content:"\\E451"}.toolTab_a0f05e5a .support_a0f05e5a:before{content:"\\E21A"}.toolTab_a0f05e5a .wiferequest_a0f05e5a:before{content:"\\E200"}.toolTab_a0f05e5a .eventsupport_a0f05e5a:before{content:"\\E917"}.toolTab_a0f05e5a .cafeservice_a0f05e5a:before{content:"\\E984"}.toolTab_a0f05e5a .Inventory_a0f05e5a:before{content:"\\E203"}.toolTab_a0f05e5a .ROtimesheet_a0f05e5a:before{content:"\\E501"}.toolTab_a0f05e5a .RoSI_a0f05e5a:before{content:"\\E137"}@media (max-width:1024px){.toolTab_a0f05e5a .card_a0f05e5a{width:46%;margin-bottom:20px}}@media (max-width:425px){.toolTab_a0f05e5a .card_a0f05e5a{width:100%;margin-bottom:20px}}',""])},function(e,t,a){e.exports=a.p+"teamsassets-light_389749df8cb26cb2b47f600f822c65f0.woff"},function(e,t){e.exports=i},,,,function(e,t,a){"use strict";a.r(t);var n=a(5),o=a(2);a(22);var i,r={toolTab:"toolTab_a0f05e5a",grid1:"grid1_a0f05e5a",heading:"heading_a0f05e5a",grid2:"grid2_a0f05e5a",row:"row_a0f05e5a",column:"column_a0f05e5a","ms-Grid":"ms-Grid_a0f05e5a",HR:"HR_a0f05e5a",PB:"PB_a0f05e5a",RO:"RO_a0f05e5a",IF:"IF_a0f05e5a",P10:"P10_a0f05e5a",shadowsm:"shadowsm_a0f05e5a",card:"card_a0f05e5a",cbody:"cbody_a0f05e5a",CBL:"CBL_a0f05e5a",CT:"CT_a0f05e5a",RL:"RL_a0f05e5a",VP:"VP_a0f05e5a",DP:"DP_a0f05e5a",CFT:"CFT_a0f05e5a",SBC:"SBC_a0f05e5a",VBP:"VBP_a0f05e5a",RIST:"RIST_a0f05e5a",GWR:"GWR_a0f05e5a",EISR:"EISR_a0f05e5a",CSA:"CSA_a0f05e5a",IR:"IR_a0f05e5a",timesheet:"timesheet_a0f05e5a",SI:"SI_a0f05e5a",CBLdes:"CBLdes_a0f05e5a",CTdes:"CTdes_a0f05e5a",RLdes:"RLdes_a0f05e5a",VPdes:"VPdes_a0f05e5a",Pdes:"Pdes_a0f05e5a",FTdes:"FTdes_a0f05e5a",BCdes:"BCdes_a0f05e5a",ISTdes:"ISTdes_a0f05e5a",GRdes:"GRdes_a0f05e5a",ISRdes:"ISRdes_a0f05e5a",CSAdes:"CSAdes_a0f05e5a",IRdes:"IRdes_a0f05e5a",timesheetdes:"timesheetdes_a0f05e5a",SIdes:"SIdes_a0f05e5a",createicon:"createicon_a0f05e5a",ticketcreation:"ticketcreation_a0f05e5a",leaverequest:"leaverequest_a0f05e5a",policies:"policies_a0f05e5a",downloadpayslip:"downloadpayslip_a0f05e5a",createfinancetkt:"createfinancetkt_a0f05e5a",submitbenefits:"submitbenefits_a0f05e5a",viewbenefits:"viewbenefits_a0f05e5a",support:"support_a0f05e5a",wiferequest:"wiferequest_a0f05e5a",eventsupport:"eventsupport_a0f05e5a",cafeservice:"cafeservice_a0f05e5a",Inventory:"Inventory_a0f05e5a",ROtimesheet:"ROtimesheet_a0f05e5a",RoSI:"RoSI_a0f05e5a"},s=a(1),l=a(12),c=a(3),f=(a(0),i=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var a in t)t.hasOwnProperty(a)&&(e[a]=t[a])},function(e,t){function a(){this.constructor=e}i(e,t),e.prototype=null===t?Object.create(t):(a.prototype=t.prototype,new a)});a(25);var u=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return f(t,e),t.prototype.render=function(){c.SPComponentLoader.loadCss("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),this.domElement.innerHTML='\n      <div class="'+r.toolTab+'" id="accordion">\n        <div class="'+r.row+'">\n          <div class="col-12" >\n            <div class="'+r.HR+' ar accordion-toggle"\n                    data-toggle="collapse"\n                    data-parent="#accordion"\n                    data-target="#HRtools" aria-expanded="false"\n                    >Human Resources\n                  </div>\n                    <div class="'+r.P10+' panel-collapse" id="HRtools">\n                      <div class="'+r.card+" "+r.shadowsm+'">\n                        <div class='+r.cbody+'>\n                          <span\n                            alt-name="create letter"\n                            class='+r.createicon+'\n                          ></span>\n                          <div class="'+r.CBL+'">Create business letter</div>\n                          <p class="'+r.CBLdes+'">\n                            Create a business letter within a predesigned color and\n                            template.\n                          </p>\n                        </div>\n                        </div>\n\n                        <div class="'+r.card+" "+r.shadowsm+'">\n                          <div class='+r.cbody+' id="createTicket">\n                            <span\n                              alt-name="create letter"\n                              class='+r.ticketcreation+'\n                            ></span>\n                            <div class="'+r.CBL+'">Create ticket</div>\n                            <p class="'+r.CBLdes+'">\n                            For all HR tickets, the ticket type is being set as Employee Support.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class="'+r.card+" "+r.shadowsm+'">\n                          <div class='+r.cbody+'>\n                            <span\n                              alt-name="create letter"\n                              class='+r.leaverequest+'\n                            ></span>\n                            <div class="'+r.CBL+'">Request leave</div>\n                            <p class="'+r.CBLdes+'">\n                            Request leave and check your status in the Leave application.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class="'+r.card+" "+r.shadowsm+'">\n                          <div class='+r.cbody+'>\n                            <span\n                              alt-name="create letter"\n                              class='+r.policies+'\n                            ></span>\n                            <div class="'+r.CBL+'">View policies</div>\n                            <p class="'+r.CBLdes+'">\n                            Identify the purpose and objectives of HR department.\n                            </p>\n                          </div>\n                          </div>\n                  </div>\n\n                    <div class="'+r.HR+' ar accordion-toggle"\n                    data-toggle="collapse"\n                    data-parent="#accordion"\n                    data-target="#Pay-benefits" aria-expanded="false"\n                    >Pay and benefits\n                  </div>\n\n                    <div class="'+r.P10+' panel-collapse" id="Pay-benefits">\n                      <div class="'+r.card+" "+r.shadowsm+'">\n                        <div class='+r.cbody+'>\n                          <span\n                            alt-name="create letter"\n                            class='+r.downloadpayslip+'\n                          ></span>\n                          <div class="'+r.CBL+'">Download payslip</div>\n                          <p class="'+r.CBLdes+'">\n                          View online pay slips and full payment histories.\n                          </p>\n                        </div>\n                        </div>\n\n                        <div class="'+r.card+" "+r.shadowsm+'">\n                          <div class='+r.cbody+'>\n                            <span\n                              alt-name="create letter"\n                              class='+r.createfinancetkt+'\n                            ></span>\n                            <div class="'+r.CBL+'">Create finance ticket</div>\n                            <p class="'+r.CBLdes+'">\n                            Open a support ticket with the Finance and Operations support.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class="'+r.card+" "+r.shadowsm+'">\n                          <div class='+r.cbody+'>\n                            <span\n                              alt-name="create letter"\n                              class='+r.submitbenefits+'\n                            ></span>\n                            <div class="'+r.CBL+'">Submit benefits claim</div>\n                            <p class="'+r.CBLdes+'">\n                            Submit a claim from your account to start the process.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class="'+r.card+" "+r.shadowsm+'">\n                          <div class='+r.cbody+'>\n                            <span\n                              alt-name="create letter"\n                              class='+r.viewbenefits+'\n                            ></span>\n                            <div class="'+r.CBL+'">View benefits policies</div>\n                            <p class="'+r.CBLdes+'">\n                            Read common queries about servicing your policy.\n                            </p>\n                          </div>\n                          </div>\n                    </div>\n\n\n                        <div class="'+r.HR+' ar accordion-toggle"\n                        data-toggle="collapse"\n                        data-parent="#accordion"\n                        data-target="#itandfacilities" aria-expanded="false"\n                        >IT and facilities\n                      </div>\n                        <div class="'+r.P10+' panel-collapse" id="itandfacilities">\n                          <div class="'+r.card+" "+r.shadowsm+'">\n                            <div class='+r.cbody+'>\n                              <span\n                                alt-name="create letter"\n                                class='+r.support+'\n                              ></span>\n                              <div class="'+r.CBL+'">Raise IT Support Ticket</div>\n                              <p class="'+r.CBLdes+'">\n                              Submit your support case to review and respond.\n                              </p>\n                            </div>\n                            </div>\n\n                            <div class="'+r.card+" "+r.shadowsm+'">\n                              <div class='+r.cbody+' id="visitorRequest">\n                                <span\n                                  alt-name="create letter"\n                                  class='+r.wiferequest+'\n                                ></span>\n                                <div class="'+r.CBL+'">Submit Visitor Request</div>\n                                <p class="'+r.CBLdes+'">\n                                Fill a request form for short-term visitors.\n                                </p>\n                              </div>\n                              </div>\n\n                              <div class="'+r.card+" "+r.shadowsm+'">\n                              <div class='+r.cbody+'>\n                                <span\n                                  alt-name="create letter"\n                                  class='+r.eventsupport+'\n                                ></span>\n                                <div class="'+r.CBL+'">Event IT Support request</div>\n                                <p class="'+r.CBLdes+'">\n                                Fill out this form to request any equiepment for events.\n                                </p>\n                              </div>\n                              </div>\n\n                              <div class="'+r.card+" "+r.shadowsm+'">\n                              <div class='+r.cbody+'>\n                                <span\n                                  alt-name="create letter"\n                                  class='+r.cafeservice+'\n                                ></span>\n                                <div class="'+r.CBL+'">Cafeteria service app</div>\n                                <p class="'+r.CBLdes+'">\n                                Emloyee can order and pay here without waiting in long queue. </p>\n                              </div>\n                              </div>\n                      </div>\n\n                    <div class="'+r.HR+' ar accordion-toggle"\n                                data-toggle="collapse"\n                                data-parent="#accordion"\n                                data-target="#retail-operations" aria-expanded="false"\n                                >Retail operations\n                              </div>\n                              <div class="'+r.P10+' panel-collapse" id="retail-operations">\n                                <div class="'+r.card+" "+r.shadowsm+'">\n                                  <div class='+r.cbody+'>\n                                    <span\n                                      alt-name="create letter"\n                                      class='+r.Inventory+'\n                                    ></span>\n                                    <div class="'+r.CBL+'">Inventory request</div>\n                                    <p class="'+r.CBLdes+'">\n                                    Inventory form to request supplies.\n                                    </p>\n                                  </div>\n                                  </div>\n\n                                  <div class="'+r.card+" "+r.shadowsm+'">\n                                    <div class='+r.cbody+'>\n                                      <span\n                                        alt-name="create letter"\n                                        class='+r.ROtimesheet+'\n                                      ></span>\n                                      <div class="'+r.CBL+'">Timesheet</div>\n                                      <p class="'+r.CBLdes+'">\n                                      Weekly Timesheet setup.\n                                        </p>\n                                    </div>\n                                    </div>\n\n                                    <div class="'+r.card+" "+r.shadowsm+'">\n                                    <div class='+r.cbody+'>\n                                      <span\n                                        alt-name="create letter"\n                                        class='+r.RoSI+'\n                                      ></span>\n                                      <div class="'+r.CBL+'">Store info</div>\n                                      <p class="'+r.CBLdes+'">\n                                      Your store information.\n                                      </p>\n                                    </div>\n                                    </div>\n                                    </div>\n\n              </div>\n          </div>\n          </div>\n      </div>',this._setButtonEventHandlers()},t.prototype._setButtonEventHandlers=function(){var e=this;this.domElement.querySelector("#createTicket").addEventListener("click",function(){e.createTicket()}),this.domElement.querySelector("#visitorRequest").addEventListener("click",function(){e.visitorRequest()})},t.prototype.createTicket=function(){s.initialize();var e={title:null,height:null,width:null,url:null,card:null,fallbackUrl:null,completionBotId:null};e.url="https://employeeconnect-9566.azurewebsites.net/createticket",e.title="Create Ticket",e.height=510,e.width=430,e.fallbackUrl=e.url,s.tasks.startTask(e,this.submitHandler)},t.prototype.visitorRequest=function(){s.initialize();var e={title:null,height:null,width:null,url:null,card:null,fallbackUrl:null,completionBotId:null};e.url="https://employeeconnect-9566.azurewebsites.net/visitorregistration",e.title="Visitor Request",e.height=510,e.width=430,e.fallbackUrl=e.url,s.tasks.startTask(e,this.submitHandler)},t.prototype.submitHandler=function(e,t){var a;"ticketcomplete"==t.action&&((a={height:null,width:null,url:null,fallbackUrl:null}).url="https://employeeconnect-9566.azurewebsites.net/ticketcomplete?ticketNoId="+t.ticketNo+"&description="+t.TDescription+"&category="+t.TCategory+"&priority="+t.TPriority,a.height=510,a.width=430,a.fallbackUrl=a.url,s.tasks.startTask(a));"createTicket"==t.action&&((a={height:null,width:null,url:null,fallbackUrl:null}).url="https://employeeconnect-9566.azurewebsites.net/createticket",a.height="medium",a.width="medium",a.fallbackUrl=a.url,s.tasks.startTask(a,this.submitHandler));"sendrequest"==t.action&&((a={height:null,width:null,url:null,fallbackUrl:null}).url="https://employeeconnect-9566.azurewebsites.net/sendrequest?="+t.vDate+"&Time="+t.vTime,a.height="medium",a.width="medium",a.fallbackUrl=a.url,s.tasks.startTask(a))},Object.defineProperty(t.prototype,"dataVersion",{get:function(){return n.Version.parse("1.0")},enumerable:!0,configurable:!0}),t.prototype.getPropertyPaneConfiguration=function(){return{pages:[{header:{description:l.PropertyPaneDescription},groups:[{groupName:l.BasicGroupName,groupFields:[Object(o.PropertyPaneTextField)("description",{label:l.DescriptionFieldLabel})]}]}]}},t}(o.BaseClientSideWebPart);t.default=u}])});
-!function(){window.__setWebpackPublicPathLoaderSrcRegistry__||(window.__setWebpackPublicPathLoaderSrcRegistry__={});var e=document.getElementsByTagName("script");if(e&&e.length)for(var t=0;t<e.length;t++)if(e[t]){var r=e[t].getAttribute("src");r&&(window.__setWebpackPublicPathLoaderSrcRegistry__[r]=!0)}}();
+define("d2865084-ab74-41f5-9cf0-afac7226c9df_0.0.1", ["@microsoft/sp-core-library","@microsoft/sp-loader","@microsoft/sp-webpart-base","ToolTabWebPartStrings","bootstrap","jquery"], function(__WEBPACK_EXTERNAL_MODULE__microsoft_sp_core_library__, __WEBPACK_EXTERNAL_MODULE__microsoft_sp_loader__, __WEBPACK_EXTERNAL_MODULE__microsoft_sp_webpart_base__, __WEBPACK_EXTERNAL_MODULE_ToolTabWebPartStrings__, __WEBPACK_EXTERNAL_MODULE_bootstrap__, __WEBPACK_EXTERNAL_MODULE_jquery__) { return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Set the webpack public path
+/******/ 	(function () {
+/******/ 	  var scripts = document.getElementsByTagName('script');
+/******/ 	  var regex = new RegExp('\\/tool-tab-web-part(_[a-z0-9-]+)*\\.js', 'i');
+/******/ 	  var publicPath;
+/******/ 	
+/******/ 	  if (scripts && scripts.length) {
+/******/ 	    for (var i = 0; i < scripts.length; i++) {
+/******/ 	      if (!scripts[i]) continue;
+/******/ 	      var path = scripts[i].getAttribute('src');
+/******/ 	      if (path && path.match(regex)) {
+/******/ 	        publicPath = path.substring(0, path.lastIndexOf('/') + 1);
+/******/ 	        break;
+/******/ 	      }
+/******/ 	    }
+/******/ 	  }
+/******/ 	
+/******/ 	  if (!publicPath) {
+/******/ 	    for (var global in window.__setWebpackPublicPathLoaderSrcRegistry__) {
+/******/ 	      if (global && global.match(regex)) {
+/******/ 	        publicPath = global.substring(0, global.lastIndexOf('/') + 1);
+/******/ 	        break;
+/******/ 	      }
+/******/ 	    }
+/******/ 	  }
+/******/ 	  __webpack_require__.p = publicPath;
+/******/ 	})();
+/******/ 	
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./lib/webparts/toolTab/ToolTabWebPart.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./lib/webparts/fonts/TeamsAssets-Light.woff":
+/*!***************************************************!*\
+  !*** ./lib/webparts/fonts/TeamsAssets-Light.woff ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "teamsassets-light_389749df8cb26cb2b47f600f822c65f0.woff";
+
+/***/ }),
+
+/***/ "./lib/webparts/toolTab/ToolTabWebPart.js":
+/*!************************************************!*\
+  !*** ./lib/webparts/toolTab/ToolTabWebPart.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @microsoft/sp-core-library */ "@microsoft/sp-core-library");
+/* harmony import */ var _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @microsoft/sp-webpart-base */ "@microsoft/sp-webpart-base");
+/* harmony import */ var _microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ToolTabWebPart.module.scss */ "./lib/webparts/toolTab/ToolTabWebPart.module.scss.js");
+/* harmony import */ var _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @microsoft/teams-js */ "./node_modules/@microsoft/teams-js/dist/MicrosoftTeams.min.js");
+/* harmony import */ var _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var ToolTabWebPartStrings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ToolTabWebPartStrings */ "ToolTabWebPartStrings");
+/* harmony import */ var ToolTabWebPartStrings__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ToolTabWebPartStrings__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @microsoft/sp-loader */ "@microsoft/sp-loader");
+/* harmony import */ var _microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+
+
+__webpack_require__(/*! bootstrap */ "bootstrap");
+var ToolTabWebPart = /** @class */ (function (_super) {
+    __extends(ToolTabWebPart, _super);
+    function ToolTabWebPart() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ToolTabWebPart.prototype.render = function () {
+        var cssURL = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
+        _microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_5__["SPComponentLoader"].loadCss(cssURL);
+        this.domElement.innerHTML = "\n      <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].toolTab + "\" id=\"accordion\">\n        <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].row + "\">\n          <div class=\"col-12\" >\n            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].HR + " ar accordion-toggle\"\n                    data-toggle=\"collapse\"\n                    data-parent=\"#accordion\"\n                    data-target=\"#HRtools\" aria-expanded=\"false\"\n                    >Human Resources\n                  </div>\n                    <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].P10 + " panel-collapse\" id=\"HRtools\">\n                      <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                        <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                          <span\n                            alt-name=\"create letter\"\n                            class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].createicon + "\n                          ></span>\n                          <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Create business letter</div>\n                          <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                            Create a business letter within a predesigned color and\n                            template.\n                          </p>\n                        </div>\n                        </div>\n\n                        <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                          <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + " id=\"createTicket\">\n                            <span\n                              alt-name=\"create letter\"\n                              class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].ticketcreation + "\n                            ></span>\n                            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Create ticket</div>\n                            <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                            For all HR tickets, the ticket type is being set as Employee Support.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                          <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                            <span\n                              alt-name=\"create letter\"\n                              class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].leaverequest + "\n                            ></span>\n                            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Request leave</div>\n                            <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                            Request leave and check your status in the Leave application.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                          <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                            <span\n                              alt-name=\"create letter\"\n                              class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].policies + "\n                            ></span>\n                            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">View policies</div>\n                            <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                            Identify the purpose and objectives of HR department.\n                            </p>\n                          </div>\n                          </div>\n                  </div>\n\n                    <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].HR + " ar accordion-toggle\"\n                    data-toggle=\"collapse\"\n                    data-parent=\"#accordion\"\n                    data-target=\"#Pay-benefits\" aria-expanded=\"false\"\n                    >Pay and benefits\n                  </div>\n\n                    <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].P10 + " panel-collapse\" id=\"Pay-benefits\">\n                      <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                        <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                          <span\n                            alt-name=\"create letter\"\n                            class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].downloadpayslip + "\n                          ></span>\n                          <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Download payslip</div>\n                          <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                          View online pay slips and full payment histories.\n                          </p>\n                        </div>\n                        </div>\n\n                        <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                          <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                            <span\n                              alt-name=\"create letter\"\n                              class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].createfinancetkt + "\n                            ></span>\n                            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Create finance ticket</div>\n                            <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                            Open a support ticket with the Finance and Operations support.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                          <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                            <span\n                              alt-name=\"create letter\"\n                              class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].submitbenefits + "\n                            ></span>\n                            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Submit benefits claim</div>\n                            <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                            Submit a claim from your account to start the process.\n                            </p>\n                          </div>\n                          </div>\n\n                          <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                          <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                            <span\n                              alt-name=\"create letter\"\n                              class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].viewbenefits + "\n                            ></span>\n                            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">View benefits policies</div>\n                            <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                            Read common queries about servicing your policy.\n                            </p>\n                          </div>\n                          </div>\n                    </div>\n\n\n                        <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].HR + " ar accordion-toggle\"\n                        data-toggle=\"collapse\"\n                        data-parent=\"#accordion\"\n                        data-target=\"#itandfacilities\" aria-expanded=\"false\"\n                        >IT and facilities\n                      </div>\n                        <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].P10 + " panel-collapse\" id=\"itandfacilities\">\n                          <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                            <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                              <span\n                                alt-name=\"create letter\"\n                                class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].support + "\n                              ></span>\n                              <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Raise it support ticket</div>\n                              <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                              Submit your support case to review and respond.\n                              </p>\n                            </div>\n                            </div>\n\n                            <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                              <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + " id=\"visitorRequest\">\n                                <span\n                                  alt-name=\"create letter\"\n                                  class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].wiferequest + "\n                                ></span>\n                                <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Submit visitor request</div>\n                                <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                                Fill a request form for short-term visitors.\n                                </p>\n                              </div>\n                              </div>\n\n                              <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                              <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                                <span\n                                  alt-name=\"create letter\"\n                                  class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].eventsupport + "\n                                ></span>\n                                <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Event it support request</div>\n                                <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                                Fill out this form to request any equiepment for events.\n                                </p>\n                              </div>\n                              </div>\n\n                              <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                              <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                                <span\n                                  alt-name=\"create letter\"\n                                  class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cafeservice + "\n                                ></span>\n                                <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Cafeteria service app</div>\n                                <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                                Emloyee can order and pay here without waiting in long queue. </p>\n                              </div>\n                              </div>\n                      </div>\n\n                    <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].HR + " ar accordion-toggle\"\n                                data-toggle=\"collapse\"\n                                data-parent=\"#accordion\"\n                                data-target=\"#retail-operations\" aria-expanded=\"false\"\n                                >Retail operations\n                              </div>\n                              <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].P10 + " panel-collapse\" id=\"retail-operations\">\n                                <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                                  <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                                    <span\n                                      alt-name=\"create letter\"\n                                      class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].Inventory + "\n                                    ></span>\n                                    <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Inventory request</div>\n                                    <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                                    Inventory form to request supplies.\n                                    </p>\n                                  </div>\n                                  </div>\n\n                                  <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                                    <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                                      <span\n                                        alt-name=\"create letter\"\n                                        class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].ROtimesheet + "\n                                      ></span>\n                                      <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Timesheet</div>\n                                      <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                                      Weekly Timesheet setup.\n                                        </p>\n                                    </div>\n                                    </div>\n\n                                    <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].card + " " + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].shadowsm + "\">\n                                    <div class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].cbody + ">\n                                      <span\n                                        alt-name=\"create letter\"\n                                        class=" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].RoSI + "\n                                      ></span>\n                                      <div class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBL + "\">Store info</div>\n                                      <p class=\"" + _ToolTabWebPart_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].CBLdes + "\">\n                                      Your store information.\n                                      </p>\n                                    </div>\n                                    </div>\n                                    </div>\n\n              </div>\n          </div>\n          </div>\n      </div>";
+        this._setButtonEventHandlers();
+    };
+    ToolTabWebPart.prototype._setButtonEventHandlers = function () {
+        var _this = this;
+        this.domElement
+            .querySelector("#createTicket")
+            .addEventListener("click", function () {
+            _this.createTicket();
+        });
+        this.domElement
+            .querySelector("#visitorRequest")
+            .addEventListener("click", function () {
+            _this.visitorRequest();
+        });
+    };
+    ToolTabWebPart.prototype.createTicket = function () {
+        _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__["initialize"]();
+        var taskInfo = {
+            title: null,
+            height: null,
+            width: null,
+            url: null,
+            card: null,
+            fallbackUrl: null,
+            completionBotId: null,
+        };
+        taskInfo.url =
+            "https://employeeconnect-9566.azurewebsites.net/createticket";
+        taskInfo.title = "Create Ticket";
+        taskInfo.height = 510;
+        taskInfo.width = 430;
+        taskInfo.fallbackUrl = taskInfo.url;
+        _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__["tasks"].startTask(taskInfo, this.submitHandler);
+    };
+    ToolTabWebPart.prototype.visitorRequest = function () {
+        _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__["initialize"]();
+        var taskInfo = {
+            title: null,
+            height: null,
+            width: null,
+            url: null,
+            card: null,
+            fallbackUrl: null,
+            completionBotId: null,
+        };
+        taskInfo.url =
+            "https://employeeconnect-9566.azurewebsites.net/visitorregistration";
+        taskInfo.title = "Visitor Request";
+        taskInfo.height = 510;
+        taskInfo.width = 430;
+        taskInfo.fallbackUrl = taskInfo.url;
+        _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__["tasks"].startTask(taskInfo, this.submitHandler);
+    };
+    ToolTabWebPart.prototype.submitHandler = function (err, result) {
+        if (result.action == "ticketcomplete") {
+            var taskInfo = {
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+            taskInfo.url =
+                "https://employeeconnect-9566.azurewebsites.net/ticketcomplete?ticketNoId=" +
+                    result.ticketNo +
+                    "&description=" +
+                    result.TDescription +
+                    "&category=" +
+                    result.TCategory +
+                    "&priority=" +
+                    result.TPriority;
+            taskInfo.height = 510;
+            taskInfo.width = 430;
+            taskInfo.fallbackUrl = taskInfo.url;
+            _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__["tasks"].startTask(taskInfo);
+        }
+        if (result.action == "createTicket") {
+            var taskInfo = {
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+            taskInfo.url =
+                "https://employeeconnect-9566.azurewebsites.net/createticket";
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+            taskInfo.fallbackUrl = taskInfo.url;
+            _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__["tasks"].startTask(taskInfo, this.submitHandler);
+        }
+        if (result.action == "sendrequest") {
+            var taskInfo = {
+                height: null,
+                width: null,
+                url: null,
+                fallbackUrl: null,
+            };
+            taskInfo.url =
+                "https://employeeconnect-9566.azurewebsites.net/sendrequest?=" +
+                    result.vDate +
+                    "&Time=" +
+                    result.vTime;
+            taskInfo.height = "medium";
+            taskInfo.width = "medium";
+            taskInfo.fallbackUrl = taskInfo.url;
+            _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__["tasks"].startTask(taskInfo);
+        }
+    };
+    Object.defineProperty(ToolTabWebPart.prototype, "dataVersion", {
+        get: function () {
+            return _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__["Version"].parse("1.0");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ToolTabWebPart.prototype.getPropertyPaneConfiguration = function () {
+        return {
+            pages: [
+                {
+                    header: {
+                        description: ToolTabWebPartStrings__WEBPACK_IMPORTED_MODULE_4__["PropertyPaneDescription"],
+                    },
+                    groups: [
+                        {
+                            groupName: ToolTabWebPartStrings__WEBPACK_IMPORTED_MODULE_4__["BasicGroupName"],
+                            groupFields: [
+                                Object(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__["PropertyPaneTextField"])("description", {
+                                    label: ToolTabWebPartStrings__WEBPACK_IMPORTED_MODULE_4__["DescriptionFieldLabel"],
+                                }),
+                            ],
+                        },
+                    ],
+                },
+            ],
+        };
+    };
+    return ToolTabWebPart;
+}(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_1__["BaseClientSideWebPart"]));
+/* harmony default export */ __webpack_exports__["default"] = (ToolTabWebPart);
+
+
+/***/ }),
+
+/***/ "./lib/webparts/toolTab/ToolTabWebPart.module.css":
+/*!********************************************************!*\
+  !*** ./lib/webparts/toolTab/ToolTabWebPart.module.css ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--4-1!./ToolTabWebPart.module.css */ "./node_modules/css-loader/index.js?!./lib/webparts/toolTab/ToolTabWebPart.module.css");
+var loader = __webpack_require__(/*! ./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js */ "./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js");
+
+if(typeof content === "string") content = [[module.i, content]];
+
+// add the styles to the DOM
+for (var i = 0; i < content.length; i++) loader.loadStyles(content[i][1], true);
+
+if(content.locals) module.exports = content.locals;
+
+/***/ }),
+
+/***/ "./lib/webparts/toolTab/ToolTabWebPart.module.scss.js":
+/*!************************************************************!*\
+  !*** ./lib/webparts/toolTab/ToolTabWebPart.module.scss.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* tslint:disable */
+__webpack_require__(/*! ./ToolTabWebPart.module.css */ "./lib/webparts/toolTab/ToolTabWebPart.module.css");
+var styles = {
+    toolTab: 'toolTab_a0f05e5a',
+    grid1: 'grid1_a0f05e5a',
+    heading: 'heading_a0f05e5a',
+    grid2: 'grid2_a0f05e5a',
+    row: 'row_a0f05e5a',
+    column: 'column_a0f05e5a',
+    'ms-Grid': 'ms-Grid_a0f05e5a',
+    HR: 'HR_a0f05e5a',
+    PB: 'PB_a0f05e5a',
+    RO: 'RO_a0f05e5a',
+    IF: 'IF_a0f05e5a',
+    P10: 'P10_a0f05e5a',
+    shadowsm: 'shadowsm_a0f05e5a',
+    card: 'card_a0f05e5a',
+    cbody: 'cbody_a0f05e5a',
+    CBL: 'CBL_a0f05e5a',
+    CT: 'CT_a0f05e5a',
+    RL: 'RL_a0f05e5a',
+    VP: 'VP_a0f05e5a',
+    DP: 'DP_a0f05e5a',
+    CFT: 'CFT_a0f05e5a',
+    SBC: 'SBC_a0f05e5a',
+    VBP: 'VBP_a0f05e5a',
+    RIST: 'RIST_a0f05e5a',
+    GWR: 'GWR_a0f05e5a',
+    EISR: 'EISR_a0f05e5a',
+    CSA: 'CSA_a0f05e5a',
+    IR: 'IR_a0f05e5a',
+    timesheet: 'timesheet_a0f05e5a',
+    SI: 'SI_a0f05e5a',
+    CBLdes: 'CBLdes_a0f05e5a',
+    CTdes: 'CTdes_a0f05e5a',
+    RLdes: 'RLdes_a0f05e5a',
+    VPdes: 'VPdes_a0f05e5a',
+    Pdes: 'Pdes_a0f05e5a',
+    FTdes: 'FTdes_a0f05e5a',
+    BCdes: 'BCdes_a0f05e5a',
+    ISTdes: 'ISTdes_a0f05e5a',
+    GRdes: 'GRdes_a0f05e5a',
+    ISRdes: 'ISRdes_a0f05e5a',
+    CSAdes: 'CSAdes_a0f05e5a',
+    IRdes: 'IRdes_a0f05e5a',
+    timesheetdes: 'timesheetdes_a0f05e5a',
+    SIdes: 'SIdes_a0f05e5a',
+    createicon: 'createicon_a0f05e5a',
+    ticketcreation: 'ticketcreation_a0f05e5a',
+    leaverequest: 'leaverequest_a0f05e5a',
+    policies: 'policies_a0f05e5a',
+    downloadpayslip: 'downloadpayslip_a0f05e5a',
+    createfinancetkt: 'createfinancetkt_a0f05e5a',
+    submitbenefits: 'submitbenefits_a0f05e5a',
+    viewbenefits: 'viewbenefits_a0f05e5a',
+    support: 'support_a0f05e5a',
+    wiferequest: 'wiferequest_a0f05e5a',
+    eventsupport: 'eventsupport_a0f05e5a',
+    cafeservice: 'cafeservice_a0f05e5a',
+    Inventory: 'Inventory_a0f05e5a',
+    ROtimesheet: 'ROtimesheet_a0f05e5a',
+    RoSI: 'RoSI_a0f05e5a'
+};
+/* harmony default export */ __webpack_exports__["default"] = (styles);
+/* tslint:enable */ 
+
+
+/***/ }),
+
+/***/ "./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/@microsoft/loader-load-themed-styles/node_modules/@microsoft/load-themed-styles/lib/index.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+/**
+ * An IThemingInstruction can specify a rawString to be preserved or a theme slot and a default value
+ * to use if that slot is not specified by the theme.
+ */
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+// IE needs to inject styles using cssText. However, we need to evaluate this lazily, so this
+// value will initialize as undefined, and later will be set once on first loadStyles injection.
+var _injectStylesWithCssText;
+// Store the theming state in __themeState__ global scope for reuse in the case of duplicate
+// load-themed-styles hosted on the page.
+var _root = (typeof window === 'undefined') ? global : window; // tslint:disable-line:no-any
+// Nonce string to inject into script tag if one provided. This is used in CSP (Content Security Policy).
+var _styleNonce = _root && _root.CSPSettings && _root.CSPSettings.nonce;
+var _themeState = initializeThemeState();
+/**
+ * Matches theming tokens. For example, "[theme: themeSlotName, default: #FFF]" (including the quotes).
+ */
+// tslint:disable-next-line:max-line-length
+var _themeTokenRegex = /[\'\"]\[theme:\s*(\w+)\s*(?:\,\s*default:\s*([\\"\']?[\.\,\(\)\#\-\s\w]*[\.\,\(\)\#\-\w][\"\']?))?\s*\][\'\"]/g;
+/** Maximum style text length, for supporting IE style restrictions. */
+var MAX_STYLE_CONTENT_SIZE = 10000;
+var now = function () { return (typeof performance !== 'undefined' && !!performance.now) ? performance.now() : Date.now(); };
+function measure(func) {
+    var start = now();
+    func();
+    var end = now();
+    _themeState.perf.duration += end - start;
+}
+/**
+ * initialize global state object
+ */
+function initializeThemeState() {
+    var state = _root.__themeState__ || {
+        theme: undefined,
+        lastStyleElement: undefined,
+        registeredStyles: []
+    };
+    if (!state.runState) {
+        state = __assign({}, (state), { perf: {
+                count: 0,
+                duration: 0
+            }, runState: {
+                flushTimer: 0,
+                mode: 0 /* sync */,
+                buffer: []
+            } });
+    }
+    if (!state.registeredThemableStyles) {
+        state = __assign({}, (state), { registeredThemableStyles: [] });
+    }
+    _root.__themeState__ = state;
+    return state;
+}
+/**
+ * Loads a set of style text. If it is registered too early, we will register it when the window.load
+ * event is fired.
+ * @param {string | ThemableArray} styles Themable style text to register.
+ * @param {boolean} loadAsync When true, always load styles in async mode, irrespective of current sync mode.
+ */
+function loadStyles(styles, loadAsync) {
+    if (loadAsync === void 0) { loadAsync = false; }
+    measure(function () {
+        var styleParts = Array.isArray(styles) ? styles : splitStyles(styles);
+        if (_injectStylesWithCssText === undefined) {
+            _injectStylesWithCssText = shouldUseCssText();
+        }
+        var _a = _themeState.runState, mode = _a.mode, buffer = _a.buffer, flushTimer = _a.flushTimer;
+        if (loadAsync || mode === 1 /* async */) {
+            buffer.push(styleParts);
+            if (!flushTimer) {
+                _themeState.runState.flushTimer = asyncLoadStyles();
+            }
+        }
+        else {
+            applyThemableStyles(styleParts);
+        }
+    });
+}
+exports.loadStyles = loadStyles;
+/**
+ * Allows for customizable loadStyles logic. e.g. for server side rendering application
+ * @param {(processedStyles: string, rawStyles?: string | ThemableArray) => void}
+ * a loadStyles callback that gets called when styles are loaded or reloaded
+ */
+function configureLoadStyles(loadStylesFn) {
+    _themeState.loadStyles = loadStylesFn;
+}
+exports.configureLoadStyles = configureLoadStyles;
+/**
+ * Configure run mode of load-themable-styles
+ * @param mode load-themable-styles run mode, async or sync
+ */
+function configureRunMode(mode) {
+    _themeState.runState.mode = mode;
+}
+exports.configureRunMode = configureRunMode;
+/**
+ * external code can call flush to synchronously force processing of currently buffered styles
+ */
+function flush() {
+    measure(function () {
+        var styleArrays = _themeState.runState.buffer.slice();
+        _themeState.runState.buffer = [];
+        var mergedStyleArray = [].concat.apply([], styleArrays);
+        if (mergedStyleArray.length > 0) {
+            applyThemableStyles(mergedStyleArray);
+        }
+    });
+}
+exports.flush = flush;
+/**
+ * register async loadStyles
+ */
+function asyncLoadStyles() {
+    return setTimeout(function () {
+        _themeState.runState.flushTimer = 0;
+        flush();
+    }, 0);
+}
+/**
+ * Loads a set of style text. If it is registered too early, we will register it when the window.load event
+ * is fired.
+ * @param {string} styleText Style to register.
+ * @param {IStyleRecord} styleRecord Existing style record to re-apply.
+ */
+function applyThemableStyles(stylesArray, styleRecord) {
+    if (_themeState.loadStyles) {
+        _themeState.loadStyles(resolveThemableArray(stylesArray).styleString, stylesArray);
+    }
+    else {
+        _injectStylesWithCssText ?
+            registerStylesIE(stylesArray, styleRecord) :
+            registerStyles(stylesArray);
+    }
+}
+/**
+ * Registers a set theme tokens to find and replace. If styles were already registered, they will be
+ * replaced.
+ * @param {theme} theme JSON object of theme tokens to values.
+ */
+function loadTheme(theme) {
+    _themeState.theme = theme;
+    // reload styles.
+    reloadStyles();
+}
+exports.loadTheme = loadTheme;
+/**
+ * Clear already registered style elements and style records in theme_State object
+ * @param option - specify which group of registered styles should be cleared.
+ * Default to be both themable and non-themable styles will be cleared
+ */
+function clearStyles(option) {
+    if (option === void 0) { option = 3 /* all */; }
+    if (option === 3 /* all */ || option === 2 /* onlyNonThemable */) {
+        clearStylesInternal(_themeState.registeredStyles);
+        _themeState.registeredStyles = [];
+    }
+    if (option === 3 /* all */ || option === 1 /* onlyThemable */) {
+        clearStylesInternal(_themeState.registeredThemableStyles);
+        _themeState.registeredThemableStyles = [];
+    }
+}
+exports.clearStyles = clearStyles;
+function clearStylesInternal(records) {
+    records.forEach(function (styleRecord) {
+        var styleElement = styleRecord && styleRecord.styleElement;
+        if (styleElement && styleElement.parentElement) {
+            styleElement.parentElement.removeChild(styleElement);
+        }
+    });
+}
+/**
+ * Reloads styles.
+ */
+function reloadStyles() {
+    if (_themeState.theme) {
+        var themableStyles = [];
+        for (var _i = 0, _a = _themeState.registeredThemableStyles; _i < _a.length; _i++) {
+            var styleRecord = _a[_i];
+            themableStyles.push(styleRecord.themableStyle);
+        }
+        if (themableStyles.length > 0) {
+            clearStyles(1 /* onlyThemable */);
+            applyThemableStyles([].concat.apply([], themableStyles));
+        }
+    }
+}
+/**
+ * Find theme tokens and replaces them with provided theme values.
+ * @param {string} styles Tokenized styles to fix.
+ */
+function detokenize(styles) {
+    if (styles) {
+        styles = resolveThemableArray(splitStyles(styles)).styleString;
+    }
+    return styles;
+}
+exports.detokenize = detokenize;
+/**
+ * Resolves ThemingInstruction objects in an array and joins the result into a string.
+ * @param {ThemableArray} splitStyleArray ThemableArray to resolve and join.
+ */
+function resolveThemableArray(splitStyleArray) {
+    var theme = _themeState.theme;
+    var themable = false;
+    // Resolve the array of theming instructions to an array of strings.
+    // Then join the array to produce the final CSS string.
+    var resolvedArray = (splitStyleArray || []).map(function (currentValue) {
+        var themeSlot = currentValue.theme;
+        if (themeSlot) {
+            themable = true;
+            // A theming annotation. Resolve it.
+            var themedValue = theme ? theme[themeSlot] : undefined;
+            var defaultValue = currentValue.defaultValue || 'inherit';
+            // Warn to console if we hit an unthemed value even when themes are provided, but only if "DEBUG" is true.
+            // Allow the themedValue to be undefined to explicitly request the default value.
+            if (theme && !themedValue && console && !(themeSlot in theme) && "boolean" !== 'undefined' && true) {
+                console.warn("Theming value not provided for \"" + themeSlot + "\". Falling back to \"" + defaultValue + "\".");
+            }
+            return themedValue || defaultValue;
+        }
+        else {
+            // A non-themable string. Preserve it.
+            return currentValue.rawString;
+        }
+    });
+    return {
+        styleString: resolvedArray.join(''),
+        themable: themable
+    };
+}
+/**
+ * Split tokenized CSS into an array of strings and theme specification objects
+ * @param {string} styles Tokenized styles to split.
+ */
+function splitStyles(styles) {
+    var result = [];
+    if (styles) {
+        var pos = 0; // Current position in styles.
+        var tokenMatch = void 0; // tslint:disable-line:no-null-keyword
+        while (tokenMatch = _themeTokenRegex.exec(styles)) {
+            var matchIndex = tokenMatch.index;
+            if (matchIndex > pos) {
+                result.push({
+                    rawString: styles.substring(pos, matchIndex)
+                });
+            }
+            result.push({
+                theme: tokenMatch[1],
+                defaultValue: tokenMatch[2] // May be undefined
+            });
+            // index of the first character after the current match
+            pos = _themeTokenRegex.lastIndex;
+        }
+        // Push the rest of the string after the last match.
+        result.push({
+            rawString: styles.substring(pos)
+        });
+    }
+    return result;
+}
+exports.splitStyles = splitStyles;
+/**
+ * Registers a set of style text. If it is registered too early, we will register it when the
+ * window.load event is fired.
+ * @param {ThemableArray} styleArray Array of IThemingInstruction objects to register.
+ * @param {IStyleRecord} styleRecord May specify a style Element to update.
+ */
+function registerStyles(styleArray) {
+    if (typeof document === 'undefined') {
+        return;
+    }
+    var head = document.getElementsByTagName('head')[0];
+    var styleElement = document.createElement('style');
+    var _a = resolveThemableArray(styleArray), styleString = _a.styleString, themable = _a.themable;
+    styleElement.type = 'text/css';
+    if (_styleNonce) {
+        styleElement.setAttribute('nonce', _styleNonce);
+    }
+    styleElement.appendChild(document.createTextNode(styleString));
+    _themeState.perf.count++;
+    head.appendChild(styleElement);
+    var record = {
+        styleElement: styleElement,
+        themableStyle: styleArray
+    };
+    if (themable) {
+        _themeState.registeredThemableStyles.push(record);
+    }
+    else {
+        _themeState.registeredStyles.push(record);
+    }
+}
+/**
+ * Registers a set of style text, for IE 9 and below, which has a ~30 style element limit so we need
+ * to register slightly differently.
+ * @param {ThemableArray} styleArray Array of IThemingInstruction objects to register.
+ * @param {IStyleRecord} styleRecord May specify a style Element to update.
+ */
+function registerStylesIE(styleArray, styleRecord) {
+    if (typeof document === 'undefined') {
+        return;
+    }
+    var head = document.getElementsByTagName('head')[0];
+    var registeredStyles = _themeState.registeredStyles;
+    var lastStyleElement = _themeState.lastStyleElement;
+    var stylesheet = lastStyleElement ? lastStyleElement.styleSheet : undefined;
+    var lastStyleContent = stylesheet ? stylesheet.cssText : '';
+    var lastRegisteredStyle = registeredStyles[registeredStyles.length - 1];
+    var resolvedStyleText = resolveThemableArray(styleArray).styleString;
+    if (!lastStyleElement || (lastStyleContent.length + resolvedStyleText.length) > MAX_STYLE_CONTENT_SIZE) {
+        lastStyleElement = document.createElement('style');
+        lastStyleElement.type = 'text/css';
+        if (styleRecord) {
+            head.replaceChild(lastStyleElement, styleRecord.styleElement);
+            styleRecord.styleElement = lastStyleElement;
+        }
+        else {
+            head.appendChild(lastStyleElement);
+        }
+        if (!styleRecord) {
+            lastRegisteredStyle = {
+                styleElement: lastStyleElement,
+                themableStyle: styleArray
+            };
+            registeredStyles.push(lastRegisteredStyle);
+        }
+    }
+    lastStyleElement.styleSheet.cssText += detokenize(resolvedStyleText);
+    Array.prototype.push.apply(lastRegisteredStyle.themableStyle, styleArray); // concat in-place
+    // Preserve the theme state.
+    _themeState.lastStyleElement = lastStyleElement;
+}
+/**
+ * Checks to see if styleSheet exists as a property off of a style element.
+ * This will determine if style registration should be done via cssText (<= IE9) or not
+ */
+function shouldUseCssText() {
+    var useCSSText = false;
+    if (typeof document !== 'undefined') {
+        var emptyStyle = document.createElement('style');
+        emptyStyle.type = 'text/css';
+        useCSSText = !!emptyStyle.styleSheet;
+    }
+    return useCSSText;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/@microsoft/teams-js/dist/MicrosoftTeams.min.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@microsoft/teams-js/dist/MicrosoftTeams.min.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,e){ true?module.exports=e():undefined}(window,function(){return function(t){var e={};function n(i){if(e[i])return e[i].exports;var o=e[i]={i:i,l:!1,exports:{}};return t[i].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=t,n.c=e,n.d=function(t,e,i){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:i})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var i=Object.create(null);if(n.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)n.d(i,o,function(e){return t[e]}.bind(null,o));return i},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=0)}([function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),function(t){for(var n in t)e.hasOwnProperty(n)||(e[n]=t[n])}(n(1))},function(t,e,n){"use strict";var i=this&&this.__rest||function(t,e){var n={};for(var i in t)Object.prototype.hasOwnProperty.call(t,i)&&e.indexOf(i)<0&&(n[i]=t[i]);if(null!=t&&"function"==typeof Object.getOwnPropertySymbols){var o=0;for(i=Object.getOwnPropertySymbols(t);o<i.length;o++)e.indexOf(i[o])<0&&(n[i[o]]=t[i[o]])}return n};Object.defineProperty(e,"__esModule",{value:!0});var o="1.4.2";function r(t){for(var e="^",n=t.split("."),i=0;i<n.length;i++)e+=(i>0?"[.]":"")+n[i].replace("*","[^/^.]+");return e+="$"}var a=function(t){for(var e="",n=0;n<t.length;n++)e+=(0===n?"":"|")+r(t[n]);return new RegExp(e)}(["https://teams.microsoft.com","https://teams.microsoft.us","https://gov.teams.microsoft.us","https://dod.teams.microsoft.us","https://int.teams.microsoft.com","https://devspaces.skype.com","https://ssauth.skype.com","http://dev.local","http://dev.local:8080","https://msft.spoppe.com","https://*.sharepoint.com","https://*.sharepoint-df.com","https://*.sharepointonline.com","https://outlook.office.com","https://outlook-sdf.office.com"]),s={},u={settings:"settings",content:"content",authentication:"authentication",remove:"remove",task:"task"};!function(t){var e,n,i,o=function(){return function(){this.enabled=!0}}();t.MenuItem=o,function(t){t.dropDown="dropDown",t.popOver="popOver"}(t.MenuListType||(t.MenuListType={})),s.navBarMenuItemPress=function(t){e&&e(t)||(_(),W(f,"handleNavBarMenuItemPress",[t]))},s.actionMenuItemPress=function(t){n&&n(t)||(_(),W(f,"handleActionMenuItemPress",[t]))},s.setModuleView=function(t){i&&i(t)||(_(),W(f,"viewConfigItemPress",[t]))},t.setUpViews=function(t,e){_(),i=e,W(f,"setUpViews",[t])},t.setNavBarMenu=function(t,n){_(),e=n,W(f,"setNavBarMenu",[t])},t.showActionMenu=function(t,e){_(),n=e,W(f,"showActionMenu",[t])}}(e.menus||(e.menus={}));var c,f,l,d,h,v,g,p,m,y,b,w,k,T=!1,C=!1,O=[],M=[],S=0,E={},I=!1;function P(){window.print()}function x(t){_(),p=t,t&&W(f,"registerHandler",["themeChange"])}function H(t){_(),m=t,t&&W(f,"registerHandler",["fullScreen"])}function N(t){_(),y=t,t&&W(f,"registerHandler",["backButton"])}function U(){_();var t=W(f,"navigateBack",[]);E[t]=function(t){if(!t)throw new Error("Back navigation is not supported in the current client or context.")}}function j(t){_(),b=t,t&&W(f,"registerHandler",["beforeUnload"])}function _(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];if(!T)throw new Error("The library has not yet been initialized");if(v&&t&&t.length>0){for(var n=!1,i=0;i<t.length;i++)if(t[i]===v){n=!0;break}if(!n)throw new Error("This call is not allowed in the '"+v+"' context")}}function B(t){if(t&&t.data&&"object"==typeof t.data){var e=t.source||t.originalEvent.source,n=t.origin||t.originalEvent.origin;e===c||n!==c.location.origin&&!a.test(n.toLowerCase())||(L(e,n),e===f?A(t):e===d&&D(t))}}function L(t,e){f&&t!==f?d&&t!==d||(d=t,h=e):(f=t,l=e),f&&f.closed&&(f=null,l=null),d&&d.closed&&(d=null,h=null),R(f),R(d)}function A(t){if("id"in t.data){var e=t.data,n=E[e.id];n&&(n.apply(null,e.args),delete E[e.id])}else if("func"in t.data){e=t.data;var i=s[e.func];i&&i.apply(this,e.args)}}function D(t){if("id"in t.data&&"func"in t.data){var e=t.data,n=s[e.func];if(n){var i=n.apply(this,e.args);i&&J(d,e.id,Array.isArray(i)?i:[i])}else{var o=W(f,e.func,e.args);E[o]=function(){for(var t=[],n=0;n<arguments.length;n++)t[n]=arguments[n];d&&J(d,e.id,t)}}}}function F(t){return t===f?O:t===d?M:[]}function z(t){return t===f?l:t===d?h:null}function R(t){for(var e=z(t),n=F(t);t&&e&&n.length>0;)t.postMessage(n.shift(),e)}function V(t,e){var n=c.setInterval(function(){0===F(t).length&&(clearInterval(n),e())},100)}function W(t,e,n){var i=K(e,n);if(C)c&&c.nativeInterface&&c.nativeInterface.framelessPostMessage(JSON.stringify(i));else{var o=z(t);t&&o?t.postMessage(i,o):F(t).push(i)}return i.id}function J(t,e,n){var i=q(e,n),o=z(t);t&&o&&t.postMessage(i,o)}function K(t,e){return{id:S++,func:t,args:e||[]}}function q(t,e){return{id:t,args:e||[]}}s.themeChange=function(t){p&&p(t);d&&W(d,"themeChange",[t])},s.fullScreenChange=function(t){m&&m(t)},s.backButtonPress=function(){y&&y()||U()},s.beforeUnload=function(){var t=function(){W(f,"readyToUnload",[])};b&&b(t)||t()},s.changeSettings=function(){w&&w()},e.initialize=function(t){if(void 0===t&&(t=window),!T){T=!0;var e=function(t){return B(t)};(f=(c=t).parent!==c.self?c.parent:c.opener)?c.addEventListener("message",e,!1):(C=!0,window.onNativeMessage=A);try{l="*";var n=W(f,"initialize",[o]);E[n]=function(t,e){v=t,g=e}}finally{l=null}this._uninitialize=function(){v&&(x(null),H(null),N(null),j(null)),v===u.settings&&k.registerOnSaveHandler(null),v===u.remove&&k.registerOnRemoveHandler(null),C||c.removeEventListener("message",e,!1),T=!1,f=null,l=null,O=[],d=null,h=null,M=[],S=0,E={},v=null,g=null,C=!1}}},e._uninitialize=function(){},e.enablePrintCapability=function(){I||(I=!0,_(),document.addEventListener("keydown",function(t){(t.ctrlKey||t.metaKey)&&80===t.keyCode&&(P(),t.cancelBubble=!0,t.preventDefault(),t.stopImmediatePropagation())}))},e.print=P,e.getContext=function(t){_();var e=W(f,"getContext");E[e]=t},e.registerOnThemeChangeHandler=x,e.registerFullScreenHandler=H,e.registerBackButtonHandler=N,e.navigateBack=U,e.registerBeforeUnloadHandler=j,e.registerChangeSettingsHandler=function(t){_(u.content),w=t,t&&W(f,"registerHandler",["changeSettings"])},e.navigateCrossDomain=function(t){_(u.content,u.settings,u.remove,u.task);var e=W(f,"navigateCrossDomain",[t]);E[e]=function(t){if(!t)throw new Error("Cross-origin navigation is only supported for URLs matching the pattern registered in the manifest.")}},e.getTabInstances=function(t,e){_();var n=W(f,"getTabInstances",[e]);E[n]=t},e.getUserJoinedTeams=function(t,e){_();var n=W(f,"getUserJoinedTeams",[e]);E[n]=t},e.getMruTabInstances=function(t,e){_();var n=W(f,"getMruTabInstances",[e]);E[n]=t},e.shareDeepLink=function(t){_(u.content),W(f,"shareDeepLink",[t.subEntityId,t.subEntityLabel,t.subEntityWebUrl])},e.openFilePreview=function(t){_(u.content);var e=[t.entityId,t.title,t.description,t.type,t.objectUrl,t.downloadUrl,t.webPreviewUrl,t.webEditUrl,t.baseUrl,t.editFile,t.subEntityId];W(f,"openFilePreview",e)},e.showNotification=function(t){_(u.content);var e=[t.message,t.notificationType];W(f,"showNotification",e)},e.executeDeepLink=function(t){_(u.content);var e=W(f,"executeDeepLink",[t]);E[e]=function(t,e){if(!t)throw new Error(e)}},e.uploadCustomApp=function(t){_();var e=W(f,"uploadCustomApp",[t]);E[e]=function(t,e){if(!t)throw new Error(e)}},e.navigateToTab=function(t){_();var e=W(f,"navigateToTab",[t]);E[e]=function(t){if(!t)throw new Error("Invalid internalTabInstanceId and/or channelId were/was provided")}},function(t){var e,n;s["settings.save"]=function(t){var n=new i(t);e?e(n):n.notifySuccess()},s["settings.remove"]=function(){var t=new o;n?n(t):t.notifySuccess()},t.setValidityState=function(t){_(u.settings,u.remove),W(f,"settings.setValidityState",[t])},t.getSettings=function(t){_(u.content,u.settings,u.remove);var e=W(f,"settings.getSettings");E[e]=t},t.setSettings=function(t){_(u.content,u.settings);var e=W(f,"settings.setSettings",[t]);E[e]=function(t,e){if(!t)throw new Error(e)}},t.registerOnSaveHandler=function(t){_(u.settings),e=t,t&&W(f,"registerHandler",["save"])},t.registerOnRemoveHandler=function(t){_(u.remove),n=t,t&&W(f,"registerHandler",["remove"])};var i=function(){function t(t){this.notified=!1,this.result=t||{}}return t.prototype.notifySuccess=function(){this.ensureNotNotified(),W(f,"settings.save.success"),this.notified=!0},t.prototype.notifyFailure=function(t){this.ensureNotNotified(),W(f,"settings.save.failure",[t]),this.notified=!0},t.prototype.ensureNotNotified=function(){if(this.notified)throw new Error("The SaveEvent may only notify success or failure once.")},t}();var o=function(){function t(){this.notified=!1}return t.prototype.notifySuccess=function(){this.ensureNotNotified(),W(f,"settings.remove.success"),this.notified=!0},t.prototype.notifyFailure=function(t){this.ensureNotNotified(),W(f,"settings.remove.failure",[t]),this.notified=!0},t.prototype.ensureNotNotified=function(){if(this.notified)throw new Error("The removeEvent may only notify success or failure once.")},t}()}(k=e.settings||(e.settings={})),function(t){var e,n;function i(){r();try{d&&d.close()}finally{d=null,h=null}}function o(t){e=t,i();var n=e.width||600,o=e.height||400;n=Math.min(n,c.outerWidth-400),o=Math.min(o,c.outerHeight-200);var r=document.createElement("a");r.href=e.url;var s=void 0!==c.screenLeft?c.screenLeft:c.screenX,u=void 0!==c.screenTop?c.screenTop:c.screenY;s+=c.outerWidth/2-n/2,u+=c.outerHeight/2-o/2,(d=c.open(r.href,"_blank","toolbar=no, location=yes, status=no, menubar=no, scrollbars=yes, top="+u+", left="+s+", width="+n+", height="+o))?a():l("FailedToOpenWindow")}function r(){n&&(clearInterval(n),n=0),delete s.initialize,delete s.navigateCrossDomain}function a(){r(),n=c.setInterval(function(){if(!d||d.closed)l("CancelledByUser");else{var t=h;try{h="*",W(d,"ping")}finally{h=t}}},100),s.initialize=function(){return[u.authentication,g]},s.navigateCrossDomain=function(t){return!1}}function l(t){try{e&&e.failureCallback&&e.failureCallback(t)}finally{e=null,i()}}function v(t,e,n){if(t){var i=document.createElement("a");i.href=decodeURIComponent(t),i.host&&i.host!==window.location.host&&"outlook.office.com"===i.host&&i.search.indexOf("client_type=Win32_Outlook")>-1&&(e&&"result"===e&&(n&&(i.href=p(i.href,"result",n)),c.location.assign(p(i.href,"authSuccess",""))),e&&"reason"===e&&(n&&(i.href=p(i.href,"reason",n)),c.location.assign(p(i.href,"authFailure",""))))}}function p(t,e,n){var i=t.indexOf("#"),o=-1===i?"#":t.substr(i);return o=o+"&"+e+(""!==n?"="+n:""),(t=-1===i?t:t.substr(0,i))+o}s["authentication.authenticate.success"]=function(t){try{e&&e.successCallback&&e.successCallback(t)}finally{e=null,i()}},s["authentication.authenticate.failure"]=l,t.registerAuthenticationHandlers=function(t){e=t},t.authenticate=function(t){var n=void 0!==t?t:e;if(_(u.content,u.settings,u.remove,u.task),"desktop"===g||"android"===g||"ios"===g){var i=document.createElement("a");i.href=n.url;var r=W(f,"authentication.authenticate",[i.href,n.width,n.height]);E[r]=function(t,e){t?n.successCallback(e):n.failureCallback(e)}}else o(n)},t.getAuthToken=function(t){_();var e=W(f,"authentication.getAuthToken",[t.resources]);E[e]=function(e,n){e?t.successCallback(n):t.failureCallback(n)}},t.getUser=function(t){_();var e=W(f,"authentication.getUser");E[e]=function(e,n){e?t.successCallback(n):t.failureCallback(n)}},t.notifySuccess=function(t,e){v(e,"result",t),_(u.authentication),W(f,"authentication.authenticate.success",[t]),V(f,function(){return setTimeout(function(){return c.close()},200)})},t.notifyFailure=function(t,e){v(e,"reason",t),_(u.authentication),W(f,"authentication.authenticate.failure",[t]),V(f,function(){return setTimeout(function(){return c.close()},200)})}}(e.authentication||(e.authentication={})),e.sendCustomMessage=function(t,e){return _(),W(f,t,e)},function(t){t.startTask=function(t,e){_(u.content);var n=W(f,"tasks.startTask",[t]);E[n]=e},t.updateTask=function(t){_(u.content,u.task),t.width,t.height;var e=i(t,["width","height"]);if(Object.keys(e).length)throw new Error("updateTask requires a taskInfo argument containing only width and height");W(f,"tasks.updateTask",[t])},t.submitTask=function(t,e){_(u.content,u.task),W(f,"tasks.completeTask",[t,Array.isArray(e)?e:[e]])}}(e.tasks||(e.tasks={})),e.getChatMembers=function(t){_();var e=W(f,"getChatMembers");E[e]=t}}])});
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./lib/webparts/toolTab/ToolTabWebPart.module.css":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--4-1!./lib/webparts/toolTab/ToolTabWebPart.module.css ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face{font-family:Teams Assets;src:url(" + escape(__webpack_require__(/*! ../fonts/TeamsAssets-Light.woff */ "./lib/webparts/fonts/TeamsAssets-Light.woff")) + ");font-style:normal}@media (max-width:768px){.toolTab_a0f05e5a .grid1_a0f05e5a,.toolTab_a0f05e5a .grid2_a0f05e5a,.toolTab_a0f05e5a .heading_a0f05e5a{display:none!important}}.toolTab_a0f05e5a .row_a0f05e5a{margin:0 -8px;-webkit-box-sizing:border-box;box-sizing:border-box;padding:5px}.toolTab_a0f05e5a .row_a0f05e5a:after,.toolTab_a0f05e5a .row_a0f05e5a:before{display:table;content:\"\";line-height:0}.toolTab_a0f05e5a .row_a0f05e5a:after{clear:both}.toolTab_a0f05e5a .column_a0f05e5a{position:relative;min-height:1px;padding-left:8px;padding-right:8px;-webkit-box-sizing:border-box;box-sizing:border-box}[dir=ltr] .toolTab_a0f05e5a .column_a0f05e5a{float:left}[dir=rtl] .toolTab_a0f05e5a .column_a0f05e5a{float:right}.toolTab_a0f05e5a .column_a0f05e5a .ms-Grid_a0f05e5a{padding:0}@media (min-width:640px){.toolTab_a0f05e5a .column_a0f05e5a{width:100%}}@media (min-width:1024px){[dir=ltr] .toolTab_a0f05e5a .column_a0f05e5a{left:16.66667%}[dir=rtl] .toolTab_a0f05e5a .column_a0f05e5a{right:16.66667%}}@media (min-width:640px){[dir=ltr] .toolTab_a0f05e5a .column_a0f05e5a{left:8.33333%}[dir=rtl] .toolTab_a0f05e5a .column_a0f05e5a{right:8.33333%}}.toolTab_a0f05e5a .HR_a0f05e5a,.toolTab_a0f05e5a .IF_a0f05e5a,.toolTab_a0f05e5a .PB_a0f05e5a,.toolTab_a0f05e5a .RO_a0f05e5a{font-size:16px;font-family:Segoe UI;cursor:pointer;margin:1% 0;margin-top:24px;margin-bottom:-5px;font-size:14px;font-weight:700;color:#333}.toolTab_a0f05e5a .P10_a0f05e5a{padding-top:10px}.toolTab_a0f05e5a .shadowsm_a0f05e5a{-webkit-box-shadow:0 .125rem .25rem rgba(0,0,0,.075)!important;box-shadow:0 .125rem .25rem rgba(0,0,0,.075)!important}.toolTab_a0f05e5a .card_a0f05e5a{position:relative;display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem;width:22%;height:20%;display:inline-block;margin-right:15px;cursor:pointer;font-family:Segoe UI;font-size:16px}.toolTab_a0f05e5a .cbody_a0f05e5a{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}.toolTab_a0f05e5a .CBL_a0f05e5a,.toolTab_a0f05e5a .CFT_a0f05e5a,.toolTab_a0f05e5a .CSA_a0f05e5a,.toolTab_a0f05e5a .CT_a0f05e5a,.toolTab_a0f05e5a .DP_a0f05e5a,.toolTab_a0f05e5a .EISR_a0f05e5a,.toolTab_a0f05e5a .GWR_a0f05e5a,.toolTab_a0f05e5a .IR_a0f05e5a,.toolTab_a0f05e5a .RIST_a0f05e5a,.toolTab_a0f05e5a .RL_a0f05e5a,.toolTab_a0f05e5a .SBC_a0f05e5a,.toolTab_a0f05e5a .SI_a0f05e5a,.toolTab_a0f05e5a .timesheet_a0f05e5a,.toolTab_a0f05e5a .VBP_a0f05e5a,.toolTab_a0f05e5a .VP_a0f05e5a{font-weight:600;padding-top:6px;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.toolTab_a0f05e5a .BCdes_a0f05e5a,.toolTab_a0f05e5a .CBLdes_a0f05e5a,.toolTab_a0f05e5a .CSAdes_a0f05e5a,.toolTab_a0f05e5a .CTdes_a0f05e5a,.toolTab_a0f05e5a .FTdes_a0f05e5a,.toolTab_a0f05e5a .GRdes_a0f05e5a,.toolTab_a0f05e5a .IRdes_a0f05e5a,.toolTab_a0f05e5a .ISRdes_a0f05e5a,.toolTab_a0f05e5a .ISTdes_a0f05e5a,.toolTab_a0f05e5a .Pdes_a0f05e5a,.toolTab_a0f05e5a .RLdes_a0f05e5a,.toolTab_a0f05e5a .SIdes_a0f05e5a,.toolTab_a0f05e5a .timesheetdes_a0f05e5a,.toolTab_a0f05e5a .VPdes_a0f05e5a{padding-top:6px;color:#adacac;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;font-size:14px;width:auto}.toolTab_a0f05e5a .cafeservice_a0f05e5a,.toolTab_a0f05e5a .createfinancetkt_a0f05e5a,.toolTab_a0f05e5a .createicon_a0f05e5a,.toolTab_a0f05e5a .downloadpayslip_a0f05e5a,.toolTab_a0f05e5a .eventsupport_a0f05e5a,.toolTab_a0f05e5a .Inventory_a0f05e5a,.toolTab_a0f05e5a .leaverequest_a0f05e5a,.toolTab_a0f05e5a .policies_a0f05e5a,.toolTab_a0f05e5a .RoSI_a0f05e5a,.toolTab_a0f05e5a .ROtimesheet_a0f05e5a,.toolTab_a0f05e5a .submitbenefits_a0f05e5a,.toolTab_a0f05e5a .support_a0f05e5a,.toolTab_a0f05e5a .ticketcreation_a0f05e5a,.toolTab_a0f05e5a .viewbenefits_a0f05e5a,.toolTab_a0f05e5a .wiferequest_a0f05e5a{font-family:Teams Assets;font-size:22px}.toolTab_a0f05e5a .createicon_a0f05e5a:before{content:\"\\E328\"}.toolTab_a0f05e5a .ticketcreation_a0f05e5a:before{content:\"\\E13F\"}.toolTab_a0f05e5a .leaverequest_a0f05e5a:before{content:\"\\E503\"}.toolTab_a0f05e5a .policies_a0f05e5a:before{content:\"\\E451\"}.toolTab_a0f05e5a .downloadpayslip_a0f05e5a:before{content:\"\\E459\"}.toolTab_a0f05e5a .createfinancetkt_a0f05e5a:before{content:\"\\E13F\"}.toolTab_a0f05e5a .submitbenefits_a0f05e5a:before{content:\"\\E971\"}.toolTab_a0f05e5a .viewbenefits_a0f05e5a:before{content:\"\\E451\"}.toolTab_a0f05e5a .support_a0f05e5a:before{content:\"\\E21A\"}.toolTab_a0f05e5a .wiferequest_a0f05e5a:before{content:\"\\E200\"}.toolTab_a0f05e5a .eventsupport_a0f05e5a:before{content:\"\\E917\"}.toolTab_a0f05e5a .cafeservice_a0f05e5a:before{content:\"\\E984\"}.toolTab_a0f05e5a .Inventory_a0f05e5a:before{content:\"\\E203\"}.toolTab_a0f05e5a .ROtimesheet_a0f05e5a:before{content:\"\\E501\"}.toolTab_a0f05e5a .RoSI_a0f05e5a:before{content:\"\\E137\"}@media (max-width:1024px){.toolTab_a0f05e5a .card_a0f05e5a{width:46%;margin-bottom:20px}}@media (max-width:425px){.toolTab_a0f05e5a .card_a0f05e5a{width:100%;margin-bottom:20px}}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/url/escape.js":
+/*!***************************************************!*\
+  !*** ./node_modules/css-loader/lib/url/escape.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ "@microsoft/sp-core-library":
+/*!*********************************************!*\
+  !*** external "@microsoft/sp-core-library" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__microsoft_sp_core_library__;
+
+/***/ }),
+
+/***/ "@microsoft/sp-loader":
+/*!***************************************!*\
+  !*** external "@microsoft/sp-loader" ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__microsoft_sp_loader__;
+
+/***/ }),
+
+/***/ "@microsoft/sp-webpart-base":
+/*!*********************************************!*\
+  !*** external "@microsoft/sp-webpart-base" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__microsoft_sp_webpart_base__;
+
+/***/ }),
+
+/***/ "ToolTabWebPartStrings":
+/*!****************************************!*\
+  !*** external "ToolTabWebPartStrings" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_ToolTabWebPartStrings__;
+
+/***/ }),
+
+/***/ "bootstrap":
+/*!****************************!*\
+  !*** external "bootstrap" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_bootstrap__;
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jquery" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_jquery__;
+
+/***/ })
+
+/******/ })});;
+//# sourceMappingURL=tool-tab-web-part.js.map
+(function(){
+if (!window.__setWebpackPublicPathLoaderSrcRegistry__) window.__setWebpackPublicPathLoaderSrcRegistry__={};
+var scripts = document.getElementsByTagName('script');
+if (scripts && scripts.length) {
+  for (var i = 0; i < scripts.length; i++) {
+    if (!scripts[i]) continue;
+    var path = scripts[i].getAttribute('src');
+    if (path) window.__setWebpackPublicPathLoaderSrcRegistry__[path]=true;
+  }
+}
+})();
